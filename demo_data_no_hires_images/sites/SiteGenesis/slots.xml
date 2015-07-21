@@ -18,16 +18,16 @@
 &lt;p style="padding: 0px 10px;"&gt;10% off any order with a purchase of over $150&lt;/p&gt;
 &lt;/div&gt;</body>
                 <body xml:lang="fr-FR">&lt;div class="minicartslot"&gt;
-&lt;p style="padding: 0px 10px;"&gt;10Â % de remise pour tout achat de plus de 150 euros&lt;/p&gt;
+&lt;p style="padding: 0px 10px;"&gt;10 % de remise pour tout achat de plus de 150 euros&lt;/p&gt;
 &lt;/div&gt;</body>
                 <body xml:lang="it-IT">&lt;div class="minicartslot"&gt;
-&lt;p style="padding: 0px 10px;"&gt;10% di sconto su tutti gli ordini superiori a â‚¬ 150&lt;/p&gt;
+&lt;p style="padding: 0px 10px;"&gt;10% di sconto su tutti gli ordini superiori a € 150&lt;/p&gt;
 &lt;/div&gt;</body>
                 <body xml:lang="ja-JP">&lt;div class="minicartslot"&gt;
-&lt;p style="padding: 0px 10px;"&gt;ã”æ³¨æ–‡ãŒ Â¥15,000 ã‚’è¶…ãˆã‚‹ã¨ 10% å‰²å¼•&lt;/p&gt;
+&lt;p style="padding: 0px 10px;"&gt;ご注文が ¥15,000 を超えると 10% 割引&lt;/p&gt;
 &lt;/div&gt;</body>
                 <body xml:lang="zh-CN">&lt;div class="minicartslot"&gt;
-&lt;p style="padding: 0px 10px;"&gt;è´­ä¹°è¶…è¿‡ 150 ç¾Žå…ƒçš„ä»»ä½•è®¢å•å¯äº«ä¹æŠ˜ä¼˜æƒ &lt;/p&gt;
+&lt;p style="padding: 0px 10px;"&gt;购买超过 150 美元的任何订单可享九折优惠&lt;/p&gt;
 &lt;/div&gt;</body>
             </html>
         </content>
@@ -56,10 +56,10 @@
         <template>slots/product/product_listing.isml</template>
         <enabled-flag>true</enabled-flag>
         <callout-msg xml:lang="x-default">Featured Products</callout-msg>
-        <callout-msg xml:lang="fr-FR">Produits prÃ©sentÃ©s</callout-msg>
+        <callout-msg xml:lang="fr-FR">Produits présentés</callout-msg>
         <callout-msg xml:lang="it-IT">Prodotti in primo piano</callout-msg>
-        <callout-msg xml:lang="ja-JP">ãŠã™ã™ã‚ã®å•†å“</callout-msg>
-        <callout-msg xml:lang="zh-CN">æŽ¨èå•†å“</callout-msg>
+        <callout-msg xml:lang="ja-JP">おすすめの商品</callout-msg>
+        <callout-msg xml:lang="zh-CN">推荐商品</callout-msg>
         <content>
             <products>
                 <product product-id="008884303989"/>
@@ -85,10 +85,10 @@
         <template>slots/product/horizontalcarousel.isml</template>
         <enabled-flag>false</enabled-flag>
         <callout-msg xml:lang="x-default">Take a look at one of these!</callout-msg>
-        <callout-msg xml:lang="fr-FR">Ã€ voir absolument !</callout-msg>
+        <callout-msg xml:lang="fr-FR">À voir absolument !</callout-msg>
         <callout-msg xml:lang="it-IT">Guarda uno di questi!</callout-msg>
-        <callout-msg xml:lang="ja-JP">ã“ã¡ã‚‰ã‚’ã”è¦§ãã ã•ã„!</callout-msg>
-        <callout-msg xml:lang="zh-CN">çœ‹çœ‹å…¶ä¸­ä¹‹ä¸€ï¼</callout-msg>
+        <callout-msg xml:lang="ja-JP">こちらをご覧ください!</callout-msg>
+        <callout-msg xml:lang="zh-CN">看看其中之一！</callout-msg>
         <content>
             <products>
                 <product product-id="008884304085"/>
@@ -135,10 +135,10 @@ It all started with a series of observations: eCommerce merchandising and market
 &lt;/div&gt;</body>
                 <body xml:lang="fr-FR">&lt;div class="folder-slot"&gt;
     &lt;h2&gt;
-        Ã€ propos de Demandware
+        À propos de Demandware
     &lt;/h2&gt;
     &lt;p&gt;
-Tout a dÃ©butÃ© par une sÃ©rie d'observations : dans l'e-commerce, l'innovation en matiÃ¨re de merchandising et de marketing est le gÃ©nÃ©rateur de recettes. Pourtant, la plupart des entreprises consacrent 80Â % de leur budget au seul maintien de leur infrastructure actuelle. Alors que le rythme du commerce s'accÃ©lÃ¨re chaque jour, la plupart des entreprises ont toutes les peines Ã  simplement se maintenir Ã  jour. Les spÃ©cialistes du merchandising et du marketing sont d'autant plus frustrÃ©s qu'ils passent davantage de temps Ã  rechercher des prestataires d'infogÃ©rance et des ressources informatiques internes qu'Ã  dÃ©ployer leurs propres actions de merchandising et de marketing. Cette situation n'Ã©tait pas satisfaisante.
+Tout a débuté par une série d'observations : dans l'e-commerce, l'innovation en matière de merchandising et de marketing est le générateur de recettes. Pourtant, la plupart des entreprises consacrent 80 % de leur budget au seul maintien de leur infrastructure actuelle. Alors que le rythme du commerce s'accélère chaque jour, la plupart des entreprises ont toutes les peines à simplement se maintenir à jour. Les spécialistes du merchandising et du marketing sont d'autant plus frustrés qu'ils passent davantage de temps à rechercher des prestataires d'infogérance et des ressources informatiques internes qu'à déployer leurs propres actions de merchandising et de marketing. Cette situation n'était pas satisfaisante.
     &lt;/p&gt;
 &lt;/div&gt;</body>
                 <body xml:lang="it-IT">&lt;div class="folder-slot"&gt;
@@ -146,23 +146,23 @@ Tout a dÃ©butÃ© par une sÃ©rie d'observations : dans l'e-commerce, l'innov
         Informazioni su Demandware
     &lt;/h2&gt;
     &lt;p&gt;
-Tutto Ã¨ iniziato da una serie di osservazioni: le innovazioni del modello e-commerce e materia di marketing sono il motore che genera i profitti, tuttavia la maggior parte delle aziende spende ancora l'80% dei budget per la manutenzione dell'infrastruttura esistente. L'e-commerce ormai avanza inesorabilmente ogni giorno di piÃ¹, mentre nelle aziende si fanno i salti mortali per cercare il modo di non adeguarsi ai cambiamenti. I venditori e gli esperti di marketing lavorano in continua frustrazione, costretti a correre dietro ai fornitori esterni e ai reparti IT interni, piuttosto che dedicarsi alla commercializzazione e al marketing per la loro attivitÃ . Deve esserci una soluzione.
+Tutto è iniziato da una serie di osservazioni: le innovazioni del modello e-commerce e materia di marketing sono il motore che genera i profitti, tuttavia la maggior parte delle aziende spende ancora l'80% dei budget per la manutenzione dell'infrastruttura esistente. L'e-commerce ormai avanza inesorabilmente ogni giorno di più, mentre nelle aziende si fanno i salti mortali per cercare il modo di non adeguarsi ai cambiamenti. I venditori e gli esperti di marketing lavorano in continua frustrazione, costretti a correre dietro ai fornitori esterni e ai reparti IT interni, piuttosto che dedicarsi alla commercializzazione e al marketing per la loro attività. Deve esserci una soluzione.
     &lt;/p&gt;
 &lt;/div&gt;</body>
                 <body xml:lang="ja-JP">&lt;div class="folder-slot"&gt;
     &lt;h2&gt;
-        Demandware ã«ã¤ã„ã¦
+        Demandware について
     &lt;/h2&gt;
     &lt;p&gt;
-å§‹ã¾ã‚Šã¯ç¾çŠ¶ã‚’è¦‹ã¤ã‚ã‚‹ã¨ã“ã‚ã‹ã‚‰: eã‚³ãƒžãƒ¼ã‚¹ã«ã‚ˆã‚‹ãƒžãƒ¼ãƒãƒ£ãƒ³ãƒ€ã‚¤ã‚¸ãƒ³ã‚°ã¨ãƒžãƒ¼ã‚±ãƒ†ã‚£ãƒ³ã‚°ã®ã‚¤ãƒŽãƒ™ãƒ¼ã‚·ãƒ§ãƒ³ã¯ã€åŽç›Šã‚’ç”Ÿã¿å‡ºã™ã‚‚ã®ã§ã‚ã‚‹ã«ã‚‚ã‹ã‹ã‚ã‚‰ãšã€å¤§éƒ¨åˆ†ã®äº‹æ¥­ã§ã¯äºˆç®—ã® 80% ã‚’ç¾åœ¨ã®ã‚¤ãƒ³ãƒ•ãƒ©ã‚’ä¿å®ˆã™ã‚‹ãŸã‚ã ã‘ã«ä½¿ã£ã¦ã„ã¾ã™ã€‚eã‚³ãƒžãƒ¼ã‚¹ã¯æ—¥ã€…åŠ é€Ÿã—ã¦ã„ã‚‹ã®ã«ã‚‚ã‹ã‹ã‚ã‚‰ãšã€å¤§éƒ¨åˆ†ã®äº‹æ¥­ã¯æ··ä¹±ã—ã¦ãŸã ç«‹ã¡å°½ãã—ã¦ã„ã¾ã™ã€‚ãƒžãƒ¼ãƒãƒ£ãƒ³ãƒ€ã‚¤ã‚¶ãƒ¼ã¨ãƒžãƒ¼ã‚±ãƒƒãƒˆæ‹…å½“è€…ã®è‘›è—¤ã¯åº¦åˆã„ã‚’å¢—ã—ã€å®Ÿéš›ã«è‡ªç¤¾ãƒ“ã‚¸ãƒã‚¹ã®ãƒžãƒ¼ãƒãƒ£ãƒ³ãƒ€ã‚¤ã‚¸ãƒ³ã‚°ã¨ãƒžãƒ¼ã‚±ãƒ†ã‚£ãƒ³ã‚°ã‚’è¡Œã†ã“ã¨ã‚ˆã‚Šã‚‚ã€å¤–æ³¨å…ˆã®ãƒ—ãƒ­ãƒã‚¤ãƒ€ãƒ¼ã‚„ç¤¾å†…ã® IT éƒ¨é–€ã¸ã®å¯¾å¿œã«ã€ã‚ˆã‚Šå¤šãã®æ™‚é–“ã‚’è²»ã‚„ã—ã¦ã„ã¾ã™ã€‚ä»–ã«ã‚‚ã£ã¨ã‚ˆã„æ–¹æ³•ãŒã‚ã‚‹ã®ã§ã¯ãªã„ã‹ã€ç§é”ã¯ãã†è€ƒãˆã¾ã—ãŸã€‚
+始まりは現状を見つめるところから: eコマースによるマーチャンダイジングとマーケティングのイノベーションは、収益を生み出すものであるにもかかわらず、大部分の事業では予算の 80% を現在のインフラを保守するためだけに使っています。eコマースは日々加速しているのにもかかわらず、大部分の事業は混乱してただ立ち尽くしています。マーチャンダイザーとマーケット担当者の葛藤は度合いを増し、実際に自社ビジネスのマーチャンダイジングとマーケティングを行うことよりも、外注先のプロバイダーや社内の IT 部門への対応に、より多くの時間を費やしています。他にもっとよい方法があるのではないか、私達はそう考えました。
     &lt;/p&gt;
 &lt;/div&gt;</body>
                 <body xml:lang="zh-CN">&lt;div class="folder-slot"&gt;
     &lt;h2&gt;
-        å…³äºŽ Demandware
+        关于 Demandware
     &lt;/h2&gt;
     &lt;p&gt;
-ä¸€ç³»åˆ—ç»“æžœå‘äººä»¬è¡¨æ˜Žï¼šeCommerce é”€å”®å’Œè¥é”€åˆ›æ–°å¯ä»¥äº§ç”Ÿæ”¶ç›Šï¼Œè€Œå¤§å¤šæ•°ä¼ä¸šéƒ½è¦å°†é¢„ç®—çš„ 80% æ‹¿å‡ºæ¥ä»…ä»…æ˜¯ä¸ºäº†ç»´æŒçŽ°æœ‰çš„åŸºç¡€è®¾æ–½ã€‚eCommerce çš„å‘å±•æ­¥ä¼æ—¥æ–°æœˆå¼‚ï¼Œè€Œå¤§å¤šæ•°ä¼ä¸šè¿˜æ˜¯åŽŸåœ°è¸æ­¥ã€‚ã€‚å•†å®¶å’Œè¥é”€äººå‘˜æ„Ÿåˆ°æ— æ‰€é€‚ä»Žï¼ŒèŠ±è´¹æ¯”å®žé™…é”€å”®å’Œè¥é”€è‡ªå·±ä¸šåŠ¡è¦å¤šå¾—å¤šçš„æ—¶é—´æ¥è¿½é€å¤–åŒ…ä¾›åº”å•†å’Œå†…éƒ¨ IT ç»„ç»‡ã€‚è‚¯å®šæœ‰æ›´å¥½çš„åŠžæ³•ã€‚
+一系列结果向人们表明：eCommerce 销售和营销创新可以产生收益，而大多数企业都要将预算的 80% 拿出来仅仅是为了维持现有的基础设施。eCommerce 的发展步伐日新月异，而大多数企业还是原地踏步。。商家和营销人员感到无所适从，花费比实际销售和营销自己业务要多得多的时间来追逐外包供应商和内部 IT 组织。肯定有更好的办法。
     &lt;/p&gt;
 &lt;/div&gt;</body>
             </html>
@@ -187,7 +187,7 @@ Here you will find answers to your questions about shopping at our online store,
 Service client
 &lt;/h2&gt;
 &lt;p&gt;
-Vous trouverez ici toutes les rÃ©ponses Ã  vos questions sur vos achats dans notre magasin en ligne, votre commande, votre mode de rÃ¨glement, etc. Pour obtenir des informations complÃ¨tes, choisissez simplement parmi les catÃ©gories ci-dessous.
+Vous trouverez ici toutes les réponses à vos questions sur vos achats dans notre magasin en ligne, votre commande, votre mode de règlement, etc. Pour obtenir des informations complètes, choisissez simplement parmi les catégories ci-dessous.
 &lt;/p&gt;
 &lt;/div&gt;</body>
                 <body xml:lang="it-IT">&lt;div class="folder-slot"&gt;
@@ -200,18 +200,18 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
 &lt;/div&gt;</body>
                 <body xml:lang="ja-JP">&lt;div class="folder-slot"&gt;
 &lt;h2&gt;
-ã‚«ã‚¹ã‚¿ãƒžãƒ¼ã‚µãƒ¼ãƒ“ã‚¹
+カスタマーサービス
 &lt;/h2&gt;
 &lt;p&gt;
-å¼Šç¤¾ã®ã‚ªãƒ³ãƒ©ã‚¤ãƒ³ã‚¹ãƒˆã‚¢ã§ã®ãŠè²·ã„ç‰©ã€ãŠå®¢æ§˜ã®ã”æ³¨æ–‡ã€æ”¯æ‰•ã„ã‚ªãƒ—ã‚·ãƒ§ãƒ³ãã®ä»–ã«é–¢ã™ã‚‹ã”è³ªå•ã¸ã®å›žç­”ã‚’ã“ã¡ã‚‰ã«ã”ç”¨æ„ã—ã¦ãŠã‚Šã¾ã™ã€‚ä»¥ä¸‹ã®ã‚«ãƒ†ã‚´ãƒªã‹ã‚‰é¸æŠžã—ã€ã”å¸Œæœ›ã®æƒ…å ±ã‚’ã”è¦§ãã ã•ã„ã€‚
+弊社のオンラインストアでのお買い物、お客様のご注文、支払いオプションその他に関するご質問への回答をこちらにご用意しております。以下のカテゴリから選択し、ご希望の情報をご覧ください。
 &lt;/p&gt;
 &lt;/div&gt;</body>
                 <body xml:lang="zh-CN">&lt;div class="folder-slot"&gt;
 &lt;h2&gt;
-å®¢æˆ·æœåŠ¡
+客户服务
 &lt;/h2&gt;
 &lt;p&gt;
-æ‚¨å¯ä»¥åœ¨è¿™é‡ŒæŸ¥çœ‹æœ‰å…³ç½‘ä¸Šå•†åº—è´­ç‰©ã€è®¢å•ã€æ”¯ä»˜é€‰é¡¹ç­‰æ–¹é¢çš„é—®é¢˜çš„ç­”æ¡ˆã€‚åªéœ€ä»Žä»¥ä¸‹åˆ†ç±»ä¸­ä½œå‡ºé€‰æ‹©ä»¥èŽ·å¾—å®Œæ•´ä¿¡æ¯ã€‚
+您可以在这里查看有关网上商店购物、订单、支付选项等方面的问题的答案。只需从以下分类中作出选择以获得完整信息。
 &lt;/p&gt;
 &lt;/div&gt;</body>
             </html>
@@ -241,10 +241,10 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <content>
             <html>
                 <body xml:lang="x-default">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Free Microsoft Zune With Purchase Of $500 Or More In Electronics" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
-                <body xml:lang="fr-FR">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Microsoft Zune offert pour tout achat d'un montant Ã©gal ou supÃ©rieur Ã  500 euros dans le rayon Ã©lectronique" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
-                <body xml:lang="it-IT">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Microsoft Zune gratuito con acquisti di almeno â‚¬ 500 in prodotti di elettronica" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
-                <body xml:lang="ja-JP">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="é›»å­æ©Ÿå™¨ã‚’ Â¥50,000 ä»¥ä¸Šè³¼å…¥ã™ã‚‹ã¨ Microsoft Zune ã‚’ç„¡æ–™ã§é€²å‘ˆ" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
-                <body xml:lang="zh-CN">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="ç”µå­äº§å“æ»¡ 500 ç¾Žå…ƒå³å…è´¹èµ é€ Microsoft Zune" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
+                <body xml:lang="fr-FR">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Microsoft Zune offert pour tout achat d'un montant égal ou supérieur à 500 euros dans le rayon électronique" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
+                <body xml:lang="it-IT">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Microsoft Zune gratuito con acquisti di almeno € 500 in prodotti di elettronica" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
+                <body xml:lang="ja-JP">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="電子機器を ¥50,000 以上購入すると Microsoft Zune を無料で進呈" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
+                <body xml:lang="zh-CN">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="电子产品满 500 美元即免费赠送 Microsoft Zune" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
             </html>
         </content>
     </slot-configuration>
@@ -271,10 +271,10 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <content>
             <html>
                 <body xml:lang="x-default">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Free Microsoft Zune With Purchase Of $500 Or More In Electronics" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
-                <body xml:lang="fr-FR">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Microsoft Zune offert pour tout achat d'un montant Ã©gal ou supÃ©rieur Ã  500 euros dans le rayon Ã©lectronique" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
-                <body xml:lang="it-IT">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Microsoft Zune gratuito con acquisti di almeno â‚¬ 500 in prodotti di elettronica" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
-                <body xml:lang="ja-JP">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="é›»å­æ©Ÿå™¨ã‚’ Â¥50,000 ä»¥ä¸Šè³¼å…¥ã™ã‚‹ã¨ Microsoft Zune ã‚’ç„¡æ–™ã§é€²å‘ˆ" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
-                <body xml:lang="zh-CN">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="ç”µå­äº§å“æ»¡ 500 ç¾Žå…ƒå³å…è´¹èµ é€ Microsoft Zune" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
+                <body xml:lang="fr-FR">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Microsoft Zune offert pour tout achat d'un montant égal ou supérieur à 500 euros dans le rayon électronique" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
+                <body xml:lang="it-IT">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Microsoft Zune gratuito con acquisti di almeno € 500 in prodotti di elettronica" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
+                <body xml:lang="ja-JP">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="電子機器を ¥50,000 以上購入すると Microsoft Zune を無料で進呈" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
+                <body xml:lang="zh-CN">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="电子产品满 500 美元即免费赠送 Microsoft Zune" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
             </html>
         </content>
     </slot-configuration>
@@ -285,10 +285,10 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <content>
             <html>
                 <body xml:lang="x-default">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="Link to Television Buying Guide" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="fr-FR">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="Lien vers le Guide d'achat d'un tÃ©lÃ©viseur" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
+                <body xml:lang="fr-FR">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="Lien vers le Guide d'achat d'un téléviseur" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
                 <body xml:lang="it-IT">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="Link alla guida per l'acquisto delle televisioni" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="ja-JP">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="ãƒ†ãƒ¬ãƒ“è³¼å…¥ã‚¬ã‚¤ãƒ‰ã¸ã®ãƒªãƒ³ã‚¯" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="zh-CN">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="ç”µè§†è´­ä¹°æŒ‡å—é“¾æŽ¥" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
+                <body xml:lang="ja-JP">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="テレビ購入ガイドへのリンク" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
+                <body xml:lang="zh-CN">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="电视购买指南链接" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
             </html>
         </content>
     </slot-configuration>
@@ -299,10 +299,10 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <content>
             <html>
                 <body xml:lang="x-default">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="Link to Television Buying Guide" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="fr-FR">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="Lien vers le Guide d'achat d'un tÃ©lÃ©viseur" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
+                <body xml:lang="fr-FR">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="Lien vers le Guide d'achat d'un téléviseur" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
                 <body xml:lang="it-IT">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="Link alla guida per l'acquisto delle televisioni" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="ja-JP">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="ãƒ†ãƒ¬ãƒ“è³¼å…¥ã‚¬ã‚¤ãƒ‰ã¸ã®ãƒªãƒ³ã‚¯" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="zh-CN">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="ç”µè§†è´­ä¹°æŒ‡å—é“¾æŽ¥" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
+                <body xml:lang="ja-JP">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="テレビ購入ガイドへのリンク" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
+                <body xml:lang="zh-CN">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="电视购买指南链接" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
             </html>
         </content>
     </slot-configuration>
@@ -375,10 +375,10 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <content>
             <html>
                 <body xml:lang="x-default">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="Link to Television Buying Guide" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="fr-FR">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="Lien vers le Guide d'achat d'un tÃ©lÃ©viseur" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
+                <body xml:lang="fr-FR">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="Lien vers le Guide d'achat d'un téléviseur" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
                 <body xml:lang="it-IT">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="Link alla guida per l'acquisto delle televisioni" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="ja-JP">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="ãƒ†ãƒ¬ãƒ“è³¼å…¥ã‚¬ã‚¤ãƒ‰ã¸ã®ãƒªãƒ³ã‚¯" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="zh-CN">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="ç”µè§†è´­ä¹°æŒ‡å—é“¾æŽ¥" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
+                <body xml:lang="ja-JP">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="テレビ購入ガイドへのリンク" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
+                <body xml:lang="zh-CN">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/electronics-televisionsbuyingguide.jpg?$staticlink$" alt="电视购买指南链接" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
             </html>
         </content>
     </slot-configuration>
@@ -399,10 +399,10 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <content>
             <html>
                 <body xml:lang="x-default">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" alt="Link to Television Buying Guide" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="fr-FR">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" alt="Lien vers le Guide d'achat d'un tÃ©lÃ©viseur" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
+                <body xml:lang="fr-FR">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" alt="Lien vers le Guide d'achat d'un téléviseur" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
                 <body xml:lang="it-IT">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" alt="Link alla guida per l'acquisto delle televisioni" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="ja-JP">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" alt="ãƒ†ãƒ¬ãƒ“è³¼å…¥ã‚¬ã‚¤ãƒ‰ã¸ã®ãƒªãƒ³ã‚¯" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="zh-CN">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" alt="ç”µè§†è´­ä¹°æŒ‡å—é“¾æŽ¥" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
+                <body xml:lang="ja-JP">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" alt="テレビ購入ガイドへのリンク" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
+                <body xml:lang="zh-CN">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="138" width="752" alt="电视购买指南链接" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
             </html>
         </content>
     </slot-configuration>
@@ -547,8 +547,8 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
                 <body xml:lang="x-default">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="138" width="752" alt="Store Locator" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
                 <body xml:lang="fr-FR">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="138" width="752" alt="Localisateur de magasins" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
                 <body xml:lang="it-IT">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="138" width="752" alt="Store Locator" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="ja-JP">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="138" width="752" alt="åº—èˆ—æ¤œç´¢" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="zh-CN">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="138" width="752" alt="å®žä½“åº—åœ°å€æœç´¢" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
+                <body xml:lang="ja-JP">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="138" width="752" alt="店舗検索" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
+                <body xml:lang="zh-CN">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="138" width="752" alt="实体店地址搜索" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
             </html>
         </content>
     </slot-configuration>
@@ -560,8 +560,8 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <callout-msg xml:lang="x-default">Product Recommendations</callout-msg>
         <callout-msg xml:lang="fr-FR">Recommandations de produit</callout-msg>
         <callout-msg xml:lang="it-IT">Suggerimenti prodotto</callout-msg>
-        <callout-msg xml:lang="ja-JP">ãŠã™ã™ã‚å•†å“</callout-msg>
-        <callout-msg xml:lang="zh-CN">äº§å“æŽ¨è</callout-msg>
+        <callout-msg xml:lang="ja-JP">おすすめ商品</callout-msg>
+        <callout-msg xml:lang="zh-CN">产品推荐</callout-msg>
         <content>
             <products>
                 <product product-id="008885535488"/>
@@ -625,10 +625,10 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <content>
             <html>
                 <body xml:lang="x-default">&lt;div class="header-promotion"&gt;&lt;strong&gt;FREE 2-Day SHIPPING&lt;/strong&gt; FOR ORDERS OVER $300&lt;/div&gt;</body>
-                <body xml:lang="fr-FR">&lt;div class="header-promotion"&gt;&lt;strong&gt;LIVRAISON en 2 jours GRATUITE&lt;/strong&gt; POUR LES COMMANDES DE PLUS DE 300 â‚¬&lt;/div&gt;</body>
-                <body xml:lang="it-IT">&lt;div class="header-promotion"&gt;&lt;strong&gt;SPEDIZIONE GRATUITA entro 2 giorni&lt;/strong&gt; PER ORDINI SUPERIORI A â‚¬ 300&lt;/div&gt;</body>
-                <body xml:lang="ja-JP">&lt;div class="header-promotion"&gt;ã”æ³¨æ–‡é‡‘é¡ãŒ Â¥30,000 ã‚’è¶…ãˆã‚‹ã¨ &lt;strong&gt;2 æ—¥é…é€ãŒç„¡æ–™&lt;/strong&gt;&lt;/div&gt;</body>
-                <body xml:lang="zh-CN">&lt;div class="header-promotion"&gt;è¶…è¿‡ 300 ç¾Žå…ƒçš„è®¢å•&lt;strong&gt;å…è´¹ 2 æ—¥é€è¾¾&lt;/strong&gt;&lt;/div&gt;</body>
+                <body xml:lang="fr-FR">&lt;div class="header-promotion"&gt;&lt;strong&gt;LIVRAISON en 2 jours GRATUITE&lt;/strong&gt; POUR LES COMMANDES DE PLUS DE 300 €&lt;/div&gt;</body>
+                <body xml:lang="it-IT">&lt;div class="header-promotion"&gt;&lt;strong&gt;SPEDIZIONE GRATUITA entro 2 giorni&lt;/strong&gt; PER ORDINI SUPERIORI A € 300&lt;/div&gt;</body>
+                <body xml:lang="ja-JP">&lt;div class="header-promotion"&gt;ご注文金額が ¥30,000 を超えると &lt;strong&gt;2 日配送が無料&lt;/strong&gt;&lt;/div&gt;</body>
+                <body xml:lang="zh-CN">&lt;div class="header-promotion"&gt;超过 300 美元的订单&lt;strong&gt;免费 2 日送达&lt;/strong&gt;&lt;/div&gt;</body>
             </html>
         </content>
     </slot-configuration>
@@ -654,13 +654,13 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
 &lt;p style="padding: 0px 10px;"&gt;Livraison gratuite par transport terrestre pour les commandes de plus de 150 euros&lt;/p&gt;
 &lt;/div&gt;</body>
                 <body xml:lang="it-IT">&lt;div class="minicartslot"&gt;
-&lt;p style="padding: 0px 10px;"&gt;Spedizione gratuita via terra per ordini superiori a â‚¬ 150&lt;/p&gt;
+&lt;p style="padding: 0px 10px;"&gt;Spedizione gratuita via terra per ordini superiori a € 150&lt;/p&gt;
 &lt;/div&gt;</body>
                 <body xml:lang="ja-JP">&lt;div class="minicartslot"&gt;
-&lt;p style="padding: 0px 10px;"&gt;ã”æ³¨æ–‡é‡‘é¡ãŒ Â¥15,000 ã‚’è¶…ãˆã‚‹ã¨é€šå¸¸é…é€æ–™ãŒç„¡æ–™&lt;/p&gt;
+&lt;p style="padding: 0px 10px;"&gt;ご注文金額が ¥15,000 を超えると通常配送料が無料&lt;/p&gt;
 &lt;/div&gt;</body>
                 <body xml:lang="zh-CN">&lt;div class="minicartslot"&gt;
-&lt;p style="padding: 0px 10px;"&gt;è¶…è¿‡ 150 ç¾Žå…ƒçš„è®¢å•å¯äº«å…è´¹é™†è·¯é€è´§&lt;/p&gt;
+&lt;p style="padding: 0px 10px;"&gt;超过 150 美元的订单可享免费陆路送货&lt;/p&gt;
 &lt;/div&gt;</body>
             </html>
         </content>
@@ -682,10 +682,10 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <template>slots/product/homerightcarousel.isml</template>
         <enabled-flag>true</enabled-flag>
         <callout-msg xml:lang="x-default">&lt;h2&gt;This Weeks&lt;/h2&gt;&lt;h1&gt;Deals&lt;/h1&gt;</callout-msg>
-        <callout-msg xml:lang="fr-FR">Produits prÃ©sentÃ©s</callout-msg>
+        <callout-msg xml:lang="fr-FR">Produits présentés</callout-msg>
         <callout-msg xml:lang="it-IT">Prodotti in primo piano</callout-msg>
-        <callout-msg xml:lang="ja-JP">ãŠã™ã™ã‚ã®å•†å“</callout-msg>
-        <callout-msg xml:lang="zh-CN">æŽ¨èå•†å“</callout-msg>
+        <callout-msg xml:lang="ja-JP">おすすめの商品</callout-msg>
+        <callout-msg xml:lang="zh-CN">推荐商品</callout-msg>
         <content>
             <products>
                 <product product-id="25591535"/>
@@ -944,34 +944,6 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="newarrivals-mens" configuration-id="new-arrivals-men" default="true" assigned-to-site="true">
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <html>
-                <body xml:lang="x-default">&lt;a href="$url('Search-Show','cgid','newarrivals-mens')$"&gt;&lt;img alt="Mens" src="images/slot/sub_banners/mens-clothing-accessories.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-                <body xml:lang="fr-FR">&lt;a href="$url('Search-Show','cgid','newarrivals-mens')$"&gt;&lt;img alt="Hommes" src="images/slot/sub_banners/mens-clothing-accessories.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-                <body xml:lang="it-IT">&lt;a href="$url('Search-Show','cgid','newarrivals-mens')$"&gt;&lt;img alt="Uomo" src="images/slot/sub_banners/mens-clothing-accessories.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-                <body xml:lang="ja-JP">&lt;a href="$url('Search-Show','cgid','newarrivals-mens')$"&gt;&lt;img alt="ãƒ¡ãƒ³ã‚º" src="images/slot/sub_banners/mens-clothing-accessories.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-                <body xml:lang="zh-CN">&lt;a href="$url('Search-Show','cgid','newarrivals-mens')$"&gt;&lt;img alt="ç”·å£«" src="images/slot/sub_banners/mens-clothing-accessories.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-            </html>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="newarrivals-electronics" configuration-id="newarrivals-electronics" default="true" assigned-to-site="true">
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <html>
-                <body xml:lang="x-default">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="136" width="789" alt="Link to Television Buying Guide" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="fr-FR">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="136" width="789" alt="Lien vers le Guide d'achat d'un tÃ©lÃ©viseur" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="it-IT">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="136" width="789" alt="Link alla guida per l'acquisto delle televisioni" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="ja-JP">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="136" width="789" alt="ãƒ†ãƒ¬ãƒ“è³¼å…¥ã‚¬ã‚¤ãƒ‰ã¸ã®ãƒªãƒ³ã‚¯" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="zh-CN">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="136" width="789" alt="ç”µè§†è´­ä¹°æŒ‡å—é“¾æŽ¥" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-            </html>
-        </content>
-    </slot-configuration>
-    
     <slot-configuration slot-id="cat-landing-slotbottom2" context="category" context-id="newarrivals" configuration-id="newarrivals-mens-products" default="true" assigned-to-site="true">
         <description>New Arrival Products for Mens</description>
         <template>slots/product/product_listing.isml</template>
@@ -999,16 +971,6 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="newarrivals-womens" configuration-id="newarrivals-women" default="true" assigned-to-site="true">
-        <template>slots/category/categorysubbanners.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="newarrivals-womens"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
     <slot-configuration slot-id="cat-landing-slotbottom" context="category" context-id="newarrivals" configuration-id="newarrivals-womens-products" default="true" assigned-to-site="true">
         <description>New Arrival Products for Womens</description>
         <template>slots/product/product_listing.isml</template>
@@ -1023,6 +985,34 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
                 <product product-id="25697561"/>
                 <product product-id="25695217"/>
             </products>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="cat-banner" context="category" context-id="newarrivals-mens" configuration-id="new-arrivals-men" default="true" assigned-to-site="true">
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <html>
+                <body xml:lang="x-default">&lt;a href="$url('Search-Show','cgid','newarrivals-mens')$"&gt;&lt;img alt="Mens" src="images/slot/sub_banners/mens-clothing-accessories.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
+                <body xml:lang="fr-FR">&lt;a href="$url('Search-Show','cgid','newarrivals-mens')$"&gt;&lt;img alt="Hommes" src="images/slot/sub_banners/mens-clothing-accessories.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
+                <body xml:lang="it-IT">&lt;a href="$url('Search-Show','cgid','newarrivals-mens')$"&gt;&lt;img alt="Uomo" src="images/slot/sub_banners/mens-clothing-accessories.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
+                <body xml:lang="ja-JP">&lt;a href="$url('Search-Show','cgid','newarrivals-mens')$"&gt;&lt;img alt="メンズ" src="images/slot/sub_banners/mens-clothing-accessories.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
+                <body xml:lang="zh-CN">&lt;a href="$url('Search-Show','cgid','newarrivals-mens')$"&gt;&lt;img alt="男士" src="images/slot/sub_banners/mens-clothing-accessories.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
+            </html>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="cat-banner" context="category" context-id="newarrivals-electronics" configuration-id="newarrivals-electronics" default="true" assigned-to-site="true">
+        <template>slots/html/htmlslotcontainer.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <html>
+                <body xml:lang="x-default">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="136" width="789" alt="Link to Television Buying Guide" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
+                <body xml:lang="fr-FR">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="136" width="789" alt="Lien vers le Guide d'achat d'un téléviseur" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
+                <body xml:lang="it-IT">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="136" width="789" alt="Link alla guida per l'acquisto delle televisioni" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
+                <body xml:lang="ja-JP">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="136" width="789" alt="テレビ購入ガイドへのリンク" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
+                <body xml:lang="zh-CN">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="136" width="789" alt="电视购买指南链接" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
+            </html>
         </content>
     </slot-configuration>
 
@@ -1052,10 +1042,10 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <enabled-flag>true</enabled-flag>
         <callout-msg xml:lang="x-default">&lt;h2&gt;This Weeks&lt;/h2&gt;
 &lt;h1&gt;Deals&lt;/h1&gt;</callout-msg>
-        <callout-msg xml:lang="fr-FR">Produits prÃ©sentÃ©s</callout-msg>
+        <callout-msg xml:lang="fr-FR">Produits présentés</callout-msg>
         <callout-msg xml:lang="it-IT">Prodotti in primo piano</callout-msg>
-        <callout-msg xml:lang="ja-JP">ãŠã™ã™ã‚ã®å•†å“</callout-msg>
-        <callout-msg xml:lang="zh-CN">æŽ¨èå•†å“</callout-msg>
+        <callout-msg xml:lang="ja-JP">おすすめの商品</callout-msg>
+        <callout-msg xml:lang="zh-CN">推荐商品</callout-msg>
         <content>
             <products>
                 <product product-id="25591535"/>
