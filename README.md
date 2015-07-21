@@ -1,37 +1,25 @@
-# Welcome to the SiteGenesis repository
+# Welcome to the SiteGenesis Repository
 
 # Purpose
-This is the primary repository for Demandware's SiteGenesis development team.  The 'master' branch contains the HEAD code of our development activities.  The HEAD branch has not been released and should be treated "as is".  For 'released' versions of SiteGenesis, either look at our TAGS or consult the Community Branch at [https://bitbucket.org/demandware/sitegenesis-community](https://bitbucket.org/demandware/sitegenesis-community).
+ 
+The goals of this repository are:
+ 
+* To provide earlier access to Demandware developers as platform releases are pushed to the sandboxes
+* To provide 'git' access to the code so that you can cherry pick specific fixes (or even merge entire releases!) into your code lines
+* To provide the community a vehicle for submitting code changes via git's 'pull request' mechanism
+* To allow community members to share (un-tested) code branches with each other.
 
-Only authorized members of the SiteGenesis developement team can modify the 'master' branch, however, we encourage all other Demandware employees and friends to fork this repository, and submit pull requests according to Contribution Guidelines outlined in [How to contribute to SiteGenesis (Internal Guide)](https://intranet.demandware.com/confluence/pages/viewpage.action?pageId=166199408)
+License and Attribution Guide is available at https://xchange.demandware.com/docs/DOC-29638.
 
-# Demo Storefront Data
+Important installation note: if you merely import the code for this site without importing the data, you will most likely see a "broken" footer.  The 15.4 footer uses some new content assets.  We recommend exporting your current site, importing the site data from the `demo_data_no_hires_images` directory and then re-import your custom data.
+ 
+A detailed submission guideline is posted on XChange (https://xchange.demandware.com/docs/DOC-21927).
 
-## Creating a data installation
+Thank you for your submissions and your thoughts on the best way to utilize this resource.
 
-Because of file size constraints, the demo store data distribution is broken into 2 distinct parts:
-- everything, without high resolution images, including a catalog with hi resolution references removed
-- a delta distibution, with only high resolution images, plus a catalog specifically referencing those images
+# Shared Content Site
+One of the new features as of SiteGenesis 14.8 is the ability to demonstrate the use of the Shared Content facility built into Demandware.  To enable this capability, the content library in Site Genesis has been rebuilt as a "shared library".  In order to demonstrate the power of this feature, we have created a new site which shares this library with Site Genesis.  The new site, called "SiteGenesisCollections".  You can download the cartrdige which contains this new site from https://bitbucket.org/demandware/sitegenesis-content-sharing
 
-If you need to install high resolution images, you will need to perform 2 separate import steps.
-
-    % git pull demo_data_no_hires_images
-
-When you want to install the high resolution images, you can do that, following the same procedure.
-
-    % git pull demo_data_only_hires_images
-
-
-## Zipping the files
-
-On the Mac, you should use the commandline `zip` command to make sure the folder structure is created properly.
-
-    % zip -r demo_data_no_hires_images demo_data_no_hires_images
-
-
-## Upload and import the site
-
-Upload the resulting file to your site and import it.
 
 # Test Automation
 
@@ -70,7 +58,7 @@ Now that you have gulp (or grunt) and its dependencies installed, you can start 
 
 
 ### SCSS
-Before authoring SCSS, make sure to check out the [README] in `app_storefront/cartridge/scss` directory.
+Before authoring SCSS, make sure to check out the README in the `app_storefront_core/cartridge/scss` directory.
 
 #### `gulp css`
 This task does 2 things:
@@ -82,7 +70,7 @@ This task is also run automatically on any `.scss` file change by using the `gul
 The equivalent task for grunt, `grunt css`, is also available.
 
 ### JS
-Before authoring JS, make sure to checkout the [README] in `app_storefront/cartridge/js` directory.
+Before authoring JS, make sure to checkout the README in `app_storefront_richUI/cartridge/js` directory.
 
 The new modular JavaScript architecture relies on [browserify](https://github.com/substack/node-browserify) to compile JS code written in CommonJS standard.
 
@@ -112,4 +100,3 @@ For sourcemaps support, run `gulp` or `grunt` in development mode by specificyin
 We only support external sourcemaps because Eclipse tend to crash with inline sourcemaps.
 As a result, if you're using Grunt, sourcemaps is only available when the build steps are run explicitly, i.e. `grunt js --sourcemaps`. Sourcemaps is not enabled during `watch` mode.
 
-Updated: 3/19/15
