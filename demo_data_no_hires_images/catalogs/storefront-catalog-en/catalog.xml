@@ -10481,6 +10481,10 @@
         <primary-flag>true</primary-flag>
     </category-assignment>
 
+    <category-assignment category-id="womens-jewelry-earrings" product-id="womens-jewelry-bundle">
+        <primary-flag>true</primary-flag>
+    </category-assignment>
+
     <recommendation source-id="11736753" source-type="product" target-id="34736758" type="1"/>
 
     <recommendation source-id="11736753" source-type="product" target-id="62516752" type="1"/>
