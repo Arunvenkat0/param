@@ -12,7 +12,7 @@
 		}],
 		"banner": {
 			"title": "New Arrivals",
-			"img": "http://dev08-sitegenesis-dw.demandware.net/on/demandware.static/Sites-SiteGenesis-Site/Sites-storefront-catalog-en/default/v1412876674461/images/MenuBanner-New%20Arrivals.jpg"
+			"img": "http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-storefront-catalog-en/default/dwa7b41331/images/slot/landing/cat-landing-slotbottom-womens-clothing.jpg"
 		}
 	}, {
 		"name": "Womens",
@@ -46,7 +46,7 @@
 		}],
 		"banner": {
 			"title": "Womans Catalog",
-			"img": "http://dev08-sitegenesis-dw.demandware.net/on/demandware.static/Sites-SiteGenesis-Site/Sites-storefront-catalog-en/default/v1412876674461/images/WomensMenuBottomBanner.jpg"
+			"img": "http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-storefront-catalog-en/default/dwfdfd3954/images/slot/landing/cat-landing-slotbanner-womens.jpg"
 		}
 	}, {
 		"name": "Mens",
@@ -72,7 +72,7 @@
 		}],
 		"banner": {
 			"title": "Mens Items",
-			"img": "http://dev08-sitegenesis-dw.demandware.net/on/demandware.static/Sites-SiteGenesis-Site/Sites-storefront-catalog-en/default/v1412876674461/images/MenuBanner-Mens.jpg"
+			"img": "http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-storefront-catalog-en/default/dwfd876cb5/images/slot/landing/cat-landing-slotbanner-mens.jpg"
 		}
 	}, {
 		"name": "Electronics",
@@ -90,7 +90,7 @@
 		}],
 		"banner": {
 			"title": "Electronics products",
-			"img": "http://dev08-sitegenesis-dw.demandware.net/on/demandware.static/Sites-SiteGenesis-Site/Sites-storefront-catalog-en/default/v1412876674461/images/MenuBanner-Electronics.jpg"
+			"img": "https://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-storefront-catalog-en/default/dwa0034e19/images/slot/landing/cat-landing-slotbottom-electronics.jpg"
 		}
 	}, {
 		"name": "Gift Certificates"

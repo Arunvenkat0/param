@@ -135,6 +135,7 @@ nav[role="navigation"] {
 	display: none;
 	> ul {
 		@extend .clearfix;
+		padding-bottom: .5em;
 		padding-left: 2.1rem;
 	}
 	.level-1 > .active & {
@@ -144,7 +145,7 @@ nav[role="navigation"] {
 		background-color: $white;
 		box-shadow: 0 3px 3px 2px rgba($charcoal, 0.3);
 		color: $night-rider;
-		padding: 0.5em 0;
+		padding: 0;
 		position: absolute;
 		z-index: 1;
 		.level-1 li:hover & {
@@ -178,6 +179,7 @@ nav[role="navigation"] {
 			> li {
 				border-right: 1px solid $gainsboro;
 				float: left;
+				padding-right: 2rem;
 				&:last-child {
 					border-right: none;
 				}
@@ -192,6 +194,9 @@ nav[role="navigation"] {
 		display: none;
 		@media screen and (min-width: 768px) {
 			display: block;
+		}
+		img {
+			vertical-align: top;
 		}
 	}
 }

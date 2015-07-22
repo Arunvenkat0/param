@@ -415,7 +415,7 @@
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
-            <custom-attribute attribute-id="headerMenuBanner">&lt;a href="$url('Product-Show','pid','25772766')$"&gt;&lt;img width="195" height="195" src="images/MenuBanner-New%20Arrivals.jpg?$staticlink$" alt="New Arrivals" /&gt;&lt;/a&gt;</custom-attribute>
+            <custom-attribute attribute-id="headerMenuBanner">&lt;img alt="New Arrivals Image" src="images/slot/landing/cat-landing-slotbottom-womens-clothing.jpg?$staticlink$" width="225" /&gt;</custom-attribute>
             <custom-attribute attribute-id="headerMenuOrientation">Vertical</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
         </custom-attributes>
@@ -533,7 +533,7 @@
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">true</custom-attribute>
-            <custom-attribute attribute-id="headerMenuBanner">&lt;a href="$httpsUrl('GiftCert-Purchase')$"&gt;&lt;img width="433" height="80" src="images/WomensMenuBottomBanner.jpg?$staticlink$" alt="Womans Catalog" /&gt;&lt;/a&gt;</custom-attribute>
+            <custom-attribute attribute-id="headerMenuBanner">&lt;img alt="Women's Catalog Image" src="images/slot/landing/cat-landing-slotbanner-womens.jpg?$staticlink$" width="480" /&gt;</custom-attribute>
             <custom-attribute attribute-id="headerMenuOrientation">Horizontal</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
             <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-slotbanner-womens.jpg</custom-attribute>
@@ -2998,7 +2998,7 @@
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">true</custom-attribute>
-            <custom-attribute attribute-id="headerMenuBanner">&lt;a href="$url('Search-Show','cgid','mens-clothing-suits')$"&gt;&lt;img width="195" height="195" src="images/MenuBanner-Mens.jpg?$staticlink$" alt="Mens Items" /&gt;&lt;/a&gt;</custom-attribute>
+            <custom-attribute attribute-id="headerMenuBanner">&lt;img alt="Men's Category Image" src="images/slot/landing/cat-landing-slotbanner-mens.jpg?$staticlink$" width="433" /&gt;</custom-attribute>
             <custom-attribute attribute-id="headerMenuOrientation">Vertical</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
             <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-slotbanner-mens.jpg</custom-attribute>
