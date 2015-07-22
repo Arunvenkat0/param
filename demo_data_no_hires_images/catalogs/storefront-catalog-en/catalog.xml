@@ -563,9 +563,6 @@
         </custom-attributes>
         <refinement-definitions>
             <blocked-refinement-definition type="attribute" attribute-id="brand" system="true"/>
-            <blocked-refinement-definition type="price"/>
-            <blocked-refinement-definition type="attribute" attribute-id="refinementColor" system="false"/>
-            <blocked-refinement-definition type="attribute" attribute-id="isNew" system="false"/>
         </refinement-definitions>
     </category>
 
@@ -3028,9 +3025,6 @@
         </custom-attributes>
         <refinement-definitions>
             <blocked-refinement-definition type="attribute" attribute-id="brand" system="true"/>
-            <blocked-refinement-definition type="attribute" attribute-id="refinementColor" system="false"/>
-            <blocked-refinement-definition type="price"/>
-            <blocked-refinement-definition type="attribute" attribute-id="isNew" system="false"/>
         </refinement-definitions>
     </category>
 
