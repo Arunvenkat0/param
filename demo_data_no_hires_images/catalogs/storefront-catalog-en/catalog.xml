@@ -477,6 +477,7 @@
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-slotbottom-womens-clothing.jpg</custom-attribute>
         </custom-attributes>
     </category>
 
@@ -505,6 +506,7 @@
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-slotbottom-mens-dressshirts.jpg</custom-attribute>
         </custom-attributes>
     </category>
 
@@ -521,6 +523,7 @@
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-slotbottom-electronics.jpg</custom-attribute>
         </custom-attributes>
     </category>
 
