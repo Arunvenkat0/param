@@ -6023,7 +6023,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h3&gt;Help?&amp;nbsp;&lt;span&gt;888-553-XXXX&lt;/span&gt;&lt;/h3&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h3&gt;Besoin d'aide ? &lt;span&gt;888-553-XXXX&lt;/span&gt;&lt;/h3&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;h3&gt;Serve aiuto? &lt;span&gt;888-553-XXXX&lt;/span&gt;&lt;/h3&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;h3&gt;サポートをご利用になりますか?&lt;span&gt;888-553-XXXX&lt;/span&gt;&lt;/h3&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;h3&gt;サポートをご利用になりますか?&lt;br&gt;&lt;span&gt;888-553-XXXX&lt;/span&gt;&lt;/h3&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;h3&gt;需要帮助？&lt;span&gt;888-553-XXXX&lt;/span&gt;&lt;/h3&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
