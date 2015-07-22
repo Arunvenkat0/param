@@ -39,9 +39,7 @@
 		</ul>
 
 		<iscomment>Country Selector</iscomment>
-		<isif condition="${showCountrySelector}">
-			<isinclude template="components/header/countryselector"/>
-		</isif>
+		<isinclude template="components/header/countryselector"/>
 	
 		<iscomment>Multi-Currency Selection</iscomment>
 		<isinclude template="components/header/multicurrency"/>
