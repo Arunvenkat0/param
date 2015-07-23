@@ -1066,9 +1066,9 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-accessories-shoes" configuration-id="womens-accessories-shoes-banner" default="true" assigned-to-site="false">
-        <description>Banner for Womens shoes</description>
-        <template>slots/category/categorysub_banners.isml</template>
+    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-accessories-shoes" configuration-id="womens-shoes-cat-banner" default="true" assigned-to-site="true">
+        <description>This is the default banner for the womens shoes banner.</description>
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>

@@ -2971,7 +2971,7 @@
         <online-flag>true</online-flag>
         <parent>womens-accessories</parent>
         <position>16.0</position>
-        <image>images/slot/sub_banners/womens-accessories-footwear.jpg</image>
+        <image>images/slot/sub_banners/cat-banner-womens-shoes.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Womens Shoes Including Casual, Flat, Mid Heels &amp; High Heels</page-title>
