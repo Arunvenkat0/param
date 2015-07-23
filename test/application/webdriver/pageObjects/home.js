@@ -1,15 +1,14 @@
 'use strict';
 
 import client from '../client';
-import config from '../config';
 
 const basePath = '/home';
 
 export const MAIN_CAROUSEL = '#homepage-slider';
 export const VERTICAL_CAROUSEL = '#vertical-carousel';
 
-export function navigateTo(path = basePath) {
-	return client.url(config.url + path);
+export function navigateTo() {
+	return client.url(basePath);
 }
 
 /**

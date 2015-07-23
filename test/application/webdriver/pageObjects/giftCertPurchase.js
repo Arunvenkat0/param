@@ -1,7 +1,6 @@
 'use strict';
 
 import client from '../client';
-import config from '../config';
 import * as formHelpers from './helpers/forms/common';
 
 export const BTN_ADD_TO_CART = '#AddToBasketButton';
@@ -10,7 +9,7 @@ export const INPUT_FROM_FIELD = 'input[id$="giftcert_purchase_from"]';
 const basePath = '/giftcertpurchase';
 
 export function navigateTo () {
-	return client.url(config.url + basePath);
+	return client.url(basePath);
 }
 
 export function pressBtnAddToCart () {

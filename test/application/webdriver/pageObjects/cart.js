@@ -1,7 +1,6 @@
 'use strict';
 
 import client from '../client';
-import config from '../config';
 import * as common from './helpers/common';
 import * as productQuickView from './productQuickView';
 
@@ -25,8 +24,8 @@ function _createCssUpdateQtyInput (idx) {
 }
 
 // Public methods
-export function navigateTo (path = basePath) {
-	return client.url(config.url + path);
+export function navigateTo () {
+	return client.url(basePath);
 }
 
 export function removeItemByRow (rowNum) {
