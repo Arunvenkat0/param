@@ -27,7 +27,7 @@
 </script>
 <div class="pagination">
 	<div class="results-hits">
-		<span class="toggle-grid"><i class="fa fa-th fa-lg" data-option="column"></i><i class="fa fa-th-list fa-lg" data-option="wide"></i></span>
+		<isif condition="${pdict.ProductSearchResult.count > 0}"> <span class="toggle-grid"><i class="fa fa-th fa-lg" data-option="column"></i><i class="fa fa-th-list fa-lg" data-option="wide"></i></span></isif>
 		${Resource.msg('global.paginginformation.showing', 'locale', null)}
 		<isif condition="${!empty(pdict.OrderPagingModel) || !dw.system.Site.getCurrent().getCustomPreferenceValue('enableInfiniteScroll')}">
 			<isprint value="${StringUtils.formatInteger(showingStart)}"/> - <isprint value="${StringUtils.formatInteger(showingEnd)}"/> ${Resource.msg('paginginformation.of', 'search', null)}
