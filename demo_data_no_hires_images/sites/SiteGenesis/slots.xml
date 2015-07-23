@@ -571,13 +571,33 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-landing-slotbanner" context="category" context-id="electronics" configuration-id="electronics-cameras" default="true" assigned-to-site="true">
-        <template>slots/category/catlandingslotbanner.isml</template>
+    <slot-configuration slot-id="cat-landing-slotbottom" context="category" context-id="electronics" configuration-id="electronics-products" default="true" assigned-to-site="true">
+        <description>Products from electronics categories.</description>
+        <template>slots/product/cat_product_listing.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <callout-msg xml:lang="x-default">Latest Products</callout-msg>
+        <content>
+            <products>
+                <product product-id="vizio-vw46lf"/>
+                <product product-id="sony-cybershot-t77"/>
+                <product product-id="microsoft-zune120"/>
+                <product product-id="easports-nascar-09-ps3"/>
+                <product product-id="garmin-foretrex-101"/>
+            </products>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="cat-landing-slotbanner" context="category" context-id="electronics" configuration-id="electronics-subcategories" default="true" assigned-to-site="true">
+        <description>Subcategory tiles for electronics.</description>
+        <template>slots/category/category-tile.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
-                <category category-id="electronics"/>
+                <category category-id="electronics-televisions"/>
                 <category category-id="electronics-digital-cameras"/>
+                <category category-id="electronics-digital-media-players"/>
+                <category category-id="electronics-gps-units"/>
+                <category category-id="electronics-gaming"/>
             </categories>
         </content>
     </slot-configuration>

@@ -4002,7 +4002,7 @@
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">true</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
-            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/electronics-cameras.jpg</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-camera.jpg</custom-attribute>
         </custom-attributes>
         <refinement-definitions>
             <refinement-definition type="attribute" bucket-type="none" attribute-id="digitalCameraType" system="false">
