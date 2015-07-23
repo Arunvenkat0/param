@@ -7,7 +7,9 @@ let client = webdriverio.remote({
 	desiredCapabilities: {
 		browserName: config.client
 	},
-	logLevel: 'silent'
+	logLevel: 'silent',
+	host: config.host || '0.0.0.0',
+	port: config.port || 4444
 });
 
 let loggingLevel = 'info';
