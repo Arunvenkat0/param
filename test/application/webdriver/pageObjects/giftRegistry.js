@@ -1,7 +1,6 @@
 'use strict';
 
 import client from '../client';
-import config from '../config';
 import * as formHelpers from './helpers/forms/common';
 
 export const SHARE_LINK = '.share-link';
@@ -16,7 +15,7 @@ export const REGISTRY_HEADING = '.page-content-tab-wrapper h2';
 const basePath = '/giftregistry';
 
 export function navigateTo () {
-	return client.url(config.url + basePath);
+	return client.url(basePath);
 }
 
 export function fillOutEventForm (eventData) {

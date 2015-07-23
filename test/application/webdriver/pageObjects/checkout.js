@@ -1,7 +1,6 @@
 'use strict';
 
 import client from '../client';
-import config from '../config';
 import * as formHelpers from './helpers/forms/common';
 
 export const BTN_CONTINUE_BILLING_SAVE = 'button[name*="billing_save"]';
@@ -24,7 +23,7 @@ export const RADIO_BTN_PAYPAL = 'input[value="PayPal"]';
 const basePath = '/checkout';
 
 export function navigateTo () {
-	return client.url(config.url + basePath);
+	return client.url(basePath);
 }
 
 export function pressBtnCheckoutAsGuest () {

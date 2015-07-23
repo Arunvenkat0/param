@@ -2,6 +2,7 @@
 
 import {assert} from 'chai';
 import client from '../webdriver/client';
+import config from '../webdriver/config';
 import url from 'url';
 import * as accountPage from '../webdriver/pageObjects/account';
 import * as cartPage from '../webdriver/pageObjects/cart';
@@ -48,7 +49,7 @@ describe('Wishlist', () => {
 			},
 			shareLinkUrl: {
 				selector: '.share-link-content a',
-				baseUrl: wishListPage.configUrl,
+				baseUrl: config.url,
 				regex: /.*\?.*WishListID=.+/
 			}
 		};

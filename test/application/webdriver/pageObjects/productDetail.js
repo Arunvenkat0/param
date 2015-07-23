@@ -1,7 +1,6 @@
 'use strict';
 
 import client from '../client';
-import config from '../config';
 
 const BTN_ADD_TO_CART = '#add-to-cart';
 
@@ -21,7 +20,7 @@ function selectAttributeByIndex (attributeName, index) {
  *     this represents the index value for the size options
  */
 export function addProductVariationToCart (product) {
-	return client.url(config.url + product.get('resourcePath'))
+	return client.url(product.get('resourcePath'))
 		// The order of setting the attributes is important, as the selection
 		// of the Color value enables Size options if available.
 		.then(() => {
