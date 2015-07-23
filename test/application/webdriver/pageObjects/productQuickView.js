@@ -1,3 +1,5 @@
+'use strict';
+
 import client from '../client';
 
 export const CONTAINER = '.ui-dialog';
@@ -22,4 +24,3 @@ export function getSizeTextByIdx(sizeIndex) {
 	return client.getText(getCssSizeByIdx(sizeIndex))
 		.then(text => text.trim());
 }
-

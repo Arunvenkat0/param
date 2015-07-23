@@ -8,7 +8,7 @@ import * as cartPage from '../webdriver/pageObjects/cart';
 import * as giftCertPurchasePage from '../webdriver/pageObjects/giftCertPurchase';
 import * as loginForm from '../webdriver/pageObjects/helpers/forms/login';
 import * as navHeader from '../webdriver/pageObjects/navHeader';
-import * as wishListPage from '../webdriver/pageObjects/wishlist';
+import * as wishListPage from '../webdriver/pageObjects/wishList';
 import * as testData from '../webdriver/pageObjects/testData/main';
 
 describe('Wishlist', () => {
@@ -156,7 +156,7 @@ describe('Wishlist', () => {
 				.then(() => client.url())
 				.then(currentUrl => {
 					let parsedUrl = url.parse(currentUrl.value);
-					return assert.isTrue(parsedUrl.pathname.endsWith('giftcertpurchase'))
+					return assert.isTrue(parsedUrl.pathname.endsWith('giftcertpurchase'));
 				})
 		);
 

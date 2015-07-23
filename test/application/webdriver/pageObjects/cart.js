@@ -2,7 +2,7 @@
 
 import client from '../client';
 import config from '../config';
-import * as common from './helpers/common'
+import * as common from './helpers/common';
 import * as productQuickView from './productQuickView';
 
 export const CSS_CART_EMPTY = '.cart-empty';
@@ -104,7 +104,7 @@ export function emptyCart () {
 						.elementIdValue(item.ELEMENT, '0'));
 
 				return client.pause(500)
-					.click(BTN_UPDATE_CART)
+					.click(BTN_UPDATE_CART);
 			}
 		})
 		// There are some products, like Gift Certificates, whose
