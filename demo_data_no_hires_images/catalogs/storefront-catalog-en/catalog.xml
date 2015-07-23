@@ -3877,7 +3877,7 @@
         <online-flag>true</online-flag>
         <parent>root</parent>
         <position>12.0</position>
-        <template>rendering/category/categorylanding</template>
+        <template>rendering/category/catlanding</template>
         <page-attributes>
             <page-title xml:lang="x-default">Shop Electronics Including Televisions, Digital Cameras, iPods &amp; More</page-title>
             <page-description xml:lang="x-default">Shop Electronics including the latest in televisions, digital cameras, camcorders, mp3, ipod, mobil phones, GPS &amp; gaming at Demandware</page-description>
@@ -3923,6 +3923,7 @@
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">true</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-tv.jpg</custom-attribute>
         </custom-attributes>
         <refinement-definitions>
             <refinement-definition type="attribute" bucket-type="none" attribute-id="tvSize" system="false">
@@ -4156,6 +4157,7 @@
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">true</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-mp3.jpg</custom-attribute>
         </custom-attributes>
         <refinement-definitions>
             <refinement-definition type="attribute" bucket-type="none" attribute-id="portableAudioType" system="false">
@@ -4251,6 +4253,7 @@
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">true</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-gps.jpg</custom-attribute>
         </custom-attributes>
         <refinement-definitions>
             <refinement-definition type="attribute" bucket-type="none" attribute-id="gpsType" system="false">
@@ -4374,6 +4377,7 @@
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">true</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
+            <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-gaming.jpg</custom-attribute>
         </custom-attributes>
     </category>
 
