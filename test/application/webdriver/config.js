@@ -8,6 +8,6 @@ let opts = minimist(process.argv.slice(2));
 
 var config = _.assign(getConfig('./config.json', {
 	client: 'phantomjs'
-}), _.pick(opts, ['client', 'url']));
+}), _.pick(opts, ['client', 'url', 'host', 'port']));
 
 export default config;
