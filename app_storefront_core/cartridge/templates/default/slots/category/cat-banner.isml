@@ -9,8 +9,6 @@
 					<isif condition="${category.image != null}">
 						<img src="${category.image.httpURL}" alt="${category.displayName}" />
 						<h1><isprint value="${category.displayName}" encoding="off"/></h1>
-					<iselse/>
-						<!-- BLANK -->
 					</isif>
 				</a>
 			</div>
