@@ -55,7 +55,7 @@ describe('Input Field', function () {
 			input: '<input class="input-text " type="text"  id="testfield" name="testfield" value="" />',
 			caption: '<div class="form-caption"></div>',
 			labelAfter: false,
-			help: '<div class="form-field-tooltip"><a href="http://example.demandware.net/Page-Show" class="tooltip">Help<div class="tooltip-content" data-layout="small">contentasset</div></a></div>'
+			help: '<div class="form-field-tooltip"><a href="http://example.demandware.net/Page-Show?cid=contentasset" class="tooltip">Help<div class="tooltip-content" data-layout="small">contentasset</div></a></div>'
 		});
 	});
 
@@ -78,7 +78,7 @@ describe('Input Field', function () {
 			input: '<input class="input-text " type="text"  id="testfield" name="testfield" value="" />',
 			caption: '<div class="form-caption"></div>',
 			labelAfter: false,
-			help: '<div class="form-field-tooltip"><a href="http://example.demandware.net/Page-Show" class="tooltip">Help<div class="tooltip-content" data-layout="small"></div></a></div>'
+			help: '<div class="form-field-tooltip"><a href="http://example.demandware.net/Page-Show?cid=notfound" class="tooltip">Help<div class="tooltip-content" data-layout="small"></div></a></div>'
 		});
 	});
 

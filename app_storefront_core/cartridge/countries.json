@@ -8,7 +8,7 @@
 	"currencyCode": "USD",
 	"taxation": {
 		"type": "net"
-	},	
+	},
 	"priceBooks": [
 		"usd-list-prices",
 		"usd-sale-prices"
@@ -25,7 +25,7 @@
 			},
 			"address2": {
 				"help": {
-					"cid": "help-apo-fpo",
+					"cid": "apo-fpo",
 					"label": {
 						"property": "singleshipping.apofpo",
 						"file": "checkout"
@@ -53,7 +53,7 @@
 	"currencyCode": "GBP",
 	"taxation": {
 		"type": "gross"
-	},	
+	},
 	"priceBooks": [
 		"gbp-list-prices",
 		"gbp-sale-prices"
@@ -114,7 +114,7 @@
 						"file": "checkout"
 					}
 				}
-			}	
+			}
 		}
 	}
 }, {
@@ -152,7 +152,7 @@
 						"file": "checkout"
 					}
 				}
-			}	
+			}
 		}
 	}
 }, {
@@ -178,7 +178,7 @@
 			},
 			"states": {
 				"skip": true
-			},	
+			},
 			"phone": {
 				"help": {
 					"cid": "help-telephone",
@@ -210,7 +210,7 @@
 		"addressDetails": {
 			"country": {
 				"type": "select"
-			},	
+			},
 			"states": {
 				"isFormGroup": true,
 				"childField": "state",

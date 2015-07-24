@@ -206,7 +206,7 @@ module.exports = function (pdict) {
 		}
 		help = [
 			'<div class="form-field-tooltip">',
-			'<a href="' + URLUtils.url('Page-Show', 'cid', pdict.helpcid) + '" class="tooltip">',
+			'<a href="' + URLUtils.url('Page-Show', 'cid', pdict.help.cid) + '" class="tooltip">',
 			helplabel,
 			'<div class="tooltip-content" data-layout="small">',
 			helpcontent,
