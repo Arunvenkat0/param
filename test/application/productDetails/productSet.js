@@ -2,11 +2,14 @@
 
 var assert = require('chai').assert;
 var client = require('../webdriver/client');
+import * as productDetailPage from '../webdriver/pageObjects/productDetail';
 
 describe('Product Details Page - Set', function () {
+
 	before(function (done) {
 		client.init().url('/home', done);
 	});
+
 	it('- Product Details for Set', function (done) {
 		client
 			.waitForExist('form[role="search"]')
@@ -15,8 +18,8 @@ describe('Product Details Page - Set', function () {
 			.waitForExist('#search-result-items', function (err) {
 				assert.equal(err, undefined);
 			})
-			.click('[title*="Fall Look"]')
-
+			.then(() => client.click('[title*="Fall Look"]'))
+			.then(() => client.waitForVisible(productDetailPage.PDP_MAIN))
 			.getText('#pdpMain > h1.product-name', function (err, title) {
 				assert.equal(err, undefined);
 				assert.equal(title, 'Fall Look', 'The Product Name should equal Fall Look');

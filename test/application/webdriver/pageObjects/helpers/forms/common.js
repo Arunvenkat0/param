@@ -17,6 +17,9 @@ export function populateField (selector, value, fieldType = 'input') {
 			return client.selectByValue(selector, value);
 		case 'selectByIndex':
 			return client.selectByIndex(selector, value);
+		// Sets HTML5 input date field
+		case 'html5Date':
+			return client.element(selector)
+				.then(el => client.elementIdValue(el.value.ELEMENT, value));
 	}
 }
-

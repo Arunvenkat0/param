@@ -1,12 +1,16 @@
 'use strict';
 
+import _ from 'lodash';
 import client from '../client';
 import * as formHelpers from './helpers/forms/common';
 
+export const BREADCRUMB_SHIPPING = '.step-1.active';
+export const BREADCRUMB_BILLING = '.step-2.active';
+export const BREADCRUMB_PLACE_ORDER = '.step-3.active';
 export const BTN_CONTINUE_BILLING_SAVE = 'button[name*="billing_save"]';
 export const BTN_CONTINUE_SHIPPING_SAVE = '[name*="shippingAddress_save"]';
 export const BTN_PLACE_ORDER = 'button[name*="submit"]';
-export const CSS_ORDER_SUBTOTAL = '.order-subtotal td:nth-child(2)';
+export const CSS_ORDER_SUBTOTAL = '.nav.summary .order-subtotal td:nth-child(2)';
 export const LABEL_ORDER_THANK_YOU = '.primary-content h1';
 export const MINI_SECTION_SHIPPING_ADDR = '.mini-shipment';
 export const MINI_SECTION_BILLING_ADDR = '.mini-billing-address';
@@ -19,6 +23,8 @@ export const MINI_SHIPPING_ADDR_DETAILS = MINI_SECTION_SHIPPING_ADDR + ' .detail
 export const MINI_BILLING_ADDR_DETAILS = MINI_SECTION_BILLING_ADDR + ' .details';
 export const MINI_PMT_METHOD_DETAILS = MINI_SECTION_PMT_METHOD + ' .details';
 export const RADIO_BTN_PAYPAL = 'input[value="PayPal"]';
+export const CHECKOUT_PROGRESS = '.checkout-progress-indicator .active';
+export const USE_AS_BILLING_ADDR = '[name*="shippingAddress_useAsBillingAddress"]';
 
 const basePath = '/checkout';
 
@@ -27,7 +33,8 @@ export function navigateTo () {
 }
 
 export function pressBtnCheckoutAsGuest () {
-	return client.click('[name*="login_unregistered"]');
+	return client.click('[name*="login_unregistered"]')
+		.waitForVisible(BREADCRUMB_SHIPPING);
 }
 
 export function fillOutShippingForm (shippingData) {
@@ -43,11 +50,22 @@ export function fillOutShippingForm (shippingData) {
 	fieldTypes.set('city', 'input');
 	fieldTypes.set('postal', 'input');
 	fieldTypes.set('phone', 'input');
+	fieldTypes.set('addressList', 'selectByValue');
 
-	for (var [key, value] of shippingData) {
-		let selector = '[name*="shippingAddress_addressFields_' + key + '"]';
+	_.each(shippingData, (value, key) => {
+		let prefix = '[name*=';
+
+		switch (key) {
+			case 'addressList':
+				prefix += 'singleshipping_';
+				break;
+			default:
+				prefix += 'shippingAddress_addressFields_';
+		}
+
+		let selector = prefix + key + ']';
 		fieldsPromise.push(formHelpers.populateField(selector, value, fieldTypes.get(key)));
-	}
+	});
 	return Promise.all(fieldsPromise);
 }
 
@@ -67,8 +85,8 @@ export function fillOutBillingForm (billingFields) {
 		type: 'input',
 		fieldPrefix: 'billing_paymentMethods_'
 	});
-	fieldTypes.set('creditCard_year', {
-		type: 'selectByIndex',
+	fieldTypes.set('creditCard_expiration_year', {
+		type: 'selectByValue',
 		fieldPrefix: 'billing_paymentMethods_'
 	});
 	fieldTypes.set('creditCard_cvn', {
@@ -76,16 +94,19 @@ export function fillOutBillingForm (billingFields) {
 		fieldPrefix: 'billing_paymentMethods_'
 	});
 
-	for (var [key, value] of billingFields) {
-		var fieldType = fieldTypes.get(key).type;
-		var selector = '[name*="' + key + '"]';
+	_.each(billingFields, (value, key) => {
+		let fieldType = fieldTypes.get(key).type;
+		let selector = '[name*=' + key + ']';
 		fieldsPromise.push(formHelpers.populateField(selector, value, fieldType));
-	}
+	});
+
 	return Promise.all(fieldsPromise);
 }
 
 export function checkUseAsBillingAddress () {
-	return client.click('[name*="shippingAddress_useAsBillingAddress"]');
+	return client.waitForExist(BREADCRUMB_SHIPPING)
+		.click(USE_AS_BILLING_ADDR)
+		.pause(1000);
 }
 
 export function getLabelOrderConfirmation () {
@@ -93,7 +114,8 @@ export function getLabelOrderConfirmation () {
 }
 
 export function getActiveBreadCrumb () {
-	return client.getText('.checkout-progress-indicator .active');
+	return client.waitForExist(CHECKOUT_PROGRESS)
+		.getText(CHECKOUT_PROGRESS);
 }
 
 export function getOrderSubTotal () {

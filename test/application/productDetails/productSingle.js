@@ -2,11 +2,14 @@
 
 var assert = require('chai').assert;
 var client = require('../webdriver/client');
+import * as productDetailPage from '../webdriver/pageObjects/productDetail';
 
 describe('Product Details Page - single item', function () {
+
 	before(function (done) {
 		client.init().url('/home', done);
 	});
+
 	it('- Product Details for Modern Blazer', function (done) {
 		client
 			.waitForExist('form[role="search"]')
@@ -15,8 +18,8 @@ describe('Product Details Page - single item', function () {
 			.waitForExist('#search-result-items', function (err) {
 				assert.equal(err, undefined);
 			})
-			.click('[title*="Modern Blazer"]')
-
+			.then(() => client.click('[title*="Modern Blazer"]'))
+			.then(() => client.waitForVisible(productDetailPage.PDP_MAIN))
 			.getText('h1.product-name', function (err, title) {
 				assert.equal(err, undefined);
 				assert.equal(title, 'Modern Blazer', 'The Product Name should equal Modern Blazer');

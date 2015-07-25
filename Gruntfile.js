@@ -10,7 +10,7 @@ module.exports = function (grunt) {
 	config.suite = grunt.option('suite') || '*';
 	if (config.suite === 'all') { config.suite = '*'; }
 	config.reporter = grunt.option('reporter') || 'spec';
-	config.timeout = grunt.option('timeout') || 20000;
+	config.timeout = grunt.option('timeout') || 60000;
 	config.port = grunt.option('port') || 7000;
 	config.sourcemaps = !!grunt.option('sourcemaps');
 

@@ -2,6 +2,7 @@
 
 import _ from 'lodash';
 import fs from 'fs';
+import moment from 'moment-timezone';
 import xml2js from 'xml2js';
 
 import * as customers from './customers.js';
@@ -12,7 +13,7 @@ import * as prices from './prices.js';
 export const defaultPassword = 'Test123!';
 export const creditCard1 = {
 	number: '4111111111111111',
-	yearIndex: 2,
+	yearIndex: _getCurrentYear() + 1,
 	cvn: 987
 };
 
@@ -144,4 +145,8 @@ export function getPricesByProductId (productId, currencyCode = 'usd') {
  */
 export function getInventoryByProductId (productId) {
 	return Promise.resolve(_.findWhere(parsedData.inventory, {productId: productId}));
+}
+
+function _getCurrentYear() {
+	return moment(new Date()).year();
 }

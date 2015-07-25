@@ -4,7 +4,7 @@ import client from '../client';
 import * as common from './helpers/common';
 import * as productQuickView from './productQuickView';
 
-export const CSS_CART_EMPTY = '.cart-empty';
+export const CART_EMPTY = '.cart-empty';
 export const CART_ITEMS = '.item-list tbody tr';
 export const CSS_ORDER_SUBTOTAL = '.order-subtotal td:nth-child(2)';
 export const BTN_UPDATE_CART = '.cart-footer button[name*="_updateCart"]';
@@ -30,11 +30,16 @@ export function navigateTo () {
 
 export function removeItemByRow (rowNum) {
 	var linkRemoveItem = _createCssNthCartRow(rowNum) + ' .item-user-actions button[value="Remove"]';
-	return client.click(linkRemoveItem);
+	return client.click(linkRemoveItem)
+		// TODO: Find a way to waitForVisible instead of this pause. When there
+		// are more than one item in the cart, the page elements will be the same
+		// after one item has been removed, so waitForVisible will resolve
+		// immediately
+		.pause(500);
 }
 
 export function verifyCartEmpty () {
-	return client.isExisting(CSS_CART_EMPTY);
+	return client.isExisting(CART_EMPTY);
 }
 
 export function getItemList () {
@@ -44,7 +49,9 @@ export function getItemList () {
 }
 
 export function getItemNameByRow (rowNum) {
-	return client.getText(_createCssNthCartRow(rowNum) + ' .name');
+	let selector = _createCssNthCartRow(rowNum) + ' .name';
+	return client.waitForVisible(selector)
+		.getText(selector);
 }
 
 export function getItemAttrByRow (rowNum, attr) {
@@ -53,9 +60,13 @@ export function getItemAttrByRow (rowNum, attr) {
 }
 
 export function updateQuantityByRow (rowNum, value) {
-	return client.setValue(_createCssUpdateQtyInput(rowNum), value)
+	let selector = _createCssUpdateQtyInput(rowNum);
+	return client.waitForVisible(selector)
+		.setValue(selector, value)
 		.click(BTN_UPDATE_CART)
-		.getValue(_createCssUpdateQtyInput(rowNum));
+		// TODO: Replace with waitUntil to check for quantity change
+		.pause(1000)
+		.getValue(selector);
 }
 
 export function getPriceByRow (rowNum) {
@@ -71,13 +82,14 @@ export function updateSizeByRow (rowNum, sizeIndex) {
 		.click(getItemEditLinkByRow(rowNum))
 		.waitForVisible(productQuickView.CONTAINER)
 		.click(productQuickView.getCssSizeLinkByIdx(sizeIndex))
+		// TODO: Investigate ways to speed this up. Seems extraneous delay.
 		.waitUntil(() =>
 			common.checkElementEquals(
 				productQuickView.SIZE_SELECTED_VALUE,
 				productQuickView.getSizeTextByIdx(sizeIndex))
 		)
 		.click('.ui-dialog #add-to-cart')
-		.waitForVisible(productQuickView.CONTAINER, 5000, true)
+		.waitForVisible(productQuickView.CONTAINER, 15000, true)
 		.getText(_createCssNthCartRow(rowNum) + ' .attribute[data-attribute="size"] .value');
 }
 
@@ -94,6 +106,8 @@ export function getOrderSubTotal () {
  *
  */
 export function emptyCart () {
+	let promises = [];
+
 	return navigateTo()
 		.then(() => client.elements('.item-quantity input'))
 		.then(items => {
@@ -101,9 +115,7 @@ export function emptyCart () {
 				items.value.forEach(item =>
 					client.elementIdClear(item.ELEMENT)
 						.elementIdValue(item.ELEMENT, '0'));
-
-				return client.pause(500)
-					.click(BTN_UPDATE_CART);
+				return client.click(BTN_UPDATE_CART);
 			}
 		})
 		// There are some products, like Gift Certificates, whose
@@ -111,15 +123,17 @@ export function emptyCart () {
 		// must click the Remove link on each.
 		.then(() => client.elements(LINK_REMOVE))
 		.then(removeLinks => {
-			if (removeLinks.value.length) {
-				// Because each Remove link results in a page reload,
-				// it is necessary to wait for one remove operation
-				// to complete before clicking on the next Remove
-				// link
-				removeLinks.value.forEach(() => _clickFirstRemoveLink());
+			// Because each Remove link results in a page reload,
+			// it is necessary to wait for one remove operation
+			// to complete before clicking on the next Remove
+			// link
+			if (!removeLinks.value.length) {
+				return Promise.resolve();
 			}
+			removeLinks.value.forEach(() => promises.push(_clickFirstRemoveLink()));
 		})
-		.then(() => client.pause(500));
+		.then(() => Promise.all(promises))
+		.then(() => client.waitForExist(CART_EMPTY));
 }
 
 /**
@@ -128,7 +142,10 @@ export function emptyCart () {
  */
 function _clickFirstRemoveLink () {
 	return client.elements(LINK_REMOVE)
-		.then(removeLinks =>
-			client.elementIdClick(removeLinks.value[0].ELEMENT)
-		);
+		.then(removeLinks => {
+			if (removeLinks.value.length) {
+				return client.elementIdClick(removeLinks.value[0].ELEMENT);
+			}
+			return Promise.resolve();
+		});
 }

@@ -1,22 +1,24 @@
 'use strict';
 
-var assert = require('chai').assert;
-var client = require('../webdriver/client');
+import {assert} from 'chai';
+import client from '../webdriver/client';
+import * as productDetailPage from '../webdriver/pageObjects/productDetail';
 
 describe('Product Details Page - Bundle', function () {
+
 	before(function (done) {
 		client.init().url('/home', done);
 	});
+
 	it('- Product Details for Bundle', function (done) {
-		client
-			.waitForExist('form[role="search"]')
+		client.waitForExist('form[role="search"]')
 			.setValue('#q', 'bundle')
 			.submitForm('form[role="search"]')
 			.waitForExist('#search-result-items', function (err) {
 				assert.equal(err, undefined);
 			})
-			.click('[title*="Playstation 3 Bundle"]')
-
+			.then(() => client.click('[title*="Playstation 3 Bundle"]'))
+			.then(() => client.waitForVisible(productDetailPage.PDP_MAIN))
 			.getText('#pdpMain > h1.product-name', function (err, title) {
 				assert.equal(err, undefined);
 				assert.equal(title, 'Playstation 3 Bundle', 'The Product Name should equal Playstation 3 Bundle');

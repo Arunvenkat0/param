@@ -13,9 +13,10 @@ export const DEFAULT_RETURNING_CUSTOMER = 'testuser1@demandware.com';
  * Fill in login form
  */
 export function loginAs (login, password) {
-	return client.setValue(INPUT_EMAIL, login)
+	return client.waitForVisible(INPUT_EMAIL, 30000)
+		.setValue(INPUT_EMAIL, login)
 		.setValue(INPUT_PASSWORD, password)
-		.click(BTN_LOGIN);
+		.then(() => client.click(BTN_LOGIN));
 }
 
 /**
