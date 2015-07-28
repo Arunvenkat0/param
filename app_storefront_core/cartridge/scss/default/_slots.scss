@@ -459,6 +459,19 @@
 			width: 100%;
 		}
 	}
+	.cat-banner {
+		overflow: hidden;
+		position: relative;
+		width: 100%;
+		img {
+			height: auto;
+			width: 100%;
+		}
+		h1 {
+			color: $night-rider;
+			right: 2%;
+		}
+	}
 	.search-result-items {
 		.grid-tile {
 			box-shadow: none;
