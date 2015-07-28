@@ -52,8 +52,8 @@
                         </fileset>
                       </copy>
                       <copy todir="${project.build.directory}/sg-resources/app_storefront_richUI">
-                          <fileset dir="${project.basedir}/app_storefront_core" includes="**/*/*">
-                          </fileset>
+                        <fileset dir="${project.basedir}/app_storefront_core" includes="**/*/*">
+                        </fileset>
                       </copy>
                       <copy todir="${project.build.directory}/sg-resources/demosite-creation">
                         <fileset dir="${project.basedir}/demo_data_no_hires_images" />
