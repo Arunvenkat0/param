@@ -51,7 +51,7 @@
                           <include name="app_storefront_controllers*/**" />
                         </fileset>
                       </copy>
-                      <copy todir="${project.build.directory}/sg-resources/app_store_front_rich_ui">
+                      <copy todir="${project.build.directory}/sg-resources/app_storefront_richUI">
                         <fileset dir="${project.basedir}/app_storefront_core" includes="**/*/*">
                         </fileset>
                       </copy>
