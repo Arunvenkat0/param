@@ -58,12 +58,14 @@
 		li {
 			border-bottom: 1px solid $gainsboro;
 			float: left;
-			height: 80px;
 			list-style: none outside none !important;
 			margin: 0 0 0 4%;
-			padding: 1.66em 0 0;
+			padding: 1em 0;
 			position: relative;
 			width: 46%;
+			@media screen and (min-width: 768px) {
+				height: 5rem;
+			}
 			a {
 				display: block;
 				font-size: 1.5em;
@@ -95,9 +97,9 @@
 	border-style: solid;
 	border-color:  $islamic-green;
 	border-width: 1px;
-	background-color: white;	
+	background-color: white;
 	padding: 0.5em 0.5em;
-	
+
 	h2{
 		color: 	$islamic-green;
 		margin: 0.5em 0em;
@@ -189,7 +191,7 @@
 				color: $white;
 				text-align: right;
 			}
-		}	
+		}
 	}
 	.slide2 {
 		.banner-message {
@@ -246,7 +248,7 @@
 	}
 	.slide5 {
 		.banner-message {
-			left: 15%;	
+			left: 15%;
 			.banner-text1 {
 				color: $cerulean;
 				display: inline;
@@ -286,7 +288,7 @@
 		li {
 			border-right: 1px solid $dim-gray;
 			color: $dim-gray;
-			display: inline;	
+			display: inline;
 			font-family: $sans-serif-alt;
   			font-size: .8rem;
   			font-weight: 400;
@@ -377,7 +379,7 @@
 				font-size: 1rem;
 				font-weight: 200;
 			}
-		}	
+		}
 	}
 	.product-tile {
 		border: 0 none;
@@ -455,7 +457,7 @@
 		img {
 			height: auto;
 			width: 100%;
-		}	
+		}
 	}
 	.search-result-items {
 		.grid-tile {
@@ -486,7 +488,7 @@
 				.product-pricing {
 					font-family: $sans-serif-alt;
 					font-size: 1rem;
-				}	
+				}
 			}
 		}
 	}
