@@ -55,7 +55,6 @@ function ResourceHelper() {}
 			MISSING_LIB 					: Resource.msg('global.missinglib', 'locale', null),
 			BAD_RESPONSE					: Resource.msg('global.badresponse', 'locale', null),
 			INVALID_PHONE					: Resource.msg('global.invalidphone', 'locale', null),
-			INVALID_EMAIL					: Resource.msg('profile.emailparseerror', 'forms', null),
 			REMOVE							: Resource.msg('global.remove', 'locale', null),
 			QTY								: Resource.msg('global.qty', 'locale', null),
 			EMPTY_IMG_ALT					: Resource.msg('global.remove', 'locale', null),
@@ -96,7 +95,25 @@ function ResourceHelper() {}
 			SEE_MORE						: Resource.msg('storelist.lightbox.seemore', 'storepickup', null),
 			SEE_LESS						: Resource.msg('storelist.lightbox.seeless', 'storepickup', null),
 			QUICK_VIEW						: Resource.msg('product.quickview', 'product', null),
-			QUICK_VIEW_POPUP				: Resource.msg('product.quickview.popup', 'product', null)
+			QUICK_VIEW_POPUP				: Resource.msg('product.quickview.popup', 'product', null),
+
+			// Validation messages
+			VALIDATE_REQUIRED				: Resource.msg('validate.required', 'forms', null),
+			VALIDATE_REMOTE					: Resource.msg('validate.remote', 'forms', null),
+			VALIDATE_EMAIL					: Resource.msg('validate.email', 'forms', null),
+			VALIDATE_URL					: Resource.msg('validate.url', 'forms', null),
+			VALIDATE_DATE					: Resource.msg('validate.date', 'forms', null),
+			VALIDATE_DATEISO				: Resource.msg('validate.dateISO', 'forms', null),
+			VALIDATE_NUMBER					: Resource.msg('validate.number', 'forms', null),
+			VALIDATE_DIGITS					: Resource.msg('validate.digits', 'forms', null),
+			VALIDATE_CREDITCARD				: Resource.msg('validate.creditcard', 'forms', null),
+			VALIDATE_EQUALTO				: Resource.msg('validate.equalTo', 'forms', null),
+			VALIDATE_MAXLENGTH				: Resource.msg('validate.maxlength', 'forms', null),
+			VALIDATE_MINLENGTH				: Resource.msg('validate.minlength', 'forms', null),
+			VALIDATE_RANGELENGTH			: Resource.msg('validate.rangelength', 'forms', null),
+			VALIDATE_RANGE					: Resource.msg('validate.range', 'forms', null),
+			VALIDATE_MAX					: Resource.msg('validate.max', 'forms', null),
+			VALIDATE_MIN					: Resource.msg('validate.min', 'forms', null)
 		};
 
 		// additional resources
