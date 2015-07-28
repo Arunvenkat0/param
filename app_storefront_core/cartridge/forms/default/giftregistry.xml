@@ -22,12 +22,12 @@
 			missing-error="giftregistry.eventDate.missing-error"
 			parse-error="giftregistry.eventDate.parse-error"
 			description="giftregistry.eventDate.description" max-length="8"/>
-
-		<field formid="town" label="giftregistry.eventCity" type="string" mandatory="true" binding="eventCity" min-length="2" max-length="60"
-			missing-error="giftregistry.eventCity.missing-error" />
-
+			
 		<!--  include address fields from customeraddress.xml form definition -->
 		<include formid="eventaddress" name="customeraddress"/>
+	
+		<field formid="town" label="giftregistry.eventCity" type="string" mandatory="true" binding="eventCity" min-length="2" max-length="60"
+			missing-error="giftregistry.eventCity.missing-error" />
 
 		<!-- define sub-group here representing a participant -->
 		<group formid="participant">
