@@ -19,7 +19,7 @@
 
 		<field formid="date" label="giftregistry.eventDate"  type="date"
 			timezoned="false" mandatory="true" binding="eventDate"
-			format="MM/dd/yy"
+			format="dd/MM/yy"
 			missing-error="giftregistry.eventDate.missing-error"
 			parse-error="giftregistry.eventDate.parse-error"
 			description="giftregistry.eventDate.description" max-length="8"/>
