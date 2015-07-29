@@ -97,16 +97,6 @@
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-accessories-scarves" configuration-id="New Slot Configuration - 2011-11-01 20:04:36" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="womens-accessories-scarves"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
     <slot-configuration slot-id="search-promo" context="global" configuration-id="New Slot Configuration - 2011-11-14 09:51:41" assigned-to-site="true">
         <template>slots/content/homepage/home-bottom-slot.isml</template>
         <enabled-flag>true</enabled-flag>
@@ -417,8 +407,9 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-accessories" configuration-id="banners-womens-accessories" default="true" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
+    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-accessories" configuration-id="womens-accessories" default="true" assigned-to-site="true">
+        <description>Default banner for this category</description>
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
@@ -427,80 +418,31 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-accessories-gloves" configuration-id="banners-womens-accessories-gloves" default="true" assigned-to-site="true">
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <html>
-                <body xml:lang="x-default">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" alt="" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="fr-FR">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" alt="" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="it-IT">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" alt="" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="ja-JP">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" alt="" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="zh-CN">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="138" width="752" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" alt="" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-            </html>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-accessories-backpacks" configuration-id="banners-womens-accessories-handbags" default="true" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
+    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-accessories-scarves" configuration-id="womens-scarves" default="true" assigned-to-site="true">
+        <description>Default banner for this category</description>
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
-                <category category-id="womens-accessories-backpacks"/>
+                <category category-id="womens-accessories-scarves"/>
             </categories>
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-accessories-hats" configuration-id="banners-womens-accessories-hats" default="true" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
+    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-clothing" configuration-id="womens-clothing" default="true" assigned-to-site="true">
+        <description>Default banner for this category</description>
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
-                <category category-id="womens-accessories-hats"/>
+                <category category-id="womens-clothing"/>
             </categories>
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-accessories-other" configuration-id="banners-womens-accessories-other" default="true" assigned-to-site="true">
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <html>
-                <body xml:lang="x-default">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="138" width="752" alt="" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="fr-FR">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="138" width="752" alt="" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="it-IT">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="138" width="752" alt="" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="ja-JP">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="138" width="752" alt="" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="zh-CN">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="138" width="752" alt="" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-            </html>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-accessories-scarves" configuration-id="banners-womens-accessories-scarves" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
-        <enabled-flag>false</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="womens-accessories-hats"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-clothing" configuration-id="banners-womens-clothing" default="true" assigned-to-site="true">
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <html>
-                <body xml:lang="x-default">&lt;a href="$url('Search-Show','cgid','newarrivals-womens')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/womens-clothing.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-                <body xml:lang="fr-FR">&lt;a href="$url('Search-Show','cgid','newarrivals-womens')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/womens-clothing.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-                <body xml:lang="it-IT">&lt;a href="$url('Search-Show','cgid','newarrivals-womens')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/womens-clothing.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-                <body xml:lang="ja-JP">&lt;a href="$url('Search-Show','cgid','newarrivals-womens')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/womens-clothing.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-                <body xml:lang="zh-CN">&lt;a href="$url('Search-Show','cgid','newarrivals-womens')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/womens-clothing.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-            </html>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-clothing-bottoms" configuration-id="banners-womens-clothing-bottoms" default="true" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
+    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-clothing-bottoms" configuration-id="womens-bottoms" default="true" assigned-to-site="true">
+        <description>Default banner for this category</description>
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
@@ -509,47 +451,14 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-clothing-outerwear" configuration-id="banners-womens-clothing-outwear" default="true" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="womens-clothing-outerwear"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-clothing-tops" configuration-id="banners-womens-clothing-tops" default="true" assigned-to-site="true">
-        <template>slots/category/categorysubbanners.isml</template>
+    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-clothing-tops" configuration-id="womens-tops" default="true" assigned-to-site="true">
+        <description>Default banner for this category</description>
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
                 <category category-id="womens-clothing-tops"/>
             </categories>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-footwear-boots" configuration-id="banners-womens-footwear-boots" default="true" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="womens-footwear-boots"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-footwear-shoes" configuration-id="banners-womens-footwear-shoes" default="true" assigned-to-site="true">
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <html>
-                <body xml:lang="x-default">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="138" width="752" alt="Store Locator" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="fr-FR">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="138" width="752" alt="Localisateur de magasins" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="it-IT">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="138" width="752" alt="Store Locator" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="ja-JP">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="138" width="752" alt="店舗検索" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="zh-CN">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="138" width="752" alt="实体店地址搜索" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-            </html>
         </content>
     </slot-configuration>
 
@@ -571,28 +480,14 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-landing-slotbanner" context="category" context-id="electronics" configuration-id="electronics-cameras" default="true" assigned-to-site="true">
-        <template>slots/category/catlandingslotbanner.isml</template>
+    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-clothing-feeling-red" configuration-id="womens-feelingred" default="true" assigned-to-site="true">
+        <description>Default banner for this category</description>
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
-                <category category-id="electronics"/>
-                <category category-id="electronics-digital-cameras"/>
+                <category category-id="womens-clothing-feeling-red"/>
             </categories>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-clothing-feeling-red" configuration-id="feeling-red" default="true" assigned-to-site="true">
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <html>
-                <body xml:lang="x-default">&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-                <body xml:lang="fr-FR">&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-                <body xml:lang="it-IT">&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-                <body xml:lang="ja-JP">&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-                <body xml:lang="zh-CN">&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-            </html>
         </content>
     </slot-configuration>
 
@@ -1055,16 +950,6 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-accessories-scarves" configuration-id="womens-accessories-scarves" default="true" assigned-to-site="true">
-        <template>slots/category/categorysubbanners.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="womens-accessories-scarves"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
     <slot-configuration slot-id="cat-banner" context="category" context-id="womens-accessories-shoes" configuration-id="womens-shoes-cat-banner" default="true" assigned-to-site="true">
         <description>This is the default banner for the womens shoes banner.</description>
         <template>slots/category/cat-banner.isml</template>
@@ -1098,8 +983,9 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-clothing-dresses" configuration-id="womens-clothing-dresses" default="true" assigned-to-site="false">
-        <template>slots/category/categorysubbanners.isml</template>
+    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-clothing-dresses" configuration-id="womens-dresses" default="true" assigned-to-site="true">
+        <description>Default banner for this category</description>
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
@@ -1108,8 +994,8 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-clothing-jackets" configuration-id="womens-clothing-jackets" default="true" assigned-to-site="false">
-        <template>slots/category/categorysubbanners.isml</template>
+    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-clothing-jackets" configuration-id="womens-jackets" default="true" assigned-to-site="true">
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
@@ -1118,18 +1004,9 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-footwear" configuration-id="womens-footwear-banner" default="true" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="womens-footwear"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
     <slot-configuration slot-id="cat-banner" context="category" context-id="womens-jewelry" configuration-id="womens-jewelry" default="true" assigned-to-site="true">
-        <template>slots/category/categorysubbanners.isml</template>
+        <description>Default banner for this category</description>
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
@@ -1138,22 +1015,8 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-jewlery-bracelets" configuration-id="womens-jewelry-bracelets" default="true" assigned-to-site="true">
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <html>
-                <body xml:lang="x-default">&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-                <body xml:lang="fr-FR">&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-                <body xml:lang="it-IT">&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-                <body xml:lang="ja-JP">&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-                <body xml:lang="zh-CN">&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/standard_storelocatorwomens.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-            </html>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-jewelry-earrings" configuration-id="womens-jewelry-earrings" default="true" assigned-to-site="true">
-        <template>slots/category/categorysubbanners.isml</template>
+    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-jewelry-earrings" configuration-id="womens-earrings" default="true" assigned-to-site="true">
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
@@ -1162,12 +1025,35 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-jewelry-necklaces" configuration-id="womens-jewelry-necklaces" default="true" assigned-to-site="true">
-        <template>slots/category/categorysubbanners.isml</template>
+    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-jewlery-bracelets" configuration-id="womens-bracelets" default="true" assigned-to-site="true">
+        <description>Default banner for this category</description>
+        <template>slots/category/cat-banner.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <categories>
+                <category category-id="womens-jewlery-bracelets"/>
+            </categories>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-jewelry-necklaces" configuration-id="womens-necklaces" default="true" assigned-to-site="true">
+        <description>Default banner for this category</description>
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
                 <category category-id="womens-jewelry-necklaces"/>
+            </categories>
+        </content>
+    </slot-configuration>
+
+    <slot-configuration slot-id="cat-banner" context="category" context-id="womens-outfits" configuration-id="womens-outfits" default="true" assigned-to-site="true">
+        <description>Default banner for this category</description>
+        <template>slots/category/cat-banner.isml</template>
+        <enabled-flag>true</enabled-flag>
+        <content>
+            <categories>
+                <category category-id="womens-outfits"/>
             </categories>
         </content>
     </slot-configuration>
