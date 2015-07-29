@@ -810,7 +810,7 @@
         <online-flag>true</online-flag>
         <parent>womens</parent>
         <position>17.0</position>
-        <image>images/slot/sub_banners/womens-clothing.jpg</image>
+        <image>images/slot/sub_banners/cat-banner-womens-clothing.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Womens Clothing Including Outerwear, Tops, Bottoms &amp; More</page-title>
@@ -1698,7 +1698,8 @@
         <online-flag>true</online-flag>
         <parent>womens-clothing</parent>
         <position>10.0</position>
-        <template/>
+        <image>images/slot/sub_banners/cat-banner-womens-outfits.jpg</image>
+        <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">outfits</page-title>
             <page-title xml:lang="fr-FR">tenues</page-title>
@@ -1726,7 +1727,7 @@
         <online-flag>true</online-flag>
         <parent>womens-clothing</parent>
         <position>11.0</position>
-        <image>images/slot/sub_banners/womens-clothing-tops.png</image>
+        <image>images/slot/sub_banners/cat-banner-womens-tops.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Women's Tops including Short &amp; Long Sleeve, Casual, Classic &amp; More</page-title>
@@ -2197,7 +2198,7 @@
         <online-flag>true</online-flag>
         <parent>womens-clothing</parent>
         <position>12.0</position>
-        <image>images/slot/sub_banners/womens-clothing-dresses.png</image>
+        <image>images/slot/sub_banners/cat-banner-womens-dresses.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Women's Dresses for all Occasions</page-title>
@@ -2226,7 +2227,7 @@
         <online-flag>true</online-flag>
         <parent>womens-clothing</parent>
         <position>13.0</position>
-        <image>images/slot/sub_banners/womens-clothing-bottoms.jpg</image>
+        <image>images/slot/sub_banners/cat-banner-womens-bottoms.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Women's Bottoms Including Khakis, Cargos, Trousers, Jeans &amp; More</page-title>
@@ -2718,7 +2719,7 @@
         <online-flag>true</online-flag>
         <parent>womens-clothing</parent>
         <position>14.0</position>
-        <image>images/slot/sub_banners/womens-clothing-jackets.png</image>
+        <image>images/slot/sub_banners/cat-banner-womens-jackets.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Women's Outerwear Including Jackets &amp; Collections</page-title>
@@ -3188,6 +3189,7 @@
         <online-flag>true</online-flag>
         <parent>womens-clothing</parent>
         <position>15.0</position>
+        <image>images/slot/sub_banners/cat-banner-womens-red.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Womens Clothing All in Red</page-title>
@@ -3224,7 +3226,7 @@
         <online-flag>true</online-flag>
         <parent>womens</parent>
         <position>18.0</position>
-        <image>images/slot/sub_banners/womens-jewelry.png</image>
+        <image>images/slot/sub_banners/cat-banner-womens-jewelry.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Women's Jewelry including Earrings, Bracelets and Necklaces.</page-title>
@@ -3257,7 +3259,7 @@
         <online-flag>true</online-flag>
         <parent>womens-jewelry</parent>
         <position>8.0</position>
-        <image>images/slot/sub_banners/womens-jewelry-earrings.png</image>
+        <image>images/slot/sub_banners/cat-banner-womens-earrings.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Women's Earrings including Button Clip-on, Curved &amp; More</page-title>
@@ -3286,6 +3288,7 @@
         <online-flag>true</online-flag>
         <parent>womens-jewelry</parent>
         <position>13.0</position>
+        <image>images/slot/sub_banners/cat-banner-womens-braclets.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Women's Bracelets including Stretched, Cuff, Beaded &amp; More</page-title>
@@ -3314,7 +3317,7 @@
         <online-flag>true</online-flag>
         <parent>womens-jewelry</parent>
         <position>14.0</position>
-        <image>images/slot/sub_banners/womens-jewelry-necklaces.png</image>
+        <image>images/slot/sub_banners/cat-banner-womens-necklaces.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Women's Necklaces including Drop, Dangle &amp; More</page-title>
@@ -3343,7 +3346,7 @@
         <online-flag>true</online-flag>
         <parent>womens</parent>
         <position>19.0</position>
-        <image>images/slot/sub_banners/womens-accessories.jpg</image>
+        <image>images/slot/sub_banners/cat-banner-womens-accessories.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Women's Accessories Belts, Wallets. Gloves, Hats, Watches, Luggage &amp; More</page-title>
@@ -3894,7 +3897,7 @@
         <online-flag>true</online-flag>
         <parent>womens-accessories</parent>
         <position>15.0</position>
-        <image>images/slot/sub_banners/womens-accessories-ties.png</image>
+        <image>images/slot/sub_banners/cat-banner-womens-scarves.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Women's Scarves</page-title>
