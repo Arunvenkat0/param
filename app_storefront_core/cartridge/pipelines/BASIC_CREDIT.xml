@@ -28,8 +28,8 @@
           <config-property key="VerifySecurityCode" value="true"/>
           <key-binding alias="dw.order.PaymentMgr.getPaymentCard(CurrentForms.billing.paymentMethods.creditCard.type.value)" key="PaymentCard"/>
           <key-binding alias="CurrentForms.billing.paymentMethods.creditCard.number.value" key="CardNumber"/>
-          <key-binding alias="CurrentForms.billing.paymentMethods.creditCard.month.value" key="ExpirationMonth"/>
-          <key-binding alias="CurrentForms.billing.paymentMethods.creditCard.year.value" key="ExpirationYear"/>
+          <key-binding alias="CurrentForms.billing.paymentMethods.creditCard.expiration.month.value" key="ExpirationMonth"/>
+          <key-binding alias="CurrentForms.billing.paymentMethods.creditCard.expiration.year.value" key="ExpirationYear"/>
           <key-binding alias="CreditCardStatus" key="Status"/>
           <key-binding alias="CurrentForms.billing.paymentMethods.creditCard.cvn.value" key="CardSecurityCode"/>
         </pipelet-node>
@@ -117,9 +117,9 @@
           <key-binding alias="PaymentInstrument.creditCardNumber" key="To_1"/>
           <key-binding alias="CurrentForms.billing.paymentMethods.creditCard.type.value" key="From_2"/>
           <key-binding alias="PaymentInstrument.creditCardType" key="To_2"/>
-          <key-binding alias="CurrentForms.billing.paymentMethods.creditCard.month.value" key="From_3"/>
+          <key-binding alias="CurrentForms.billing.paymentMethods.creditCard.expiration.month.value" key="From_3"/>
           <key-binding alias="PaymentInstrument.creditCardExpirationMonth" key="To_3"/>
-          <key-binding alias="CurrentForms.billing.paymentMethods.creditCard.year.value" key="From_4"/>
+          <key-binding alias="CurrentForms.billing.paymentMethods.creditCard.expiration.year.value" key="From_4"/>
           <key-binding alias="PaymentInstrument.creditCardExpirationYear" key="To_4"/>
           <key-binding alias="null" key="From_5"/>
           <key-binding alias="null" key="To_5"/>
