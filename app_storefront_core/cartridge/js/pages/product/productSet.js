@@ -27,16 +27,13 @@ module.exports = function () {
 	// click on swatch for product set
 	$productSetList.on('click', '.product-set-item .swatchanchor', function (e) {
 		e.preventDefault();
-		var url = Urls.getSetItem + this.search,
-			$container = $(this).closest('.product-set-item'),
-			qty = $container.find('form input[name="Quantity"]').first().val();
-		if (isNaN(qty)) {
-			qty = '1';
-		}
-		url = util.appendParamToURL(url, 'Quantity', qty);
+		if ($(this).parents('li').hasClass('unselectable')) { return; }
+		var url = Urls.getSetItem + this.search;
+		var $container = $(this).closest('.product-set-item');
+		var qty = $container.find('form input[name="Quantity"]').first().val();
 
 		ajax.load({
-			url: url,
+			url: util.appendParamToURL(url, 'Quantity', isNaN(qty) ? '1' : qty),
 			target: $container,
 			callback: function () {
 				updateAddToCartButtons();
