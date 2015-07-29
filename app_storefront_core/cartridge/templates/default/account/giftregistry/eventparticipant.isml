@@ -26,19 +26,13 @@
 					${Resource.msg('account.giftregistry.eventparticipant.eventinfo','account',null)}
 					<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 				</legend>
-
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.event.type}" type="select"/>
-
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.event.name}" type="input"/>
-
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.event.date}" type="input"/>
-
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.event.eventaddress.country}" type="select"/>
-
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.event.eventaddress.states.state}" type="select"/>
-
-				<isinputfield formfield="${pdict.CurrentForms.giftregistry.event.town}" type="input"/>
-
+				<isscript>
+					var currentCountry = require('~/cartridge/scripts/util/Countries').getCurrent(pdict);
+				</isscript>
+				
+				<isdynamicform formobject="${pdict.CurrentForms.giftregistry.event}" formdata="${currentCountry.dynamicForms.giftRegistryEvent}"/>
+				
+				
 			</fieldset>
 
 			<fieldset>

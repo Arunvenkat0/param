@@ -53,9 +53,23 @@ module.exports.getFields = function (formObject, formData) {
 			}
 			fields.push(getFieldContext(formElement, fieldData));
 		} else if (formElement instanceof FormGroup) {
-			if (fieldData && fieldData.isFormGroup && fieldData.childField) {
-				var childFieldElement = formElement[fieldData.childField];
-				fields.push(getFieldContext(childFieldElement, fieldData));
+			if (fieldData && Array.isArray(fieldData)) {
+				fieldData.forEach(function (field) {
+					
+					// in case of nested children, iterate through children selector separated by `.`
+					var childFieldElement = formElement;
+					var nestedChildren;
+					if (field.fieldName.indexOf('.') !== -1) {
+						nestedChildren = field.fieldName.split('.');
+						nestedChildren.forEach(function (child) {
+							childFieldElement = childFieldElement[child];
+						});
+					} else {	
+						childFieldElement = formElement[field.fieldName];
+					}
+					
+					fields.push(getFieldContext(childFieldElement, field));
+				});
 			}
 		}
 	}
