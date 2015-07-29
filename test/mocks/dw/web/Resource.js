@@ -1,7 +1,19 @@
 'use strict';
 
+import _ from 'lodash';
+
+function msg (val) {
+	return val;
+}
+function msgf () {
+	return _.chain(arguments)
+		.values()
+		.compact()
+		.value()
+		.join(' ');
+}
+
 module.exports = {
-	msg: function (val) {
-		return val;
-	}
+	msg: msg,
+	msgf: msgf
 };
