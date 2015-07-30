@@ -54,22 +54,21 @@ module.exports.getFields = function (formObject, formData) {
 			fields.push(getFieldContext(formElement, fieldData));
 		} else if (formElement instanceof FormGroup) {
 			if (fieldData && Array.isArray(fieldData)) {
-				fieldData.forEach(function (field) {
-					
+				for (var i = 0; i < fieldData.length; i++) {
+					var childField = fieldData[i];
 					// in case of nested children, iterate through children selector separated by `.`
 					var childFieldElement = formElement;
 					var nestedChildren;
-					if (field.fieldName.indexOf('.') !== -1) {
-						nestedChildren = field.fieldName.split('.');
-						nestedChildren.forEach(function (child) {
-							childFieldElement = childFieldElement[child];
-						});
-					} else {	
-						childFieldElement = formElement[field.fieldName];
+					if (childField.fieldName.indexOf('.') !== -1) {
+						nestedChildren = childField.fieldName.split('.');
+						for (var j = 0; j < nestedChildren.length; j++) {
+							childFieldElement = childFieldElement[nestedChildren[j]];
+						}
+					} else {
+						childFieldElement = formElement[childField.fieldName];
 					}
-					
-					fields.push(getFieldContext(childFieldElement, field));
-				});
+					fields.push(getFieldContext(childFieldElement, childField));
+				}
 			}
 		}
 	}
