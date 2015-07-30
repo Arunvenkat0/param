@@ -14,13 +14,13 @@ var addToCart = require('./addToCart'),
  * @param {String} href - url of the new product variant
  **/
 var updateContent = function (href) {
-	var $pdpForm = $('.pdpForm'),
-		qty = $pdpForm.find('input[name="Quantity"]').first().val(),
-		params = {
-			Quantity: isNaN(qty) ? '1' : qty,
-			format: 'ajax',
-			productlistid: $pdpForm.find('input[name="productlistid"]').first().val()
-		};
+	var $pdpForm = $('.pdpForm');
+	var qty = $pdpForm.find('input[name="Quantity"]').first().val();
+	var params = {
+		Quantity: isNaN(qty) ? '1' : qty,
+		format: 'ajax',
+		productlistid: $pdpForm.find('input[name="productlistid"]').first().val()
+	};
 
 	progress.show($('#pdpMain'));
 
