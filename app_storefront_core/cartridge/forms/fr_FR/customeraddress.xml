@@ -16,7 +16,7 @@
 	<field formid="city" label="resource.city" type="string" mandatory="true" binding="city" min-length="2" max-length="50"
 		missing-error="customeraddress.city.missing-error"/>
 
-	<field formid="state" label="resource.state" type="string" binding="stateCode" missing-error="address.state.missing" value-error="address.field.invalid"/>
+	<group formid="states"><field formid="state" label="resource.state" type="string" binding="stateCode" missing-error="address.state.missing" value-error="address.field.invalid"/></group>
 
 	<field formid="country" label="resource.country" type="string" mandatory="true" binding="countryCode"
 		missing-error="customeraddress.country.missing-error">
