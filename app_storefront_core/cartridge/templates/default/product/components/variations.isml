@@ -54,18 +54,18 @@
 							<isloop items="${VAVALS}" var="VV">
 								<isif condition="${cleanPVM.hasOrderableVariants(VA, VV)}">
 									<isscript>
-										var lgImage = PVM.getImage('large', VA, VV),
-											swImage = VV.getImage('swatch'),
-											selectable = PVM.hasOrderableVariants(VA, VV),
-											isSelected = PVM.isSelectedAttributeValue(VA, VV),
-											displayValue = VV.displayValue ? VV.displayValue : VV.value,
-											linkURL = PVM.urlSelectVariationValue('Product-Variation', VA, VV),
-											hiresURL = !empty(VV.getImage('hi-res')) ? VV.getImage('hi-res').getURL() : '',
-											swatchClass = selectable ? 'available' : 'unselectable',
-											variationGroup;
+										var lgImage = PVM.getImage('large', VA, VV);
+										var swImage = VV.getImage('swatch');
+										var selectable = PVM.hasOrderableVariants(VA, VV);
+										var isSelected = PVM.isSelectedAttributeValue(VA, VV);
+										var displayValue = VV.displayValue ? VV.displayValue : VV.value;
+										var linkURL = PVM.urlSelectVariationValue('Product-Variation', VA, VV);
+										var hiresURL = VV.getImage('hi-res') ? VV.getImage('hi-res').getURL() : '';
+										var swatchClass = selectable ? 'selectable' : 'unselectable';
+										var variationGroup;
 
 										if (isSelected) {
-											swatchClass = 'selected';
+											swatchClass += ' selected';
 											selectedSwatch = displayValue;
 											linkURL = PVM.urlUnselectVariationValue('Product-Variation', VA);
 											selectedVariants.push(VA.ID + '-' + VV.value);
@@ -81,13 +81,8 @@
 											linkURL += '&vgid=' + variationGroup.ID;
 											// PVM.getVariationValue returns `null` for attribute that
 											// is not assigned to the variation group
-											if (PVM.getVariationValue(variationGroup, VA) == null) {
-												if (swatchClass === 'available') {
-													swatchClass = 'variation-group-value';
-												} else if (swatchClass === 'selected') {
-													swatchClass += ' variation-group-value';
-												}
-
+											if (PVM.getVariationValue(variationGroup, VA) === null) {
+												swatchClass += ' variation-group-value';
 											}
 										}
 									</isscript>
@@ -101,7 +96,7 @@
 												</isif>
 											</a>
 										<iselse/>
-											<a class="swatchanchor" title="${Resource.msgf('product.variationnotavailable','product', null, vaId.toUpperCase(), displayValue)}">
+											<a class="swatchanchor" title="${Resource.msgf('product.variationnotavailable','product', null, vaId, displayValue)}">
 												<isprint value="${displayValue}"/>
 											</a>
 										</isif>
