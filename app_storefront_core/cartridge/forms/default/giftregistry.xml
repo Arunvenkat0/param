@@ -7,10 +7,10 @@
 			missing-error="giftregistry.eventType.missing-error">
 			<options>
 				<option optionid="prompt" label="resource.select" value=""/>
-				<option optionid="wedding" label="giftregistry.wedding" value="giftregistry.wedding"/>
-				<option optionid="weddingshower" label="giftregistry.weddingshower" value="giftregistry.weddingshower"/>
-				<option optionid="babyshower" label="giftregistry.babyshower" value="giftregistry.babyshower"/>
-				<option optionid="other" label="giftregistry.other" value="giftregistry.other"/>
+				<option optionid="wedding" label="giftregistry.wedding" value="wedding"/>
+				<option optionid="weddingshower" label="giftregistry.weddingshower" value="weddingshower"/>
+				<option optionid="babyshower" label="giftregistry.babyshower" value="babyshower"/>
+				<option optionid="other" label="giftregistry.other" value="other"/>
 			</options>
 		</field>
 
@@ -23,10 +23,10 @@
 			missing-error="giftregistry.eventDate.missing-error"
 			parse-error="giftregistry.eventDate.parse-error"
 			description="giftregistry.eventDate.description" max-length="8"/>
-			
+
 		<!--  include address fields from customeraddress.xml form definition -->
 		<include formid="eventaddress" name="customeraddress"/>
-	
+
 		<field formid="town" label="giftregistry.eventCity" type="string" mandatory="true" binding="eventCity" min-length="2" max-length="60"
 			missing-error="giftregistry.eventCity.missing-error" />
 
@@ -196,6 +196,67 @@
 			value-error="giftregistry.send.check"
 			missing-error="giftregistry.send.invalid"/>
 		<action formid="sendEmail" valid-form="true" label="resource.send"/>
+	</group>
+
+	<group formid="search">
+		<group formid="simple">
+			<field formid="registrantLastName" label="giftregistry.registrantLastName" regexp="[^*?]*" type="string" mandatory="true" missing-error="giftregistry.registrantLastName.missing-error" parse-error="giftregistry.registrantLastName.parse-error"/>
+			<field formid="registrantFirstName" label="giftregistry.registrantFirstName" regexp="[^*?]*" type="string" mandatory="true" parse-error="giftregistry.registrantFirstName.parse-error"/>
+			<field formid="eventType" label="giftregistry.eventType" type="string" mandatory="false"
+				missing-error="giftregistry.eventType.missing-error">
+				<options>
+					<option optionid="blank" label="resource.select" value=""/>
+					<option optionid="wedding" label="giftregistry.wedding" value="Wedding"/>
+					<option optionid="weddingshower" label="giftregistry.weddingshower" value="Wedding Shower"/>
+					<option optionid="babyshower" label="giftregistry.babyshower" value="Baby Shower"/>
+					<option optionid="other" label="giftregistry.other" value="Other"/>
+				</options>
+			</field>
+		</group>
+
+		<group formid="advanced">
+			<field formid="eventName" label="giftregistry.eventName" type="string" mandatory="false" />
+			<field formid="eventMonth" label="productlist.eventmonth"  type="integer" mandatory="false">
+				<options>
+					<option optionid="blank" label="" value=""/>
+					<option optionid="jan" label="month.january" value="1"/>
+					<option optionid="feb" label="month.february" value="2"/>
+					<option optionid="mar" label="month.march" value="3"/>
+					<option optionid="apr" label="month.april" value="4"/>
+					<option optionid="may" label="month.may" value="5"/>
+					<option optionid="jun" label="month.june" value="6"/>
+					<option optionid="jul" label="month.july" value="7"/>
+					<option optionid="aug" label="month.august" value="8"/>
+					<option optionid="sep" label="month.september" value="9"/>
+					<option optionid="oct" label="month.october" value="10"/>
+					<option optionid="nov" label="month.november" value="11"/>
+					<option optionid="dec" label="month.december" value="12"/>
+				</options>
+			</field>
+
+			<field formid="eventYear" label="productlist.eventyear" type="integer" mandatory="false"
+					value-error="productlist.eventyearerror">
+				<options>
+					<option optionid="" label="" value=""/>
+					<option optionid="2008" label="year.2008" value="2008"/>
+					<option optionid="2009" label="year.2009" value="2009"/>
+					<option optionid="2010" label="year.2010" value="2010"/>
+					<option optionid="2011" label="year.2011" value="2011"/>
+					<option optionid="2012" label="year.2012" value="2012"/>
+					<option optionid="2013" label="year.2013" value="2013"/>
+					<option optionid="2014" label="year.2014" value="2014"/>
+					<option optionid="2015" label="year.2015" value="2015"/>
+					<option optionid="2016" label="year.2016" value="2016"/>
+					<option optionid="2017" label="year.2017" value="2017"/>
+					<option optionid="2018" label="year.2018" value="2018"/>
+				</options>
+			</field>
+
+			<field formid="eventCity" label="giftregistry.eventCity" type="string" mandatory="false" />
+
+			<include formid="eventAddress" name="customeraddress" />
+		</group>
+		<action formid="search" valid-form="true"/>
 	</group>
 
 	<!-- optional flags -->

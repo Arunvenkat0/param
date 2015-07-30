@@ -20,7 +20,8 @@
 			},
 			"states": [{
 				"fieldName": "state",
-				"type": "select"
+				"type": "select",
+				"required": true
 			}],
 			"address2": {
 				"help": {
@@ -51,6 +52,28 @@
 			}],
 			"type": {
 				"type": "select"
+			}
+		},
+		"giftRegistrySearch": {
+			"simple": {
+				"eventType": {
+					"type": "select"
+				}
+			},
+			"advanced": {
+				"eventMonth": {
+					"type": "select"
+				},
+				"eventYear": {
+					"type": "select"
+				},
+				"eventAddress": [{
+					"fieldName": "states.state",
+					"type": "select"
+				}, {
+					"fieldName": "country",
+					"type": "select"
+				}]
 			}
 		}
 	}
@@ -97,6 +120,27 @@
 			}],
 			"type": {
 				"type": "select"
+			}
+		},
+		"giftRegistrySearch": {
+			"simple": {
+				"eventType": {
+					"type": "select"
+				}
+			},
+			"advanced": {
+				"eventMonth": {
+					"type": "select"
+				},
+				"eventYear": {
+					"type": "select"
+				},
+				"eventAddress": [{
+					"fieldName": "states.state"
+				}, {
+					"fieldName": "country",
+					"type": "select"
+				}]
 			}
 		}
 	}
@@ -147,6 +191,28 @@
 			"type": {
 				"type": "select"
 			}
+		},
+		"giftRegistrySearch": {
+			"simple": {
+				"eventType": {
+					"type": "select"
+				}
+			},
+			"advanced": {
+				"eventMonth": {
+					"type": "select"
+				},
+				"eventYear": {
+					"type": "select"
+				},
+				"eventAddress": [{
+					"fieldName": "states.state",
+					"type": "select"
+				}, {
+					"fieldName": "country",
+					"type": "select"
+				}]
+			}
 		}
 	}
 }, {
@@ -195,6 +261,27 @@
 			"type": {
 				"type": "select"
 			}
+		},
+		"giftRegistrySearch": {
+			"simple": {
+				"eventType": {
+					"type": "select"
+				}
+			},
+			"advanced": {
+				"eventMonth": {
+					"type": "select"
+				},
+				"eventYear": {
+					"type": "select"
+				},
+				"eventAddress": [{
+					"fieldName": "states.state"
+				}, {
+					"fieldName": "country",
+					"type": "select"
+				}]
+			}
 		}
 	}
 }, {
@@ -237,10 +324,31 @@
 				"type": "select"
 			}, {
 				"fieldName": "states.state"
-				
+
 			}],
 			"type": {
 				"type": "select"
+			}
+		},
+		"giftRegistrySearch": {
+			"simple": {
+				"eventType": {
+					"type": "select"
+				}
+			},
+			"advanced": {
+				"eventMonth": {
+					"type": "select"
+				},
+				"eventYear": {
+					"type": "select"
+				},
+				"eventAddress": [{
+					"fieldName": "states.state"
+				}, {
+					"fieldName": "country",
+					"type": "select"
+				}]
 			}
 		}
 	}
@@ -289,6 +397,28 @@
 			}],
 			"type": {
 				"type": "select"
+			}
+		},
+		"giftRegistrySearch": {
+			"simple": {
+				"eventType": {
+					"type": "select"
+				}
+			},
+			"advanced": {
+				"eventMonth": {
+					"type": "select"
+				},
+				"eventYear": {
+					"type": "select"
+				},
+				"eventAddress": [{
+					"fieldName": "states.state",
+					"type": "select"
+				}, {
+					"fieldName": "country",
+					"type": "select"
+				}]
 			}
 		}
 	}
