@@ -265,7 +265,6 @@
 }
 
 #home-bottom-left {
-	height: 413px;
 	margin: auto;
 	max-width: 320px;
 	position: relative;
@@ -304,10 +303,12 @@
 			}
 		}
 	}
+	img {
+		display: block;
+	}
 }
 
 #home-bottom-center {
-	height: 413px;
 	width: 100%;
 	margin: auto;
 	max-width: 320px;
@@ -345,11 +346,13 @@
 			text-transform: uppercase;
 		}
 	}
+	img {
+		display: block;
+	}
 }
 
 .home-bottom-right {
 	font-family: $sans-serif-alt;
-	height: 413px;
 	width: 100%;
 	margin: auto;
 	max-width: 320px;
@@ -379,6 +382,9 @@
 				font-size: 1rem;
 				font-weight: 200;
 			}
+		}
+		img {
+			display: block;
 		}
 	}
 	.product-tile {
