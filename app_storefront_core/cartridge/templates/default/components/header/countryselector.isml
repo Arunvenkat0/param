@@ -12,7 +12,7 @@
 		session.setCurrency(dw.util.Currency.getCurrency(currentCountry.currencyCode));
 	}
 </isscript>
-<isif condition="${Number(Countries.getCountries().length) > 1 && showCountrySelector}">
+<isif condition="${Number(Countries.getCountries().length) > 1 && pdict.showCountrySelector}">
 	<div class="country-selector">
 		<div class="current-country">
 			<i class="fa fa-angle-right fa-fw selector-icon"></i>
