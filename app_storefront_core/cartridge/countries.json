@@ -236,7 +236,7 @@
 				"fieldName": "country",
 				"type": "select"
 			}, {
-				"fieldName": "state"
+				"fieldName": "states.state"
 				
 			}],
 			"type": {
