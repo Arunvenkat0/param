@@ -7,7 +7,7 @@
 		<isset name="aid" value="${empty(address.key) ? address.ID : address.key}" scope="page"/>
 		<isif condition="${previous_addresses.indexOf(aid) < 0}">
 			<option value="${aid}" ${aid == pdict.SelectedAddressID ? "selected='selected'" : ""} data-address='<isprint value="${JSON.stringify(address).replace("'","^")}" encoding="off"/>'>
-				(${empty(address.displayValue) ? aid : address.displayValue}) <isprint value="${address.address1}"/>, <isprint value="${address.city}"/>, <isprint value="${address.stateCode}"/>, <isprint value="${address.postalCode}"/>
+				(${!address.displayValue ? aid : address.displayValue}) ${Resource.msgf('address.saved.dropdown.format', 'forms', null, address.address1, address.city, address.stateCode, address.postalCode)}
 			</option>
 		</isif>
 		<isscript>previous_addresses.push(aid)</isscript>
