@@ -1,28 +1,23 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
-<form action="${URLUtils.continueURL()}" method="post" class="registry-search" id="${pdict.CurrentForms.productlists.search.htmlName}">
+<form action="${URLUtils.continueURL()}" method="post" class="registry-search" id="${pdict.CurrentForms.giftregistry.search.htmlName}">
 	<fieldset>
 		<isscript>
 			var attributes = {
 				maxlength: 255
 			};
+			var currentCountry = require('~/cartridge/scripts/util/Countries').getCurrent(pdict);
 		</isscript>
-		<isinputfield formfield="${pdict.CurrentForms.productlists.search.registrantLastName}" type="input" attributes="${attributes}"/>
-		<isinputfield formfield="${pdict.CurrentForms.productlists.search.registrantFirstName}" type="input" attributes="${attributes}"/>
-		<isinputfield formfield="${pdict.CurrentForms.productlists.search.eventType}" type="select"/>
+
+		<isdynamicform formobject="${pdict.CurrentForms.giftregistry.search.simple}" formdata="${currentCountry.dynamicForms.giftRegistrySearch.simple}"/>
 
 		<div class="gift-registry-advanced">
 			<a href="#" class="toggle">${Resource.msg('account.giftregistry.advanced','account',null)}</a>
 			<div class="toggle-content">
-				<isinputfield formfield="${pdict.CurrentForms.productlists.search.eventName}" type="input"/>
-				<isinputfield formfield="${pdict.CurrentForms.productlists.search.eventMonth}" type="select" rowclass="event-month"/>
-				<isinputfield formfield="${pdict.CurrentForms.productlists.search.eventYear}" type="select"/>
-				<isinputfield formfield="${pdict.CurrentForms.productlists.search.eventCity}" type="input" attributes="${attributes}" rowclass="event-city"/>
-				<isinputfield formfield="${pdict.CurrentForms.productlists.search.eventState}" type="select"/>
-				<isinputfield formfield="${pdict.CurrentForms.productlists.search.eventCountry}" type="select"/>
+				<isdynamicform formobject="${pdict.CurrentForms.giftregistry.search.advanced}" formdata="${currentCountry.dynamicForms.giftRegistrySearch.advanced}"/>
 			</div>
 		</div>
 		<div class="form-row form-row-button">
-			<button type="submit" value="${Resource.msg('global.find','locale',null)}" name="${pdict.CurrentForms.productlists.search.search.htmlName}">
+			<button type="submit" value="${Resource.msg('global.find','locale',null)}" name="${pdict.CurrentForms.giftregistry.search.search.htmlName}">
 				${Resource.msg('global.find','locale',null)}
 			</button>
 		</div>

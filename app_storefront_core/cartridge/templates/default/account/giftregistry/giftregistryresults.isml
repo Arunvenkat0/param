@@ -1,19 +1,19 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isdecorate template="account/giftregistry/pt_giftregistry">
 	<isinclude template="util/modules"/>
-	
+
 	<h1>${Resource.msg('account.giftregistry.searchheader','account',null)}</h1>
 
-		<isslot id="registry-header" description="Banner for Gift Registry" context="global" />	
+		<isslot id="registry-header" description="Banner for Gift Registry" context="global" />
 
 		<div class="form-inline">
-			<isinclude template="account/giftregistry/giftregistrysearch"/>	
+			<isinclude template="account/giftregistry/giftregistrysearch"/>
 		</div>
 
 		<h2>${Resource.msg('giftregistryresults.searchresults','account',null)}</h2>
-		
+
 		<isif condition="${!empty(pdict.ProductLists)}">
-			
+
 			<table class="registry-results-table item-list">
 				<tr>
 					<th class="section-header hdr-header">${Resource.msg('giftregistryresults.lastheader','account',null)}</th>
@@ -34,12 +34,12 @@
 					</tr>
 				</isloop>
 			</table>
-			
+
 		<iselse/>
 
 			<p>
 				${Resource.msg('giftregistryresults.emptymessage','account',null)}
-				${Resource.msgf('global.user.name', 'locale', null, pdict.CurrentForms.productlists.search.registrantFirstName.value, pdict.CurrentForms.productlists.search.registrantLastName.value)}
+				${Resource.msgf('global.user.name', 'locale', null, pdict.CurrentForms.giftregistry.search.simple.registrantFirstName.value, pdict.CurrentForms.giftregistry.search.simple.registrantLastName.value)}
 				${Resource.msg('giftregistryresults.emptymessage2','account',null)}
 			</p>
 

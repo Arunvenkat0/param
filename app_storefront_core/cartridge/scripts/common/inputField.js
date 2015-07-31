@@ -36,6 +36,7 @@ var inputElementTypes = [
  * @param {dw.system.PipelineDictionary} pdict
  * @param {dw.web.FormField} pdict.formfield
  * @param {Boolean} pdict.formfield.mandatory - indicate whether the field is mandatory
+ * @param {Boolean} pdict.required - override pdict.formfield.mandatory
  * @param {String} pdict.type - type of input element, such as `input`, `textarea`, `select`. It could also be input element's types, such as `checkbox`, `email`, `date` etc.
  * @param {Boolean} pdict.dynamicname - whether to use a defined `htmlName` or `dynamicHtmlName`
  * @param {Object} pdict.attributes - key/value pairs of custom attributes, for eg. {"data-greeting": "hello world"}
@@ -53,6 +54,7 @@ module.exports = function (pdict) {
 	var help = '';
 	var fieldClass = '';
 	var labelAfter = false;
+	var required = pdict.formfield.mandatory;
 	var element, name, id, rowClass, caption;
 
 	// default type is 'text' for 'input' element
@@ -94,7 +96,11 @@ module.exports = function (pdict) {
 	}
 
 	// required
-	if (pdict.formfield.mandatory) {
+	// pdict.required override pdict.formfield.mandatory
+	if (pdict.required !== undefined) {
+		required = pdict.required;
+	}
+	if (required) {
 		fieldClass += ' required';
 		rowClass += ' required';
 	}
@@ -106,7 +112,7 @@ module.exports = function (pdict) {
 
 	// label
 	label = '<label for="' + name + '">';
-	if (pdict.formfield.mandatory) {
+	if (required) {
 		label += '<span class="required-indicator">&#8226; </span>';
 	}
 	label += '<span>' + Resource.msg(pdict.formfield.label, 'forms', null) + '</span>';
@@ -122,10 +128,7 @@ module.exports = function (pdict) {
 				var option = pdict.formfield.options[optionKey];
 				// avoid empty option tags, because this causes an XHTML warning
 				var label = Resource.msg(option.label, 'forms', null);
-				var value = '';
-				if (option.value) {
-					value = Resource.msg(option.value, 'forms', null) || option.value;
-				}
+				var value = option.value || '';
 				var displayValue = label;
 				var selected = option.selected ? 'selected="selected"' : '';
 

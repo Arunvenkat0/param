@@ -30,11 +30,9 @@ function getFieldContext(field, fieldData) {
 	context.formfield = field;
 	context.type = type;
 	if (fieldData) {
-		for (var prop in fieldData) {
-			if (fieldData.hasOwnProperty(prop)) {
-				context[prop] = fieldData[prop];
-			}
-		}
+		Object.keys(fieldData).forEach(function (prop) {
+			context[prop] = fieldData[prop];
+		});
 	}
 	return context;
 }

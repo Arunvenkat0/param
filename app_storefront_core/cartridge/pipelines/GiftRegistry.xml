@@ -393,7 +393,7 @@
           <transition target-connector="in"/>
           <segment>
             <node>
-              <decision-node condition-key="CurrentForms.productlists.search.eventMonth.value != null &amp;&amp; CurrentForms.productlists.search.eventYear.value == null" condition-operator="expr">
+              <decision-node condition-key="CurrentForms.giftregistry.search.advanced.eventMonth.value != null &amp;&amp; CurrentForms.giftregistry.search.advanced.eventYear.value == null" condition-operator="expr">
                 <description>You must specify year if you specify month.</description>
               </decision-node>
               <node-display x="0" y="1"/>
@@ -407,7 +407,7 @@
                 <segment>
                   <node>
                     <pipelet-node pipelet-name="InvalidateFormElement" pipelet-set-identifier="bc_api">
-                      <key-binding alias="CurrentForms.productlists.search.eventYear" key="FormElement"/>
+                      <key-binding alias="CurrentForms.giftregistry.search.advanced.eventYear" key="FormElement"/>
                     </pipelet-node>
                     <node-display orientation="horizontal" x="1" y="1"/>
                   </node>
@@ -2250,7 +2250,7 @@
         </interaction-continue-node>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="addGiftCertificate">
-	  <transition target-connector="in"/>
+          <transition target-connector="in"/>
           <segment>
             <node>
               <pipelet-node pipelet-name="AddGiftCertificateToProductList" pipelet-set-identifier="bc_api">
@@ -2260,7 +2260,7 @@
               </pipelet-node>
               <node-display x="1" y="3"/>
               <branch basename="b2" source-connector="error">
-		<transition target-connector="in1" target-path="./+2"/>
+                <transition target-connector="in1" target-path="./+2"/>
               </branch>
             </node>
             <transition target-connector="in1" target-path="./+1"/>
@@ -2283,66 +2283,66 @@
             <node>
               <join-node/>
               <node-display x="1" y="0"/>
-	    </node>
-	    <transition target-connector="in1" target-path="./+1">
-	      <transition-display>
-		<bend-point relative-to="target" x="0" y="4"/>
-	      </transition-display>
-	    </transition>
-	  </segment>
-	  <segment>
-	    <node>
-	      <join-node/>
-	      <node-display x="3" y="-2"/>
-	    </node>
-	    <transition target-connector="in1" target-path="../-2">
-	      <transition-display>
-		<bend-point relative-to="target" x="12" y="0"/>
-	      </transition-display>
-	    </transition>
-	  </segment>
-	</branch>
-	<branch basename="b3" source-connector="addToCart">
-	  <transition target-connector="in"/>
-	  <segment>
-	    <node>
-	      <decision-node condition-key="CurrentForms.giftregistry.items.triggeredAction.parent.object.type == CurrentForms.giftregistry.items.triggeredAction.parent.object.TYPE_GIFT_CERTIFICATE" condition-operator="expr"/>
-	      <node-display orientation="horizontal" x="3" y="0"/>
-	      <branch basename="b2" source-connector="yes">
-		<transition target-connector="in">
-		  <transition-display>
-		    <bend-point relative-to="source" x="1" y="0"/>
-		  </transition-display>
-		</transition>
-		<segment>
-		  <node>
-		    <jump-node start-name-ref="GiftCert-Purchase"/>
-		    <node-display orientation="horizontal" x="1" y="0"/>
-		  </node>
-		</segment>
-	      </branch>
-	    </node>
-	    <simple-transition>
-	      <transition-display>
-		<bend-point relative-to="source" x="0" y="2"/>
-		<bend-point relative-to="target" x="-1" y="0"/>
-	      </transition-display>
-	    </simple-transition>
-	    <node>
-	      <jump-node start-name-ref="Cart-AddProduct"/>
-	      <node-display orientation="horizontal" x="1" y="1"/>
-	    </node>
-	  </segment>
-	</branch>
-	<branch basename="b4" source-connector="deleteItem">
-	  <transition target-connector="in"/>
-	  <segment>
-	    <node>
-	      <decision-node condition-key="TriggeredAction.object.purchasedQuantity.value == 0" condition-operator="expr"/>
-	      <node-display x="3" y="2"/>
-	      <branch basename="b2" source-connector="yes">
-		<transition target-connector="in">
-		  <transition-display>
+            </node>
+            <transition target-connector="in1" target-path="./+1">
+              <transition-display>
+                <bend-point relative-to="target" x="0" y="4"/>
+              </transition-display>
+            </transition>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="3" y="-2"/>
+            </node>
+            <transition target-connector="in1" target-path="../-2">
+              <transition-display>
+                <bend-point relative-to="target" x="12" y="0"/>
+              </transition-display>
+            </transition>
+          </segment>
+        </branch>
+        <branch basename="b3" source-connector="addToCart">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <decision-node condition-key="CurrentForms.giftregistry.items.triggeredAction.parent.object.type == CurrentForms.giftregistry.items.triggeredAction.parent.object.TYPE_GIFT_CERTIFICATE" condition-operator="expr"/>
+              <node-display orientation="horizontal" x="3" y="0"/>
+              <branch basename="b2" source-connector="yes">
+                <transition target-connector="in">
+                  <transition-display>
+                    <bend-point relative-to="source" x="1" y="0"/>
+                  </transition-display>
+                </transition>
+                <segment>
+                  <node>
+                    <jump-node start-name-ref="GiftCert-Purchase"/>
+                    <node-display orientation="horizontal" x="1" y="0"/>
+                  </node>
+                </segment>
+              </branch>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="2"/>
+                <bend-point relative-to="target" x="-1" y="0"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <jump-node start-name-ref="Cart-AddProduct"/>
+              <node-display orientation="horizontal" x="1" y="1"/>
+            </node>
+          </segment>
+        </branch>
+        <branch basename="b4" source-connector="deleteItem">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <decision-node condition-key="TriggeredAction.object.purchasedQuantity.value == 0" condition-operator="expr"/>
+              <node-display x="3" y="2"/>
+              <branch basename="b2" source-connector="yes">
+                <transition target-connector="in">
+                  <transition-display>
                     <bend-point relative-to="source" x="0" y="1"/>
                   </transition-display>
                 </transition>
@@ -2353,13 +2353,13 @@
                     </pipelet-node>
                     <node-display x="0" y="1"/>
                   </node>
-		  <transition target-connector="in2" target-path="../../b2.4"/>
+                  <transition target-connector="in2" target-path="../../b2.4"/>
                 </segment>
               </branch>
             </node>
             <simple-transition>
               <transition-display>
-		<bend-point relative-to="source" x="1" y="0"/>
+                <bend-point relative-to="source" x="1" y="0"/>
               </transition-display>
             </simple-transition>
             <node>
@@ -2382,53 +2382,53 @@
                 <key-binding alias="null" key="To_7"/>
                 <key-binding alias="null" key="From_8"/>
                 <key-binding alias="null" key="To_8"/>
-		<key-binding alias="null" key="From_9"/>
-		<key-binding alias="null" key="To_9"/>
-	      </pipelet-node>
-	      <node-display orientation="horizontal" x="1" y="0"/>
-	    </node>
-	    <simple-transition>
-	      <transition-display>
-		<bend-point relative-to="source" x="1" y="0"/>
-	      </transition-display>
-	    </simple-transition>
-	    <node>
-	      <jump-node start-name-ref="GiftRegistry-ShowStatus"/>
-	      <node-display orientation="horizontal" x="1" y="0"/>
-	    </node>
-	  </segment>
-	</branch>
-	<branch basename="b5" source-connector="navEvent">
-	  <transition target-connector="in"/>
-	  <segment>
-	    <node>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
+              </pipelet-node>
+              <node-display orientation="horizontal" x="1" y="0"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="1" y="0"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <jump-node start-name-ref="GiftRegistry-ShowStatus"/>
+              <node-display orientation="horizontal" x="1" y="0"/>
+            </node>
+          </segment>
+        </branch>
+        <branch basename="b5" source-connector="navEvent">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
               <jump-node start-name-ref="GiftRegistry-EditEvent"/>
               <node-display x="-3" y="3"/>
-	    </node>
-	  </segment>
-	</branch>
-	<branch basename="b6" source-connector="navPurchases">
-	  <transition target-connector="in"/>
-	  <segment>
-	    <node>
-	      <jump-node start-name-ref="GiftRegistry-ShowPurchases"/>
-	      <node-display x="-3" y="1"/>
-	    </node>
-	  </segment>
-	</branch>
-	<branch basename="b7" source-connector="navShipping">
-	  <transition target-connector="in"/>
-	  <segment>
-	    <node>
-	      <jump-node start-name-ref="GiftRegistry-EditAddresses"/>
-	      <node-display x="-3" y="2"/>
-	    </node>
-	  </segment>
-	</branch>
-	<branch basename="b8" source-connector="purchaseGiftCertificate">
-	  <transition target-connector="in"/>
-	  <segment>
-	    <node>
+            </node>
+          </segment>
+        </branch>
+        <branch basename="b6" source-connector="navPurchases">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <jump-node start-name-ref="GiftRegistry-ShowPurchases"/>
+              <node-display x="-3" y="1"/>
+            </node>
+          </segment>
+        </branch>
+        <branch basename="b7" source-connector="navShipping">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <jump-node start-name-ref="GiftRegistry-EditAddresses"/>
+              <node-display x="-3" y="2"/>
+            </node>
+          </segment>
+        </branch>
+        <branch basename="b8" source-connector="purchaseGiftCertificate">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
               <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                 <key-binding alias="TriggeredAction.object" key="From_1"/>
                 <key-binding alias="ProductListItem" key="To_1"/>
@@ -2459,13 +2459,13 @@
             <node>
               <jump-node start-name-ref="GiftRegistryCustomer-PurchaseGiftCertificate"/>
               <node-display x="0" y="1"/>
-	    </node>
-	  </segment>
-	</branch>
-	<branch basename="b9" source-connector="setPrivate">
-	  <transition target-connector="in"/>
-	  <segment>
-	    <node>
+            </node>
+          </segment>
+        </branch>
+        <branch basename="b9" source-connector="setPrivate">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
               <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="true"/>
                 <key-binding alias="false" key="From_0"/>
@@ -2508,7 +2508,7 @@
             <transition target-connector="in1" target-path="../b2.2"/>
           </segment>
         </branch>
-	<branch basename="b10" source-connector="setPublic">
+        <branch basename="b10" source-connector="setPublic">
           <transition target-connector="in"/>
           <segment>
             <node>
@@ -2534,22 +2534,22 @@
                 <key-binding alias="null" key="To_8"/>
                 <key-binding alias="null" key="From_9"/>
                 <key-binding alias="null" key="To_9"/>
-	      </pipelet-node>
-	      <node-display x="0" y="3"/>
-	    </node>
-	    <transition target-connector="in1" target-path="../b9.3"/>
-	  </segment>
-	</branch>
-	<branch basename="b11" source-connector="updateItem">
-	  <transition target-connector="in"/>
-	  <segment>
-	    <node>
-	      <call-node start-name-ref="GiftRegistry-UpdateAll"/>
-	      <node-display x="2" y="3"/>
-	    </node>
-	    <transition target-connector="in1" target-path="../b2.3"/>
-	  </segment>
-	</branch>
+              </pipelet-node>
+              <node-display x="0" y="3"/>
+            </node>
+            <transition target-connector="in1" target-path="../b9.3"/>
+          </segment>
+        </branch>
+        <branch basename="b11" source-connector="updateItem">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <call-node start-name-ref="GiftRegistry-UpdateAll"/>
+              <node-display x="2" y="3"/>
+            </node>
+            <transition target-connector="in1" target-path="../b2.3"/>
+          </segment>
+        </branch>
       </node>
       <transition target-connector="in1" target-path="./-1">
         <transition-display>
@@ -2608,17 +2608,17 @@
         <pipelet-node pipelet-name="SearchProductLists" pipelet-set-identifier="bc_api">
           <config-property key="PublicOnly" value="true"/>
           <key-binding alias="ProductLists" key="ProductLists"/>
-          <key-binding alias="CurrentForms.productlists.search.eventType.value" key="EventType"/>
+          <key-binding alias="CurrentForms.giftregistry.search.simple.eventType.value" key="EventType"/>
           <key-binding alias="null" key="EventDate"/>
-          <key-binding alias="CurrentForms.productlists.search.eventCity.value" key="EventCity"/>
-          <key-binding alias="CurrentForms.productlists.search.eventState.value" key="EventState"/>
-          <key-binding alias="CurrentForms.productlists.search.eventCountry.value" key="EventCountry"/>
-          <key-binding alias="CurrentForms.productlists.search.registrantFirstName.value" key="RegistrantFirstName"/>
-          <key-binding alias="CurrentForms.productlists.search.registrantLastName.value" key="RegistrantLastName"/>
+          <key-binding alias="CurrentForms.giftregistry.search.advanced.eventCity.value" key="EventCity"/>
+          <key-binding alias="CurrentForms.giftregistry.search.advanced.eventAddress.states.state.value" key="EventState"/>
+          <key-binding alias="CurrentForms.giftregistry.search.advanced.eventAddress.country.value" key="EventCountry"/>
+          <key-binding alias="CurrentForms.giftregistry.search.simple.registrantFirstName.value" key="RegistrantFirstName"/>
+          <key-binding alias="CurrentForms.giftregistry.search.simple.registrantLastName.value" key="RegistrantLastName"/>
           <key-binding alias="dw.customer.ProductList.TYPE_GIFT_REGISTRY" key="Type"/>
-          <key-binding alias="CurrentForms.productlists.search.eventMonth.value" key="EventMonth"/>
-          <key-binding alias="CurrentForms.productlists.search.eventYear.value" key="EventYear"/>
-          <key-binding alias="CurrentForms.productlists.search.eventName.value" key="EventName"/>
+          <key-binding alias="CurrentForms.giftregistry.search.advanced.eventMonth.value" key="EventMonth"/>
+          <key-binding alias="CurrentForms.giftregistry.search.advanced.eventYear.value" key="EventYear"/>
+          <key-binding alias="CurrentForms.giftregistry.search.advanced.eventName.value" key="EventName"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
       </node>

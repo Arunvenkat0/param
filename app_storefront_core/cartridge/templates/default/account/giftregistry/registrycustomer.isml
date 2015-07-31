@@ -36,7 +36,7 @@
 		<h3>${Resource.msg('giftregistryconfirmation.eventinfo','account',null)}</h3>
 		<dl class="event">
 			<dt>${Resource.msg('account.registrycustomer.eventtype','account',null)}</dt>
-			<dd><isprint value="${pdict.ProductList.eventType}"/></dd>
+			<dd><isprint value="${Resource.msg('giftregistry.' + pdict.ProductList.eventType, 'forms', null}"/></dd>
 			<dt>${Resource.msg('account.registrycustomer.location','account',null)}</dt>
 			<dd><isprint value="${pdict.ProductList.eventCity}"/>,<isprint value="${pdict.ProductList.eventState}"/></dd>
 		</dl>

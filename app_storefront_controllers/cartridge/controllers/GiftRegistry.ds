@@ -55,7 +55,7 @@ function start() {
 	Form.get(productListsForm.items).copyFrom(ProductLists);
 
     var accountGiftRegistry = Content.get('myaccount-giftregistry');
-    
+
     var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update(accountGiftRegistry);
 
@@ -816,16 +816,16 @@ function search() {
     var SearchProductListsResult = new Pipelet('SearchProductLists', {
         PublicOnly: true
     }).execute({
-        EventType: currentForms.productlists.search.eventType.value,
-        EventCity: currentForms.productlists.search.eventCity.value,
-        EventState: currentForms.productlists.search.eventState.value,
-        EventCountry: currentForms.productlists.search.eventCountry.value,
-        RegistrantFirstName: currentForms.productlists.search.registrantFirstName.value,
-        RegistrantLastName: currentForms.productlists.search.registrantLastName.value,
+        EventType: currentForms.giftregistry.search.simple.eventType.value,
+        EventCity: currentForms.giftregistry.search.advanced.eventCity.value,
+        EventState: currentForms.giftregistry.search.advanced.eventAddress.states.state.value,
+        EventCountry: currentForms.giftregistry.search.advanced.eventAddress.country.value,
+        RegistrantFirstName: currentForms.giftregistry.search.simple.registrantFirstName.value,
+        RegistrantLastName: currentForms.giftregistry.search.simple.registrantLastName.value,
         Type: ProductList.TYPE_GIFT_REGISTRY,
-        EventMonth: currentForms.productlists.search.eventMonth.value,
-        EventYear: currentForms.productlists.search.eventYear.value,
-        EventName: currentForms.productlists.search.eventName.value
+        EventMonth: currentForms.giftregistry.search.advanced.eventMonth.value,
+        EventYear: currentForms.giftregistry.search.advanced.eventYear.value,
+        EventName: currentForms.giftregistry.search.advanced.eventName.value
     });
     var ProductLists = SearchProductListsResult.ProductLists;
 
