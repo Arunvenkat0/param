@@ -3,21 +3,20 @@
 import _ from 'lodash';
 import {assert} from 'chai';
 import sinon from 'sinon';
-let mockRequire = require('proxyquire').noCallThru();
+let proxyquire = require('proxyquire').noCallThru();
 
 /**
  * Mocks
  *
  */
 let mockResource = require('../../../mocks/dw/web/Resource');
-let ProductUtilsPath = '../../../../app_storefront_core/cartridge/scripts/product/ProductUtils.ds';
 let mockProductAvailabilityModel = {
 	AVAILABILITY_STATUS_IN_STOCK: 'prop1',
 	AVAILABILITY_STATUS_PREORDER: 'prop2',
 	AVAILABILITY_STATUS_BACKORDER: 'prop3',
 	AVAILABILITY_STATUS_NOT_AVAILABLE: 'prop4'
 };
-let ProductUtils = mockRequire(ProductUtilsPath, {
+let ProductUtils = proxyquire('../../../../app_storefront_core/cartridge/scripts/product/ProductUtils.ds', {
 	'dw/system/Site': {},
 	'dw/catalog/ProductAvailabilityModel': mockProductAvailabilityModel,
 	'dw/catalog/ProductAvailabilityLevels': {},
@@ -28,10 +27,10 @@ let ProductUtils = mockRequire(ProductUtilsPath, {
 	'dw/web/Resource': mockResource
 });
 let mockProductAvailabilityLevels = {
-	notAvailable: { value: 0 },
-	inStock: { value: 50},
-	preorder: { value: 0 },
-	backorder: { value: 0 }
+	notAvailable: {value: 0},
+	inStock: {value: 50},
+	preorder: {value: 0},
+	backorder: {value: 0}
 };
 let availabilityModel = {
 	availability: 6,

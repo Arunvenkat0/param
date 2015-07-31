@@ -44,8 +44,8 @@ function cleanupID(s) {
  */
 function ProductUtils (pdict) {
 	var _product = Product = pdict.Product || null;
-	var _httpMap = HttpParameterMap = pdict.CurrentHttpParameterMap;
-	var _variationModel = ProductVariationModel = pdict.hasOwnProperty('CurrentVariationModel') && pdict.CurrentVariationModel ? (_product==null?null:_product.variationModel) : pdict.CurrentVariationModel;
+	var _httpMap = pdict.CurrentHttpParameterMap;
+	var _variationModel = pdict.hasOwnProperty('CurrentVariationModel') && pdict.CurrentVariationModel ? (_product==null?null:_product.variationModel) : pdict.CurrentVariationModel;
 	var _variantHierarchy = null;
 
 	/**
