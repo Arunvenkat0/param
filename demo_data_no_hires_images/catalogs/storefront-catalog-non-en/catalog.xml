@@ -3977,7 +3977,7 @@
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">true</custom-attribute>
             <custom-attribute attribute-id="headerMenuBanner">&lt;img alt="Men's Category Image" src="images/slot/landing/cat-landing-slotbanner-mens.jpg?$staticlink$" width="433" /&gt;</custom-attribute>
-            <custom-attribute attribute-id="headerMenuOrientation">Vertical</custom-attribute>
+            <custom-attribute attribute-id="headerMenuOrientation">Horizontal</custom-attribute>
             <custom-attribute attribute-id="showInMenu">true</custom-attribute>
             <custom-attribute attribute-id="slotBannerImage">images/slot/landing/cat-landing-slotbanner-mens.jpg</custom-attribute>
         </custom-attributes>
@@ -3995,7 +3995,7 @@
         <online-flag>true</online-flag>
         <parent>mens</parent>
         <position>12.0</position>
-        <image>images/slot/sub_banners/mens-clothing-accessories.jpg</image>
+        <image>images/slot/sub_banners/cat-banner-mens-clothing.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Mens Clothing Including Suits, Tops, Bottoms &amp; More</page-title>
@@ -4029,7 +4029,7 @@
         <online-flag>true</online-flag>
         <parent>mens-clothing</parent>
         <position>13.0</position>
-        <image>images/slot/sub_banners/mens-clothing-suits.jpg</image>
+        <image>images/slot/sub_banners/cat-banner-mens-suits.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Mens Suits for Business and Casual</page-title>
@@ -4284,7 +4284,7 @@
         <online-flag>true</online-flag>
         <parent>mens-clothing</parent>
         <position>14.0</position>
-        <image>images/slot/sub_banners/mens-clothing-sportscoats.png</image>
+        <image>images/slot/sub_banners/cat-banner-mens-jackets.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Men's Jackets Including Jackets &amp; Blazzers</page-title>
@@ -4607,7 +4607,7 @@
         <online-flag>true</online-flag>
         <parent>mens-clothing</parent>
         <position>15.0</position>
-        <image>images/slot/sub_banners/mens-clothing-dress-shirts.jpg</image>
+        <image>images/slot/sub_banners/cat-banner-mens-shirts.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Men's Dress Shirts including Striped, Button Down, Non-Iron &amp; More</page-title>
@@ -4650,7 +4650,7 @@
         <online-flag>true</online-flag>
         <parent>mens-clothing</parent>
         <position>16.0</position>
-        <image>images/slot/sub_banners/mens-clothing-shorts.png</image>
+        <image>images/slot/sub_banners/cat-banner-mens-shorts.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Men's Spring Shorts</page-title>
@@ -4865,7 +4865,7 @@
         <online-flag>true</online-flag>
         <parent>mens-clothing</parent>
         <position>17.0</position>
-        <image>images/slot/sub_banners/mens-clothing-pants.png</image>
+        <image>images/slot/sub_banners/cat-banner-mens-pants.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Men's Pants Including Khakis, Cargos, Trousers, Jeans &amp; More</page-title>
@@ -5159,7 +5159,8 @@
         <online-flag>true</online-flag>
         <parent>mens</parent>
         <position>13.0</position>
-        <template/>
+        <image>images/slot/sub_banners/cat-banner-mens-accessories.jpg</image>
+        <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Men's Accessories Belts, Wallets. Gloves, Hats, Watches, Luggage &amp; More</page-title>
             <page-title xml:lang="fr-FR">Accessoires homme : ceintures, portefeuilles. Gants, chapeaux, montres, bagages et plus encore</page-title>
@@ -5193,7 +5194,7 @@
         <online-flag>true</online-flag>
         <parent>mens-accessories</parent>
         <position>1.0</position>
-        <image>images/slot/sub_banners/mens-accessories-ties.png</image>
+        <image>images/slot/sub_banners/cat-banner-mens-ties.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Men's Casual and Business Ties</page-title>
@@ -5222,6 +5223,7 @@
         <online-flag>true</online-flag>
         <parent>mens-accessories</parent>
         <position>2.0</position>
+        <image>images/slot/sub_banners/cat-banner-mens-gloves.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Men's Gloves</page-title>
@@ -5255,7 +5257,7 @@
         <online-flag>true</online-flag>
         <parent>mens-accessories</parent>
         <position>3.0</position>
-        <image>images/slot/sub_banners/mens-accessories-luggage.jpg</image>
+        <image>images/slot/sub_banners/cat-banner-mens-luggage.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Men's Wheeled Luggage</page-title>

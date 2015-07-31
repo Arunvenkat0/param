@@ -397,8 +397,9 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-accessories-luggage" configuration-id="banners-mens-accessories-luggage" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
+    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-accessories-luggage" configuration-id="mens-luggage" default="true" assigned-to-site="true">
+        <description>Default banner for this category</description>
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
@@ -406,7 +407,6 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
             </categories>
         </content>
     </slot-configuration>
-
     <slot-configuration slot-id="cat-banner" context="category" context-id="womens-accessories" configuration-id="womens-accessories" default="true" assigned-to-site="true">
         <description>Default banner for this category</description>
         <template>slots/category/cat-banner.isml</template>
@@ -644,42 +644,30 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-accessories-hats" configuration-id="mens-accessories -hats-banner" default="true" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
+    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-accessories" configuration-id="mens-accessories" default="true" assigned-to-site="true">
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
-                <category category-id="mens-accessories-hats"/>
+                <category category-id="mens-accessories"/>
             </categories>
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-accessories" configuration-id="mens-accessories-banner-flashbanner" default="true" assigned-to-site="true">
-        <template>slots/content/giftcertificates.isml</template>
+    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-accessories-gloves" configuration-id="mens-gloves" default="true" assigned-to-site="true">
+        <description>Default banner for this category</description>
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
-            <content-assets>
-                <content-asset content-id="gift-certificates-banner"/>
-            </content-assets>
+            <categories>
+                <category category-id="mens-accessories-gloves"/>
+            </categories>
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-accessories-gloves" configuration-id="mens-accessories-gloves" default="true" assigned-to-site="true">
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <html>
-                <body xml:lang="x-default">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="136" width="788" alt="" src="images/slot/sub_banners/standard_storeLocatorMens.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="fr-FR">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="136" width="788" alt="" src="images/slot/sub_banners/standard_storeLocatorMens.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="it-IT">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="136" width="788" alt="" src="images/slot/sub_banners/standard_storeLocatorMens.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="ja-JP">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="136" width="788" alt="" src="images/slot/sub_banners/standard_storeLocatorMens.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="zh-CN">&lt;p&gt;&lt;a href="$url('Stores-Find')$"&gt;&lt;img height="136" width="788" alt="" src="images/slot/sub_banners/standard_storeLocatorMens.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-            </html>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-accessories-luggage" configuration-id="mens-accessories-luggage" default="true" assigned-to-site="true">
-        <template>slots/category/categorysubbanners.isml</template>
+    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-accessories-luggage" configuration-id="mens-luggage" default="true" assigned-to-site="true">
+        <description>Default banner for this category</description>
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
@@ -688,16 +676,9 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-accessories-other" configuration-id="mens-accessories-other-banner" default="true" assigned-to-site="true">
-        <template>slots/html/gift_certificates.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <html/>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-accessories-ties" configuration-id="mens-accessories-ties" default="true" assigned-to-site="true">
-        <template>slots/category/categorysubbanners.isml</template>
+    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-accessories-ties" configuration-id="mens-ties" default="true" assigned-to-site="true">
+        <description>Default banner for this category</description>
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
@@ -706,32 +687,20 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-clothing-bottoms" configuration-id="mens-bottom-banner" default="true" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
+    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-clothing" configuration-id="mens-clothing" default="true" assigned-to-site="true">
+        <description>Default banner for this category</description>
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
-                <category category-id="mens-clothing-bottoms"/>
+                <category category-id="mens-clothing"/>
             </categories>
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-clothing" configuration-id="mens-clothing-banner" default="true" assigned-to-site="true">
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <html>
-                <body xml:lang="x-default">&lt;p&gt;&lt;a href="$url('Search-Show','cgid','newarrivals-mens')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/mens-clothing-accessories.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="fr-FR">&lt;p&gt;&lt;a href="$url('Search-Show','cgid','newarrivals-mens')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/mens-clothing-accessories.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="it-IT">&lt;p&gt;&lt;a href="$url('Search-Show','cgid','newarrivals-mens')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/mens-clothing-accessories.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="ja-JP">&lt;p&gt;&lt;a href="$url('Search-Show','cgid','newarrivals-mens')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/mens-clothing-accessories.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="zh-CN">&lt;p&gt;&lt;a href="$url('Search-Show','cgid','newarrivals-mens')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/mens-clothing-accessories.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-            </html>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-clothing-dress-shirts" configuration-id="mens-clothing-dress-shirts" default="true" assigned-to-site="false">
-        <template>slots/category/categorysubbanners.isml</template>
+    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-clothing-dress-shirts" configuration-id="mens-shirts" default="true" assigned-to-site="true">
+        <description>Default banner for this category</description>
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
@@ -740,8 +709,8 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-clothing-jackets" configuration-id="mens-clothing-jackets" default="true" assigned-to-site="true">
-        <template>slots/category/categorysubbanners.isml</template>
+    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-clothing-jackets" configuration-id="mens-jackets" default="true" assigned-to-site="true">
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
@@ -750,8 +719,9 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-clothing-pants" configuration-id="mens-clothing-pants" default="true" assigned-to-site="true">
-        <template>slots/category/categorysubbanners.isml</template>
+    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-clothing-pants" configuration-id="mens-pants" default="true" assigned-to-site="true">
+        <description>Default banner for this category</description>
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
@@ -760,8 +730,9 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-clothing-shorts" configuration-id="mens-clothing-shorts" default="true" assigned-to-site="true">
-        <template>slots/category/categorysubbanners.isml</template>
+    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-clothing-shorts" configuration-id="mens-shorts" default="true" assigned-to-site="true">
+        <description>Default banner for this category</description>
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
@@ -770,56 +741,13 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-clothing-suits" configuration-id="mens-clothing-suits" default="true" assigned-to-site="true">
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <html>
-                <body xml:lang="x-default">&lt;p&gt;&lt;a href="$url('Search-Show','cgid','mens-clothing-suits')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/mens-clothing-suits.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="fr-FR">&lt;p&gt;&lt;a href="$url('Search-Show','cgid','mens-clothing-suits')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/mens-clothing-suits.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="it-IT">&lt;p&gt;&lt;a href="$url('Search-Show','cgid','mens-clothing-suits')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/mens-clothing-suits.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="ja-JP">&lt;p&gt;&lt;a href="$url('Search-Show','cgid','mens-clothing-suits')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/mens-clothing-suits.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="zh-CN">&lt;p&gt;&lt;a href="$url('Search-Show','cgid','mens-clothing-suits')$"&gt;&lt;img height="136" width="789" alt="" src="images/slot/sub_banners/mens-clothing-suits.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-            </html>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-footwear" configuration-id="mens-footwear-banner" default="true" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
+    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-clothing-suits" configuration-id="mens-suits" default="true" assigned-to-site="true">
+        <description>Default banner for this category</description>
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
-                <category category-id="mens-footwear"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-footwear-boots" configuration-id="mens-footwear-boots-banner" default="true" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="mens-footwear-boots"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-footwear-sandals" configuration-id="mens-footwear-sandals-banner" default="true" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="mens-footwear-shoes"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-footwear-shoes" configuration-id="mens-footwear-shoes-banner" default="true" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="mens-footwear-shoes"/>
+                <category category-id="mens-clothing-suits"/>
             </categories>
         </content>
     </slot-configuration>
@@ -836,36 +764,6 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
                 <category category-id="mens-clothing-dress-shirts"/>
                 <category category-id="mens-clothing-pants"/>
                 <category category-id="mens-accessories"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-clothing-outerwear" configuration-id="mens-outwear-banner" default="true" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="mens-clothing-outerwear"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-clothing-tops" configuration-id="mens-tops-banner" default="true" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="mens-clothing-tops"/>
-            </categories>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="mens-accessories-wallets" configuration-id="mens-wallets-banner" default="true" assigned-to-site="true">
-        <template>slots/category/categorysub_banners.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <categories>
-                <category category-id="mens-accessories-wallets"/>
             </categories>
         </content>
     </slot-configuration>
@@ -1115,13 +1013,5 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
             </products>
         </content>
     </slot-configuration>
-
-    <slot-configuration-campaign-assignment slot-id="cat-banner" context="category" context-id="mens-clothing-dress-shirts" configuration-id="mens-clothing-dress-shirts" campaign-id="mens-clothing-dress-shirts">
-        <rank>10</rank>
-    </slot-configuration-campaign-assignment>
-
-    <slot-configuration-campaign-assignment slot-id="cat-banner" context="category" context-id="mens-clothing-suits" configuration-id="mens-clothing-suits" campaign-id="mens-clothing-suits">
-        <rank>10</rank>
-    </slot-configuration-campaign-assignment>
 
 </slot-configurations>
