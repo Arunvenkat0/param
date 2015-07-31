@@ -882,36 +882,20 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         </content>
     </slot-configuration>
 
-    <slot-configuration slot-id="cat-banner" context="category" context-id="newarrivals-mens" configuration-id="new-arrivals-men" default="true" assigned-to-site="true">
-        <template>slots/html/htmlslotcontainer.isml</template>
+    <slot-configuration slot-id="cat-banner" context="category" context-id="newarrivals-mens" configuration-id="newarrivals-men" default="true" assigned-to-site="true">
+        <description>Default banner for this catagory</description>
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
-            <html>
-                <body xml:lang="x-default">&lt;a href="$url('Search-Show','cgid','newarrivals-mens')$"&gt;&lt;img alt="Mens" src="images/slot/sub_banners/mens-clothing-accessories.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-                <body xml:lang="fr-FR">&lt;a href="$url('Search-Show','cgid','newarrivals-mens')$"&gt;&lt;img alt="Hommes" src="images/slot/sub_banners/mens-clothing-accessories.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-                <body xml:lang="it-IT">&lt;a href="$url('Search-Show','cgid','newarrivals-mens')$"&gt;&lt;img alt="Uomo" src="images/slot/sub_banners/mens-clothing-accessories.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-                <body xml:lang="ja-JP">&lt;a href="$url('Search-Show','cgid','newarrivals-mens')$"&gt;&lt;img alt="メンズ" src="images/slot/sub_banners/mens-clothing-accessories.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-                <body xml:lang="zh-CN">&lt;a href="$url('Search-Show','cgid','newarrivals-mens')$"&gt;&lt;img alt="男士" src="images/slot/sub_banners/mens-clothing-accessories.jpg?$staticlink$" /&gt;&lt;/a&gt;</body>
-            </html>
-        </content>
-    </slot-configuration>
-
-    <slot-configuration slot-id="cat-banner" context="category" context-id="newarrivals-electronics" configuration-id="newarrivals-electronics" default="true" assigned-to-site="true">
-        <template>slots/html/htmlslotcontainer.isml</template>
-        <enabled-flag>true</enabled-flag>
-        <content>
-            <html>
-                <body xml:lang="x-default">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="136" width="789" alt="Link to Television Buying Guide" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="fr-FR">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="136" width="789" alt="Lien vers le Guide d'achat d'un téléviseur" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="it-IT">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="136" width="789" alt="Link alla guida per l'acquisto delle televisioni" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="ja-JP">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="136" width="789" alt="テレビ購入ガイドへのリンク" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-                <body xml:lang="zh-CN">&lt;p&gt;&lt;a href="$httpUrl('Page-Show', 'cid', 'buying-guide-tv')$"&gt;&lt;img height="136" width="789" alt="电视购买指南链接" src="images/slot/sub_banners/electronics-televisions.jpg?$staticlink$" /&gt;&lt;/a&gt;&lt;/p&gt;</body>
-            </html>
+            <categories>
+                <category category-id="newarrivals-mens"/>
+            </categories>
         </content>
     </slot-configuration>
 
     <slot-configuration slot-id="cat-banner" context="category" context-id="newarrivals-womens" configuration-id="newarrivals-women" default="true" assigned-to-site="true">
-        <template>slots/category/categorysubbanners.isml</template>
+        <description>Default banner for this catagory</description>
+        <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <categories>
