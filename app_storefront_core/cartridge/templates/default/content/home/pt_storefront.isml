@@ -12,6 +12,7 @@
 			type: 'storefront',
 			ns: 'storefront'
 		};
+		pdict.showCountrySelector = true;
 	</isscript>
 	<isinclude template="util/modules"/>
 
@@ -24,7 +25,6 @@
 
 </head>
 <body>
-	<isset name="showCountrySelector" value="${true}" scope="page"/>
 	<div id="wrapper" class="pt_storefront">
 
 		<isinclude template="components/header/header"/>
