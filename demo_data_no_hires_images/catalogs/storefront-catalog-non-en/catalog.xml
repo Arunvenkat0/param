@@ -712,7 +712,7 @@
         <online-flag>true</online-flag>
         <parent>newarrivals</parent>
         <position>3.0</position>
-        <image>images/slot/sub_banners/womens-clothing.jpg</image>
+        <image>images/slot/sub_banners/cat-banner-womens-clothing.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">New Arrivals in Women's Footwear, Outerwear, Clothing &amp; Accessories</page-title>
@@ -742,6 +742,7 @@
         <online-flag>true</online-flag>
         <parent>newarrivals</parent>
         <position>4.0</position>
+        <image>images/slot/sub_banners/cat-banner-mens-clothing.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">New Arrivals in Men's Clothing, Suits &amp; Accessories</page-title>
