@@ -15,7 +15,7 @@
 <isscript>
 	importPackage(dw.system);
 	importPackage(dw.util);
-	importScript('product/ProductUtils.ds');
+	importScript('product/ProductUtils.js');
 	var qs = ProductUtils.getQueryString(pdict.CurrentHttpParameterMap, ['source', 'uuid']),
 		qsAppend = qs.length == 0 ? '' : ('&' + qs),
 		pUtil = new ProductUtils(pdict),

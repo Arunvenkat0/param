@@ -16,14 +16,16 @@ let mockProductAvailabilityModel = {
 	AVAILABILITY_STATUS_BACKORDER: 'prop3',
 	AVAILABILITY_STATUS_NOT_AVAILABLE: 'prop4'
 };
-let ProductUtils = proxyquire('../../../../app_storefront_core/cartridge/scripts/product/ProductUtils.ds', {
+let ProductUtils = proxyquire('../../../../app_storefront_core/cartridge/scripts/product/ProductUtils.js', {
 	'dw/system/Site': {},
+	'dw/catalog/CatalogMgr': {},
 	'dw/catalog/ProductAvailabilityModel': mockProductAvailabilityModel,
-	'dw/catalog/ProductAvailabilityLevels': {},
 	'dw/util/StringUtils': {},
 	'dw/util/HashMap': {},
 	'dw/value/Money': {},
 	'dw/web/HttpParameterMap': {},
+	'dw/campaign/Promotion': {},
+	'dw/campaign/PromotionMgr': {},
 	'dw/web/Resource': mockResource
 });
 let mockProductAvailabilityLevels = {

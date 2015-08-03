@@ -1,11 +1,15 @@
+'use strict';
+
+var CatalogMgr = require('dw/catalog/CatalogMgr');
 var HashMap = require('dw/util/HashMap');
-var HttpParameterMap = require('dw/web/HttpParameterMap');
 var Money = require('dw/value/Money');
 var ProductAvailabilityModel = require('dw/catalog/ProductAvailabilityModel');
-var ProductAvailabilityLevels = require('dw/catalog/ProductAvailabilityLevels');
+var Promotion = require('dw/campaign/Promotion');
+var PromotionMgr = require('dw/campaign/PromotionMgr');
 var Resource = require('dw/web/Resource');
 var Site = require('dw/system/Site');
 var StringUtils = require('dw/util/StringUtils');
+var pdict = pdict;
 
 /**
  * Sanitize a string by removing the whitespaces
@@ -18,34 +22,16 @@ function sanitize(inS) {
 }
 
 /**
- * unsanitizeOR a string by replaced %7c with '|' pipes
- *
- * @param anURL URL String to sanitize
- *
- **/
-function unsanitizeOR( anURL ) {
-	return anURL.toString().replace('%7c','|','g');
-}
-
-/**
- * cleanupID cleans a product id
- *
- * @param a a String to cleanup
- *
- **/
-function cleanupID(s) {
-	return (s === null) ? s : s.replace(new RegExp( "[^a-z0-9_\-]", "gi" ), "_" ).toLowerCase();
-}
-
-/**
  * Product Utilities object
  *
  * @param {dw.system.PipelineDictionary} pdict
  */
 function ProductUtils (pdict) {
-	var _product = Product = pdict.Product || null;
+	var _product = pdict.Product || null;
 	var _httpMap = pdict.CurrentHttpParameterMap;
-	var _variationModel = pdict.hasOwnProperty('CurrentVariationModel') && pdict.CurrentVariationModel ? (_product==null?null:_product.variationModel) : pdict.CurrentVariationModel;
+ 	var _variationModel = pdict.hasOwnProperty('CurrentVariationModel') && pdict.CurrentVariationModel ?
+		(_product === null ? null : _product.variationModel) :
+		pdict.CurrentVariationModel;
 	var _variantHierarchy = null;
 
 	/**
@@ -72,7 +58,7 @@ function ProductUtils (pdict) {
 			variant: item.isVariant(),
 			masterID: pm.ID
 		};
-		var dct = pdict;
+
 		try {
 			p.variations = getVariationAttributes(item);
 			p.pricing = ProductUtils.getPricing(item);
@@ -86,11 +72,12 @@ function ProductUtils (pdict) {
 		catch (error) {
 			p.error = error;
 		}
+
 		return p;
 	};
 
 	var getVariantHierarchy = function() {
-		if (_product==null) { return null; }
+		if (_product === null) { return null; }
 		var vh = {};
 		if (!_variantHierarchy) {
 			_variantHierarchy = ProductUtils.getVariantHierarchy(_product, _variationModel, _httpMap.Quantity.stringValue);
@@ -109,7 +96,7 @@ function ProductUtils (pdict) {
 		var arr = [], att = null;
 
 		var vh = getVariantHierarchy();
-		if (selected.length==0) {
+		if (selected.length === 0) {
 			for (att in vh.attributes) {
 				if (att.selected) {	break; }
 			}
@@ -139,10 +126,12 @@ function ProductUtils (pdict) {
 	var getAttributeAvailability = function(attribute) {
 		var available = false;
 		if (attribute.attributes) {
-			for (a in attribute.attributes) {
+			for (var a in attribute.attributes) {
 				var att = attribute.attributes[a];
-				var available = getAttributeAvailability(att);
-				if (available) { break;}
+				available = getAttributeAvailability(att);
+				if (available) {
+					break;
+				}
 			}
 		}
 		else {
@@ -183,7 +172,7 @@ function ProductUtils (pdict) {
 					val: v_attVal.displayValue ? v_attVal.displayValue: v_attVal.value
 				};
 
-				if (pva.id == 'color') {
+				if (pva.id === 'color') {
 					// get images for variation
 					pvaVal.images = {
 						"swatch": {},
@@ -217,12 +206,6 @@ function ProductUtils (pdict) {
 		return imgArray;
 	};
 
-	var appendObjectProperties = function(source, destination) {
-		for (var p in source) {
-			destination[p] = source[p];
-		}
-	};
-
 	return {
 		getSimpleProduct : getSimpleProduct,
 		getImages : getImages,
@@ -240,7 +223,7 @@ function ProductUtils (pdict) {
  * @returns {Object}
  */
 ProductUtils.getAvailability = function(item, quantity) {
-	var qty = isNaN(quantity) ? 1 : (new Number(quantity)).toFixed();
+	var qty = isNaN(quantity) ? 1 : (parseInt(quantity)).toFixed();
 	/* product availability */
 	var avm = item.availabilityModel;
 	var invRecordEmpty = !avm.inventoryRecord || avm.inventoryRecord === {};
@@ -257,8 +240,8 @@ ProductUtils.getAvailability = function(item, quantity) {
 		levels : {}
 	};
 
-	var avmLevels = ProductAvailabilityLevels = avm.getAvailabilityLevels((qty < 1) ? 1 : qty);
-	availability.isAvailable = avmLevels.notAvailable.value==0;
+	var avmLevels = avm.getAvailabilityLevels((qty < 1) ? 1 : qty);
+	availability.isAvailable = avmLevels.notAvailable.value === 0;
 	availability.inStockMsg = Resource.msgf('global.quantityinstock','locale',"", avmLevels.inStock.value.toFixed());
 	availability.preOrderMsg = Resource.msgf('global.quantitypreorder','locale',"", avmLevels.preorder.value.toFixed());
 	availability.backOrderMsg = Resource.msgf('global.quantitybackorder','locale',"", avmLevels.backorder.value.toFixed());
@@ -322,7 +305,7 @@ ProductUtils.getPricing = function(item) {
 	}
 
 	var salesPrice = priceModel.getPrice();
-	var showStdPrice = standardPrice.available && salesPrice.available && standardPrice.compareTo(salesPrice) == 1;
+	var showStdPrice = standardPrice.available && salesPrice.available && standardPrice.compareTo(salesPrice) === 1;
 	var promoPrice = Money.NOT_AVAILABLE;
 	var isPromoPrice = false;
 
@@ -341,7 +324,7 @@ ProductUtils.getPricing = function(item) {
 			}
 		}
 
-		if (promoPrice.available && salesPrice.compareTo(promoPrice) != 0) {
+		if (promoPrice.available && salesPrice.compareTo(promoPrice) !== 0) {
 			showStdPrice = true;
 			isPromoPrice = true;
 			standardPrice = salesPrice;
@@ -392,7 +375,7 @@ ProductUtils.getSimpleBonusProduct = function(item, lineItem) {
 	// if product is variant or master, get selected  attribute definitions
 	if (item.isVariant() || item.isMaster()) {
 		var attDefs = item.variationModel.getProductVariationAttributes();
-		for (var i=0, len=attDefs.length; i < len; i++) {
+		for (var i=0; i < attDefs.length; i++) {
 			var attDef = attDefs[i];
 			var selectedValue = item.variationModel.getSelectedValue(attDef);
 			// push variation attributes to simple object
@@ -411,8 +394,8 @@ ProductUtils.getSimpleBonusProduct = function(item, lineItem) {
 
 	// otherwise get option product line items
 	var optionLineItems = lineItem.optionProductLineItems;
-	for (var i=0, len=optionLineItems.length; i < len; i++) {
-		var optionLineItem = optionLineItems[i];
+	for (var j=0; j < optionLineItems.length; j++) {
+		var optionLineItem = optionLineItems[j];
 		var option = item.optionModel.getOption(optionLineItem.optionID);
 		// push option attributes to simple object
 		p.options.attributes.push({
@@ -447,15 +430,15 @@ ProductUtils.getBonusProductJson = function(item, lineItem) {
  * @returns {dw.catalog.ProductVariationAttributeValue}
  */
 ProductUtils.getSelectedColor = function(product, pvm) {
-	if (product==null) { return null; }
-	var vm = pvm==null ? product.variationModel : pvm;
+	if (product === null) { return null; }
+	var vm = pvm === null ? product.variationModel : pvm;
 	var cvm = product.isVariant() ? product.masterProduct.variationModel : product.variationModel;
 
 	var selectedColor = null;
 	var colorVA = vm.getProductVariationAttribute("color");
-	if (colorVA==null) { return null; }
+	if (colorVA === null) { return null; }
 
-	var selectedColor = vm.getSelectedValue(colorVA);
+	selectedColor = vm.getSelectedValue(colorVA);
 
 	if (selectedColor) {
 		return selectedColor;
@@ -496,12 +479,12 @@ ProductUtils.getVariantForColor = function(prod, colorId)  {
 	var newProduct = prod;
 	var variants = prod.getVariants();
 
-	if(variants == null || variants.length == 0) {
+	if(variants === null || variants.length === 0) {
 		return newProduct;
 	}
 
 	variants.forEach(function(p) {
-		if(p.onlineFlag && (!colorId || p.custom.color == colorId)) {
+		if(p.onlineFlag && (!colorId || p.custom.color === colorId)) {
 			newProduct = p;
 		}
 	});
@@ -523,7 +506,7 @@ ProductUtils.getQueryString = function(map, fields) {
 		if (!key || !map.isParameterSubmitted(key)) { continue; }
 
 		var parm = map.get(key);
-		if(!parm || parm.stringValue.length==0) { continue; }
+		if(!parm || parm.stringValue.length === 0) { continue; }
 
 		// only get here if we have a match
 		parms.push(sanitize(key)+"="+sanitize(parm.stringValue));
@@ -539,10 +522,9 @@ ProductUtils.getQueryString = function(map, fields) {
  */
 ProductUtils.isCompareEnabled = function(catId) {
 	var cat = CatalogMgr.getCategory(catId);
-	while (cat != null) {
+	while (cat !== null) {
 		if ('enableCompare' in cat.custom && cat.custom.enableCompare) {
 			return true;
-			break;
 		}
 		cat = cat.parent;
 	}
@@ -640,13 +622,13 @@ ProductUtils.getSelectedAttributes = function(pvm) {
 	var atts = {},
 		attDefs = pvm.getProductVariationAttributes();
 
-	for (i=0; i<attDefs.length;i++) {
-		var attribute = attDefs[i];
+	for (var l=0; l < attDefs.length; l++) {
+		var attribute = attDefs[l];
 		var selectedValue = pvm.getSelectedValue(attribute);
 		atts[attribute.ID] = {
-			displayName:attribute.displayName,
-			value:selectedValue?selectedValue.value:"",
-			displayValue:selectedValue?selectedValue.displayValue:""
+			displayName: attribute.displayName,
+			value: selectedValue ? selectedValue.value : '',
+			displayValue: selectedValue ? selectedValue.displayValue : ''
 		};
 	}
 	return atts;
@@ -674,8 +656,8 @@ ProductUtils.getDefaultVariant = function(pvm) {
 	}
 
 	var variants = pvm.getVariants(map);
-	for (var i=0,len=variants.length;i<len;i++) {
-		var p = variants[i];
+	for (var k=0; k < variants.length; k++) {
+		var p = variants[k];
 		if (p.onlineFlag && p.availabilityModel.availability>0) {
 			return p;
 		}

@@ -1,7 +1,7 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isdecorate template="search/pt_productsearchresult_content">
 	<isscript>
-		importScript("product/ProductUtils.ds");
+		importScript("product/ProductUtils.js");
 		var compareEnabled = false;
 		if (!empty(pdict.CurrentHttpParameterMap.cgid.value)) {
 			compareEnabled = ProductUtils.isCompareEnabled(pdict.CurrentHttpParameterMap.cgid.value);
@@ -46,13 +46,13 @@
 		<isif condition="${!empty(pdict.ProductSearchResult.category)}">
 			<isslot id="cat-banner" context="category" description="Category Banner" context-object="${pdict.ProductSearchResult.category}"/>
 		<iselse/>
-			<isif condition="${pdict.SearchPromo != null}">			
+			<isif condition="${pdict.SearchPromo != null}">
 				<isif condition="${'body' in pdict.SearchPromo.custom && pdict.SearchPromo.custom.body != null}">
 					<div class="contentasset"><!-- dwMarker="content" dwContentID="${pdict.Content.UUID}" -->
 						<isprint value="${pdict.SearchPromo.custom.body}" encoding="off"/>
 					</div> <!-- End contentasset -->
 				</isif>
-			<iselse/>	
+			<iselse/>
 				<isslot id="search-result-banner" description="Promotional Search Result Banner" context="global"/>
 			</isif>
 		</isif>

@@ -284,7 +284,7 @@
 				The checkbox is displayed if either the category or one of its parent categories
 				has the custom attribute "enableCompare" set to true.
 			</iscomment>
-			<isscript>importScript("product/ProductUtils.ds")</isscript>
+			<isscript>importScript("product/ProductUtils.js")</isscript>
 			<isif condition="${!empty(pdict.CurrentHttpParameterMap.cgid.value) && ProductUtils.isCompareEnabled(pdict.CurrentHttpParameterMap.cgid.value)}">
 				<isif condition="${!Product.productSet && !Product.bundle}">
 					<isscript>

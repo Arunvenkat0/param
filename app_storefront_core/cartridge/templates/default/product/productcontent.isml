@@ -1,6 +1,6 @@
 <isif condition="${false&&pdict.resetAttributes}">
 	<isscript>
-		importScript("product/ProductUtils.ds");
+		importScript("product/ProductUtils.js");
 		var url = dw.web.URLUtils.url('Product-Variation', 'pid', pdict.Product.ID, 'format', 'ajax');
 		var qs = ProductUtils.getQueryString(pdict.CurrentHttpParameterMap, ["source", "uuid", "Quantity"]);
 		if (qs && qs.length>0) { url+="&"+qs; }
