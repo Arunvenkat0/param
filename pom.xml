@@ -17,7 +17,7 @@
     <artifactId>sitegen</artifactId>
     <name>SiteGenesis</name>
     <packaging>pom</packaging>
-    <version>15.8.0.5</version>
+    <version>15.8.0.6</version>
     <description>SiteGenesis Source</description>
 
 
