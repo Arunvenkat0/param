@@ -3145,9 +3145,9 @@ The handle pipeline is responsible for payment provider / payment method specifi
                       <key-binding alias="ValidPaymentInstrument.creditCardType" key="From_2"/>
                       <key-binding alias="CurrentForms.billing.paymentMethods.creditCard.type.value" key="To_2"/>
                       <key-binding alias="ValidPaymentInstrument.creditCardExpirationMonth" key="From_3"/>
-                      <key-binding alias="CurrentForms.billing.paymentMethods.creditCard.month.value" key="To_3"/>
+                      <key-binding alias="CurrentForms.billing.paymentMethods.creditCard.expiration.month.value" key="To_3"/>
                       <key-binding alias="ValidPaymentInstrument.creditCardExpirationYear" key="From_4"/>
-                      <key-binding alias="CurrentForms.billing.paymentMethods.creditCard.year.value" key="To_4"/>
+                      <key-binding alias="CurrentForms.billing.paymentMethods.creditCard.expiration.year.value" key="To_4"/>
                       <key-binding alias="null" key="From_5"/>
                       <key-binding alias="null" key="To_5"/>
                       <key-binding alias="null" key="From_6"/>

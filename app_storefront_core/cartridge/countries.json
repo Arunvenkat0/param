@@ -75,6 +75,14 @@
 					"type": "select"
 				}]
 			}
+		},
+		"expirationInfo": {
+			"year" : {
+				"type" : "select"
+			},
+			"month" : {
+				"type" : "select"
+			}
 		}
 	}
 }, {
@@ -141,6 +149,14 @@
 					"fieldName": "country",
 					"type": "select"
 				}]
+			}
+		},
+		"expirationInfo": {
+			"year" : {
+				"type" : "select"
+			},
+			"month" : {
+				"type" : "select"
 			}
 		}
 	}
@@ -213,6 +229,14 @@
 					"type": "select"
 				}]
 			}
+		},
+		"expirationInfo": {
+			"year" : {
+				"type" : "select"
+			},
+			"month" : {
+				"type" : "select"
+			}
 		}
 	}
 }, {
@@ -282,6 +306,14 @@
 					"type": "select"
 				}]
 			}
+		},
+		"expirationInfo": {
+			"year" : {
+				"type" : "select"
+			},
+			"month" : {
+				"type" : "select"
+			}
 		}
 	}
 }, {
@@ -349,6 +381,14 @@
 					"fieldName": "country",
 					"type": "select"
 				}]
+			}
+		},
+		"expirationInfo": {
+			"year" : {
+				"type" : "select"
+			},
+			"month" : {
+				"type" : "select"
 			}
 		}
 	}
@@ -419,6 +459,14 @@
 					"fieldName": "country",
 					"type": "select"
 				}]
+			}
+		},
+		"expirationInfo": {
+			"year" : {
+				"type" : "select"
+			},
+			"month" : {
+				"type" : "select"
 			}
 		}
 	}
