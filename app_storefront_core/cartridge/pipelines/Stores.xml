@@ -65,7 +65,7 @@
           </transition>
           <segment>
             <node>
-              <decision-node condition-key="CurrentForms.storelocator.address.country.value != null &amp;&amp;CurrentForms.storelocator.address.country.value != ''" condition-operator="expr"/>
+              <decision-node condition-key="CurrentForms.storelocator.country.value != null &amp;&amp;CurrentForms.storelocator.country.value != ''" condition-operator="expr"/>
               <node-display x="1" y="3"/>
               <branch basename="b2" source-connector="yes">
                 <transition target-connector="in">
@@ -93,7 +93,7 @@
                       <key-binding alias="null" key="SortBy3"/>
                       <key-binding alias="null" key="SortBy3Direction"/>
                       <key-binding alias="null" key="Search1Key"/>
-                      <key-binding alias="CurrentForms.storelocator.address.country.value" key="Search1Value"/>
+                      <key-binding alias="CurrentForms.storelocator.country.value" key="Search1Value"/>
                     </pipelet-node>
                     <node-display x="1" y="2"/>
                   </node>
@@ -115,7 +115,7 @@
                         <node>
                           <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                             <config-property key="Transactional" value="false"/>
-                            <key-binding alias="CurrentForms.storelocator.address.country.value" key="From_0"/>
+                            <key-binding alias="CurrentForms.storelocator.country.value" key="From_0"/>
                             <key-binding alias="SearchString" key="To_0"/>
                             <key-binding alias="null" key="From_2"/>
                             <key-binding alias="null" key="From_3"/>
@@ -215,16 +215,10 @@
           <transition target-connector="in"/>
           <segment>
             <node>
-              <pipelet-node custom-name="CurrentForms.store" pipelet-name="Assign" pipelet-set-identifier="bc_api">
+              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="false"/>
-                <key-binding alias="CurrentForms.storelocator.address.states.stateUSCA.htmlValue" key="From_0"/>
-                <key-binding alias="stateCode" key="To_0"/>
-                <key-binding alias="null" key="From_1"/>
-                <key-binding alias="null" key="To_1"/>
                 <key-binding alias="null" key="From_2"/>
                 <key-binding alias="null" key="To_2"/>
-                <key-binding alias="null" key="From_3"/>
-                <key-binding alias="null" key="To_3"/>
                 <key-binding alias="null" key="From_4"/>
                 <key-binding alias="null" key="To_4"/>
                 <key-binding alias="null" key="From_5"/>
@@ -237,6 +231,8 @@
                 <key-binding alias="null" key="To_8"/>
                 <key-binding alias="null" key="From_9"/>
                 <key-binding alias="null" key="To_9"/>
+                <key-binding alias="CurrentForms.storelocator.state.htmlValue" key="From_0"/>
+                <key-binding alias="stateCode" key="To_0"/>
               </pipelet-node>
               <node-display x="0" y="2"/>
             </node>
@@ -269,7 +265,7 @@
                       <key-binding alias="null" key="SortBy3"/>
                       <key-binding alias="null" key="SortBy3Direction"/>
                       <key-binding alias="null" key="Search1Key"/>
-                      <key-binding alias="CurrentForms.storelocator.address.states.stateUSCA.htmlValue" key="Search1Value"/>
+                      <key-binding alias="CurrentForms.storelocator.state.htmlValue" key="Search1Value"/>
                     </pipelet-node>
                     <node-display x="0" y="2"/>
                   </node>
@@ -291,7 +287,7 @@
                         <node>
                           <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                             <config-property key="Transactional" value="false"/>
-                            <key-binding alias="&quot;State &quot; + CurrentForms.storelocator.address.states.stateUSCA.htmlValue" key="From_0"/>
+                            <key-binding alias="&quot;State &quot; + CurrentForms.storelocator.state.htmlValue" key="From_0"/>
                             <key-binding alias="SearchString" key="To_0"/>
                             <key-binding alias="null" key="From_2"/>
                             <key-binding alias="null" key="From_3"/>

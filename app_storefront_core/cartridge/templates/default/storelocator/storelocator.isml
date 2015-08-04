@@ -46,7 +46,7 @@
 			<form action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.storelocator.htmlName}_state">
 				<fieldset>
 				
-					<isinputfield formfield="${pdict.CurrentForms.storelocator.address.states.state}" type="select" mandatory="false"/>
+					<isinputfield formfield="${pdict.CurrentForms.storelocator.state}" type="select" mandatory="false"/>
 					
 					<div class="form-row form-row-button">
 						<button type="submit" name="${pdict.CurrentForms.storelocator.findbystate.htmlName}" value="${Resource.msg('global.search','locale',null)}">
@@ -76,13 +76,9 @@
 			<form action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.storelocator.htmlName}_int">
 				<fieldset>
 				
-					<isinputfield formfield="${pdict.CurrentForms.storelocator.address.country}" type="select" mandatory="false"/>
+					<isinputfield formfield="${pdict.CurrentForms.storelocator.country}" type="select" mandatory="false"/>
 					
 					<div class="form-row form-row-button">						<button class="search shadow-darker" type="submit" name="${pdict.CurrentForms.storelocator.findbycountry.htmlName}" value="${Resource.msg('global.search','locale',null)}"><span>${Resource.msg('global.search','locale',null)}</span></button>
-					</div>
-					
-					<div class="form-caption">
-						<p>${Resource.msg('storelocator.unitedkingdomcustomer','storelocator',null)}</p>
 					</div>
 					
 				</fieldset>
