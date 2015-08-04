@@ -8,7 +8,7 @@
 importPackage( dw.customer );
 importPackage( dw.order );
 importPackage( dw.system );
-importPackage( dw.web ); 
+importPackage( dw.web );
 
 function execute( pdict : PipelineDictionary ) : Number
 {
@@ -32,8 +32,8 @@ function execute( pdict : PipelineDictionary ) : Number
 	// coy the credit card details to the payment instrument
 	paymentInstr.setCreditCardHolder( creditCardFields.owner.value );
 	paymentInstr.setCreditCardNumber( creditCardFields.number.value );
-	paymentInstr.setCreditCardExpirationMonth( creditCardFields.month.value );
-	paymentInstr.setCreditCardExpirationYear( creditCardFields.year.value );
+	paymentInstr.setCreditCardExpirationMonth( creditCardFields.expiration.month.value );
+	paymentInstr.setCreditCardExpirationYear( creditCardFields.expiration.year.value );
 	paymentInstr.setCreditCardType( creditCardFields.type.value );
 
     return PIPELET_NEXT;
