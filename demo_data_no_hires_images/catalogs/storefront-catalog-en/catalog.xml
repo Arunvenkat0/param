@@ -3915,6 +3915,7 @@
         <online-flag>true</online-flag>
         <parent>electronics</parent>
         <position>5.0</position>
+        <image>images/slot/sub_banners/cat-banner-electronics-tv.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Televisions Including LCD, Plasma &amp; More in High Definition</page-title>
@@ -3949,6 +3950,7 @@
         <online-flag>true</online-flag>
         <parent>electronics-televisions</parent>
         <position>1.0</position>
+        <image>images/slot/sub_banners/cat-banner-electronics-tv.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">LCD &amp; Plasma High Definition Flat Screen Televisions</page-title>
@@ -3966,6 +3968,7 @@
         <online-flag>true</online-flag>
         <parent>electronics-televisions</parent>
         <position>2.0</position>
+        <image>images/slot/sub_banners/cat-banner-electronics-tv.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Projection High Definition Televisions</page-title>
@@ -3980,7 +3983,7 @@
 
     <category category-id="electronics-televisions-tv_dvd-combo">
         <display-name xml:lang="x-default">TV DVD Combo</display-name>
-        <online-flag>true</online-flag>
+        <online-flag>false</online-flag>
         <parent>electronics-televisions</parent>
         <position>3.0</position>
         <template>rendering/category/categoryproducthits</template>
@@ -4000,7 +4003,7 @@
         <online-flag>true</online-flag>
         <parent>electronics</parent>
         <position>7.0</position>
-        <image>images/slot/sub_banners/electronics-cameras.jpg</image>
+        <image>images/slot/sub_banners/cat-banner-electronics-camera.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Digital Cameras</page-title>
@@ -4148,7 +4151,7 @@
         <online-flag>true</online-flag>
         <parent>electronics</parent>
         <position>9.0</position>
-        <image>images/slot/sub_banners/electronics-ipod-accessories.jpg</image>
+        <image>images/slot/sub_banners/cat-banner-electronics-mp3.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">iPod &amp; MP3 Digital Media Players</page-title>
@@ -4244,7 +4247,7 @@
         <online-flag>true</online-flag>
         <parent>electronics</parent>
         <position>12.0</position>
-        <image>images/slot/sub_banners/electronics-gps.jpg</image>
+        <image>images/slot/sub_banners/cat-banner-electronics-gps.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">GPS Units</page-title>
@@ -4368,7 +4371,7 @@
         <online-flag>true</online-flag>
         <parent>electronics</parent>
         <position>13.0</position>
-        <image>images/slot/sub_banners/electronics-gaming.jpg</image>
+        <image>images/slot/sub_banners/cat-banner-electronics.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Gaming</page-title>
@@ -4387,7 +4390,7 @@
         <online-flag>true</online-flag>
         <parent>electronics-gaming</parent>
         <position>1.0</position>
-        <image>images/slot/sub_banners/electronics-gaming.jpg</image>
+        <image>images/slot/sub_banners/cat-banner-electronics.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Video Game Consoles</page-title>
@@ -4405,7 +4408,7 @@
         <online-flag>true</online-flag>
         <parent>electronics-gaming</parent>
         <position>2.0</position>
-        <image>images/slot/sub_banners/electronics-gaming-madden.jpg</image>
+        <image>images/slot/sub_banners/cat-banner-electronics.jpg</image>
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Video Games</page-title>
