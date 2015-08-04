@@ -6,7 +6,7 @@
 
 <iscomment>Added to access unsanitizeOR()</iscomment>
 <isscript>
-	importScript('product/ProductUtils.ds');
+	importScript('product/ProductUtils.js');
 </isscript>
 
 <div class="breadcrumb">

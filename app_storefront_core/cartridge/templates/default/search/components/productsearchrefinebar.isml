@@ -3,7 +3,7 @@
 
 <iscomment>Added to access unsanitizeOR()</iscomment>
 <isscript>
-	importScript('product/ProductUtils.ds');
+	importScript('product/ProductUtils.js');
 </isscript>
 
 <iscomment>NOTE: Removes Refinements if NO Products are found</iscomment>
