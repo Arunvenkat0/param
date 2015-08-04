@@ -46,7 +46,7 @@
 			<form action="${URLUtils.continueURL()}" method="post" id="${pdict.CurrentForms.storelocator.htmlName}_state">
 				<fieldset>
 				
-					<isinputfield formfield="${pdict.CurrentForms.storelocator.address.states.stateUSCA}" type="select" mandatory="false"/>
+					<isinputfield formfield="${pdict.CurrentForms.storelocator.address.states.state}" type="select" mandatory="false"/>
 					
 					<div class="form-row form-row-button">
 						<button type="submit" name="${pdict.CurrentForms.storelocator.findbystate.htmlName}" value="${Resource.msg('global.search','locale',null)}">
