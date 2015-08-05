@@ -67,15 +67,6 @@
 				</a>
 			</li>
 		</ul>
-		{{#if currency}}
-		<div class="currency-converter">
-			<select name="{{currency.name}}">
-				{{#each currency.options}}
-				<option class="currency-converter-option" value="{{value}}"{{#if default}} selected="selected"{{/if}}>{{value}}</option>
-				{{/each}}
-			</select>
-		</div>
-		{{/if}}
 	</nav>
 	<div id="mini-cart">
 		<div class="mini-cart-total">
