@@ -553,6 +553,76 @@
         <currency>EUR</currency>
     </shipping-method>
 
+    <shipping-method method-id="EUR004" default="false">
+        <display-name xml:lang="x-default">Super Saver</display-name>
+        <display-name xml:lang="fr-FR">Ultra-économique</display-name>
+        <display-name xml:lang="it">Spedizione ridotta</display-name>
+        <display-name xml:lang="it-IT">Spedizione ridotta</display-name>
+        <display-name xml:lang="ja-JP">超おトク</display-name>
+        <display-name xml:lang="zh-CN">Super Saver</display-name>
+        <description xml:lang="x-default">Super Saver Delivery (arrives in 3-7 business days)</description>
+        <description xml:lang="fr-FR">Livraison ultra-économique (en 3 à 7 jours ouvrés)</description>
+        <description xml:lang="it">Spedizione ridotta (consegna in 3-7 giorni lavorativi)</description>
+        <description xml:lang="it-IT">Spedizione ridotta (consegna in 3-7 giorni lavorativi)</description>
+        <description xml:lang="ja-JP">超おトク便 (お受け取りまで 3 ～ 7 営業日)</description>
+        <description xml:lang="zh-CN">Super Saver 交货（3 到 7 个工作日内送达）</description>
+        <online-flag>true</online-flag>
+        <tax-class-id>standard</tax-class-id>
+        <price-table>
+            <amount order-value="0.0">0.0</amount>
+            <amount order-value="0.01">1.99</amount>
+        </price-table>
+        <product-cost-groups>
+            <product-cost-group>
+                <products>
+                    <included-products>
+                        <condition-group>
+                            <category-condition catalog-id="storefront-catalog-en">
+                                <category-id>electronics-gaming</category-id>
+                            </category-condition>
+                        </condition-group>
+                    </included-products>
+                </products>
+                <cost-per-item>
+                    <surcharge>100.00</surcharge>
+                </cost-per-item>
+            </product-cost-group>
+        </product-cost-groups>
+        <excluded-addresses>
+            <included-addresses>
+                <condition-group match-mode="all">
+                    <condition>
+                        <attribute-path>shipment.shippingAddress.stateCode</attribute-path>
+                        <operator>is-equal</operator>
+                        <string>AA</string>
+                        <string>AB</string>
+                        <string>AE</string>
+                        <string>AP</string>
+                        <string>AK</string>
+                        <string>AS</string>
+                        <string>BC</string>
+                        <string>GU</string>
+                        <string>HI</string>
+                        <string>MB</string>
+                        <string>NB</string>
+                        <string>NL</string>
+                        <string>NT</string>
+                        <string>NS</string>
+                        <string>NU</string>
+                        <string>ON</string>
+                        <string>PE</string>
+                        <string>PR</string>
+                        <string>QC</string>
+                        <string>SK</string>
+                        <string>VI</string>
+                        <string>YT</string>
+                    </condition>
+                </condition-group>
+            </included-addresses>
+        </excluded-addresses>
+        <currency>EUR</currency>
+    </shipping-method>
+
     <shipping-method method-id="EUR005" default="false">
         <display-name xml:lang="x-default">EUR Store Pickup</display-name>
         <display-name xml:lang="fr-FR">EUR Livraison en magasin</display-name>
@@ -1005,7 +1075,7 @@
                 </cost-per-item>
             </product-cost-group>
         </product-cost-groups>
-        <currency>EUR</currency>
+        <currency>GBP</currency>
     </shipping-method>
 
     <shipping-method method-id="GBP003" default="false">
