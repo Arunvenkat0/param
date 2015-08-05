@@ -18,6 +18,37 @@ var util = {
 		var separator = url.indexOf('?') !== -1 ? '&' : '?';
 		return url + separator + name + '=' + encodeURIComponent(value);
 	},
+
+	/**
+	 * @function
+	 * @description remove the parameter and its value from the given url and returns the changed url
+	 * @param {String} url the url from which the parameter will be removed
+	 * @param {String} name the name of parameter that will be removed from url
+	 */
+	removeParamFromURL: function (url, name) {
+		if (url.indexOf('?') === -1 || url.indexOf(name + '=') === -1) {
+			return url;
+		}
+		var hash;
+		var params;
+		var domain = url.split('?')[0];
+		var paramUrl = url.split('?')[1];
+		var newParams = [];
+		// if there is a hash at the end, store the hash
+		if (paramUrl.indexOf('#') > -1) {
+			hash = paramUrl.split('#')[1] || '';
+			paramUrl = paramUrl.split('#')[0];
+		}
+		params = paramUrl.split('&');
+		for (var i = 0; i < params.length; i++) {
+			// put back param to newParams array if it is not the one to be removed
+			if (params[i].split('=')[0] !== name) {
+				newParams.push(params[i]);
+			}
+		}
+		return domain + '?' + newParams.join('&') + (hash ? '#' + hash : '');
+	},
+
 	/**
 	 * @function
 	 * @description appends the parameters to the given url and returns the changed url
