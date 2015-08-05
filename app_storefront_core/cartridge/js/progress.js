@@ -11,7 +11,7 @@ var show = function (container) {
 	var target = (!container || $(container).length === 0) ? $('body') : $(container);
 	$loader = $loader || $('.loader');
 
-	if ($loader.lengt === 0) {
+	if ($loader.length === 0) {
 		$loader = $('<div/>').addClass('loader')
 			.append($('<div/>').addClass('loader-indicator'), $('<div/>').addClass('loader-bg'));
 	}
