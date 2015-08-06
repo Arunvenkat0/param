@@ -15,3 +15,15 @@
 		width: 33%;
 	}
 }
+
+// Hide Refinements on Category Landing Pages
+.pt_categorylanding {
+	.refinements {
+		.refinement {
+			display: none;
+		}
+		.category-refinement {
+			display: block;
+		}
+	}
+}
