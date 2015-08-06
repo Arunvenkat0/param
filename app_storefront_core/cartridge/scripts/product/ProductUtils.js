@@ -9,17 +9,7 @@ var PromotionMgr = require('dw/campaign/PromotionMgr');
 var Resource = require('dw/web/Resource');
 var Site = require('dw/system/Site');
 var StringUtils = require('dw/util/StringUtils');
-var pdict = pdict;
-
-/**
- * Sanitize a string by removing the whitespaces
- *
- * @param inS String to sanitize
- *
- **/
-function sanitize(inS) {
-	return inS.replace(/\W/g,'');
-}
+var sanitize = require('util/StringUtils').sanitize;
 
 /**
  * Product Utilities object
