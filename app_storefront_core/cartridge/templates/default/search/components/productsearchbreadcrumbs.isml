@@ -4,9 +4,8 @@
 <iscomment>get the current paging model for convenient reuse</iscomment>
 <isset name="pagingModel" value="${pdict.ProductPagingModel}" scope="page"/>
 
-<iscomment>Added to access unsanitizeOR()</iscomment>
 <isscript>
-	var StringUtils = require('~/cartridge/scripts/util/StringUtils.js');
+	var StringUtils = require('~/cartridge/scripts/util/StringUtils');
 </isscript>
 
 <div class="breadcrumb">
@@ -98,7 +97,7 @@
 					<iselse/>
 						<isset name="breadcrumbHref" value="${pagingModel.appendPaging(pdict.ProductSearchResult.urlRelaxPrice('Search-Show'), 0)}" scope="page" />
 					</isif>
-					<a class="breadcrumb-relax" href="${unsanitizeOR(breadcrumbHref)}" title="${Resource.msg('global.remove', 'locale', null)}">x</a>
+					<a class="breadcrumb-relax" href="${StringUtils.unsanitizeOR(breadcrumbHref)}" title="${Resource.msg('global.remove', 'locale', null)}">x</a>
 				</span>
 			</span>
 
@@ -116,13 +115,17 @@
 					<isloop items="${pdict.ProductSearchResult.refinements.getRefinementValues(definition)}" var="value" status="values">
 						<isif condition="${pdict.ProductSearchResult.isRefinedByAttributeValue(definition.attributeID, value.value)}">
 							<span class="breadcrumb-refinement-value">
-								<isprint value="${value.displayValue}"/>
+								<isif condition="${value.displayValue == 'true'}">
+									${Resource.msg('global.' + value.displayValue, 'locale', null)}
+								<iselse/>
+									<isprint value="${value.displayValue}"/>
+								</isif>
 								<isif condition="${empty(pagingModel)}">
 									<isset name="breadcrumbHref" value="${pdict.ProductSearchResult.urlRelaxAttributeValue('Search-Show', definition.attributeID, value.value)}" scope="page" />
 								<iselse/>
 									<isset name="breadcrumbHref" value="${pagingModel.appendPaging(pdict.ProductSearchResult.urlRelaxAttributeValue('Search-Show', definition.attributeID, value.value), 0)}" scope="page" />
 								</isif>
-								<a class="breadcrumb-relax" href="${unsanitizeOR(breadcrumbHref)}" title="${Resource.msg('global.remove', 'locale', null)}">x</a>
+								<a class="breadcrumb-relax" href="${StringUtils.unsanitizeOR(breadcrumbHref)}" title="${Resource.msg('global.remove', 'locale', null)}">x</a>
 							</span>
 						</isif>
 					</isloop>
