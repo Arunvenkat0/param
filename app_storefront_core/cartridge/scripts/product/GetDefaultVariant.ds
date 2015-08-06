@@ -8,7 +8,7 @@
 importPackage( dw.util );
 importPackage( dw.system );
 importPackage( dw.catalog );
-importScript("product/ProductUtils.js");
+var ProductUtils = require('~/cartridge/scripts/product/ProductUtils.js');
 
 function execute( args : PipelineDictionary ) : Number
 {
