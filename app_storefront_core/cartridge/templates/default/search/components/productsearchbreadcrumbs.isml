@@ -115,11 +115,7 @@
 					<isloop items="${pdict.ProductSearchResult.refinements.getRefinementValues(definition)}" var="value" status="values">
 						<isif condition="${pdict.ProductSearchResult.isRefinedByAttributeValue(definition.attributeID, value.value)}">
 							<span class="breadcrumb-refinement-value">
-								<isif condition="${value.displayValue == 'true'}">
-									${Resource.msg('global.' + value.displayValue, 'locale', null)}
-								<iselse/>
-									<isprint value="${value.displayValue}"/>
-								</isif>
+									${Resource.msg('refinement.' + definition.attributeID + '.' + value.displayValue, 'locale', value.displayValue)}
 								<isif condition="${empty(pagingModel)}">
 									<isset name="breadcrumbHref" value="${pdict.ProductSearchResult.urlRelaxAttributeValue('Search-Show', definition.attributeID, value.value)}" scope="page" />
 								<iselse/>
