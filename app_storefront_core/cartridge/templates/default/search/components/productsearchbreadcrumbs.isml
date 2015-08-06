@@ -6,7 +6,7 @@
 
 <iscomment>Added to access unsanitizeOR()</iscomment>
 <isscript>
-	importScript('util/StringUtils.js');
+	var StringUtils = require('~/cartridge/scripts/util/StringUtils.js');
 </isscript>
 
 <div class="breadcrumb">
