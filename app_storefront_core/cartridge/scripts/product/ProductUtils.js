@@ -9,7 +9,7 @@ var PromotionMgr = require('dw/campaign/PromotionMgr');
 var Resource = require('dw/web/Resource');
 var Site = require('dw/system/Site');
 var StringUtils = require('dw/util/StringUtils');
-var sanitize = require('util/StringUtils').sanitize;
+var sanitize = require('~/cartridge/scripts/util/StringUtils').sanitize;
 
 /**
  * Product Utilities object
