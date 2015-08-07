@@ -316,7 +316,7 @@
 						}
 					</isscript>
 					<div class="product-compare label-inline">
-						<label for="${'cc-'+Product.UUID}">${Resource.msg('search.compare', 'search', null)} <span class="visually-hidden">${Product.name}</span></label>
+						<label for="${'cc-'+Product.UUID}">${Resource.msg('search.compare', 'search', null)} <span class="visually-hidden">${Product.name} ${Product.ID}</span></label>
 						<div class="field-wrapper">
 							<input type="checkbox" class="compare-check" id="${'cc-'+Product.UUID}" <isprint value="${checkedStr}" encoding="off" />/>
 						</div>
