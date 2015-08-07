@@ -27,7 +27,7 @@ let ProductUtils = proxyquire('../../../../app_storefront_core/cartridge/scripts
 	'dw/campaign/Promotion': {},
 	'dw/campaign/PromotionMgr': {},
 	'dw/web/Resource': mockResource,
-	'util/StringUtils': {}
+	'~/cartridge/scripts/util/StringUtils': {}
 });
 let mockProductAvailabilityLevels = {
 	notAvailable: {value: 0},
