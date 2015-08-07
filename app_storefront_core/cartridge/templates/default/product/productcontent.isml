@@ -56,14 +56,11 @@
 	</iscomment>
 
 	<isset name="showTieredPrice" value="${true}" scope="page"/>
-	<isset name="showTieredPrice" value="${false}" scope="page"/>
 	<isinclude template="product/components/pricing"/>
 
 	<isset name="pam" value="${pdict.Product.getAttributeModel()}" scope="page"/>
 	<isset name="group" value="${pam.getAttributeGroup('mainAttributes')}" scope="page"/>
 	<isinclude template="product/components/group"/>
-
-	<isset name="showTieredPrice" value="${false}" scope="page"/>
 
 	<iscomment>
 		variations
@@ -91,7 +88,8 @@
 				product promotions
 				=============================================================
 			</iscomment>
-
+			
+			<isset name="showTieredPrice" value="${false}" scope="page"/>
 			<isinclude template="product/components/promotions"/>
 
 			<div class="product-add-to-cart">
