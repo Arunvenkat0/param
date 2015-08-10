@@ -17,6 +17,9 @@
                 <body xml:lang="x-default">&lt;div class="minicartslot"&gt;
 &lt;p style="padding: 0px 10px;"&gt;10% off any order with a purchase of over $150&lt;/p&gt;
 &lt;/div&gt;</body>
+                <body xml:lang="en-GB">&lt;div class="minicartslot"&gt;
+&lt;p style="padding: 0px 10px;"&gt;10% off any order with a purchase of over £150&lt;/p&gt;
+&lt;/div&gt;</body>
                 <body xml:lang="fr-FR">&lt;div class="minicartslot"&gt;
 &lt;p style="padding: 0px 10px;"&gt;10 % de remise pour tout achat de plus de 150 euros&lt;/p&gt;
 &lt;/div&gt;</body>
@@ -393,6 +396,7 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <content>
             <html>
                 <body xml:lang="x-default">&lt;div class="header-promotion"&gt;&lt;strong&gt;FREE 2-Day SHIPPING&lt;/strong&gt; FOR ORDERS OVER $300&lt;/div&gt;</body>
+                <body xml:lang="en-GB">&lt;div class="header-promotion"&gt;&lt;strong&gt;FREE 2-Day SHIPPING&lt;/strong&gt; FOR ORDERS OVER £300&lt;/div&gt;</body>
                 <body xml:lang="fr-FR">&lt;div class="header-promotion"&gt;&lt;strong&gt;LIVRAISON en 2 jours GRATUITE&lt;/strong&gt; POUR LES COMMANDES DE PLUS DE 300 €&lt;/div&gt;</body>
                 <body xml:lang="it-IT">&lt;div class="header-promotion"&gt;&lt;strong&gt;SPEDIZIONE GRATUITA entro 2 giorni&lt;/strong&gt; PER ORDINI SUPERIORI A € 300&lt;/div&gt;</body>
                 <body xml:lang="ja-JP">&lt;div class="header-promotion"&gt;ご注文金額が ¥30,000 を超えると &lt;strong&gt;2 日配送が無料&lt;/strong&gt;&lt;/div&gt;</body>
@@ -417,6 +421,9 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
             <html>
                 <body xml:lang="x-default">&lt;div class="minicartslot"&gt;
 &lt;p style="padding: 0px 10px;"&gt;Free Ground Shipping for Orders over $150&lt;/p&gt;
+&lt;/div&gt;</body>
+                <body xml:lang="en-GB">&lt;div class="minicartslot"&gt;
+&lt;p style="padding: 0px 10px;"&gt;Free Ground Shipping for Orders over £150&lt;/p&gt;
 &lt;/div&gt;</body>
                 <body xml:lang="fr-FR">&lt;div class="minicartslot"&gt;
 &lt;p style="padding: 0px 10px;"&gt;Livraison gratuite par transport terrestre pour les commandes de plus de 150 euros&lt;/p&gt;
