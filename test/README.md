@@ -35,8 +35,8 @@ test
 │       ├── config.json
 │       └── config.sample.json
 └── unit
-	└── util
-		└── index.js
+└── util
+	└── index.js
 
 ```
 Above is the structure of our tests. The main `test` directory lives in the root folder of SG application. In it will be `application` and `unit` directories.
@@ -49,17 +49,17 @@ The tests are contained in suites, which are represented as directories. For exa
 
 1. Install all dependencies
 
-    ```shell
-    :; npm install
-    ```
+```shell
+:; npm install
+```
 
 1. Install phantomjs and standalone Selenium driver
 
-    ```shell
-    :; npm install -g phantomjs # see note [1]
-    :; npm install --production -g selenium-standalone@latest
-    :; selenium-standalone install # see note [2]
-    ```
+```shell
+:; npm install -g phantomjs # see note [1]
+:; npm install --production -g selenium-standalone@latest
+:; selenium-standalone install # see note [2]
+```
 
 1. Use a WebDAV client (i.e. Cyberduck at https://cyberduck.io/) to upload the
 testdata directory from the app_storefront/cartridge to the "Impex/src"
@@ -75,12 +75,12 @@ Settings:
 
 1. Update site url config and desired browser client in `test/application/webdriver/config.json`. For example:
 
-    ```javascript
-    {
-        "url": "https://example.demandware.net/s/SiteGenesis",
-        "client": "phantomjs"
-    }
-    ```
+```javascript
+{
+	"url": "https://example.demandware.net/s/SiteGenesis",
+	"client": "phantomjs"
+}
+```
  *Note: please use Storefront URL format for application tests, but without the ending `/home` part.*
 
 These 5 steps only need to be performed once.
@@ -118,7 +118,7 @@ the application tests.
 
 1. Run the test
 
-    ```sh
+```sh
 :; gulp test:application
 ```
 
@@ -130,6 +130,7 @@ Other configurations are also available, see below.
 ```shell
 :; gulp test:unit
 ```
+
 This command runs all the test suites by default. In order to run specific test suite(s), you can specify from the command line, for eg. `gulp test:unit --suite util`.
 Other configurations are also available, see below.
 
