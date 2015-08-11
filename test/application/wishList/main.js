@@ -61,9 +61,8 @@ describe('Wishlist', () => {
 		after(() => navHeader.logout());
 
 		it('should display a Facebook icon and link', () =>
-			client.isExisting(socialLinks.facebook.selector)
-				.then(doesExist => assert.isTrue(doesExist))
-				.then(() => client.getAttribute(socialLinks.facebook.selector, 'href'))
+			client.waitForExist(socialLinks.facebook.selector)
+				.getAttribute(socialLinks.facebook.selector, 'href')
 				.then(href => {
 					assert.isTrue(href.startsWith(socialLinks.facebook.baseUrl));
 					assert.ok(href.match(socialLinks.facebook.regex));
@@ -71,9 +70,8 @@ describe('Wishlist', () => {
 		);
 
 		it('should display a Twitter icon and link', () =>
-			client.isExisting(socialLinks.twitter.selector)
-				.then(doesExist => assert.isTrue(doesExist))
-				.then(() => client.getAttribute(socialLinks.twitter.selector, 'href'))
+			client.waitForExist(socialLinks.twitter.selector)
+				.getAttribute(socialLinks.twitter.selector, 'href')
 				.then(href => {
 					assert.isTrue(href.startsWith(socialLinks.twitter.baseUrl));
 					assert.ok(href.match(socialLinks.twitter.regex));
@@ -81,9 +79,8 @@ describe('Wishlist', () => {
 		);
 
 		it('should display a Google Plus icon and link', () =>
-			client.isExisting(socialLinks.googlePlus.selector)
-				.then(doesExist => assert.isTrue(doesExist))
-				.then(() => client.getAttribute(socialLinks.googlePlus.selector, 'href'))
+			client.waitForExist(socialLinks.googlePlus.selector)
+				.getAttribute(socialLinks.googlePlus.selector, 'href')
 				.then(href => {
 					assert.isTrue(href.startsWith(socialLinks.googlePlus.baseUrl));
 					assert.ok(href.match(socialLinks.googlePlus.regex));
@@ -91,9 +88,8 @@ describe('Wishlist', () => {
 		);
 
 		it('should display a Pinterest icon and link', () =>
-			client.isExisting(socialLinks.pinterest.selector)
-				.then(doesExist => assert.isTrue(doesExist))
-				.then(() => client.getAttribute(socialLinks.pinterest.selector, 'href'))
+			client.waitForExist(socialLinks.pinterest.selector)
+				.getAttribute(socialLinks.pinterest.selector, 'href')
 				.then(href => {
 					assert.isTrue(href.startsWith(socialLinks.pinterest.baseUrl));
 					assert.ok(href.match(socialLinks.pinterest.regex));
@@ -101,9 +97,8 @@ describe('Wishlist', () => {
 		);
 
 		it('should display a Mail icon and link', () =>
-			client.isExisting(socialLinks.emailLink.selector)
-				.then(doesExist => assert.isTrue(doesExist))
-				.then(() => client.getAttribute(socialLinks.emailLink.selector, 'href'))
+			client.waitForExist(socialLinks.emailLink.selector)
+				.getAttribute(socialLinks.emailLink.selector, 'href')
 				.then(href => {
 					assert.isTrue(href.startsWith(socialLinks.emailLink.baseUrl));
 					assert.ok(href.match(socialLinks.emailLink.regex));
@@ -117,8 +112,8 @@ describe('Wishlist', () => {
 
 		it('should display a URL when chain icon clicked', () =>
 			client.click(wishListPage.CSS_SHARE_LINK)
-				.then(() => client.waitForVisible(socialLinks.shareLinkUrl.selector))
-				.then(() => client.isVisible(socialLinks.shareLinkUrl.selector))
+				.waitForVisible(socialLinks.shareLinkUrl.selector)
+				.isVisible(socialLinks.shareLinkUrl.selector)
 				.then(visible => assert.isTrue(visible))
 				.then(() => client.getAttribute(socialLinks.shareLinkUrl.selector, 'href'))
 				.then(href => {
@@ -128,7 +123,7 @@ describe('Wishlist', () => {
 		);
 	});
 
-	describe('Gift Certificates', () => {
+	describe.skip('Gift Certificates', () => {
 		var giftCertItemSelector = 'table div a[href*=giftcertpurchase]';
 		var btnGiftCertAddToCart = giftCertItemSelector + '.button';
 		var giftCertFieldMap = new Map();
@@ -140,26 +135,23 @@ describe('Wishlist', () => {
 
 		before(() => accountPage.navigateTo()
 			.then(() => loginForm.loginAsDefaultCustomer())
+			.then(() => client.waitForVisible(accountPage.LOGOUT))
 			.then(() => cartPage.emptyCart())
 			.then(() => wishListPage.navigateTo()));
 
-		after(() => cartPage.emptyCart()
-			.then(() => navHeader.logout()));
+		after(() => cartPage.emptyCart());
 
-		it('should redirect to the Gift Certificate Purchase page when adding one to the Cart', () =>
-			client.isExisting(giftCertItemSelector)
-				.then(exists => {
-					if (!exists) {
-						wishListPage.clickAddGiftCertButton();
-					}
-				})
+		it('should redirect to the Gift Certificate Purchase page when adding one to the Cart', () => {
+			return client.waitForVisible(giftCertItemSelector)
+				.then(() => wishListPage.clickAddGiftCertButton())
 				.then(() => client.click(btnGiftCertAddToCart))
+				.then(() => client.waitForVisible('.gift-certificate-purchase'))
 				.then(() => client.url())
 				.then(currentUrl => {
 					let parsedUrl = url.parse(currentUrl.value);
 					return assert.isTrue(parsedUrl.pathname.endsWith('giftcertpurchase'));
-				})
-		);
+				});
+		});
 
 		it('should automatically populate the Your Name field', () => {
 			let defaultCustomer;

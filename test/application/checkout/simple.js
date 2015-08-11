@@ -1,11 +1,13 @@
 'use strict';
 
+import _ from 'lodash';
 import {assert} from 'chai';
 
 import client from '../webdriver/client';
 import * as checkoutPage from '../webdriver/pageObjects/checkout';
 import * as cartPage from '../webdriver/pageObjects/cart';
 import * as homePage from '../webdriver/pageObjects/home';
+import * as orderConfPage from '../webdriver/pageObjects/orderConfirmation';
 import * as productDetailPage from '../webdriver/pageObjects/productDetail';
 import * as testData from '../webdriver/pageObjects/testData/main';
 import * as formLogin from '../webdriver/pageObjects/helpers/forms/login';
@@ -14,33 +16,38 @@ import * as navHeader from '../webdriver/pageObjects/navHeader';
 
 describe('Checkout', () => {
 	let login = 'testuser1@demandware.com';
-	let shippingFormData = new Map();
-	let billingFormData = new Map();
+	let shippingData = {};
+	let billingFormData = {};
 	let successfulCheckoutTitle = 'Thank you for your order.';
 
-	before(() => {
-		return client.init()
+	before(() =>
+		client.init()
 			.then(() => testData.getCustomerByLogin(login))
 			.then(customer => {
-
 				let address = customer.getPreferredAddress();
 
-				shippingFormData.set('firstName', customer.firstName);
-				shippingFormData.set('lastName', customer.lastName);
-				shippingFormData.set('address1', address.address1);
-				shippingFormData.set('country', address.countryCode);
-				shippingFormData.set('states_state', address.stateCode);
-				shippingFormData.set('city', address.city);
-				shippingFormData.set('postal', address.postalCode);
-				shippingFormData.set('phone', address.phone);
+				shippingData = {
+					firstName: customer.firstName,
+					lastName: customer.lastName,
+					address1: address.address1,
+					country: address.countryCode,
+					states_state: address.stateCode,
+					city: address.city,
+					postal: address.postalCode,
+					phone: address.phone,
+					addressList: address.addressId
+				};
 
-				billingFormData.set('emailAddress', customer.email);
-				billingFormData.set('creditCard_owner', customer.firstName + ' ' + customer.lastName);
-				billingFormData.set('creditCard_number', testData.creditCard1.number);
-				billingFormData.set('creditCard_year', testData.creditCard1.yearIndex);
-				billingFormData.set('creditCard_cvn', testData.creditCard1.cvn);
-			});
-	});
+				billingFormData = {
+					emailAddress: customer.email,
+					creditCard_owner: customer.firstName + ' ' + customer.lastName,
+					creditCard_number: testData.creditCard1.number,
+					creditCard_expiration_year: testData.creditCard1.yearIndex,
+					creditCard_cvn: testData.creditCard1.cvn
+				};
+			})
+			.then(() => Promise.resolve())
+	);
 
 	after(() => client.end());
 
@@ -58,7 +65,15 @@ describe('Checkout', () => {
 	}
 
 	describe('Checkout as Guest', () => {
+		let shippingFormData;
+
 		before(() => addProductVariationMasterToCart()
+			.then(() => {
+				// Set form data without preferred address, since manually
+				// entering form fields as Guest
+				shippingFormData = _.cloneDeep(shippingData);
+				delete shippingFormData.addressList;
+			})
 			.then(() => checkoutPage.navigateTo())
 		);
 
@@ -71,10 +86,6 @@ describe('Checkout', () => {
 		// Fill in Shipping Form
 		it('should allow saving of Shipping form when required fields filled', () =>
 			checkoutPage.fillOutShippingForm(shippingFormData)
-				// for some reason, this pause is the only way to
-				// have the use as billing address checkbox selected
-				// consider removing it if it's no longer needed
-				.then(() => client.pause(500))
 				.then(() => checkoutPage.checkUseAsBillingAddress())
 				.then(() => client.isEnabled(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
 				.then(savable => assert.ok(savable))
@@ -89,10 +100,11 @@ describe('Checkout', () => {
 		// Fill in Billing Form
 		it('should allow saving of Billing Form when required fields filled', () =>
 			checkoutPage.fillOutBillingForm(billingFormData)
+				.then(() => client.waitForExist(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
 				.then(() => client.waitForEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
 				.then(() => client.isEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
 				.then(enabled => assert.ok(enabled))
-			);
+		);
 
 		it('should redirect to the Place Order page after Billing saved', () =>
 			client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE)
@@ -107,12 +119,14 @@ describe('Checkout', () => {
 
 		it('should redirect to Order Confirmation page after a successful order submission', () =>
 			client.click(checkoutPage.BTN_PLACE_ORDER)
+				.waitForVisible(orderConfPage.ORDER_CONF_DETAILS)
 				.then(() => checkoutPage.getLabelOrderConfirmation())
 				.then(title => assert.equal(title, successfulCheckoutTitle))
 		);
 	});
 
 	describe('Checkout as Returning Customer', () => {
+
 		before(() => addProductVariationMasterToCart()
 			.then(() => checkoutPage.navigateTo())
 			.then(() => formLogin.loginAsDefaultCustomer())
@@ -121,14 +135,19 @@ describe('Checkout', () => {
 		after(() => navHeader.logout());
 
 		it('should allow check out as a returning customer', () => {
-			return checkoutPage.fillOutShippingForm(shippingFormData)
+			let shippingFormData = {addressList: shippingData.addressList};
+			return client.waitForVisible(checkoutPage.BREADCRUMB_SHIPPING)
+				.then(() => checkoutPage.fillOutShippingForm(shippingFormData))
 				.then(() => checkoutPage.checkUseAsBillingAddress())
-				.then(() => client.waitForEnabled(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE)
-					.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
+				.then(() => client.waitForEnabled(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
+				.then(() => client.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
+				.then(() => client.waitForVisible(checkoutPage.BREADCRUMB_BILLING))
 				.then(() => checkoutPage.fillOutBillingForm(billingFormData))
-				.then(() => client.waitForEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE)
-					.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+				.then(() => client.waitForEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+				.then(() => client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+				.then(() => client.waitForVisible(checkoutPage.BREADCRUMB_PLACE_ORDER))
 				.then(() => client.click(checkoutPage.BTN_PLACE_ORDER))
+				.then(() => client.waitForVisible(orderConfPage.ORDER_CONF_DETAILS))
 				.then(() => checkoutPage.getLabelOrderConfirmation())
 				.then(title => assert.equal(title, successfulCheckoutTitle));
 		});
@@ -140,11 +159,17 @@ describe('Checkout', () => {
 			.then(() => cartPage.emptyCart())
 			.then(() => addProductVariationMasterToCart())
 			.then(() => checkoutPage.navigateTo())
-			.then(() => checkoutPage.fillOutShippingForm(shippingFormData))
+			.then(() => {
+				return {addressList: shippingData.addressList};
+			})
+			.then(shippingFormData => checkoutPage.fillOutShippingForm(shippingFormData))
+			.then(() => client.waitForSelected(checkoutPage.SAVED_ADDRESSES_SELECT_MENU), 30000)
 			.then(() => checkoutPage.checkUseAsBillingAddress())
 			.then(() => client.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
+			.then(() => client.waitForVisible(checkoutPage.BREADCRUMB_BILLING))
 			.then(() => checkoutPage.fillOutBillingForm(billingFormData))
 			.then(() => client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+			.then(() => client.waitForVisible(checkoutPage.BREADCRUMB_PLACE_ORDER))
 		);
 
 		after(() => navHeader.logout());
@@ -156,18 +181,28 @@ describe('Checkout', () => {
 				.then(() => cartPage.getOrderSubTotal())
 				.then(subtotal => updatedSubtotal = subtotal)
 				.then(() => client.click(cartPage.BTN_CHECKOUT))
+				.then(() => client.waitForVisible(checkoutPage.BREADCRUMB_SHIPPING))
+				.then(() => checkoutPage.checkUseAsBillingAddress())
+				.then(() => client.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
+				.then(() => client.waitForVisible(checkoutPage.BREADCRUMB_BILLING))
+				.then(() => checkoutPage.fillOutBillingForm(billingFormData))
+				.then(() => client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+				.then(() => client.waitForVisible(checkoutPage.BREADCRUMB_PLACE_ORDER))
 				.then(() => checkoutPage.getOrderSubTotal())
 				.then(subtotal => assert.equal(subtotal, updatedSubtotal));
 		});
 
 		it('should show Shipping Address edits', () => {
 			let address2 = 'Suite 100';
-			return client.click(checkoutPage.LINK_EDIT_SHIPPING_ADDR)
+			return client.waitForVisible(checkoutPage.BREADCRUMB_PLACE_ORDER)
+				.then(() => client.click(checkoutPage.LINK_EDIT_SHIPPING_ADDR))
+				.then(() => client.waitForVisible(checkoutPage.BREADCRUMB_SHIPPING))
 				.then(() => formHelpers.populateField('input[id*=address2]', address2, 'input'))
 				.then(() => client.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
-				.then(() => client.waitForVisible('.step-3.active', 5000))
+				.then(() => client.waitForVisible(checkoutPage.BREADCRUMB_BILLING))
 				.then(() => checkoutPage.fillOutBillingForm(billingFormData))
 				.then(() => client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+				.then(() => client.waitForVisible(checkoutPage.BREADCRUMB_PLACE_ORDER))
 				.then(() => client.getText(checkoutPage.MINI_SHIPPING_ADDR_DETAILS))
 				.then(shippingAddr => assert.isAbove(shippingAddr.indexOf(address2), -1));
 		});
@@ -175,20 +210,24 @@ describe('Checkout', () => {
 		it('should show Billing Address edits', () => {
 			let address2 = 'Apt. 1234';
 			return client.click(checkoutPage.LINK_EDIT_BILLING_ADDR)
+				.waitForVisible(checkoutPage.BREADCRUMB_BILLING)
 				.then(() => checkoutPage.fillOutBillingForm(billingFormData))
 				.then(() => formHelpers.populateField('input[id*=address2]', address2, 'input'))
 				.then(() => client.waitForValue('[id*=address2]', 5000))
 				.then(() => client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
-				.then(() => client.waitForVisible('.step-3.active', 5000))
+				.then(() => client.waitForVisible(checkoutPage.BREADCRUMB_PLACE_ORDER))
 				.then(() => client.getText(checkoutPage.MINI_BILLING_ADDR_DETAILS))
 				.then(billingAddr => assert.isAbove(billingAddr.indexOf(address2), -1));
 		});
 
 		it('should show Payment Method edits', () => {
 			let paymentMethodLabel = 'Pay Pal';
-			return client.click(checkoutPage.LINK_EDIT_PMT_METHOD)
+			return client.waitForVisible(checkoutPage.BREADCRUMB_PLACE_ORDER)
+				.click(checkoutPage.LINK_EDIT_PMT_METHOD)
+				.waitForVisible(checkoutPage.BREADCRUMB_BILLING)
 				.then(() => client.click(checkoutPage.RADIO_BTN_PAYPAL))
 				.then(() => client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+				.then(() => client.waitForVisible(checkoutPage.BREADCRUMB_PLACE_ORDER))
 				.then(() => client.getText(checkoutPage.MINI_PMT_METHOD_DETAILS))
 				.then(pmtMethod => assert.isAbove(pmtMethod.indexOf(paymentMethodLabel), -1));
 		});

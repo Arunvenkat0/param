@@ -10,7 +10,8 @@ let client = webdriverio.remote({
 	logLevel: 'silent',
 	host: config.host || '0.0.0.0',
 	port: config.port || 4444,
-	baseUrl: config.url
+	baseUrl: config.url,
+	waitforTimeout: 20000
 });
 
 let loggingLevel = 'info';

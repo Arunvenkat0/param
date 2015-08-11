@@ -51,6 +51,7 @@
     "load-grunt-tasks": "^3.2.0",
     "merge-stream": "^0.1.7",
     "minimist": "^1.1.1",
+    "moment-timezone": "^0.4.0",
     "mocha": "^2.2.5",
     "phantomjs": "^1.9.17",
     "proxyquire": "^1.5.0",

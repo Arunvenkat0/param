@@ -28,7 +28,6 @@ describe('Gift Registry', () => {
 			selector: 'a[data-share=googleplus]',
 			baseUrl: 'https://plus.google.com/share',
 			regex: /.*\?.*url=.+/
-
 		},
 		pinterest: {
 			selector: 'a[data-share=pinterest]',
@@ -51,16 +50,13 @@ describe('Gift Registry', () => {
 	};
 
 	before(() => client.init()
-		.then(() => giftRegistryPage.navigateTo())
-		.then(() => loginForm.loginAsDefaultCustomer())
-		.then(() => client.click(giftRegistryPage.BTN_CREATE_REGISTRY))
 		.then(() => testData.getCustomerByLogin(login))
 		.then(customer => {
 			let address = customer.getPreferredAddress();
 
-			eventFormData.set('type', 'Wedding');
-			eventFormData.set('name', 'blah');
-			eventFormData.set('date', '03/28/08');
+			eventFormData.set('type', 'wedding');
+			eventFormData.set('name', 'Wedding of the Century');
+			eventFormData.set('date', '03-28-2008');
 			eventFormData.set('eventaddress_country', address.countryCode);
 			eventFormData.set('eventaddress_states_state', address.stateCode);
 			eventFormData.set('town', address.city);
@@ -69,42 +65,50 @@ describe('Gift Registry', () => {
 			eventFormData.set('participant_lastName', customer.lastName);
 			eventFormData.set('participant_email', customer.email);
 
-			eventFormShippingData.set('addressid', 'test address');
-			eventFormShippingData.set('firstname', customer.firstName);
-			eventFormShippingData.set('lastname', customer.lastName);
-			eventFormShippingData.set('address1', address.address1);
-			eventFormShippingData.set('city', address.city);
-			eventFormShippingData.set('states_state', address.stateCode);
-			eventFormShippingData.set('postal', address.postalCode);
-			eventFormShippingData.set('country', address.countryCode);
-			eventFormShippingData.set('phone', address.phone);
+			eventFormShippingData.set('addressBeforeList', address.addressId);
 		})
+		.then(() => giftRegistryPage.navigateTo())
+		.then(() => loginForm.loginAsDefaultCustomer())
+		.then(() => client.waitForVisible(giftRegistryPage.BTN_CREATE_REGISTRY))
+		.then(() => client.click(giftRegistryPage.BTN_CREATE_REGISTRY))
+		.then(() => client.waitForVisible(giftRegistryPage.FORM_REGISTRY))
 	);
 
 	after(() => client.end());
 
 	it('should fill out the event form', () =>
 		giftRegistryPage.fillOutEventForm(eventFormData)
+			// FIXME: This button is always enabled, even if form is not filled
+			// out.  Would be better to check on some other attribute
 			.then(() => client.isEnabled(giftRegistryPage.BTN_EVENT_CONTINUE))
 			.then(enabled => assert.ok(enabled))
 	);
 
 	it('should fill out the event shipping form', () =>
 		client.click(giftRegistryPage.BTN_EVENT_CONTINUE)
+			.waitForVisible(giftRegistryPage.USE_PRE_EVENT)
 			.then(() => giftRegistryPage.fillOutEventShippingForm(eventFormShippingData))
+			// This wait is necessary, since without it, the .click() will fire
+			// even if the required fields have not been filled in
+			.then(() => client.waitForValue('[name*=addressBeforeEvent_phone]'))
 			.then(() => client.click(giftRegistryPage.USE_PRE_EVENT))
+			.then(() => client.waitForVisible(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE))
 			.then(() => client.isEnabled(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE))
 			.then(enabled => assert.ok(enabled))
 	);
 
 	it('should submit the event', () =>
 		client.click(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE)
+			.then(() => client.waitForVisible(giftRegistryPage.BTN_EVENT_CONTINUE))
 			.then(() => client.click(giftRegistryPage.BTN_EVENT_CONTINUE))
+			.then(() => client.waitForVisible(giftRegistryPage.REGISTRY_HEADING))
 			.then(() => client.getText(giftRegistryPage.REGISTRY_HEADING))
-			.then(eventTitle => assert.equal(eventTitle, 'BLAH - 3/28/08'))
+			.then(eventTitle => assert.equal(eventTitle, 'WEDDING OF THE CENTURY - 3/28/08'))
 	);
+
 	it('should make the gift registry public', () =>
-			client.click(giftRegistryPage.BTN_SET_PUBLIC)
+		client.click(giftRegistryPage.BTN_SET_PUBLIC)
+			.waitForVisible(giftRegistryPage.SHARE_OPTIONS)
 			.then(() => client.isVisible(giftRegistryPage.SHARE_OPTIONS))
 			.then(visible => assert.isTrue(visible))
 	);
@@ -176,4 +180,6 @@ describe('Gift Registry', () => {
 			})
 	);
 
+	// TODO: Add a test that deletes the newly created event.  This will have
+	// the dual purpose of also cleaning up
 });

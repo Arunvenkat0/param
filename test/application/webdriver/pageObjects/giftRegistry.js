@@ -5,12 +5,13 @@ import * as formHelpers from './helpers/forms/common';
 
 export const SHARE_LINK = '.share-link';
 export const USE_PRE_EVENT = '.usepreevent';
-export const BTN_EVENT_CONTINUE = '[name$="giftregistry_event_confirm"]';
-export const BTN_EVENT_ADDRESS_CONTINUE = '[name$="giftregistry_eventaddress_confirm"]';
-export const BTN_SET_PUBLIC = '[name$="giftregistry_setPublic"]';
-export const SHARE_OPTIONS = '[class$="share-options"]';
-export const BTN_CREATE_REGISTRY = '[name$="giftregistry_create"]';
+export const BTN_EVENT_CONTINUE = '[name*="giftregistry_event_confirm"]';
+export const BTN_EVENT_ADDRESS_CONTINUE = '[name*="giftregistry_eventaddress_confirm"]';
+export const BTN_SET_PUBLIC = '[name*="giftregistry_setPublic"]';
+export const SHARE_OPTIONS = '[class*="share-options"]';
+export const BTN_CREATE_REGISTRY = '[name*="giftregistry_create"]';
 export const REGISTRY_HEADING = '.page-content-tab-wrapper h2';
+export const FORM_REGISTRY = 'form[name*=giftregistry_event]';
 
 const basePath = '/giftregistry';
 
@@ -24,7 +25,7 @@ export function fillOutEventForm (eventData) {
 
 	fieldTypes.set('type', 'selectByValue');
 	fieldTypes.set('name', 'input');
-	fieldTypes.set('date', 'input');
+	fieldTypes.set('date', 'date');
 	fieldTypes.set('eventaddress_country', 'selectByValue');
 	fieldTypes.set('eventaddress_states_state', 'selectByValue');
 	fieldTypes.set('town', 'input');
@@ -34,7 +35,7 @@ export function fillOutEventForm (eventData) {
 	fieldTypes.set('participant_email', 'input');
 
 	for (let [key, value] of eventData) {
-		let selector = '[name$="event_' + key + '"]';
+		let selector = '[name*="event_' + key + '"]';
 		fieldsPromise.push(formHelpers.populateField(selector, value, fieldTypes.get(key)));
 	}
 
@@ -45,18 +46,19 @@ export function fillOutEventShippingForm (eventShippingData) {
 	let fieldTypes = new Map();
 	let fieldsPromise = [];
 
-	fieldTypes.set('addressid', 'input');
-	fieldTypes.set('firstname', 'input');
-	fieldTypes.set('lastname', 'input');
-	fieldTypes.set('address1', 'input');
-	fieldTypes.set('city', 'input');
-	fieldTypes.set('states_state', 'selectByValue');
-	fieldTypes.set('postal', 'input');
-	fieldTypes.set('country', 'selectByValue');
-	fieldTypes.set('phone', 'input');
+	fieldTypes.set('addressBeforeList', 'selectByValue');
+	fieldTypes.set('addressBeforeEvent_addressid', 'input');
+	fieldTypes.set('addressBeforeEvent_firstname', 'input');
+	fieldTypes.set('addressBeforeEvent_lastname', 'input');
+	fieldTypes.set('addressBeforeEvent_address1', 'input');
+	fieldTypes.set('addressBeforeEvent_city', 'input');
+	fieldTypes.set('addressBeforeEvent_states_state', 'selectByValue');
+	fieldTypes.set('addressBeforeEvent_postal', 'input');
+	fieldTypes.set('addressBeforeEvent_country', 'selectByValue');
+	fieldTypes.set('addressBeforeEvent_phone', 'input');
 
 	for (let [key, value] of eventShippingData) {
-		let selector = '[name$="addressBeforeEvent_' + key + '"]';
+		let selector = '[name*=eventaddress_' + key + ']';
 		fieldsPromise.push(formHelpers.populateField(selector, value, fieldTypes.get(key)));
 	}
 

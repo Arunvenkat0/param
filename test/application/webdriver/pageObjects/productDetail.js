@@ -2,11 +2,16 @@
 
 import client from '../client';
 
+export const PDP_MAIN = '.pdp-main';
 const BTN_ADD_TO_CART = '#add-to-cart';
+const MINI_CART = '.mini-cart-content';
+
 
 function selectAttributeByIndex (attributeName, index) {
-	return client.click('.swatches.' + attributeName + ' li:nth-child(' + index + ') a')
-		.waitForText('.swatches.' + attributeName + ' .selected-value', 4000);
+	let selector = '.swatches.' + attributeName + ' li:nth-child(' + index + ') a';
+	return client.waitForVisible(selector)
+		.click(selector)
+		.waitForText('.swatches.' + attributeName + ' .selected-value');
 }
 
 /**
@@ -44,7 +49,8 @@ export function addProductVariationToCart (product) {
 				return Promise.resolve();
 			}
 		})
-		.then(() => client.waitForEnabled(BTN_ADD_TO_CART, 2000)
+		.then(() => client.waitForVisible(BTN_ADD_TO_CART)
+			.waitForEnabled(BTN_ADD_TO_CART)
 			.click(BTN_ADD_TO_CART)
-			.waitForVisible('.mini-cart-content'));
+			.waitForVisible(MINI_CART));
 }
