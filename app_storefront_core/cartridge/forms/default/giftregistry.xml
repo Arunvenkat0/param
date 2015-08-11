@@ -206,10 +206,10 @@
 				missing-error="giftregistry.eventType.missing-error">
 				<options>
 					<option optionid="blank" label="resource.select" value=""/>
-					<option optionid="wedding" label="giftregistry.wedding" value="Wedding"/>
-					<option optionid="weddingshower" label="giftregistry.weddingshower" value="Wedding Shower"/>
-					<option optionid="babyshower" label="giftregistry.babyshower" value="Baby Shower"/>
-					<option optionid="other" label="giftregistry.other" value="Other"/>
+					<option optionid="wedding" label="giftregistry.wedding" value="wedding"/>
+					<option optionid="weddingshower" label="giftregistry.weddingshower" value="weddingshower"/>
+					<option optionid="babyshower" label="giftregistry.babyshower" value="babyshower"/>
+					<option optionid="other" label="giftregistry.other" value="other"/>
 				</options>
 			</field>
 		</group>
