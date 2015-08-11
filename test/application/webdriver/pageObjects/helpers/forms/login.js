@@ -13,10 +13,12 @@ export const DEFAULT_RETURNING_CUSTOMER = 'testuser1@demandware.com';
  * Fill in login form
  */
 export function loginAs (login, password) {
+	// After several trials, 30000 yields the fewest number of test failures
+	// involving this waitForVisible
 	return client.waitForVisible(INPUT_EMAIL, 30000)
 		.setValue(INPUT_EMAIL, login)
 		.setValue(INPUT_PASSWORD, password)
-		.then(() => client.click(BTN_LOGIN));
+		.click(BTN_LOGIN);
 }
 
 /**

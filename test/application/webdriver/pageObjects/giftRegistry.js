@@ -25,7 +25,7 @@ export function fillOutEventForm (eventData) {
 
 	fieldTypes.set('type', 'selectByValue');
 	fieldTypes.set('name', 'input');
-	fieldTypes.set('date', 'html5Date');
+	fieldTypes.set('date', 'date');
 	fieldTypes.set('eventaddress_country', 'selectByValue');
 	fieldTypes.set('eventaddress_states_state', 'selectByValue');
 	fieldTypes.set('town', 'input');

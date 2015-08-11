@@ -102,7 +102,7 @@ gulp.task('test:application', function () {
 	}
 	// default reporter to spec
 	var reporter = opts.reporter || 'spec';
-	// default timeout to 10s
+	// default timeout to 60s
 	var timeout = opts.timeout || 60000;
 	return gulp.src(['test/application/' + suite + '/**/*.js', '!test/application/webdriver/*'], {read: false})
 		.pipe(mocha({

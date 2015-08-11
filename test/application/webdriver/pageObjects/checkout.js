@@ -25,6 +25,7 @@ export const MINI_PMT_METHOD_DETAILS = MINI_SECTION_PMT_METHOD + ' .details';
 export const RADIO_BTN_PAYPAL = 'input[value="PayPal"]';
 export const CHECKOUT_PROGRESS = '.checkout-progress-indicator .active';
 export const USE_AS_BILLING_ADDR = '[name*="shippingAddress_useAsBillingAddress"]';
+export const SAVED_ADDRESSES_SELECT_MENU = '[name*=singleshipping_addressList]';
 
 const basePath = '/checkout';
 
@@ -105,8 +106,7 @@ export function fillOutBillingForm (billingFields) {
 
 export function checkUseAsBillingAddress () {
 	return client.waitForExist(BREADCRUMB_SHIPPING)
-		.click(USE_AS_BILLING_ADDR)
-		.pause(1000);
+		.click(USE_AS_BILLING_ADDR);
 }
 
 export function getLabelOrderConfirmation () {

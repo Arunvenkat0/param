@@ -86,9 +86,6 @@ describe('Checkout', () => {
 		// Fill in Shipping Form
 		it('should allow saving of Shipping form when required fields filled', () =>
 			checkoutPage.fillOutShippingForm(shippingFormData)
-				// for some reason, this pause is the only way to
-				// have the use as billing address checkbox selected
-				// consider removing it if it's no longer needed
 				.then(() => checkoutPage.checkUseAsBillingAddress())
 				.then(() => client.isEnabled(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
 				.then(savable => assert.ok(savable))
@@ -166,7 +163,7 @@ describe('Checkout', () => {
 				return {addressList: shippingData.addressList};
 			})
 			.then(shippingFormData => checkoutPage.fillOutShippingForm(shippingFormData))
-			.then(() => client.waitForSelected('[name*=singleshipping_addressList]'), 30000)
+			.then(() => client.waitForSelected(checkoutPage.SAVED_ADDRESSES_SELECT_MENU), 30000)
 			.then(() => checkoutPage.checkUseAsBillingAddress())
 			.then(() => client.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
 			.then(() => client.waitForVisible(checkoutPage.BREADCRUMB_BILLING))
