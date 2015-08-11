@@ -97,7 +97,7 @@ module.exports = function (pdict) {
 
 	// required
 	// pdict.required override pdict.formfield.mandatory
-	if (pdict.required !== undefined) {
+	if (pdict.required !== undefined && pdict.required !== null) {
 		required = pdict.required;
 	}
 	if (required) {
