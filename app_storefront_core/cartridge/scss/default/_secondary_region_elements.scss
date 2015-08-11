@@ -49,23 +49,6 @@
 	}
 }
 
-.refinement {
-	position: relative;
-}
-
-// Hide Refinements on Category Landing Pages
-.pt_categorylanding {
-	.refinements {
-		.refinement {
-			display: none;
-			&.category-refinement {
-				display: block;
-			}
-		}
-	}
-}
-
-
 .refinement-header {
 	background-color: $white-smoke;
 	border-top: 1px solid $gainsboro;
@@ -78,22 +61,27 @@
 	text-transform: uppercase;
 }
 
-.refinement h3 {
-	background-color: $white-smoke;
-	border-top: 1px solid $gainsboro;
-	font-size: 1.1em;
-	letter-spacing: 0.125em;
-	margin: 0 0 .65em;
-	padding: 1.15em .75em .75em;
-	text-transform: uppercase;
-	.ie7 & {
-		clear: both;
-	}
-}
-
 .refinement {
 	padding-bottom: .65em;
+	position: relative;
+	// Hide Refinements on Category Landing Pages
+	.pt_categorylanding & {
+   		display: none;
+   		&.category-refinement {
+   			display: block;
+   		}    	
+   	}
 	h3 {
+		background-color: $white-smoke;
+		border-top: 1px solid $gainsboro;
+		font-size: 1.1em;
+		letter-spacing: 0.125em;
+		margin: 0 0 .65em;
+		padding: 1.15em .75em .75em;
+		text-transform: uppercase;
+		.ie7 & {
+			clear: both;
+		}
 		i {
 			color: $rain-forest
 		}
