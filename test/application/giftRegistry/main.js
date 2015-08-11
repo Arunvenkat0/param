@@ -88,6 +88,8 @@ describe('Gift Registry', () => {
 		client.click(giftRegistryPage.BTN_EVENT_CONTINUE)
 			.waitForVisible(giftRegistryPage.USE_PRE_EVENT)
 			.then(() => giftRegistryPage.fillOutEventShippingForm(eventFormShippingData))
+			// This wait is necessary, since without it, the .click() will fire
+			// even if the required fields have not been filled in
 			.then(() => client.waitForValue('[name*=addressBeforeEvent_phone]'))
 			.then(() => client.click(giftRegistryPage.USE_PRE_EVENT))
 			.then(() => client.waitForVisible(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE))
