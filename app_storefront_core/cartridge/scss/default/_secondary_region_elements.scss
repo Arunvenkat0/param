@@ -53,6 +53,19 @@
 	position: relative;
 }
 
+// Hide Refinements on Category Landing Pages
+.pt_categorylanding {
+	.refinements {
+		.refinement {
+			display: none;
+			&.category-refinement {
+				display: block;
+			}
+		}
+	}
+}
+
+
 .refinement-header {
 	background-color: $white-smoke;
 	border-top: 1px solid $gainsboro;
