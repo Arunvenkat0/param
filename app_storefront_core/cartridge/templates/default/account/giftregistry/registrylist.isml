@@ -39,7 +39,7 @@
 					<isloop items="${pdict.CurrentForms.productlists.items}" var="item" status="loopstate">
 						<tr class="<isif condition="${loopstate.first}"> first <iselseif condition="${loopstate.last}"> last</isif>">
 							<td class="event-name"><isprint value="${item.object.name}"/></td>
-							<td class="event-type"><isprint value="${item.object.eventType}"/></td>
+							<td class="event-type"><isprint value="${Resource.msg('giftregistry.' + item.object.eventType, 'forms', item.object.eventType)}"/></td>
 							<td class="event-date"><isprint value="${item.object.eventDate}" timezone="utc"/></td>
 							<td class="event-location"><isprint value="${item.object.eventCity}"/>, <isprint value="${item.object.eventState}"/></td>
 							<td class="event-details"><a href="${URLUtils.https('GiftRegistry-ShowRegistryByID','ProductListID', item.object.UUID)}" title="${Resource.msg('global.view','locale',null)}">${Resource.msg('global.view','locale',null)}</a></td>
