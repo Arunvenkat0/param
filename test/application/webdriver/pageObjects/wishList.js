@@ -1,12 +1,13 @@
 'use strict';
 
 import client from '../client';
+import * as common from './helpers/common';
 
-export const CSS_WISHLIST_SHARE = '#dwfrm_wishlist_share';
-export const CSS_SHARE_OPTIONS = '.share-options';
-export const CSS_SHARE_ICON = '.share-icon';
 export const CSS_SHARE_LINK = '.share-link';
 export const BTN_ADD_GIFT_CERT = 'button[name$=frm_wishlist_addGiftCertificate]';
+export const BTN_TOGGLE_PRIVACY = '[name*=wishlist_setList]';
+export const LINK_REMOVE = 'button.delete-item';
+export const WISHLIST_ITEMS = '.item-list tbody tr:not(.headings)';
 
 const basePath = '/wishlist';
 
@@ -17,4 +18,20 @@ export function navigateTo () {
 export function clickAddGiftCertButton () {
 	return client.click(BTN_ADD_GIFT_CERT)
 		.waitForVisible('table.item-list');
+}
+
+export function emptyWishList () {
+	return navigateTo()
+		.waitForVisible(BTN_TOGGLE_PRIVACY)
+		// Must click the Remove link on each product in the Wishlist.
+		.then(() => common.removeItems(LINK_REMOVE))
+		.then(() => client.waitForExist('table.item-list', 500, true));
+}
+
+function _createCssNthCartRow (idx) {
+	return WISHLIST_ITEMS + ':nth-child(' + idx + ')';
+}
+
+export function getItemNameByRow (rowNum) {
+	return client.getText(_createCssNthCartRow(rowNum) + ' .name');
 }

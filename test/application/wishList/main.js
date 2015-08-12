@@ -4,13 +4,13 @@ import {assert} from 'chai';
 import client from '../webdriver/client';
 import config from '../webdriver/config';
 import url from 'url';
-import * as accountPage from '../webdriver/pageObjects/account';
 import * as cartPage from '../webdriver/pageObjects/cart';
 import * as giftCertPurchasePage from '../webdriver/pageObjects/giftCertPurchase';
 import * as loginForm from '../webdriver/pageObjects/helpers/forms/login';
 import * as navHeader from '../webdriver/pageObjects/navHeader';
-import * as wishListPage from '../webdriver/pageObjects/wishList';
+import * as productDetailPage from '../webdriver/pageObjects/productDetail';
 import * as testData from '../webdriver/pageObjects/testData/main';
+import * as wishListPage from '../webdriver/pageObjects/wishList';
 
 describe('Wishlist', () => {
 	before(() => client.init());
@@ -123,7 +123,7 @@ describe('Wishlist', () => {
 		);
 	});
 
-	describe.skip('Gift Certificates', () => {
+	describe('Gift Certificates', () => {
 		var giftCertItemSelector = 'table div a[href*=giftcertpurchase]';
 		var btnGiftCertAddToCart = giftCertItemSelector + '.button';
 		var giftCertFieldMap = new Map();
@@ -133,13 +133,17 @@ describe('Wishlist', () => {
 		giftCertFieldMap.set('message', 'Congratulations!');
 		giftCertFieldMap.set('amount', '250');
 
-		before(() => accountPage.navigateTo()
+		before(() => wishListPage.navigateTo()
 			.then(() => loginForm.loginAsDefaultCustomer())
-			.then(() => client.waitForVisible(accountPage.LOGOUT))
+			.then(() => client.waitForVisible(wishListPage.BTN_TOGGLE_PRIVACY))
 			.then(() => cartPage.emptyCart())
-			.then(() => wishListPage.navigateTo()));
+			.then(() => wishListPage.navigateTo())
+			.then(() => wishListPage.emptyWishList())
+		);
 
-		after(() => cartPage.emptyCart());
+		after(() => cartPage.emptyCart()
+			.then(() => navHeader.logout())
+		);
 
 		it('should redirect to the Gift Certificate Purchase page when adding one to the Cart', () => {
 			return client.waitForVisible(giftCertItemSelector)
@@ -176,5 +180,54 @@ describe('Wishlist', () => {
 			cartPage.getItemNameByRow(1)
 				.then(name => assert.equal('Gift Certificate', name))
 		);
+	});
+
+	describe('Adding Items', () => {
+		let productVariationMaster;
+
+		function addProductVariationMasterToWishList () {
+			return testData.getProductVariationMaster()
+				.then(variationMaster => productVariationMaster = variationMaster)
+				.then(() => productVariationMaster.getUrlResourcePath())
+				.then(resourcePath => {
+					let product = new Map();
+					product.set('resourcePath', resourcePath);
+					product.set('colorIndex', 1);
+					product.set('sizeIndex', 2);
+					product.set('widthIndex', 1);
+					return product;
+				})
+				.then(product => productDetailPage.addProductVariationToWishList(product))
+				// To ensure that the product has been added to the wishlist before proceeding,
+				// we need to wait for a selector in the resulting page to display
+				.then(() => client.waitForVisible('table.item-list'));
+		}
+
+		describe('as a returning customer', () => {
+			before(() => wishListPage.navigateTo()
+					.then(() => loginForm.loginAsDefaultCustomer())
+					.then(() => client.waitForVisible(wishListPage.BTN_TOGGLE_PRIVACY))
+					.then(() => wishListPage.emptyWishList())
+					.then(() => addProductVariationMasterToWishList())
+			);
+
+			it('should directly navigate to the WishList Page', () =>
+					client.isExisting('label[for=editAddress]')
+						.then(exists => assert.equal(exists, true))
+			);
+
+			it('should allow user to toggle privacy', () => {
+				let privacyButton = 'button[name*=wishlist_setList]';
+				return client.waitForVisible(privacyButton)
+					.isEnabled(privacyButton)
+					.then(enabled => assert.isTrue(enabled));
+			});
+
+			it('should display the product name in the Wish List page after add items', () =>
+					wishListPage.getItemNameByRow(2)
+						.then(name => assert.equal('Navy Single Pleat Wool Suit', name))
+			);
+		});
+
 	});
 });

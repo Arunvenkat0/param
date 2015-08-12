@@ -4,8 +4,8 @@ import _ from 'lodash';
 import {assert} from 'chai';
 
 import client from '../webdriver/client';
-import * as checkoutPage from '../webdriver/pageObjects/checkout';
 import * as cartPage from '../webdriver/pageObjects/cart';
+import * as checkoutPage from '../webdriver/pageObjects/checkout';
 import * as homePage from '../webdriver/pageObjects/home';
 import * as orderConfPage from '../webdriver/pageObjects/orderConfirmation';
 import * as productDetailPage from '../webdriver/pageObjects/productDetail';
