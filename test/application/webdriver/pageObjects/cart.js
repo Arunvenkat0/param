@@ -82,12 +82,10 @@ export function updateSizeByRow (rowNum, sizeIndex) {
 		.click(getItemEditLinkByRow(rowNum))
 		.waitForVisible(productQuickView.CONTAINER)
 		.click(productQuickView.getCssSizeLinkByIdx(sizeIndex))
-		// TODO: Investigate ways to speed this up. Seems extraneous delay.
-		.waitUntil(() =>
-			common.checkElementEquals(
-				productQuickView.SIZE_SELECTED_VALUE,
-				productQuickView.getSizeTextByIdx(sizeIndex))
-		)
+		.then(() => productQuickView.getSizeTextByIdx(sizeIndex))
+		.then(size => client.waitUntil(() =>
+			common.checkElementEquals(productQuickView.SIZE_SELECTED_VALUE, size)
+		))
 		.click('.ui-dialog #add-to-cart')
 		.waitForVisible(productQuickView.CONTAINER, 15000, true)
 		.getText(_createCssNthCartRow(rowNum) + ' .attribute[data-attribute="size"] .value');
