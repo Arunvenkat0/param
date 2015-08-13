@@ -78,10 +78,12 @@
 		},
 		"expirationInfo": {
 			"year" : {
-				"type" : "select"
+				"type" : "select",
+				"rowclass": "year"
 			},
 			"month" : {
-				"type" : "select"
+				"type" : "select",
+				"rowclass": "month"
 			}
 		}
 	}
@@ -153,10 +155,12 @@
 		},
 		"expirationInfo": {
 			"year" : {
-				"type" : "select"
+				"type" : "select",
+				"rowclass": "year"
 			},
 			"month" : {
-				"type" : "select"
+				"type" : "select",
+				"rowclass": "month"
 			}
 		}
 	}
@@ -232,10 +236,12 @@
 		},
 		"expirationInfo": {
 			"year" : {
-				"type" : "select"
+				"type" : "select",
+				"rowclass": "year"
 			},
 			"month" : {
-				"type" : "select"
+				"type" : "select",
+				"rowclass": "month"
 			}
 		}
 	}
@@ -309,10 +315,12 @@
 		},
 		"expirationInfo": {
 			"year" : {
-				"type" : "select"
+				"type" : "select",
+				"rowclass": "year"
 			},
 			"month" : {
-				"type" : "select"
+				"type" : "select",
+				"rowclass": "month"
 			}
 		}
 	}
@@ -385,10 +393,12 @@
 		},
 		"expirationInfo": {
 			"year" : {
-				"type" : "select"
+				"type" : "select",
+				"rowclass": "year"
 			},
 			"month" : {
-				"type" : "select"
+				"type" : "select",
+				"rowclass": "month"
 			}
 		}
 	}
@@ -463,10 +473,12 @@
 		},
 		"expirationInfo": {
 			"year" : {
-				"type" : "select"
+				"type" : "select",
+				"rowclass": "year"
 			},
 			"month" : {
-				"type" : "select"
+				"type" : "select",
+				"rowclass": "month"
 			}
 		}
 	}
