@@ -236,15 +236,26 @@
               </transition-display>
             </simple-transition>
             <node>
+              <pipelet-node pipelet-name="CreateCustomerPaymentInstrument" pipelet-set-identifier="bc_api">
+                <key-binding alias="PaymentInstrument" key="PaymentInstrument"/>
+                <key-binding alias="dw.order.PaymentInstrument.METHOD_CREDIT_CARD" key="PaymentMethod"/>
+                <key-binding alias="CurrentCustomer" key="Customer"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-                <config-property key="Transactional" value="false"/>
+                <config-property key="Transactional" value="true"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="account/payment/DuplicateCheck.ds"/>
-                <key-binding alias="CurrentForms.paymentinstruments.creditcards.newcreditcard.number.value" key="NoIn"/>
-                <key-binding alias="DuplicateCard" key="Duplicate"/>
-                <key-binding alias="PaymentInstruments" key="PIList"/>
-                <key-binding alias="debugger" key="ScriptLog"/>
-                <key-binding alias="OldCard" key="OldCard"/>
+                <config-property key="ScriptFile" value="checkout/SaveCustomerCreditCard.ds"/>
+                <key-binding alias="null" key="ScriptLog"/>
+                <key-binding alias="PaymentInstrument" key="PaymentInstrument"/>
+                <key-binding alias="CurrentForms.paymentinstruments.creditcards.newcreditcard" key="CreditCardFormFields"/>
               </pipelet-node>
               <node-display x="0" y="1"/>
               <branch basename="b3" source-connector="error">
@@ -261,22 +272,15 @@
               </transition-display>
             </simple-transition>
             <node>
-              <pipelet-node pipelet-name="CreateCustomerPaymentInstrument" pipelet-set-identifier="bc_api">
-                <key-binding alias="PaymentInstrument" key="PaymentInstrument"/>
-                <key-binding alias="dw.order.PaymentInstrument.METHOD_CREDIT_CARD" key="PaymentMethod"/>
-                <key-binding alias="CurrentCustomer" key="Customer"/>
-              </pipelet-node>
-              <node-display x="0" y="1"/>
-            </node>
-            <simple-transition>
-              <transition-display>
-                <bend-point relative-to="source" x="0" y="1"/>
-              </transition-display>
-            </simple-transition>
-            <node>
-              <pipelet-node pipelet-name="UpdateObjectWithForm" pipelet-set-identifier="bc_api">
-                <key-binding alias="CurrentForms.paymentinstruments.creditcards.newcreditcard" key="Form"/>
-                <key-binding alias="PaymentInstrument" key="Object"/>
+              <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="false"/>
+                <config-property key="OnError" value="PIPELET_ERROR"/>
+                <config-property key="ScriptFile" value="account/payment/DuplicateCheck.ds"/>
+                <key-binding alias="CurrentForms.paymentinstruments.creditcards.newcreditcard.number.value" key="NoIn"/>
+                <key-binding alias="DuplicateCard" key="Duplicate"/>
+                <key-binding alias="PaymentInstruments" key="PIList"/>
+                <key-binding alias="debugger" key="ScriptLog"/>
+                <key-binding alias="OldCard" key="OldCard"/>
               </pipelet-node>
               <node-display x="0" y="1"/>
               <branch basename="b4" source-connector="error">
@@ -394,8 +398,8 @@
           <config-property key="VerifySecurityCode" value="false"/>
           <key-binding alias="dw.order.PaymentMgr.getPaymentCard(CurrentForms.paymentinstruments.creditcards.newcreditcard.type.value)" key="PaymentCard"/>
           <key-binding alias="CurrentForms.paymentinstruments.creditcards.newcreditcard.number.value" key="CardNumber"/>
-          <key-binding alias="CurrentForms.paymentinstruments.creditcards.newcreditcard.month.value" key="ExpirationMonth"/>
-          <key-binding alias="CurrentForms.paymentinstruments.creditcards.newcreditcard.year.value" key="ExpirationYear"/>
+          <key-binding alias="CurrentForms.paymentinstruments.creditcards.newcreditcard.expiration.month.value" key="ExpirationMonth"/>
+          <key-binding alias="CurrentForms.paymentinstruments.creditcards.newcreditcard.expiration.year.value" key="ExpirationYear"/>
           <key-binding alias="Status" key="Status"/>
           <key-binding alias="CurrentForms.paymentinstruments.creditcards.newcreditcard.cvn.value" key="CardSecurityCode"/>
         </pipelet-node>
