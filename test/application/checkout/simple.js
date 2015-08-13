@@ -165,6 +165,7 @@ describe('Checkout', () => {
 			.then(shippingFormData => checkoutPage.fillOutShippingForm(shippingFormData))
 			.then(() => client.waitForValue(checkoutPage.SAVED_ADDRESSES_SELECT_MENU))
 			.then(() => checkoutPage.checkUseAsBillingAddress())
+			.then(() => client.waitForEnabled(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
 			.then(() => client.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
 			.then(() => client.waitForVisible(checkoutPage.BREADCRUMB_BILLING))
 			.then(() => checkoutPage.fillOutBillingForm(billingFormData))
