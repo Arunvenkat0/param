@@ -35,20 +35,16 @@ export function removeItems (removeLink) {
 		.then(() => Promise.all(promises));
 }
 
-/**
- * Clicks the first Remove link in a Cart or WishList
- *
- */
-function _clickFirstRemoveLink (removeLink) {
-	return client.elements(removeLink)
-		.then(removeLinks => {
-			if (removeLinks.value.length) {
-				return client.elementIdClick(removeLinks.value[0].ELEMENT);
+export function clickCheckbox(selector) {
+	return client.click(selector)
+		.isSelected(selector)
+		.then(selected => {
+			if (!selected) {
+				return client.click(selector);
 			}
 			return Promise.resolve();
 		});
 }
-
 
 export function selectAttributeByIndex (attributeName, index) {
 	let selector = '.swatches.' + attributeName + ' li:nth-child(' + index + ') a';
@@ -74,25 +70,36 @@ export function addProductVariationToBasket (product, btnAdd) {
 		.then(() => {
 			if (product.has('colorIndex')) {
 				return selectAttributeByIndex('color', product.get('colorIndex'));
-			} else {
-				return Promise.resolve();
 			}
+			return Promise.resolve();
 		})
 		.then(() => {
 			if (product.has('sizeIndex')) {
 				return selectAttributeByIndex('size', product.get('sizeIndex'));
-			} else {
-				return Promise.resolve();
 			}
+			return Promise.resolve();
 		})
 		.then(() => {
 			if (product.has('widthIndex')) {
 				return selectAttributeByIndex('width', product.get('widthIndex'));
-			} else {
-				return Promise.resolve();
 			}
+			return Promise.resolve();
 		})
 		.then(() => client.waitForVisible(btnAdd)
 			.waitForEnabled(btnAdd)
 			.click(btnAdd));
+}
+
+/**
+ * Clicks the first Remove link in a Cart or WishList
+ *
+ */
+function _clickFirstRemoveLink (removeLink) {
+	return client.elements(removeLink)
+		.then(removeLinks => {
+			if (removeLinks.value.length) {
+				return client.elementIdClick(removeLinks.value[0].ELEMENT);
+			}
+			return Promise.resolve();
+		});
 }
