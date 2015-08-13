@@ -30,8 +30,12 @@
 				<span class="required-indicator">&#8226; </span>
 				${Resource.msg('account.paymentinstrumentdetails.expires','account',null)}
 			</div>
-			<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.month}" type="select" rowclass="month"/>
-			<isinputfield formfield="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.year}" type="select" rowclass="year"/>
+			<isscript>
+					var currentCountry = require('~/cartridge/scripts/util/Countries').getCurrent(pdict);
+			</isscript>
+				
+			<isdynamicform formobject="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.expiration}" formdata="${currentCountry.dynamicForms.expirationInfo}" />
+			
 			<div class="form-row form-row-button">
 				<button id="applyBtn" type="submit" value="${Resource.msg('global.apply','locale',null)}">
 					${Resource.msg('global.apply', 'locale', null)}
