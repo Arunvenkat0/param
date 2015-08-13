@@ -146,8 +146,7 @@ describe('Wishlist', () => {
 		);
 
 		it('should redirect to the Gift Certificate Purchase page when adding one to the Cart', () => {
-			return client.waitForVisible(giftCertItemSelector)
-				.then(() => wishListPage.clickAddGiftCertButton())
+			return wishListPage.clickAddGiftCertButton()
 				.then(() => client.click(btnGiftCertAddToCart))
 				.then(() => client.waitForVisible('.gift-certificate-purchase'))
 				.then(() => client.url())
@@ -217,7 +216,7 @@ describe('Wishlist', () => {
 			);
 
 			it('should allow user to toggle privacy', () => {
-				let privacyButton = 'button[name*=wishlist_setList]';
+				let privacyButton = wishListPage.BTN_TOGGLE_PRIVACY;
 				return client.waitForVisible(privacyButton)
 					.isEnabled(privacyButton)
 					.then(enabled => assert.isTrue(enabled));

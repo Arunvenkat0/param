@@ -4,7 +4,7 @@ import client from '../client';
 import * as common from './helpers/common';
 
 export const CSS_SHARE_LINK = '.share-link';
-export const BTN_ADD_GIFT_CERT = 'button[name$=frm_wishlist_addGiftCertificate]';
+export const BTN_ADD_GIFT_CERT = 'button[name*=wishlist_addGiftCertificate]';
 export const BTN_TOGGLE_PRIVACY = '[name*=wishlist_setList]';
 export const LINK_REMOVE = 'button.delete-item';
 export const WISHLIST_ITEMS = '.item-list tbody tr:not(.headings)';
@@ -25,13 +25,9 @@ export function emptyWishList () {
 		.waitForVisible(BTN_TOGGLE_PRIVACY)
 		// Must click the Remove link on each product in the Wishlist.
 		.then(() => common.removeItems(LINK_REMOVE))
-		.then(() => client.waitForExist('table.item-list', 500, true));
-}
-
-function _createCssNthCartRow (idx) {
-	return WISHLIST_ITEMS + ':nth-child(' + idx + ')';
+		.then(() => client.waitForExist('table.item-list', 5000, true));
 }
 
 export function getItemNameByRow (rowNum) {
-	return client.getText(_createCssNthCartRow(rowNum) + ' .name');
+	return client.getText(`${WISHLIST_ITEMS}:nth-child(${rowNum}) .name`);
 }
