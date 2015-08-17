@@ -67,6 +67,7 @@
 			}
 		}
 		.user-panel {
+			box-sizing: content-box; //See https://code.google.com/p/chromium/issues/detail?can=2&q=max-content&colspec=ID%20Pri%20M%20Stars%20ReleaseBlock%20Cr%20Status%20Owner%20Summary%20OS%20Modified&id=522191&thanks=522191&ts=1439925077
 			margin-top: .5rem;
 			text-align: left;
 			transition: all .3s ease;
