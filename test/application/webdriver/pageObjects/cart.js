@@ -104,8 +104,6 @@ export function getOrderSubTotal () {
  *
  */
 export function emptyCart () {
-	let promises = [];
-
 	return navigateTo()
 		.then(() => client.elements('.item-quantity input'))
 		.then(items => {
@@ -119,31 +117,6 @@ export function emptyCart () {
 		// There are some products, like Gift Certificates, whose
 		// quantities cannot be changed in the Cart. For these, we
 		// must click the Remove link on each.
-		.then(() => client.elements(LINK_REMOVE))
-		.then(removeLinks => {
-			// Because each Remove link results in a page reload,
-			// it is necessary to wait for one remove operation
-			// to complete before clicking on the next Remove
-			// link
-			if (!removeLinks.value.length) {
-				return Promise.resolve();
-			}
-			removeLinks.value.forEach(() => promises.push(_clickFirstRemoveLink()));
-		})
-		.then(() => Promise.all(promises))
+		.then(() => common.removeItems(LINK_REMOVE))
 		.then(() => client.waitForExist(CART_EMPTY));
-}
-
-/**
- * Clicks the first Remove link in a Cart.
- *
- */
-function _clickFirstRemoveLink () {
-	return client.elements(LINK_REMOVE)
-		.then(removeLinks => {
-			if (removeLinks.value.length) {
-				return client.elementIdClick(removeLinks.value[0].ELEMENT);
-			}
-			return Promise.resolve();
-		});
 }

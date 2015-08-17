@@ -2,6 +2,7 @@
 
 import _ from 'lodash';
 import client from '../client';
+import * as common from './helpers/common';
 import * as formHelpers from './helpers/forms/common';
 
 export const BREADCRUMB_SHIPPING = '.step-1.active';
@@ -105,8 +106,7 @@ export function fillOutBillingForm (billingFields) {
 }
 
 export function checkUseAsBillingAddress () {
-	return client.waitForExist(BREADCRUMB_SHIPPING)
-		.click(USE_AS_BILLING_ADDR);
+	return common.clickCheckbox(USE_AS_BILLING_ADDR);
 }
 
 export function getLabelOrderConfirmation () {
