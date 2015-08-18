@@ -1,6 +1,6 @@
 {
   "name": "sitegenesis",
-  "version": "14.8.0",
+  "version": "15.8.1",
   "description": "Because of file size constraints, the demo store data distribution is broken into 2 distinct parts:\r - everything, without high resolution images, including a catalog with hi resolution references removed\r - a delta distibution, with only high resolution images, plus a catalog specifically referencing those images",
   "main": "gulpfile.js",
   "directories": {
@@ -68,7 +68,8 @@
   },
   "scripts": {
     "test": "mocha --compilers js:babel/register test/unit/**/*.js",
-    "lint": "jshint . --reporter node_modules/jshint-stylish/stylish.js && jscs ."
+    "lint": "jshint . --reporter node_modules/jshint-stylish/stylish.js && jscs .",
+    "bump-version": "./version.js"
   },
   "repository": {
     "type": "git",
