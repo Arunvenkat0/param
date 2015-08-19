@@ -11,10 +11,10 @@
 }
 
 .ui-tooltip.ui-widget-content {
-  	background: $night-rider;
-  	border-radius: 3px;
-  	box-shadow: 2px 3px 3px 0 $nobel;
-  	color: $white;
+	background: $night-rider;
+	border-radius: 3px;
+	box-shadow: 2px 3px 3px 0 $nobel;
+	color: $white;
 }
 
 .ui-tooltip-content {
@@ -35,17 +35,19 @@
 	.recommendation-tooltip-attributes {
 		padding: 0.8em;
 	}
-	.shipping-method-cost {
-		float: right;
-		.value {
-			border-bottom: 1px solid $charcoal;
-			display: inline-block;
-			padding-bottom: 0.3em;
-		}
+	.shipping-method-cost,
+	.surcharge-product,
+	.promo {
+		text-align: right;
+		padding-bottom: .3rem;
 	}
 	.shippingtotal {
 		clear: right;
-		float: right;
-		margin-top: 0.3em;
+		text-align: right;
+		margin-top: .3rem;
+		.value {
+			border-top: 1px solid $charcoal;
+			padding-top: .3rem;
+		}
 	}
 }
