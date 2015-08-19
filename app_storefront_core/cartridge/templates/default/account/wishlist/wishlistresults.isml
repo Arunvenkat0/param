@@ -45,22 +45,21 @@
 			</table>
 
 		<iselse/>
-
-			<p>${Resource.msg('searchresult.emptymessage','account',null)}
-
-			<isif condition="${pdict.SearchLastName != null}">
-				<isprint value="${pdict.SearchLastName}"/>
-			</isif>
-
-			<isif condition="${pdict.SearchFirstName != null}">
-				<isprint value="${pdict.SearchFirstName}"/>
-			</isif>
-
-			<isif condition="${pdict.SearchEmail != null}">
-				<isprint value="${pdict.SearchEmail}"/>
-			</isif>
-
-			${Resource.msg('searchresult.emptymessage2','account',null)}</p>
+			
+			<isscript>
+				var searchName = '';
+				if (pdict.SearchLastName) {
+					searchName += pdict.SearchLastName;
+				}
+				if (pdict.SearchFirstName) {
+					searchName += ' ' + pdict.SearchFirstName;
+				}
+				if (pdict.SearchEmail) {
+					searchName += ' ' + pdict.SearchEmail;
+				}
+			</isscript>
+			
+			<p>${Resource.msgf('searchresult.emptymessage','account',null, searchName)}</p>
 
 		</isif>
 
