@@ -4,3 +4,7 @@
 	product reviews
 	=============================================================
 </iscomment>
+
+<div class="product-review" data-pid="${Product.ID}">
+	<div class="rating"></div>
+</div>

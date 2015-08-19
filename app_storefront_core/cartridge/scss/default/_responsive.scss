@@ -151,21 +151,10 @@
 			}
 		}
 		.product-add-to-cart {
-			.inventory {
-				width: 100%;
-				label {
-					display: inline-block;
-					width: 36%;
-				}
-			}
 			.product-price {
 				font-size: 2em;
 				padding: 30px 10px;
 				text-align: left;
-				width: 100%;
-			}
-			button {
-				clear: both;
 				width: 100%;
 			}
 		}

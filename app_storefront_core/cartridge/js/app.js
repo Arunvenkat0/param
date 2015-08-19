@@ -69,12 +69,6 @@ function initializeEvents() {
 		searchsuggestbeta.init($searchContainer, Resources.SIMPLE_SEARCH);
 	}
 
-	// print handler
-	$('.print-page').on('click', function () {
-		window.print();
-		return false;
-	});
-
 	// add show/hide navigation elements
 	$('.secondary-navigation .toggle').click(function () {
 		$(this).toggleClass('expanded').next('ul').toggle();

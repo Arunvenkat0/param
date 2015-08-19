@@ -16,7 +16,7 @@ var dialog = require('../../dialog'),
  * @description Initialize product detail page with reviews, recommendation and product navigation.
  */
 function initializeDom() {
-	$('#pdpMain .product-detail .product-tabs').tabs();
+	$('#pdpMain .product-tabs').tabs();
 	productNav();
 	recommendations();
 	tooltip.init();

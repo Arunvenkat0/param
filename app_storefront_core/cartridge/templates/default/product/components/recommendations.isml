@@ -22,15 +22,7 @@
 		}
 	</isscript>
 	<div class="recommendations cross-sell">
-
 		<isif condition="${recProducts.size() > 0}">
-			<h2>
-				<isif condition="${pdict.Product.productSet}">
-					${Resource.msg('product.recommendations.productsets','product',null)}
-				<iselse/>
-					${Resource.msg('product.recommendations.products','product',null)}
-				</isif>
-			</h2>
 			<div id="carousel-recommendations">
 				<ul>
 					<iscomment>Preserve the Product instance</iscomment>
@@ -114,9 +106,9 @@
 					</isloop>
 					<iscomment>Restore the Product instance</iscomment>
 					<isset name="Product" value="${pdict.mainProduct}" scope="pdict"/>
-				</ul>
-				<a class="jcarousel-nav jcarousel-prev"><span class="visually-hidden">${Resource.msg('global.previous.abbr', 'locale', null)}</span></a>
-				<a class="jcarousel-nav jcarousel-next"><span class="visually-hidden">${Resource.msg('global.next', 'locale', null)}</span></a>
+				</ul> 
+				<a class="jcarousel-nav jcarousel-prev"><i class="fa fa-arrow-circle-left fa-2x"></i><span class="visually-hidden">${Resource.msg('global.previous.abbr', 'locale', null)}</span></a>
+				<a class="jcarousel-nav jcarousel-next"><i class="fa fa-arrow-circle-right fa-2x"></i><span class="visually-hidden">${Resource.msg('global.next', 'locale', null)}</span></a>
 			</div>
 		</isif>
 	</div>

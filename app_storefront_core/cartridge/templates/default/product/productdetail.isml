@@ -12,9 +12,6 @@
 			<isinclude template="product/producttopcontent" />
 		</isif>
 		
-		<isif condition="${!isQuickView}">
-			<isinclude template="product/components/recommendations"/>
-		</isif>
 	</div><!--/pdpMain -->
 </isobject>
 <isslot id="recomm-prod-anchor" description="Product page slot" context="global" context-object="${pdict.Product}"/>
