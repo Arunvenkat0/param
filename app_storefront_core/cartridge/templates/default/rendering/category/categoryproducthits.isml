@@ -62,9 +62,8 @@
 
 		<div class="search-result-bookmarks">
 			${Resource.msg('topcontenthits.yoursearch','search',null)}
-			<a href="${'#results-products'}" class="first">${Resource.msg('search.nohits.didyoumeanex=Did you mean to search for:
-search.producthits.productsfound','search',null)}</a>
-			<a href="${'#results-content'}">${Resource.msg('topcontenthits.goto','search',null)}</a>
+			<a href="${'#results-products'}" class="first">${Resource.msg('search.producthits.productsfound', 'search', null)}</a>
+			<a href="${'#results-content'}">${Resource.msg('topcontenthits.goto', 'search', null)}</a>
 		</div>
 
 		<h1 class="content-header" id="results-products">${Resource.msgf('search.producthits.productsfoundcount','search',null,pdict.ProductSearchResult.count)}</h1>
