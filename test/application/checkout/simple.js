@@ -153,7 +153,7 @@ describe('Checkout', () => {
 		});
 	});
 
-	describe('Form Editing', () => {
+	describe.skip('Form Editing', () => {
 		before(() => homePage.navigateTo()
 			.then(() => navHeader.login())
 			.then(() => cartPage.emptyCart())
