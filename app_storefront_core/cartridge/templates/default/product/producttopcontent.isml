@@ -26,7 +26,7 @@
 		<h2 class="visually-hidden">Additional Information</h2>
 		<isset name="vags" value="${pam.getVisibleAttributeGroups()}" scope="page"/>
 		<isset name="showAttributes" value="${false}" scope="page"/>
-			<isloop items="${vags}" var="AttributeGroup" status="loopstatus">				
+			<isloop items="${vags}" var="AttributeGroup" status="loopstatus">
 			<isif condition="${AttributeGroup.ID != 'mainAttributes'}">
 				<isset name="showAttributes" value="${true}" scope="page"/>
 			</isif>
@@ -34,23 +34,14 @@
 		<div class="tabs">
 			<isscript>
 				// get all orderable cross sell recommendations (1 = cross sell)
-				var recommendations : dw.util.Iterator = pdict.Product.getOrderableRecommendations(1).iterator();
-				var recProducts : dw.util.Collection = new dw.util.ArrayList();
-		
+				var recommendations = pdict.Product.getOrderableRecommendations(1).iterator();
+				var recProducts = new dw.util.ArrayList();
+				var counter = 0;
 				// display 20 recommendations at maximum
-				var maxRecs = 20, counter = 0;
-		
-				while( recommendations.hasNext() )
-				{
-					var recommendation : dw.catalog.Recommendation = recommendations.next();
-					var recommendedProduct : dw.catalog.Product = recommendation.getRecommendedItem();
-		
-					recProducts.add( recommendedProduct );
-		
-					if(++counter >= maxRecs)
-					{
-						break;
-					}
+				while (recommendations.hasNext() && counter < 20) {
+					var recommendedProduct = recommendations.next().getRecommendedItem();
+					recProducts.add(recommendedProduct);
+					counter++;
 				}
 			</isscript>
 			<isif condition="${recProducts.size() > 0}">
