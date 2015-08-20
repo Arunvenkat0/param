@@ -4,6 +4,7 @@
 	"disallowMixedSpacesAndTabs": true,
 	"disallowNewlineBeforeBlockStatements": true,
 	"disallowSpaceAfterObjectKeys": true,
+	"disallowSpaceBeforeComma": true,
 	"disallowSpacesInsideArrayBrackets": "all",
 	"disallowSpacesInsideObjectBrackets": "all",
 	"disallowSpacesInsideParentheses": true,

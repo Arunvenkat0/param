@@ -103,3 +103,14 @@ function _clickFirstRemoveLink (removeLink) {
 			return Promise.resolve();
 		});
 }
+	/**
+	 * Clicks on an selector and wait for the page to reload
+ 	 * @param selectorToClick
+	 * @param selectorToWait
+	 * @returns {*|Promise.<T>}
+	 */
+export function clickAndWait(selectorToClick, selectorToWait) {
+	return client.click(selectorToClick)
+		.waitForVisible(selectorToWait);
+	}
+

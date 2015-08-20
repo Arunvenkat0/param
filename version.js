@@ -37,7 +37,7 @@ if (argv.from) {
 
 if (!currentVersion || !newVersion) {
 	console.error('Error: Both old and new versions are needed.');
-	return;
+	process.exit(0);
 }
 
 files.forEach(function (filepath) {
