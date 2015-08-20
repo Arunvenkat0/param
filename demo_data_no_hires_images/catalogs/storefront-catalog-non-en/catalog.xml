@@ -16,6 +16,10 @@
 
     <category category-id="root">
         <display-name xml:lang="x-default">Storefront Catalog - Non-EN</display-name>
+        <display-name xml:lang="fr-FR">Catalogue de boutique en ligne - Non - EN</display-name>
+        <display-name xml:lang="it-IT">Storefront Catalog - Non-EN</display-name>
+        <display-name xml:lang="ja-JP">ストアフロントカタログ - Non-EN</display-name>
+        <display-name xml:lang="zh-CN">Storefront Catalog - Non-EN</display-name>
         <online-flag>true</online-flag>
         <template/>
         <page-attributes/>
@@ -88,7 +92,7 @@
                     </attribute-bucket>
                     <attribute-bucket>
                         <display-name xml:lang="x-default">Brown</display-name>
-                        <display-name xml:lang="fr-FR">Doré</display-name>
+                        <display-name xml:lang="fr-FR">Marron</display-name>
                         <display-name xml:lang="it-IT">Marrone</display-name>
                         <display-name xml:lang="ja-JP">ブラウン</display-name>
                         <display-name xml:lang="zh-CN">棕色</display-name>
@@ -193,7 +197,7 @@
                         <display-name xml:lang="fr-FR">0 € - 19,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 0 - € 19,99</display-name>
                         <display-name xml:lang="ja-JP">€0 ～ €19.99</display-name>
-                        <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 19.99 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -201,7 +205,7 @@
                         <display-name xml:lang="fr-FR">20 € - 49,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 20 - € 49,99</display-name>
                         <display-name xml:lang="ja-JP">€20 ～ €49.99</display-name>
-                        <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">20 - 49.99 元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -209,7 +213,7 @@
                         <display-name xml:lang="fr-FR">50 € - 99,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 50 - € 99,99</display-name>
                         <display-name xml:lang="ja-JP">€50 ～ €99.99</display-name>
-                        <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">50 - 99.99 元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -217,7 +221,7 @@
                         <display-name xml:lang="fr-FR">100 € - 499 €</display-name>
                         <display-name xml:lang="it-IT">€ 100 - € 499,00</display-name>
                         <display-name xml:lang="ja-JP">€100 ～ €499.00</display-name>
-                        <display-name xml:lang="zh-CN">100 - 499.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">100 - 499.00 元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -225,7 +229,7 @@
                         <display-name xml:lang="fr-FR">500 € - 999,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 500 - € 999,99</display-name>
                         <display-name xml:lang="ja-JP">€500 ～ €999.99</display-name>
-                        <display-name xml:lang="zh-CN">500 - 999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">500 - 999.99 元</display-name>
                         <threshold>1000</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -233,7 +237,7 @@
                         <display-name xml:lang="fr-FR">1 000 € - 1499,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 1000 - € 1499,99</display-name>
                         <display-name xml:lang="ja-JP">€1000 ～ €1499.99</display-name>
-                        <display-name xml:lang="zh-CN">1000 - 1499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">1000 - 1499.99 元</display-name>
                         <threshold>1500</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -241,7 +245,7 @@
                         <display-name xml:lang="fr-FR">1 500 € - 1 999,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 1500 - € 1999,99</display-name>
                         <display-name xml:lang="ja-JP">€1500 ～ €1999.99</display-name>
-                        <display-name xml:lang="zh-CN">1500 - 1999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">1500 - 1999.99 元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -249,7 +253,7 @@
                         <display-name xml:lang="fr-FR">2 000 € - 2 499,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 2000 - € 2499,99</display-name>
                         <display-name xml:lang="ja-JP">€2000 ～ €2499.99</display-name>
-                        <display-name xml:lang="zh-CN">2000 - 2499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">2000 - 2499.99 元</display-name>
                         <threshold>2500</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -257,7 +261,7 @@
                         <display-name xml:lang="fr-FR">2 500 € - 4999,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 2500 - € 4999,99</display-name>
                         <display-name xml:lang="ja-JP">€2500 ～ €4999.99</display-name>
-                        <display-name xml:lang="zh-CN">2500 - 4999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">2500 - 4999.99 元</display-name>
                         <threshold>5000</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -265,7 +269,7 @@
                         <display-name xml:lang="fr-FR">5 000 € - 9999,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 5000 - € 9999,99</display-name>
                         <display-name xml:lang="ja-JP">€5000 ～ €9999.99</display-name>
-                        <display-name xml:lang="zh-CN">5000 - 9999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">5000 - 9999.99 元</display-name>
                         <threshold>10000</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
@@ -369,7 +373,7 @@
                         <display-name xml:lang="fr-FR">0 ¥ - 19,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 0 - ¥ 19,99</display-name>
                         <display-name xml:lang="ja-JP">¥0 ～ ¥19.99</display-name>
-                        <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 19.99 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -377,7 +381,7 @@
                         <display-name xml:lang="fr-FR">20 ¥ - 49,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 20 - ¥ 49,99</display-name>
                         <display-name xml:lang="ja-JP">¥20 ～ ¥49.99</display-name>
-                        <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">20 - 49.99 元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -385,7 +389,7 @@
                         <display-name xml:lang="fr-FR">50 ¥ - 99,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 50 - ¥ 99,99</display-name>
                         <display-name xml:lang="ja-JP">¥50 ～ ¥99.99</display-name>
-                        <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">50 - 99.99 元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -393,7 +397,7 @@
                         <display-name xml:lang="fr-FR">100 ¥ - 499 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 100 - ¥ 499,00</display-name>
                         <display-name xml:lang="ja-JP">¥100 ～ ¥499.00</display-name>
-                        <display-name xml:lang="zh-CN">100 - 499.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">100 - 499.00 元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -401,7 +405,7 @@
                         <display-name xml:lang="fr-FR">500 ¥ - 999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 500 - ¥ 999,99</display-name>
                         <display-name xml:lang="ja-JP">¥500 ～ ¥999.99</display-name>
-                        <display-name xml:lang="zh-CN">500 - 999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">500 - 999.99 元</display-name>
                         <threshold>1000</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -409,7 +413,7 @@
                         <display-name xml:lang="fr-FR">1 000 ¥ - 1499,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 1000 - ¥ 1499,99</display-name>
                         <display-name xml:lang="ja-JP">¥1000 ～ ¥1499.99</display-name>
-                        <display-name xml:lang="zh-CN">1000 - 1499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">1000 - 1499.99 元</display-name>
                         <threshold>1500</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -417,7 +421,7 @@
                         <display-name xml:lang="fr-FR">1 500 ¥ - 1 999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 1500 - ¥ 1999,99</display-name>
                         <display-name xml:lang="ja-JP">¥1500 ～ ¥1999.99</display-name>
-                        <display-name xml:lang="zh-CN">1500 - 1999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">1500 - 1999.99 元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -425,7 +429,7 @@
                         <display-name xml:lang="fr-FR">2 000 ¥ - 2 499,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 2000 - ¥ 2499,99</display-name>
                         <display-name xml:lang="ja-JP">¥2000 ～ ¥2499.99</display-name>
-                        <display-name xml:lang="zh-CN">2000 - 2499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">2000 - 2499.99 元</display-name>
                         <threshold>2500</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -433,7 +437,7 @@
                         <display-name xml:lang="fr-FR">2 500 ¥ - 4999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 2500 - ¥ 4999,99</display-name>
                         <display-name xml:lang="ja-JP">¥2500 ～ ¥4999.99</display-name>
-                        <display-name xml:lang="zh-CN">2500 - 4999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">2500 - 4999.99 元</display-name>
                         <threshold>5000</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -441,7 +445,7 @@
                         <display-name xml:lang="fr-FR">5 000 ¥ - 9999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 5000 - ¥ 9999,99</display-name>
                         <display-name xml:lang="ja-JP">¥5000 ～ ¥9999.99</display-name>
-                        <display-name xml:lang="zh-CN">5000 - 9999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">5000 - 9999.99 元</display-name>
                         <threshold>10000</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -449,7 +453,7 @@
                         <display-name xml:lang="fr-FR">0 £ - 19,99 £</display-name>
                         <display-name xml:lang="it-IT">£ 0 - £ 19,99</display-name>
                         <display-name xml:lang="ja-JP">£0 ～ £19.99</display-name>
-                        <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 19.99 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -457,7 +461,7 @@
                         <display-name xml:lang="fr-FR">20 ¥ - 49,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 20 - ¥ 49,99</display-name>
                         <display-name xml:lang="ja-JP">¥20 ～ ¥49.99</display-name>
-                        <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">20 - 49.99 元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -465,7 +469,7 @@
                         <display-name xml:lang="fr-FR">50 ¥ - 99,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 50 - ¥ 99,99</display-name>
                         <display-name xml:lang="ja-JP">¥50 ～ ¥99.99</display-name>
-                        <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">50 - 99.99 元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -473,7 +477,7 @@
                         <display-name xml:lang="fr-FR">100 ¥ - 499 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 100 - ¥ 499,00</display-name>
                         <display-name xml:lang="ja-JP">¥100 ～ ¥499.00</display-name>
-                        <display-name xml:lang="zh-CN">100 - 499.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">100 - 499.00 元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -481,7 +485,7 @@
                         <display-name xml:lang="fr-FR">500 ¥ - 999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 500 - ¥ 999,99</display-name>
                         <display-name xml:lang="ja-JP">¥500 ～ ¥999.99</display-name>
-                        <display-name xml:lang="zh-CN">500 - 999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">500 - 999.99 元</display-name>
                         <threshold>1000</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -489,7 +493,7 @@
                         <display-name xml:lang="fr-FR">1 000 ¥ - 1499,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 1000 - ¥ 1499,99</display-name>
                         <display-name xml:lang="ja-JP">¥1000 ～ ¥1499.99</display-name>
-                        <display-name xml:lang="zh-CN">1000 - 1499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">1000 - 1499.99 元</display-name>
                         <threshold>1500</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -497,7 +501,7 @@
                         <display-name xml:lang="fr-FR">1 500 ¥ - 1 999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 1500 - ¥ 1999,99</display-name>
                         <display-name xml:lang="ja-JP">¥1500 ～ ¥1999.99</display-name>
-                        <display-name xml:lang="zh-CN">1500 - 1999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">1500 - 1999.99 元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -505,7 +509,7 @@
                         <display-name xml:lang="fr-FR">2 000 ¥ - 2 499,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 2000 - ¥ 2499,99</display-name>
                         <display-name xml:lang="ja-JP">¥2000 ～ ¥2499.99</display-name>
-                        <display-name xml:lang="zh-CN">2000 - 2499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">2000 - 2499.99 元</display-name>
                         <threshold>2500</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -513,7 +517,7 @@
                         <display-name xml:lang="fr-FR">2 500 ¥ - 4999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 2500 - ¥ 4999,99</display-name>
                         <display-name xml:lang="ja-JP">¥2500 ～ ¥4999.99</display-name>
-                        <display-name xml:lang="zh-CN">2500 - 4999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">2500 - 4999.99 元</display-name>
                         <threshold>5000</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -521,7 +525,7 @@
                         <display-name xml:lang="fr-FR">5 000 ¥ - 9999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 5000 - ¥ 9999,99</display-name>
                         <display-name xml:lang="ja-JP">¥5000 ～ ¥9999.99</display-name>
-                        <display-name xml:lang="zh-CN">5000 - 9999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">5000 - 9999.99 元</display-name>
                         <threshold>10000</threshold>
                     </price-bucket>
                     <price-bucket currency="JPY">
@@ -635,7 +639,7 @@
             </refinement-definition>
             <refinement-definition type="attribute" bucket-type="none" attribute-id="brand" system="true">
                 <display-name xml:lang="x-default">Brand</display-name>
-                <display-name xml:lang="fr-FR">Par marque</display-name>
+                <display-name xml:lang="fr-FR">Marque</display-name>
                 <display-name xml:lang="it-IT">Marca</display-name>
                 <display-name xml:lang="ja-JP">ブランド</display-name>
                 <display-name xml:lang="zh-CN">按品牌</display-name>
@@ -1490,7 +1494,7 @@
                         <display-name xml:lang="fr-FR">0 € - 19,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 0 - € 19,99</display-name>
                         <display-name xml:lang="ja-JP">€0 ～ €19.99</display-name>
-                        <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 19.99 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -1498,7 +1502,7 @@
                         <display-name xml:lang="fr-FR">20 € - 49,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 20 - € 49,99</display-name>
                         <display-name xml:lang="ja-JP">€20 ～ €49.99</display-name>
-                        <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">20 - 49.99 元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -1506,7 +1510,7 @@
                         <display-name xml:lang="fr-FR">50 € - 99,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 50 - € 99,99</display-name>
                         <display-name xml:lang="ja-JP">€50 ～ €99.99</display-name>
-                        <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">50 - 99.99 元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -1514,7 +1518,7 @@
                         <display-name xml:lang="fr-FR">100 € - 499,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 100 - € 499,99</display-name>
                         <display-name xml:lang="ja-JP">€100 ～ €499.99</display-name>
-                        <display-name xml:lang="zh-CN">100 - 499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">100 - 499.99 元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -1522,7 +1526,7 @@
                         <display-name xml:lang="fr-FR">500 € - 1999,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 500 - € 1999,99</display-name>
                         <display-name xml:lang="ja-JP">€500 ～ €1999.99</display-name>
-                        <display-name xml:lang="zh-CN">500 - 1999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">500 - 1999.99 元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
@@ -1570,7 +1574,7 @@
                         <display-name xml:lang="fr-FR">0 ¥ - 19,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 0 - ¥ 19,99</display-name>
                         <display-name xml:lang="ja-JP">¥0 ～ ¥19.99</display-name>
-                        <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 19.99 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -1578,7 +1582,7 @@
                         <display-name xml:lang="fr-FR">20 € - 49,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 20 - ¥ 49,99</display-name>
                         <display-name xml:lang="ja-JP">¥20 ～ ¥49.99</display-name>
-                        <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">20 - 49.99 元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -1586,7 +1590,7 @@
                         <display-name xml:lang="fr-FR">50 ¥ - 99,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 50 - ¥ 99,99</display-name>
                         <display-name xml:lang="ja-JP">¥50 ～ ¥99.99</display-name>
-                        <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">50 - 99.99 元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -1594,7 +1598,7 @@
                         <display-name xml:lang="fr-FR">100 ¥ - 499,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 100 - ¥ 499,99</display-name>
                         <display-name xml:lang="ja-JP">¥100 ～ ¥499.99</display-name>
-                        <display-name xml:lang="zh-CN">100 - 499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">100 - 499.99 元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -1602,7 +1606,7 @@
                         <display-name xml:lang="fr-FR">500 ¥ - 1999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 500 - ¥ 1999,99</display-name>
                         <display-name xml:lang="ja-JP">¥500 ～ ¥1999.99</display-name>
-                        <display-name xml:lang="zh-CN">500 - 1999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">500 - 1999.99 元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -1610,7 +1614,7 @@
                         <display-name xml:lang="fr-FR">0 ¥ - 19,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 0 - ¥ 19,99</display-name>
                         <display-name xml:lang="ja-JP">¥0 ～ ¥19.99</display-name>
-                        <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 19.99 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -1618,7 +1622,7 @@
                         <display-name xml:lang="fr-FR">20 € - 49,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 20 - ¥ 49,99</display-name>
                         <display-name xml:lang="ja-JP">¥20 ～ ¥49.99</display-name>
-                        <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">20 - 49.99 元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -1626,7 +1630,7 @@
                         <display-name xml:lang="fr-FR">50 ¥ - 99,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 50 - ¥ 99,99</display-name>
                         <display-name xml:lang="ja-JP">¥50 ～ ¥99.99</display-name>
-                        <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">50 - 99.99 元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -1634,7 +1638,7 @@
                         <display-name xml:lang="fr-FR">100 ¥ - 499,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 100 - ¥ 499,99</display-name>
                         <display-name xml:lang="ja-JP">¥100 ～ ¥499.99</display-name>
-                        <display-name xml:lang="zh-CN">100 - 499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">100 - 499.99 元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -1642,7 +1646,7 @@
                         <display-name xml:lang="fr-FR">500 ¥ - 1999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 500 - ¥ 1999,99</display-name>
                         <display-name xml:lang="ja-JP">¥500 ～ ¥1999.99</display-name>
-                        <display-name xml:lang="zh-CN">500 - 1999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">500 - 1999.99 元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="JPY">
@@ -1990,7 +1994,7 @@
                         <display-name xml:lang="fr-FR">0 € - 19,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 0 - € 19,99</display-name>
                         <display-name xml:lang="ja-JP">€0 ～ €19.99</display-name>
-                        <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 19.99 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -1998,7 +2002,7 @@
                         <display-name xml:lang="fr-FR">20 € - 49,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 20 - € 49,99</display-name>
                         <display-name xml:lang="ja-JP">€20 ～ €49.99</display-name>
-                        <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">20 - 49.99 元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -2006,7 +2010,7 @@
                         <display-name xml:lang="fr-FR">50 € - 99,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 50 - € 99,99</display-name>
                         <display-name xml:lang="ja-JP">€50 ～ €99.99</display-name>
-                        <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">50 - 99.99 元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -2014,7 +2018,7 @@
                         <display-name xml:lang="fr-FR">100 € - 499,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 100 - € 499,99</display-name>
                         <display-name xml:lang="ja-JP">€100 ～ €499.99</display-name>
-                        <display-name xml:lang="zh-CN">100 - 499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">100 - 499.99 元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -2022,7 +2026,7 @@
                         <display-name xml:lang="fr-FR">500 € - 1999,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 500 - € 1999,99</display-name>
                         <display-name xml:lang="ja-JP">€500 ～ €1999.99</display-name>
-                        <display-name xml:lang="zh-CN">500 - 1999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">500 - 1999.99 元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
@@ -2070,7 +2074,7 @@
                         <display-name xml:lang="fr-FR">0 ¥ - 19,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 0 - ¥ 19,99</display-name>
                         <display-name xml:lang="ja-JP">¥0 ～ ¥19.99</display-name>
-                        <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 19.99 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -2078,7 +2082,7 @@
                         <display-name xml:lang="fr-FR">20 ¥ - 49,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 20 - ¥ 49,99</display-name>
                         <display-name xml:lang="ja-JP">¥20 ～ ¥49.99</display-name>
-                        <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">20 - 49.99 元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -2086,7 +2090,7 @@
                         <display-name xml:lang="fr-FR">50 ¥ - 99,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 50 - ¥ 99,99</display-name>
                         <display-name xml:lang="ja-JP">¥50 ～ ¥99.99</display-name>
-                        <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">50 - 99.99 元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -2094,7 +2098,7 @@
                         <display-name xml:lang="fr-FR">100 ¥ - 499,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 100 - ¥ 499,99</display-name>
                         <display-name xml:lang="ja-JP">¥100 ～ ¥499.99</display-name>
-                        <display-name xml:lang="zh-CN">100 - 499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">100 - 499.99 元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -2102,7 +2106,7 @@
                         <display-name xml:lang="fr-FR">500 ¥ - 1999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 500 - ¥ 1999,99</display-name>
                         <display-name xml:lang="ja-JP">¥500 ～ ¥1999.99</display-name>
-                        <display-name xml:lang="zh-CN">500 - 1999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">500 - 1999.99 元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -2110,7 +2114,7 @@
                         <display-name xml:lang="fr-FR">0 ¥ - 19,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 0 - ¥ 19,99</display-name>
                         <display-name xml:lang="ja-JP">¥0 ～ ¥19.99</display-name>
-                        <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 19.99 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -2118,7 +2122,7 @@
                         <display-name xml:lang="fr-FR">20 ¥ - 49,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 20 - ¥ 49,99</display-name>
                         <display-name xml:lang="ja-JP">¥20 ～ ¥49.99</display-name>
-                        <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">20 - 49.99 元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -2126,7 +2130,7 @@
                         <display-name xml:lang="fr-FR">50 ¥ - 99,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 50 - ¥ 99,99</display-name>
                         <display-name xml:lang="ja-JP">¥50 ～ ¥99.99</display-name>
-                        <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">50 - 99.99 元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -2134,7 +2138,7 @@
                         <display-name xml:lang="fr-FR">100 ¥ - 499,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 100 - ¥ 499,99</display-name>
                         <display-name xml:lang="ja-JP">¥100 ～ ¥499.99</display-name>
-                        <display-name xml:lang="zh-CN">100 - 499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">100 - 499.99 元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -2142,7 +2146,7 @@
                         <display-name xml:lang="fr-FR">500 ¥ - 1999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 500 - ¥ 1999,99</display-name>
                         <display-name xml:lang="ja-JP">¥500 ～ ¥1999.99</display-name>
-                        <display-name xml:lang="zh-CN">500 - 1999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">500 - 1999.99 元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="JPY">
@@ -2511,7 +2515,7 @@
                         <display-name xml:lang="fr-FR">0 € - 19,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 0 - € 19,99</display-name>
                         <display-name xml:lang="ja-JP">€0 ～ €19.99</display-name>
-                        <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 19.99 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -2519,7 +2523,7 @@
                         <display-name xml:lang="fr-FR">20 € - 49,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 20 - € 49,99</display-name>
                         <display-name xml:lang="ja-JP">€20 ～ €49.99</display-name>
-                        <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">20 - 49.99 元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -2527,7 +2531,7 @@
                         <display-name xml:lang="fr-FR">50 € - 99,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 50 - € 99,99</display-name>
                         <display-name xml:lang="ja-JP">€50 ～ €99.99</display-name>
-                        <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">50 - 99.99 元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -2535,7 +2539,7 @@
                         <display-name xml:lang="fr-FR">100 € - 499,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 100 - € 499,99</display-name>
                         <display-name xml:lang="ja-JP">€100 ～ €499.99</display-name>
-                        <display-name xml:lang="zh-CN">100 - 499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">100 - 499.99 元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -2543,7 +2547,7 @@
                         <display-name xml:lang="fr-FR">500 € - 1999,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 500 - € 1999,99</display-name>
                         <display-name xml:lang="ja-JP">€500 ～ €1999.99</display-name>
-                        <display-name xml:lang="zh-CN">500 - 1999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">500 - 1999.99 元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
@@ -2591,7 +2595,7 @@
                         <display-name xml:lang="fr-FR">0 ¥ - 19,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 0 - ¥ 19,99</display-name>
                         <display-name xml:lang="ja-JP">¥0 ～ ¥19.99</display-name>
-                        <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 19.99 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -2599,7 +2603,7 @@
                         <display-name xml:lang="fr-FR">20 ¥ - 49,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 20 - ¥ 49,99</display-name>
                         <display-name xml:lang="ja-JP">¥20 ～ ¥49.99</display-name>
-                        <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">20 - 49.99 元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -2607,7 +2611,7 @@
                         <display-name xml:lang="fr-FR">50 ¥ - 99,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 50 - ¥ 99,99</display-name>
                         <display-name xml:lang="ja-JP">¥50 ～ ¥99.99</display-name>
-                        <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">50 - 99.99 元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -2615,7 +2619,7 @@
                         <display-name xml:lang="fr-FR">100 ¥ - 499,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 100 - ¥ 499,99</display-name>
                         <display-name xml:lang="ja-JP">¥100 ～ ¥499.99</display-name>
-                        <display-name xml:lang="zh-CN">100 - 499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">100 - 499.99 元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -2623,7 +2627,7 @@
                         <display-name xml:lang="fr-FR">500 ¥ - 1999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 500 - ¥ 1999,99</display-name>
                         <display-name xml:lang="ja-JP">¥500 ～ ¥1999.99</display-name>
-                        <display-name xml:lang="zh-CN">500 - 1999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">500 - 1999.99 元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -2631,7 +2635,7 @@
                         <display-name xml:lang="fr-FR">0 ¥ - 19,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 0 - ¥ 19,99</display-name>
                         <display-name xml:lang="ja-JP">¥0 ～ ¥19.99</display-name>
-                        <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 19.99 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -2639,7 +2643,7 @@
                         <display-name xml:lang="fr-FR">20 ¥ - 49,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 20 - ¥ 49,99</display-name>
                         <display-name xml:lang="ja-JP">¥20 ～ ¥49.99</display-name>
-                        <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">20 - 49.99 元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -2647,7 +2651,7 @@
                         <display-name xml:lang="fr-FR">50 ¥ - 99,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 50 - ¥ 99,99</display-name>
                         <display-name xml:lang="ja-JP">¥50 ～ ¥99.99</display-name>
-                        <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">50 - 99.99 元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -2655,7 +2659,7 @@
                         <display-name xml:lang="fr-FR">100 ¥ - 499,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 100 - ¥ 499,99</display-name>
                         <display-name xml:lang="ja-JP">¥100 ～ ¥499.99</display-name>
-                        <display-name xml:lang="zh-CN">100 - 499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">100 - 499.99 元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -2663,7 +2667,7 @@
                         <display-name xml:lang="fr-FR">500 ¥ - 1999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 500 - ¥ 1999,99</display-name>
                         <display-name xml:lang="ja-JP">¥500 ～ ¥1999.99</display-name>
-                        <display-name xml:lang="zh-CN">500 - 1999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">500 - 1999.99 元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="JPY">
@@ -2981,7 +2985,7 @@
                         <display-name xml:lang="fr-FR">0 € - 19,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 0 - € 19,99</display-name>
                         <display-name xml:lang="ja-JP">€0 ～ €19.99</display-name>
-                        <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 19.99 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -2989,7 +2993,7 @@
                         <display-name xml:lang="fr-FR">20 € - 49,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 20 - € 49,99</display-name>
                         <display-name xml:lang="ja-JP">€20 ～ €49.99</display-name>
-                        <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">20 - 49.99 元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -2997,7 +3001,7 @@
                         <display-name xml:lang="fr-FR">50 € - 99,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 50 - € 99,99</display-name>
                         <display-name xml:lang="ja-JP">€50 ～ €99.99</display-name>
-                        <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">50 - 99.99 元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -3005,7 +3009,7 @@
                         <display-name xml:lang="fr-FR">100 € - 499,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 100 - € 499,99</display-name>
                         <display-name xml:lang="ja-JP">€100 ～ €499.99</display-name>
-                        <display-name xml:lang="zh-CN">100 - 499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">100 - 499.99 元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -3013,7 +3017,7 @@
                         <display-name xml:lang="fr-FR">500 € - 1999,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 500 - € 1999,99</display-name>
                         <display-name xml:lang="ja-JP">€500 ～ €1999.99</display-name>
-                        <display-name xml:lang="zh-CN">500 - 1999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">500 - 1999.99 元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
@@ -3061,7 +3065,7 @@
                         <display-name xml:lang="fr-FR">0 ¥ - 19,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 0 - ¥ 19,99</display-name>
                         <display-name xml:lang="ja-JP">¥0 ～ ¥19.99</display-name>
-                        <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 19.99 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -3069,7 +3073,7 @@
                         <display-name xml:lang="fr-FR">20 ¥ - 49,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 20 - ¥ 49,99</display-name>
                         <display-name xml:lang="ja-JP">¥20 ～ ¥49.99</display-name>
-                        <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">20 - 49.99 元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -3077,7 +3081,7 @@
                         <display-name xml:lang="fr-FR">50 ¥ - 99,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 50 - ¥ 99,99</display-name>
                         <display-name xml:lang="ja-JP">¥50 ～ ¥99.99</display-name>
-                        <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">50 - 99.99 元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -3085,7 +3089,7 @@
                         <display-name xml:lang="fr-FR">100 ¥ - 499,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 100 - ¥ 499,99</display-name>
                         <display-name xml:lang="ja-JP">¥100 ～ ¥499.99</display-name>
-                        <display-name xml:lang="zh-CN">100 - 499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">100 - 499.99 元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -3093,7 +3097,7 @@
                         <display-name xml:lang="fr-FR">500 ¥ - 1999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 500 - ¥ 1999,99</display-name>
                         <display-name xml:lang="ja-JP">¥500 ～ ¥1999.99</display-name>
-                        <display-name xml:lang="zh-CN">500 - 1999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">500 - 1999.99 元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -3101,7 +3105,7 @@
                         <display-name xml:lang="fr-FR">0 ¥ - 19,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 0 - ¥ 19,99</display-name>
                         <display-name xml:lang="ja-JP">¥0 ～ ¥19.99</display-name>
-                        <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 19.99 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -3109,7 +3113,7 @@
                         <display-name xml:lang="fr-FR">20 ¥ - 49,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 20 - ¥ 49,99</display-name>
                         <display-name xml:lang="ja-JP">¥20 ～ ¥49.99</display-name>
-                        <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">20 - 49.99 元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -3117,7 +3121,7 @@
                         <display-name xml:lang="fr-FR">50 ¥ - 99,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 50 - ¥ 99,99</display-name>
                         <display-name xml:lang="ja-JP">¥50 ～ ¥99.99</display-name>
-                        <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">50 - 99.99 元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -3125,7 +3129,7 @@
                         <display-name xml:lang="fr-FR">100 ¥ - 499,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 100 - ¥ 499,99</display-name>
                         <display-name xml:lang="ja-JP">¥100 ～ ¥499.99</display-name>
-                        <display-name xml:lang="zh-CN">100 - 499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">100 - 499.99 元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -3133,7 +3137,7 @@
                         <display-name xml:lang="fr-FR">500 ¥ - 1999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 500 - ¥ 1999,99</display-name>
                         <display-name xml:lang="ja-JP">¥500 ～ ¥1999.99</display-name>
-                        <display-name xml:lang="zh-CN">500 - 1999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">500 - 1999.99 元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="JPY">
@@ -3489,7 +3493,7 @@
                         <display-name xml:lang="fr-FR">0 € - 19,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 0 - € 19,99</display-name>
                         <display-name xml:lang="ja-JP">€0 ～ €19.99</display-name>
-                        <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 19.99 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -3497,7 +3501,7 @@
                         <display-name xml:lang="fr-FR">20 € - 49,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 20 - € 49,99</display-name>
                         <display-name xml:lang="ja-JP">€20 ～ €49.99</display-name>
-                        <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">20 - 49.99 元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -3505,7 +3509,7 @@
                         <display-name xml:lang="fr-FR">50 € - 99,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 50 - € 99,99</display-name>
                         <display-name xml:lang="ja-JP">€50 ～ €99.99</display-name>
-                        <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">50 - 99.99 元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -3513,7 +3517,7 @@
                         <display-name xml:lang="fr-FR">100 € - 499,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 100 - € 499,99</display-name>
                         <display-name xml:lang="ja-JP">€100 ～ €499.99</display-name>
-                        <display-name xml:lang="zh-CN">100 - 499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">100 - 499.99 元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -3521,7 +3525,7 @@
                         <display-name xml:lang="fr-FR">500 € - 999,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 500 - € 999,99</display-name>
                         <display-name xml:lang="ja-JP">€500 ～ €999.99</display-name>
-                        <display-name xml:lang="zh-CN">500 - 999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">500 - 999.99 元</display-name>
                         <threshold>1000</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -3529,7 +3533,7 @@
                         <display-name xml:lang="fr-FR">1 000 € - 1499,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 1000 - € 1499,99</display-name>
                         <display-name xml:lang="ja-JP">€1000 ～ €1499.99</display-name>
-                        <display-name xml:lang="zh-CN">1000 - 1499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">1000 - 1499.99 元</display-name>
                         <threshold>1500</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -3537,7 +3541,7 @@
                         <display-name xml:lang="fr-FR">1 500 € - 1 999,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 1500 - € 1999,99</display-name>
                         <display-name xml:lang="ja-JP">€1500 ～ €1999.99</display-name>
-                        <display-name xml:lang="zh-CN">1500 - 1999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">1500 - 1999.99 元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -3545,7 +3549,7 @@
                         <display-name xml:lang="fr-FR">2 000 € - 2 499,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 2000 - € 2499,99</display-name>
                         <display-name xml:lang="ja-JP">€2000 ～ €2499.99</display-name>
-                        <display-name xml:lang="zh-CN">2000 - 2499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">2000 - 2499.99 元</display-name>
                         <threshold>2500</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -3553,7 +3557,7 @@
                         <display-name xml:lang="fr-FR">2 500 € - 9 999,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 2500 - € 9999,99</display-name>
                         <display-name xml:lang="ja-JP">€2500 ～ €9999.99</display-name>
-                        <display-name xml:lang="zh-CN">2500 - 9999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">2500 - 9999.99 元</display-name>
                         <threshold>5000</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -3561,7 +3565,7 @@
                         <display-name xml:lang="fr-FR">5 000 € - 9 999,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 5000 - € 9999,99</display-name>
                         <display-name xml:lang="ja-JP">€5000  ～ €9999.99</display-name>
-                        <display-name xml:lang="zh-CN">5000 - 9999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">5000 - 9999.99 元</display-name>
                         <threshold>10000</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
@@ -3649,7 +3653,7 @@
                         <display-name xml:lang="fr-FR">0 ¥ - 19,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 0 - ¥ 19,99</display-name>
                         <display-name xml:lang="ja-JP">¥0 ～ ¥19.99</display-name>
-                        <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 19.99 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -3657,7 +3661,7 @@
                         <display-name xml:lang="fr-FR">20 ¥ - 49,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 20 - ¥ 49,99</display-name>
                         <display-name xml:lang="ja-JP">¥20 ～ ¥49.99</display-name>
-                        <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">20 - 49.99 元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -3665,7 +3669,7 @@
                         <display-name xml:lang="fr-FR">50 ¥ - 99,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 50 - ¥ 99,99</display-name>
                         <display-name xml:lang="ja-JP">¥50 ～ ¥99.99</display-name>
-                        <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">50 - 99.99 元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -3673,7 +3677,7 @@
                         <display-name xml:lang="fr-FR">100 ¥ - 499,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 100 - ¥ 499,99</display-name>
                         <display-name xml:lang="ja-JP">¥100 ～ ¥499.99</display-name>
-                        <display-name xml:lang="zh-CN">100 - 499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">100 - 499.99 元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -3681,7 +3685,7 @@
                         <display-name xml:lang="fr-FR">500 ¥ - 999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 500 - ¥ 999,99</display-name>
                         <display-name xml:lang="ja-JP">¥500 ～ ¥999.99</display-name>
-                        <display-name xml:lang="zh-CN">500 - 999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">500 - 999.99 元</display-name>
                         <threshold>1000</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -3689,7 +3693,7 @@
                         <display-name xml:lang="fr-FR">1 000 ¥ - 1499,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 1000 - ¥ 1499,99</display-name>
                         <display-name xml:lang="ja-JP">¥1000 ～ ¥1499.99</display-name>
-                        <display-name xml:lang="zh-CN">1000 - 1499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">1000 - 1499.99 元</display-name>
                         <threshold>1500</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -3697,7 +3701,7 @@
                         <display-name xml:lang="fr-FR">1 500 ¥ - 1 999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 1500 - ¥ 1999,99</display-name>
                         <display-name xml:lang="ja-JP">¥1500 ～ ¥1999.99</display-name>
-                        <display-name xml:lang="zh-CN">1500 - 1999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">1500 - 1999.99 元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -3705,7 +3709,7 @@
                         <display-name xml:lang="fr-FR">2 000 ¥ - 2 499,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 2000 - ¥ 2499,99</display-name>
                         <display-name xml:lang="ja-JP">¥2000 ～ ¥2499.99</display-name>
-                        <display-name xml:lang="zh-CN">2000 - 2499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">2000 - 2499.99 元</display-name>
                         <threshold>2500</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -3713,7 +3717,7 @@
                         <display-name xml:lang="fr-FR">2 500 ¥ - 9 999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 2500 - ¥ 9999,99</display-name>
                         <display-name xml:lang="ja-JP">¥2500 ～ ¥9999.99</display-name>
-                        <display-name xml:lang="zh-CN">2500 - 9999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">2500 - 9999.99 元</display-name>
                         <threshold>5000</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -3721,7 +3725,7 @@
                         <display-name xml:lang="fr-FR">5 000 ¥ - 9 999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 5000 - ¥ 9999,99</display-name>
                         <display-name xml:lang="ja-JP">¥5000  ～ ¥9999.99</display-name>
-                        <display-name xml:lang="zh-CN">5000 - 9999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">5000 - 9999.99 元</display-name>
                         <threshold>10000</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -3729,7 +3733,7 @@
                         <display-name xml:lang="fr-FR">0 ¥ - 19,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 0 - ¥ 19,99</display-name>
                         <display-name xml:lang="ja-JP">¥0 ～ ¥19.99</display-name>
-                        <display-name xml:lang="zh-CN">0 - 19.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 19.99 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -3737,7 +3741,7 @@
                         <display-name xml:lang="fr-FR">20 ¥ - 49,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 20 - ¥ 49,99</display-name>
                         <display-name xml:lang="ja-JP">¥20 ～ ¥49.99</display-name>
-                        <display-name xml:lang="zh-CN">20 - 49.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">20 - 49.99 元</display-name>
                         <threshold>50</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -3745,7 +3749,7 @@
                         <display-name xml:lang="fr-FR">50 ¥ - 99,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 50 - ¥ 99,99</display-name>
                         <display-name xml:lang="ja-JP">¥50 ～ ¥99.99</display-name>
-                        <display-name xml:lang="zh-CN">50 - 99.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">50 - 99.99 元</display-name>
                         <threshold>100</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -3753,7 +3757,7 @@
                         <display-name xml:lang="fr-FR">100 ¥ - 499,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 100 - ¥ 499,99</display-name>
                         <display-name xml:lang="ja-JP">¥100 ～ ¥499.99</display-name>
-                        <display-name xml:lang="zh-CN">100 - 499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">100 - 499.99 元</display-name>
                         <threshold>500</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -3761,7 +3765,7 @@
                         <display-name xml:lang="fr-FR">500 ¥ - 999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 500 - ¥ 999,99</display-name>
                         <display-name xml:lang="ja-JP">¥500 ～ ¥999.99</display-name>
-                        <display-name xml:lang="zh-CN">500 - 999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">500 - 999.99 元</display-name>
                         <threshold>1000</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -3769,7 +3773,7 @@
                         <display-name xml:lang="fr-FR">1 000 ¥ - 1499,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 1000 - ¥ 1499,99</display-name>
                         <display-name xml:lang="ja-JP">¥1000 ～ ¥1499.99</display-name>
-                        <display-name xml:lang="zh-CN">1000 - 1499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">1000 - 1499.99 元</display-name>
                         <threshold>1500</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -3777,7 +3781,7 @@
                         <display-name xml:lang="fr-FR">1 500 ¥ - 1 999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 1500 - ¥ 1999,99</display-name>
                         <display-name xml:lang="ja-JP">¥1500 ～ ¥1999.99</display-name>
-                        <display-name xml:lang="zh-CN">1500 - 1999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">1500 - 1999.99 元</display-name>
                         <threshold>2000</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -3785,7 +3789,7 @@
                         <display-name xml:lang="fr-FR">2 000 ¥ - 2 499,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 2000 - ¥ 2499,99</display-name>
                         <display-name xml:lang="ja-JP">¥2000 ～ ¥2499.99</display-name>
-                        <display-name xml:lang="zh-CN">2000 - 2499.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">2000 - 2499.99 元</display-name>
                         <threshold>2500</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -3793,7 +3797,7 @@
                         <display-name xml:lang="fr-FR">2 500 ¥ - 9 999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 2500 - ¥ 9999,99</display-name>
                         <display-name xml:lang="ja-JP">¥2500 ～ ¥9999.99</display-name>
-                        <display-name xml:lang="zh-CN">2500 - 9999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">2500 - 9999.99 元</display-name>
                         <threshold>5000</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -3801,7 +3805,7 @@
                         <display-name xml:lang="fr-FR">5 000 ¥ - 9 999,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 5000 - ¥ 9999,99</display-name>
                         <display-name xml:lang="ja-JP">¥5000  ～ ¥9999.99</display-name>
-                        <display-name xml:lang="zh-CN">5000 - 9999.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">5000 - 9999.99 元</display-name>
                         <threshold>10000</threshold>
                     </price-bucket>
                     <price-bucket currency="JPY">
@@ -4065,7 +4069,7 @@
                         <display-name xml:lang="fr-FR">144 € - 180 €</display-name>
                         <display-name xml:lang="it-IT">€ 144 - € 180,00</display-name>
                         <display-name xml:lang="ja-JP">€144 ～ €180.00</display-name>
-                        <display-name xml:lang="zh-CN">144 - 180.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">144 - 180.00 元</display-name>
                         <threshold>180</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -4081,7 +4085,7 @@
                         <display-name xml:lang="fr-FR">181 € - 215 €</display-name>
                         <display-name xml:lang="it-IT">€ 181 - € 215,00</display-name>
                         <display-name xml:lang="ja-JP">€181 ～ €215.00</display-name>
-                        <display-name xml:lang="zh-CN">181 - 215.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">181 - 215.00 元</display-name>
                         <threshold>216</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -4089,7 +4093,7 @@
                         <display-name xml:lang="fr-FR">216 € - 359 €</display-name>
                         <display-name xml:lang="it-IT">€ 216 - € 359,00</display-name>
                         <display-name xml:lang="ja-JP">€216 ～ €359.00</display-name>
-                        <display-name xml:lang="zh-CN">216 - 359.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">216 - 359.00 元</display-name>
                         <threshold>360</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -4097,7 +4101,7 @@
                         <display-name xml:lang="fr-FR">plus de 360 €</display-name>
                         <display-name xml:lang="it-IT">oltre € 360</display-name>
                         <display-name xml:lang="ja-JP">€360 以上</display-name>
-                        <display-name xml:lang="zh-CN">360 欧元以上</display-name>
+                        <display-name xml:lang="zh-CN">360 元以上</display-name>
                         <threshold>719999</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
@@ -4145,7 +4149,7 @@
                         <display-name xml:lang="fr-FR">144 ¥ - 180 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 144 - ¥ 180,00</display-name>
                         <display-name xml:lang="ja-JP">¥144 ～ ¥180.00</display-name>
-                        <display-name xml:lang="zh-CN">144 - 180.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">144 - 180.00 元</display-name>
                         <threshold>180</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -4161,7 +4165,7 @@
                         <display-name xml:lang="fr-FR">181 ¥ - 215 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 181 - ¥ 215,00</display-name>
                         <display-name xml:lang="ja-JP">¥181 ～ ¥215.00</display-name>
-                        <display-name xml:lang="zh-CN">181 - 215.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">181 - 215.00 元</display-name>
                         <threshold>216</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -4169,7 +4173,7 @@
                         <display-name xml:lang="fr-FR">216 ¥ - 359 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 216 - ¥ 359,00</display-name>
                         <display-name xml:lang="ja-JP">¥216 ～ ¥359.00</display-name>
-                        <display-name xml:lang="zh-CN">216 - 359.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">216 - 359.00 元</display-name>
                         <threshold>360</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -4177,7 +4181,7 @@
                         <display-name xml:lang="fr-FR">plus de 360 ¥</display-name>
                         <display-name xml:lang="it-IT">oltre ¥ 360</display-name>
                         <display-name xml:lang="ja-JP">¥360 以上</display-name>
-                        <display-name xml:lang="zh-CN">360 欧元以上</display-name>
+                        <display-name xml:lang="zh-CN">360 元以上</display-name>
                         <threshold>719999</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -4185,7 +4189,7 @@
                         <display-name xml:lang="fr-FR">144 ¥ - 180 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 144 - ¥ 180,00</display-name>
                         <display-name xml:lang="ja-JP">¥144 ～ ¥180.00</display-name>
-                        <display-name xml:lang="zh-CN">144 - 180.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">144 - 180.00 元</display-name>
                         <threshold>180</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -4201,7 +4205,7 @@
                         <display-name xml:lang="fr-FR">181 ¥ - 215 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 181 - ¥ 215,00</display-name>
                         <display-name xml:lang="ja-JP">¥181 ～ ¥215.00</display-name>
-                        <display-name xml:lang="zh-CN">181 - 215.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">181 - 215.00 元</display-name>
                         <threshold>216</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -4209,7 +4213,7 @@
                         <display-name xml:lang="fr-FR">216 ¥ - 359 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 216 - ¥ 359,00</display-name>
                         <display-name xml:lang="ja-JP">¥216 ～ ¥359.00</display-name>
-                        <display-name xml:lang="zh-CN">216 - 359.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">216 - 359.00 元</display-name>
                         <threshold>360</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -4217,7 +4221,7 @@
                         <display-name xml:lang="fr-FR">plus de 360 ¥</display-name>
                         <display-name xml:lang="it-IT">oltre ¥ 360</display-name>
                         <display-name xml:lang="ja-JP">¥360 以上</display-name>
-                        <display-name xml:lang="zh-CN">360 欧元以上</display-name>
+                        <display-name xml:lang="zh-CN">360 元以上</display-name>
                         <threshold>719999</threshold>
                     </price-bucket>
                     <price-bucket currency="JPY">
@@ -4399,7 +4403,7 @@
                         <display-name xml:lang="fr-FR">0 € - 14,00 €</display-name>
                         <display-name xml:lang="it-IT">€ 0 - € 14,00</display-name>
                         <display-name xml:lang="ja-JP">€0 ～ €14.00</display-name>
-                        <display-name xml:lang="zh-CN">0 - 14.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 14.00 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -4407,7 +4411,7 @@
                         <display-name xml:lang="fr-FR">14 € - 35 €</display-name>
                         <display-name xml:lang="it-IT">€ 14,00 - € 35,00</display-name>
                         <display-name xml:lang="ja-JP">€14.00 ～ €35.00</display-name>
-                        <display-name xml:lang="zh-CN">14.00 - 35.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">14.00 - 35.00 元</display-name>
                         <threshold>36</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -4415,7 +4419,7 @@
                         <display-name xml:lang="fr-FR">36 € - 71,00 €</display-name>
                         <display-name xml:lang="it-IT">€ 36 - € 71,00</display-name>
                         <display-name xml:lang="ja-JP">€36 ～ €71.00</display-name>
-                        <display-name xml:lang="zh-CN">36 - 71.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">36 - 71.00 元</display-name>
                         <threshold>72</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -4423,7 +4427,7 @@
                         <display-name xml:lang="fr-FR">72 € - 359,00 €</display-name>
                         <display-name xml:lang="it-IT">€ 72 - € 359,00</display-name>
                         <display-name xml:lang="ja-JP">€72 ～ €359.00</display-name>
-                        <display-name xml:lang="zh-CN">72 - 359.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">72 - 359.00 元</display-name>
                         <threshold>360</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -4431,7 +4435,7 @@
                         <display-name xml:lang="fr-FR">360 € - 1 439 €</display-name>
                         <display-name xml:lang="it-IT">€ 360 - € 1439,00</display-name>
                         <display-name xml:lang="ja-JP">€360 ～ €1439.00</display-name>
-                        <display-name xml:lang="zh-CN">360 - 1439.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">360 - 1439.00 元</display-name>
                         <threshold>1440</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
@@ -4479,7 +4483,7 @@
                         <display-name xml:lang="fr-FR">0 ¥ - 14,00 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 0 - ¥ 14,00</display-name>
                         <display-name xml:lang="ja-JP">¥0 ～ ¥14.00</display-name>
-                        <display-name xml:lang="zh-CN">0 - 14.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 14.00 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -4487,7 +4491,7 @@
                         <display-name xml:lang="fr-FR">14 € - 35 €</display-name>
                         <display-name xml:lang="it-IT">¥ 14,00 - ¥ 35,00</display-name>
                         <display-name xml:lang="ja-JP">¥14.00 ～ ¥35.00</display-name>
-                        <display-name xml:lang="zh-CN">14.00 - 35.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">14.00 - 35.00 元</display-name>
                         <threshold>36</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -4495,7 +4499,7 @@
                         <display-name xml:lang="fr-FR">36 ¥ - 71,00 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 36 - ¥ 71,00</display-name>
                         <display-name xml:lang="ja-JP">¥36 ～ ¥71.00</display-name>
-                        <display-name xml:lang="zh-CN">36 - 71.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">36 - 71.00 元</display-name>
                         <threshold>72</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -4503,7 +4507,7 @@
                         <display-name xml:lang="fr-FR">72 ¥ - 359,00 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 72 - ¥ 359,00</display-name>
                         <display-name xml:lang="ja-JP">¥72 ～ ¥359.00</display-name>
-                        <display-name xml:lang="zh-CN">72 - 359.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">72 - 359.00 元</display-name>
                         <threshold>360</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -4511,7 +4515,7 @@
                         <display-name xml:lang="fr-FR">360 ¥ - 1 439 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 360 - ¥ 1439,00</display-name>
                         <display-name xml:lang="ja-JP">¥360 ～ ¥1439.00</display-name>
-                        <display-name xml:lang="zh-CN">360 - 1439.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">360 - 1439.00 元</display-name>
                         <threshold>1440</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -4519,7 +4523,7 @@
                         <display-name xml:lang="fr-FR">0 ¥ - 14,00 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 0 - ¥ 14,00</display-name>
                         <display-name xml:lang="ja-JP">¥0 ～ ¥14.00</display-name>
-                        <display-name xml:lang="zh-CN">0 - 14.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 14.00 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -4527,7 +4531,7 @@
                         <display-name xml:lang="fr-FR">14 € - 35 €</display-name>
                         <display-name xml:lang="it-IT">¥ 14,00 - ¥ 35,00</display-name>
                         <display-name xml:lang="ja-JP">¥14.00 ～ ¥35.00</display-name>
-                        <display-name xml:lang="zh-CN">14.00 - 35.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">14.00 - 35.00 元</display-name>
                         <threshold>36</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -4535,7 +4539,7 @@
                         <display-name xml:lang="fr-FR">36 ¥ - 71,00 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 36 - ¥ 71,00</display-name>
                         <display-name xml:lang="ja-JP">¥36 ～ ¥71.00</display-name>
-                        <display-name xml:lang="zh-CN">36 - 71.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">36 - 71.00 元</display-name>
                         <threshold>72</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -4543,7 +4547,7 @@
                         <display-name xml:lang="fr-FR">72 ¥ - 359,00 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 72 - ¥ 359,00</display-name>
                         <display-name xml:lang="ja-JP">¥72 ～ ¥359.00</display-name>
-                        <display-name xml:lang="zh-CN">72 - 359.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">72 - 359.00 元</display-name>
                         <threshold>360</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -4551,7 +4555,7 @@
                         <display-name xml:lang="fr-FR">360 ¥ - 1 439 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 360 - ¥ 1439,00</display-name>
                         <display-name xml:lang="ja-JP">¥360 ～ ¥1439.00</display-name>
-                        <display-name xml:lang="zh-CN">360 - 1439.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">360 - 1439.00 元</display-name>
                         <threshold>1440</threshold>
                     </price-bucket>
                     <price-bucket currency="JPY">
@@ -4697,7 +4701,7 @@
                         <display-name xml:lang="fr-FR">moins de 18 €</display-name>
                         <display-name xml:lang="it-IT">sotto $18</display-name>
                         <display-name xml:lang="ja-JP">€18 以下</display-name>
-                        <display-name xml:lang="zh-CN">18 欧元以下</display-name>
+                        <display-name xml:lang="zh-CN">18 元以下</display-name>
                         <threshold>18</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -4705,7 +4709,7 @@
                         <display-name xml:lang="fr-FR">18 € - 36 €</display-name>
                         <display-name xml:lang="it-IT">€ 18 - € 36</display-name>
                         <display-name xml:lang="ja-JP">€18 ～ €36</display-name>
-                        <display-name xml:lang="zh-CN">18 - 36 欧元</display-name>
+                        <display-name xml:lang="zh-CN">18 - 36 元</display-name>
                         <threshold>36</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -4713,7 +4717,7 @@
                         <display-name xml:lang="fr-FR">36 € - 71,00 €</display-name>
                         <display-name xml:lang="it-IT">€ 36 - € 71,00</display-name>
                         <display-name xml:lang="ja-JP">€36 ～ €71.00</display-name>
-                        <display-name xml:lang="zh-CN">36 - 71.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">36 - 71.00 元</display-name>
                         <threshold>72</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -4721,7 +4725,7 @@
                         <display-name xml:lang="fr-FR">72 € et plus</display-name>
                         <display-name xml:lang="it-IT">€ 72 e oltre</display-name>
                         <display-name xml:lang="ja-JP">€72 以上</display-name>
-                        <display-name xml:lang="zh-CN">72 欧元以上</display-name>
+                        <display-name xml:lang="zh-CN">72 元以上</display-name>
                         <threshold>719999</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
@@ -4761,7 +4765,7 @@
                         <display-name xml:lang="fr-FR">moins de 18 ¥</display-name>
                         <display-name xml:lang="it-IT">sotto ¥18</display-name>
                         <display-name xml:lang="ja-JP">¥18 以下</display-name>
-                        <display-name xml:lang="zh-CN">18 欧元以下</display-name>
+                        <display-name xml:lang="zh-CN">18 元以下</display-name>
                         <threshold>18</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -4769,7 +4773,7 @@
                         <display-name xml:lang="fr-FR">18 ¥ - 36 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 18 - ¥ 36</display-name>
                         <display-name xml:lang="ja-JP">¥18 ～ ¥36</display-name>
-                        <display-name xml:lang="zh-CN">18 - 36 欧元</display-name>
+                        <display-name xml:lang="zh-CN">18 - 36 元</display-name>
                         <threshold>36</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -4777,7 +4781,7 @@
                         <display-name xml:lang="fr-FR">36 ¥ - 71,00 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 36 - ¥ 71,00</display-name>
                         <display-name xml:lang="ja-JP">¥36 ～ ¥71.00</display-name>
-                        <display-name xml:lang="zh-CN">36 - 71.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">36 - 71.00 元</display-name>
                         <threshold>72</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -4785,7 +4789,7 @@
                         <display-name xml:lang="fr-FR">72 ¥ et plus</display-name>
                         <display-name xml:lang="it-IT">¥ 72 e oltre</display-name>
                         <display-name xml:lang="ja-JP">¥72 以上</display-name>
-                        <display-name xml:lang="zh-CN">72 欧元以上</display-name>
+                        <display-name xml:lang="zh-CN">72 元以上</display-name>
                         <threshold>719999</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -4793,7 +4797,7 @@
                         <display-name xml:lang="fr-FR">moins de 18 £</display-name>
                         <display-name xml:lang="it-IT">sotto £18</display-name>
                         <display-name xml:lang="ja-JP">£18 以下</display-name>
-                        <display-name xml:lang="zh-CN">18 欧元以下</display-name>
+                        <display-name xml:lang="zh-CN">18 元以下</display-name>
                         <threshold>18</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -4801,7 +4805,7 @@
                         <display-name xml:lang="fr-FR">18 ¥ - 36 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 18 - ¥ 36</display-name>
                         <display-name xml:lang="ja-JP">¥18 ～ ¥36</display-name>
-                        <display-name xml:lang="zh-CN">18 - 36 欧元</display-name>
+                        <display-name xml:lang="zh-CN">18 - 36 元</display-name>
                         <threshold>36</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -4809,7 +4813,7 @@
                         <display-name xml:lang="fr-FR">36 ¥ - 71,00 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 36 - ¥ 71,00</display-name>
                         <display-name xml:lang="ja-JP">¥36 ～ ¥71.00</display-name>
-                        <display-name xml:lang="zh-CN">36 - 71.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">36 - 71.00 元</display-name>
                         <threshold>72</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -4817,7 +4821,7 @@
                         <display-name xml:lang="fr-FR">72 ¥ et plus</display-name>
                         <display-name xml:lang="it-IT">¥ 72 e oltre</display-name>
                         <display-name xml:lang="ja-JP">¥72 以上</display-name>
-                        <display-name xml:lang="zh-CN">72 欧元以上</display-name>
+                        <display-name xml:lang="zh-CN">72 元以上</display-name>
                         <threshold>719999</threshold>
                     </price-bucket>
                     <price-bucket currency="JPY">
@@ -4859,7 +4863,7 @@
 
     <category category-id="mens-clothing-pants">
         <display-name xml:lang="x-default">Pants</display-name>
-        <display-name xml:lang="fr-FR">Pantalon</display-name>
+        <display-name xml:lang="fr-FR">Pantalons</display-name>
         <display-name xml:lang="it-IT">Pantaloni</display-name>
         <display-name xml:lang="ja-JP">パンツ</display-name>
         <display-name xml:lang="zh-CN">裤子</display-name>
@@ -4951,7 +4955,7 @@
                         <display-name xml:lang="fr-FR">0 € - 14,00 €</display-name>
                         <display-name xml:lang="it-IT">€ 0 - € 14,00</display-name>
                         <display-name xml:lang="ja-JP">€0 ～ €14.00</display-name>
-                        <display-name xml:lang="zh-CN">0 - 14.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 14.00 元</display-name>
                         <threshold>14</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -4959,7 +4963,7 @@
                         <display-name xml:lang="fr-FR">14 € - 35 €</display-name>
                         <display-name xml:lang="it-IT">€ 14 - € 35,00</display-name>
                         <display-name xml:lang="ja-JP">€14 ～ €35.00</display-name>
-                        <display-name xml:lang="zh-CN">14 - 35.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">14 - 35.00 元</display-name>
                         <threshold>36</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -4967,7 +4971,7 @@
                         <display-name xml:lang="fr-FR">36 € - 71,00 €</display-name>
                         <display-name xml:lang="it-IT">€ 36 - € 71,00</display-name>
                         <display-name xml:lang="ja-JP">€36 ～ €71.00</display-name>
-                        <display-name xml:lang="zh-CN">36 - 71.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">36 - 71.00 元</display-name>
                         <threshold>72</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -4975,7 +4979,7 @@
                         <display-name xml:lang="fr-FR">72 € - 359,00 €</display-name>
                         <display-name xml:lang="it-IT">€ 72 - € 359,00</display-name>
                         <display-name xml:lang="ja-JP">€72 ～ €359.00</display-name>
-                        <display-name xml:lang="zh-CN">72 - 359.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">72 - 359.00 元</display-name>
                         <threshold>360</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -4983,7 +4987,7 @@
                         <display-name xml:lang="fr-FR">360 € - 1 439,99 €</display-name>
                         <display-name xml:lang="it-IT">€ 360 - € 1439,99</display-name>
                         <display-name xml:lang="ja-JP">€360 ～ €1439.99</display-name>
-                        <display-name xml:lang="zh-CN">360 - 1439.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">360 - 1439.99 元</display-name>
                         <threshold>1440</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
@@ -5031,7 +5035,7 @@
                         <display-name xml:lang="fr-FR">0 ¥ - 14,00 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 0 - ¥ 14,00</display-name>
                         <display-name xml:lang="ja-JP">¥0 ～ ¥14.00</display-name>
-                        <display-name xml:lang="zh-CN">0 - 14.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 14.00 元</display-name>
                         <threshold>14</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -5039,7 +5043,7 @@
                         <display-name xml:lang="fr-FR">14 ¥ - 35 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 14 - ¥ 35,00</display-name>
                         <display-name xml:lang="ja-JP">¥14 ～ ¥35.00</display-name>
-                        <display-name xml:lang="zh-CN">14 - 35.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">14 - 35.00 元</display-name>
                         <threshold>36</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -5047,7 +5051,7 @@
                         <display-name xml:lang="fr-FR">36 ¥ - 71,00 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 36 - ¥ 71,00</display-name>
                         <display-name xml:lang="ja-JP">¥36 ～ ¥71.00</display-name>
-                        <display-name xml:lang="zh-CN">36 - 71.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">36 - 71.00 元</display-name>
                         <threshold>72</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -5055,7 +5059,7 @@
                         <display-name xml:lang="fr-FR">72 ¥ - 359,00 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 72 - ¥ 359,00</display-name>
                         <display-name xml:lang="ja-JP">¥72 ～ ¥359.00</display-name>
-                        <display-name xml:lang="zh-CN">72 - 359.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">72 - 359.00 元</display-name>
                         <threshold>360</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -5063,7 +5067,7 @@
                         <display-name xml:lang="fr-FR">360 ¥ - 1 439,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 360 - ¥ 1439,99</display-name>
                         <display-name xml:lang="ja-JP">¥360 ～ ¥1439.99</display-name>
-                        <display-name xml:lang="zh-CN">360 - 1439.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">360 - 1439.99 元</display-name>
                         <threshold>1440</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -5071,7 +5075,7 @@
                         <display-name xml:lang="fr-FR">0 ¥ - 14,00 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 0 - ¥ 14,00</display-name>
                         <display-name xml:lang="ja-JP">¥0 ～ ¥14.00</display-name>
-                        <display-name xml:lang="zh-CN">0 - 14.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 14.00 元</display-name>
                         <threshold>14</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -5079,7 +5083,7 @@
                         <display-name xml:lang="fr-FR">14 ¥ - 35 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 14 - ¥ 35,00</display-name>
                         <display-name xml:lang="ja-JP">¥14 ～ ¥35.00</display-name>
-                        <display-name xml:lang="zh-CN">14 - 35.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">14 - 35.00 元</display-name>
                         <threshold>36</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -5087,7 +5091,7 @@
                         <display-name xml:lang="fr-FR">36 ¥ - 71,00 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 36 - ¥ 71,00</display-name>
                         <display-name xml:lang="ja-JP">¥36 ～ ¥71.00</display-name>
-                        <display-name xml:lang="zh-CN">36 - 71.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">36 - 71.00 元</display-name>
                         <threshold>72</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -5095,7 +5099,7 @@
                         <display-name xml:lang="fr-FR">72 ¥ - 359,00 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 72 - ¥ 359,00</display-name>
                         <display-name xml:lang="ja-JP">¥72 ～ ¥359.00</display-name>
-                        <display-name xml:lang="zh-CN">72 - 359.00 欧元</display-name>
+                        <display-name xml:lang="zh-CN">72 - 359.00 元</display-name>
                         <threshold>360</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -5103,7 +5107,7 @@
                         <display-name xml:lang="fr-FR">360 ¥ - 1 439,99 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 360 - ¥ 1439,99</display-name>
                         <display-name xml:lang="ja-JP">¥360 ～ ¥1439.99</display-name>
-                        <display-name xml:lang="zh-CN">360 - 1439.99 欧元</display-name>
+                        <display-name xml:lang="zh-CN">360 - 1439.99 元</display-name>
                         <threshold>1440</threshold>
                     </price-bucket>
                     <price-bucket currency="JPY">
@@ -5306,9 +5310,9 @@
 
     <category category-id="top-seller">
         <display-name xml:lang="x-default">Top Sellers</display-name>
-        <display-name xml:lang="fr-FR">Meilleure vente</display-name>
+        <display-name xml:lang="fr-FR">Meilleures ventes</display-name>
         <display-name xml:lang="it-IT">I più venduti</display-name>
-        <display-name xml:lang="ja-JP">売れ筋商品</display-name>
+        <display-name xml:lang="ja-JP">売れ筋順</display-name>
         <display-name xml:lang="zh-CN">最畅销</display-name>
         <online-flag>true</online-flag>
         <parent>root</parent>
@@ -5360,20 +5364,20 @@
         <template/>
         <page-attributes>
             <page-title xml:lang="x-default">Men's, Women's, and Kid's Sales</page-title>
-            <page-title xml:lang="fr-FR">Soldes hommes, femmes, et produits enfants</page-title>
-            <page-title xml:lang="it-IT">Svendite uomo, donna, ed bambino</page-title>
-            <page-title xml:lang="ja-JP">メンズ、レディース、キッズ、エレクトロニクス製品のセール商品</page-title>
-            <page-title xml:lang="zh-CN">男士、女士、儿童及电子产品促销</page-title>
+            <page-title xml:lang="fr-FR">Soldes homme, femme et enfant</page-title>
+            <page-title xml:lang="it-IT">Vendita uomo, donna, bambino</page-title>
+            <page-title xml:lang="ja-JP">メンズ、レディース、キッズセール</page-title>
+            <page-title xml:lang="zh-CN">男士、女士及儿童促销产品</page-title>
             <page-description xml:lang="x-default">Shop all of our discounted items in our Men's, Women's, and Kid's departments at Demandware.</page-description>
-            <page-description xml:lang="fr-FR">Découvrez tous nos articles soldés dans les boutiques homme, femme, et produits enfant de Demandware.</page-description>
-            <page-description xml:lang="it-IT">Tutti i nostri articoli scontati nei reparti Uomo, Donna, ed Bambino di Demandware.</page-description>
-            <page-description xml:lang="ja-JP">Demandware のメンズ、レディース、キッズ、エレクトロニクス製品コーナーは、各種ディスカウントアイテムを取り揃えています。</page-description>
-            <page-description xml:lang="zh-CN">在 Demandware 的男士、女士、儿童及电子产品部，选购所有的折扣商品。</page-description>
+            <page-description xml:lang="fr-FR">Découvrez tous nos articles soldés dans les boutiques homme, femme et enfant de Demandware.</page-description>
+            <page-description xml:lang="it-IT">Tutti i nostri articoli scontati nei reparti Uomo, Donna e Bambino presso Demandware.</page-description>
+            <page-description xml:lang="ja-JP">Demandware のメンズ、レディース、キッズコーナーでディスカウントアイテムをご購入ください。</page-description>
+            <page-description xml:lang="zh-CN">在 Demandware 的男士、女士及儿童促销产品部，选购所有的折扣商品。</page-description>
             <page-keywords xml:lang="x-default">sale, sales. mens, womens, kids</page-keywords>
-            <page-keywords xml:lang="fr-FR">soldes, promotions, homme, femme, produits enfant</page-keywords>
-            <page-keywords xml:lang="it-IT">svendita, svendite, uomo, donna, bambino</page-keywords>
-            <page-keywords xml:lang="ja-JP">セール、セール商品、メンズ、レディース、キッズ、エレクトロニクス製品</page-keywords>
-            <page-keywords xml:lang="zh-CN">促销、折扣、男士、女士、儿童, 电子产品</page-keywords>
+            <page-keywords xml:lang="fr-FR">soldes, promotions, homme, femme, enfant</page-keywords>
+            <page-keywords xml:lang="it-IT">vendita, vendite. uomo, donna, bambino</page-keywords>
+            <page-keywords xml:lang="ja-JP">セール、セール、メンズ、レディース、キッズ</page-keywords>
+            <page-keywords xml:lang="zh-CN">促销、折扣、男士、女士、儿童</page-keywords>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -6605,7 +6609,7 @@
                         <display-name xml:lang="fr-FR">0 € - 20 €</display-name>
                         <display-name xml:lang="it-IT">€ 0 - € 20</display-name>
                         <display-name xml:lang="ja-JP">€0 ～ €20</display-name>
-                        <display-name xml:lang="zh-CN">0 - 20 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 20 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -6613,7 +6617,7 @@
                         <display-name xml:lang="fr-FR">14 € - 36 €</display-name>
                         <display-name xml:lang="it-IT">€ 14 - € 36</display-name>
                         <display-name xml:lang="ja-JP">€14 ～ €36</display-name>
-                        <display-name xml:lang="zh-CN">14 - 36 欧元</display-name>
+                        <display-name xml:lang="zh-CN">14 - 36 元</display-name>
                         <threshold>36</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -6621,7 +6625,7 @@
                         <display-name xml:lang="fr-FR">36 € - 72 €</display-name>
                         <display-name xml:lang="it-IT">€ 36 - € 72</display-name>
                         <display-name xml:lang="ja-JP">€36 ～ €72</display-name>
-                        <display-name xml:lang="zh-CN">36 - 72 欧元</display-name>
+                        <display-name xml:lang="zh-CN">36 - 72 元</display-name>
                         <threshold>72</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -6629,7 +6633,7 @@
                         <display-name xml:lang="fr-FR">72 € - 360 €</display-name>
                         <display-name xml:lang="it-IT">€ 72 - € 360</display-name>
                         <display-name xml:lang="ja-JP">€72 ～ €360</display-name>
-                        <display-name xml:lang="zh-CN">72 - 360 欧元</display-name>
+                        <display-name xml:lang="zh-CN">72 - 360 元</display-name>
                         <threshold>360</threshold>
                     </price-bucket>
                     <price-bucket currency="EUR">
@@ -6637,7 +6641,7 @@
                         <display-name xml:lang="fr-FR">360 € - 1 440 €</display-name>
                         <display-name xml:lang="it-IT">€ 360 - € 1440</display-name>
                         <display-name xml:lang="ja-JP">€360 ～ €1440</display-name>
-                        <display-name xml:lang="zh-CN">360 - 1440 欧元</display-name>
+                        <display-name xml:lang="zh-CN">360 - 1440 元</display-name>
                         <threshold>1440</threshold>
                     </price-bucket>
                     <price-bucket currency="USD">
@@ -6685,7 +6689,7 @@
                         <display-name xml:lang="fr-FR">0 ¥ - 20 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 0 - ¥ 20</display-name>
                         <display-name xml:lang="ja-JP">¥0 ～ ¥20</display-name>
-                        <display-name xml:lang="zh-CN">0 - 20 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 20 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -6693,7 +6697,7 @@
                         <display-name xml:lang="fr-FR">14 ¥ - 36 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 14 - ¥ 36</display-name>
                         <display-name xml:lang="ja-JP">¥14 ～ ¥36</display-name>
-                        <display-name xml:lang="zh-CN">14 - 36 欧元</display-name>
+                        <display-name xml:lang="zh-CN">14 - 36 元</display-name>
                         <threshold>36</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -6701,7 +6705,7 @@
                         <display-name xml:lang="fr-FR">36 ¥ - 72 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 36 - ¥ 72</display-name>
                         <display-name xml:lang="ja-JP">¥36 ～ ¥72</display-name>
-                        <display-name xml:lang="zh-CN">36 - 72 欧元</display-name>
+                        <display-name xml:lang="zh-CN">36 - 72 元</display-name>
                         <threshold>72</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -6709,7 +6713,7 @@
                         <display-name xml:lang="fr-FR">72 ¥ - 360 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 72 - ¥ 360</display-name>
                         <display-name xml:lang="ja-JP">¥72 ～ ¥360</display-name>
-                        <display-name xml:lang="zh-CN">72 - 360 欧元</display-name>
+                        <display-name xml:lang="zh-CN">72 - 360 元</display-name>
                         <threshold>360</threshold>
                     </price-bucket>
                     <price-bucket currency="CNY">
@@ -6717,7 +6721,7 @@
                         <display-name xml:lang="fr-FR">360 ¥ - 1 440 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 360 - ¥ 1440</display-name>
                         <display-name xml:lang="ja-JP">¥360 ～ ¥1440</display-name>
-                        <display-name xml:lang="zh-CN">360 - 1440 欧元</display-name>
+                        <display-name xml:lang="zh-CN">360 - 1440 元</display-name>
                         <threshold>1440</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -6725,7 +6729,7 @@
                         <display-name xml:lang="fr-FR">0 ¥ - 20 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 0 - ¥ 20</display-name>
                         <display-name xml:lang="ja-JP">¥0 ～ ¥20</display-name>
-                        <display-name xml:lang="zh-CN">0 - 20 欧元</display-name>
+                        <display-name xml:lang="zh-CN">0 - 20 元</display-name>
                         <threshold>20</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -6733,7 +6737,7 @@
                         <display-name xml:lang="fr-FR">14 ¥ - 36 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 14 - ¥ 36</display-name>
                         <display-name xml:lang="ja-JP">¥14 ～ ¥36</display-name>
-                        <display-name xml:lang="zh-CN">14 - 36 欧元</display-name>
+                        <display-name xml:lang="zh-CN">14 - 36 元</display-name>
                         <threshold>36</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -6741,7 +6745,7 @@
                         <display-name xml:lang="fr-FR">36 ¥ - 72 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 36 - ¥ 72</display-name>
                         <display-name xml:lang="ja-JP">¥36 ～ ¥72</display-name>
-                        <display-name xml:lang="zh-CN">36 - 72 欧元</display-name>
+                        <display-name xml:lang="zh-CN">36 - 72 元</display-name>
                         <threshold>72</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -6749,7 +6753,7 @@
                         <display-name xml:lang="fr-FR">72 ¥ - 360 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 72 - ¥ 360</display-name>
                         <display-name xml:lang="ja-JP">¥72 ～ ¥360</display-name>
-                        <display-name xml:lang="zh-CN">72 - 360 欧元</display-name>
+                        <display-name xml:lang="zh-CN">72 - 360 元</display-name>
                         <threshold>360</threshold>
                     </price-bucket>
                     <price-bucket currency="GBP">
@@ -6757,7 +6761,7 @@
                         <display-name xml:lang="fr-FR">360 ¥ - 1 440 ¥</display-name>
                         <display-name xml:lang="it-IT">¥ 360 - ¥ 1440</display-name>
                         <display-name xml:lang="ja-JP">¥360 ～ ¥1440</display-name>
-                        <display-name xml:lang="zh-CN">360 - 1440 欧元</display-name>
+                        <display-name xml:lang="zh-CN">360 - 1440 元</display-name>
                         <threshold>1440</threshold>
                     </price-bucket>
                     <price-bucket currency="JPY">

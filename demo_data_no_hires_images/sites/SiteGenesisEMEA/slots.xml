@@ -21,7 +21,7 @@
 &lt;p style="padding: 0px 10px;"&gt;10% off any order with a purchase of over £150&lt;/p&gt;
 &lt;/div&gt;</body>
                 <body xml:lang="fr-FR">&lt;div class="minicartslot"&gt;
-&lt;p style="padding: 0px 10px;"&gt;10 % de remise pour tout achat de plus de 150 euros&lt;/p&gt;
+&lt;p style="padding: 0px 10px;"&gt;10 % de remise pour tout achat de plus de 150 €&lt;/p&gt;
 &lt;/div&gt;</body>
                 <body xml:lang="it-IT">&lt;div class="minicartslot"&gt;
 &lt;p style="padding: 0px 10px;"&gt;10% di sconto su tutti gli ordini superiori a € 150&lt;/p&gt;
@@ -384,7 +384,7 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <enabled-flag>true</enabled-flag>
         <content>
             <content-assets>
-                <content-asset content-id="home-free-shipping-orders-over-150"/>
+                <content-asset content-id="home-bottom-center"/>
             </content-assets>
         </content>
     </slot-configuration>
@@ -447,7 +447,7 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <enabled-flag>true</enabled-flag>
         <content>
             <content-assets>
-                <content-asset content-id="home-bottom-womens-shoes"/>
+                <content-asset content-id="home-bottom-left"/>
             </content-assets>
         </content>
     </slot-configuration>
@@ -457,10 +457,10 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <template>slots/product/homerightcarousel.isml</template>
         <enabled-flag>true</enabled-flag>
         <callout-msg xml:lang="x-default">&lt;h2&gt;This Weeks&lt;/h2&gt;&lt;h1&gt;Deals&lt;/h1&gt;</callout-msg>
-        <callout-msg xml:lang="fr-FR">Produits présentés</callout-msg>
-        <callout-msg xml:lang="it-IT">Prodotti in primo piano</callout-msg>
-        <callout-msg xml:lang="ja-JP">おすすめの商品</callout-msg>
-        <callout-msg xml:lang="zh-CN">推荐商品</callout-msg>
+        <callout-msg xml:lang="fr-FR">&lt;h2&gt;Les bonnes affaires&lt;/h2&gt;&lt;h1&gt;De la semaine&lt;/h1&gt;</callout-msg>
+        <callout-msg xml:lang="it-IT">&lt;h2&gt;Offerte&lt;/h2&gt;&lt;h1&gt;della settimana&lt;/h1&gt;</callout-msg>
+        <callout-msg xml:lang="ja-JP">&lt;h2&gt;今週の&lt;/h2&gt;&lt;h1&gt;特価商品&lt;/h1&gt;</callout-msg>
+        <callout-msg xml:lang="zh-CN">&lt;h2&gt;本周&lt;/h2&gt;&lt;h1&gt;热卖&lt;/h1&gt;</callout-msg>
         <content>
             <products>
                 <product product-id="25591494"/>
@@ -624,6 +624,10 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <template>slots/product/product_listing.isml</template>
         <enabled-flag>true</enabled-flag>
         <callout-msg xml:lang="x-default">Womens New Arrivals</callout-msg>
+        <callout-msg xml:lang="fr-FR">Nouveautés Femme</callout-msg>
+        <callout-msg xml:lang="it-IT">Nuovi arrivi Donna</callout-msg>
+        <callout-msg xml:lang="ja-JP">レディース新着商品</callout-msg>
+        <callout-msg xml:lang="zh-CN">女款新品</callout-msg>
         <content>
             <products>
                 <product product-id="fall-look"/>
@@ -641,6 +645,10 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <template>slots/product/product_listing.isml</template>
         <enabled-flag>true</enabled-flag>
         <callout-msg xml:lang="x-default">Mens New Arrivals</callout-msg>
+        <callout-msg xml:lang="fr-FR">Nouveautés Homme</callout-msg>
+        <callout-msg xml:lang="it-IT">Nuovi arrivi Uomo</callout-msg>
+        <callout-msg xml:lang="ja-JP">メンズ新着商品</callout-msg>
+        <callout-msg xml:lang="zh-CN">男款新品</callout-msg>
         <content>
             <products>
                 <product product-id="25604524"/>
@@ -722,7 +730,7 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <enabled-flag>true</enabled-flag>
         <content>
             <html>
-                <body xml:lang="x-default">&lt;img alt="Image for Womens Category" src="images/slot/landing/cat-landing-slotbanner-womens-abtest.jpg?$staticlink$" title="" /&gt;</body>
+                <body xml:lang="fr-FR">&lt;img alt="Image Catégorie Femme" src="images/slot/landing/cat-landing-slotbanner-womens-abtest.jpg?$staticlink$" title="" /&gt;</body>
             </html>
         </content>
     </slot-configuration>

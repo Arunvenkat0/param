@@ -4,7 +4,7 @@
         <online-flag>true</online-flag>
         <page-attributes>
             <page-title xml:lang="x-default">SiteGenesis Online Store</page-title>
-            <page-title xml:lang="fr-FR">Magasin en ligne SiteGenesis </page-title>
+            <page-title xml:lang="fr-FR">Boutique en ligne SiteGenesis</page-title>
             <page-title xml:lang="it-IT">Negozio online SiteGenesis</page-title>
             <page-title xml:lang="ja-JP">SiteGenesis オンラインストア</page-title>
             <page-title xml:lang="zh-CN">SiteGenesis 网上商店</page-title>
@@ -263,12 +263,12 @@
         <display-name xml:lang="x-default">Content Asset Page Includes</display-name>
         <display-name xml:lang="fr-FR">La page d'éléments de contenu contient</display-name>
         <display-name xml:lang="it-IT">La pagina Asset di contenuto include</display-name>
-        <display-name xml:lang="ja-JP">コンテンツ資産ページの内容</display-name>
+        <display-name xml:lang="ja-JP">コンテンツアセットページの内容</display-name>
         <display-name xml:lang="zh-CN">内容素材页面包含</display-name>
         <description xml:lang="x-default">This folder contains all content assets that are included within the storefront including home page assets, marketing landing page assets etc.</description>
-        <description xml:lang="fr-FR">Ce dossier contient tous les éléments de contenu qui font partie du magasin en ligne, notamment les éléments de la page d'accueil, les éléments marketing de la page principale, etc.</description>
+        <description xml:lang="fr-FR">Ce dossier contient tous les éléments de contenu qui font partie de la boutique en ligne, notamment les éléments de la page d'accueil, les éléments marketing de la page principale, etc.</description>
         <description xml:lang="it-IT">Questa cartella contiene tutti gli asset di contenuto inclusi nello storefront, tra questi gli asset della pagina principale, gli asset della pagina di destinazione degli annunci pubblicitari ecc.</description>
-        <description xml:lang="ja-JP">このフォルダーには、ホームページの資産、マーケティングのランディングページの資産など、ストアフロント内にあるすべてのコンテンツ資産が含まれています。</description>
+        <description xml:lang="ja-JP">このフォルダーには、ホームページの資産、マーケティングのランディングページの資産など、ストアフロント内にあるすべてのコンテンツアセットが含まれています。</description>
         <description xml:lang="zh-CN">此文件夹包括网店中包含的所有内容素材，包括主页素材、营销登录页面素材等。</description>
         <online-flag>false</online-flag>
         <parent>root</parent>
@@ -441,15 +441,15 @@
 &lt;p style="margin:24px 0 8px 0;"&gt;&lt;strong&gt;Note:&lt;/strong&gt; All Televisions must ship using ground shipping, 2nd Day Air and Next Day Air are not available shipping options for televisions.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;div style="padding:24px 16px 0 16px"&gt;&#13;
-&lt;h2&gt; &lt;span style="color: rgb(86, 79, 71); "&gt;Lirvraison |&lt;/span&gt; &lt;span style="color: rgb(225, 185, 149);"&gt;Livraison en 2 jours gratuite pour les commandes de plus de 300 €&lt;/span&gt;&lt;/h2&gt;&#13;
+&lt;h2&gt; &lt;span style="color: rgb(86, 79, 71); "&gt;Livraison |&lt;/span&gt; &lt;span style="color: rgb(225, 185, 149);"&gt;Livraison en 2 jours gratuite pour les commandes de plus de 300 €&lt;/span&gt;&lt;/h2&gt;&#13;
 &lt;hr /&gt;&#13;
-&lt;h2&gt;Livraison gratuite en 2 jours pour les commandes supérieures à 300 euros&lt;/h2&gt;&#13;
-&lt;p style="text-align: left;"&gt;SiteGenesis vous offre la livraison en 2 jours pour toute commande supérieure à 300 euros, à destination des États contigus. Cette offre est limitée aux commandes livrées en 2 jours. &lt;em&gt;Offre non valable pour l'Arkansas, Hawaï et les boîtes postales. &lt;/em&gt;La livraison gratuite est déterminée par le total de la commande, après déduction des remises.&lt;/p&gt;&#13;
+&lt;h2&gt;Livraison gratuite en 2 jours pour les commandes supérieures à 300 euros&lt;/h2&gt;&#13;
+&lt;p style="text-align: left;"&gt;SiteGenesis vous offre la livraison en 2 jours pour toute commande supérieure à 300 euros, à destination des États contigus. Cette offre est limitée aux commandes livrées en 2 jours. &lt;em&gt;Offre non valable pour l'Arkansas, Hawaï et les boîtes postales. &lt;/em&gt;La livraison gratuite est déterminée par le total de la commande, après déduction des remises.&lt;/p&gt;&#13;
 &lt;h2&gt;Formules de livraison&lt;/h2&gt;&#13;
 &lt;table class="shippingpromotable" summary="Shipping Promotion Table"&gt;&#13;
     &lt;tbody&gt;&#13;
         &lt;tr&gt;&#13;
-            &lt;th&gt;Frais de port&lt;/th&gt;&#13;
+            &lt;th&gt;Montant de la livraison&lt;/th&gt;&#13;
             &lt;th&gt;Transport terrestre UPS&lt;/th&gt;&#13;
             &lt;th&gt;Par avion J+2&lt;/th&gt;&#13;
             &lt;th&gt;Par avion J+1&lt;/th&gt;&#13;
@@ -467,7 +467,7 @@
             &lt;td&gt;19,99 €&lt;/td&gt;&#13;
         &lt;/tr&gt;&#13;
         &lt;tr&gt;&#13;
-            &lt;th&gt;200,00 € - 499,9 €&lt;/th&gt;&#13;
+            &lt;th&gt;200,00 € - 499,99 €&lt;/th&gt;&#13;
             &lt;td&gt;9,99 €&lt;/td&gt;&#13;
             &lt;td&gt;15,99 €&lt;/td&gt;&#13;
             &lt;td&gt;21,99 €&lt;/td&gt;&#13;
@@ -480,7 +480,7 @@
         &lt;/tr&gt;&#13;
     &lt;/tbody&gt;&#13;
 &lt;/table&gt;&#13;
-&lt;p style="margin:24px 0 8px 0;"&gt;&lt;strong&gt;Remarque :&lt;/strong&gt; Les téléviseurs sont livrés par transport terrestre. La livraison par avion en J+2 ou J+1 n'est pas disponible pour les téléviseurs.&lt;/p&gt;&#13;
+&lt;p style="margin:24px 0 8px 0;"&gt;&lt;strong&gt;Remarque :&lt;/strong&gt; les téléviseurs sont livrés par transport terrestre. La livraison par avion en J+2 ou J+1 n'est pas disponible pour les téléviseurs.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;div style="padding:24px 16px 0 16px"&gt;&#13;
 &lt;h2&gt; &lt;span style="color: rgb(86, 79, 71); "&gt;Spedizione |&lt;/span&gt; &lt;span style="color: rgb(225, 185, 149);"&gt;Spedizione gratuita entro 2 giorni per ordini superiori a € 300&lt;/span&gt;&lt;/h2&gt;&#13;
@@ -709,7 +709,7 @@ La pagina non è più disponibile. Errore 404: pagina non trovata. Usa la casell
         <display-name xml:lang="ja-JP">Demandware について</display-name>
         <display-name xml:lang="zh-CN">关于我们</display-name>
         <description xml:lang="x-default">It all started with a series of observations: eCommerce merchandising and marketing innovation is what generates the revenue, yet most operations are spending 80% of their budgets simply maintaining current infrastructure. The pace of ecommerce accelerates daily, yet most operations are scrambling to stand still. Merchandisers and marketers are supremely frustrated, spending more time chasing outsourced providers and internal IT organizations, than actually merchandising and marketing their own businesses. There had to be a better way.</description>
-        <description xml:lang="fr-FR">Tout a débuté par trois observations : dans l'e-commerce, l'innovation en matière de merchandising et de marketing est le générateur de recettes ; pourtant, la plupart des entreprises consacrent 80 % de leur budget au seul maintien de leur infrastructure actuelle. Alors que le rythme du commerce s'accélère chaque jour, la plupart des entreprises ont toutes les peines à simplement se maintenir à jour. Les spécialistes du merchandising et du marketing sont d'autant plus frustrés qu'ils passent davantage de temps à rechercher des prestataires d'infogérance et des ressources informatiques internes qu'à déployer leurs propres actions de merchandising et de marketing. Une vision</description>
+        <description xml:lang="fr-FR">Tout a débuté par une série d'observations : dans l'e-commerce, l'innovation en matière de merchandising et de marketing est le générateur de recettes ; pourtant, la plupart des entreprises consacrent 80 % de leur budget au seul maintien de leur infrastructure actuelle. Alors que le rythme du commerce s'accélère chaque jour, la plupart des entreprises ont toutes les peines à simplement se maintenir à jour. Les spécialistes du merchandising et du marketing sont d'autant plus frustrés qu'ils passent davantage de temps à rechercher des prestataires d'infogérance et des ressources informatiques internes qu'à déployer leurs propres actions de merchandising et de marketing. Une vision</description>
         <description xml:lang="it-IT">Tutto è iniziato da una serie di osservazioni: le innovazioni nei campi di merchandising e marketing e-commerce sono il motore che genera i profitti, tuttavia la maggior parte delle aziende spende ancora l'80% dei budget per la manutenzione dell'infrastruttura esistente. L'e-commerce ormai avanza inesorabilmente ogni giorno di più, mentre nelle aziende si fanno i salti mortali per cercare il modo di non adeguarsi ai cambiamenti. I venditori e gli esperti di marketing lavorano in continua frustrazione, costretti a correre dietro ai fornitori esterni e ai reparti IT interni, piuttosto che dedicarsi alla commercializzazione e al marketing per la loro attività. Deve esserci una soluzione.</description>
         <description xml:lang="ja-JP">始まりは現状を見つめるところから: eコマースによるマーチャンダイジングとマーケティングのイノベーションは、収益を生み出すものであるにもかかわらず、大部分の事業では予算の 80% を現在のインフラを保守するためだけに使っています。eコマースは日々加速しているのにもかかわらず、大部分の事業は混乱してただ立ち尽くしています。マーチャンダイザーとマーケット担当者の葛藤は度合いを増し、実際に自社ビジネスのマーチャンダイジングとマーケティングを行うことよりも、外注先のプロバイダーや社内の IT 部門への対応に、より多くの時間を費やしています。他にもっとよい方法があるのではないか、私達はそう考えました。</description>
         <description xml:lang="zh-CN">一系列结果向人们表明：eCommerce 销售和营销创新可以产生收益，而大多数企业都要将预算的 80% 拿出来仅仅是为了维持现有的基础设施。eCommerce 的发展步伐日新月异，而大多数企业还是原地踏步。。商家和营销人员感到无所适从，花费比实际销售和营销自己业务要多得多的时间来追逐外包供应商和内部 IT 组织。肯定有更好的办法。</description>
@@ -747,7 +747,7 @@ For more information please browse our &lt;a title="About Us Content" href="$url
 &lt;p&gt;En résumé, ils sont libres. Libres de vendre. Libres de croître. Libres d'innover. Libres de changer. La définition même du e-commerce.&lt;/p&gt;&#13;
 &#13;
 &lt;p&gt;&#13;
-Pour plus d'informations, rendez-vous sur nos &lt;a title="Contenu À propos de nous" href="$url(Search-ShowContent,fdid,about-us)$"&gt;À propos de nous&lt;/a&gt; et  &lt;a title="Contenu À propos de nous" href="$url(Search-ShowContent,fdid,customer-service)$"&gt;Service client&lt;/a&gt; pages.&#13;
+Pour plus d'informations, rendez-vous sur nos pages &lt;a title="Contenu À propos de nous" href="$url(Search-ShowContent,fdid,about-us)$"&gt;À propos de nous&lt;/a&gt; et  &lt;a title="Contenu Service client" href="$url(Search-ShowContent,fdid,customer-service)$"&gt;Service client&lt;/a&gt; .&#13;
 &lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;h1 class="content-header"&gt;Chi siamo&lt;/h1&gt;&#13;
 &lt;h2&gt;Tutto è iniziato da una serie di osservazioni:&lt;/h2&gt;      &#13;
@@ -776,10 +776,10 @@ Per ulteriori informazioni visita le pagine &lt;a title="Contenuto Chi siamo" hr
 &lt;p&gt;そして 2004 年、その方法を見つけるべく活動を開始したのです。ビジョンは、&amp;mdash; そのときも今も &amp;mdash; 明白でした。つまり、より大きな力と革新をマーチャンダイザーの手に委ねると同時に、eコマース事業を営むための技術的コスト、リスク、複雑さを排除するエンタープライズ規模の eコマースソリューションを市場にもたらすことです。私達が知っている優れた eコマースマーチャンダイジング (弊社の創設者は 1994 年から eコマースに携わっています) に基づき、当時めざましく台頭していた SaaS アーキテクチャと動的グリッドコンピューティングにそれを適用しました。後は努力に努力を重ね、夜遅くまで働き、コーヒーを何杯も飲みました。そして 2005 年の終わり、ついに市場初のオンデマンドエンタープライズ eコマースプラットフォームを世に出したのです。&lt;/p&gt;                &#13;
 &lt;h2&gt;結果は、顧客からの大絶賛でした。&lt;/h2&gt;       &#13;
 &lt;p&gt;Demandware eコマースを使用すれば、マーチャンダイジングとマーケティングに、より多くの時間を費やせます。サイトをすべて自分たちで管理し、いつでも変更を加え、新しいストアフロントを起ち上げることができます。そして、(一般的な機能の構築ではなく) 独自のイノベーションを推し進めることに多くの時間を費やせるようになります。Demandware から新しいソフトウェアアップグレードを継続的に受け取ることができるため、サイトのアップタイム、可用性、セキュリティについて一切心配しなくてよいのです。&lt;/p&gt;&#13;
-&lt;p&gt;つまり、自由を手に入れたということ。自由に商売を行い、自由に成長し、自由に革新を遂げ、自由に変化する。Eコマースとはかくあるべきではないでしょうか? &lt;/p&gt;&#13;
+&lt;p&gt;つまり、自由を手に入れたということ。自由に商売を行い、自由に成長し、自由に革新を遂げ、自由に変化する。eコマースとはかくあるべきではないでしょうか? &lt;/p&gt;&#13;
 &#13;
 &lt;p&gt;&#13;
-詳細については、 &lt;a title="企業情報コンテンツ" href="$url(Search-ShowContent,fdid,about-us)$"&gt;Demandware について&lt;/a&gt; および  &lt;a title="企業情報コンテンツ" href="$url(Search-ShowContent,fdid,customer-service)$"&gt;カスタマーサービス&lt;/a&gt; のページをお読みください。&#13;
+詳細については、&lt;a title="企業情報コンテンツ" href="$url(Search-ShowContent,fdid,about-us)$"&gt;Demandware について&lt;/a&gt;および&lt;a title="企業情報コンテンツ" href="$url(Search-ShowContent,fdid,customer-service)$"&gt;カスタマーサービス&lt;/a&gt;のページをお読みください。&#13;
 &lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;h1 class="content-header"&gt;关于我们&lt;/h1&gt;&#13;
 &lt;h2&gt;一切皆因一系列的意见而开始：&lt;/h2&gt;      &#13;
@@ -5248,7 +5248,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <description xml:lang="x-default">Global Cart Footer Content Asset</description>
         <description xml:lang="fr-FR">Élément de contenu global de pied de page Panier</description>
         <description xml:lang="it-IT">Asset di contenuto a piè di pagina Carrello globale</description>
-        <description xml:lang="ja-JP">グローバル買い物カゴフッターのコンテンツ資産</description>
+        <description xml:lang="ja-JP">グローバル買い物カゴフッターのコンテンツアセット</description>
         <description xml:lang="zh-CN">全局购物车页脚内容素材</description>
         <online-flag>true</online-flag>
         <searchable-flag>false</searchable-flag>
@@ -5267,7 +5267,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <description xml:lang="x-default">Global Cart Header Content Asset</description>
         <description xml:lang="fr-FR">Élément de contenu global d'en-tête Panier</description>
         <description xml:lang="it-IT">Asset di contenuto per intestazione sezione Carrello globale</description>
-        <description xml:lang="ja-JP">グローバル買い物カゴヘッダーのコンテンツ資産</description>
+        <description xml:lang="ja-JP">グローバル買い物カゴヘッダーのコンテンツアセット</description>
         <description xml:lang="zh-CN">全局购物车页眉内容素材</description>
         <online-flag>true</online-flag>
         <searchable-flag>false</searchable-flag>
@@ -5522,9 +5522,9 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <display-name xml:lang="ja-JP">注文手続き</display-name>
         <display-name xml:lang="zh-CN">结账</display-name>
         <description xml:lang="x-default">When you are ready to complete your purchase, simply go to Checkout and follow these steps to place your order:</description>
-        <description xml:lang="fr-FR">Lorsque vous avez terminé vos achats, il ne vous reste plus qu'à les régler et à suivre les étapes ci-dessous pour passer votre commande :</description>
+        <description xml:lang="fr-FR">Lorsque vous avez terminé vos achats, il ne vous reste plus qu'à les régler et à suivre les étapes ci-dessous pour passer votre commande.</description>
         <description xml:lang="it-IT">Quando sei pronto per completare l'acquisto, passa al checkout e segui questa procedura per inviare l'ordine:</description>
-        <description xml:lang="ja-JP">お買い物が終わったら、「注文手続き」に移動し、以下の手順に従って注文処理を完了してください: </description>
+        <description xml:lang="ja-JP">お買い物が終わったら、「注文手続き」に移動し、以下の手順に従って注文処理を完了してください。</description>
         <description xml:lang="zh-CN">准备完成购买时，只需前往“结账”并按照以下步骤下达订单：</description>
         <online-flag>true</online-flag>
         <searchable-flag>true</searchable-flag>
@@ -5616,7 +5616,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
 &lt;p&gt;Una volta emessa la fattura, riceverai un'e-mail di conferma con il link per visualizzare la fattura con IVA per gli articoli acquistati e spediti. Questa e-mail si aggiunge all'e-mail di conferma della spedizione.&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;h1 class="content-header"&gt;注文手続き&lt;/h1&gt;&#13;
 &#13;
-&lt;h2&gt;お買い物が終わったら、「注文手続き」に移動し、以下の手順に従って注文処理を完了してください: &lt;/h2&gt;&#13;
+&lt;h2&gt;お買い物が終わったら、「注文手続き」に移動し、以下の手順に従って注文処理を完了してください。&lt;/h2&gt;&#13;
 &#13;
 &#13;
 &lt;h3&gt;登録ユーザーの方: &lt;/h3&gt;&#13;
@@ -5791,7 +5791,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div class="cvn-tooltip"&gt;&lt;img src="images/Cart/cvnimage.jpg?$staticlink$" alt="CVN Number" /&gt;&lt;p&gt;What is a Card Verification Number (CVN)?&lt;/p&gt;&#13;
 &lt;p&gt;For Discover, MasterCard and Visa, enter last three digits on the signature strip. For American Express, enter the four digits in small print on the front of the card.&lt;/p&gt;&lt;/div&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;div class="cvn-tooltip"&gt;&lt;img src="images/Cart/cvnimage.jpg?$staticlink$" alt="Numéro de vérification de la carte" /&gt;&lt;p&gt;Qu'est-ce que le numéro de vérification de la carte ?&lt;/p&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;div class="cvn-tooltip"&gt;&lt;img src="images/Cart/cvnimage.jpg?$staticlink$" alt="Numéro de vérification de la carte" /&gt;&lt;p&gt;Qu'est-ce que le numéro de vérification de la carte ?&lt;/p&gt;&#13;
 &lt;p&gt;Pour les cartes Discover, MasterCard et Visa, saisissez les trois derniers chiffres de la zone de signature. Pour les cartes American Express, saisissez les quatre chiffres en petits caractères situés au recto de la carte.&lt;/p&gt;&lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;div class="cvn-tooltip"&gt;&lt;img src="images/Cart/cvnimage.jpg?$staticlink$" alt="Numero CV2" /&gt;&lt;p&gt;Cos'è il numero di sicurezza della carta di credito (CV2)?&lt;/p&gt;&#13;
 &lt;p&gt;Per le carte Discover, MasterCard e Visa, inserisci le ultime tre cifre del numero presente sulla striscia della firma. Per le carte American Express, inserisci le quattro cifre indicate in carattere piccolo sul lato anteriore della carta.&lt;/p&gt;&lt;/div&gt;</custom-attribute>
@@ -5929,7 +5929,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
 &lt;li&gt;&lt;p&gt;&lt;span style="font-weight:bold;"&gt;Étape 2 &lt;/span&gt;Trouvez un article que souhaiteriez ajouter et cliquez sur le bouton Ajouter à la liste de cadeaux.&lt;/p&gt;&lt;/li&gt;&#13;
 &lt;li&gt;&lt;p&gt;&lt;span style="font-weight:bold;"&gt;Étape 3 &lt;/span&gt;Votre liste de cadeaux, à laquelle l'article sera ajouté, s'affiche.&lt;/p&gt;&lt;/li&gt;&#13;
 &lt;/ul&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;p&gt;Crea la tua lista regali personalizzata con tutti gli articoli che ti piacerebbe ricevere. Puoi condividere la lista con amici e parenti o scegliere di mantenerla privata.&lt;/p&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;p&gt;Crea la tua lista regali personalizzata con tutti gli articoli che ti piacerebbe ricevere. Puoi condividere la lista con amici e familiari o scegliere di mantenerla privata.&lt;/p&gt;&#13;
 &lt;ul style="margin: 0 0 0 16px;"&gt;&#13;
 &lt;li&gt;&lt;p&gt;&lt;span style="font-weight:bold;"&gt;Fase 1 &lt;/span&gt;Accedi per visualizzare le tue liste regali OPPURE registrati per creare la tua lista regali.&lt;/p&gt;&lt;/li&gt;&#13;
 &lt;li&gt;&lt;p&gt;&lt;span style="font-weight:bold;"&gt;Fase 2 &lt;/span&gt;Trova un articolo che ti piacerebbe aggiungere alla lista e fai clic sul pulsante "Aggiungi alla lista regali".&lt;/p&gt;&lt;/li&gt;&#13;
@@ -5962,7 +5962,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <display-name xml:lang="zh-CN">愿望清单优势</display-name>
         <description xml:lang="x-default">Create your very own Wish List of items you would like to have. You may share your list with family and friends, or you can choose to keep it to yourself.</description>
         <description xml:lang="fr-FR">Créez votre propre liste de souhaits avec les articles qui vous combleraient. Vous pourrez partager cette liste avec vos parents et amis, ou choisir de la garder pour vous.</description>
-        <description xml:lang="it-IT">Crea la tua lista desideri personalizzata con tutti gli articoli che vorresti comprare. Puoi condividere la lista con amici e parenti o scegliere di mantenerla privata.</description>
+        <description xml:lang="it-IT">Crea la tua lista desideri personalizzata con tutti gli articoli che vorresti comprare. Puoi condividere la lista con amici e familiari o scegliere di mantenerla privata.</description>
         <description xml:lang="ja-JP">希望する商品を集めて、自分専用のほしい物リストを作成しましょう。リストはご家族やお友達と共有することも、非公開にすることもできます。</description>
         <description xml:lang="zh-CN">创建您想拥有的属于自己的愿望清单项目。您可以与家人和朋友分享您的清单，或选择将清单保留给自己。</description>
         <online-flag>true</online-flag>
@@ -5981,7 +5981,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
 &lt;li&gt;&lt;p&gt;&lt;span style="font-weight:bold;"&gt;Étape 2 &lt;/span&gt;Trouvez un article que vous souhaiteriez ajouter et cliquez sur le bouton Ajouter à la liste de souhaits.&lt;/p&gt;&lt;/li&gt;&#13;
 &lt;li&gt;&lt;p&gt;&lt;span style="font-weight:bold;"&gt;Étape 3 &lt;/span&gt;Votre liste de souhaits, à laquelle l'article sera ajouté, s'affiche.&lt;/p&gt;&lt;/li&gt;&#13;
 &lt;/ul&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;p&gt;Crea la tua lista desideri personalizzata con tutti gli articoli che vorresti comprare. Puoi condividere la lista con amici e parenti o scegliere di mantenerla privata.&lt;/p&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;p&gt;Crea la tua lista desideri personalizzata con tutti gli articoli che vorresti comprare. Puoi condividere la lista con amici e familiari o scegliere di mantenerla privata.&lt;/p&gt;&#13;
 &lt;ul style="margin: 0 0 0 16px;"&gt;&#13;
 &lt;li&gt;&lt;p&gt;&lt;span style="font-weight:bold;"&gt;Fase 1 &lt;/span&gt;Registrati per creare la tua lista desideri.&lt;/p&gt;&lt;/li&gt;&#13;
 &lt;li&gt;&lt;p&gt;&lt;span style="font-weight:bold;"&gt;Fase 2 &lt;/span&gt;Trova un articolo che ti piacerebbe aggiungere alla lista e fai clic sul pulsante "Aggiungi alla lista desideri".&lt;/p&gt;&lt;/li&gt;&#13;
@@ -6059,7 +6059,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header"&gt;Welcome to Customer Service&lt;/h1&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h1 class="content-header"&gt;Bienvenue au service client&lt;/h1&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h1 class="content-header"&gt;Bienvenue dans le service client&lt;/h1&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;h1 class="content-header"&gt;Benvenuto al Servizio clienti&lt;/h1&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;h1 class="content-header"&gt;カスタマーサービスへようこそ&lt;/h1&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;h1 class="content-header"&gt;欢迎光临客户服务&lt;/h1&gt;</custom-attribute>
@@ -6226,16 +6226,16 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
 &lt;ul&gt;&#13;
     &lt;li&gt;01. &lt;a href="#q01"&gt;Puis-je précommander des articles ?&lt;/a&gt;&lt;/li&gt;&#13;
     &lt;li&gt;02. &lt;a href="#q02"&gt;Puis-je modifier ma commande ?&lt;/a&gt;&lt;/li&gt;&#13;
-    &lt;li&gt;03. &lt;a href="#q03"&gt;Proposez-vous différents types de paquets cadeaux ?&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;03. &lt;a href="#q03"&gt;Proposez-vous différents types de paquets cadeaux ?&lt;/a&gt;&lt;/li&gt;&#13;
     &lt;li&gt;04. &lt;a href="#q04"&gt;Puis-je retourner un article en magasin ?&lt;/a&gt;&lt;/li&gt;&#13;
-    &lt;li&gt;05. &lt;a href="#q05"&gt;Quand serai-je remboursé après avoir retourné un article ?&lt;/a&gt;&lt;/li&gt;&#13;
-    &lt;li&gt;06. &lt;a href="#q06"&gt;Si je retourne tous les articles de ma commande, devrai-je quand même payer les frais de livraison ?&lt;/a&gt;&lt;/li&gt;&#13;
-    &lt;li&gt;07. &lt;a href="#q07"&gt;Que dois-je faire si ma carte de crédit/de débit a été refusée lorsque j'ai passé commande ?&lt;/a&gt;&lt;/li&gt;&#13;
-    &lt;li&gt;08. &lt;a href="#q08"&gt;Devrai-je payer des frais de port pour chaque article commandé ?&lt;/a&gt;&lt;/li&gt;&#13;
-    &lt;li&gt;09. &lt;a href="#q09"&gt;La livraison à l'étranger est-elle possible ?&lt;/a&gt;&lt;/li&gt;&#13;
-    &lt;li&gt;10. &lt;a href="#q10"&gt;Je souhaite faire une réclamation, à qui dois-je m'adresser ?&lt;/a&gt;&lt;/li&gt;&#13;
-    &lt;li&gt;11. &lt;a href="#q11"&gt;Que dois-je faire si mon produit tombe en panne pendant la période de garantie ?&lt;/a&gt;&lt;/li&gt;&#13;
-    &lt;li&gt;12 &lt;a href="#q12"&gt;Proposez-vous des remises pour les commandes destinées aux entreprises ou pour les commandes en gros ?&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;05. &lt;a href="#q05"&gt;Quand serai-je remboursé après avoir retourné un article ?&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;06. &lt;a href="#q06"&gt;Si je retourne tous les articles de ma commande, devrai-je quand même payer les frais de livraison ?&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;07. &lt;a href="#q07"&gt;Que dois-je faire si ma carte de crédit/de débit a été refusée lorsque j'ai passé commande ?&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;08. &lt;a href="#q08"&gt;Devrai-je payer des frais de port pour chaque article commandé ?&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;09. &lt;a href="#q09"&gt;La livraison à l'étranger est-elle possible ?&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;10. &lt;a href="#q10"&gt;Je souhaite faire une réclamation, à qui dois-je m'adresser ?&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;11. &lt;a href="#q11"&gt;Que dois-je faire si mon produit tombe en panne pendant la période de garantie ?&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;12 &lt;a href="#q12"&gt;Proposez-vous des remises pour les commandes destinées aux entreprises ou pour les commandes en gros ?&lt;/a&gt;&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
 &#13;
 &lt;h2&gt;Réponses&lt;/h2&gt;&#13;
@@ -6250,8 +6250,8 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
 &lt;br /&gt;&lt;a href="#faq-top"&gt;Haut de page&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
-&lt;h3 id="q03"&gt;03. Proposez-vous différents types de paquets cadeaux ?&lt;/h3&gt;&#13;
-&lt;p&gt;Oui, vos cadeaux peuvent être livrés dans nos superbes paquets cadeaux pour seulement 4,99 euros par article. Chaque paquet porte le logo Demandware et contient une carte pour votre message personnel. Saisissez votre message personnel dans les champs réservés à cet effet (dans la limite de 4 lignes et 80 caractères). Pour changer de paquet cadeau, sélectionnez simplement le paquet souhaité dans la liste déroulante. Lorsque vous avez terminé, cliquez sur Continuer pour valider votre achat. Remarque : Les paquets cadeaux ne sont pas disponibles pour tous les articles (les articles volumineux, comme un cheval à bascule ou un véhicule à propulsion, en sont exclus).&#13;
+&lt;h3 id="q03"&gt;03. Proposez-vous différents types de paquets cadeaux ?&lt;/h3&gt;&#13;
+&lt;p&gt;Oui, vos cadeaux peuvent être livrés dans nos superbes paquets cadeaux pour seulement 4,99 euros par article. Chaque paquet porte le logo Demandware et contient une carte pour votre message personnel. Saisissez votre message personnel dans les champs réservés à cet effet (dans la limite de 4 lignes et 80 caractères). Pour changer de paquet cadeau, sélectionnez simplement le paquet souhaité dans la liste déroulante. Lorsque vous avez terminé, cliquez sur Continuer pour valider votre achat. Remarque : Les paquets cadeaux ne sont pas disponibles pour tous les articles (les articles volumineux, comme un cheval à bascule ou un véhicule à propulsion, en sont exclus).&#13;
 &lt;a href="#faq-top"&gt;Haut de page&lt;/a&gt;&#13;
 &#13;
 &#13;
@@ -6260,42 +6260,42 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
 &lt;br /&gt;&lt;a href="#faq-top"&gt;Haut de page&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
-&lt;h3 id="q05"&gt;05. Quand serai-je remboursé après avoir retourné un article ?&lt;/h3&gt;&#13;
+&lt;h3 id="q05"&gt;05. Quand serai-je remboursé après avoir retourné un article ?&lt;/h3&gt;&#13;
 &lt;p&gt;Une fois l'article reçu dans notre entrepôt, le remboursement sur la carte de paiement utilisée initialement intervient généralement dans un délai de deux semaines.&#13;
 &lt;br /&gt;&lt;a href="#faq-top"&gt;Haut de page&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
-&lt;h3 id="q06"&gt;06. Si je retourne tous les articles de ma commande, devrai-je quand même payer les frais de livraison ?&lt;/h3&gt;&#13;
+&lt;h3 id="q06"&gt;06. Si je retourne tous les articles de ma commande, devrai-je quand même payer les frais de livraison ?&lt;/h3&gt;&#13;
 &lt;p&gt;Si l'un des articles que nous vous avons livrés est endommagé ou n'est pas celui commandé, nous vous rembourserons les frais de port. Si vous changez d'avis et ne souhaitez pas garder un article, vous pouvez le retourner gratuitement, mais nous ne vous rembourserons pas les frais de port initiaux.&#13;
 &lt;br /&gt;&lt;a href="#faq-top"&gt;Haut de page&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
-&lt;h3 id="q07"&gt;07. Que dois-je faire si ma carte de crédit/de débit a été refusée lorsque j'ai passé commande ?&lt;/h3&gt;&#13;
+&lt;h3 id="q07"&gt;07. Que dois-je faire si ma carte de crédit/de débit a été refusée lorsque j'ai passé commande ?&lt;/h3&gt;&#13;
 &lt;p&gt;Vérifiez que toutes les informations saisies sur la page de paiement sont correctes. Si malgré cela votre carte est refusée, essayez une autre carte de crédit.&#13;
 &lt;br /&gt;&lt;a href="#faq-top"&gt;Haut de page&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
-&lt;h3 id="q08"&gt;08. Devrai-je payer des frais de port pour chaque article commandé ?&lt;/h3&gt;&#13;
+&lt;h3 id="q08"&gt;08. Devrai-je payer des frais de port pour chaque article commandé ?&lt;/h3&gt;&#13;
 &lt;p&gt;Les frais de port et d'emballage de chaque paquet cadeau sont facturés séparément. Tous les autres articles seront soumis à des frais de livraison uniques, quel que soit leur nombre.&#13;
 &lt;br /&gt;&lt;a href="#faq-top"&gt;Haut de page&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
-&lt;h3 id="q09"&gt;09. La livraison à l'étranger est-elle possible ?&lt;/h3&gt;&#13;
+&lt;h3 id="q09"&gt;09. La livraison à l'étranger est-elle possible ?&lt;/h3&gt;&#13;
 &lt;p&gt;Oui, à l'exception des chèques-cadeaux.&#13;
 &lt;br /&gt;&lt;a href="#faq-top"&gt;Haut de page&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
-&lt;h3 id="q10"&gt;10. Je souhaite faire une réclamation, à qui dois-je m'adresser ?&lt;/h3&gt;&#13;
+&lt;h3 id="q10"&gt;10. Je souhaite faire une réclamation, à qui dois-je m'adresser ?&lt;/h3&gt;&#13;
 &lt;p&gt;Si votre réclamation concerne un produit que vous avez acheté dans l'un de nos magasins, veuillez prendre contact avec le magasin concerné&amp;ndash; le numéro de téléphone de tous nos magasins figure sur ce site Web. Si votre réclamation concerne un achat effectué en ligne, appelez un de nos conseillers clientèle au 800 555 1212 ou remplissez le formulaire disponible sur la page &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Contactez-nous&lt;/a&gt; .&#13;
 &lt;br /&gt;&lt;a href="#faq-top"&gt;Haut de page&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
-&lt;h3 id="q11"&gt;11. Que dois-je faire si mon produit tombe en panne pendant la période de garantie ?&lt;/h3&gt;&#13;
+&lt;h3 id="q11"&gt;11. Que dois-je faire si mon produit tombe en panne pendant la période de garantie ?&lt;/h3&gt;&#13;
 &lt;p&gt;Si les produits sont sous garantie, l'e-mail de confirmation de votre commande/le bon de livraison constitue la preuve d'achat/de réception et vous devez suivre les instructions du fabricant pour l'informer de tout problème pendant la période de garantie.&#13;
 &lt;br /&gt;&lt;a href="#faq-top"&gt;Haut de page&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
-&lt;h3 id="q12"&gt;12 Proposez-vous des remises pour les commandes destinées aux entreprises ou pour les commandes en gros ?&lt;/h3&gt;&#13;
+&lt;h3 id="q12"&gt;12 Proposez-vous des remises pour les commandes destinées aux entreprises ou pour les commandes en gros ?&lt;/h3&gt;&#13;
 &lt;p&gt;Nous proposons des remises pour les livraisons à la même adresse au-delà d'un certain montant de commande. Veuillez nous contacter au 800 555 1212 pour nous préciser vos besoins.&#13;
 &lt;br /&gt;&lt;a href="#faq-top"&gt;Haut de page&lt;/a&gt;&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;h1 class="content-header" id="faq-top"&gt;Domande frequenti&lt;/h1&gt;&#13;
@@ -6571,14 +6571,14 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;h3&gt;企業情報&lt;/h3&gt;&#13;
                 &lt;ul class="menu-footer menu pipe"&gt;&#13;
                 &lt;li&gt;&lt;a href="$url('Page-Show', 'cid', 'about-us')$" title="「Demandware について」に移動する"&gt;Demandware について&lt;/a&gt;&lt;/li&gt;&#13;
-                &lt;li&gt;&lt;a href="$url('Page-Show', 'cid', 'privacy-policy')$" title="「プライバシー」に移動する"&gt;Privacy&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a href="$url('Page-Show', 'cid', 'privacy-policy')$" title="「プライバシー」に移動する"&gt;プライバシー&lt;/a&gt;&lt;/li&gt;&#13;
                 &lt;li&gt;&lt;a href="$url('Page-Show', 'cid', 'terms')$" title="「利用条件」に移動する"&gt;利用条件&lt;/a&gt;&lt;/li&gt;&#13;
                 &lt;li&gt;&lt;a href="$url('Page-Show', 'cid', 'jobs-landing')$" title="「採用情報」に移動する"&gt;採用情報&lt;/a&gt;&lt;/li&gt;&#13;
                 &lt;/ul&gt;&lt;!-- END: footer_about --&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;h3&gt;关于&lt;/h3&gt;&#13;
                 &lt;ul class="menu-footer menu pipe"&gt;&#13;
                 &lt;li&gt;&lt;a href="$url('Page-Show', 'cid', 'about-us')$" title="前往关于我们"&gt;公司&lt;/a&gt;&lt;/li&gt;&#13;
-                &lt;li&gt;&lt;a href="$url('Page-Show', 'cid', 'privacy-policy')$" title="前往隐私"&gt;Privacy&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a href="$url('Page-Show', 'cid', 'privacy-policy')$" title="前往隐私"&gt;隐私政策&lt;/a&gt;&lt;/li&gt;&#13;
                 &lt;li&gt;&lt;a href="$url('Page-Show', 'cid', 'terms')$" title="前往条款"&gt;条款&lt;/a&gt;&lt;/li&gt;&#13;
                 &lt;li&gt;&lt;a href="$url('Page-Show', 'cid', 'jobs-landing')$" title="前往招聘"&gt;招聘&lt;/a&gt;&lt;/li&gt;&#13;
                 &lt;/ul&gt;&lt;!-- END: footer_about --&gt;</custom-attribute>
@@ -6670,7 +6670,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <description xml:lang="x-default">Footer content asset containing the social icons and email form.</description>
         <description xml:lang="fr-FR">Élément de contenu de pied de page affichant les icônes de réseaux sociaux et le formulaire électronique.</description>
         <description xml:lang="it-IT">Asset di contenuto a piè di pagina contenente le icone dei social network e il modulo per e-mail.</description>
-        <description xml:lang="ja-JP">ソーシャルアイコンと Eメールフォームを含むフッターのコンテンツ資産。</description>
+        <description xml:lang="ja-JP">ソーシャルアイコンと Eメールフォームを含むフッターのコンテンツアセット。</description>
         <description xml:lang="zh-CN">包含社交网站图标和电子邮件表格的页脚内容素材。</description>
         <online-flag>true</online-flag>
         <searchable-flag>false</searchable-flag>
@@ -6715,15 +6715,16 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
                 &lt;/form&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;h3&gt;フォロー&lt;/h3&gt;&#13;
                 &lt;ul class="social-links"&gt;&#13;
-                &lt;li&gt;&lt;a class="fa fa-linkedin-square fa-3x" title="LinkedIn に移動する" href="https://www.linkedin.com/company/demandware" target="_blank"&gt;&lt;/a&gt;&lt;/li&gt;&#13;
-                &lt;li&gt;&lt;a class="fa fa-facebook-square fa-3x" title="Facebook に移動する" href="https://www.facebook.com/demandware" target="_blank"&gt;&lt;/a&gt;&lt;/li&gt;&#13;
-                &lt;li&gt;&lt;a class="fa fa-twitter-square fa-3x" title="Twitter に移動する" href="https://twitter.com/demandware" target="_blank"&gt;&lt;/a&gt;&lt;/li&gt;&#13;
-                &lt;li&gt;&lt;a class="fa fa-youtube-square fa-3x" title="YouTube に移動する" href="https://www.youtube.com/user/demandware" target="_blank"&gt;&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a class="fa fa-linkedin-square fa-3x" title="LinkedIn に移動する" href="https://www.linkedin.com/company/demandware" target="_blank"&gt;&lt;span class="visually-hidden"&gt;LinkedIn&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a class="fa fa-facebook-square fa-3x" title="Facebook に移動する" href="https://www.facebook.com/demandware" target="_blank"&gt;&lt;span class="visually-hidden"&gt;Facebook&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a class="fa fa-twitter-square fa-3x" title="Twitter に移動する" href="https://twitter.com/demandware" target="_blank"&gt;&lt;span class="visually-hidden"&gt;Twitter&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a class="fa fa-youtube-square fa-3x" title="YouTube に移動する" href="https://www.youtube.com/user/demandware" target="_blank"&gt;&lt;span class="visually-hidden"&gt;YouTube&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&#13;
                 &lt;/ul&gt;                     &#13;
-                &lt;h3&gt;最新スタイルの特別プロモーションとニュースをお届けします&lt;/h3&gt;&#13;
+                &lt;h3&gt;特別プロモーションと最新スタイルのニュースをお届けします&lt;/h3&gt;&#13;
                 &lt;form action="#" method="post" id="email-alert-signup"&gt;&#13;
+                &lt;label for="email-alert-address"&gt;&lt;span class="visually-hidden"&gt;Eメールアドレスの入力&lt;/span&gt;&lt;/label&gt;&#13;
                 &lt;input type="text" id="email-alert-address" class="input-text" placeholder="Eメールアドレスの入力" value="" /&gt;&#13;
-                &lt;button type="submit" name="home-email" value="Submit" Title="Submit" class="fa fa-envelope" /&gt;&lt;/button&gt;&#13;
+                &lt;button type="submit" name="home-email" value="Submit" class="fa fa-envelope" /&gt;&lt;span class="visually-hidden"&gt;送信&lt;/span&gt;&lt;/button&gt;&#13;
                 &lt;/form&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;h3&gt;关注我们&lt;/h3&gt;&#13;
                 &lt;ul class="social-links"&gt;&#13;
@@ -7070,8 +7071,8 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
         <description xml:lang="x-default">With Demandware ecommerce, our customers are spending more time leading with merchandising and marketing. They're in complete control over their site, making changes and launching new storefronts whenever they like. They're spending more time developing their own proprietary innovations (versus building commodity functionality). They receive new software upgrades from Demandware continuously. And they never-ever-worry about site uptime, availability and security.</description>
         <description xml:lang="fr-FR">Avec Demandware ecommerce, nos clients restent à la pointe dans leur domaine, avec des outils de merchandising et de marketing. Ils ont la maîtrise totale de leur site, apportent des changements et lancent de nouvelles boutiques en ligne, à leur gré. Ils se consacrent davantage au développement de leurs propres innovations (et non plus à personnaliser une fonctionnalité standard). Ils reçoivent en permanence de nouvelles mises à jour logicielles de Demandware. Ils n'ont jamais à se soucier des questions de fonctionnement, de disponibilité et de sécurité.</description>
         <description xml:lang="it-IT">Con l'e-commerce di Demandware, i nostri clienti possono perfezionare la loro leadership nelle attività di merchandising e marketing. Dispongono del controllo completo del loro sito, possono apportare modifiche e aprire nuovi storefront come e quando vogliono. Possono dedicarsi allo sviluppo e all'innovazione di prodotti propri e non alla creazione di funzionalità. Ricevono gli aggiornamenti del software continuamente da Demandware e non devono mai preoccuparsi della funzionalità, della disponibilità e della sicurezza del sito.</description>
-        <description xml:lang="ja-JP">Demandware eコマースを使用すれば、マーチャンダイジングとマーケティングに、より多くの時間を費やせます。サイトをすべて自分たちで管理し、いつでも変更を加え、新しいストアフロントを起ち上げることができます。そして、(一般的な機能の構築ではなく) 独自のイノベーションを推し進めることに多くの時間を費やせるようになります。Demandware から新しいソフトウェアアップグレードを継続的に受け取ることができるため、サイトのアップタイム、可用性、セキュリティについて一切心配しなくてよいのです。</description>
-        <description xml:lang="zh-CN">通过 Demandware eCommerce，他们可以将更多的时间用于实现销售和营销的领先地位。他们可以完全掌控自己的站点，按照自己的喜好随时进行更改和建立新的网店。他们可以花更多的时间开发自己的专属创新（而不是建立商品功能）。他们不断从 Demandware 收到新的软件升级。他们永远不必担心站点运行、可用性和安全性。</description>
+        <description xml:lang="ja-JP">Demandware eコマースを使用すれば、お客様はマーチャンダイジングとマーケティングに、より多くの時間を費やせます。サイトをすべて自分たちで管理し、いつでも変更を加え、新しいストアフロントを起ち上げることができます。そして、(一般的な機能の構築ではなく) 独自のイノベーションを推し進めることに多くの時間を費やせるようになります。Demandware から新しいソフトウェアアップグレードを継続的に受け取ることができるため、サイトのアップタイム、可用性、セキュリティについて一切心配しなくてよいのです。</description>
+        <description xml:lang="zh-CN">通过 Demandware eCommerce，我们的客户可以将更多的时间用于实现销售和营销的领先地位。他们可以完全掌控自己的站点，按照自己的喜好随时进行更改和建立新的网店。他们可以花更多的时间开发自己的专属创新（而不是建立商品功能）。他们不断从 Demandware 收到新的软件升级。他们永远不必担心站点运行、可用性和安全性。</description>
         <online-flag>true</online-flag>
         <searchable-flag>true</searchable-flag>
         <page-attributes/>
@@ -7141,9 +7142,9 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &#13;
                 &lt;h5 class="internal"&gt;結果は、顧客からの大絶賛でした。&lt;/h5&gt;&#13;
                 &#13;
-                &lt;p&gt;Demandware eコマースを使用すれば、マーチャンダイジングとマーケティングに、より多くの時間を費やせます。サイトをすべて自分たちで管理し、いつでも変更を加え、新しいストアフロントを起ち上げることができます。そして、(一般的な機能の構築ではなく) 独自のイノベーションを推し進めることに多くの時間を費やせるようになります。Demandware から新しいソフトウェアアップグレードを継続的に受け取ることができるため、サイトのアップタイム、可用性、セキュリティについて一切心配しなくてよいのです。&lt;/p&gt;&#13;
+                &lt;p&gt;Demandware eコマースを使用すれば、お客様はマーチャンダイジングとマーケティングに、より多くの時間を費やせます。サイトをすべて自分たちで管理し、いつでも変更を加え、新しいストアフロントを起ち上げることができます。そして、(一般的な機能の構築ではなく) 独自のイノベーションを推し進めることに多くの時間を費やせるようになります。Demandware から新しいソフトウェアアップグレードを継続的に受け取ることができるため、サイトのアップタイム、可用性、セキュリティについて一切心配しなくてよいのです。&lt;/p&gt;&#13;
 &#13;
-                &lt;p&gt;つまり、自由を手に入れたということ。自由に商売を行い、自由に成長し、自由に革新を遂げ、自由に変化する。Eコマースとはかくあるべきではないでしょうか? &lt;/p&gt;</custom-attribute>
+                &lt;p&gt;つまり、自由を手に入れたということ。自由に商売を行い、自由に成長し、自由に革新を遂げ、自由に変化する。eコマースとはかくあるべきではないでしょうか? &lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;p&gt;&lt;strong&gt;一切皆因一系列的意见而开始：&lt;/strong&gt;&lt;/p&gt;&#13;
                 &#13;
                 &lt;ul&gt;&#13;
@@ -7158,7 +7159,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &#13;
                 &lt;h5 class="internal"&gt;我们的客户对这些成就感到喜出望外。&lt;/h5&gt;&#13;
                 &#13;
-                &lt;p&gt;通过 Demandware eCommerce，他们可以将更多的时间用于实现销售和营销的领先地位。他们可以完全掌控自己的站点，按照自己的喜好随时进行更改和建立新的网店。他们可以花更多的时间开发自己的专属创新（而不是建立商品功能）。他们不断从 Demandware 收到新的软件升级。他们永远不必担心站点运行、可用性和安全性。&lt;/p&gt;&#13;
+                &lt;p&gt;通过 Demandware eCommerce，我们的客户可以将更多的时间用于实现销售和营销的领先地位。他们可以完全掌控自己的站点，按照自己的喜好随时进行更改和建立新的网店。他们可以花更多的时间开发自己的专属创新（而不是建立商品功能）。他们不断从 Demandware 收到新的软件升级。他们永远不必担心站点运行、可用性和安全性。&lt;/p&gt;&#13;
 &#13;
                 &lt;p&gt;总而言之，他们自由了。自由地销售。自由地成长。自由地创新。自由地更改。eCommerce 不正应该如此吗？&lt;/p&gt;</custom-attribute>
         </custom-attributes>
@@ -7179,25 +7180,35 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div id="home-promo-free-shipping"&gt;&#13;
-&lt;h2&gt;Free Shipping&lt;/h2&gt;&#13;
-&lt;p&gt;Get free shipping on orders more that $130&lt;/p&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;img alt="Free Shipping for order over $150" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
+&lt;div class="home-bottom-center-text"&gt;&#13;
+&lt;h1&gt;Free&lt;/h1&gt;&#13;
+&lt;h2&gt;Ground Shipping&lt;/h2&gt;&#13;
+&lt;h3&gt;on orders of $150 or more&lt;/h3&gt;&#13;
 &lt;/div&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;div id="home-promo-free-shipping"&gt;&#13;
-&lt;h2&gt;Frais de port gratuits&lt;/h2&gt;&#13;
-&lt;p&gt;Bénéficiez de la livraison gratuite pour toute commande supérieure à 130 euros&lt;/p&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;img alt="Livraison gratuite pour les commandes de plus de 150 euros" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
+&lt;div class="home-bottom-center-text"&gt;&#13;
+&lt;h1&gt;Transport terrestre&lt;/h1&gt;&#13;
+&lt;h2&gt;gratuit&lt;/h2&gt;&#13;
+&lt;h3&gt;pour les commandes de plus de 150 euros&lt;/h3&gt;&#13;
 &lt;/div&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;div id="home-promo-free-shipping"&gt;&#13;
-&lt;h2&gt;Spedizione gratuita&lt;/h2&gt;&#13;
-&lt;p&gt;Spedizione gratuita per ordini superiori a € 130&lt;/p&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;img alt="Spedizione gratuita per ordini superiori a € 150" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
+&lt;div class="home-bottom-center-text"&gt;&#13;
+&lt;h1&gt;Spedizione gratuita&lt;/h1&gt;&#13;
+&lt;h2&gt;via terra&lt;/h2&gt;&#13;
+&lt;h3&gt;per ordini pari o superiori a € 150&lt;/h3&gt;&#13;
 &lt;/div&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;div id="home-promo-free-shipping"&gt;&#13;
-&lt;h2&gt;送料無料&lt;/h2&gt;&#13;
-&lt;p&gt;¥13,000 を超えるご注文で送料無料&lt;/p&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;img alt="ご注文金額が ¥15,000 を超えると配送料が無料" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
+&lt;div class="home-bottom-center-text"&gt;&#13;
+&lt;h1&gt;ご注文金額が ¥15,000 を超えると&lt;/h1&gt;&#13;
+&lt;h2&gt;通常配送&lt;/h2&gt;&#13;
+&lt;h3&gt;が無料&lt;/h3&gt;&#13;
 &lt;/div&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;div id="home-promo-free-shipping"&gt;&#13;
-&lt;h2&gt;免费送货&lt;/h2&gt;&#13;
-&lt;p&gt;订单满 130 美元即享免费送货&lt;/p&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;img alt="金额超过 150 美元的订单享受免费送货" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
+&lt;div class="home-bottom-center-text"&gt;&#13;
+&lt;h1&gt;免费&lt;/h1&gt;&#13;
+&lt;h2&gt;陆路送货&lt;/h2&gt;&#13;
+&lt;h3&gt;金额达到或超过 150 美元的订单&lt;/h3&gt;&#13;
 &lt;/div&gt;</custom-attribute>
         </custom-attributes>
     </content>
@@ -7224,6 +7235,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
         &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Flats&lt;/a&gt;&lt;/li&gt;&#13;
         &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Open Toe&lt;/a&gt;&lt;/li&gt;&#13;
     &lt;/ul&gt;&#13;
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Go to category: Women's Shoes"&gt;&lt;img alt="Women's Shoes" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;div id="home-promo-shop-shoes"&gt;&#13;
     &lt;h2&gt;Acheter des chaussures&lt;/h2&gt;&#13;
@@ -7231,7 +7243,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
         &lt;li&gt;&lt;span&gt;Chaussures :&lt;/span&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Talons&lt;/a&gt;&lt;/li&gt;&#13;
         &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Ballerines&lt;/a&gt;&lt;/li&gt;&#13;
         &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Sandales&lt;/a&gt;&lt;/li&gt;&#13;
-    &lt;/ul&gt;&#13;
+    &lt;/ul&gt;&#13;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Aller à la catégorie : Chaussures Femmes"&gt;&lt;img alt="Chaussures Femmes" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;div id="home-promo-shop-shoes"&gt;&#13;
     &lt;h2&gt;Acquista scarpe&lt;/h2&gt;&#13;
@@ -7239,7 +7251,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
         &lt;li&gt;&lt;span&gt;Scarpe:&lt;/span&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Con tacco&lt;/a&gt;&lt;/li&gt;&#13;
         &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Basse&lt;/a&gt;&lt;/li&gt;&#13;
         &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Spuntate&lt;/a&gt;&lt;/li&gt;&#13;
-    &lt;/ul&gt;&#13;
+    &lt;/ul&gt;&#13;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Vai a categoria: Scarpe donna"&gt;&lt;img alt="Scarpe donna" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;div id="home-promo-shop-shoes"&gt;&#13;
     &lt;h2&gt;シューズを購入&lt;/h2&gt;&#13;
@@ -7247,7 +7259,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
         &lt;li&gt;&lt;span&gt;シューズ: &lt;/span&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;ハイヒール&lt;/a&gt;&lt;/li&gt;&#13;
         &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;フラット&lt;/a&gt;&lt;/li&gt;&#13;
         &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;オープントゥ&lt;/a&gt;&lt;/li&gt;&#13;
-    &lt;/ul&gt;&#13;
+    &lt;/ul&gt;&#13;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="次のカテゴリに移動する: レディースシューズ"&gt;&lt;img alt="レディースシューズ" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;div id="home-promo-shop-shoes"&gt;&#13;
     &lt;h2&gt;购买鞋类&lt;/h2&gt;&#13;
@@ -7255,7 +7267,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
         &lt;li&gt;&lt;span&gt;鞋&lt;/span&gt;：&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;高跟&lt;/a&gt;&lt;/li&gt;&#13;
         &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;平底&lt;/a&gt;&lt;/li&gt;&#13;
         &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;露趾&lt;/a&gt;&lt;/li&gt;&#13;
-    &lt;/ul&gt;&#13;
+    &lt;/ul&gt;&#13;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="前往分类：女士鞋类"&gt;&lt;img alt="女士鞋类" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;
 &lt;/div&gt;</custom-attribute>
         </custom-attributes>
     </content>
@@ -7294,42 +7306,42 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
 &lt;/ul&gt;&#13;
 &#13;
 &lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Go to category: Women's Shoes"&gt;&lt;img alt="Women's Shoes" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="fr">&lt;h1&gt;Boutique&lt;/h1&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h1&gt;Magasin&lt;/h1&gt;&#13;
 &#13;
 &lt;ul&gt;&#13;
-    &lt;li&gt;&lt;span&gt;Chaussures&lt;/span&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Talons&lt;/a&gt;&lt;/li&gt;&#13;
-    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Les Trotteurs&lt;/a&gt;&lt;/li&gt;&#13;
-    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Ouvrir Toe&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;span&gt;Chaussures :&lt;/span&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Talons&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Ballerines&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Sandales&lt;/a&gt;&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
 &#13;
-&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Boutique"&gt;&lt;img alt="Boutique" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="it">&lt;h1&gt;Negozio&lt;/h1&gt;&#13;
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Aller à la catégorie : Chaussures Femmes"&gt;&lt;img alt="Chaussures Femmes" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;h1&gt;Negozio&lt;/h1&gt;&#13;
 &#13;
 &lt;ul&gt;&#13;
-    &lt;li&gt;&lt;span&gt;Scarpe&lt;/span&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Tacchi&lt;/a&gt;&lt;/li&gt;&#13;
-    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Flats&lt;/a&gt;&lt;/li&gt;&#13;
-    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Open Toe&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;span&gt;Scarpe:&lt;/span&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Con tacco&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Basse&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Spuntate&lt;/a&gt;&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
 &#13;
-&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Scarpe"&gt;&lt;img alt="Scarpe" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="ja">&lt;h1&gt;ショップ&lt;/h1&gt;&#13;
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Vai a categoria: Scarpe donna"&gt;&lt;img alt="Scarpe donna" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;h1&gt;お買い物: &lt;/h1&gt;&#13;
 &#13;
 &lt;ul&gt;&#13;
-    &lt;li&gt;&lt;span&gt;シューズ&lt;/span&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;踵&lt;/a&gt;&lt;/li&gt;&#13;
-    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;フラッツ&lt;/a&gt;&lt;/li&gt;&#13;
-    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;オープントウ&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;span&gt;シューズ: &lt;/span&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;ハイヒール&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;フラット&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;オープントゥ&lt;/a&gt;&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
 &#13;
-&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Women's Shoes"&gt;&lt;img alt="Women's Shoes" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="zh">&lt;h1&gt;购买&lt;/h1&gt;&#13;
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="次のカテゴリに移動する: レディースシューズ"&gt;&lt;img alt="レディースシューズ" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;h1&gt;购物&lt;/h1&gt;&#13;
 &#13;
 &lt;ul&gt;&#13;
-    &lt;li&gt;&lt;span&gt;鞋类&lt;/span&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;高跟鞋&lt;/a&gt;&lt;/li&gt;&#13;
-    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;平底鞋&lt;/a&gt;&lt;/li&gt;&#13;
-    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;开口凉鞋&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;span&gt;鞋&lt;/span&gt;：&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;高跟&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;平底&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;露趾&lt;/a&gt;&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
 &#13;
-&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="购买"&gt;&lt;img alt="购买" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="前往分类：女士鞋类"&gt;&lt;img alt="女士鞋类" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
         </custom-attributes>
     </content>
 
@@ -7401,128 +7413,128 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
     &lt;/li&gt;&#13;
 &lt;/ul&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;ul id="homepage-slides"&gt;&#13;
-        &lt;li class="slide slide1"&gt;&#13;
-            &lt;a href="$url('Search-Show','cgid','mens-clothing-suits')$"&gt;&#13;
-                &lt;div class="banner-message"&gt;&#13;
-                    &lt;div class="banner-text2"&gt;Costumes&lt;/div&gt;&#13;
-                    &lt;div class="banner-text1"&gt;Hommes&lt;/div&gt;&#13;
-                    &lt;div class="banner-text3"&gt;Acheter maintenant&lt;/div&gt;&#13;
-                &lt;/div&gt;&#13;
-                &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-suit.jpg" alt="Mens Suits"/&gt;&#13;
-            &lt;/a&gt;&#13;
-        &lt;/li&gt;&#13;
-        &lt;li class="slide slide2"&gt;&#13;
-            &lt;a href="$url('Search-Show','cgid','womens-accessories')$"&gt;&#13;
-                &lt;div class="banner-message"&gt;&#13;
-                    &lt;div class="banner-text2"&gt;Le&lt;/div&gt;&#13;
-                    &lt;div class="banner-text1"&gt;compagnon idéal&lt;/div&gt;&#13;
-                    &lt;div class="banner-text3"&gt;Achetez Maintenant&lt;/div&gt;&#13;
-                &lt;/div&gt;&#13;
-                &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-accessories.jpg" alt="Le compagnon idéal"/&gt;&#13;
-            &lt;/a&gt;&#13;
-        &lt;/li&gt;&#13;
-        &lt;li class="slide slide3"&gt;&#13;
-            &lt;a href="$url('Search-Show','cgid','womens-accessories-shoes')$"&gt;&#13;
-                &lt;div class="banner-message"&gt;&#13;
-                    &lt;div class="banner-text2"&gt;Passez&lt;/div&gt;&#13;
-                    &lt;div class="banner-text1"&gt;à l'été&lt;/div&gt;&#13;
-                    &lt;div class="banner-text3"&gt;Achetez Maintenant&lt;/div&gt;&#13;
-                &lt;/div&gt;&#13;
-                &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-shoes.jpg" alt="Passez à l'été"/&gt;&#13;
-            &lt;/a&gt;&#13;
-        &lt;/li&gt;&#13;
-        &lt;li class="slide slide4"&gt;&#13;
-            &lt;a href="$url('Search-Show','cgid','womens-clothing-dresses')$"&gt;&#13;
-                &lt;div class="banner-message"&gt;&#13;
-                    &lt;div class="banner-text2"&gt;Robes&lt;/div&gt;&#13;
-                    &lt;div class="banner-text1"&gt;Femmes&lt;/div&gt;&#13;
-                    &lt;div class="banner-text3"&gt;Achetez Maintenant&lt;/div&gt;&#13;
-                &lt;/div&gt;&#13;
-                &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-dresses.jpg" alt="Robes Femmes"/&gt;&#13;
-            &lt;/a&gt;&#13;
-        &lt;/li&gt;&#13;
-        &lt;li class="slide slide5"&gt;&#13;
-            &lt;a href="$url('Search-Show','cgid','newarrivals-womens')$"&gt;&#13;
-                &lt;div class="banner-message"&gt;&#13;
-                    &lt;div class="banner-text1"&gt;Nouveautés&lt;/div&gt;&#13;
-                    &lt;div class="banner-text2"&gt;du printemps&lt;/div&gt;&#13;
-                    &lt;div class="banner-text3"&gt;Achetez Maintenant&lt;/div&gt;&#13;
-                &lt;/div&gt;&#13;
-                &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-spring.jpg" alt="Arrivages de printemps" /&gt;&#13;
-            &lt;/a&gt;&#13;
-        &lt;/li&gt;&#13;
-    &lt;/ul&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;ul id="homepage-slides"&gt;&#13;
     &lt;li class="slide slide1"&gt;&#13;
-        &lt;a href="$url('Search-Show','cgid','mens-clothing-suits')$"&gt;&#13;
+    &lt;a href="$url('Search-Show','cgid','mens-clothing-suits')$"&gt;&#13;
             &lt;div class="banner-message"&gt;&#13;
-                &lt;div class="banner-text2"&gt;Completi&lt;/div&gt;&#13;
-                &lt;div class="banner-text1"&gt;da uomo&lt;/div&gt;&#13;
-                &lt;div class="banner-text3"&gt;Acquista ora&lt;/div&gt;&#13;
+                &lt;div class="banner-text2"&gt;Homme&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;Costumes&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Acheter maintenant&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-suit.jpg" alt="Completi da uomo"/&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-suit.jpg" alt="Costumes Hommes" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide2"&gt;&#13;
         &lt;a href="$url('Search-Show','cgid','womens-accessories')$"&gt;&#13;
             &lt;div class="banner-message"&gt;&#13;
-                &lt;div class="banner-text2"&gt;Nuovi arrivi&lt;/div&gt;&#13;
-                &lt;div class="banner-text1"&gt;di primaveraPerfect Companion&lt;/div&gt;&#13;
-                &lt;div class="banner-text3"&gt;Acquistare Ora&lt;/div&gt;&#13;
+                &lt;div class="banner-text2"&gt;Le&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;Compagnon idéal&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Acheter maintenant&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-accessories.jpg" alt="Amico perfetto"/&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwcfde1e36/homepage/car-accessories.jpg" alt="Compagnon idéal" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide3"&gt;&#13;
         &lt;a href="$url('Search-Show','cgid','womens-accessories-shoes')$"&gt;&#13;
             &lt;div class="banner-message"&gt;&#13;
-                &lt;div class="banner-text2"&gt;Da Donna&lt;/div&gt;&#13;
-                &lt;div class="banner-text1"&gt;Scarpe&lt;/div&gt;&#13;
-                &lt;div class="banner-text3"&gt;Acquistare Ora&lt;/div&gt;&#13;
+                &lt;div class="banner-text2"&gt;Femme&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;Chaussures&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Acheter maintenant&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-shoes.jpg" alt="Da Donna Scarpe"/&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw3904b03a/homepage/car-shoes.jpg" alt="Chaussures Femmes" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide4"&gt;&#13;
         &lt;a href="$url('Search-Show','cgid','womens-clothing-dresses')$"&gt;&#13;
             &lt;div class="banner-message"&gt;&#13;
-                &lt;div class="banner-text2"&gt;Vestiti&lt;/div&gt;&#13;
-                &lt;div class="banner-text1"&gt;da donna&lt;/div&gt;&#13;
-                &lt;div class="banner-text3"&gt;Acquistare Ora&lt;/div&gt;&#13;
+                &lt;div class="banner-text2"&gt;Femme&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;Robes&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Acheter maintenant&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-dresses.jpg" alt="Vestiti donna"/&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw0145214e/homepage/car-dresses.jpg" alt="Robes Femmes" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide5"&gt;&#13;
-        &lt;a href="$url('Search-Show','cgid','newarrivals-womens')$"&gt;&#13;
+&lt;a href="$url('Search-Show','cgid','newarrivals-womens')$"&gt;&#13;
             &lt;div class="banner-message"&gt;&#13;
-                &lt;div class="banner-text1"&gt;Nuovi arrivi&lt;/div&gt;&#13;
-                &lt;div class="banner-text2"&gt;di primavera&lt;/div&gt;&#13;
-                &lt;div class="banner-text3"&gt;Acquistare Ora&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;Printemps&lt;/div&gt;&#13;
+                &lt;div class="banner-text2"&gt;Nouveautés&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Acheter maintenant&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-spring.jpg" alt="Collezione primaverile" /&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw27fbf28e/homepage/car-spring.jpg" alt="Arrivages de printemps" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
 &lt;/ul&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;ul id="homepage-slides"&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;ul id="homepage-slides"&gt;&#13;
     &lt;li class="slide slide1"&gt;&#13;
-        &lt;a href="$url('Search-Show','cgid','mens-clothing-suits')$"&gt;&#13;
+    &lt;a href="$url('Search-Show','cgid','mens-clothing-suits')$"&gt;&#13;
             &lt;div class="banner-message"&gt;&#13;
-                &lt;div class="banner-text2"&gt;メンズ&lt;/div&gt;&#13;
-                &lt;div class="banner-text1"&gt;スーツ&lt;/div&gt;&#13;
-        &lt;div class="banner-text3"&gt;今すぐお買い物をする&lt;/div&gt;&#13;
+                &lt;div class="banner-text2"&gt;Uomo&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;Completi&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Acquista ora&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-suit.jpg" alt="メンズスーツ"/&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-suit.jpg" alt="Completi uomo" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide2"&gt;&#13;
         &lt;a href="$url('Search-Show','cgid','womens-accessories')$"&gt;&#13;
             &lt;div class="banner-message"&gt;&#13;
-                &lt;div class="banner-text2"&gt;ファッションの&lt;/div&gt;&#13;
-                &lt;div class="banner-text1"&gt;必需品&lt;/div&gt;&#13;
-        &lt;div class="banner-text3"&gt;今すぐお買い物をする&lt;/div&gt;&#13;
+                &lt;div class="banner-text2"&gt;L'&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;abbinamento perfetto&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Acquista ora&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-accessories.jpg" alt="ファッションの必需品"/&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwcfde1e36/homepage/car-accessories.jpg" alt="Abbinamento perfetto" /&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide3"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','womens-accessories-shoes')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;Donna&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;Scarpe&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Acquista ora&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw3904b03a/homepage/car-shoes.jpg" alt="Scarpe donna" /&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide4"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','womens-clothing-dresses')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;Donna&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;Vestiti&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Acquista ora&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw0145214e/homepage/car-dresses.jpg" alt="Vestiti donna" /&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide5"&gt;&#13;
+&lt;a href="$url('Search-Show','cgid','newarrivals-womens')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text1"&gt;Primavera&lt;/div&gt;&#13;
+                &lt;div class="banner-text2"&gt;Nuovi arrivi&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;Acquista ora&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw27fbf28e/homepage/car-spring.jpg" alt="Collezione primaverile" /&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+&lt;/ul&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;ul id="homepage-slides"&gt;&#13;
+    &lt;li class="slide slide1"&gt;&#13;
+    &lt;a href="$url('Search-Show','cgid','mens-clothing-suits')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt;メンズ&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;スーツ&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;今すぐお買い物をする&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-suit.jpg" alt="メンズスーツ" /&gt;&#13;
+        &lt;/a&gt;&#13;
+    &lt;/li&gt;&#13;
+    &lt;li class="slide slide2"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','womens-accessories')$"&gt;&#13;
+            &lt;div class="banner-message"&gt;&#13;
+                &lt;div class="banner-text2"&gt; &lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;最高の相性&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;今すぐお買い物をする&lt;/div&gt;&#13;
+            &lt;/div&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwcfde1e36/homepage/car-accessories.jpg" alt="最高の相性" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide3"&gt;&#13;
@@ -7530,76 +7542,81 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
             &lt;div class="banner-message"&gt;&#13;
                 &lt;div class="banner-text2"&gt;レディース&lt;/div&gt;&#13;
                 &lt;div class="banner-text1"&gt;シューズ&lt;/div&gt;&#13;
-        &lt;div class="banner-text3"&gt;今すぐお買い物をする&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;今すぐお買い物をする&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-shoes.jpg" alt="レディースシューズ"/&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw3904b03a/homepage/car-shoes.jpg" alt="レディースシューズ" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide4"&gt;&#13;
         &lt;a href="$url('Search-Show','cgid','womens-clothing-dresses')$"&gt;&#13;
             &lt;div class="banner-message"&gt;&#13;
                 &lt;div class="banner-text2"&gt;レディース&lt;/div&gt;&#13;
-                &lt;div class="banner-text1"&gt;ファッション&lt;/div&gt;&#13;
-        &lt;div class="banner-text3"&gt;今すぐお買い物をする&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;ドレス&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;今すぐお買い物をする&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-dresses.jpg" alt="レディースファッション"/&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw0145214e/homepage/car-dresses.jpg" alt="レディースワンピース" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide5"&gt;&#13;
-        &lt;a href="$url('Search-Show','cgid','newarrivals-womens')$"&gt;&#13;
+&lt;a href="$url('Search-Show','cgid','newarrivals-womens')$"&gt;&#13;
             &lt;div class="banner-message"&gt;&#13;
-                &lt;div class="banner-text1"&gt;春 新着&lt;/div&gt;&#13;
-                &lt;div class="banner-text2"&gt;ファッション&lt;/div&gt;&#13;
-        &lt;div class="banner-text3"&gt;今すぐお買い物をする&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;春の&lt;/div&gt;&#13;
+                &lt;div class="banner-text2"&gt;新着アイテム&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;今すぐお買い物をする&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-spring.jpg" alt="春 新着ファッション" /&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw27fbf28e/homepage/car-spring.jpg" alt="春物入荷" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
 &lt;/ul&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;ul id="homepage-slides"&gt;&#13;
     &lt;li class="slide slide1"&gt;&#13;
-&lt;a href="$url('Search-Show','cgid','mens-clothing-suits')$"&gt;&#13;
+    &lt;a href="$url('Search-Show','cgid','mens-clothing-suits')$"&gt;&#13;
             &lt;div class="banner-message"&gt;&#13;
-                &lt;div class="banner-text1"&gt;男士西装&lt;/div&gt;&#13;
-                &lt;div class="banner-text3"&gt;即刻购买&lt;/div&gt;&#13;
+                &lt;div class="banner-text2"&gt;男士&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;西装&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;立即购买&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-suit.jpg" alt="男士西装即刻购买"/&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-suit.jpg" alt="男士西装" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide2"&gt;&#13;
         &lt;a href="$url('Search-Show','cgid','womens-accessories')$"&gt;&#13;
             &lt;div class="banner-message"&gt;&#13;
-                &lt;div class="banner-text1"&gt;最佳服装配饰&lt;/div&gt;&#13;
-                &lt;div class="banner-text3"&gt;即刻购买&lt;/div&gt;&#13;
+                &lt;div class="banner-text2"&gt;此&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;完美伴侣&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;立即购买&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-accessories.jpg" alt="最佳服装配饰即刻购买"/&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwcfde1e36/homepage/car-accessories.jpg" alt="完美伴侣" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide3"&gt;&#13;
-&lt;a href="$url('Search-Show','cgid','womens-accessories-shoes')$"&gt;&#13;
+        &lt;a href="$url('Search-Show','cgid','womens-accessories-shoes')$"&gt;&#13;
             &lt;div class="banner-message"&gt;&#13;
-                &lt;div class="banner-text1"&gt;女士鞋类&lt;/div&gt;&#13;
-                &lt;div class="banner-text3"&gt;即刻购买&lt;/div&gt;&#13;
+                &lt;div class="banner-text2"&gt;女士&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;鞋类&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;立即购买&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-shoes.jpg" alt="女士鞋类即刻购买"/&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw3904b03a/homepage/car-shoes.jpg" alt="女士鞋类" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide4"&gt;&#13;
         &lt;a href="$url('Search-Show','cgid','womens-clothing-dresses')$"&gt;&#13;
             &lt;div class="banner-message"&gt;&#13;
-                &lt;div class="banner-text1"&gt;女士连衣裙&lt;/div&gt;&#13;
-                &lt;div class="banner-text3"&gt;即刻购买&lt;/div&gt;&#13;
+                &lt;div class="banner-text2"&gt;女士&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;裙装&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;立即购买&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-dresses.jpg" alt="女士连衣裙即刻购买"/&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw0145214e/homepage/car-dresses.jpg" alt="女士连衣裙" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide5"&gt;&#13;
-        &lt;a href="$url('Search-Show','cgid','newarrivals-womens')$"&gt;&#13;
+&lt;a href="$url('Search-Show','cgid','newarrivals-womens')$"&gt;&#13;
             &lt;div class="banner-message"&gt;&#13;
-                &lt;div class="banner-text2"&gt;春季新货到场&lt;/div&gt;&#13;
-                &lt;div class="banner-text3"&gt;即刻购买&lt;/div&gt;&#13;
+                &lt;div class="banner-text1"&gt;春季&lt;/div&gt;&#13;
+                &lt;div class="banner-text2"&gt;新品&lt;/div&gt;&#13;
+                &lt;div class="banner-text3"&gt;立即购买&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-spring.jpg" alt="春季新货到场" /&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw27fbf28e/homepage/car-spring.jpg" alt="春季货品" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
 &lt;/ul&gt;</custom-attribute>
@@ -7864,7 +7881,7 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
 &lt;/ul&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;h1 class="content-header"&gt;お客様のアカウントの管理&lt;/h1&gt;&#13;
 &#13;
-&lt;p&gt;アカウント情報はいつでも簡単にオンラインで変更できます。&lt;a href="$httpsURL('Account-Show')$"&gt;マイアカウント&lt;/a&gt;をクリックするだけで、今すぐアカウントにアクセスできます。パスワードをお忘れの場合は、 &lt;a href="$httpsURL('Account-Show')$"&gt;こちらをクリック&lt;/a&gt;してください。&lt;/p&gt;&#13;
+&lt;p&gt;アカウント情報はいつでも簡単にオンラインで変更できます。&lt;a href="$httpsURL('Account-Show')$"&gt;マイアカウント&lt;/a&gt; をクリックするだけで、今すぐアカウントにアクセスできます。パスワードをお忘れの場合は、 &lt;a href="$httpsURL('Account-Show')$"&gt;こちらをクリック&lt;/a&gt;してください。&lt;/p&gt;&#13;
 &lt;ul&gt;&#13;
     &lt;li&gt;ご注文に関する重要な情報をお客様の Eメールアドレスにお届けします。また、ご登録の Eメールアドレスは Demandware アカウント ID となります。&lt;/li&gt;&#13;
     &lt;li&gt;アカウントには、注文履歴、請求先住所と配送先住所などの情報が保存されます。また、アカウントからご注文状況を確認することもできます。パスワードを設定していただきますので、お客様のアカウント情報にアクセスできるのはお客様ご自身だけです。&lt;/li&gt;&#13;
@@ -10730,7 +10747,7 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
 &lt;/ul&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h1 class="content-header"&gt;Ouverture d'un compte&lt;/h1&gt;&#13;
 &#13;
-&lt;p&gt;Ouvrir un compte est simple. Cliquez simplement sur &lt;a href="$httpsURL('Account-Show')$"&gt;Mon compte &lt;/a&gt;ou au moment de passer commande, vous serez invité à vous connecter à l'aide de votre adresse e-mail et de votre mot de passe. Avoir un compte vous permet de commander rapidement, simplement et en toute sécurité. Le compte vous permet également de suivre votre commande et de recevoir des e-mails à propos de votre commande.&lt;/p&gt;&#13;
+&lt;p&gt;Ouvrir un compte est simple. Cliquez simplement sur &lt;a href="$httpsURL('Account-Show')$"&gt;Mon compte&lt;/a&gt;ou au moment de passer commande, vous serez invité à vous connecter à l'aide de votre adresse e-mail et de votre mot de passe. Avoir un compte vous permet de commander rapidement, simplement et en toute sécurité. Le compte vous permet également de suivre votre commande et de recevoir des e-mails à propos de votre commande.&lt;/p&gt;&#13;
 &#13;
 &lt;h2&gt;Avantages d'un compte&lt;/h2&gt; &#13;
 &lt;p&gt;Configurez Mon compte et personnalisez vos préférences. Améliorez votre expérience d'achat en bénéficiant d'avantages uniques.&lt;/p&gt;&#13;
@@ -10792,7 +10809,7 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
     &lt;/li&gt;&#13;
     &lt;li&gt;&#13;
         &lt;h2&gt;注文履歴&lt;/h2&gt; &#13;
-        &lt;p&gt;ご注文についての重要な情報をお届けします。また、ご注文の配送状況を確認できます。&lt;/p&gt;&#13;
+        &lt;p&gt;ご注文についての重要な情報をお届けします。また、ご注文の配送状況を随時確認できます。&lt;/p&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li&gt;&#13;
         &lt;h2&gt;素早く注文手続きへ&lt;/h2&gt;&#13;
@@ -11469,7 +11486,7 @@ Burlington, MA 01803, USA&lt;br /&gt;&#13;
 &lt;p&gt;我们欢迎您对我们的隐私政策提出宝贵意见。如果您对本隐私政策有任何问题或建议，请通过 privacy@demandware.com 联系我们。&lt;/p&gt;&#13;
 &#13;
 &lt;p&gt;Demandware, Inc.&lt;br /&gt;&#13;
-ATTN:Privacy&lt;br /&gt;&#13;
+ATTN:隐私政策&lt;br /&gt;&#13;
 5 Wall Street&lt;br /&gt;&#13;
 Burlington, MA 01803 USA&lt;br /&gt;&#13;
 +1 (888) 553 0216（总机）&lt;/p&gt;</custom-attribute>
@@ -12064,7 +12081,7 @@ Consideriamo molto seriamente i diritti relativi alla privacy degli utenti di qu
 &lt;table summary="Shipping Promotion Table"&gt;&#13;
     &lt;tbody&gt;&#13;
         &lt;tr&gt;&#13;
-            &lt;th&gt;Frais de port&lt;/th&gt;&#13;
+            &lt;th&gt;Montant de la livraison&lt;/th&gt;&#13;
             &lt;th&gt;Transport terrestre UPS&lt;/th&gt;&#13;
             &lt;th&gt;Par avion J+2&lt;/th&gt;&#13;
             &lt;th&gt;Par avion J+1&lt;/th&gt;&#13;
@@ -12095,7 +12112,7 @@ Consideriamo molto seriamente i diritti relativi alla privacy degli utenti di qu
         &lt;/tr&gt;&#13;
     &lt;/tbody&gt;&#13;
 &lt;/table&gt;&#13;
-&lt;p&gt;&lt;strong&gt;Remarque :&lt;/strong&gt; les téléviseurs sont livrés par transport terrestre. La livraison par avion J+2 ou J+1 n'est pas disponible pour les téléviseurs.&lt;/p&gt;</custom-attribute>
+&lt;p&gt;&lt;strong&gt;Remarque :&lt;/strong&gt; les téléviseurs sont livrés par transport terrestre. La livraison par avion en J+2 ou J+1 n'est pas disponible pour les téléviseurs.&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;h1 class="content-header"&gt;Metodi di spedizione&lt;/h1&gt;&#13;
 &#13;
 &lt;p&gt;&lt;em&gt;SiteGenesis non effettua spedizioni a AK, HI o caselle postali.&lt;/em&gt;&lt;/p&gt;&#13;
