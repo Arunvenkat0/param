@@ -4388,33 +4388,6 @@ The Search Preferences&gt;Search Suggestion option is set to Disabled by default
                 <externally-managed-flag>false</externally-managed-flag>
                 <default-value>false</default-value>
             </attribute-definition>
-            <attribute-definition attribute-id="facebookAppID">
-                <display-name xml:lang="x-default">Facebook App ID</display-name>
-                <description xml:lang="x-default">The application ID that will be used with Facebook Connect.</description>
-                <type>string</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-                <min-length>0</min-length>
-                <field-length>0</field-length>
-                <default-value>389910431020874</default-value>
-            </attribute-definition>
-            <attribute-definition attribute-id="facebookConnectEnabled">
-                <display-name xml:lang="x-default">Facebook Connect Enabled</display-name>
-                <description xml:lang="x-default">The check box used to determine if the Facebook part of the registration form can communicate with Facebook when registering customers in the storefront.</description>
-                <type>boolean</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-            </attribute-definition>
-            <attribute-definition attribute-id="facebookURI">
-                <display-name xml:lang="x-default">Facebook URI Pipeline</display-name>
-                <description xml:lang="x-default">The pipeline used to redirect from Facebook to an internal pipeline - used in the facebookregistration.isml template.  This is a pipeline, so the format must be &lt;pipeline&gt;-&lt;subpipeline&gt;, for example, Account-Connect.</description>
-                <type>string</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-                <min-length>0</min-length>
-                <field-length>0</field-length>
-                <default-value>Account-Connect</default-value>
-            </attribute-definition>
             <attribute-definition attribute-id="listPriceDefault">
                 <display-name xml:lang="x-default">Default List Price Book ID</display-name>
                 <type>string</type>
@@ -4599,9 +4572,6 @@ The Search Preferences&gt;Search Suggestion option is set to Disabled by default
                 <attribute attribute-id="GoogleVerificationTag"/>
                 <attribute attribute-id="buildNotificationEmailList"/>
                 <attribute attribute-id="slideshoweffect"/>
-                <attribute attribute-id="facebookConnectEnabled"/>
-                <attribute attribute-id="facebookURI"/>
-                <attribute attribute-id="facebookAppID"/>
                 <attribute attribute-id="enableInfiniteScroll"/>
                 <attribute attribute-id="enableMultiShipping"/>
                 <attribute attribute-id="enableStorePickUp"/>

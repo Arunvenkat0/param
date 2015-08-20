@@ -12,15 +12,6 @@
 			<h1>${Resource.msg('account.user.registration.createnew','account',null)}</h1>
 		</isif>
 
-		<iscomment>Only enable the facebook registration if the customer isn't authenticated</iscomment>
-		<isif condition="${!pdict.CurrentCustomer.authenticated &&
-							(dw.system.Site.getCurrent().getCustomPreferenceValue('facebookConnectEnabled')) &&
-							(dw.system.Site.getCurrent().getCustomPreferenceValue('facebookAppID') != null) &&
-							(dw.system.Site.getCurrent().getCustomPreferenceValue('facebookURI') != null)
-							}">
-			<isinclude template="account/facebook/facebookregistration"/>
-		</isif>
-
 		<form action="${URLUtils.httpsContinue()}" method="post" class="form-horizontal" id="RegistrationForm">
 
 			<fieldset>
