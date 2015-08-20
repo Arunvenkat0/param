@@ -274,7 +274,7 @@
 	border-top: 1px solid $very-light-gray;
 	margin: 0;
 	padding: 1em .5em;
- 	overflow: hidden;	
+ 	overflow: hidden;
 	.inventory {
 		float: left;
 		white-space: nowrap;
@@ -499,6 +499,24 @@
 	}
 	.tab-switch {
 		display: none;
+		&:checked {
+			+ .tab-label {
+				@media screen and (min-width: 768px) {
+					background: #fff;
+					border-bottom-color: $citrus;
+					color: $black;
+					font-weight: 700;
+					top: -0.0625rem;
+					transition: all 0.35s;
+					z-index: 1
+				}
+			}
+			+ label + .tab-content {
+				opacity: 1;
+				transition: all 0.35s;
+				z-index: 2;
+			}
+		}
 	}
 	.tab-label {
 		border-bottom: 3px solid $white;
@@ -534,22 +552,6 @@
 			width: 100%;
 		}
 	}
-}
-.tab-switch:checked + .tab-label {
-	@media screen and (min-width: 768px) {
-		background: #fff;
-		border-bottom-color: $citrus;
-		color: $black;
-		font-weight: 700;
-		top: -0.0625rem;
-		transition: all 0.35s;
-		z-index: 1
-	}
-}
-.tab-switch:checked + label + .tab-content {
-	opacity: 1;
-	transition: all 0.35s;
-	z-index: 2;
 }
 
 .js button.add-all-to-cart {
