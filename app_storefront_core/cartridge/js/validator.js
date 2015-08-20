@@ -15,7 +15,7 @@ var regex = {
 		us: /^\d{5}(-\d{4})?$/,
 		ca: /^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}$/,
 		fr: /^(F-)?((2[A|B])|[0-9]{2})[0-9]{3}$/,
-		it: /^(V-|I-)?[0-9]{4}$/,
+		it: /^([0-9]){5}$/,
 		jp: /^([0-9]){3}[-]([0-9]){4}$/,
 		cn: /^([0-9]){6}$/,
 		gb: /^([A-PR-UWYZ0-9][A-HK-Y0-9][AEHMNPRTVXY0-9]?[ABEHMNPRVWXY0-9]? {1,2}[0-9][ABD-HJLN-UW-Z]{2}|GIR 0AA)$/
