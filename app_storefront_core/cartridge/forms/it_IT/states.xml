@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <form xmlns="http://www.demandware.com/xml/form/2008-04-19">
-	<field formid="state" label="resource.state" type="string" mandatory="true" binding="stateCode" missing-error="address.state.missing" value-error="address.field.invalid">
+	<field formid="state" label="resource.state" type="string" mandatory="false" binding="stateCode" missing-error="address.state.missing" value-error="address.field.invalid">
 		<options>
-			
+
 			<option optionid="" 	label="resource.select" 		value=""/>
-			
+
 			<!-- Italian states -->
 			<option optionid="AB"	label="state.it.AB" value="AB"/>
 			<option optionid="BC"	label="state.it.BC" value="BC" />
@@ -27,7 +27,7 @@
 			<option optionid="VD"	label="state.it.VD" value="VD" />
 			<option optionid="VN"	label="state.it.VN" value="VN" />
 
-		</options>	
+		</options>
 	</field>
-	
+
 </form>
