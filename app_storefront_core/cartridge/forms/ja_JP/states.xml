@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <form xmlns="http://www.demandware.com/xml/form/2008-04-19">
-  <field formid="state" label="resource.state" type="string" mandatory="true" binding="stateCode" missing-error="address.state.missing" value-error="address.field.invalid">
+  <field formid="state" label="resource.state" type="string" mandatory="false" binding="stateCode" missing-error="address.state.missing" value-error="address.field.invalid">
     <options>
-      
+
       <option optionid=""   label="resource.select"     value=""/>
-  
+
       <!-- Japanese Prefectures -->
 
       <option value="北海道" optionid="北海道">北海道</option>
@@ -56,7 +56,7 @@
       <option value="沖縄県" optionid="沖縄県">沖縄県</option>
       <option value="国外" optionid="国外">国外</option>
 
-    </options>  
+    </options>
   </field>
-  
+
 </form>

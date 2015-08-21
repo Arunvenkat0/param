@@ -48,7 +48,8 @@
 				"type": "select"
 			}, {
 				"fieldName": "states.state",
-				"type": "select"
+				"type": "select",
+				"required": true
 			}],
 			"type": {
 				"type": "select"
@@ -188,7 +189,8 @@
 			},
 			"states": [{
 				"fieldName": "state",
-				"type": "select"
+				"type": "select",
+				"required": true
 			}],
 			"phone": {
 				"help": {
@@ -206,7 +208,8 @@
 				"type": "select"
 			}, {
 				"fieldName": "states.state",
-				"type": "select"
+				"type": "select",
+				"required": true
 			}],
 			"type": {
 				"type": "select"
@@ -269,7 +272,8 @@
 			},
 			"states": [{
 				"fieldName": "state",
-				"type": "input"
+				"type": "input",
+				"required": true
 			}],
 			"phone": {
 				"help": {
@@ -286,7 +290,8 @@
 				"fieldName": "country",
 				"type": "select"
 			}, {
-				"fieldName": "states.state"
+				"fieldName": "states.state",
+				"required": true
 			}],
 			"type": {
 				"type": "select"
@@ -425,7 +430,8 @@
 			},
 			"states": [{
 				"fieldName": "state",
-				"type": "select"
+				"type": "select",
+				"required": true
 			}],
 			"phone": {
 				"help": {
@@ -443,7 +449,8 @@
 				"type": "select"
 			}, {
 				"fieldName": "states.state",
-				"type": "select"
+				"type": "select",
+				"required": true
 			}],
 			"type": {
 				"type": "select"
