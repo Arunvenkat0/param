@@ -1,7 +1,6 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 
 	<isscript>
-		var customer = pdict.CurrentCustomer;
 		var links, title;
 		// User has session, but not authenticated
 		if (customer.registered && !customer.authenticated) {
