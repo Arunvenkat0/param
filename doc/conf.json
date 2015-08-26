@@ -15,8 +15,8 @@
     "opts": {
         "recurse": true,
         "lenient": true,
-        "template": "jsdoc/template",
-        "tutorials": "jsdoc/tutorials"
+        "template": "doc/template",
+        "tutorials": "doc/tutorials"
     },
-    "plugins": ["jsdoc/demandware"]
+    "plugins": ["doc/demandware"]
 }
