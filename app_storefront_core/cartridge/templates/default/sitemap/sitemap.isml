@@ -13,7 +13,7 @@
 			<isset name="subCatLayout" value="${getSubCategoriesLayout(topCat)}" scope="page"/>
 			
 			<h2>
-				<a href="${getCategoryUrl(topCat)}" title="${topCat.displayName}">
+				<a href="<isprint value="${getCategoryUrl(topCat)}" encoding="off"/>" title="${topCat.displayName}">
 					<isprint value="${topCat.displayName}"/>
 				</a>
 			</h2>
