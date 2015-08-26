@@ -47,7 +47,6 @@
 <isset name="noOfImages" value="${largeImagesSize > smallImagesSize ? smallImagesSize : largeImagesSize}" scope="page"/>
 <isif condition="${smallImagesSize > 1}">
 	<div id="thumbnails" class="product-thumbnails">
-		<h2>${Resource.msg('product.productthumbnails.title','product',null)}</h2>
 		<ul>
 			<isloop items="${imageProduct.getImages('small')}" var="img" status="imgSmStatus">
 				<iscomment>we only show the smallest of large or small images, there is 1-1 correspondence</iscomment>
