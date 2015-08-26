@@ -270,16 +270,16 @@
 	position: relative;
 	text-align: center;
 	width: 100%;
-	h1 {
+	h2 {
 		color: $black;
 		font-family: $sans-serif-alt;
 		font-size: 2rem;
 		font-weight: 100;
 		margin: 0;
-		padding: 0;
+		padding: 1rem 0;
 		text-transform: uppercase;
 		@media screen and (min-width: 768px) {
-			font-size: 4rem;
+			font-size: 2.3rem;
 		}
 	}
 	ul {
@@ -359,19 +359,6 @@
 	position: relative;
 	text-align: center;
 	.home-bottom-right-header {
-		h1 {
-			color: $rain-forest;
-			font-size: 2.2rem;
-			font-style: normal;
-			font-weight: 200;
-			margin: -0.4rem 0 0 0;
-			padding: 0;
-			text-transform: uppercase;
-			@media screen and (min-width: 768px) {
-				font-size: 4rem;
-				margin-top: -0.8rem;
-			}
-		}
 		h2 {
 			color: $dim-gray;
 			font-size: 0.7rem;
@@ -379,8 +366,20 @@
 			padding: .5em 0 0 0;
 			margin: 0;
 			@media screen and (min-width: 768px) {
-				font-size: 1rem;
+				font-size: 2.3rem;
 				font-weight: 200;
+			}
+		}
+		h3 {
+			color: $rain-forest;
+			font-size: 2.2rem;
+			font-style: normal;
+			font-weight: 200;
+			margin: 0;
+			padding: 0;
+			text-transform: uppercase;
+			@media screen and (min-width: 768px) {
+				font-size: 2.3rem;
 			}
 		}
 		img {

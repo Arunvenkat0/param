@@ -578,7 +578,7 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <description>Product Carousel of This Weeks Deals</description>
         <template>slots/product/homerightcarousel.isml</template>
         <enabled-flag>true</enabled-flag>
-        <callout-msg xml:lang="x-default">&lt;h2&gt;This Weeks&lt;/h2&gt;&lt;h1&gt;Deals&lt;/h1&gt;</callout-msg>
+        <callout-msg xml:lang="x-default">&lt;h2&gt;This Weeks&lt;/h2&gt;&lt;h3&gt;Deals&lt;/h3&gt;</callout-msg>
         <callout-msg xml:lang="fr-FR">Produits présentés</callout-msg>
         <callout-msg xml:lang="it-IT">Prodotti in primo piano</callout-msg>
         <callout-msg xml:lang="ja-JP">おすすめの商品</callout-msg>
@@ -831,7 +831,7 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <template>slots/product/homerightcarousel.isml</template>
         <enabled-flag>true</enabled-flag>
         <callout-msg xml:lang="x-default">&lt;h2&gt;This Weeks&lt;/h2&gt;
-&lt;h1&gt;Deals&lt;/h1&gt;</callout-msg>
+&lt;h3&gt;Deals&lt;/h3&gt;</callout-msg>
         <callout-msg xml:lang="fr-FR">Produits présentés</callout-msg>
         <callout-msg xml:lang="it-IT">Prodotti in primo piano</callout-msg>
         <callout-msg xml:lang="ja-JP">おすすめの商品</callout-msg>
