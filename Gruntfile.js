@@ -29,6 +29,10 @@ module.exports = function (grunt) {
 					return path.src + '*.scss';
 				}).push('styleguide/scss/*.scss'),
 				tasks: ['css:styleguide']
+			},
+			doc: {
+				files: ['doc/**/*', '!doc/dist/', '!doc/.tmp'],
+				tasks: ['jsdoc']
 			}
 		},
 		sass: {
@@ -114,6 +118,12 @@ module.exports = function (grunt) {
 					port: grunt.option('port') || 8000,
 					base: 'styleguide'
 				}
+			},
+			doc: {
+				options: {
+					port: grunt.option('port') || 5000,
+					base: 'doc/dist'
+				}
 			}
 		},
 		jscs: {
@@ -154,6 +164,15 @@ module.exports = function (grunt) {
 					message: 'Update ' + new Date().toISOString(),
 					repo: require('./styleguide/deploy.json').options.remoteUrl
 				}
+			},
+			doc: {
+				src: '**/*',
+				options: {
+					base: 'doc/dist',
+					clone: 'doc/.tmp',
+					message: 'Update ' + new Date().toISOString(),
+					repo: require('./doc/deploy.json').options.remoteUrl
+				}
 			}
 		},
 		jsdoc: {
@@ -182,4 +201,6 @@ module.exports = function (grunt) {
 	grunt.registerTask('lint', ['jshint', 'jscs']);
 	grunt.registerTask('styleguide', ['css:styleguide', 'browserify:watchStyleguide', 'connect:styleguide', 'watch:styleguide']);
 	grunt.registerTask('deploy:styleguide', ['css:styleguide', 'browserify:styleguide', 'gh-pages:styleguide']);
+	grunt.registerTask('doc', ['jsdoc', 'connect:doc', 'watch:doc']);
+	grunt.registerTask('deploy:doc', ['jsdoc', 'gh-pages:doc']);
 };
