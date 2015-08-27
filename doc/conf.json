@@ -29,5 +29,5 @@
 		"template": "doc/template",
 		"tutorials": "doc/tutorials"
 	},
-	"plugins": ["doc/demandware"]
+	"plugins": ["doc/demandware", "plugins/markdown"]
 }
