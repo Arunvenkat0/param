@@ -190,6 +190,7 @@ h5,
 }
 
 .itemMembers {
+	display: none;
 	font-size: .9rem;
 	padding-left: 2rem;
 }
@@ -209,4 +210,15 @@ h5,
 	display: inline-block;
 	margin-right: 4px;
 	width: .8rem;
+}
+
+.transactional {
+	border: 1px solid #000;
+	border-radius: 50%;
+	display: inline-block;
+	font-family: monospace;
+	font-weight: bold;
+	line-height: 1;
+	padding-left: .3rem;
+	width: 1rem;
 }
