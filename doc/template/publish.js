@@ -372,8 +372,6 @@ function linktoExternal(longName, name) {
  */
 function buildNav(members) {
     var nav = '<h2><a href="index.html">Home</a></h2>';
-    // add search box
-    nav += '<div class="search"><input id="search" type="text" class="form-control input-sm" placeholder="Search Documentations"></div>';
     var seen = {};
     var seenTutorials = {};
 

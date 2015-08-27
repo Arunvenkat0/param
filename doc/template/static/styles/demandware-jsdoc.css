@@ -66,9 +66,6 @@ label[for="nav-trigger"] {
 	width: 50%;
 	overflow: scroll;
 }
-.navigation * {
-	box-sizing: inherit;
-}
 @media (min-width: 43.75em) {
 	.navigation {
 		border-left: 1px solid #84bd00;
@@ -88,9 +85,19 @@ label[for="nav-trigger"] {
 	left: 0;
 }
 
+.navigation * {
+	box-sizing: inherit;
+}
+
+.navigation li {
+	margin-top: 0;
+	word-break: break-all;
+}
+
 #main {
 	box-sizing: border-box;
 	float: none;
+	overflow-x: scroll;
 	padding: .5rem 0 .5rem 1rem;
 	position: relative;
 	width: 100%;
@@ -112,8 +119,8 @@ label[for="nav-trigger"] {
 	}
 }
 
-nav li {
-	margin-top: 0;
+.search {
+	margin-bottom: 1rem;
 }
 
 .search input {

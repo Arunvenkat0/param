@@ -158,7 +158,7 @@ module.exports = function (grunt) {
 		},
 		jsdoc: {
 			dist: {
-				src: ['app_storefront_controllers/README.md', 'app_storefront_controllers/**/*.ds'],
+				src: ['app_storefront_controllers/README.md', '.'],
 				options:{
 					destination: 'doc/dist',
 					configure: 'doc/conf.json'
