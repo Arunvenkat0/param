@@ -1,0 +1,33 @@
+{
+	"tags": {
+		"allowUnknownTags": true
+	},
+	"source": {
+		"exclude": [
+			"node_modules",
+			"doc",
+			"src",
+			"storefront_refapp",
+			"styleguide",
+			"test",
+			"app_storefront_core/cartridge/static",
+			"version.js",
+			"app_storefront_core"
+		],
+		"includePattern": ".+\\.(ds|js)(doc)?$"
+	},
+	"templates": {
+		"cleverLinks": false,
+		"monospaceLinks": false,
+		"default": {
+			"outputSourceFiles": true
+		}
+	},
+	"opts": {
+		"recurse": true,
+		"lenient": true,
+		"template": "doc/template",
+		"tutorials": "doc/tutorials"
+	},
+	"plugins": ["doc/demandware", "plugins/markdown"]
+}
