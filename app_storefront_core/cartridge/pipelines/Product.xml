@@ -462,7 +462,7 @@ quantity (required) - the quantity to use for determining avalability</descripti
         </transition-display>
       </simple-transition>
       <node>
-        <decision-node condition-key="CurrentHttpParameterMap.cgid" condition-operator="expr"/>
+        <decision-node condition-key="CurrentHttpParameterMap.cgid.stringValue" condition-operator="expr"/>
         <node-display x="-1" y="1"/>
         <branch basename="b2" source-connector="yes">
           <transition target-connector="in">
