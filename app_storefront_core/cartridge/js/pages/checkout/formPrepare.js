@@ -15,6 +15,9 @@ var hasEmptyRequired = function () {
 var validateForm = function () {
 	// only validate form when all required fields are filled to avoid
 	// throwing errors on empty form
+	if (!validator) {
+		return;
+	}
 	if (!hasEmptyRequired()) {
 		if (validator.form()) {
 			$continue.removeAttr('disabled');
