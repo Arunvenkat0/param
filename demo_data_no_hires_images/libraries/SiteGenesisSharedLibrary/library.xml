@@ -7200,7 +7200,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;img alt="ご注文金額が ¥15,000 を超えると配送料が無料" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
 &lt;div class="home-bottom-center-text"&gt;&#13;
-&lt;h1&gt;ご注文金額が ¥15,000 を超えると&lt;/h1&gt;&#13;
+&lt;h1&gt;ご注文金額が ¥15,000&lt;br&gt;を超えると&lt;/h1&gt;&#13;
 &lt;h2&gt;通常配送&lt;/h2&gt;&#13;
 &lt;h3&gt;が無料&lt;/h3&gt;&#13;
 &lt;/div&gt;</custom-attribute>
@@ -7297,7 +7297,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1&gt;Shop&lt;/h1&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h2&gt;Shop Shoes&lt;/h2&gt;&#13;
 &#13;
 &lt;ul&gt;&#13;
     &lt;li&gt;&lt;span&gt;Shoes:&lt;/span&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Heels&lt;/a&gt;&lt;/li&gt;&#13;
