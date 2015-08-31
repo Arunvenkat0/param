@@ -6,6 +6,15 @@
 
 	<iscomment>Builds a registration page for the user. It provides all input fields for names and address</iscomment>
 
+		<isscript>
+			var attributes = {
+				disabled: 'disabled'
+			};
+			var autocomplete_attributes = {
+				autocomplete: "off"
+			};					
+		</isscript>
+
 		<isif condition="${!empty(pdict.Action) && pdict.Action == 'edit'}">
 			<h1>${Resource.msg('account.user.registration.editaccount','account',null)}</h1>
 		<iselse/>
@@ -15,11 +24,7 @@
 		<form action="${URLUtils.httpsContinue()}" method="post" class="form-horizontal" id="RegistrationForm">
 
 			<fieldset>
-				<isscript>
-					var attributes = {
-						disabled: 'disabled'
-					};
-				</isscript>
+
 				<legend>
 					${Resource.msg('account.user.registration.name','account',null)}
 					<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
@@ -33,17 +38,16 @@
 				</isif>
 			</fieldset>
 
-
 			<fieldset>
 				<legend>
 					${Resource.msg('account.user.registration.logininfo','account',null)}
 					<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 				</legend>
-				<isif condition="${!pdict.CurrentSession.customer.externallyAuthenticated}">
+				<isif condition="${!pdict.CurrentSession.customer.externallyAuthenticated}">			
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.emailconfirm}" type="input"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.login.password}" type="password" dynamicname="true"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.login.passwordconfirm}" type="password" dynamicname="true"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.login.password}" type="password" dynamicname="true" attributes="${autocomplete_attributes}"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.login.passwordconfirm}" type="password" dynamicname="true" attributes="${autocomplete_attributes}"/>
 				<iselse/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input" attributes="${attributes}"/>
 				</isif>

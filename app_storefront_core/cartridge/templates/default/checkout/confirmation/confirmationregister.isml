@@ -13,12 +13,17 @@
 
 			<form action="${URLUtils.httpsContinue()}" method="post" id="RegistrationForm">
 				<fieldset>
+					<isscript>
+						var attributes = {
+							autocomplete: "off"
+						};
+					</isscript>				
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.firstname}" type="input"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.lastname}" type="input"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.email}" type="input"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.customer.emailconfirm}" type="input"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.login.password}" type="password" dynamicname="true"/>
-					<isinputfield formfield="${pdict.CurrentForms.profile.login.passwordconfirm}" type="password" dynamicname="true"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.login.password}" type="password" dynamicname="true" attributes="${attributes}"/>
+					<isinputfield formfield="${pdict.CurrentForms.profile.login.passwordconfirm}" type="password" dynamicname="true" attributes="${attributes}"/>
 					<button type="submit" class="largebutton" value="${Resource.msg('global.createbutton','locale',null)}" name="${pdict.CurrentForms.profile.confirm.htmlName}"><span>${Resource.msg('global.createbutton','locale',null)}</span></button>
 					<input type="hidden" name="${pdict.CurrentForms.profile.secureKeyHtmlName}" value="${pdict.CurrentForms.profile.secureKeyValue}"/>
 				</fieldset>
