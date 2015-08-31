@@ -93,6 +93,7 @@
 		<option optionid="it" label="country.italy" value="it"/>
 		<option optionid="jp" label="country.japan" value="jp"/>
 		<option optionid="cn" label="country.china" value="cn"/>
+		<option optionid="de" label="country.germany" value="DE"/>
 	</options>	
 </field>
 <action formid="findbyzip" label="resource.find" valid-form="true"/>
