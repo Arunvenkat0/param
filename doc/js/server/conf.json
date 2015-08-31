@@ -8,11 +8,11 @@
 			"doc",
 			"src",
 			"storefront_refapp",
-			"styleguide",
 			"test",
 			"app_storefront_core/cartridge/static",
-			"version.js",
-			"app_storefront_core"
+			"app_storefront_core/cartridge/js",
+			"app_storefront_core/cartridge/scripts",
+			"version.js"
 		],
 		"includePattern": ".+\\.(ds|js)(doc)?$"
 	},
@@ -26,8 +26,8 @@
 	"opts": {
 		"recurse": true,
 		"lenient": true,
-		"template": "doc/template",
-		"tutorials": "doc/tutorials"
+		"template": "doc/js/server/template",
+		"tutorials": "doc/js/server/tutorials"
 	},
-	"plugins": ["doc/demandware", "plugins/markdown"]
+	"plugins": ["doc/js/server/demandware", "plugins/markdown"]
 }

@@ -27,11 +27,11 @@ module.exports = function (grunt) {
 			styleguide: {
 				files: paths.css.map(function (path) {
 					return path.src + '*.scss';
-				}).push('styleguide/scss/*.scss'),
+				}).push('doc/styleguide/scss/*.scss'),
 				tasks: ['css:styleguide']
 			},
 			doc: {
-				files: ['doc/**/*', '!doc/dist/', '!doc/.tmp'],
+				files: ['doc/js/**/*', '!doc/dist/', '!doc/.tmp'],
 				tasks: ['jsdoc']
 			}
 		},
@@ -47,7 +47,7 @@ module.exports = function (grunt) {
 			},
 			styleguide: {
 				files: [{
-					'styleguide/dist/main.css': 'styleguide/scss/main.scss'
+					'doc/dist/styleguide/main.css': 'doc/styleguide/scss/main.scss'
 				}]
 			}
 		},
@@ -59,7 +59,7 @@ module.exports = function (grunt) {
 			},
 			styleguide: {
 				files: [{
-					'styleguide/dist/main.css': 'styleguide/dist/main.css'
+					'doc/dist/styleguide/main.css': 'doc/dist/styleguide/main.css'
 				}]
 			}
 		},
@@ -86,8 +86,8 @@ module.exports = function (grunt) {
 			},
 			styleguide: {
 				files: [{
-					src: 'styleguide/js/main.js',
-					dest: 'styleguide/dist/main.js'
+					src: 'doc/styleguide/js/main.js',
+					dest: 'doc/dist/styleguide/main.js'
 				}],
 				options: {
 					transform: ['hbsfy']
@@ -95,8 +95,8 @@ module.exports = function (grunt) {
 			},
 			watchStyleguide: {
 				files: [{
-					src: 'styleguide/js/main.js',
-					dest: 'styleguide/dist/main.js'
+					src: 'doc/styleguide/js/main.js',
+					dest: 'doc/dist/styleguide/main.js'
 				}],
 				options: {
 					transform: ['hbsfy'],
@@ -113,12 +113,6 @@ module.exports = function (grunt) {
 			}
 		},
 		connect: {
-			styleguide: {
-				options: {
-					port: grunt.option('port') || 8000,
-					base: 'styleguide'
-				}
-			},
 			doc: {
 				options: {
 					port: grunt.option('port') || 5000,
@@ -156,15 +150,6 @@ module.exports = function (grunt) {
 			}
 		},
 		'gh-pages': {
-			styleguide: {
-				src: ['dist/**', 'index.html', 'lib/**/*'],
-				options: {
-					base: 'styleguide',
-					clone: 'styleguide/.tmp',
-					message: 'Update ' + new Date().toISOString(),
-					repo: require('./styleguide/deploy.json').options.remoteUrl
-				}
-			},
 			doc: {
 				src: '**/*',
 				options: {
@@ -176,12 +161,29 @@ module.exports = function (grunt) {
 			}
 		},
 		jsdoc: {
-			dist: {
+			server: {
 				src: ['app_storefront_controllers/README.md', '.'],
-				options:{
-					destination: 'doc/dist',
-					configure: 'doc/conf.json'
+				options: {
+					destination: 'doc/dist/js/server',
+					configure: 'doc/js/server/conf.json'
 				}
+			},
+			client: {
+				src: ['app_storefront_core/cartridge/js/README.md', '.'],
+				options: {
+					destination: 'doc/dist/js/client',
+					configure: 'doc/js/client/conf.json'
+				}
+			}
+		},
+		copy: {
+			doc: {
+				files: [
+					{'doc/dist/index.html': 'doc/index.html'},
+					{'doc/dist/styleguide/index.html': 'doc/styleguide/index.html'},
+					{expand: true, cwd: 'doc/styleguide', src: ['lib/**/*'], dest: 'doc/dist/styleguide'},
+					{expand: true, cwd: 'doc/styleguide', src: ['templates/**/*'], dest: 'doc/dist/styleguide'}
+				]
 			}
 		}
 	});
@@ -199,8 +201,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('test:unit', ['mochaTest:unit']);
 	grunt.registerTask('build', ['js', 'css']);
 	grunt.registerTask('lint', ['jshint', 'jscs']);
-	grunt.registerTask('styleguide', ['css:styleguide', 'browserify:watchStyleguide', 'connect:styleguide', 'watch:styleguide']);
-	grunt.registerTask('deploy:styleguide', ['css:styleguide', 'browserify:styleguide', 'gh-pages:styleguide']);
-	grunt.registerTask('doc', ['jsdoc', 'connect:doc', 'watch:doc']);
-	grunt.registerTask('deploy:doc', ['jsdoc', 'gh-pages:doc']);
+	grunt.registerTask('styleguide', ['css:styleguide', 'browserify:watchStyleguide']);
+	grunt.registerTask('doc', ['jsdoc:server', 'jsdoc:client', 'styleguide', 'copy:doc', 'connect:doc', 'watch']);
+	grunt.registerTask('doc:deploy', ['jsdoc:server', 'jsdoc:client', 'styleguide', 'copy:doc', 'gh-pages:doc']);
 };
