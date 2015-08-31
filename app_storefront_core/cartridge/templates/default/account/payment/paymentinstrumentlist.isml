@@ -13,7 +13,7 @@
 	<isif condition="${pdict.PaymentInstruments.size() > 0}">
 		<ul class="payment-list">
 			<isloop items="${pdict.CurrentForms.paymentinstruments.creditcards.storedcards}" var="creditcard" status="loopstate">
-			<li class="<isif condition="${loopstate.first}"> first <iselseif condition="${loopstate.last}"> last</isif>">
+			<li class="<isif condition="${loopstate.first}">first <iselseif condition="${loopstate.last}">last </isif>${pdict.PaymentInstruments[loopstate.count - 1].creditCardType}">
 				<isminicreditcard card="${creditcard.object}" show_expiration="${true}"/>
 				<form action="${URLUtils.url('PaymentInstruments-Delete')}" name="payment-remove" method="post" id="creditcards_${loopstate.count}">
 					<fieldset>
