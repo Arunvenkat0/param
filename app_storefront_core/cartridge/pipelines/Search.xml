@@ -160,7 +160,7 @@
                               </node>
                               <simple-transition/>
                               <node>
-                                <decision-node condition-key="!empty(CurrentHttpParameterMap.q)" condition-operator="expr"/>
+                                <decision-node condition-key="CurrentHttpParameterMap.q &amp;&amp; CurrentHttpParameterMap.q.value" condition-operator="expr"/>
                                 <node-display x="1" y="0"/>
                                 <branch basename="b3" source-connector="yes">
                                   <transition target-connector="in">
@@ -171,7 +171,7 @@
                                   <segment>
                                     <node>
                                       <pipelet-node pipelet-name="GetContent" pipelet-set-identifier="bc_api">
-                                        <key-binding alias="&quot;keyword_&quot;+CurrentHttpParameterMap.q.value.toLowerCase()" key="ContentID"/>
+                                        <key-binding alias="&quot;keyword_&quot; + CurrentHttpParameterMap.q.value.toLowerCase()" key="ContentID"/>
                                         <key-binding alias="SearchPromo" key="Content"/>
                                       </pipelet-node>
                                       <node-display x="0" y="1"/>
