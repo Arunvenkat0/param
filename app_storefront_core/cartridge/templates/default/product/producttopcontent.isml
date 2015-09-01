@@ -14,7 +14,7 @@
 	<isinclude template="product/components/productimages"/>
 </div>
 
-<div class="product-col-2  product-detail">
+<div class="product-col-2 product-detail">
 	<h1 class="product-name" itemprop="name"><isprint value="${pdict.Product.name}"/></h1>
 	<div id="product-content">
 		<isinclude template="product/productcontent"/>

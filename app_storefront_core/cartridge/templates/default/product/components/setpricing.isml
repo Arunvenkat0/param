@@ -68,8 +68,7 @@
 	<isset name="ProductMaxPrice" value="${pdict.ProductMaxPrice + pdict.Product.priceModel.maxPrice}" scope="pdict" />
 <iselse/>	
 	
-	<isif condition="${StandardPrice.valueOrNull != null && StandardPrice.valueOrNull > 0}">
-		
+	<isif condition="${StandardPrice.valueOrNull != null && StandardPrice.valueOrNull > 0}">		
 		<isset name="ProductSetStandardPrice" value="${pdict.ProductSetStandardPrice+StandardPrice}" scope="pdict" />
 	</isif>
 

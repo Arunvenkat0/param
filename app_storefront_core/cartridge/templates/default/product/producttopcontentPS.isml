@@ -38,8 +38,6 @@
 	</isif>
 </isloop>
 
-<h1 class="product-name"  itemprop="name"><isprint value="${pdict.Product.name}"/></h1>
-
 <iscomment>
 	Image
 	=============================================================
@@ -106,13 +104,15 @@
 	</div>
 </div>
 
-<div class="product-col-2  product-set">
+<div class="product-col-2 product-detail product-set">
 
 	<iscomment>
 		primary details
 		=============================================================
 	</iscomment>
-
+	
+	<h1 class="product-name"  itemprop="name"><isprint value="${pdict.Product.name}"/></h1>
+	
 	<span class="visually-hidden" itemprop="url">${URLUtils.http('Product-Show','pid', pdict.Product.ID)}</span>
 
 	<div class="product-number">
@@ -125,8 +125,11 @@
 	</isif>
 
 	<isset name="psProduct" value="${pdict.Product}" scope="page"/>
-
-	<isinclude template="product/components/pricing"/>
+	
+	<iscomment>
+		product promotions
+		=============================================================
+	</iscomment>
 
 	<isinclude template="product/components/promotions"/>
 	<isif condition=${pdict.isBundle}>
@@ -151,27 +154,34 @@
 	</isif>
 		<div class="product-add-to-cart">
 			<isset name="disabledText" value="${isUnavailable?' disabled="disabled"':''}" scope="page"/>
-
+			
+			<iscomment>
+				product set price
+				=============================================================
+			</iscomment>
+			
+			<label>${Resource.msg('product.setpricelabel','product',null)}</label>
 			<isinclude template="product/components/pricing"/>
-				<isif condition="${pdict.isSet}">
-					<button id="add-all-to-cart" type="submit" value="${Resource.msg('global.addalltocart','locale',null)}" class="button-fancy-large add-all-to-cart"${disabledText}>
-						${Resource.msg('global.addalltocart','locale',null)}
-					</button>
-				<iselse/>
-					<isscript>
-						var updateSources = ["cart", "giftregistry", "wishlist"];
-						var source = pdict.CurrentHttpParameterMap.source.stringValue;
-						var buttonTitle = (empty(source) || updateSources.indexOf(source)<0) ?	dw.web.Resource.msg('global.addtocart','locale','Add to Cart') : dw.web.Resource.msg('global.update','locale','Update');
-					</isscript>
-					<isset name="cartAction" value="add" scope="page"/>
-					<isif condition="${pdict.CurrentHttpParameterMap.uuid.stringValue}">
-						<input type="hidden" name="uuid" id="uuid" value="${pdict.CurrentHttpParameterMap.uuid.stringValue}" />
-						<isset name="cartAction" value="update" scope="page"/>
-					</isif>
-					<input type="hidden" name="cartAction" id="cartAction" value="${cartAction}" />
-					<input type="hidden" name="pid" id="pid" value="${pdict.Product.ID}" />
-					<button id="add-to-cart" type="submit" title="${buttonTitle}" value="${buttonTitle}" class="button-fancy-large add-to-cart bundle"${disabledText}>${buttonTitle}</button>
+			
+			<isif condition="${pdict.isSet}">
+				<button id="add-all-to-cart" type="submit" value="${Resource.msg('global.addalltocart','locale',null)}" class="button-fancy-large add-all-to-cart"${disabledText}>
+					${Resource.msg('global.addalltocart','locale',null)}
+				</button>
+			<iselse/>
+				<isscript>
+					var updateSources = ["cart", "giftregistry", "wishlist"];
+					var source = pdict.CurrentHttpParameterMap.source.stringValue;
+					var buttonTitle = (empty(source) || updateSources.indexOf(source)<0) ?	dw.web.Resource.msg('global.addtocart','locale','Add to Cart') : dw.web.Resource.msg('global.update','locale','Update');
+				</isscript>
+				<isset name="cartAction" value="add" scope="page"/>
+				<isif condition="${pdict.CurrentHttpParameterMap.uuid.stringValue}">
+					<input type="hidden" name="uuid" id="uuid" value="${pdict.CurrentHttpParameterMap.uuid.stringValue}" />
+					<isset name="cartAction" value="update" scope="page"/>
 				</isif>
+				<input type="hidden" name="cartAction" id="cartAction" value="${cartAction}" />
+				<input type="hidden" name="pid" id="pid" value="${pdict.Product.ID}" />
+				<button id="add-to-cart" type="submit" title="${buttonTitle}" value="${buttonTitle}" class="button-fancy-large add-to-cart bundle"${disabledText}>${buttonTitle}</button>
+			</isif>
 
 		</div><!-- END .addalltocart -->
 	</form>
