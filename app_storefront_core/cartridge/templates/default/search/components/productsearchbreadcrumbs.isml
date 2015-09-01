@@ -129,6 +129,4 @@
 			</isif>
 		</isloop>
 	</isif>
-
-	<ispagingcurrentpage pageurl="${pdict.ProductSearchResult.url('Search-Show')}" pagingmodel="${pdict.ProductPagingModel}"/>
 </div><!-- END: breadcrumb -->
