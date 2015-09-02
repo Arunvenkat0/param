@@ -126,13 +126,13 @@ describe('Wishlist', () => {
 	describe('Gift Certificates', () => {
 		var giftCertItemSelector = 'table div a[href*=giftcertpurchase]';
 		var btnGiftCertAddToCart = giftCertItemSelector + '.button';
-		var giftCertFieldMap = new Map();
-		giftCertFieldMap.set('recipient', 'Joe Smith');
-		giftCertFieldMap.set('recipientEmail', 'jsmith@someBogusEmailDomain.tv');
-		giftCertFieldMap.set('confirmRecipientEmail', 'jsmith@someBogusEmailDomain.tv');
-		giftCertFieldMap.set('message', 'Congratulations!');
-		giftCertFieldMap.set('amount', '250');
-
+		let giftCertFieldMap = {
+			recipient: 'Joe Smith',
+			recipientEmail: 'jsmith@someBogusEmailDomain.tv',
+			confirmRecipientEmail: 'jsmith@someBogusEmailDomain.tv',
+			message: 'Congratulations!',
+			amount: '250'
+		};
 		before(() => wishListPage.navigateTo()
 			.then(() => loginForm.loginAsDefaultCustomer())
 			.then(() => client.waitForVisible(wishListPage.BTN_TOGGLE_PRIVACY))
