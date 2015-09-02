@@ -4,24 +4,13 @@ import _ from 'lodash';
 import client from '../client';
 import * as formHelpers from './helpers/forms/common';
 
-export const FORM_CREDIT_CARD = 'form[name*=CreditCardForm]';
-export const DISPLAYED_CREDIT_CARD = '.first';
-
-export const LINK_ADD_CREDIT_CARD = '[class*=add-card]';
+export const AMEX_CREDIT_CARD = '[class*=Amex]';
+export const BTN_DELETE_AMEX_CARD = '.Amex .delete';
 export const BTN_CREATE_CARD = '#applyBtn';
 export const BTN_DELETE_CREDIT_CARD = '[class*=delete]';
-
-export const VISA_CREDIT_CARD = '[class*=Visa]';
-export const AMEX_CREDIT_CARD = '[class*=Amex]';
-export const MASTER_CREDIT_CARD = '[class*=MasterCard]';
-export const DISCOVER_CREDIT_CARD = '[class*=Discover]';
-
-export const BTN_DELETE_VISA_CARD = '.Visa .delete';
-export const BTN_DELETE_AMEX_CARD = '.Amex .delete';
-export const BTN_DELETE_MASTER_CARD = '.MasterCard .delete';
-export const BTN_DELETE_DISCOVER_CARD = '.Discover .delete';
-
-
+export const CREDIT_CARD_SELECTOR = '.payment-list li:nth-of-type(1)';
+export const FORM_CREDIT_CARD = 'form[name*=CreditCardForm]';
+export const LINK_ADD_CREDIT_CARD = '[class*=add-card]';
 
 const basePath = '/wallet';
 
@@ -30,17 +19,35 @@ export function navigateTo () {
 }
 
 export function fillOutCreditCardForm (creditCardData) {
-	let fieldTypes = new Map();
 	let fieldsPromise = [];
 
-	fieldTypes.set('owner', 'input');
-	fieldTypes.set('type', 'selectByValue');
-	fieldTypes.set('number', 'input');
-	fieldTypes.set('expiration_year', 'selectByValue');
+	let fieldTypes = {
+		owner: 'input',
+		type: 'selectByValue',
+		number: 'input',
+		expiration_year: 'selectByValue'
+	};
 
 	_.each(creditCardData, (value, key) => {
-		let selector = '[name*="newcreditcard_' + key + '"]';
-		fieldsPromise.push(formHelpers.populateField(selector, value, fieldTypes.get(key)));
+		let selector = '[name*=newcreditcard_' + key + ']';
+		fieldsPromise.push(formHelpers.populateField(selector, value, fieldTypes[key]));
 	});
 	return Promise.all(fieldsPromise);
+}
+
+export function deleteAllCreditCards () {
+	return client.elements(BTN_DELETE_CREDIT_CARD)
+		.then(removeLinks => {
+			return removeLinks.value.reduce(removeCreditCard => {
+				return removeCreditCard.then(() => client.click(BTN_DELETE_CREDIT_CARD)
+					.then(() => client.waitUntil(() =>
+						client.alertText()
+							.then(
+								text => text === 'Do you want to remove this credit card?',
+								err => err.message != 'no alert open'
+							)
+					))
+					.then(() =>client.alertAccept()));
+			}, Promise.resolve());
+		});
 }
