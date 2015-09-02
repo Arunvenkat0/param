@@ -14,6 +14,7 @@ import * as formLogin from '../webdriver/pageObjects/helpers/forms/login';
 import * as formHelpers from '../webdriver/pageObjects/helpers/forms/common';
 import * as helpers from '../webdriver/pageObjects/helpers/common';
 import * as navHeader from '../webdriver/pageObjects/navHeader';
+import * as giftCertPage from '../webdriver/pageObjects/giftCertPurchase';
 
 describe('Checkout', () => {
 	let login = 'testuser1@demandware.com';
@@ -149,6 +150,37 @@ describe('Checkout', () => {
 				.then(() => checkoutPage.getLabelOrderConfirmation())
 				.then(title => assert.equal(title, successfulCheckoutTitle));
 		});
+	});
+
+	describe('Checkout Gift Certificate as Returning Customer', () => {
+		let giftCertFieldMap = {
+			recipient: 'Joe Smith',
+			recipientEmail: 'jsmith@someBogusEmailDomain.tv',
+			confirmRecipientEmail: 'jsmith@someBogusEmailDomain.tv',
+			message: 'Congratulations!',
+			amount: '250'
+		};
+		before(() => homePage.navigateTo()
+			.then(() => navHeader.login())
+			.then(() => cartPage.emptyCart())
+			.then(() => giftCertPage.navigateTo())
+			.then(() => giftCertPage.fillOutGiftCertPurchaseForm(giftCertFieldMap))
+			.then(() => giftCertPage.pressBtnAddToCart())
+			.then(() => checkoutPage.navigateTo())
+		);
+
+		after(() => navHeader.logout());
+
+		it('should allow check out as a returning customer', () => {
+			return client.waitForVisible(checkoutPage.BREADCRUMB_BILLING)
+				.then(() => checkoutPage.fillOutBillingForm(billingFormData))
+				.then(() => client.waitForEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+				.then(() => helpers.clickAndWait(checkoutPage.BTN_CONTINUE_BILLING_SAVE, checkoutPage.BREADCRUMB_PLACE_ORDER))
+				.then(() => helpers.clickAndWait(checkoutPage.BTN_PLACE_ORDER, orderConfPage.ORDER_CONF_DETAILS))
+				.then(() => checkoutPage.getLabelOrderConfirmation())
+				.then(title => assert.equal(title, successfulCheckoutTitle));
+		});
+
 	});
 
 	describe('Form Editing', () => {
