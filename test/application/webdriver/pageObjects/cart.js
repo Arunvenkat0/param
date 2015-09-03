@@ -11,6 +11,7 @@ export const BTN_UPDATE_CART = '.cart-footer button[name*="_updateCart"]';
 export const BTN_CHECKOUT = 'button[name*="checkoutCart"]';
 export const LINK_REMOVE = 'button[value="Remove"]';
 export const ITEM_DETAILS = '.item-details';
+export const CSS_ITEM_QUANTITY = '.item-quantity';
 
 const basePath = '/cart';
 
@@ -57,6 +58,11 @@ export function getItemNameByRow (rowNum) {
 export function getItemAttrByRow (rowNum, attr) {
 	var itemAttr = _createCssNthCartRow(rowNum) + ' .attribute[data-attribute="' + attr + '"] .value';
 	return client.getText(itemAttr);
+}
+//get the quantity in Cart for a particular row
+export function getQuantityByRow(rowNum) {
+	var selector = _createCssNthCartRow(rowNum) + ' .item-quantity ';
+	return client.getText(selector);
 }
 
 export function updateQuantityByRow (rowNum, value) {
