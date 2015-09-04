@@ -681,23 +681,23 @@ La pagina non è più disponibile. Errore 404: pagina non trovata. Usa la casell
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;If you can’t find what you are looking for, why not let our trained staff recommend something?&lt;/p&gt;&#13;
-&lt;p&gt;Our Customer Service Representatives are available now to help. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Email us&lt;/a&gt; or call 800-555-1212.&lt;/p&gt;&#13;
+&lt;p&gt;Our Customer Service Representatives are available now to help. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Email us&lt;/a&gt; or call 800-555-XXXX.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;Vous ne trouvez pas ce que vous recherchez. Demandez l'aide de notre personnel qualifié.&lt;/p&gt;&#13;
-&lt;p&gt;Les conseillers de notre service client sont à votre disposition pour vous aider. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Envoyez-nous un e-mail ou&lt;/a&gt; appelez le 800-555-1212.&lt;/p&gt;&#13;
+&lt;p&gt;Les conseillers de notre service client sont à votre disposition pour vous aider. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Envoyez-nous un e-mail ou&lt;/a&gt; appelez le 800-555-XXXX.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;Se non riesci a trovare quello che cerchi, lascia che il nostro personale qualificato ti offra qualche consiglio.&lt;/p&gt;&#13;
-&lt;p&gt;I nostri operatori del servizio clienti sono disponibili immediatamente per aiutarti. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Mandaci un'e-mail&lt;/a&gt; o chiama il numero 800-555-1212.&lt;/p&gt;&#13;
+&lt;p&gt;I nostri operatori del servizio clienti sono disponibili immediatamente per aiutarti. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Mandaci un'e-mail&lt;/a&gt; o chiama il numero 800-555-XXXX.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;お探しの情報が見つからない場合は、弊社の熟練スタッフがお手伝いいたします。&lt;/p&gt;&#13;
-&lt;p&gt;弊社のカスタマーサービスまで、&lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Eメール&lt;/a&gt;またはお電話 (800-555-1212) にてご相談ください。&lt;/p&gt;&#13;
+&lt;p&gt;弊社のカスタマーサービスまで、&lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Eメール&lt;/a&gt;またはお電話 (800-555-XXXX) にてご相談ください。&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;如果您无法找到想要找的内容，何不让我们训练有素的员工给您推荐？&lt;/p&gt;&#13;
-&lt;p&gt;我们的客户服务代表可提供帮助。 &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;给我们发电子邮件&lt;/a&gt; 或致电 800-555-1212。&lt;/p&gt;&#13;
+&lt;p&gt;我们的客户服务代表可提供帮助。 &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;给我们发电子邮件&lt;/a&gt; 或致电 800-555-XXXX&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
         </custom-attributes>
     </content>
@@ -6108,23 +6108,23 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;If you can’t find what you are looking for, why not let our trained staff recommend something?&lt;/p&gt;&#13;
-&lt;p&gt;Our Customer Service Representatives are available now to help. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Email us&lt;/a&gt; or call 800-555-1212.&lt;/p&gt;&#13;
+&lt;p&gt;Our Customer Service Representatives are available now to help. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Email us&lt;/a&gt; or call 800-555-XXXX.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;Vous ne trouvez pas ce que vous recherchez. Demandez l'aide de notre personnel qualifié.&lt;/p&gt;&#13;
-&lt;p&gt;Les conseillers de notre service client sont à votre disposition pour vous aider. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Envoyez-nous un e-mail ou&lt;/a&gt; appelez le 800-555-1212.&lt;/p&gt;&#13;
+&lt;p&gt;Les conseillers de notre service client sont à votre disposition pour vous aider. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Envoyez-nous un e-mail ou&lt;/a&gt; appelez le 800-555-XXXX.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;Se non riesci a trovare quello che cerchi, lascia che il nostro personale qualificato ti offra qualche consiglio.&lt;/p&gt;&#13;
-&lt;p&gt;I nostri operatori del servizio clienti sono disponibili immediatamente per aiutarti. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Mandaci un'e-mail&lt;/a&gt; o chiama al numero 800-555-1212.&lt;/p&gt;&#13;
+&lt;p&gt;I nostri operatori del servizio clienti sono disponibili immediatamente per aiutarti. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Mandaci un'e-mail&lt;/a&gt; o chiama al numero 800-555-XXXX.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;お探しの情報が見つからない場合は、弊社の熟練スタッフがお手伝いいたします。&lt;/p&gt;&#13;
-&lt;p&gt;弊社のカスタマーサービスまで、&lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Eメール&lt;/a&gt;またはお電話 (800-555-1212) にてご相談ください。&lt;/p&gt;&#13;
+&lt;p&gt;弊社のカスタマーサービスまで、&lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Eメール&lt;/a&gt;またはお電話 (800-555-XXXX) にてご相談ください。&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;如果您无法找到想要找的内容，何不让我们训练有素的员工给您推荐？&lt;/p&gt;&#13;
-&lt;p&gt;我们的客户服务代表可提供帮助。 &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;给我们发电子邮件&lt;/a&gt; 或致电 800-555-1212。&lt;/p&gt;&#13;
+&lt;p&gt;我们的客户服务代表可提供帮助。 &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;给我们发电子邮件&lt;/a&gt; 或致电 800-555-XXXX。&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
         </custom-attributes>
     </content>
@@ -10640,15 +10640,15 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
         <page-attributes/>
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;p&gt;If you cannot find what you are looking for, why not let our trained staff recommend something?&lt;/p&gt;&#13;
-&lt;div&gt;Our Customer Service Representatives are available now to help. &lt;a href="mailto:service@demandware.com"&gt;Email&lt;/a&gt; us or call 800-555-1212.&lt;/div&gt;</custom-attribute>
+&lt;div&gt;Our Customer Service Representatives are available now to help. &lt;a href="mailto:service@demandware.com"&gt;Email&lt;/a&gt; us or call 800-555-XXXX.&lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;p&gt;Vous ne trouvez pas ce que vous recherchez. Demandez l'aide de notre personnel qualifié.&lt;/p&gt;&#13;
-&lt;div&gt;Les conseillers de notre service client sont à votre disposition pour vous aider. &lt;a href="mailto:service@demandware.com"&gt;E-mail&lt;/a&gt; ou appelez-nous au 800-555-1212.&lt;/div&gt;</custom-attribute>
+&lt;div&gt;Les conseillers de notre service client sont à votre disposition pour vous aider. &lt;a href="mailto:service@demandware.com"&gt;E-mail&lt;/a&gt; ou appelez-nous au 800-555-XXXX.&lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;p&gt;Se non riesci a trovare quello che cerchi, lascia che il nostro personale qualificato ti offra qualche consiglio.&lt;/p&gt;&#13;
-&lt;div&gt;I nostri operatori del servizio clienti sono disponibili immediatamente per aiutarti. &lt;a href="mailto:service@demandware.com"&gt;E-mail&lt;/a&gt; oppure chiamaci al numero 800-555-1212.&lt;/div&gt;</custom-attribute>
+&lt;div&gt;I nostri operatori del servizio clienti sono disponibili immediatamente per aiutarti. &lt;a href="mailto:service@demandware.com"&gt;E-mail&lt;/a&gt; oppure chiamaci al numero 800-555-XXXX.&lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;p&gt;お探しの情報が見つからない場合は、弊社の熟練スタッフがお手伝いいたします。&lt;/p&gt;&#13;
-&lt;div&gt;弊社のカスタマーサービスまで、&lt;a href="mailto:service@demandware.com"&gt;Eメール&lt;/a&gt;またはお電話 (800-555-1212) にてご相談ください。&lt;/div&gt;</custom-attribute>
+&lt;div&gt;弊社のカスタマーサービスまで、&lt;a href="mailto:service@demandware.com"&gt;Eメール&lt;/a&gt;またはお電話 (800-555-XXXX) にてご相談ください。&lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;p&gt;如果您无法找到想要找的内容，何不让我们训练有素的员工给您推荐？&lt;/p&gt;&#13;
-&lt;div&gt;我们的客户服务代表可提供帮助。 &lt;a href="mailto:service@demandware.com"&gt;发送电子邮件&lt;/a&gt; 给我们或致电 800-555-1212。&lt;/div&gt;</custom-attribute>
+&lt;div&gt;我们的客户服务代表可提供帮助。 &lt;a href="mailto:service@demandware.com"&gt;发送电子邮件&lt;/a&gt; 给我们或致电 800-555-XXXX。&lt;/div&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="grid-banners"/>
