@@ -83,7 +83,8 @@ h1 .account-logout {
 		padding: 0;
 	}
 	li {
-		list-style: none outside none;
+		list-style-position: inside;
+		list-style-type: square;
 	}
 	.order-shipped-to,
 	.order-items,
