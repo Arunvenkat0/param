@@ -6,6 +6,12 @@ import client from '../../client';
 // https://github.com/webdriverio/webdriverio/issues/498
 import Q from 'q';
 
+// commonly used selectors
+export const PRIMARY_H1 = '#primary h1';
+export const BREADCRUMB_A = '.breadcrumb a';
+export const LAST_BREADCRUMB = '.breadcrumb-element:last-of-type';
+
+
 export function getPageTitle() {
 	return Q.Promise(resolve => {
 		client.getTitle()
