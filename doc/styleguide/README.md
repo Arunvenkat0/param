@@ -9,9 +9,6 @@ By documenting only what is essential to the design of the application, SSG free
 
 _**Disclaimer**: this is still a work in progress and is not complete. The example style guide provided here is meant as a proof of concept. Further development on top of is strongly encouranged._
 
-## How to use
-In order to generate the styleguide for your application, go to the command line and run `gulp styleguide`. This will set up a static web server (by default at `http://localhost:8000`) that displays the living styleguide.
-
 ## What it does
 This style guide imports the Sass styles in `app_storefront`. This way, any update to the application's style will be reflected in the style guide.
 
