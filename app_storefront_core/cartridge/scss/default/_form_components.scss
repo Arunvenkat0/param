@@ -27,18 +27,6 @@ legend {
 	}
 }
 
-.dialog-required {
-	display: inline;
-	font-size: 12px;
-	font-weight: 400;
-	position: relative;
-	padding: .16em 0;
-	text-transform: none
-	em {
-		color: $night-rider;
-	}
-}
-
 label {
 	display: block;
 	font-size: 1.1em;
@@ -225,16 +213,22 @@ div.error {
 	}
 }
 
-.require-dialog {
-	font-weight: 400;
-	position: absolute;
-	right: 1em;
-	text-transform: none;
-	top: 1em;
+// Required Indicator and Text
+.dialog-required {
+	display: inline;
+	position: relative;
+	padding: 0 .5em;
+	em {
+		color: $sangria;
+		font-size: .65rem;
+		font-style: normal;
+		text-transform: uppercase;
+	}
 }
-
 .required-indicator {
 	color: $sangria;
+	font-size: 1rem;
+	padding: 0;
 }
 
 .form-field-tooltip {
