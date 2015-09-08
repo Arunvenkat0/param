@@ -17,7 +17,7 @@
 		<isscript>
 			var isDefault = !empty(pdict.CurrentCustomer.profile.addressBook.preferredAddress) && (pdict.CurrentCustomer.profile.addressBook.preferredAddress.ID == address.ID);
 			var cssClass = "";
-			if (loopstate.first) { cssClass = "first"; } 
+			if (loopstate.first) { cssClass = "first"; }
 			else if (loopstate.last) { cssClass = "last"; }
 			
 			if (isDefault) { cssClass+=" default"; }
