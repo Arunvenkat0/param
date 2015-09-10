@@ -33,6 +33,11 @@
 			}
 		}
 	}
+	&.pt_product-details {
+		.primary-content {
+			padding-top: 1rem;
+		}
+	}
 	&.menu-active {
 		left: 50%;
 	}

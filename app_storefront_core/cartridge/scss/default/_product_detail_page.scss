@@ -54,7 +54,6 @@
 		}
 	}
 	.product-name {
-		margin-top: 1rem;
 		margin-bottom: .3rem;
 		@media screen and (min-width: 768px) {
 			width: 65%;
@@ -93,7 +92,6 @@
 	}
 	.product-primary-image {
 		max-width: 100%;
-		padding: 1em 0 0;
 		text-align: center;
 	}
 	.product-info {
@@ -227,7 +225,6 @@
 			.product-name {
 				float: none;
 				font-size: 1.3em;
-				margin-top: 0;
 				margin-bottom: 0;
 				width: auto;
 			}
