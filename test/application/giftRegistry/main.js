@@ -180,6 +180,9 @@ describe('Gift Registry', () => {
 			})
 	);
 
-	// TODO: Add a test that deletes the newly created event.  This will have
-	// the dual purpose of also cleaning up
+	it('should delete all the gift registry events', () =>
+		giftRegistryPage.emptyAllGiftRegistries()
+			.then(() => client.isExisting(giftRegistryPage.LINK_REMOVE))
+			.then(doesExist => assert.isFalse(doesExist))
+	);
 });
