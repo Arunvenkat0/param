@@ -55,6 +55,7 @@
     "mocha": "^2.2.5",
     "moment-timezone": "^0.4.0",
     "phantomjs": "^1.9.17",
+    "properties-parser": "^0.3.0",
     "proxyquire": "^1.5.0",
     "q": "^1.4.1",
     "require-inject": "^1.2.0",
