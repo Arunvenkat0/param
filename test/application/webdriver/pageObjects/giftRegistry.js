@@ -12,7 +12,7 @@ export const SHARE_OPTIONS = '[class*="share-options"]';
 export const BTN_CREATE_REGISTRY = '[name*="giftregistry_create"]';
 export const REGISTRY_HEADING = '.page-content-tab-wrapper h2';
 export const FORM_REGISTRY = 'form[name*=giftregistry_event]';
-
+export const LINK_REMOVE = '[class*=delete-registry]';
 const basePath = '/giftregistry';
 
 export function navigateTo () {
@@ -65,3 +65,26 @@ export function fillOutEventShippingForm (eventShippingData) {
 	return Promise.all(fieldsPromise);
 }
 
+/**
+ * Redirects the browser to the GiftRegistry page, and
+ * delete all the Gift Registry events.
+ */
+export function emptyAllGiftRegistries() {
+	return navigateTo()
+		.then(() => client.waitForVisible(BTN_CREATE_REGISTRY))
+		.then(() => client.elements(LINK_REMOVE))
+		.then(removeLinks => {
+			// click on all the remove links, one by one, sequentially
+			return removeLinks.value.reduce(removeRegistry => {
+				return removeRegistry.then(() => client.click(LINK_REMOVE)
+					.then(() => client.waitUntil(() =>
+						client.alertText()
+							.then(
+								text =>  text === 'Do you want to remove this gift registry?',
+								err => err.message !== 'no alert open'
+							)
+					))
+					.then(() => client.alertAccept()));
+			}, Promise.resolve());
+		});
+}
