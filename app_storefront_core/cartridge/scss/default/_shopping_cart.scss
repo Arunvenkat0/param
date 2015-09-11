@@ -31,6 +31,13 @@
 		.name {
 			font-size: 1rem;
 		}
+		// Removes Edit Details Quickview link for handheld devices
+		.item-edit-details {
+			display: none;
+			@media screen and (min-width: 768px) {
+				display: block;
+			}
+		}
 	}
 	.item-quantity {
 		clear: left;
