@@ -5,6 +5,7 @@
 /* API Includes */
 var AbstractModel = require('./AbstractModel');
 var ArrayList = require('dw/util/ArrayList');
+var OrderMgr = require('dw/order/OrderMgr');
 
 /**
  * Order helper providing enhanced order functionality
@@ -59,7 +60,7 @@ var OrderModel = AbstractModel.extend(
 OrderModel.get = function (parameter) {
     var obj = null;
     if (typeof parameter === 'string') {
-        obj = dw.order.OrderMgr.getOrder(parameter);
+        obj = OrderMgr.getOrder(parameter);
     }
     else if (typeof parameter === 'object') {
         obj = parameter;
