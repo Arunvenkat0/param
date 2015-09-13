@@ -532,7 +532,7 @@ function redeemGiftCertificateJson() {
     giftCertStatus = redeemGiftCertificate(giftCertCode);
 
 	let r = require('~/cartridge/scripts/util/Response');
-	
+
     if (request.httpParameterMap.format.stringValue !== 'ajax') {
         // @FIXME we could also build an ajax guard?
         r.renderJSON({});
@@ -747,7 +747,7 @@ function saveCreditCard() {
             newCreditCard.setCreditCardExpirationYear(app.getForm('billing').object.paymentMethods.creditCard.year.value);
             newCreditCard.setCreditCardType(app.getForm('billing').object.paymentMethods.creditCard.type.value);
 
-            for ( i = 0; i < creditCards.length; i = +1) {
+            for (i = 0; i < creditCards.length; i++) {
                 var creditcard = creditCards[i];
 
                 if (creditcard.maskedCreditCardNumber === newCreditCard.maskedCreditCardNumber && creditcard.creditCardType === newCreditCard.creditCardType) {
