@@ -743,8 +743,8 @@ function saveCreditCard() {
             // coy the credit card details to the payment instrument
             newCreditCard.setCreditCardHolder(app.getForm('billing').object.paymentMethods.creditCard.owner.value);
             newCreditCard.setCreditCardNumber(app.getForm('billing').object.paymentMethods.creditCard.number.value);
-            newCreditCard.setCreditCardExpirationMonth(app.getForm('billing').object.paymentMethods.creditCard.month.value);
-            newCreditCard.setCreditCardExpirationYear(app.getForm('billing').object.paymentMethods.creditCard.year.value);
+            newCreditCard.setCreditCardExpirationMonth(app.getForm('billing').object.paymentMethods.creditCard.expiration.month.value);
+            newCreditCard.setCreditCardExpirationYear(app.getForm('billing').object.paymentMethods.creditCard.expiration.year.value);
             newCreditCard.setCreditCardType(app.getForm('billing').object.paymentMethods.creditCard.type.value);
 
             for (i = 0; i < creditCards.length; i++) {

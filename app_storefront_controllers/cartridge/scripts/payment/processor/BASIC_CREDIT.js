@@ -17,8 +17,8 @@ function Handle(args) {
 	}).execute({
 			PaymentCard      : PaymentMgr.getPaymentCard(session.forms.billing.paymentMethods.creditCard.type.value),
 			CardNumber       : session.forms.billing.paymentMethods.creditCard.number.value,
-			ExpirationMonth  : session.forms.billing.paymentMethods.creditCard.month.value,
-			ExpirationYear   : session.forms.billing.paymentMethods.creditCard.year.value,
+			ExpirationMonth  : session.forms.billing.paymentMethods.creditCard.expiration.month.value,
+			ExpirationYear   : session.forms.billing.paymentMethods.creditCard.expiration.year.value,
 			CardSecurityCode : session.forms.billing.paymentMethods.creditCard.cvn.value
 		});
 
@@ -45,8 +45,8 @@ function Handle(args) {
 		paymentInstrument.creditCardHolder = session.forms.billing.paymentMethods.creditCard.owner.value;
 		paymentInstrument.creditCardNumber = session.forms.billing.paymentMethods.creditCard.number.value;
 		paymentInstrument.creditCardType = session.forms.billing.paymentMethods.creditCard.type.value;
-		paymentInstrument.creditCardExpirationMonth = session.forms.billing.paymentMethods.creditCard.month.value;
-		paymentInstrument.creditCardExpirationYear = session.forms.billing.paymentMethods.creditCard.year.value;
+		paymentInstrument.creditCardExpirationMonth = session.forms.billing.paymentMethods.creditCard.expiration.month.value;
+		paymentInstrument.creditCardExpirationYear = session.forms.billing.paymentMethods.creditCard.expiration.year.value;
 	});
 
 	return {success : true};
