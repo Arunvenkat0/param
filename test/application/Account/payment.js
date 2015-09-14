@@ -1,7 +1,6 @@
 'use strict';
 
 import {assert} from 'chai';
-import config from '../webdriver/config';
 import client from '../webdriver/client';
 import * as paymentSettingsPage from '../webdriver/pageObjects/paymentSettings';
 import * as testData from '../webdriver/pageObjects/testData/main';
@@ -17,7 +16,6 @@ describe('Payment Settings', () => {
 	before(() => client.init()
 		.then(() => testData.getCustomerByLogin(login))
 		.then(customer => {
-			let address = customer.getPreferredAddress();
 
 			amexCardData = {
 				owner: customer.firstName + ' ' + customer.lastName,

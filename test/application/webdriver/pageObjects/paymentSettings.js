@@ -44,7 +44,7 @@ export function deleteAllCreditCards () {
 						client.alertText()
 							.then(
 								text => text === 'Do you want to remove this credit card?',
-								err => err.message != 'no alert open'
+								err => err.message !== 'no alert open'
 							)
 					))
 					.then(() =>client.alertAccept()));
