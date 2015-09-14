@@ -30,8 +30,8 @@ describe('Forgot Password (C147192)', () => {
 	it('#2 should verify that the pop-up appears when you click on it', () =>
 		client.click(accountPage.PASSWORD_RESET_LINK)
 			.waitForVisible(accountPage.PASSWORD_DIALOG_SELECTOR)
-			.then(() => client.getAttribute(accountPage.PASSWORD_DIALOG_SELECTOR, 'style'))
-			.then(style => assert.isTrue(style.indexOf('block') >= 0))
+			.isVisible(accountPage.PASSWORD_DIALOG_SELECTOR)
+			.then(visible => assert.isTrue(visible))
 	);
 
 
