@@ -37,6 +37,7 @@ function execute( pdict : PipelineDictionary ) : Number
 		switch( item.code )
 		{
 			case PaymentStatusCodes.CREDITCARD_INVALID_CARD_NUMBER:
+				creditCardForm.number.setValue(creditCardForm.number.htmlValue);
 				creditCardForm.number.invalidateFormElement();
 				continue;
 

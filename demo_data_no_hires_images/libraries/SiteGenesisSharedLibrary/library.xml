@@ -681,23 +681,23 @@ La pagina non è più disponibile. Errore 404: pagina non trovata. Usa la casell
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;If you can’t find what you are looking for, why not let our trained staff recommend something?&lt;/p&gt;&#13;
-&lt;p&gt;Our Customer Service Representatives are available now to help. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Email us&lt;/a&gt; or call 800-555-1212.&lt;/p&gt;&#13;
+&lt;p&gt;Our Customer Service Representatives are available now to help. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Email us&lt;/a&gt; or call 800-555-XXXX.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;Vous ne trouvez pas ce que vous recherchez. Demandez l'aide de notre personnel qualifié.&lt;/p&gt;&#13;
-&lt;p&gt;Les conseillers de notre service client sont à votre disposition pour vous aider. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Envoyez-nous un e-mail ou&lt;/a&gt; appelez le 800-555-1212.&lt;/p&gt;&#13;
+&lt;p&gt;Les conseillers de notre service client sont à votre disposition pour vous aider. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Envoyez-nous un e-mail ou&lt;/a&gt; appelez le 800-555-XXXX.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;Se non riesci a trovare quello che cerchi, lascia che il nostro personale qualificato ti offra qualche consiglio.&lt;/p&gt;&#13;
-&lt;p&gt;I nostri operatori del servizio clienti sono disponibili immediatamente per aiutarti. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Mandaci un'e-mail&lt;/a&gt; o chiama il numero 800-555-1212.&lt;/p&gt;&#13;
+&lt;p&gt;I nostri operatori del servizio clienti sono disponibili immediatamente per aiutarti. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Mandaci un'e-mail&lt;/a&gt; o chiama il numero 800-555-XXXX.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;お探しの情報が見つからない場合は、弊社の熟練スタッフがお手伝いいたします。&lt;/p&gt;&#13;
-&lt;p&gt;弊社のカスタマーサービスまで、 &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Eメール&lt;/a&gt; またはお電話 (800-555-1212) にてご相談ください。&lt;/p&gt;&#13;
+&lt;p&gt;弊社のカスタマーサービスまで、&lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Eメール&lt;/a&gt;またはお電話 (800-555-XXXX) にてご相談ください。&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;如果您无法找到想要找的内容，何不让我们训练有素的员工给您推荐？&lt;/p&gt;&#13;
-&lt;p&gt;我们的客户服务代表可提供帮助。 &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;给我们发电子邮件&lt;/a&gt; 或致电 800-555-1212。&lt;/p&gt;&#13;
+&lt;p&gt;我们的客户服务代表可提供帮助。 &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;给我们发电子邮件&lt;/a&gt; 或致电 800-555-XXXX&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
         </custom-attributes>
     </content>
@@ -766,7 +766,7 @@ Pour plus d'informations, rendez-vous sur nos pages &lt;a title="Contenu À prop
 Per ulteriori informazioni visita le pagine &lt;a title="Contenuto Chi siamo" href="$url(Search-ShowContent,fdid,about-us)$"&gt;Chi siamo&lt;/a&gt; e  &lt;a title="Contenuto Chi siamo" href="$url(Search-ShowContent,fdid,customer-service)$"&gt;Servizio clienti.&lt;/a&gt;  &#13;
 &lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;h1 class="content-header"&gt;Demandware について&lt;/h1&gt;&#13;
-&lt;h2&gt;始まりは現状を見つめるところから: &lt;/h2&gt;      &#13;
+&lt;h2&gt;始まりは現状を見つめるところから。&lt;/h2&gt;      &#13;
 &lt;ul&gt;&#13;
 &lt;li&gt;eコマースによるマーチャンダイジングとマーケティングのイノベーションは、収益を生み出すものであるにもかかわらず、大部分の事業では予算の 80% を現在のインフラを保守するためだけに使っています。&lt;/li&gt;&#13;
 &lt;li&gt;eコマースは日々加速しているのにもかかわらず、大部分の事業は混乱してただ立ち尽くしています。&lt;/li&gt;&#13;
@@ -5625,22 +5625,22 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
 &lt;h3&gt;未登録ユーザーの方: &lt;/h3&gt;&#13;
 &lt;p&gt;登録していない方でも、アカウントを作成せずに続行できます。また、アカウントを作成していただくことも可能です。&lt;/p&gt;&#13;
 &#13;
-&lt;h3&gt;「請求」と「配送」タブ。&lt;/h3&gt;&#13;
+&lt;h3&gt;「請求」と「配送」タブ&lt;/h3&gt;&#13;
 &lt;p&gt;クレジットカード明細書に記載されている請求先情報を入力してください。適切な請求先住所と電話番号を入力しないと、クレジットカードは承認されません。登録済みのお客様につきましては、請求先住所が「請求」と「配送」ページに自動的に表示されます。配送先住所が請求先住所と異なる場合は、ご注文の商品の配送先住所を入力してください。&lt;/p&gt;&#13;
 &#13;
-&lt;h3&gt;配送オプション。&lt;/h3&gt;&#13;
+&lt;h3&gt;配送オプション&lt;/h3&gt;&#13;
 &lt;p&gt;提示されるオプションから、購入しようとしてる商品で利用可能な配送方法を選択してください。配送の詳細については、 &lt;a href="$url('Page-Show', 'cid', 'shipping-methods')$"&gt;こちらをクリックしてください&lt;/a&gt;。&lt;/p&gt;&#13;
 &#13;
-&lt;h3&gt;支払情報。&lt;/h3&gt;&#13;
+&lt;h3&gt;支払情報&lt;/h3&gt;&#13;
 &lt;p&gt;この時点で、住所情報が正確に入力されていることを確認し、注文内容を見直した上で支払方法を入力して "注文を確定する" をクリックしてください。支払いの詳細については、 &lt;a href="$url('Page-Show', 'cid', 'payment')$"&gt;こちらをクリックしてください&lt;/a&gt;。&lt;/p&gt;&#13;
 &#13;
-&lt;h3&gt;購入サマリ。&lt;/h3&gt;&#13;
+&lt;h3&gt;購入サマリ&lt;/h3&gt;&#13;
 &lt;p&gt;注文手続きを完了すると、購入サマリページが開き、確定した注文の詳細が表示されます。また、購入サマリリファレンス番号も表示されます。注文情報の確認が必要になったときのために、この購入サマリページを記録として印刷しておくことをお勧めします。&lt;/p&gt;&#13;
 &#13;
-&lt;h3&gt;注文と配送の確認。&lt;/h3&gt;&#13;
+&lt;h3&gt;注文と配送の確認&lt;/h3&gt;&#13;
 &lt;p&gt;注文番号が記載された注文確認 Eメールがお手元に届きます。これを使用してマイアカウントでご注文状況を確認できます。商品が発送されると、どの商品が発送されたかが記載された配送確認 Eメールがお手元に届きます。複数の商品をご注文になった場合、在庫の状況によっては商品が別々の日に配達されることがあります。&lt;/p&gt;&#13;
 &#13;
-&lt;h3&gt;VAT 請求書。&lt;/h3&gt;&#13;
+&lt;h3&gt;VAT 請求書&lt;/h3&gt;&#13;
 &lt;p&gt;商品の請求書が作成されると、発送済みのご購入商品用の VAT 請求書を取得するためのリンクが記載された Eメールがお手元に届きます。この Eメールはお客様に送信される「配送確認」 Eメールとは別です。&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;h1 class="content-header"&gt;结账&lt;/h1&gt;&#13;
 &#13;
@@ -6108,23 +6108,23 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;If you can’t find what you are looking for, why not let our trained staff recommend something?&lt;/p&gt;&#13;
-&lt;p&gt;Our Customer Service Representatives are available now to help. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Email us&lt;/a&gt; or call 800-555-1212.&lt;/p&gt;&#13;
+&lt;p&gt;Our Customer Service Representatives are available now to help. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Email us&lt;/a&gt; or call 800-555-XXXX.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;Vous ne trouvez pas ce que vous recherchez. Demandez l'aide de notre personnel qualifié.&lt;/p&gt;&#13;
-&lt;p&gt;Les conseillers de notre service client sont à votre disposition pour vous aider. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Envoyez-nous un e-mail ou&lt;/a&gt; appelez le 800-555-1212.&lt;/p&gt;&#13;
+&lt;p&gt;Les conseillers de notre service client sont à votre disposition pour vous aider. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Envoyez-nous un e-mail ou&lt;/a&gt; appelez le 800-555-XXXX.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;Se non riesci a trovare quello che cerchi, lascia che il nostro personale qualificato ti offra qualche consiglio.&lt;/p&gt;&#13;
-&lt;p&gt;I nostri operatori del servizio clienti sono disponibili immediatamente per aiutarti. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Mandaci un'e-mail&lt;/a&gt; o chiama al numero 800-555-1212.&lt;/p&gt;&#13;
+&lt;p&gt;I nostri operatori del servizio clienti sono disponibili immediatamente per aiutarti. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Mandaci un'e-mail&lt;/a&gt; o chiama al numero 800-555-XXXX.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;お探しの情報が見つからない場合は、弊社の熟練スタッフがお手伝いいたします。&lt;/p&gt;&#13;
-&lt;p&gt;弊社のカスタマーサービスまで、 &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Eメール&lt;/a&gt; またはお電話 (800-555-1212) にてご相談ください。&lt;/p&gt;&#13;
+&lt;p&gt;弊社のカスタマーサービスまで、&lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Eメール&lt;/a&gt;またはお電話 (800-555-XXXX) にてご相談ください。&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;如果您无法找到想要找的内容，何不让我们训练有素的员工给您推荐？&lt;/p&gt;&#13;
-&lt;p&gt;我们的客户服务代表可提供帮助。 &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;给我们发电子邮件&lt;/a&gt; 或致电 800-555-1212。&lt;/p&gt;&#13;
+&lt;p&gt;我们的客户服务代表可提供帮助。 &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;给我们发电子邮件&lt;/a&gt; 或致电 800-555-XXXX。&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
         </custom-attributes>
     </content>
@@ -6645,19 +6645,19 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div class="copyright"&gt;&amp;copy; 2004-2015 Demandware or its affiliates. All rights reserved.&lt;/div&gt;&#13;
                 &lt;div class="postscript"&gt;This is a demo store only. Orders made WILL NOT be processed.&lt;/div&gt;&#13;
-		&lt;!-- SG.15.9.0.2 --&gt;</custom-attribute>
+		&lt;!-- SG.15.9.1.2 --&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;div class="copyright"&gt;© 2004-2015 Demandware ou ses affiliés. Tous droits réservés.&lt;/div&gt;&#13;
                 &lt;div class="postscript"&gt;Ceci est une boutique de démonstration uniquement. Les commandes NE SERONT PAS traitées.&lt;/div&gt;&#13;
-		&lt;!-- SG.15.9.0.2 --&gt;</custom-attribute>
+		&lt;!-- SG.15.9.1.2 --&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;div class="copyright"&gt;© 2004-2015 Demandware o società affiliate. Tutti i diritti riservati.&lt;/div&gt;&#13;
                 &lt;div class="postscript"&gt;Questo è un negozio fittizio a scopo dimostrativo. Gli ordini effettuati NON VERRANNO evasi.&lt;/div&gt;&#13;
-		&lt;!-- SG.15.9.0.2 --&gt;</custom-attribute>
+		&lt;!-- SG.15.9.1.2 --&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;div class="copyright"&gt;© 2004-2015 Demandware またはその系列会社。All Rights Reserved.&lt;/div&gt;&#13;
                 &lt;div class="postscript"&gt;これはデモのみを目的とするストアです。注文を確定しても処理されません。&lt;/div&gt;&#13;
-		&lt;!-- SG.15.9.0.2 --&gt;</custom-attribute>
+		&lt;!-- SG.15.9.1.2 --&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;div class="copyright"&gt;© 2004-2015 Demandware 或其附属公司。保留所有权利。&lt;/div&gt;&#13;
                 &lt;div class="postscript"&gt;此仅为示范商店。所下订单不会被处理。&lt;/div&gt;&#13;
-		&lt;!-- SG.15.9.0.2 --&gt;</custom-attribute>
+		&lt;!-- SG.15.9.1.2 --&gt;</custom-attribute>
         </custom-attributes>
     </content>
 
@@ -6691,15 +6691,16 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
                 &lt;/form&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h3&gt;Retrouvez-nous&lt;/h3&gt;&#13;
                 &lt;ul class="social-links"&gt;&#13;
-                &lt;li&gt;&lt;a class="fa fa-linkedin-square fa-3x" title="Aller sur LinkedIn" href="https://www.linkedin.com/company/demandware" target="_blank"&gt;&lt;/a&gt;&lt;/li&gt;&#13;
-                &lt;li&gt;&lt;a class="fa fa-facebook-square fa-3x" title="Aller sur Facebook" href="https://www.facebook.com/demandware" target="_blank"&gt;&lt;/a&gt;&lt;/li&gt;&#13;
-                &lt;li&gt;&lt;a class="fa fa-twitter-square fa-3x" title="Aller sur Twitter" href="https://twitter.com/demandware" target="_blank"&gt;&lt;/a&gt;&lt;/li&gt;&#13;
-                &lt;li&gt;&lt;a class="fa fa-youtube-square fa-3x" title="Aller sur YouTube" href="https://www.youtube.com/user/demandware" target="_blank"&gt;&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a class="fa fa-linkedin-square fa-3x" title="Aller sur LinkedIn" href="https://www.linkedin.com/company/demandware" target="_blank"&gt;&lt;span class="visually-hidden"&gt;LinkedIn&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a class="fa fa-facebook-square fa-3x" title="Aller sur Facebook" href="https://www.facebook.com/demandware" target="_blank"&gt;&lt;span class="visually-hidden"&gt;Facebook&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a class="fa fa-twitter-square fa-3x" title="Aller sur Twitter" href="https://twitter.com/demandware" target="_blank"&gt;&lt;span class="visually-hidden"&gt;Twitter&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&#13;
+                &lt;li&gt;&lt;a class="fa fa-youtube-square fa-3x" title="Aller sur YouTube" href="https://www.youtube.com/user/demandware" target="_blank"&gt;&lt;span class="visually-hidden"&gt;YouTube&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&#13;
                 &lt;/ul&gt;                     &#13;
                 &lt;h3&gt;Bénéficiez d'offres spéciales et découvrez les dernières tendances&lt;/h3&gt;&#13;
                 &lt;form action="#" method="post" id="email-alert-signup"&gt;&#13;
-                &lt;input type="text" id="email-alert-address" class="input-text" placeholder="Saisissez votre adresse e-mail" value="" /&gt;&#13;
-                &lt;button type="submit" name="home-email" value="Submit" Title="Submit" class="fa fa-envelope" /&gt;&lt;/button&gt;&#13;
+                &lt;label for="email-alert-address"&gt;&lt;span class="visually-hidden"&gt;Saisissez votre e-mail&lt;/span&gt;&lt;/label&gt;&#13;
+                &lt;input type="text" id="email-alert-address" class="input-text" placeholder="Saisissez votre e-mail" value="" /&gt;&#13;
+                &lt;button type="submit" name="home-email" value="Submit" class="fa fa-envelope" /&gt;&lt;span class="visually-hidden"&gt;Envoyer&lt;/span&gt;&lt;/button&gt;&#13;
                 &lt;/form&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;h3&gt;Seguici&lt;/h3&gt;&#13;
                 &lt;ul class="social-links"&gt;&#13;
@@ -7128,7 +7129,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;p&gt;Con l'e-commerce di Demandware, i nostri clienti possono perfezionare la loro leadership nelle attività di merchandising e marketing. Dispongono del controllo completo del loro sito, possono apportare modifiche e aprire nuovi storefront come e quando vogliono. Possono dedicarsi allo sviluppo e all'innovazione di prodotti propri e non alla creazione di funzionalità. Ricevono gli aggiornamenti del software continuamente da Demandware e non devono mai preoccuparsi della funzionalità, della disponibilità e della sicurezza del sito.&lt;/p&gt;&#13;
 &#13;
                 &lt;p&gt;In poche parole, sono totalmente liberi. Liberi di vendere. Liberi di crescere. Liberi di innovare. Liberi di cambiare. Non è questa l'essenza dell'e-commerce?&lt;/p&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;p&gt;&lt;strong&gt;始まりは現状を見つめるところから: &lt;/strong&gt;&lt;/p&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;p&gt;&lt;strong&gt;始まりは現状を見つめるところから。&lt;/strong&gt;&lt;/p&gt;&#13;
                 &#13;
                 &lt;ul&gt;&#13;
                     &lt;li&gt;eコマースによるマーチャンダイジングとマーケティングのイノベーションは、収益を生み出すものであるにもかかわらず、大部分の事業では予算の 80% を現在のインフラを保守するためだけに使っています。&#13;
@@ -7420,7 +7421,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text1"&gt;Costumes&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;Acheter maintenant&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-suit.jpg" alt="Costumes Hommes" /&gt;&#13;
+            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-suit.jpg" alt="Costumes Homme" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide2"&gt;&#13;
@@ -7881,7 +7882,7 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
 &lt;/ul&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;h1 class="content-header"&gt;お客様のアカウントの管理&lt;/h1&gt;&#13;
 &#13;
-&lt;p&gt;アカウント情報はいつでも簡単にオンラインで変更できます。&lt;a href="$httpsURL('Account-Show')$"&gt;マイアカウント&lt;/a&gt; をクリックするだけで、今すぐアカウントにアクセスできます。パスワードをお忘れの場合は、 &lt;a href="$httpsURL('Account-Show')$"&gt;こちらをクリック&lt;/a&gt;してください。&lt;/p&gt;&#13;
+&lt;p&gt;アカウント情報はいつでも簡単にオンラインで変更できます。&lt;a href="$httpsURL('Account-Show')$"&gt;マイアカウント&lt;/a&gt;をクリックするだけで、今すぐアカウントにアクセスできます。パスワードをお忘れの場合は、 &lt;a href="$httpsURL('Account-Show')$"&gt;こちらをクリック&lt;/a&gt;してください。&lt;/p&gt;&#13;
 &lt;ul&gt;&#13;
     &lt;li&gt;ご注文に関する重要な情報をお客様の Eメールアドレスにお届けします。また、ご登録の Eメールアドレスは Demandware アカウント ID となります。&lt;/li&gt;&#13;
     &lt;li&gt;アカウントには、注文履歴、請求先住所と配送先住所などの情報が保存されます。また、アカウントからご注文状況を確認することもできます。パスワードを設定していただきますので、お客様のアカウント情報にアクセスできるのはお客様ご自身だけです。&lt;/li&gt;&#13;
@@ -10639,15 +10640,15 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
         <page-attributes/>
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;p&gt;If you cannot find what you are looking for, why not let our trained staff recommend something?&lt;/p&gt;&#13;
-&lt;div&gt;Our Customer Service Representatives are available now to help. &lt;a href="mailto:service@demandware.com"&gt;Email&lt;/a&gt; us or call 800-555-1212.&lt;/div&gt;</custom-attribute>
+&lt;div&gt;Our Customer Service Representatives are available now to help. &lt;a href="mailto:service@demandware.com"&gt;Email&lt;/a&gt; us or call 800-555-XXXX.&lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;p&gt;Vous ne trouvez pas ce que vous recherchez. Demandez l'aide de notre personnel qualifié.&lt;/p&gt;&#13;
-&lt;div&gt;Les conseillers de notre service client sont à votre disposition pour vous aider. &lt;a href="mailto:service@demandware.com"&gt;E-mail&lt;/a&gt; ou appelez-nous au 800-555-1212.&lt;/div&gt;</custom-attribute>
+&lt;div&gt;Les conseillers de notre service client sont à votre disposition pour vous aider. &lt;a href="mailto:service@demandware.com"&gt;E-mail&lt;/a&gt; ou appelez-nous au 800-555-XXXX.&lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;p&gt;Se non riesci a trovare quello che cerchi, lascia che il nostro personale qualificato ti offra qualche consiglio.&lt;/p&gt;&#13;
-&lt;div&gt;I nostri operatori del servizio clienti sono disponibili immediatamente per aiutarti. &lt;a href="mailto:service@demandware.com"&gt;E-mail&lt;/a&gt; oppure chiamaci al numero 800-555-1212.&lt;/div&gt;</custom-attribute>
+&lt;div&gt;I nostri operatori del servizio clienti sono disponibili immediatamente per aiutarti. &lt;a href="mailto:service@demandware.com"&gt;E-mail&lt;/a&gt; oppure chiamaci al numero 800-555-XXXX.&lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;p&gt;お探しの情報が見つからない場合は、弊社の熟練スタッフがお手伝いいたします。&lt;/p&gt;&#13;
-&lt;div&gt;弊社のカスタマーサービスまで、 &lt;a href="mailto:service@demandware.com"&gt;Eメール&lt;/a&gt; またはお電話 (800-555-1212) にてご相談ください。&lt;/div&gt;</custom-attribute>
+&lt;div&gt;弊社のカスタマーサービスまで、&lt;a href="mailto:service@demandware.com"&gt;Eメール&lt;/a&gt;またはお電話 (800-555-XXXX) にてご相談ください。&lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;p&gt;如果您无法找到想要找的内容，何不让我们训练有素的员工给您推荐？&lt;/p&gt;&#13;
-&lt;div&gt;我们的客户服务代表可提供帮助。 &lt;a href="mailto:service@demandware.com"&gt;发送电子邮件&lt;/a&gt; 给我们或致电 800-555-1212。&lt;/div&gt;</custom-attribute>
+&lt;div&gt;我们的客户服务代表可提供帮助。 &lt;a href="mailto:service@demandware.com"&gt;发送电子邮件&lt;/a&gt; 给我们或致电 800-555-XXXX。&lt;/div&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="grid-banners"/>
