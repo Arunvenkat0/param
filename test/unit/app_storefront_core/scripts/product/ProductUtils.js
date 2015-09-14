@@ -9,14 +9,14 @@ let proxyquire = require('proxyquire').noCallThru();
  * Mocks
  *
  */
-let mockResource = require('../../../mocks/dw/web/Resource');
+let mockResource = require('../../../../mocks/dw/web/Resource');
 let mockProductAvailabilityModel = {
 	AVAILABILITY_STATUS_IN_STOCK: 'prop1',
 	AVAILABILITY_STATUS_PREORDER: 'prop2',
 	AVAILABILITY_STATUS_BACKORDER: 'prop3',
 	AVAILABILITY_STATUS_NOT_AVAILABLE: 'prop4'
 };
-let ProductUtils = proxyquire('../../../../app_storefront_core/cartridge/scripts/product/ProductUtils.js', {
+let ProductUtils = proxyquire('../../../../../app_storefront_core/cartridge/scripts/product/ProductUtils.js', {
 	'dw/system/Site': {},
 	'dw/catalog/CatalogMgr': {},
 	'dw/catalog/ProductAvailabilityModel': mockProductAvailabilityModel,

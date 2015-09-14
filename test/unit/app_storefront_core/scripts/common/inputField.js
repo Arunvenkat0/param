@@ -4,12 +4,12 @@ var assert = require('chai').assert;
 var proxyquire = require('proxyquire').noCallThru();
 
 // Demandware server dependencies
-var ContentMgr = require('../../mocks/dw/content/ContentMgr');
-var StringUtils = require('../../mocks/dw/util/StringUtils');
-var Resource = require('../../mocks/dw/web/Resource');
-var URLUtils = require('../../mocks/dw/web/URLUtils');
+var ContentMgr = require('../../../../mocks/dw/content/ContentMgr');
+var StringUtils = require('../../../../mocks/dw/util/StringUtils');
+var Resource = require('../../../../mocks/dw/web/Resource');
+var URLUtils = require('../../../../mocks/dw/web/URLUtils');
 
-var inputField = proxyquire('../../../app_storefront_core/cartridge/scripts/common/inputField', {
+var inputField = proxyquire('../../../../../app_storefront_core/cartridge/scripts/common/inputField', {
 	'dw/content/ContentMgr': ContentMgr,
 	'dw/util/StringUtils': StringUtils,
 	'dw/web/Resource': Resource,
