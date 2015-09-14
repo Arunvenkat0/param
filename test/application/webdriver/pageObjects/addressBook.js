@@ -51,7 +51,7 @@ export function removeAddresses () {
 			// filter out Home and Work addresses
 			return addressTexts.filter(function (addressText) {
 				return addressText !== 'Home' && addressText !== 'Work';
-			})
+			});
 		})
 		// remove addresses sequentially
 		.then(addressTextsToRemove => {
