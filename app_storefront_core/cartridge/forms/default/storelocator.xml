@@ -87,12 +87,12 @@
 </field>
 <field formid="country" label="resource.country" type="string" mandatory="false" binding="countryCode">
 	<options>	
-		<option optionid="us" label="country.unitedstates" value="us"/>
-		<option optionid="gb" label="country.unitedkingdom" value="gb"/>
-		<option optionid="fr" label="country.france" value="fr"/>
-		<option optionid="it" label="country.italy" value="it"/>
-		<option optionid="jp" label="country.japan" value="jp"/>
-		<option optionid="cn" label="country.china" value="cn"/>
+		<option optionid="us" label="country.unitedstates" value="US"/>
+		<option optionid="gb" label="country.unitedkingdom" value="GB"/>
+		<option optionid="fr" label="country.france" value="FR"/>
+		<option optionid="it" label="country.italy" value="IT"/>
+		<option optionid="jp" label="country.japan" value="JP"/>
+		<option optionid="cn" label="country.china" value="CN"/>
 		<option optionid="de" label="country.germany" value="DE"/>
 	</options>	
 </field>
