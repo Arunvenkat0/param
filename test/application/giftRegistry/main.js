@@ -6,6 +6,8 @@ import client from '../webdriver/client';
 import * as giftRegistryPage from '../webdriver/pageObjects/giftRegistry';
 import * as testData from '../webdriver/pageObjects/testData/main';
 import * as loginForm from '../webdriver/pageObjects/helpers/forms/login';
+import * as navHeader from '../webdriver/pageObjects/navHeader';
+import * as footerPage from '../webdriver/pageObjects/footer';
 
 
 describe('Gift Registry', () => {
@@ -70,6 +72,7 @@ describe('Gift Registry', () => {
 		.then(() => giftRegistryPage.navigateTo())
 		.then(() => loginForm.loginAsDefaultCustomer())
 		.then(() => client.waitForVisible(giftRegistryPage.BTN_CREATE_REGISTRY))
+		.then(() => giftRegistryPage.emptyAllGiftRegistries())
 		.then(() => client.click(giftRegistryPage.BTN_CREATE_REGISTRY))
 		.then(() => client.waitForVisible(giftRegistryPage.FORM_REGISTRY))
 	);
@@ -180,9 +183,29 @@ describe('Gift Registry', () => {
 			})
 	);
 
-	it('should delete all the gift registry events', () =>
-		giftRegistryPage.emptyAllGiftRegistries()
+	it('should return the event at Gift Registry search', () => {
+		return navHeader.logout()
+			.then(() => client.click(footerPage.GIFT_REGISTRY))
+			.then(() => client.waitForVisible(footerPage.GIFT_REGISTRY))
+			.then(() => giftRegistryPage.searchGiftRegistry(
+				giftRegistryPage.lastName,
+				giftRegistryPage.firstName,
+				giftRegistryPage.eventType))
+			.then(() => giftRegistryPage.getGiftRegistryCount())
+			.then(rows => assert.equal(1, rows))
+			.then(() => giftRegistryPage.openGiftRegistry())
+			.then(() => client.waitForVisible(giftRegistryPage.buttonPrint))
+			.then(() => client.getText(giftRegistryPage.eventTitle))
+			.then(str => assert.equal(str, giftRegistryPage.eventName));
+	});
+
+	it('should delete all the gift registry events', () => {
+		return giftRegistryPage.navigateTo()
+			.then(() => loginForm.loginAsDefaultCustomer())
+			.then(() => client.waitForVisible(giftRegistryPage.BTN_CREATE_REGISTRY))
+			.then(() => giftRegistryPage.emptyAllGiftRegistries())
 			.then(() => client.isExisting(giftRegistryPage.LINK_REMOVE))
-			.then(doesExist => assert.isFalse(doesExist))
-	);
+			.then(doesExist => assert.isFalse(doesExist));
+	});
+
 });
