@@ -31,6 +31,13 @@
             <customer-group group-id="Everyone"/>
         </customer-groups>
     </campaign>
+	
+    <campaign campaign-id="PromotionTest_PriceDisplay_MD">
+        <enabled-flag>false</enabled-flag>
+        <customer-groups>
+            <customer-group group-id="Everyone"/>
+        </customer-groups>
+    </campaign>	
 
     <campaign campaign-id="mens-clothing-suits">
         <description>This is a campaign that displays a landing banner, with a 25% discount on all suits and default sorting rule of top selling suits.</description>
@@ -60,6 +67,35 @@
         </global-excluded-products>
     </global-promotion-settings>
 
+	<promotion promotion-id="PromotionTest_WithoutQualifying">
+        <enabled-flag>false</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <exclusivity>no</exclusivity>
+        <name xml:lang="x-default">PromotionTest_WithoutQualifying</name>
+        <callout-msg xml:lang="x-default">PromotionTest_WithoutQualifying</callout-msg>
+        <details xml:lang="x-default">PromotionTest_WithoutQualifying</details>
+        <product-promotion-rule>
+            <discounted-products>
+                <included-products>
+                    <condition-group>
+                        <category-condition catalog-id="storefront-catalog-en">
+                            <category-id>newarrivals</category-id>
+                            <category-id>womens</category-id>
+                            <category-id>mens</category-id>
+                            <category-id>electronics</category-id>
+                            <category-id>top-seller</category-id>
+                            <category-id>gift-certificates</category-id>
+                        </category-condition>
+                    </condition-group>
+                </included-products>
+            </discounted-products>
+            <simple-discount>
+                <percentage>20.0</percentage>
+            </simple-discount>
+        </product-promotion-rule>
+    </promotion>
+	
     <promotion promotion-id="$50offShippingAmountAbove150">
         <enabled-flag>false</enabled-flag>
         <searchable-flag>true</searchable-flag>
@@ -1974,6 +2010,14 @@
         </order-promotion-rule>
     </promotion>
 
+    <promotion-campaign-assignment promotion-id="PromotionTest_WithoutQualifying" campaign-id="PromotionTest_PriceDisplay_MD">
+        <qualifiers match-mode="any">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>	
+	
     <promotion-campaign-assignment promotion-id="$50offShippingAmountAbove150" campaign-id="Automation">
         <qualifiers match-mode="any">
             <customer-groups/>

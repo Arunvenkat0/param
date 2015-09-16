@@ -130,6 +130,13 @@
 
 .search-result-content {
 	clear: both;
+	.product-price {
+		.price-standard {
+			color: #999;
+			font-weight: 100;
+			text-decoration: line-through;
+		}
+	}
 }
 
 .search-promo {
