@@ -2,9 +2,9 @@
 
 import {assert} from 'chai';
 import client from '../webdriver/client';
-import * as cartPage from '../webdriver/pageObjects/cart';
-import * as productDetailPage from '../webdriver/pageObjects/productDetail';
-import * as testData from '../webdriver/pageObjects/testData/main';
+import * as cartPage from '../pageObjects/cart';
+import * as productDetailPage from '../pageObjects/productDetail';
+import * as testData from '../pageObjects/testData/main';
 
 describe('Cart - Simple', () => {
 

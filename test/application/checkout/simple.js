@@ -4,17 +4,17 @@ import _ from 'lodash';
 import {assert} from 'chai';
 
 import client from '../webdriver/client';
-import * as cartPage from '../webdriver/pageObjects/cart';
-import * as checkoutPage from '../webdriver/pageObjects/checkout';
-import * as homePage from '../webdriver/pageObjects/home';
-import * as orderConfPage from '../webdriver/pageObjects/orderConfirmation';
-import * as productDetailPage from '../webdriver/pageObjects/productDetail';
-import * as testData from '../webdriver/pageObjects/testData/main';
-import * as formLogin from '../webdriver/pageObjects/helpers/forms/login';
-import * as formHelpers from '../webdriver/pageObjects/helpers/forms/common';
-import * as helpers from '../webdriver/pageObjects/helpers/common';
-import * as navHeader from '../webdriver/pageObjects/navHeader';
-import * as giftCertPage from '../webdriver/pageObjects/giftCertPurchase';
+import * as cartPage from '../pageObjects/cart';
+import * as checkoutPage from '../pageObjects/checkout';
+import * as homePage from '../pageObjects/home';
+import * as orderConfPage from '../pageObjects/orderConfirmation';
+import * as productDetailPage from '../pageObjects/productDetail';
+import * as testData from '../pageObjects/testData/main';
+import * as formLogin from '../pageObjects/helpers/forms/login';
+import * as formHelpers from '../pageObjects/helpers/forms/common';
+import * as helpers from '../pageObjects/helpers/common';
+import * as navHeader from '../pageObjects/navHeader';
+import * as giftCertPage from '../pageObjects/giftCertPurchase';
 
 describe('Checkout', () => {
 	let login = 'testuser1@demandware.com';

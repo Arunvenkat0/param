@@ -3,12 +3,12 @@
 import {assert} from 'chai';
 import client from '../webdriver/client';
 
-import * as footerPage from '../webdriver/pageObjects/footer';
-import * as homePage from '../webdriver/pageObjects/home';
-import * as common from '../webdriver/pageObjects/helpers/common';
-import * as formLogin from '../webdriver/pageObjects/helpers/forms/login';
-import * as accountPage from '../webdriver/pageObjects/account';
-import * as navHeader from '../webdriver/pageObjects/navHeader';
+import * as footerPage from '../pageObjects/footer';
+import * as homePage from '../pageObjects/home';
+import * as common from '../pageObjects/helpers/common';
+import * as formLogin from '../pageObjects/helpers/forms/login';
+import * as accountPage from '../pageObjects/account';
+import * as navHeader from '../pageObjects/navHeader';
 import url from 'url';
 
 describe('Footer #C147201', () => {

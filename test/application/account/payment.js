@@ -2,9 +2,9 @@
 
 import {assert} from 'chai';
 import client from '../webdriver/client';
-import * as paymentSettingsPage from '../webdriver/pageObjects/paymentSettings';
-import * as testData from '../webdriver/pageObjects/testData/main';
-import * as loginForm from '../webdriver/pageObjects/helpers/forms/login';
+import * as paymentSettingsPage from '../pageObjects/paymentSettings';
+import * as testData from '../pageObjects/testData/main';
+import * as loginForm from '../pageObjects/helpers/forms/login';
 import Resource from '../../mocks/dw/web/Resource';
 
 
@@ -58,4 +58,3 @@ describe('Payment Settings', () => {
 			.then(doesExist => assert.isFalse(doesExist))
 	);
 });
-

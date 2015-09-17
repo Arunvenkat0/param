@@ -1,6 +1,6 @@
 'use strict';
 
-import client from '../client';
+import client from '../webdriver/client';
 
 export const CONTAINER = '.ui-dialog';
 export const SWATCHES_SIZE = '.swatches.size';

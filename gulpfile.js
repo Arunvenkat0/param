@@ -104,7 +104,7 @@ gulp.task('test:application', function () {
 	var reporter = opts.reporter || 'spec';
 	// default timeout to 60s
 	var timeout = opts.timeout || 60000;
-	return gulp.src(['test/application/' + suite + '/**/*.js', '!test/application/webdriver/*'], {read: false})
+	return gulp.src(['test/application/' + suite + '/**/*.js', '!test/application/webdriver/*', '!test/application/pageObjects/*'], {read: false})
 		.pipe(mocha({
 			reporter: reporter,
 			timeout: timeout

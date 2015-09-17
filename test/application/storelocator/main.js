@@ -3,7 +3,7 @@
 import {assert} from 'chai';
 import config from '../webdriver/config';
 import client from '../webdriver/client';
-import * as storeLocatorPage from '../webdriver/pageObjects/storeLocator';
+import * as storeLocatorPage from '../pageObjects/storeLocator';
 
 describe('Storelocator', () => {
 
