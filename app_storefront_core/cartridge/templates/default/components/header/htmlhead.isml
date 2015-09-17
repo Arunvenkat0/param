@@ -6,6 +6,12 @@ If you are not using the build cartridge the comments can be safely removed.
 
 <meta charset=UTF-8>
 
+<iscomment>See https://github.com/h5bp/html5-boilerplate/blob/5.2.0/dist/doc/html.md#x-ua-compatible</iscomment>
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+<iscomment>See https://github.com/h5bp/html5-boilerplate/blob/5.2.0/dist/doc/html.md#mobile-viewport</iscomment>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <script type="text/javascript">
   WebFontConfig = {
     google: { families: [ 'Lato:100,300,700,100italic,300italic:latin', 'Crete+Round:400,400italic:latin' ] }
