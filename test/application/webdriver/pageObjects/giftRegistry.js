@@ -11,8 +11,22 @@ export const BTN_SET_PUBLIC = '[name*="giftregistry_setPublic"]';
 export const SHARE_OPTIONS = '[class*="share-options"]';
 export const BTN_CREATE_REGISTRY = '[name*="giftregistry_create"]';
 export const REGISTRY_HEADING = '.page-content-tab-wrapper h2';
-export const FORM_REGISTRY = 'form[name*=giftregistry_event]';
-export const LINK_REMOVE = '[class*=delete-registry]';
+export const FORM_REGISTRY = 'form[name*="giftregistry_event"]';
+export const LINK_REMOVE = '[class*="delete-registry"]';
+export const SEARCH_GIFTREGISTRY = 'button[name$="giftregistry_search_search"]';
+export const INPUT_LASTTNAME = 'input[name$="registrantLastName"]';
+export const INPUT_FIRSTNAME = 'input[name$="registrantFirstName"]';
+export const INPUT_EVENTTYPE = 'select[id*="giftregistry_search_simple_eventType"]';
+export const BUTTON_FIND = 'button[value=Find]';
+export const LINK_VIEW_GIFTREGISTRY = 'a[href*="giftregistryshow"]';
+export const TABLE_GR_ITEMS = 'table[class*="item-list"] tr';
+export const firstName = 'Test1';
+export const lastName = 'User1';
+export const eventType = 'wedding';
+export const eventTitle = '.list-title';
+export const eventName = 'WEDDING OF THE CENTURY - 3/28/08';
+export const buttonPrint = 'button[class=print-page]';
+
 const basePath = '/giftregistry';
 
 export function navigateTo () {
@@ -78,13 +92,33 @@ export function emptyAllGiftRegistries() {
 			return removeLinks.value.reduce(removeRegistry => {
 				return removeRegistry.then(() => client.click(LINK_REMOVE)
 					.then(() => client.waitUntil(() =>
-						client.alertText()
-							.then(
-								text =>  text === 'Do you want to remove this gift registry?',
-								err => err.message !== 'no alert open'
+							client.alertText()
+								.then(
+									text =>  text === 'Do you want to remove this gift registry?',
+									err => err.message !== 'no alert open'
 							)
 					))
 					.then(() => client.alertAccept()));
 			}, Promise.resolve());
 		});
+}
+ /* open the first giftRegistry
+ *
+ */
+export function openGiftRegistry () {
+	client.click(LINK_VIEW_GIFTREGISTRY);
+}
+
+export function searchGiftRegistry(lastName, firstName, eventType) {
+	//caller should be responsible navigate to the Gift Registry page before calling this function
+	return client.waitForVisible(SEARCH_GIFTREGISTRY)
+		.then(() => client.setValue(INPUT_LASTTNAME, lastName))
+		.then(() => client.setValue(INPUT_FIRSTNAME, firstName))
+		.then(() => client.selectByValue(INPUT_EVENTTYPE, eventType))
+		.then(() => client.click(BUTTON_FIND));
+}
+
+export function getGiftRegistryCount () {
+	return client.elements(TABLE_GR_ITEMS)
+		.then(eventRows => eventRows.value.length - 1);
 }
