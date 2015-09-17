@@ -1,7 +1,7 @@
 'use strict';
 
 import _ from 'lodash';
-import client from '../client';
+import client from '../webdriver/client';
 import * as common from './helpers/common';
 import * as formHelpers from './helpers/forms/common';
 

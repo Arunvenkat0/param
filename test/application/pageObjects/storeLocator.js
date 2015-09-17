@@ -1,6 +1,6 @@
 'use strict';
 
-import client from '../client';
+import client from '../webdriver/client';
 
 export const BTN_COUNTRY = 'button[name$="_findbycountry"]';
 export const BTN_STATE = 'button[name$="_findbystate"]';
@@ -31,4 +31,3 @@ export function getStoreInfo() {
 	var storeInfoSelector =  RESULTS_TITLE;
 	return client.getText(storeInfoSelector);
 }
-

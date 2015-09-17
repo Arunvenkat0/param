@@ -3,11 +3,11 @@
 import {assert} from 'chai';
 import config from '../webdriver/config';
 import client from '../webdriver/client';
-import * as giftRegistryPage from '../webdriver/pageObjects/giftRegistry';
-import * as testData from '../webdriver/pageObjects/testData/main';
-import * as loginForm from '../webdriver/pageObjects/helpers/forms/login';
-import * as navHeader from '../webdriver/pageObjects/navHeader';
-import * as footerPage from '../webdriver/pageObjects/footer';
+import * as giftRegistryPage from '../pageObjects/giftRegistry';
+import * as testData from '../pageObjects/testData/main';
+import * as loginForm from '../pageObjects/helpers/forms/login';
+import * as navHeader from '../pageObjects/navHeader';
+import * as footerPage from '../pageObjects/footer';
 
 
 describe('Gift Registry', () => {

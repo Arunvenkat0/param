@@ -69,7 +69,8 @@
     "xtend": "^4.0.0"
   },
   "scripts": {
-    "test": "mocha --compilers js:babel/register test/unit/**/*.js",
+    "test:unit": "mocha --compilers js:babel/register test/unit/**/*.js",
+    "test:application": "mocha --compilers js:babel/register test/application/**/*.js --reporter spec --timeout 60000",
     "lint": "jshint . --reporter node_modules/jshint-stylish/stylish.js && jscs .",
     "bump-version": "./version.js"
   },

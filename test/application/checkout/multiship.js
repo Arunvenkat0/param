@@ -3,9 +3,9 @@
 import {assert} from 'chai';
 import client from '../webdriver/client';
 
-import * as formLogin from '../webdriver/pageObjects/helpers/forms/login';
-import * as multiShipPage from '../webdriver/pageObjects/multiShipping';
-import * as testData from '../webdriver/pageObjects/testData/main';
+import * as formLogin from '../pageObjects/helpers/forms/login';
+import * as multiShipPage from '../pageObjects/multiship';
+import * as testData from '../pageObjects/testData/main';
 import Resource from '../../mocks/dw/web/Resource';
 
 describe('Multi Shipping', () => {

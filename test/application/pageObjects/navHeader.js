@@ -1,6 +1,6 @@
 'use strict';
 
-import client from '../client';
+import client from '../webdriver/client';
 import * as accountPage from './account';
 import * as formLogin from './helpers/forms/login';
 

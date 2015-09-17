@@ -2,9 +2,9 @@
 
 import {assert} from 'chai';
 import client from '../webdriver/client';
-import * as addressPage from '../webdriver/pageObjects/addressBook';
-import * as testData from '../webdriver/pageObjects/testData/main';
-import * as loginForm from '../webdriver/pageObjects/helpers/forms/login';
+import * as addressPage from '../pageObjects/addressBook';
+import * as testData from '../pageObjects/testData/main';
+import * as loginForm from '../pageObjects/helpers/forms/login';
 
 describe('Address', () => {
 	let login = 'testuser1@demandware.com';
