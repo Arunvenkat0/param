@@ -160,7 +160,7 @@ function ResourceHelper() {}
 			getSetItem 					: URLUtils.url('Product-GetSetItem').toString(),
 			productDetail 				: URLUtils.url('Product-Detail').toString(),
 			getAvailability				: URLUtils.url('Product-GetAvailability').toString(),
-			removeImg 					: URLUtils.staticURL('/images/interface/icon_remove.gif').toString(),
+			removeImg 					: URLUtils.staticURL('/images/icon_remove.gif').toString(),
 			searchsuggest 				: URLUtils.url('Search-GetSuggestions').toString(),
 			productNav 					: URLUtils.url('Product-Productnav').toString(),
 			summaryRefreshURL			: URLUtils.url('COBilling-UpdateSummary').toString(),

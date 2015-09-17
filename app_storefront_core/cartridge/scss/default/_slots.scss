@@ -53,33 +53,33 @@
 		list-style: decimal outside none;
 	}
 	.account-options {
+		align-items: stretch;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
 		margin: 0;
 		padding: 0;
 		li {
-			border-bottom: 1px solid $gainsboro;
-			float: left;
-			list-style: none outside none !important;
-			margin: 0 0 0 4%;
-			padding: 1em 0;
-			position: relative;
-			width: 46%;
-			@media screen and (min-width: 768px) {
-				height: 5rem;
+			background-color: $dim-gray;
+			border: 3px solid $very-light-gray;
+			border-radius: 5px;
+			list-style-type: none;
+			margin: 1rem;
+			text-align: center;
+			width: 35%;
+			transition: all 1000ms ease;
+			&:hover {
+				background-color: $rain-forest;
+				border-color: $rain-forest;
 			}
 			a {
+				color: $white;
 				display: block;
-				font-size: 1.5em;
-				line-height: 2.5em;
-				padding: 0 0 0 4.58em;
-			}
-			img {
-				left: 0;
-				position: absolute;
-				top: .83em;
-			}
-			p {
-				margin: 0;
-				padding-left: 4.58em;
+				padding: 1rem;
+
+				i {
+					font-size: 6rem;
+				}
 			}
 		}
 	}
