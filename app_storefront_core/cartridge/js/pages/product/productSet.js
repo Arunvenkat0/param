@@ -37,7 +37,6 @@ module.exports = function () {
 			target: $container,
 			callback: function () {
 				updateAddToCartButtons();
-				addToCart($container);
 				tooltip.init();
 			}
 		});

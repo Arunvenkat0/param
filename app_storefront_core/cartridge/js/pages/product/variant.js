@@ -28,7 +28,6 @@ var updateContent = function (href) {
 		url: util.appendParamsToUrl(href, params),
 		target: $('#product-content'),
 		callback: function () {
-			addToCart();
 			if (SitePreferences.STORE_PICKUP) {
 				productStoreInventory.init();
 			}
