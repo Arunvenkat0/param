@@ -14,13 +14,9 @@
 	
 	<div id="addresses">
 		<h1>${Resource.msg('account.addressbook.addresslist.header','account',null)}</h1>
-		
-		<div class="section-header">
-			${Resource.msg('account.addressbook.addresslist.header','account',null)}
-			<a class="section-header-note address-create" title="${Resource.msg('account.addressbook.addresslist.create.label','account',null)}" href="${URLUtils.url('Address-Add')}" >
-				${Resource.msg('account.addressbook.addresslist.create','account',null)}
-			</a>
-		</div>
+		<a class="section-header-note address-create button" title="${Resource.msg('account.addressbook.addresslist.create.label','account',null)}" href="${URLUtils.url('Address-Add')}" >
+			${Resource.msg('account.addressbook.addresslist.create','account',null)}
+		</a>
 	
 		<isinclude template="account/addressbook/addressinclude"/>
 	</div>

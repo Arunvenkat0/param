@@ -21,37 +21,45 @@ h1 .account-logout {
 	}
 }
 
-.address-list {
+.address-list,
+.payment-list {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0;
 	padding: 0;
 	li {
-		float: left;
-		list-style: none outside none;
-		margin: 0;
-		min-height: 135px;
-		padding: 1em 0;
-		width: 30%;
+		list-style-type: none;
+		padding: 1em;
+		width: 90%;
+		@media screen and (min-width: 768px) {
+			width: 25%;
+		}
 		&.default {
-			border-bottom: 1px solid $white-smoke;
-			float: none;
-			width: auto;
+			background-color: $white-smoke;
+			border: 1px solid $very-light-gray;
+			border-radius: 5px;
+			margin-top: 1em;
+			width: 85%;
+		}
+		address {
+			color: $dim-gray;
+			font-style: normal;
+		}
+		a,
+		.button-text {
+			line-height: 2rem;
+    		padding-right: .2rem;
 		}
 	}
 	.mini-address-title {
 		font-style: italic;
+		line-height: 2rem;
+	}
+	.cc-owner {
+		font-weight: 700;
 	}
 }
-.payment-list {
-	overflow: hidden;
-	padding: 0;
-	li {
-		float: left;
-		list-style: none outside none;
-		margin: 0;
-		min-height: 110px;
-		width: 33%;
-	}
-}
-
 
 .order-history-header {
 	background: url("../images/interface/icon-double-line-header.png") repeat-x scroll left top $white-smoke;
