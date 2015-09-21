@@ -139,7 +139,7 @@ module.exports = function (grunt) {
 					reporter: config.reporter,
 					timeout: config.timeout
 				},
-				src: ['test/application/' + config.suite + '/**/*.js', '!test/application/webdriver/*']
+				src: ['test/application/' + config.suite + '/**/*.js', '!test/application/webdriver/*', '!test/application/pageObjects/*']
 			},
 			unit: {
 				options: {

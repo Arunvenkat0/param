@@ -2,8 +2,8 @@
 
 import {assert} from 'chai';
 import client from '../webdriver/client';
-import * as homePage from '../webdriver/pageObjects/home';
-import * as productDetailPage from '../webdriver/pageObjects/productDetail';
+import * as homePage from '../pageObjects/home';
+import * as productDetailPage from '../pageObjects/productDetail';
 
 // TODO:  Refactor these tests to use testData module instead of this search
 // pattern.  Also, break up these singular tests to individual it() calls.

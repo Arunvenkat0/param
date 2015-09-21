@@ -3,9 +3,9 @@
 import {assert} from 'chai';
 import client from '../webdriver/client';
 
-import * as accountPage from '../webdriver/pageObjects/account';
-import * as homePage from '../webdriver/pageObjects/home';
-import * as navHeader from '../webdriver/pageObjects/navHeader';
+import * as accountPage from '../pageObjects/account';
+import * as homePage from '../pageObjects/home';
+import * as navHeader from '../pageObjects/navHeader';
 
 let goodEmail = 'goodemail@demandware.com';
 let badEmail = 'badEmail';

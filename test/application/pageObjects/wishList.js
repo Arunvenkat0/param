@@ -1,6 +1,6 @@
 'use strict';
 
-import client from '../client';
+import client from '../webdriver/client';
 import * as common from './helpers/common';
 
 export const CSS_SHARE_LINK = '.share-link';

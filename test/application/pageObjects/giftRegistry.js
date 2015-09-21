@@ -1,6 +1,6 @@
 'use strict';
 
-import client from '../client';
+import client from '../webdriver/client';
 import * as formHelpers from './helpers/forms/common';
 
 export const SHARE_LINK = '.share-link';

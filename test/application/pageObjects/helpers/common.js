@@ -1,6 +1,6 @@
 'use strict';
 
-import client from '../../client';
+import client from '../../webdriver/client';
 // using Q to be compliant with webdriver.
 // should switch to native Promise if it is used in webdriver v3
 // https://github.com/webdriverio/webdriverio/issues/498
@@ -119,4 +119,3 @@ export function clickAndWait(selectorToClick, selectorToWait) {
 	return client.click(selectorToClick)
 		.waitForVisible(selectorToWait);
 	}
-

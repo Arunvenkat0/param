@@ -1,6 +1,6 @@
 'use strict';
 
-import client from '../client';
+import client from '../webdriver/client';
 
 export const LOGOUT = '.account-logout';
 export const BTN_LOGIN = 'button[name*=login_login]';

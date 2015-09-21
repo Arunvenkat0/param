@@ -4,13 +4,13 @@ import {assert} from 'chai';
 import client from '../webdriver/client';
 import config from '../webdriver/config';
 import url from 'url';
-import * as cartPage from '../webdriver/pageObjects/cart';
-import * as giftCertPurchasePage from '../webdriver/pageObjects/giftCertPurchase';
-import * as loginForm from '../webdriver/pageObjects/helpers/forms/login';
-import * as navHeader from '../webdriver/pageObjects/navHeader';
-import * as productDetailPage from '../webdriver/pageObjects/productDetail';
-import * as testData from '../webdriver/pageObjects/testData/main';
-import * as wishListPage from '../webdriver/pageObjects/wishList';
+import * as cartPage from '../pageObjects/cart';
+import * as giftCertPurchasePage from '../pageObjects/giftCertPurchase';
+import * as loginForm from '../pageObjects/helpers/forms/login';
+import * as navHeader from '../pageObjects/navHeader';
+import * as productDetailPage from '../pageObjects/productDetail';
+import * as testData from '../pageObjects/testData/main';
+import * as wishListPage from '../pageObjects/wishList';
 
 describe('Wishlist', () => {
 	before(() => client.init());
