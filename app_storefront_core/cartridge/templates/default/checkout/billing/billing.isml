@@ -167,7 +167,7 @@
 								<div class="success giftcert-pi" id="gc-${giftCertPI.getGiftCertificateCode()}">
 									${Resource.msgf('billing.giftcertredeemed', 'checkout', null, giftCertPI.paymentTransaction.amount, giftCertPI.getMaskedGiftCertificateCode())}
 									<a id="rgc-${giftCertPI.getGiftCertificateCode()}" class="remove" href="${URLUtils.https('COBilling-RemoveGiftCertificate', 'giftCertificateID', giftCertPI.getGiftCertificateCode(),'format','old')}">
-										<img src="${URLUtils.staticURL('/images/interface/icon_remove.gif')}" alt="${Resource.msg('global.remove','locale',null)}"/>
+										<img src="${URLUtils.staticURL('/images/icon_remove.gif')}" alt="${Resource.msg('global.remove','locale',null)}"/>
 										<span>${Resource.msg('global.remove','locale',null)}</span>
 									</a>
 								</div>
