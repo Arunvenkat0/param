@@ -9,49 +9,6 @@
 	</isif>
 	<isslot id="cart-banner" description="Banner for Cart page"	context="global" />
 
-	<iscomment>Display selected bonus products Order Promotion message</iscomment>
-	<isif condition="${!(pdict.Basket == null)}">
-		<isloop items="${pdict.Basket.bonusDiscountLineItems}"	var="bonusDiscountLineItem">
-			<isif condition="${bonusDiscountLineItem.getPromotion().getPromotionClass() == dw.campaign.Promotion.PROMOTION_CLASS_ORDER && bonusDiscountLineItem.getBonusProductLineItems().size() == 0}">
-				<div class="bonus-item-promo">
-
-					<iscomment>Display appropriate text based on status of bonus discount and number of selected bonus products.</iscomment>
-					<isif condition="${bonusDiscountLineItem.getBonusProductLineItems().size() > 0}">
-						<isif condition="${bonusDiscountLineItem.getMaxBonusItems() > 1}">
-							<isset	name="bonusButtonText"	value="${Resource.msg('cart.updatebonusproducts','checkout',null)}"	scope="page" />
-						<iselse/>
-							<isset name="bonusButtonText" value="${Resource.msg('cart.updatebonusproduct','checkout',null)}" scope="page" />
-						</isif>
-					<iselse/>
-						<isif condition="${bonusDiscountLineItem.getMaxBonusItems() > 1}">
-							<isset name="bonusButtonText" value="${Resource.msg('cart.selectbonusproducts','checkout',null)}" scope="page" />
-						<iselse/>
-							<isset name="bonusButtonText" value="${Resource.msg('cart.selectbonusproduct','checkout',null)}" scope="page" />
-						</isif>
-					</isif>
-					<div class="bonus-item-details">
-						<isprint value="${bonusDiscountLineItem.getPromotion().getName()}" />
-						<isprint value="${bonusDiscountLineItem.getPromotion().getCalloutMsg()}" encoding="off"/>
-						<a class="tooltip" href="#">
-							${Resource.msg('product.promotiondetails','product',null)}
-							<div class="tooltip-content" data-layout="small">
-								<isprint value="${bonusDiscountLineItem.getPromotion().getDetails()}" />
-								<br />
-								${StringUtils.format(Resource.msg('cart.bonusmaxitems','checkout',null),bonusDiscountLineItem.getMaxBonusItems())}
-								${StringUtils.format(Resource.msg('cart.bonusnumselected','checkout',null),bonusDiscountLineItem.getBonusProductLineItems().size())}
-							</div>
-						</a>
-					</div>
-					<div class="bonus-products">
-						<a href="${URLUtils.url('Product-GetBonusProducts','bonusDiscountLineItemUUID', bonusDiscountLineItem.UUID)}" title="${bonusButtonText}">
-							${bonusButtonText}
-						</a>
-					</div>
-				</div>
-			</isif>
-		</isloop>
-	</isif>
-
 	<isif condition="${pdict.Basket == null || (empty(pdict.Basket.productLineItems) && empty(pdict.Basket.giftCertificateLineItems))}">
 		<div class="cart-empty">
 			<h1>${Resource.msg('cart.cartempty','checkout',null)}</h1>
@@ -137,7 +94,53 @@
 					</thead>
 
 					<tbody>
+	<iscomment>Display selected bonus products Order Promotion message</iscomment>
+	<isif condition="${!(pdict.Basket == null)}">
+		<isloop items="${pdict.Basket.bonusDiscountLineItems}"	var="bonusDiscountLineItem">
+			<isif condition="${bonusDiscountLineItem.getPromotion().getPromotionClass() == dw.campaign.Promotion.PROMOTION_CLASS_ORDER && bonusDiscountLineItem.getBonusProductLineItems().size() == 0}">
+				<div class="bonus-item-promo">
 
+					<iscomment>Display appropriate text based on status of bonus discount and number of selected bonus products.</iscomment>
+					<isif condition="${bonusDiscountLineItem.getBonusProductLineItems().size() > 0}">
+						<isif condition="${bonusDiscountLineItem.getMaxBonusItems() > 1}">
+							<isset	name="bonusButtonText"	value="${Resource.msg('cart.updatebonusproducts','checkout',null)}"	scope="page" />
+						<iselse/>
+							<isset name="bonusButtonText" value="${Resource.msg('cart.updatebonusproduct','checkout',null)}" scope="page" />
+						</isif>
+					<iselse/>
+						<isif condition="${bonusDiscountLineItem.getMaxBonusItems() > 1}">
+							<isset name="bonusButtonText" value="${Resource.msg('cart.selectbonusproducts','checkout',null)}" scope="page" />
+						<iselse/>
+							<isset name="bonusButtonText" value="${Resource.msg('cart.selectbonusproduct','checkout',null)}" scope="page" />
+						</isif>
+					</isif>
+					<tr class="cart-promo">
+
+						<td colspan="3" class="bonus-item-details">
+							<isprint value="${bonusDiscountLineItem.getPromotion().getName()}" />
+							<isprint value="${bonusDiscountLineItem.getPromotion().getCalloutMsg()}" encoding="off"/>
+							<a class="tooltip" href="#">
+								${Resource.msg('product.promotiondetails','product',null)}
+								<div class="tooltip-content" data-layout="small">
+									<isprint value="${bonusDiscountLineItem.getPromotion().getDetails()}" />
+									<br />
+									${StringUtils.format(Resource.msg('cart.bonusmaxitems','checkout',null), bonusDiscountLineItem.getMaxBonusItems())}
+									${StringUtils.format(Resource.msg('cart.bonusnumselected','checkout',null),bonusDiscountLineItem.getBonusProductLineItems().size())}
+								</div>
+							</a>
+						</td>
+	
+						<td colspan="4" class="bonus-item-actions">
+							<a class="select-bonus" href="${URLUtils.url('Product-GetBonusProducts','bonusDiscountLineItemUUID', bonusDiscountLineItem.UUID)}" title="${bonusButtonText}">
+								${bonusButtonText}
+							</a>
+						</td>
+	
+					</tr>
+				</div>
+			</isif>
+		</isloop>
+	</isif>
 						<iscomment>	LOOP TO SEPARATE DIFFERENT SHIPMENTS ex: Gift Registry Shipments Etc.</iscomment>
 						<isloop items="${pdict.CurrentForms.cart.shipments}" var="Shipment"	status="loopstate">
 							<isloop items="${Shipment.items}" alias="FormLi" status="loopstate">
