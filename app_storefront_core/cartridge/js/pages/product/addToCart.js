@@ -64,16 +64,9 @@ var addAllToCart = function (e) {
 /**
  * @function
  * @description Binds the click event to a given target for the add-to-cart handling
- * @param {Element} target The target on which an add to cart event-handler will be set
  */
-module.exports = function (target) {
+module.exports = function () {
 	$('.add-to-cart[disabled]').attr('title', $('.availability-msg').text());
-
-	if (target) {
-		target.on('click', '.add-to-cart', addToCart);
-	} else {
-		$('.add-to-cart').on('click', addToCart);
-	}
-
+	$('.product-detail').on('click', '.add-to-cart', addToCart);
 	$('#add-all-to-cart').on('click', addAllToCart);
 };
