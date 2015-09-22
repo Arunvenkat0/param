@@ -1,9 +1,12 @@
 # Welcome to the SiteGenesis Repository
 
+Please note that `master` is under active development, so please use with caution.
+Check out our tagged versions if you'd like more stable, tested releases.
+
 # Purpose
- 
+
 The goals of this repository are:
- 
+
 * To provide earlier access to Demandware developers as platform releases are pushed to the sandboxes
 * To provide 'git' access to the code so that you can cherry pick specific fixes (or even merge entire releases!) into your code lines
 * To provide the community a vehicle for submitting code changes via git's 'pull request' mechanism
@@ -12,7 +15,7 @@ The goals of this repository are:
 License and Attribution Guide is available at https://xchange.demandware.com/docs/DOC-29638.
 
 Important installation note: if you merely import the code for this site without importing the data, you will most likely see a "broken" footer.  The 15.4 footer uses some new content assets.  We recommend exporting your current site, importing the site data from the `demo_data_no_hires_images` directory and then re-import your custom data.
- 
+
 A detailed submission guideline is posted on XChange (https://xchange.demandware.com/docs/DOC-21927).
 
 Thank you for your submissions and your thoughts on the best way to utilize this resource.
