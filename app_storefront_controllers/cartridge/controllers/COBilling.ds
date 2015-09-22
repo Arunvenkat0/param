@@ -21,7 +21,7 @@ var Status = require('dw/system/Status');
 var StringUtils = require('dw/util/StringUtils');
 var Transaction = require('dw/system/Transaction');
 var URLUtils = require('dw/web/URLUtils');
-var Countries = require('~/../app_storefront_core/cartridge/scripts/util/Countries');
+var Countries = require('app_storefront_core/cartridge/scripts/util/Countries');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
