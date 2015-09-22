@@ -1,4 +1,5 @@
 var countries = require('~/cartridge/countries');
+var Locale = require('dw/util/Locale');
 
 /**
  * @description filter out the countries array to return only ones that are allowed in
@@ -43,7 +44,7 @@ function getCountriesGroupedBy(group) {
  * @return {object} country the object containing the country's settings
  */
 function getCurrent(pdict) {
-	var currentLocale = dw.util.Locale.getLocale(pdict.CurrentRequest.locale);
+	var currentLocale = Locale.getLocale(pdict.CurrentRequest.locale);
 	var country;
 	if (!currentLocale.country) {
 		return;
