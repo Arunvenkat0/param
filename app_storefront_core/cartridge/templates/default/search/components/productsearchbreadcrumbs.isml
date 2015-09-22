@@ -2,45 +2,60 @@
 <iscomment>This template renders the breadcrumb navigation for product search results</iscomment>
 
 <iscomment>get the current paging model for convenient reuse</iscomment>
-<isset name="pagingModel" value="${pdict.ProductPagingModel}" scope="page"/>
 
 <isscript>
 	var StringUtils = require('~/cartridge/scripts/util/StringUtils');
+	var URLUtils = require('dw/web/URLUtils');
+	var Resource = require('dw/web/Resource');
+	var ArrayList = require('dw/util/ArrayList');
+	var ProductSearchModel = require('dw/catalog/ProductSearchModel');
+
+	var pagingModel = pdict.ProductPagingModel;
+	var psr = pdict.ProductSearchResult;
+	var searchPhrase = psr.getSearchPhrase();
+	var suggestedSearchPhrase = psr.getSuggestedSearchPhrase();
+	var searchPhraseURL = URLUtils.url('Search-Show', 'q', searchPhrase);
+	var suggestedSearchPhraseURL = suggestedSearchPhrase ? URLUtils.url('Search-Show', 'q', suggestedSearchPhrase) : '';
+	var resultsText = Resource.msg('searchbreadcrumbs.resultstext', 'search', null);
+	if (pagingModel) {
+		searchPhraseURL = pagingModel.appendPaging(searchPhraseURL, 0);
+	}
+	if (suggestedSearchPhrase) {
+		resultsText = Resource.msg('searchbreadcrumbs.searchphrase', 'search', null);
+	}
+
+	var category = psr.getCategory();
+	var categories = new ArrayList();
+	var cat = category;
+	while (cat.parent) {
+		if (cat.online) {
+			categories.addAt(0, cat);
+		}
+		cat = cat.parent;
+	}
 </isscript>
 
 <div class="breadcrumb">
-	<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.searchPhrase)}">
-		<isif condition="${empty(pagingModel)}">
-			<isset name="breadcrumbHref" value="${URLUtils.url('Search-Show','q',pdict.ProductSearchResult.searchPhrase)}" scope="page" />
-		<iselse/>
-			<isset name="breadcrumbHref" value="${pagingModel.appendPaging(URLUtils.url('Search-Show','q',pdict.ProductSearchResult.searchPhrase), 0)}" scope="page" />
-		</isif>
+	<isif condition="${psr && searchPhrase}">
 		<span class="breadcrumb-element breadcrumb-result-text">
-			${Resource.msg('searchbreadcrumbs.resultstext','search',null)}
-			&quot;<a href="${breadcrumbHref}" title="${pdict.ProductSearchResult.searchPhrase}">${pdict.ProductSearchResult.searchPhrase}</a>&quot;
+			${resultsText} &quot;<a href="${searchPhraseURL}" title="${searchPhrase}">${searchPhrase}</a>&quot;
+			<isif condition="${suggestedSearchPhrase}">
+				- ${Resource.msg('searchbreadcrumbs.showresults', 'search', null)} &quot;<a href="${suggestedSearchPhraseURL}" title="${suggestedSearchPhrase}">${suggestedSearchPhrase}</a>&quot;
+			</isif>
 		</span>
 	</isif>
 
-	<isif condition="${!empty(pdict.ProductSearchResult) && pdict.ProductSearchResult.category != null}">
-		<isactivedatacontext category="${pdict.ProductSearchResult.category}"/>
+	<isif condition="${psr && category}">
+		<isactivedatacontext category="${category}"/>
 
-		<isscript>
-			var path = new dw.util.ArrayList();
-			var cat = pdict.ProductSearchResult.category;
-			while (cat.parent != null) {
-				if (cat.online) { path.addAt( 0, cat ); }
-				cat = cat.parent;
-			}
-		</isscript>
-
-		<isloop items="${path}" var="cat" status="loopstate">
-			<isif condition="${loopstate.first && !pdict.ProductSearchResult.categorySearch}">
+		<isloop items="${categories}" var="cat" status="loopstate">
+			<isif condition="${loopstate.first && !psr.categorySearch}">
 				<span class="breadcrumb-result-text">${Resource.msg('searchbreadcrumbs.in','search',null)}</span>
 			</isif>
-			<isif condition="${pdict.ProductSearchResult.categorySearch}">
-				<isset name="catLinkUrl" value="${dw.catalog.ProductSearchModel.urlForCategory('Search-Show', cat.ID)}" scope="page"/>
+			<isif condition="${psr.categorySearch}">
+				<isset name="catLinkUrl" value="${ProductSearchModel.urlForCategory('Search-Show', cat.ID)}" scope="page"/>
 			<iselse/>
-				<isset name="catLinkUrl" value="${dw.catalog.ProductSearchModel.urlForCategory(URLUtils.url('Search-Show','q', pdict.ProductSearchResult.searchPhrase), cat.ID)}" scope="page"/>
+				<isset name="catLinkUrl" value="${ProductSearchModel.urlForCategory(URLUtils.url('Search-Show','q', psr.searchPhrase), cat.ID)}" scope="page"/>
 			</isif>
 			<a class="breadcrumb-element" href="${catLinkUrl}" title="${Resource.msg('global.breadcrumbs.label.prefix','locale',null)} ${cat.displayName}">${cat.displayName}</a>
 		</isloop>
@@ -48,31 +63,31 @@
 	</isif>
 
 	<iscomment>SORTING INFO </iscomment>
-	<isif condition="${!empty(pdict.ProductSearchResult) && !empty(pdict.ProductSearchResult.sortingRule) && (pdict.ProductSearchResult.category != null)}">
-		<isif condition="${pdict.ProductSearchResult.sortingRule.ID}">
+	<isif condition="${!empty(psr) && !empty(psr.sortingRule) && (psr.category != null)}">
+		<isif condition="${psr.sortingRule.ID}">
 			<span class="breadcrumb-refined-by">${Resource.msg('searchbreadcrumbs.sortedby', 'search', null)}</span>
 		</isif>
 		<isloop items="${dw.catalog.CatalogMgr.getSortingOptions()}" var="sortingOption">
-			<isif condition="${sortingOption.getID() == pdict.ProductSearchResult.sortingRule.ID}">
+			<isif condition="${sortingOption.getID() == psr.sortingRule.ID}">
 				<span class="breadcrumb-refinement">${sortingOption.getDisplayName()}</span>
 			</isif>
 		</isloop>
 	</isif>
 
 	<iscomment>REFINEMENT INFO </iscomment>
-	<isif condition="${!empty(pdict.ProductSearchResult) && ((pdict.ProductSearchResult.refinedByPrice && pdict.ProductSearchResult.priceMax) || pdict.ProductSearchResult.refinedByAttribute)}">
+	<isif condition="${psr && ((psr.refinedByPrice && psr.priceMax) || psr.refinedByAttribute)}">
 
-		<isif condition="${(pdict.ProductSearchResult.refinements.priceRefinementDefinition && pdict.ProductSearchResult.refinedByPrice) || (pdict.ProductSearchResult.refinements.refinementDefinitions.size() > 0)}">
+		<isif condition="${(psr.refinements.priceRefinementDefinition && psr.refinedByPrice) || (psr.refinements.refinementDefinitions.size() > 0)}">
 			<span class="breadcrumb-refined-by">${Resource.msg('searchbreadcrumbs.refinedby', 'search', null)}</span>
 		</isif>
 
 		<iscomment>Price</iscomment>
-		<isif condition="${pdict.ProductSearchResult.refinements.priceRefinementDefinition && pdict.ProductSearchResult.refinedByPrice}">
+		<isif condition="${psr.refinements.priceRefinementDefinition && psr.refinedByPrice}">
 			<isscript>
 				// for price refinements, we use the display value of the price refinement definition's value
 				var breadcrumbLabel = null
 
-				var refinements = pdict.ProductSearchResult.refinements;
+				var refinements = psr.refinements;
 				var prdValues = refinements.getRefinementValues(refinements.priceRefinementDefinition);
 				if (prdValues.iterator().hasNext()) {
 					breadcrumbLabel = prdValues.iterator().next().getDisplayValue();
@@ -80,22 +95,22 @@
 			</isscript>
 			<span class="breadcrumb-refinement" data-divider="${Resource.msg('searchbreadcrumbs.attributedivider','search',null)}">
 				<span class="breadcrumb-refinement-name">
-					<isprint value="${pdict.ProductSearchResult.refinements.priceRefinementDefinition.displayName}"/>
+					<isprint value="${psr.refinements.priceRefinementDefinition.displayName}"/>
 				</span>
 
 				<span class="breadcrumb-refinement-value">
 					<isif condition="${!empty(breadcrumbLabel)}">
 						<isprint value="${breadcrumbLabel}"/>
 					<iselse/>
-						<isprint value="${pdict.ProductSearchResult.priceMin}"/>
+						<isprint value="${psr.priceMin}"/>
 						${Resource.msg('searchbreadcrumbs.to','search',null)}
-						<isprint value="${pdict.ProductSearchResult.priceMax}"/>
+						<isprint value="${psr.priceMax}"/>
 					</isif>
 
 					<isif condition="${empty(pagingModel)}">
-						<isset name="breadcrumbHref" value="${pdict.ProductSearchResult.urlRelaxPrice('Search-Show')}" scope="page" />
+						<isset name="breadcrumbHref" value="${psr.urlRelaxPrice('Search-Show')}" scope="page" />
 					<iselse/>
-						<isset name="breadcrumbHref" value="${pagingModel.appendPaging(pdict.ProductSearchResult.urlRelaxPrice('Search-Show'), 0)}" scope="page" />
+						<isset name="breadcrumbHref" value="${pagingModel.appendPaging(psr.urlRelaxPrice('Search-Show'), 0)}" scope="page" />
 					</isif>
 					<a class="breadcrumb-relax" href="${StringUtils.unsanitizeOR(breadcrumbHref)}" title="${Resource.msg('global.remove', 'locale', null)}">x</a>
 				</span>
@@ -105,21 +120,21 @@
 
 		<iscomment>attributes</iscomment>
 		<isset name="hasAttributes" value="${false}" scope="page" />
-		<isloop items="${pdict.ProductSearchResult.refinements.refinementDefinitions}" var="definition" status="attributes">
-			<isif condition="${definition.isAttributeRefinement() && pdict.ProductSearchResult.isRefinedByAttribute(definition.attributeID)}">
+		<isloop items="${psr.refinements.refinementDefinitions}" var="definition" status="attributes">
+			<isif condition="${definition.isAttributeRefinement() && psr.isRefinedByAttribute(definition.attributeID)}">
 				<span class="breadcrumb-refinement" data-divider="${Resource.msg('searchbreadcrumbs.attributedivider','search',null)}">
 					<span class="breadcrumb-refinement-name">
 						<isprint value="${definition.displayName}"/>
 					</span>
 					<isset name="hasAttributes" value="${true}" scope="page" />
-					<isloop items="${pdict.ProductSearchResult.refinements.getRefinementValues(definition)}" var="value" status="values">
-						<isif condition="${pdict.ProductSearchResult.isRefinedByAttributeValue(definition.attributeID, value.value)}">
+					<isloop items="${psr.refinements.getRefinementValues(definition)}" var="value" status="values">
+						<isif condition="${psr.isRefinedByAttributeValue(definition.attributeID, value.value)}">
 							<span class="breadcrumb-refinement-value">
 									${Resource.msg('refinement.' + definition.attributeID + '.' + value.displayValue, 'locale', value.displayValue)}
 								<isif condition="${empty(pagingModel)}">
-									<isset name="breadcrumbHref" value="${pdict.ProductSearchResult.urlRelaxAttributeValue('Search-Show', definition.attributeID, value.value)}" scope="page" />
+									<isset name="breadcrumbHref" value="${psr.urlRelaxAttributeValue('Search-Show', definition.attributeID, value.value)}" scope="page" />
 								<iselse/>
-									<isset name="breadcrumbHref" value="${pagingModel.appendPaging(pdict.ProductSearchResult.urlRelaxAttributeValue('Search-Show', definition.attributeID, value.value), 0)}" scope="page" />
+									<isset name="breadcrumbHref" value="${pagingModel.appendPaging(psr.urlRelaxAttributeValue('Search-Show', definition.attributeID, value.value), 0)}" scope="page" />
 								</isif>
 								<a class="breadcrumb-relax" href="${StringUtils.unsanitizeOR(breadcrumbHref)}" title="${Resource.msg('global.remove', 'locale', null)}">x</a>
 							</span>
