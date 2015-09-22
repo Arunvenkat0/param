@@ -68,10 +68,6 @@
 		border: 0 none;
 		width: 100%;
 	}
-	.page-content & {
-		padding-left: 3%;
-		width: 758px;
-	}
 }
 
 #secondary {
@@ -99,6 +95,13 @@
 			float: left;
 			padding-left: .4rem;
 			width: 24%;
+		}
+	}
+	// Remove Refinements for responsive design
+	.pt_content-search-result & {
+		display: none;
+		@media screen and (min-width: 768px) {
+			display: block;
 		}
 	}
 }

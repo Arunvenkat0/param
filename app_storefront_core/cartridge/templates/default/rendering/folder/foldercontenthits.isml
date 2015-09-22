@@ -45,7 +45,7 @@
 					<iscomment>append the search parameters to the article URL</iscomment>
 					<isset name="articleURL" value="${pdict.ContentSearchResult.url( URLUtils.url('Page-Show','cid', asset.ID) )}" scope="page"/>
 					
-					<a href="${articleURL}">
+					<a class="content-title" href="${articleURL}">
 						<isprint value="${asset.name}"/>
 					</a>
 					
