@@ -18,9 +18,8 @@ function infiniteScroll() {
 		loadingPlaceHolder.attr('data-loading-state', 'loading');
 		loadingPlaceHolder.addClass('infinite-scroll-loading');
 
-		/**
-		 * named wrapper function, which can either be called, if cache is hit, or ajax repsonse is received
-		 */
+
+		// named wrapper function, which can either be called, if cache is hit, or ajax repsonse is received
 		var fillEndlessScrollChunk = function (html) {
 			loadingPlaceHolder.removeClass('infinite-scroll-loading');
 			loadingPlaceHolder.attr('data-loading-state', 'loaded');
@@ -59,21 +58,16 @@ function infiniteScroll() {
  * @function
  * @description replaces breadcrumbs, lefthand nav and product listing with ajax and puts a loading indicator over the product listing
  */
-function updateProductListing() {
-	var hash = location.href.split('#')[1];
-	if (hash === 'results-content' || hash === 'results-products') { return; }
-	var refineUrl;
-
-	if (hash.length > 0) {
-		refineUrl = window.location.pathname + '?' + hash;
-	} else {
+function updateProductListing(url) {
+	if (!url || url === window.location.href) {
 		return;
 	}
 	progress.show($('.search-result-content'));
-	$('#main').load(util.appendParamToURL(refineUrl, 'format', 'ajax'), function () {
+	$('#main').load(util.appendParamToURL(url, 'format', 'ajax'), function () {
 		compareWidget.init();
 		productTile.init();
 		progress.hide();
+		history.pushState(undefined, '', url);
 	});
 }
 
@@ -111,24 +105,13 @@ function initializeEvents() {
 	});
 
 	// handle events for updating grid
-	$main.on('click', '.refinements a, .pagination a, .breadcrumb-refinement-value a', function () {
-		if ($(this).parent().hasClass('unselectable')) { return; }
-		var catparent = $(this).parents('.category-refinement');
-		var folderparent = $(this).parents('.folder-refinement');
-
-		//if the anchor tag is uunderneath a div with the class names & , prevent the double encoding of the url
-		//else handle the encoding for the url
-		if (catparent.length > 0 || folderparent.length > 0) {
-			return true;
-		} else {
-			var query = util.getQueryString(this.href);
-			if (query.length > 1) {
-				window.location.hash = query;
-			} else {
-				window.location.href = this.href;
-			}
-			return false;
+	$main.on('click', '.refinements a, .pagination a, .breadcrumb-refinement-value a', function (e) {
+		// don't intercept for category and folder refinements, as well as unselectable
+		if ($(this).parents('.category-refinement').length > 0 || $(this).parents('.folder-refinement').length > 0 || $(this).parent().hasClass('unselectable')) {
+			return;
 		}
+		e.preventDefault();
+		updateProductListing(this.href);
 	});
 
 	// handle events item click. append params.
@@ -156,26 +139,19 @@ function initializeEvents() {
 	});
 
 	// handle sorting change
-	$main.on('change', '.sort-by select', function () {
-		var refineUrl = $(this).find('option:selected').val();
-		var queryString = util.getQueryString(refineUrl);
-		window.location.hash = queryString;
-		return false;
+	$main.on('change', '.sort-by select', function (e) {
+		e.preventDefault();
+		updateProductListing($(this).find('option:selected').val());
 	})
 	.on('change', '.items-per-page select', function () {
 		var refineUrl = $(this).find('option:selected').val();
-		var queryString = util.getQueryString(refineUrl);
 		if (refineUrl === 'INFINITE_SCROLL') {
 			$('html').addClass('infinite-scroll').removeClass('disable-infinite-scroll');
 		} else {
 			$('html').addClass('disable-infinite-scroll').removeClass('infinite-scroll');
-			window.location.hash = queryString;
+			updateProductListing(refineUrl);
 		}
-		return false;
 	});
-
-	// handle hash change
-	window.onhashchange = updateProductListing;
 }
 
 exports.init = function () {
