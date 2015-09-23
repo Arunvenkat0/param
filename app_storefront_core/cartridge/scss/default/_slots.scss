@@ -403,8 +403,28 @@
 		}
 	}
 }
+.cart-recommendations {
+	margin-top: 1rem;
+	.product-listing {
+		@extend %clearfix;
+		background-color: $white-smoke;
+		padding: 1rem 0;
+	}
+}
+.cart-recommendations,
 .category-slot,
 .product-slot {
+	.tiles-container {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: center;
+		.grid-tile {
+			box-shadow: none;
+			margin: 1rem;
+			padding: 1rem;
+    		width: 25%;
+		}
+	}
 	h1 {
 		color: $white;
 		font-family: $sans-serif-alt;

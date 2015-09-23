@@ -24,13 +24,13 @@
 	<div class="recommendations cross-sell">
 		<isif condition="${recProducts.size() > 0}">
 			<div id="carousel-recommendations">
-				<ul>
+				<ul class="tiles-container">
 					<iscomment>Preserve the Product instance</iscomment>
 					<isset name="mainProduct" value="${pdict.Product}" scope="pdict"/>
 					<isloop items="${recProducts}" var="rec" end="19">
 						<isset name="Product" value="${rec}" scope="pdict"/>
 						<isset name="pName" value="${pdict.Product.name}" scope="page"/>
-						<li class="recommendation-item">
+						<li class="grid-tile recommendation-item">
 							<div class="product-tile tooltip">
 								<div class="analytics capture-product-id"><isprint value="${pdict.Product.ID}"/></div>
 								<div class="product-image recommendation_image">

@@ -221,21 +221,6 @@
 	}
 }
 
-.cart-recommendations {
-	margin-top: 1rem;
-	.product-listing {
-		@extend %clearfix;
-		background-color: $white-smoke;
-		padding: 1rem 0;
-		h2 {
-			margin-left: 1.3rem;
-		}
-		.search-result-items {
-			margin-top: 1em;
-		}
-	}
-}
-
 .cart-actions-top {
 	margin-top: .5rem;
 	padding-bottom: 1em;
