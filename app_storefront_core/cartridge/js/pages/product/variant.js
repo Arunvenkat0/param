@@ -1,7 +1,6 @@
 'use strict';
 
-var addToCart = require('./addToCart'),
-	ajax = require('../../ajax'),
+var ajax = require('../../ajax'),
 	image = require('./image'),
 	progress = require('../../progress'),
 	productStoreInventory = require('../../storeinventory/product'),
