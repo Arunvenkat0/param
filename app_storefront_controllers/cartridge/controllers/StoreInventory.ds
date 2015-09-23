@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * This module handles in store functionality which is mostly used on the PDP
+ * This controller handles in-store functionality that is mostly used on the Product Detail Page.
  *
  * @module controllers/StoreInventory
  * @TODO Simplify the logic, there is no need to return the stores as JSON to render them in the client
@@ -45,7 +45,8 @@ function setStore() {
 }
 
 /**
- * These pipelines are used when the UI cartridge is not in the cartridge path.
+ * These function are used when the UI cartridge is not in the cartridge path.
+ * TODO - Is this outdated?
  */
 function showSelectedStoreCore() {
     session.custom.storeId = request.httpParameterMap.storeId.value;
@@ -170,13 +171,13 @@ function inventory() {
     }
     var storeAvailabilityMap = getStoreAvailabilityMap(storesList, product, lineitem);
 
-    // create JSON representation
+    // Creates JSON representation.
     var stores = [];
 
     for (var i = 0, len = storesList.length; i < len; i++) {
         var store = storesList[i];
 
-        // this may need to be changed to ("inventoryListId" in store.custom) ?
+        // TODO This may need to be changed to ("inventoryListId" in store.custom) ?
         // store.custom.inventoryListId : "";
         var inventoryListId = store.custom.inventoryListId || '';
         var inventoryList = dw.catalog.ProductInventoryMgr.getInventoryList(inventoryListId);
@@ -207,7 +208,7 @@ function inventory() {
 }
 
 /**
- * Sets the preferred store to the session
+ * Sets the preferred store for the session.
  */
 function setPreferredStore() {
     session.custom.storeId = request.httpParameterMap.storeId.value;
@@ -216,7 +217,7 @@ function setPreferredStore() {
 }
 
 /**
- * Gets the preferred store from the session
+ * Gets the preferred store from the session.
  */
 function getPreferredStore() {
 	let r = require('~/cartridge/scripts/util/Response');
@@ -226,7 +227,7 @@ function getPreferredStore() {
 }
 
 /**
- * Sets the users zip code for at the session
+ * Sets the users zip code for at the session.
  */
 function setZipCode() {
     session.custom.zipcode = request.httpParameterMap.zipCode.value;
@@ -235,7 +236,7 @@ function setZipCode() {
 }
 
 /**
- * Gets the users zip code from the session
+ * Gets the users zip code from the session.
  */
 function getZipCode() {
 	let r = require('~/cartridge/scripts/util/Response');
@@ -250,7 +251,7 @@ function getZipCode() {
 
 /**
  * Looks up stores based on the zipcode given and the site prefernces that refer
- * the the radius and units of distance
+ * to the radius and units of distance.
  */
 function lookupByZipCode() {
     var nearestStores = dw.catalog.StoreMgr.searchStoresByPostalCode(
@@ -269,7 +270,7 @@ function lookupByZipCode() {
 
 /**
  * Assumes that the pid refers to a product line item instead of a product
- * object for determining products availability.
+ * object for determining a product's availability.
  */
 function getProductLineItem(uuid) {
     var Cart = app.getModel('Cart');
@@ -342,7 +343,7 @@ function setStoreInLineItem( basket, liUUID, storeId, storepickup )
                 } else {
                     productLineItem.custom.fromStoreId='';
                     productLineItem.setProductInventoryList(null);
-                    //loop over the shipments to find the one with out instore to assign it to
+                    //Loop over the shipments to find the one with out instore to assign it to
                     //productLineItem.shipment = null;
                     //var shipmentToDelete
                     //check if the default shipment is instore or not
@@ -389,7 +390,7 @@ function getStoreAvailabilityMap( stores, product, productLineItem ) {
 }
 
 /**
- * Get the availability message for a given store and product
+ * Get the availability message for a given store and product.
  * @param  {dw.catalog.Store} store   The store
  * @param  {dw.catalog.Product} product The product
  * @return {String}         The localized message

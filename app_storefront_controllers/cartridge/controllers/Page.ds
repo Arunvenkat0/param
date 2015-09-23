@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Renders a content page or a content include.
+ * This controller renders a content page or a content include.
  *
  * @module controllers/Page
  */

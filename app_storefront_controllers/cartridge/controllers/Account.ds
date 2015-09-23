@@ -1,7 +1,8 @@
 'use strict';
 
 /**
- * Controller : account
+ * This controller provides functions that render the account overview, manage customer registration and password reset, 
+ * and edit customer profile information.
  *
  * @module controllers/Account
  */
@@ -56,7 +57,7 @@ function editProfile() {
 }
 
 /**
- * Handles the form submission on profile update of edit profile
+ * Handles the form submission on profile update of edit profile.
  */
 function editForm() {
     app.getForm('profile').handleAction({
@@ -97,7 +98,7 @@ function editForm() {
 
 /**
  * Renders the password reset screen. This is very similar to the password reset
- * dialog but has screen-based interaction instead of popup interaction.
+ * dialog but has a screen-based interaction instead of a popup interaction.
  */
 function passwordReset() {
     app.getForm('requestpassword').clear();
@@ -107,8 +108,8 @@ function passwordReset() {
 }
 
 /**
- * Utility, which handles form submits from dialog based and full page
- * based password reset
+ * Utility that handles form submission from dialog and full page
+ *  password reset.
  * @private
  */
 function passwordResetFormHandler(templateName, continueURL) {

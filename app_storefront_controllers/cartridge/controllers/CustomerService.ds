@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Controller handling customer service related pages, like help desk as well as the contact us form.
+ * This controller handles customer service related pages, such as the contact us form.
  *
  * @module controllers/CustomerService
  */
@@ -38,7 +38,7 @@ function contactUs() {
 }
 
 /**
- * The form handler.
+ * The form handler for the contactus form.
  */
 function submit() {
 	var contactUsForm = app.getForm('contactus');
@@ -46,7 +46,7 @@ function submit() {
     var contactUsResult = contactUsForm.handleAction({
         'send'  : function (formgroup) {
             // Change the MailTo in order to send to the store's customer service email address. It defaults to the
-            // user's email for demonstration.
+            // user's email.
             var Email = app.getModel('Email');
             return Email.get('mail/contactus', formgroup.email.value)
                 .setFrom(formgroup.email.value)
@@ -54,7 +54,7 @@ function submit() {
                 .send({});
         },
         'error' : function (formgroup) {
-            // no special error handling in case the form is invalid
+            // No special error handling if the form is invalid.
             return null;
         }
     });

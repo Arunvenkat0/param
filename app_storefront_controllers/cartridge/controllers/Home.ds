@@ -66,7 +66,7 @@ function mobileSite() {
 }
 
 /**
- * TODO remove - not responsive - maybe replace with a css class forcing the layout
+ * TODO remove - not responsive - maybe replace with a CSS class forcing the layout.
  */
 function fullSite() {
     session.custom.device = 'fullsite';

@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Renders store finder and store detail pages.
+ * This controller renders store finder and store detail pages.
  *
  * @module controllers/Stores
  */
@@ -32,7 +32,7 @@ function find() {
 }
 
 /**
- * The form handler. This form is submitted with GET.
+ * The storeLocator form handler. This form is submitted with GET.
  */
 function findStores() {
     var Content = app.getModel('Content');

@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * The GiftRegistry module contains a set of workflows that allow you to create and maintain one or more Gift Registries.
+ * This controller implements functionality for gift registry business logic.
  *
  * @module  controllers/GiftRegistry
  */
@@ -62,7 +62,9 @@ function start() {
     app.getView().render('account/giftregistry/registrylist');
 }
 
-
+/**
+ * Creates or searches for a gift registry.
+ */
 function registrymain() {
     // TODO this should trigger some redirect
 	var TriggeredAction = request.triggeredFormAction;
@@ -193,7 +195,9 @@ function createOne()
     app.getView().render('account/giftregistry/eventparticipant');
 }
 
-
+/**
+ * TODO
+ */
 function eventParticipant() {
     // TODO this should be some redirect
 	var TriggeredAction = request.triggeredFormAction;
@@ -216,13 +220,17 @@ function eventParticipant() {
 	}
 }
 
-
+/**
+ * TODO
+ */
 function showAddresses()
 {
     app.getView().render('account/giftregistry/addresses');
 }
 
-
+/**
+ * TODO
+ */
 function participantAddresses() {
     // TODO this should trigger some redirect
 	var TriggeredAction = request.triggeredFormAction;
@@ -294,13 +302,17 @@ function participantAddresses() {
     showConfirmation();
 }
 
-
+/**
+ * TODO
+ */
 function showConfirmation()
 {
     app.getView().render('account/giftregistry/giftregistryconfirmation');
 }
 
-
+/**
+ * TODO
+ */
 function confirmation() {
     // TODO this should trigger some redirect
 	var TriggeredAction = request.triggeredFormAction;
@@ -461,7 +473,7 @@ function confirmation() {
 
 
 /**
- * Selects a gift registry from a list of gift registries, e.g. found by the registry search.
+ * Selects a gift registry from a list of gift registries that are found by the registry search.
  */
 function selectOne()
 {
@@ -494,7 +506,9 @@ function selectProductListInteraction() {
 	// TODO what to render otherwise?
 }
 
-
+/**
+ * TODO
+ */
 function editEvent()
 {
     var currentForms = session.forms;
@@ -517,12 +531,16 @@ function editEvent()
     showEditParticipantForm();
 }
 
-
+/**
+ * TODO
+ */
 function showEditParticipantForm()
 {
     app.getView().render('account/giftregistry/eventparticipant');
 }
-
+/**
+ * TODO
+ */
 // TODO this is probably never called?
 function editEventParticipant() {
 	var TriggeredAction = request.triggeredFormAction;
@@ -622,7 +640,9 @@ function editEventParticipant() {
 	showEditParticipantForm();
 }
 
-
+/**
+ * TODO
+ */
 function showPurchases()
 {
     var currentForms = session.forms;
@@ -635,13 +655,17 @@ function showPurchases()
     showPurchases();
 }
 
-
+/**
+ * @FIXME Why are there two identically named functions?
+ */
 function showPurchases()
 {
     app.getView().render('account/giftregistry/purchases');
 }
 
-
+/**
+ * TODO
+ */
 // @secure
 function showPurchasesInteraction() {
     // TODO this should end in a redirect
@@ -689,7 +713,9 @@ function showRegistry(args) {
     });
 }
 
-
+/**
+ * TODO
+ */
 function showRegistryInteraction() {
     // TODO this should end in redirects
 	var TriggeredAction = request.triggeredFormAction;
@@ -828,7 +854,9 @@ function search() {
         EventName: currentForms.giftregistry.search.advanced.eventName.value
     });
     var ProductLists = SearchProductListsResult.ProductLists;
-
+/**
+ * TODO
+ */
     showSearch({
         ProductLists: ProductLists
     });
@@ -842,7 +870,9 @@ function showSearch(args)
     });
 }
 
-
+/**
+ * TODO
+ */
 function searchGiftRegistry() {
     // TODO this should end with a redirect
 	var TriggeredAction = request.triggeredFormAction;
@@ -899,7 +929,9 @@ function showRegistryByID() {
 }
 
 
-
+/**
+ * TODO
+ */
 function updateAddressDetails() {
     var currentHttpParameterMap = request.httpParameterMap;
     var currentForms = session.forms;
@@ -1031,12 +1063,17 @@ function editAddresses() {
     showAddresses();
 }
 
-
+/**
+ * TODO
+ */
 function showAddresses() {
     app.getView().render('account/giftregistry/addresses');
 }
 
-
+/**
+ * TODO
+ @FIXME Why are there two functions with the same name?
+ */
 // @secure
 function editAddresses() {
     // TODO this should end in some redirect
@@ -1095,7 +1132,9 @@ function editAddresses() {
     confirm();
 }
 
-
+/**
+ * TODO
+ */
 function confirm() {
     var currentForms = session.forms;
     var currentHttpParameterMap = request.httpParameterMap;

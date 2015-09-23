@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Creating, modifying and showing of a product comparison.
+ * This controller provides functions for creating, modifying and showing a product comparison.
  * @module controllers/Compare
  */
 
@@ -17,16 +17,16 @@ var Category = app.getModel('Category');
 var Compare = app.getModel('Compare');
 
 /**
- * Expects: - category: category ID
+ * Gets a compare form and gets or creates a comparison object associated with the session.
  */
 function show() {
     var compareForm = app.getForm('compare');
 
-    // Get the product comparison object from the session or create a new one
+    // Get the product comparison object from the session or create a new one.
     var comparison = Compare.get();
     comparison.setCategory(request.httpParameterMap.category.value);
 
-    // Store selected compare list properties in a map
+    // Store selected compare list properties in a map.
     var map = new HashMap();
     map.put('categories', comparison.getCategories());
     map.put('products', comparison.getProducts());
@@ -40,7 +40,7 @@ function show() {
 }
 
 /**
- * Expects: - pid: SKU - category: category ID
+ * Adds a product to a comparison.
  */
 function addProduct() {
 	let r = require('~/cartridge/scripts/util/Response');
@@ -61,7 +61,7 @@ function addProduct() {
         return;
     }
     
-    // Get the product comparison object from the session or create a new one
+    // Get the product comparison object from the session or create a new one.
     var comparison = Compare.get();
     comparison.add(product.object, category.object);
     comparison.setCategory(category.getID());
@@ -72,7 +72,7 @@ function addProduct() {
 }
 
 /**
- * Parameters: - pid: SKU - category: category ID
+ * Removes a product from a comparison.
  */
  function removeProduct() {
 	let r = require('~/cartridge/scripts/util/Response');
@@ -93,7 +93,7 @@ function addProduct() {
         return;
     }
     
-    // Get the product comparison object from the session or create a new one
+    // Get the product comparison object from the session or create a new one.
     var comparison = Compare.get();
     comparison.remove(product.object, category.object);
     comparison.setCategory(category.getID());
@@ -104,7 +104,7 @@ function addProduct() {
 }
 
 /**
- * Parameters: - category: category ID
+ * Renders the product comparison widget.
  */
 function controls() {
 
@@ -114,7 +114,7 @@ function controls() {
         return;
     }
     
-    // Get the product comparison object from the session or create a new one
+    // Get the product comparison object from the session or create a new one.
     var comparison = Compare.get();
     app.getView({CompareList : comparison, Category : category.object}).render('search/components/productcomparewidget');
 }

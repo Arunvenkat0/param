@@ -19,7 +19,7 @@ var Customer       = app.getModel('Customer');
 var LOGGER         = dw.system.Logger.getLogger('login');
 
 /**
- * This method contains the login page preparation and display, it is called from various
+ * Contains the login page preparation and display, it is called from various
  * places implicitly when 'loggedIn' is ensured via the {@link module:guard}.
  */
 function show()
@@ -41,7 +41,7 @@ function show()
     var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update(dw.content.ContentMgr.getContent('myaccount-login'));
 
-    // save return URL in session
+    // Save return URL in session.
     if (request.httpParameterMap.original.submitted) {
         session.custom.TargetLocation = request.httpParameterMap.original.value;
     }
@@ -52,11 +52,11 @@ function show()
     if(request.httpParameterMap.scope.submitted){
         switch(request.httpParameterMap.scope.stringValue){
             case 'wishlist':
-                // @TODO update metadata for wishlist login
+                // @TODO Update metadata for wishlist login.
                 v.template = 'account/wishlist/wishlistlanding';
                 break;
             case 'giftregistry':
-                // @TODO update metadata for giftregistry login
+                // @TODO Update metadata for giftregistry login.
                 v.template = 'account/giftregistry/giftregistrylanding';
                 break;
             default:
@@ -83,7 +83,7 @@ function getTargetUrl()
 }
 
 /**
- * Handles the login form actions
+ * Handles the login form actions.
  */
 function handleLoginForm()
 {
@@ -101,7 +101,7 @@ function handleLoginForm()
             }
 
             // In case of successful login
-            // redirect to the origin who triggered the login process
+            // Redirects to the original controller that triggered the login process.
             response.redirect(getTargetUrl());
 
             return;
@@ -162,7 +162,7 @@ function handleLoginForm()
 }
 
 /**
- * Handles the OAuth login form
+ * Handles the OAuth login form.
  */
 function handleOAuthLoginForm()
 {
@@ -183,7 +183,7 @@ function handleOAuthLoginForm()
                     oauthLoginForm.get('loginsucceeded').invalidate();
                     finishOAuthLogin();
 
-                    // show login page with error
+                    // Show login page with error.
                     app.getView('Login').render();
                     return;
                 }
@@ -274,11 +274,11 @@ function handleOAuthReentry()
     }
     LOGGER.debug('{0} response:\n{1}', oAuthProviderID, responseText);
     if (null !== responseText) {
-        //wheather to drop the rememberMe cookie (preserved in the session before InitiateOAuthLogin pipelet)
+        //whether to drop the rememberMe cookie (preserved in the session before InitiateOAuthLogin pipelet)
         var rememberMe = session.custom.RememberMe;
         delete session.custom.RememberMe;
 
-        // LinkedIn returns XML
+        // LinkedIn returns XML.
         var extProfile = {};
         if(oAuthProviderID === 'LinkedIn'){
             var responseReader = new dw.io.Reader(responseText);
@@ -288,7 +288,7 @@ function handleOAuthReentry()
                 if (xmlStreamReader.next() === dw.io.XMLStreamConstants.START_ELEMENT)
                 {
                     var localElementName = xmlStreamReader.getLocalName();
-                    // ignore the top level person element and read the rest into a plain object
+                    // Ignore the top level person element and read the rest into a plain object.
                     if (localElementName !== 'person')
                     {
                         extProfile[localElementName] = xmlStreamReader.getElementText();
@@ -298,7 +298,7 @@ function handleOAuthReentry()
             xmlStreamReader.close();
             responseReader.close();
         }else{
-            // all other providers JSON (as they should)
+            // All other providers return JSON.
             extProfile = JSON.parse(responseText);
             if (null === extProfile) {
                 LOGGER.warn('Data could not be extracted from the response:\n{0}', responseText);
@@ -306,12 +306,12 @@ function handleOAuthReentry()
                 return;
             }
             if(oAuthProviderID === 'VKontakte'){
-                // they use JSON, but thought it would be cool to add some extra top level elements
+                // They use JSON, but thought it would be cool to add some extra top level elements
                 extProfile = extProfile.response[0];
             }
         }
 
-        // This is always id or uid for all providers
+        // This is always id or uid for all providers.
         var userId = extProfile.id || extProfile.uid;
         if (!userId) {
             LOGGER.warn( 'Undefined user identifier - make sure you are mapping the correct property from the response.' +
@@ -337,26 +337,24 @@ function handleOAuthReentry()
                 profile = customer.getProfile();
                 var firstName, lastName, email;
 
-                // Dear friends of generic code, now it becomes interesting
-
-                // Google comes with a name property which holds first & last name
+                // Google comes with a 'name' property that holds first and last name.
                 if (typeof extProfile.name === 'object') {
                     firstName = extProfile.name.givenName;
                     lastName = extProfile.name.familyName;
                 }else{
-                    // The other providers use one of these, GitHub & SinaWeibo have just a 'name'
+                    // The other providers use one of these, GitHub & SinaWeibo have just a 'name'.
                     firstName = extProfile['first-name'] || extProfile.first_name || extProfile.name;
                     lastName = extProfile['last-name'] || extProfile.last_name || extProfile.name;
                 }
-                // NOw the various email addresses, let's start with the simple one's
+                // Simple email addresses.
                 email =  extProfile['email-address'] || extProfile.email;
                 if(!email){
                     var emails = extProfile.emails;
                     // Google comes with an array
                     if (emails && emails.length) {
-                        //first element of the array would be the account email according to Google:
+                        //First element of the array is the account email according to Google.
                         profile.setEmail(extProfile.emails[0].value);
-                    // while MS comes with an object
+                    // While MS comes with an object.
                     }else{
                         email = emails['preferred'] || extProfile['emails.account'] || extProfile['emails.personal'] ||
                             extProfile['emails.business'];
@@ -458,11 +456,11 @@ function getSinaWeiboAccountInfo(accessToken, userId){
 }
 
 /**
- * Internal helper to finish the OAuth login
+ * Internal helper to finish the OAuth login.
  */
 function finishOAuthLogin()
 {
-    // to continue to the destination (preserved in the session before InitiateOAuthLogin pipelet)
+    // To continue to the destination that is already preserved in the session.
     var location = session.custom.ContinuationURL;
     delete session.custom.ContinuationURL;
     response.redirect(location);

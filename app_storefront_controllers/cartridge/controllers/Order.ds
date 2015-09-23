@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Manages the order history of a registered user.
+ * This controller manages the order history of a registered user.
  *
  * @module controllers/Order
  */
@@ -47,7 +47,7 @@ function history()
 
 
 /**
- * Renders the order detail page
+ * Renders the order detail page.
  */
 function orders()
 {
@@ -67,8 +67,8 @@ function orders()
 
 
 /**
- * Renders a page with details of a single order. The pipeline is intended to
- * render the order details by the UUID of the order, therefore can also be used
+ * Renders a page with details of a single order. This function
+ * renders the order details by the UUID of the order, therefore it can also be used
  * for unregistered customers to track the status of their orders.
  */
 function track()

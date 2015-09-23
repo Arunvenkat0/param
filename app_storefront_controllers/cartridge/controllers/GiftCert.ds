@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Gift Certificate purchase related business logic
+ * This controller implements gift certificate purchase business logic.
  *
  * @module controllers/GiftCert
  */
@@ -93,6 +93,8 @@ function showError(args)
 
 
 /**
+ * Assigns values from the gift certificate line item to the giftcert.purchase form
+ * and renders an updated version of the giftcertepurchase template. 
  * Parameters - GiftCertificateLineItemID: UUID of line item for gift
  * certificate to edit in basket.
  */
@@ -162,6 +164,7 @@ function checkBalance()
 
 
 /**
+ * Adds a gift certificate to the basket. 
  * Parameters - post of giftcert.purchase
  */
 function addToBasket()
@@ -170,6 +173,7 @@ function addToBasket()
 }
 
 /**
+ * Updates the gift certificate in the basket.
  * Parameters - post of giftcert.purchase
  */
 function update()
@@ -179,13 +183,13 @@ function update()
 
 /**
  * Internal helper which creates/updates the GiftCert
- * @param  {function} action The gift certificat action to execute
+ * @param  {function} action The gift certificate action to execute.
  */
 function processAddToBasket(action)
 {
     var purchaseForm = app.getForm('giftcert.purchase');
 	
-    // Validate confirmation of email address
+    // Validates confirmation of email address.
     var recipientEmailForm = purchaseForm.get('recipientEmail');
     var confirmRecipientEmailForm = purchaseForm.get('confirmRecipientEmail');
       
@@ -193,13 +197,13 @@ function processAddToBasket(action)
         confirmRecipientEmailForm.invalidate('giftcert.confirmrecipientemailvalueerror');
     }
 
-    // Validate amount in range
+    // Validates amount in range.
     var amountForm = purchaseForm.get('amount');
     if (amountForm.valid() && ((amountForm.value() < 5) || (amountForm.value() > 5000))) {
         amountForm.invalidate('giftcert.amountvalueerror');
     }
 
-    // Extract any error messages from validation
+    // Extracts any error messages from validation.
     var formErrors = new HashMap();
     for (var i = 0; i < purchaseForm.object.getChildCount(); i++) {
         var field = form[i];

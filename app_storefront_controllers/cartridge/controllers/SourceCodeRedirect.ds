@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * The handler module for a source code redirect.
+ * This controller is the handler module for a source code redirect.
  *
  * @module controllers/SourceCodeRedirect
  */

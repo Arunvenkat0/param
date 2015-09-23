@@ -1,6 +1,9 @@
 'use strict';
 
-/** @module models/AddressModel */
+/** 
+ * Model for address functionality.
+ * @module models/AddressModel
+ */
 
 /* API Includes */
 var AbstractModel = require('./AbstractModel');
@@ -21,6 +24,7 @@ var AddressModel = AbstractModel.extend(
      * Note that the deletion will fail in case the address is still associated with a product list
      *
      * @transactional
+     * @alias module:models/AddressModel~AddressModel/remove
      * @return {Boolean} true if the address was successfully deleted, false otherwise
      */
     remove : function () {
@@ -48,6 +52,7 @@ var AddressModel = AbstractModel.extend(
 /**
  * Use this method to get a new instance for a given address or address ID.
  *
+ * @alias module:models/AddressModel~AddressModel/get
  * @param parameter {dw.order.OrderAddress|dw.customer.CustomerAddress|String} The address object to enhance/wrap or an address ID
  * @returns {module:models/AddressModel~AddressModel}
  */
@@ -66,6 +71,7 @@ Address.get = function (parameter) {
  * Creates a new address.
  *
  * @transactional
+ * @alias module:models/AddressModel~AddressModel/create
  * @param {dw.web.FormGroup} [addressForm] The form which is used to update the address
  * @returns {module:models/AddressModel~AddressModel} The created address
  */
@@ -94,6 +100,7 @@ AddressModel.create = function(addressForm) {
  * Updates an existing address using the given form group.
  *
  * @transactional
+ * @alias module:models/AddressModel~AddressModel/update
  * @param {dw.web.FormGroup} [addressForm] The form which is used to update the address
  * @returns {module:models/AddressModel~AddressModel} The updated address
  */
@@ -132,6 +139,7 @@ AddressModel.update = function (addressId, addressForm) {
  * Note that the deletion will fail in case the address is still associated with a product list
  *
  * @transactional
+ * @alias module:models/AddressModel~AddressModel/remove
  * @param {String} addressId The ID of the address to delete
  * @return {Boolean} true if the address was successfully deleted, false otherwise
  * @see module:models/AddressModel~AddressModel#remove

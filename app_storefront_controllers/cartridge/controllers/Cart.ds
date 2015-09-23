@@ -1,8 +1,8 @@
 'use strict';
 
 /**
- * Controller implementing cart related functionality like add to / remove from cart for products, coupons, product list
- * items etc.
+ * This controller provides functions to add and remove products and coupons in the cart.
+ * Also provides functions for the continue shopping button and minicart.
  *
  * @module controllers/Cart
  */
@@ -35,7 +35,7 @@ function continueShopping() {
 }
 
 /**
- * Renders the basket content.
+ * Invalidates the login and shipment forms. Renders the basket content.
  */
 function show() {
     var cartForm = app.getForm('cart');
@@ -54,12 +54,13 @@ function show() {
  * Form handler for the cart form.
  */
 function submitForm() {
-    // we have no existing state, so resolve the basket again
+    // There is no existing state, so resolve the basket again.
     var cart, formResult, cartForm, cartAsset, pageMeta;
     cartForm = app.getForm('cart');
     cart = app.getModel('Cart').goc();
 
     formResult = cartForm.handleAction({
+        //Add a coupon if a coupon was entered correctly and is active.
         'addCoupon': function(formgroup) {
             var status, result;
             if (formgroup.couponCode.htmlValue) {
@@ -89,7 +90,7 @@ function submitForm() {
 
         },
         'calculateTotal': function(formgroup) {
-            // nothing to do here as re-calculation happens during view anyways
+            // Nothing to do here as re-calculation happens during view anyways
             return {
                 cart: cart
             };
@@ -216,7 +217,6 @@ function submitForm() {
             };
         },
         'error': function() {
-            // no special error handling in case the form is invalid
             return null;
         }
     });
@@ -252,7 +252,7 @@ function addProduct() {
         return;
     }
 
-    // update product lineitem
+    // Updates a product line item.
     if (params.uuid.stringValue) {
         var lineItem = cart.getProductLineItemByUUID(params.uuid.stringValue);
         if (lineItem) {
@@ -272,11 +272,11 @@ function addProduct() {
             app.getView('Cart', {Basket: cart}).render('checkout/cart/cart');
         }
     } else if (params.plid.stringValue) {
-        // add product list item
+        // Adds a product to a product list.
         var productList = ProductListMgr.getProductList(params.plid.stringValue);
         cart.addProductListItem(productList && productList.getItem(params.itemid.stringValue), params.Quantity.doubleValue, params.cgid.value);
     } else {
-        // add product
+        // Adds a product.
         var product = Product.get(params.pid.stringValue);
         var previousBonusDiscountLineItems = cart.getBonusDiscountLineItems();
 
@@ -299,7 +299,7 @@ function addProduct() {
             cart.addProductItem(product.object, params.Quantity.doubleValue, params.cgid.value, productOptionModel);
         }
 
-        // When adding a new product to the cart check to see if it has triggered a new bonus discount line item.
+        // When adding a new product to the cart, check to see if it has triggered a new bonus discount line item.
         newBonusDiscountLineItem = cart.getNewBonusDiscountLineItem(previousBonusDiscountLineItems);
     }
 
@@ -314,7 +314,7 @@ function addProduct() {
 }
 
 /**
- * The cart page provides various actions to be performed, e.g. line item editing, coupon redemption etc.
+ * Displays the current items in the cart in the minicart panel.
  */
 function miniCart() {
     var Product = app.getModel('Product');
@@ -348,7 +348,7 @@ function addToWishlist() {
 }
 
 /**
- * Add bonus product to cart.
+ * Adds bonus product to cart.
  */
 function addBonusProductJson() {
     var h, i, j, cart, data, productsJSON, bonusDiscountLineItem, product, lineItem, childPids, childProduct, ScriptResult, foundLineItem, Product;
@@ -452,7 +452,7 @@ function addCouponJson() {
 */
 
 /*
-* Web exposed methods
+* Exposed methods.
 */
 /** @see module:controllers/Cart~addProduct */
 exports.AddProduct = guard.ensure(['post'], addProduct);

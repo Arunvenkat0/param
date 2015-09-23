@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Default entry point when www.mydomain.com is opened
+ * Default entry point when www.mydomain.com is opened.
  *
  * @module controllers/Default
  */
