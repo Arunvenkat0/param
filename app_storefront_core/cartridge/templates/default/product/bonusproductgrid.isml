@@ -38,8 +38,13 @@
 		<isloop items="${pdict.BonusDiscountLineItem.bonusProducts}" var="LoopProductHit">
 			<isset name="hasDefaultVariant" value="${!empty(LoopProductHit.variationModel)}" scope="page"/>
 			<isset name="Product" value="${hasDefaultVariant ? LoopProductHit : LoopProductHit.variationModel.defaultVariant}" scope="pdict"/>
-
-			<div class="bonus-product-item" id="${'item-'+pdict.Product.UUID}">
+			
+			<isscript>
+				var ProductUtils = require('~/cartridge/scripts/product/ProductUtils.js');
+				var productType = ProductUtils.getProductType(pdict.Product);
+			</isscript>
+			
+			<div class="bonus-product-item" id="${'item-'+pdict.Product.UUID}" data-producttype="${productType}">
 				<isinclude template="product/components/bonusproduct"/>
 			</div>
 		</isloop>

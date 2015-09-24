@@ -61,7 +61,7 @@ var selectedItemTemplate = function (data) {
 
 // hide swatches that are not selected or not part of a Product Variation Group
 var hideSwatches = function () {
-	$('.bonus-product-item .swatches li').not('.selected').not('.variation-group-value').hide();
+	$('.bonus-product-item:not([data-producttype="master"]) .swatches li').not('.selected').not('.variation-group-value').hide();
 	// prevent unselecting the selected variant
 	$('.bonus-product-item .swatches .selected').on('click', function () {
 		return false;
