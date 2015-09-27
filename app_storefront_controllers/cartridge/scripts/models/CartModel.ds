@@ -15,6 +15,7 @@ var Money = require('dw/value/Money');
 var MultiShippingLogger = dw.system.Logger.getLogger("multishipping");
 var PaymentInstrument = require('dw/order/PaymentInstrument');
 var PaymentMgr = require('dw/order/PaymentMgr');
+var Pipelet = require('dw/system/Pipelet');
 var Product = require('~/cartridge/scripts/models/ProductModel');
 var ProductInventoryMgr = require('dw/catalog/ProductInventoryMgr');
 var PromotionMgr = require('dw/campaign/PromotionMgr');
@@ -32,9 +33,8 @@ var UUIDUtils = require('dw/util/UUIDUtils');
  *
  * @param {dw.order.Basket} obj The basket object to enhance/wrap.
  */
-var CartModel = AbstractModel.extend(
+var CartModel = AbstractModel.extend({
     /** @lends module:models/CartModel~CartModel.prototype */
-    {
         /**
          * Triggers the cart calculation by executing the hook 'dw.ocapi.shop.basket.calculate'.
          *
@@ -55,25 +55,25 @@ var CartModel = AbstractModel.extend(
         addProductListItem : function (productListItem, quantity, cgid) {
 
             if (productListItem) {
-			    var cart = this;
-	
-			    Transaction.wrap(function() {
-	                var productOptionSelections = Product.get(productListItem.getProduct()).updateOptionSelection(request.httpParameterMap);
-	
-	                // TODO
-	                var AddProductToBasketResult = new dw.system.Pipelet('AddProductToBasket').execute({
-	                    Basket             : cart.object,
-	                    ProductOptionModel : productOptionSelections,
-	                    Quantity           : quantity,
-	                    Category           : dw.catalog.CatalogMgr.getCategory(cgid),
-	                    ProductListItem    : productListItem
-	                });
-	                if (AddProductToBasketResult.result === PIPELET_ERROR) {
-	                    return;
-	                }
-	
-	                cart.calculate();
-			    });
+                var cart = this;
+
+                Transaction.wrap(function() {
+                    var productOptionSelections = Product.get(productListItem.getProduct()).updateOptionSelection(request.httpParameterMap);
+
+                    // TODO
+                    var AddProductToBasketResult = new Pipelet('AddProductToBasket').execute({
+                        Basket             : cart.object,
+                        ProductOptionModel : productOptionSelections,
+                        Quantity           : quantity,
+                        Category           : dw.catalog.CatalogMgr.getCategory(cgid),
+                        ProductListItem    : productListItem
+                    });
+                    if (AddProductToBasketResult.result === PIPELET_ERROR) {
+                        return;
+                    }
+
+                    cart.calculate();
+                });
             }
         },
 
@@ -87,55 +87,55 @@ var CartModel = AbstractModel.extend(
          * @param {dw.catalog.ProductOptionModel} productOptionModel - The option model of the product that is to be added to the basket.
          */
         addProductItem : function (product, quantity, cgid, productOptionModel) {
-		    var cart = this;
-		    Transaction.wrap(function() {
-				var i;
-	            if (product) {
+            var cart = this;
+            Transaction.wrap(function() {
+                var i;
+                if (product) {
 
-	                var AddProductToBasketResult = new dw.system.Pipelet('AddProductToBasket').execute({
-	                    Basket             : cart.object,
-	                    Product            : product,
-	                    ProductOptionModel : productOptionModel,
-	                    Quantity           : quantity,
-	                    Category           : dw.catalog.CatalogMgr.getCategory(cgid)
-	                });
+                    var AddProductToBasketResult = new Pipelet('AddProductToBasket').execute({
+                        Basket             : cart.object,
+                        Product            : product,
+                        ProductOptionModel : productOptionModel,
+                        Quantity           : quantity,
+                        Category           : dw.catalog.CatalogMgr.getCategory(cgid)
+                    });
 
-	                if (AddProductToBasketResult.result === PIPELET_ERROR) {
-	                    return;
-	                }
+                    if (AddProductToBasketResult.result === PIPELET_ERROR) {
+                        return;
+                    }
 
-	                if (product.bundle) {
-	                    /**
-	                     * By default, when a bundle is added to cart all its sub products gets added too, but if those products happens to be
-	                     * variants then we have to manually replace the master products with the selected variants which gets passed in the
-	                     * http params as childPids along with any options. Params: CurrentHttpParameterMap.childPids - comma separated list of
-	                     * pids of the bundled products which are variations
-	                     */
-	                    if (request.httpParameterMap.childPids.stringValue) {
-	                        var childPids = request.httpParameterMap.childPids.stringValue.split(',');
+                    if (product.bundle) {
+                        /**
+                         * By default, when a bundle is added to cart all its sub products gets added too, but if those products happens to be
+                         * variants then we have to manually replace the master products with the selected variants which gets passed in the
+                         * http params as childPids along with any options. Params: CurrentHttpParameterMap.childPids - comma separated list of
+                         * pids of the bundled products which are variations
+                         */
+                        if (request.httpParameterMap.childPids.stringValue) {
+                            var childPids = request.httpParameterMap.childPids.stringValue.split(',');
 
-	                        for (i = 0; i < childPids.length; i++) {
-	                            var childProduct = Product.get(childPids[i]).object;
+                            for (i = 0; i < childPids.length; i++) {
+                                var childProduct = Product.get(childPids[i]).object;
 
-	                            if (childProduct) {
-	                                // why is this needed ?
-	                                childProduct.updateOptionSelection(request.httpParameterMap);
+                                if (childProduct) {
+                                    // why is this needed ?
+                                    childProduct.updateOptionSelection(request.httpParameterMap);
 
-	                                var foundLineItem = null;
-	                                foundLineItem = this.getBundledProductLineItemByPID(lineItem, (childProduct.isVariant() ? childProduct.masterProduct.ID : childProduct.ID));
+                                    var foundLineItem = null;
+                                    foundLineItem = this.getBundledProductLineItemByPID(lineItem, (childProduct.isVariant() ? childProduct.masterProduct.ID : childProduct.ID));
 
-	                                if (foundLineItem) {
-	                                    foundLineItem.replaceProduct(childProduct);
-	                                }
-	                            }
-	                        }
-	                    }
-	                }
+                                    if (foundLineItem) {
+                                        foundLineItem.replaceProduct(childProduct);
+                                    }
+                                }
+                            }
+                        }
+                    }
 
-	                cart.calculate();
+                    cart.calculate();
 
-	            }
-			});
+                }
+            });
         },
 
         /**
@@ -181,7 +181,7 @@ var CartModel = AbstractModel.extend(
         addCoupon : function (couponCode) {
             if (couponCode) {
 
-                var AddCouponToBasket2Result = new dw.system.Pipelet('AddCouponToBasket2').execute({
+                var AddCouponToBasket2Result = new Pipelet('AddCouponToBasket2').execute({
                     Basket     : this.object,
                     CouponCode : couponCode
                 });
@@ -213,7 +213,7 @@ var CartModel = AbstractModel.extend(
         addBonusProduct : function (bonusDiscountLineItem, product, selectedOptions, quantity) {
             // var productModel = Product.get(product);
             // productModel.updateOptionSelection();
-            var ScriptResult = new dw.system.Pipelet('Script', {
+            var ScriptResult = new Pipelet('Script', {
                 Transactional : false,
                 OnError       : 'PIPELET_ERROR',
                 ScriptFile    : 'cart/UpdateProductOptionSelections.ds'
@@ -234,7 +234,7 @@ var CartModel = AbstractModel.extend(
         removeGiftCertificateLineItem : function (giftCertificateLineItem) {
 
             // TODO - add check whether the given lineitem actually belongs to this cart object
-            new dw.system.Pipelet('RemoveGiftCertificateLineItem').execute({
+            new Pipelet('RemoveGiftCertificateLineItem').execute({
                 GiftCertificateLineItem : giftCertificateLineItem
             });
 
@@ -351,8 +351,7 @@ var CartModel = AbstractModel.extend(
                             pli.custom.fromStoreId = store.ID;
                             pli.setProductInventoryList(storeinventory);
 
-                        }
-                        else {
+                        } else {
                             //the in store line item will be reset to a regular home delivery item.
                             pli.custom.fromStoreId = '';
                             pli.setProductInventoryList(null);
@@ -393,16 +392,14 @@ var CartModel = AbstractModel.extend(
          * @param {dw.catalog.ProductOptionModel} productOptionModel - The option model of the product that is to be added to the basket.
          */
         updateLineItem : function (lineItem, product, quantity, productOptionModel) {
+            var optionValues = productOptionModel.getOptions();
 
-            // lineItem.replaceProduct(product);
-            // lineItem.setQuantityValue(quantity);
-            // but how to set the option model?
-            new dw.system.Pipelet('ReplaceLineItemProduct').execute({
-                ProductLineItem    : lineItem,
-                NewProduct         : product,
-                Quantity           : quantity,
-                ProductOptionModel : productOptionModel
-            });
+            lineItem.replaceProduct(product);
+            lineItem.setQuantityValue(quantity);
+
+            if (optionValues.length) {
+                lineItem.updateOptionValue(optionValues[0]);
+            }
 
             if (product.isBundle()) {
 
@@ -451,7 +448,7 @@ var CartModel = AbstractModel.extend(
          */
         validateForCheckout : function () {
 
-            var result = new dw.system.Pipelet('Script', {
+            var result = new Pipelet('Script', {
                 ScriptFile    : 'cart/ValidateCartForCheckout.ds',
                 Transactional : false
             }).execute({
@@ -572,8 +569,7 @@ var CartModel = AbstractModel.extend(
                     counter++;
                     candidateID = baseID + '' + counter;
                     shipment = null;
-                }
-                else {
+                } else {
                     return candidateID;
                 }
             }
@@ -630,8 +626,7 @@ var CartModel = AbstractModel.extend(
                     if (pli.custom.fromStoreId === pli.shipment.custom.fromStoreId) {
                         if (pli.shipment.shippingAddress) {
                             continue;
-                        }
-                        else {
+                        } else {
                             //create the shipment address to reflect the new store address
                             shippingAddress = new TransientAddress();
                             storeObject = StoreMgr.getStore(pli.custom.fromStoreId);
@@ -639,8 +634,7 @@ var CartModel = AbstractModel.extend(
                             shippingAddress.storeAddressTo(orderAddress, storeObject);
                             continue;
                         }
-                    }
-                    else {
+                    } else {
                         storeObject = StoreMgr.getStore(pli.custom.fromStoreId);
                         //change the shipment address to reflect the new store address
                         pli.shipment.shippingAddress.setFirstName('');
@@ -672,8 +666,7 @@ var CartModel = AbstractModel.extend(
 
                     }
 
-                }
-                else {
+                } else {
                     //create a new shipment to put this pli in
                     var shipment = null;
                     shipment = this.createShipment(UUIDUtils.createUUID());
@@ -785,8 +778,7 @@ var CartModel = AbstractModel.extend(
                 var baseShippingAdjusted = null;
                 if (priceAdjTotal >= 0) {
                     baseShippingAdjusted = baseShipping.subtract(priceAdjTotal);
-                }
-                else {
+                } else {
                     baseShippingAdjusted = baseShipping.add(priceAdjTotal);
                 }
 
@@ -832,8 +824,7 @@ var CartModel = AbstractModel.extend(
                     if (!method.ID.equals(shippingMethodID)) {
                         continue;
                     }
-                }
-                else {
+                } else {
                     if (method !== shippingMethod) {
                         continue;
                     }
@@ -849,12 +840,10 @@ var CartModel = AbstractModel.extend(
             if (shippingMethods.contains(defaultShippingMethod)) {
                 // 2) Set the default shipping method if it is applicable.
                 shipment.setShippingMethod(defaultShippingMethod);
-            }
-            else if (shippingMethods.length > 0) {
+            } else if (shippingMethods.length > 0) {
                 // 3) Set the first shipping method in the applicable list.
                 shipment.setShippingMethod(shippingMethods.iterator().next());
-            }
-            else {
+            } else {
                 // 4) Invalidate the current shipping method selection.
                 shipment.setShippingMethod(null);
             }
@@ -995,8 +984,7 @@ var CartModel = AbstractModel.extend(
                 // doesn't cover the order we need to error out.
                 if (giftCertTotal < orderTotal) {
                     return false;
-                }
-                else {
+                } else {
                     return true;
                 }
             }
@@ -1009,8 +997,7 @@ var CartModel = AbstractModel.extend(
             if (amount.value <= 0.0) {
                 var zero = new Money(0, amount.getCurrencyCode());
                 nonGCPaymentInstrument.getPaymentTransaction().setAmount(zero);
-            }
-            else {
+            } else {
                 nonGCPaymentInstrument.getPaymentTransaction().setAmount(amount);
             }
 
@@ -1080,12 +1067,10 @@ var CartModel = AbstractModel.extend(
                     if (productRelations.containsKey(productID)) {
                         var quantity = productRelations.get(productID);
                         productRelations.put(productID, quantity + 1);
-                    }
-                    else {
+                    } else {
                         productRelations.put(productID, 1);
                     }
-                }
-                else {
+                } else {
                     var productRelations = new HashMap();
                     productRelations.put(productID, 1);
                     addressRelations.put(selectedAddress, productRelations);
@@ -1120,8 +1105,7 @@ var CartModel = AbstractModel.extend(
                 if (!defaultShippingSet) {
                     shipment = this.getDefaultShipment();
                     defaultShippingSet = true;
-                }
-                else {
+                } else {
                     shipment = this.createShipment(address.UUID);
                 }
                 orderAddress = shipment.createShippingAddress();
@@ -1224,8 +1208,7 @@ var CartModel = AbstractModel.extend(
                         if (card && cards.contains(card)) {
                             continue;
                         }
-                    }
-                    else {
+                    } else {
                         // continue, if method is applicable
                         continue;
                     }
@@ -1241,8 +1224,7 @@ var CartModel = AbstractModel.extend(
                     InvalidPaymentInstruments : invalidPaymentInstruments,
                     ValidPaymentInstruments   : validPaymentInstruments
                 };
-            }
-            else {
+            } else {
                 return {
                     ValidPaymentInstruments : validPaymentInstruments
                 };
@@ -1492,15 +1474,14 @@ var CartModel = AbstractModel.extend(
          * @returns {dw.order.Order} The created order in status CREATED or null if an error occured.
          */
         createOrder : function () {
-            var CreateOrder2Result = new dw.system.Pipelet('CreateOrder2', {
+            var CreateOrder2Result = new Pipelet('CreateOrder2', {
                 CreateCustomerNo : true
             }).execute({
                     Basket : this.object
                 });
             if (CreateOrder2Result.result === PIPELET_ERROR) {
                 return null;
-            }
-            else {
+            } else {
                 return CreateOrder2Result.Order;
             }
         },
@@ -1544,14 +1525,13 @@ CartModel.get = function (parameter) {
     var obj = null;
 
     if (!parameter) {
-        var GetBasketResult = new dw.system.Pipelet('GetBasket', {
+        var GetBasketResult = new Pipelet('GetBasket', {
             Create : false
         }).execute();
         if (GetBasketResult.result !== PIPELET_ERROR) {
             obj = GetBasketResult.Basket;
         }
-    }
-    else if (typeof parameter === 'object') {
+    } else if (typeof parameter === 'object') {
         obj = parameter;
     }
     return (obj !== null) ? new CartModel(obj) : null;
@@ -1565,7 +1545,7 @@ CartModel.get = function (parameter) {
 CartModel.goc = function () {
     var obj = null;
 
-    var GetBasketResult = new dw.system.Pipelet('GetBasket', {
+    var GetBasketResult = new Pipelet('GetBasket', {
         Create : true
     }).execute();
 

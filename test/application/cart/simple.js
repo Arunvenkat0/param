@@ -63,6 +63,12 @@ describe('Cart - Simple', () => {
 				.then(size => assert.equal(size, 'Short'))
 	);
 
+	it('should change size', () =>
+		cartPage
+			.updateSizeByRow(1, 5)
+			.then(size => assert.equal(size, '42'))
+	);
+
 	it('should update quantity in cart', () =>
 		cartPage
 			.updateQuantityByRow(1, 3)
@@ -72,13 +78,9 @@ describe('Cart - Simple', () => {
 	it('should update price in cart when quantity updated', () =>
 		cartPage
 			.getPriceByRow(1)
-			.then(updatedItemSubTotal => assert.equal(updatedItemSubTotal, '$899.97'))
-	);
-
-	it('should change size', () =>
-		cartPage
-			.updateSizeByRow(1, 5)
-			.then(size => assert.equal(size, '42'))
+			.then(updatedItemSubTotal =>
+				assert.equal(updatedItemSubTotal, '$899.97')
+			)
 	);
 
 	it('should remove product from cart', () =>

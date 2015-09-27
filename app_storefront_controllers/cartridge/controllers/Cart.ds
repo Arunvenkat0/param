@@ -10,6 +10,7 @@
 /* API Includes */
 var ArrayList = require('dw/util/ArrayList');
 var ISML = require('dw/template/ISML');
+var Pipelet = require('dw/system/Pipelet');
 var ProductListMgr = require('dw/customer/ProductListMgr');
 var Resource = require('dw/web/Resource');
 var Transaction = require('dw/system/Transaction');
@@ -43,8 +44,8 @@ function show() {
     cartForm.get('shipments').invalidate();
 
     app.getView('Cart', {
-        cart : app.getModel('Cart').get(),
-        RegistrationStatus : false
+        cart: app.getModel('Cart').get(),
+        RegistrationStatus: false
     }).render('checkout/cart/cart');
 
 }
@@ -59,7 +60,7 @@ function submitForm() {
     cart = app.getModel('Cart').goc();
 
     formResult = cartForm.handleAction({
-        'addCoupon' : function(formgroup) {
+        'addCoupon': function(formgroup) {
             var status, result;
             if (formgroup.couponCode.htmlValue) {
 
@@ -69,31 +70,31 @@ function submitForm() {
 
                 if (status) {
                     result = {
-                        cart : cart,
-                        CouponStatus : status
+                        cart: cart,
+                        CouponStatus: status
                     };
                 } else {
                     result = {
-                        cart : cart,
-                        CouponError : 'NO_ACTIVE_PROMOTION'
+                        cart: cart,
+                        CouponError: 'NO_ACTIVE_PROMOTION'
                     };
                 }
             } else {
                 result = {
-                    cart : cart,
-                    CouponError : 'COUPON_CODE_MISSING'
+                    cart: cart,
+                    CouponError: 'COUPON_CODE_MISSING'
                 };
             }
             return result;
 
         },
-        'calculateTotal' : function(formgroup) {
+        'calculateTotal': function(formgroup) {
             // nothing to do here as re-calculation happens during view anyways
             return {
-                cart : cart
+                cart: cart
             };
         },
-        'checkoutCart' : function(formgroup) {
+        'checkoutCart': function(formgroup) {
             var validationResult, result;
 
             validationResult = cart.validateForCheckout();
@@ -104,45 +105,45 @@ function submitForm() {
 
             } else {
                 result = {
-                    cart : cart,
-                    BasketStatus : validationResult.BasketStatus,
-                    EnableCheckout : validationResult.EnableCheckout
+                    cart: cart,
+                    BasketStatus: validationResult.BasketStatus,
+                    EnableCheckout: validationResult.EnableCheckout
                 };
             }
             return result;
         },
-        'continueShopping' : function(formgroup) {
+        'continueShopping': function(formgroup) {
             continueShopping();
             return null;
         },
-        'deleteCoupon' : function(formgroup) {
+        'deleteCoupon': function(formgroup) {
             Transaction.wrap(function() {
                 cart.removeCouponLineItem(formgroup.getTriggeredAction().object);
             });
 
             return {
-                cart : cart
+                cart: cart
             };
         },
-        'deleteGiftCertificate' : function(formgroup) {
+        'deleteGiftCertificate': function(formgroup) {
             Transaction.wrap(function() {
                 cart.removeGiftCertificateLineItem(formgroup.getTriggeredAction().object);
             });
 
             return {
-                cart : cart
+                cart: cart
             };
         },
-        'deleteProduct' : function(formgroup) {
+        'deleteProduct': function(formgroup) {
             Transaction.wrap(function() {
                 cart.removeProductLineItem(formgroup.getTriggeredAction().object);
             });
 
             return {
-                cart : cart
+                cart: cart
             };
         },
-        'editLineItem' : function(formgroup) {
+        'editLineItem': function(formgroup) {
             var product, productOptionModel;
             product = app.getModel('Product').get(request.httpParameterMap.pid.stringValue).object;
             productOptionModel = product.updateOptionSelection(request.httpParameterMap);
@@ -155,7 +156,7 @@ function submitForm() {
             ISML.renderTemplate('checkout/cart/refreshcart');
             return null;
         },
-        'login' : function(formgroup) {
+        'login': function() {
             // TODO should not be processed here at all
             var success, result;
             success = app.getController('Login').Process();
@@ -164,18 +165,19 @@ function submitForm() {
                 response.redirect(URLUtils.https('COCustomer-Start'));
             } else if (!success) {
                 result = {
-                    cart : cart
+                    cart: cart
                 };
             }
             return result;
         },
-        'logout' : function(formgroup) {
-            new dw.system.Pipelet('LogoutCustomer').execute();
+        'logout': function() {
+            var CustomerMgr = require('dw/customer/CustomerMgr');
+            CustomerMgr.logoutCustomer();
             return {
-                cart : cart
+                cart: cart
             };
         },
-        'register' : function(formgroup) {
+        'register': function() {
             app.getController('Account').StartRegister();
             Transaction.wrap(function() {
                 cart.calculate();
@@ -183,20 +185,20 @@ function submitForm() {
 
             return null;
         },
-        'unregistered' : function(formgroup) {
+        'unregistered': function() {
             app.getController('COShipping').Start();
             return null;
         },
-        'updateCart' : function(formgroup) {
+        'updateCart': function() {
 
             Transaction.wrap(function() {
-                var i, j, shipmentItem, item;
+                var shipmentItem, item;
 
                 // remove zero quantity line items
-                for ( i = 0; i < session.forms.cart.shipments.childCount; i += 1) {
+                for (var i=0; i < session.forms.cart.shipments.childCount; i++) {
                     shipmentItem = session.forms.cart.shipments[i];
 
-                    for ( j = 0; j < shipmentItem.items.childCount; j += 1) {
+                    for (var j=0; j < shipmentItem.items.childCount; j++) {
                         item = shipmentItem.items[j];
 
                         if (item.quantity.value === 0) {
@@ -210,10 +212,10 @@ function submitForm() {
             });
 
             return {
-                cart : cart
+                cart: cart
             };
         },
-        'error' : function(formgroup) {
+        'error': function() {
             // no special error handling in case the form is invalid
             return null;
         }
@@ -230,12 +232,15 @@ function submitForm() {
 }
 
 /**
- * Adds a product to the cart. Should be used only for simple UI.
+ * Adds a product to the cart.
  */
 function addProduct() {
-    var i, params, cart, lineItem, product, productOptionModel, productList, previousBonusDiscountLineItems, childPids, childQtys, counter, childProduct, childProductOptionModel, newBonusDiscountLineItem, template, Product;
-    params = request.httpParameterMap;
-    template = 'checkout/cart/minicart';
+    var cart = app.getModel('Cart').goc();
+    var params = request.httpParameterMap;
+    var format = params.format.stringValue.toLowerCase();
+    var Product = app.getModel('Product');
+    var template = 'checkout/cart/minicart';
+    var newBonusDiscountLineItem;
 
     if (params.source && params.source.stringValue === 'giftregistry' && params.cartAction && params.cartAction.stringValue === 'update') {
         app.getController('GiftRegistry').ReplaceProductListItem();
@@ -247,61 +252,50 @@ function addProduct() {
         return;
     }
 
-    cart = app.getModel('Cart').goc();
-
     // update product lineitem
     if (params.uuid.stringValue) {
-
-        lineItem = cart.getProductLineItemByUUID(params.uuid.stringValue);
-
+        var lineItem = cart.getProductLineItemByUUID(params.uuid.stringValue);
         if (lineItem) {
-
-            product = app.getModel('Product').get(request.httpParameterMap.pid.stringValue).object;
-            productOptionModel = product.updateOptionSelection(request.httpParameterMap);
+            var productModel = Product.get(request.httpParameterMap.pid.stringValue);
+            var product = productModel.object;
+            var quantity = parseInt(params.Quantity.value);
+            var productOptionModel = productModel.updateOptionSelection(request.httpParameterMap);
 
             Transaction.wrap(function() {
-                cart.updateLineItem(lineItem, product, productOptionModel);
+                cart.updateLineItem(lineItem, product, quantity, productOptionModel);
             });
 
-            if (params.format.stringValue.toLowerCase() === 'ajax') {
+            if (format === 'ajax') {
                 template = 'checkout/cart/refreshcart';
             }
         } else {
-
-            app.getView('Cart', {
-                Basket : cart
-            }).render('checkout/cart/cart');
-
+            app.getView('Cart', {Basket: cart}).render('checkout/cart/cart');
         }
     } else if (params.plid.stringValue) {
         // add product list item
-
-        productList = ProductListMgr.getProductList(params.plid.stringValue);
+        var productList = ProductListMgr.getProductList(params.plid.stringValue);
         cart.addProductListItem(productList && productList.getItem(params.itemid.stringValue), params.Quantity.doubleValue, params.cgid.value);
-
     } else {
         // add product
-        Product = app.getModel('Product');
+        var product = Product.get(params.pid.stringValue);
+        var previousBonusDiscountLineItems = cart.getBonusDiscountLineItems();
 
-        previousBonusDiscountLineItems = cart.getBonusDiscountLineItems();
-        product = Product.get(params.pid.stringValue);
+        if (product.object.isProductSet()) {
+            var childPids = params.childPids.stringValue.split(',');
+            var childQtys = params.childQtys.stringValue.split(',');
+            var counter = 0;
 
-        if (product.isProductSet()) {
-            childPids = params.childPids.stringValue.split(",");
-            childQtys = params.childQtys.stringValue.split(",");
-            counter = 0;
-
-            for ( i = 0; i < childPids.length; i += 1) {
-                childProduct = Product.get(childPids[i]);
+            for (var i=0; i < childPids.length; i++) {
+                var childProduct = Product.get(childPids[i]);
 
                 if (childProduct.object && !childProduct.isProductSet()) {
-                    childProductOptionModel = childProduct.updateOptionSelection(request.httpParameterMap);
+                    var childProductOptionModel = childProduct.updateOptionSelection(request.httpParameterMap);
                     cart.addProductItem(childProduct.object, parseInt(childQtys[counter], 10), params.cgid.value, childProductOptionModel);
                 }
-                counter += 1;
+                counter++;
             }
         } else {
-            productOptionModel = product.updateOptionSelection(request.httpParameterMap);
+            var productOptionModel = product.updateOptionSelection(request.httpParameterMap);
             cart.addProductItem(product.object, params.Quantity.doubleValue, params.cgid.value, productOptionModel);
         }
 
@@ -309,10 +303,10 @@ function addProduct() {
         newBonusDiscountLineItem = cart.getNewBonusDiscountLineItem(previousBonusDiscountLineItems);
     }
 
-    if (params.format.stringValue === 'ajax') {
+    if (format === 'ajax') {
         app.getView('Cart', {
-            cart : cart,
-            BonusDiscountLineItem : newBonusDiscountLineItem
+            cart: cart,
+            BonusDiscountLineItem: newBonusDiscountLineItem
         }).render(template);
     } else {
         response.redirect(URLUtils.url('Cart-Show'));
@@ -327,7 +321,7 @@ function miniCart() {
 
     var cart = app.getModel('Cart').get();
     app.getView({
-        Basket : cart ? cart.object : null
+        Basket: cart ? cart.object : null
     }).render('checkout/cart/minicart');
 
 }
@@ -347,8 +341,8 @@ function addToWishlist() {
     productList.addProduct(product, request.httpParameterMap.Quantity.doubleValue, productOptionModel);
 
     app.getView('Cart', {
-        cart : app.getModel('Cart').get(),
-        ProductAddedToWishlist : productID
+        cart: app.getModel('Cart').get(),
+        ProductAddedToWishlist: productID
     }).render('checkout/cart/cart');
 
 }
@@ -389,16 +383,18 @@ function addBonusProductJson() {
 
                     if (childProduct) {
 
-                        ScriptResult = new dw.system.Pipelet('Script', {
-                            Transactional : false,
-                            OnError : 'PIPELET_ERROR',
-                            ScriptFile : 'cart/UpdateProductOptionSelections.ds'
+                        // TODO: CommonJSify cart/UpdateProductOptionSelections.ds and import here
+                        ScriptResult = new Pipelet('Script', {
+                            Transactional: false,
+                            OnError: 'PIPELET_ERROR',
+                            ScriptFile: 'cart/UpdateProductOptionSelections.ds'
                         }).execute({
-                            SelectedOptions : new dw.util.ArrayList(productsJSON[i].options),
-                            Product : childProduct
+                            SelectedOptions: new ArrayList(productsJSON[i].options),
+                            Product: childProduct
                         });
 
-                        foundLineItem = cart.getBundledProductLineItemByPID(lineItem.getBundledProductLineItems(), (childProduct.isVariant() ? childProduct.masterProduct.ID : childProduct.ID));
+                        foundLineItem = cart.getBundledProductLineItemByPID(lineItem.getBundledProductLineItems(),
+                            (childProduct.isVariant() ? childProduct.masterProduct.ID : childProduct.ID));
 
                         if (foundLineItem) {
                             foundLineItem.replaceProduct(childProduct);
@@ -410,8 +406,8 @@ function addBonusProductJson() {
             Transaction.rollback();
 
             let r = require('~/cartridge/scripts/util/Response');
-			r.renderJSON({
-                success : false
+            r.renderJSON({
+                success: false
             });
             return;
         }
@@ -422,7 +418,7 @@ function addBonusProductJson() {
 
     let r = require('~/cartridge/scripts/util/Response');
     r.renderJSON({
-        success : true
+        success: true
     });
 }
 
@@ -442,11 +438,11 @@ function addCouponJson() {
     if (request.httpParameterMap.format.stringValue === 'ajax') {
         let r = require('~/cartridge/scripts/util/Response');
         r.renderJSON({
-            status : couponStatus.code,
-            message : Resource.msgf('cart.' + couponStatus.code, 'checkout', null, couponCode),
-            success : !couponStatus.error,
-            baskettotal : cart.object.adjustedMerchandizeTotalGrossPrice.value,
-            CouponCode : couponCode
+            status: couponStatus.code,
+            message: Resource.msgf('cart.' + couponStatus.code, 'checkout', null, couponCode),
+            success: !couponStatus.error,
+            baskettotal: cart.object.adjustedMerchandizeTotalGrossPrice.value,
+            CouponCode: couponCode
         });
     }
 }
@@ -472,7 +468,7 @@ exports.AddCouponJson = guard.ensure(['get', 'https'], addCouponJson);
 exports.MiniCart = guard.ensure(['get'], miniCart);
 /** @see module:controllers/Cart~addToWishlist */
 exports.AddToWishlist = guard.ensure(['get', 'https', 'loggedIn'], addToWishlist, {
-    scope : 'wishlist'
+    scope: 'wishlist'
 });
 /** @see module:controllers/Cart~addBonusProductJson */
 exports.AddBonusProduct = guard.ensure(['post'], addBonusProductJson);

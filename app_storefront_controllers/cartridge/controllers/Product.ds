@@ -7,6 +7,8 @@
  * @module controllers/Product
  */
 
+var params = request.httpParameterMap;
+
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
@@ -17,22 +19,21 @@ var guard = require('~/cartridge/scripts/guard');
  */
 function show() {
 
-    var product = app.getModel('Product').get(request.httpParameterMap.pid.stringValue);
+    var product = app.getModel('Product').get(params.pid.stringValue);
 
     if (product.isVisible()) {
         require('~/cartridge/scripts/meta').update(product);
 
         var productView = app.getView('Product', {
-            product        : product,
-            DefaultVariant : product.getDefaultVariant()
+            product: product,
+            DefaultVariant: product.getDefaultVariant()
         });
 
-        productView.CurrentOptionModel = product.updateOptionSelection(request.httpParameterMap);
-        productView.CurrentVariationModel = product.updateVariationSelection(request.httpParameterMap);
+        productView.CurrentOptionModel = product.updateOptionSelection(params);
+        productView.CurrentVariationModel = product.updateVariationSelection(params);
 
         productView.render(product.getTemplate() || 'product/product');
-    }
-    else {
+    } else {
         // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
         // remote includes which the WA won't resolve
         response.setStatus(410);
@@ -48,20 +49,19 @@ function show() {
 function detail() {
 
     var Product = app.getModel('Product');
-    var product = Product.get(request.httpParameterMap.pid.stringValue);
+    var product = Product.get(params.pid.stringValue);
 
     if (product.isVisible()) {
         var productView = app.getView('Product', {
-            product        : product,
-            DefaultVariant : product.getDefaultVariant()
+            product: product,
+            DefaultVariant: product.getDefaultVariant()
         });
 
-        productView.CurrentOptionModel = product.updateOptionSelection(request.httpParameterMap);
-        productView.CurrentVariationModel = product.updateVariationSelection(request.httpParameterMap);
+        productView.CurrentOptionModel = product.updateOptionSelection(params);
+        productView.CurrentVariationModel = product.updateVariationSelection(params);
 
         productView.render(product.getTemplate() || 'product/productdetail');
-    }
-    else {
+    } else {
         // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
         // remote includes which the WA won't resolve
         response.setStatus(410);
@@ -78,14 +78,13 @@ function detail() {
 function getAvailability() {
 
     var Product = app.getModel('Product');
-    var product = Product.get(request.httpParameterMap.pid.stringValue);
+    var product = Product.get(params.pid.stringValue);
 
     if (product.isVisible()) {
-    	let r = require('~/cartridge/scripts/util/Response');
-    	
-        r.renderJSON(product.getAvailability(request.httpParameterMap.Quantity.stringValue));
-    }
-    else {
+        let r = require('~/cartridge/scripts/util/Response');
+
+        r.renderJSON(product.getAvailability(params.Quantity.stringValue));
+    } else {
         // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
         // remote includes which the WA won't resolve
         response.setStatus(410);
@@ -100,16 +99,16 @@ function getAvailability() {
 function hitTile() {
 
     var Product = app.getModel('Product');
-    var product = Product.get(request.httpParameterMap.pid.stringValue);
+    var product = Product.get(params.pid.stringValue);
 
     if (product.isVisible()) {
         var productView = app.getView('Product', {
-            product       : product,
-            showswatches  : true,
-            showpricing   : true,
-            showpromotion : true,
-            showrating    : true,
-            showcompare   : true
+            product: product,
+            showswatches: true,
+            showpricing: true,
+            showpromotion: true,
+            showrating: true,
+            showcompare: true
         });
 
         // special handling for dictionary key 'product' as the template requires it in lower case
@@ -127,12 +126,12 @@ function hitTile() {
  */
 function productNavigation() {
 
-    var params = request.httpParameterMap;
-
     var Product = app.getModel('Product');
     var product = Product.get(params.pid.stringValue);
 
     if (product.isVisible()) {
+        var PagingModel;
+        var productPagingModel;
 
         // construct the search based on the HTTP params & set the categoryID
         var Search = app.getModel('Search');
@@ -161,18 +160,17 @@ function productNavigation() {
         productSearchModel.search();
 
         // construct the paging model
-        var PagingModel = require('dw/web/PagingModel');
-        var productPagingModel = new PagingModel(productSearchModel.productSearchHits, productSearchModel.count);
+        PagingModel = require('dw/web/PagingModel');
+        productPagingModel = new PagingModel(productSearchModel.productSearchHits, productSearchModel.count);
         productPagingModel.setPageSize(3);
         productPagingModel.setStart(params.start.intValue - 2);
 
         app.getView({
-            ProductPagingModel  : productPagingModel,
-            ProductSearchResult : productSearchModel
+            ProductPagingModel: productPagingModel,
+            ProductSearchResult: productSearchModel
         }).render('search/productnav');
 
-    }
-    else {
+    } else {
         // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
         // remote includes which the WA won't resolve
         response.setStatus(410);
@@ -187,16 +185,15 @@ function productNavigation() {
 function variation() {
 
     var Product = app.getModel('Product');
-    var product = Product.get(request.httpParameterMap.pid.stringValue);
+    var product = Product.get(params.pid.stringValue);
 
     if (product.isVisible()) {
 
-        var currentVariationModel = product.updateVariationSelection(request.httpParameterMap);
+        var currentVariationModel = product.updateVariationSelection(params);
 
         var selectedVariant = currentVariationModel.getSelectedVariant();
-        if (selectedVariant)
-        {
-        	product = Product.get(selectedVariant);
+        if (selectedVariant) {
+            product = Product.get(selectedVariant);
         }
 
         // TODO this is apparently nowhere set to true..
@@ -207,40 +204,37 @@ function variation() {
             resetAttributes = false;
         }
 
-        if (request.httpParameterMap.source.stringValue === 'bonus') {
+        if (params.source.stringValue === 'bonus') {
             var Cart = app.getModel('Cart');
             var bonusDiscountLineItems = Cart.get().getBonusDiscountLineItems();
             var bonusDiscountLineItem = null;
 
             for (var i = 0; i < bonusDiscountLineItems.length; i++) {
-                if (bonusDiscountLineItems[i].UUID === request.httpParameterMap.bonusDiscountLineItemUUID.stringValue) {
+                if (bonusDiscountLineItems[i].UUID === params.bonusDiscountLineItemUUID.stringValue) {
                     bonusDiscountLineItem = bonusDiscountLineItems[i];
                     break;
                 }
             }
 
             app.getView('Product', {
-                product               : product,
-                CurrentVariationModel : currentVariationModel,
-                BonusDiscountLineItem : bonusDiscountLineItem
+                product: product,
+                CurrentVariationModel: currentVariationModel,
+                BonusDiscountLineItem: bonusDiscountLineItem
             }).render('product/components/bonusproduct');
-        }
-        else if (request.httpParameterMap.format.stringValue) {
+        } else if (params.format.stringValue) {
             app.getView('Product', {
-                product         : product,
-                GetImages       : true,
-                resetAttributes : resetAttributes,
-                CurrentVariationModel : currentVariationModel
+                product: product,
+                GetImages: true,
+                resetAttributes: resetAttributes,
+                CurrentVariationModel: currentVariationModel
             }).render('product/productcontent');
-        }
-        else {
+        } else {
             app.getView('Product', {
-                product               : product,
-                CurrentVariationModel : currentVariationModel
+                product: product,
+                CurrentVariationModel: currentVariationModel
             }).render('product/product');
         }
-    }
-    else {
+    } else {
         // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
         // remote includes which the WA won't resolve
         response.setStatus(410);
@@ -255,29 +249,27 @@ function variation() {
 function variationPS() {
 
     var Product = app.getModel('Product');
-    var product = Product.get(request.httpParameterMap.pid.stringValue);
+    var product = Product.get(params.pid.stringValue);
 
     if (product.isVisible()) {
 
         var productView = app.getView('Product', {
-            product : product
+            product: product
         });
 
-        var productVariationSelections = productView.getProductVariationSelections(request.httpParameterMap);
+        var productVariationSelections = productView.getProductVariationSelections(params);
         product = Product.get(productVariationSelections.SelectedProduct);
 
         if (product.isMaster()) {
             product = Product.get(product.getDefaultVariant());
         }
 
-        if (request.httpParameterMap.format.stringValue) {
-            app.getView('Product', {product : product}).render('product/components/productsetproduct');
+        if (params.format.stringValue) {
+            app.getView('Product', {product: product}).render('product/components/productsetproduct');
+        } else {
+            app.getView('Product', {product: product}).render('product/product');
         }
-        else {
-            app.getView('Product', {product : product}).render('product/product');
-        }
-    }
-    else {
+    } else {
         // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
         // remote includes which the WA won't resolve
         response.setStatus(410);
@@ -291,7 +283,7 @@ function variationPS() {
  */
 function includeLastVisited() {
     app.getView({
-        LastVisitedProducts : app.getModel('RecentlyViewedItems').getRecentlyViewedProducts(3)
+        LastVisitedProducts: app.getModel('RecentlyViewedItems').getRecentlyViewedProducts(3)
     }).render('product/lastvisited');
 }
 
@@ -304,14 +296,14 @@ function getBonusProducts() {
     var bonusDiscountLineItem = null;
 
     for (var i = 0; i < bonusDiscountLineItems.length; i++) {
-        if (bonusDiscountLineItems[i].UUID === request.httpParameterMap.bonusDiscountLineItemUUID.stringValue) {
+        if (bonusDiscountLineItems[i].UUID === params.bonusDiscountLineItemUUID.stringValue) {
             bonusDiscountLineItem = bonusDiscountLineItems[i];
             break;
         }
     }
 
     app.getView({
-        BonusDiscountLineItem : bonusDiscountLineItem
+        BonusDiscountLineItem: bonusDiscountLineItem
     }).render('product/bonusproductgrid');
 
 }
@@ -322,15 +314,14 @@ function getBonusProducts() {
 function getSetItem() {
 
     var Product = app.getModel('Product');
-    var product = Product.get(request.httpParameterMap.pid.stringValue);
+    var product = Product.get(params.pid.stringValue);
 
     if (product.isVisible()) {
         app.getView('Product', {
-            product : product,
-            isSet   : true
+            product: product,
+            isSet: true
         }).render('product/components/productsetproduct');
-    }
-    else {
+    } else {
         // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
         // remote includes which the WA won't resolve
         response.setStatus(410);
