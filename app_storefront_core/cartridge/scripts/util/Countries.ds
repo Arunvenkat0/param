@@ -47,7 +47,7 @@ function getCurrent(pdict) {
 	var currentLocale = Locale.getLocale(pdict.CurrentRequest.locale);
 	var country;
 	if (!currentLocale.country) {
-		return;
+		return countries[0]; // return the first in the list if the requested one is not available
 	}
 	for (var i = 0; i < countries.length; i++) {
 		var _country = countries[i];
@@ -56,7 +56,7 @@ function getCurrent(pdict) {
 			break;
 		}
 	}
-	return country;
+	return country ? country : countries[0];  // return the first in the list if the requested one is not available
 };
 
 exports.getCountries = getCountries;
