@@ -42,10 +42,10 @@
             <boost>2.0</boost>
         </searchable-attribute>
     </searchable-attributes>
-    <stopword-list xml:lang="x-default">
+    <stopword-list xml:lang="en-US">
         <stopwords>a, an, and, are, as, at, be, but, by, for, if, in, into, is, it, no, not, of, on, or, s, such, t, that, the, their, then, there, these, they, this, to, was, will, with, x</stopwords>
     </stopword-list>
-    <synonym-list xml:lang="x-default">
+    <synonym-list xml:lang="en-US">
         <synonyms>camera, digital camera, digitalcamera</synonyms>
         <synonyms>dresses, dress, -dress shirts, -shirts</synonyms>
         <synonyms>glove, gloves, mittens, mitten, mittans, mittans</synonyms>
@@ -54,7 +54,7 @@
         <synonyms>scarf, scarves</synonyms>
         <synonyms>tv, television, televisions, tv set, hdtv</synonyms>
     </synonym-list>
-    <hypernym-list xml:lang="x-default">
+    <hypernym-list xml:lang="en-US">
         <hypernym-rule>
             <hyponyms>boot</hyponyms>
             <hypernyms>shoe</hypernyms>
@@ -70,47 +70,47 @@
     </hypernym-list>
     <redirect-list>
         <redirect>
-            <keywords xml:lang="x-default">new arrivals, what's new, just in</keywords>
+            <keywords xml:lang="en-US">new arrivals, what's new, just in</keywords>
             <online-flag>true</online-flag>
             <category-redirect category-id="newarrivals"/>
         </redirect>
         <redirect>
-            <keywords xml:lang="x-default">about, about us, history</keywords>
+            <keywords xml:lang="en-US">about, about us, history</keywords>
             <online-flag>true</online-flag>
             <page-redirect page-id="about-us"/>
         </redirect>
         <redirect>
-            <keywords xml:lang="x-default">jobs, employment, careers</keywords>
+            <keywords xml:lang="en-US">jobs, employment, careers</keywords>
             <online-flag>true</online-flag>
             <page-redirect page-id="jobs-landing"/>
         </redirect>
         <redirect>
-            <keywords xml:lang="x-default">shipping, delivery, timetables</keywords>
+            <keywords xml:lang="en-US">shipping, delivery, timetables</keywords>
             <online-flag>true</online-flag>
             <page-redirect page-id="shipping"/>
         </redirect>
         <redirect>
-            <keywords xml:lang="x-default">account, my account, order history</keywords>
+            <keywords xml:lang="en-US">account, my account, order history</keywords>
             <online-flag>true</online-flag>
             <pipeline-redirect pipeline-name="Account-Show"/>
         </redirect>
         <redirect>
-            <keywords xml:lang="x-default">contact, contact us</keywords>
+            <keywords xml:lang="en-US">contact, contact us</keywords>
             <online-flag>true</online-flag>
             <pipeline-redirect pipeline-name="CustomerService-ContactUs"/>
         </redirect>
         <redirect>
-            <keywords xml:lang="x-default">customer service, help, order status</keywords>
+            <keywords xml:lang="en-US">customer service, help, order status</keywords>
             <online-flag>true</online-flag>
             <pipeline-redirect pipeline-name="CustomerService-Show"/>
         </redirect>
         <redirect>
-            <keywords xml:lang="x-default">stores, store, store locator</keywords>
+            <keywords xml:lang="en-US">stores, store, store locator</keywords>
             <online-flag>true</online-flag>
             <pipeline-redirect pipeline-name="Stores-Find"/>
         </redirect>
     </redirect-list>
-    <suggestion-list xml:lang="x-default">
+    <suggestion-list xml:lang="en-US">
         <suggestions>Cargo</suggestions>
         <suggestions>Chino</suggestions>
         <suggestions>Coat</suggestions>
@@ -135,13 +135,13 @@
         <suggestions>iPod</suggestions>
         <exclusions/>
     </suggestion-list>
-    <compound-word-list xml:lang="x-default">
+    <compound-word-list xml:lang="en-US">
         <compound-words>digital-camera</compound-words>
         <compound-words>global-positioning-system</compound-words>
         <compound-words>mp3-player, music-player, mp3-players, music-players</compound-words>
         <compound-words>tv-set, tv-sets</compound-words>
     </compound-word-list>
-    <common-phrase-list xml:lang="x-default">
+    <common-phrase-list xml:lang="en-US">
         <common-phrases match-mode="exact-match">ankle boots</common-phrases>
         <common-phrases match-mode="exact-match">digital camera</common-phrases>
         <common-phrases match-mode="exact-match">hand bag</common-phrases>
@@ -150,7 +150,7 @@
         <common-phrases match-mode="exact-match">shoe cleaner, boot cleaner</common-phrases>
         <common-phrases match-mode="exact-match">tv sets</common-phrases>
     </common-phrase-list>
-    <category-exclusion-list xml:lang="x-default">
+    <category-exclusion-list xml:lang="en-US">
         <category-exclusions>belts &amp; scarves</category-exclusions>
         <category-exclusions>boy &amp; girl</category-exclusions>
         <category-exclusions>hats &amp; gloves</category-exclusions>
