@@ -11,9 +11,10 @@ export const FIRST_ADDRESS_TITLE = '.first.default .mini-address-title';
 export const FORM_ADDRESS = '.ui-dialog';
 export const LAST_ADDRESS_TITLE = '.last .mini-address-title';
 export const LINK_CREATE_ADDRESS = '.address-create';
-export const MAKE_DEFAULT_ADDRESS = '.first .address-make-default';
+export const MAKE_DEFAULT_ADDRESS = '.last .address-make-default';
 export const MAKE_LAST_DEFAULT_ADDRESS = '.last .address-make-default';
 export const TITLE_ADDRESS_SELECTOR = '.address-list li .mini-address-title';
+export const ADDRESS_SELECTOR = '.address-list li';
 
 const basePath = '/addressbook';
 
@@ -44,13 +45,20 @@ export function fillAddressForm (addressFormData) {
 	return Promise.all(fieldsPromise);
 }
 
+export function getAddressTitles () {
+	// This assumes that the client is already on the My Account > Addresses page
+	return client.getText(TITLE_ADDRESS_SELECTOR);
+}
+
 export function removeAddresses () {
+	let defaultAddresses = ['Home', 'Work'];
+
 	// get all address titles
 	return client.getText('.address-list li .mini-address-title')
 		.then(addressTexts => {
 			// filter out Home and Work addresses
 			return addressTexts.filter(function (addressText) {
-				return addressText !== 'Home' && addressText !== 'Work';
+				return defaultAddresses.indexOf(addressText) === -1;
 			});
 		})
 		// remove addresses sequentially
@@ -62,5 +70,35 @@ export function removeAddresses () {
 						.alertAccept();
 				});
 			}, Promise.resolve());
-		});
+		})
+		.then(() => client.waitUntil(() =>
+			getAddressCount().then(count => count === defaultAddresses.length)
+		));
+}
+
+export function getAddressCount () {
+	return client.elements(ADDRESS_SELECTOR)
+		.then(rows => rows.value.length);
+}
+
+/**
+ * edit the address title from origialAddress to something defined in editAddressFormData
+ * @param originalAddress
+ * @param editAddressFormData
+ * @returns {Promise.}
+ */
+export function editAddress(originalAddress, editAddressFormData) {
+	// get all address titles
+	return client.getText(TITLE_ADDRESS_SELECTOR)
+		.then(addressTexts => {
+			// filter out Home and Work addresses
+			return addressTexts.filter(function (addressText) {
+				return addressText === originalAddress;
+			});
+		})
+		.then((addressToEdit) => client.element('li*=' + addressToEdit))
+			.click('.address-edit')
+		.then(() => client.waitForVisible(FORM_ADDRESS))
+		.then(() => fillAddressForm(editAddressFormData))
+		.then(() => client.click(BTN_EDIT_ADDRESS));
 }
