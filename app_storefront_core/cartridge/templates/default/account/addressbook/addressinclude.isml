@@ -16,10 +16,7 @@
 	<isloop items="${pdict.CurrentCustomer.profile.addressBook.addresses}" var="address" status="loopstate">
 		<isscript>
 			var isDefault = !empty(pdict.CurrentCustomer.profile.addressBook.preferredAddress) && (pdict.CurrentCustomer.profile.addressBook.preferredAddress.ID == address.ID);
-			var cssClass = "";
-			if (loopstate.first) { cssClass = "first"; }
-			else if (loopstate.last) { cssClass = "last"; }
-			
+			var cssClass = "address-tile ";			
 			if (isDefault) { cssClass+=" default"; }
 		</isscript>
 		

@@ -13,14 +13,10 @@
 	<iselse/>
 		<h1>${Resource.msg('account.addressbook.editaddress.editaddress','account',null)}</h1>
 	</isif>
+	<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
 
 	<form method="post" class="form-horizontal" action="${URLUtils.httpsContinue()}" id="edit-address-form" name="${pdict.CurrentForms.profile.address.htmlName}">
 		<fieldset>
-			<legend>
-				${Resource.msg('account.addressbook.addressdetails','account',null)}
-				<div class="dialog-required"> <span class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span></div>
-			</legend>
-
 
 			<isif condition="${pdict.Status != null && pdict.Status.isError()}">
 				<!-- Use the error code value to build an appropriate error message -->
@@ -38,7 +34,7 @@
 				<button class="apply-button" type="submit" name="${pdict.Action == 'add' ? pdict.CurrentForms.profile.address.create.htmlName : pdict.CurrentForms.profile.address.edit.htmlName}" value="${Resource.msg('global.apply','locale',null)}">
 					${Resource.msg('global.apply','locale',null)}
 				</button>
-				<button class="cancel cancel-button" type="submit" name="${pdict.CurrentForms.profile.address.cancel.htmlName}" value="${Resource.msg('global.cancel','locale',null)}">
+				<button class="cancel cancel-button simple" type="submit" name="${pdict.CurrentForms.profile.address.cancel.htmlName}" value="${Resource.msg('global.cancel','locale',null)}">
 					${Resource.msg('global.cancel','locale',null)}
 				</button>
 				<isif condition="${pdict.Action != 'add'}">
