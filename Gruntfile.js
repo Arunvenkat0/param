@@ -31,7 +31,7 @@ module.exports = function (grunt) {
 				tasks: ['css:styleguide']
 			},
 			doc: {
-				files: ['doc/js/**/*', '!doc/dist/', '!doc/.tmp'],
+				files: ['doc/js/**/*', '!doc/dist/', '!doc/.tmp', 'app_storefront_core/**/*.{js,ds}', 'app_storefront_controllers/**/*.{js,ds}'],
 				tasks: ['jsdoc']
 			}
 		},
