@@ -6,13 +6,13 @@ import * as formHelpers from './helpers/forms/common';
 
 export const BTN_EDIT_ADDRESS = 'button[name*=address_edit]';
 export const BTN_FORM_CREATE = 'button[name*=create]';
-export const EDIT_ADDRESS = '.first .address-edit';
-export const FIRST_ADDRESS_TITLE = '.first.default .mini-address-title';
+export const EDIT_ADDRESS = '.address-tile:first-of-type .address-edit';
+export const FIRST_ADDRESS_TITLE = '.default .mini-address-title';
 export const FORM_ADDRESS = '.ui-dialog';
-export const LAST_ADDRESS_TITLE = '.last .mini-address-title';
+export const LAST_ADDRESS_TITLE = '.address-tile:last-of-type .mini-address-title';
 export const LINK_CREATE_ADDRESS = '.address-create';
-export const MAKE_DEFAULT_ADDRESS = '.last .address-make-default';
-export const MAKE_LAST_DEFAULT_ADDRESS = '.last .address-make-default';
+export const MAKE_DEFAULT_ADDRESS = '.address-tile:last-of-type .address-make-default';
+export const MAKE_LAST_DEFAULT_ADDRESS = '.address-tile:last-of-type .address-make-default';
 export const TITLE_ADDRESS_SELECTOR = '.address-list li .mini-address-title';
 export const ADDRESS_SELECTOR = '.address-list li';
 

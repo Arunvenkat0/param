@@ -81,7 +81,7 @@ describe('Address', () => {
 				client.getText(addressPage.LAST_ADDRESS_TITLE)
 					.then(
 						text => text === testAddressTitle,
-						err => false
+						() => false
 				)
 			))
 			.then(() => client.getText(addressPage.LAST_ADDRESS_TITLE))
