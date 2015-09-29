@@ -61,7 +61,7 @@
 							<isif condition="${LineItemCtnr.shippingTotalPrice.available}">
 								<isprint value="${Shipment.shippingTotalPrice}"/>
 							<iselse/>
-								${Resource.msg('order.ordersummary.nodata','order',null)}
+								${Resource.msg('global.symbol.dash','locale',null)}
 							</isif>
 						</td>
 					</tr>
@@ -81,7 +81,7 @@
 						<isif condition="${LineItemCtnr.shippingTotalPrice.available}">
 							<isprint value="${LineItemCtnr.shippingTotalPrice}"/>
 						<iselse/>
-							${Resource.msg('order.ordersummary.nodata','order',null)}
+							${Resource.msg('global.symbol.dash','locale',null)}
 						</isif>
 					</td>
 				</tr>
@@ -115,7 +115,7 @@
 						<isif condition="${LineItemCtnr.totalTax.available}">
 							<isprint value="${LineItemCtnr.totalTax}"/>
 						<iselse/>
-							${Resource.msg('order.ordersummary.nodata','order',null)}
+							${Resource.msg('global.symbol.dash','locale',null)}
 						</isif>
 					</td>
 				</tr>
