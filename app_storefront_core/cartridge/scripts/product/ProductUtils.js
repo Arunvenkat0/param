@@ -11,6 +11,7 @@ var Site = require('dw/system/Site');
 var StringUtils = require('dw/util/StringUtils');
 var sanitize = require('~/cartridge/scripts/util/StringUtils').sanitize;
 
+
 /**
  * Product Utilities object
  *
@@ -653,6 +654,24 @@ ProductUtils.getDefaultVariant = function(pvm) {
 		}
 	}
 	return null;
+};
+
+ProductUtils.getProductType = function (product) {
+	var productType;
+	if (product.master) {
+		productType = 'master';
+	} else if (product.variant) {
+		productType = 'variant';
+	} else if (product.variation_group) {
+		productType = 'variationGroup';
+	} else if (product.bundle) {
+		productType = 'bundle';
+	} else if (product.set) {
+		productType = 'set';
+	} else {
+		productType = 'standard';
+	}
+	return productType;
 };
 
 module.exports = ProductUtils;
