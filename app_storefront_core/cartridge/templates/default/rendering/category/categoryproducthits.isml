@@ -28,14 +28,6 @@
 	<iscomment>create reporting event</iscomment>
 	<isinclude template="util/reporting/ReportSearch.isml"/>
 
-	<iscomment>suggest similar search phrase below the breadcrumb</iscomment>
-	<isif condition="${!empty(pdict.ProductSearchResult.getSuggestedSearchPhrase())}">
-		<p class="did-you-mean">
-			${Resource.msg('search.nohits.didyoumeanex','search',null)}
-			<a title="${pdict.ProductSearchResult.suggestedSearchPhrase}" href="<isprint value="${URLUtils.http('Search-Show','q',pdict.ProductSearchResult.suggestedSearchPhrase)}"/>"><isprint value="${pdict.ProductSearchResult.suggestedSearchPhrase}"/></a>
-		</p>
-	</isif>
-
 	<iscomment>
 		Render promotional content at the top of search results as global slot.
 		This content is only displayed if the search result is refined by a category.
