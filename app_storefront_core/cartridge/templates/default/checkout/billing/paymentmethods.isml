@@ -85,13 +85,12 @@
 					<span class="required-indicator">${Resource.msg('billing.requiredindicator','checkout',null)}</span>
 					<span>${Resource.msg('billing.creditcardlistexpdate', 'checkout', null)}</span>
 				</label>
-				
 				<isscript>
 					var currentCountry = require('~/cartridge/scripts/util/Countries').getCurrent(pdict);
 				</isscript>
-				
+
 				<isdynamicform formobject="${pdict.CurrentForms.billing.paymentMethods.creditCard.expiration}" formdata="${currentCountry.dynamicForms.expirationInfo}"/>
-				
+
 			</div>
 
 			<isscript>

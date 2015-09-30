@@ -75,6 +75,7 @@ function initEmailAddress(cart) {
  * @param cart
  */
 function returnToForm(cart, params) {
+    var pageMeta = require('~/cartridge/scripts/meta');
 
     if (!empty(cart.getPaymentInstrument()) && cart.getPaymentInstrument().getPaymentMethod() === PaymentInstrument.METHOD_GIFT_CERTIFICATE) {
         app.getForm('billing').copyFrom({
@@ -82,13 +83,12 @@ function returnToForm(cart, params) {
         });
     }
 
-    var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update({
         pageTitle : Resource.msg('billing.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')
     });
 
     if (params) {
-        app.getView(require('~/object').extend(params, {
+        app.getView(require('~/cartridge/scripts/object').extend(params, {
             Basket : cart.object,
             ContinueURL : URLUtils.https('COBilling-Billing')
         })).render('checkout/billing/billing');
@@ -104,7 +104,7 @@ function returnToForm(cart, params) {
  * TODO
  * @param cart
  */
-function start(cart) {
+function start(cart, params) {
 
     app.getController('COShipping').PrepareShipments();
 
@@ -116,7 +116,7 @@ function start(cart) {
     pageMeta.update({
         pageTitle : Resource.msg('billing.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')
     });
-    returnToForm(cart);
+    returnToForm(cart, params);
 }
 
 /**
@@ -124,15 +124,18 @@ function start(cart) {
  * instruments of type credit card.
  */
 function initCreditCardList(cart) {
-    var paymentAmount, countryCode, applicablePaymentMethods, applicablePaymentCards, applicableCreditCards;
-    paymentAmount = cart.getNonGiftCertificateAmount();
-    
-    var countryCode = Countries.getCurrent({
-    	CurrentRequest: {
-    		locale: request.locale
-    	}
+    var paymentAmount = cart.getNonGiftCertificateAmount();
+    var countryCode;
+    var applicablePaymentMethods;
+    var applicablePaymentCards;
+    var applicableCreditCards;
+
+    countryCode = Countries.getCurrent({
+        CurrentRequest: {
+            locale: request.locale
+        }
     }).countryCode;
-    
+
     applicablePaymentMethods = PaymentMgr.getApplicablePaymentMethods(customer, countryCode, paymentAmount.value);
     applicablePaymentCards = PaymentMgr.getPaymentMethod(PaymentInstrument.METHOD_CREDIT_CARD).getApplicablePaymentCards(customer, countryCode, paymentAmount.value);
 
@@ -141,11 +144,10 @@ function initCreditCardList(cart) {
     applicableCreditCards = null;
 
     if (customer.authenticated) {
-    	var profile = app.getModel('Profile').get();
-    	if (profile)
-    	{
-        	applicableCreditCards = profile.validateWalletPaymentInstruments(countryCode, paymentAmount.getValue()).ValidPaymentInstruments;
-    	}
+        var profile = app.getModel('Profile').get();
+        if (profile) {
+            applicableCreditCards = profile.validateWalletPaymentInstruments(countryCode, paymentAmount.getValue()).ValidPaymentInstruments;
+        }
     }
 
     return {
@@ -159,27 +161,28 @@ function initCreditCardList(cart) {
  * and COShippingMultiple jump to this node.
  */
 function publicStart() {
-    var cart, applicablePaymentMethods;
-    cart = app.getModel('Cart').get();
-
+    var cart = app.getModel('Cart').get();
     if (cart) {
 
         // Initializes all forms of the billing page including: - address form - email address - coupon form
         initAddressForm(cart);
         initEmailAddress(cart);
 
-        applicablePaymentMethods = initCreditCardList(cart).ApplicablePaymentMethods;
+        var creditCardList = initCreditCardList(cart);
+        var applicablePaymentMethods = creditCardList.ApplicablePaymentMethods;
 
-        if (app.getForm('billing').object.paymentMethods.valid) {
-            app.getForm('billing').object.paymentMethods.selectedPaymentMethodID.setOptions(applicablePaymentMethods.iterator());
+        var billingForm = app.getForm('billing').object;
+        var paymentMethods = billingForm.paymentMethods;
+        if (paymentMethods.valid) {
+            paymentMethods.selectedPaymentMethodID.setOptions(applicablePaymentMethods.iterator());
         } else {
-            app.getForm('billing').object.paymentMethods.clearFormElement();
+            paymentMethods.clearFormElement();
         }
 
         app.getForm('billing.couponCode').clear();
         app.getForm('billing.giftCertCode').clear();
 
-        start(cart);
+        start(cart, {ApplicableCreditCards: creditCardList.ApplicableCreditCards});
     } else {
         app.getController('Cart').Show();
     }
@@ -214,7 +217,6 @@ function adjustGiftCertificates() {
                 (gc.getStatus() !== GiftCertificate.STATUS_PENDING) && // make sure it is available for use
                 (gc.getStatus() !== GiftCertificate.STATUS_REDEEMED) && // make sure it has not been fully redeemed
                 (gc.balance.currencyCode === cart.getCurrencyCode())) {// make sure the GC is in the right currency
-
                     cart.createGiftCertificatePaymentInstrument(gc);
                 }
             }
@@ -537,13 +539,13 @@ function redeemGiftCertificateJson() {
     giftCertCode = request.httpParameterMap.giftCertCode.stringValue;
     giftCertStatus = redeemGiftCertificate(giftCertCode);
 
-	let r = require('~/cartridge/scripts/util/Response');
+    let responseUtils = require('~/cartridge/scripts/util/Response');
 
     if (request.httpParameterMap.format.stringValue !== 'ajax') {
         // @FIXME we could also build an ajax guard?
-        r.renderJSON({});
+        responseUtils.renderJSON({});
     } else {
-        r.renderJSON({
+        responseUtils.renderJSON({
             status : giftCertStatus.code,
             success : !giftCertStatus.error,
             message : Resource.msgf('billing.' + giftCertStatus.code, 'checkout', null, giftCertCode),
@@ -645,17 +647,15 @@ function editBillingAddress() {
  */
 function getGiftCertificateBalance() {
     var giftCertificate = GiftCertificateMgr.getGiftCertificateByCode(request.httpParameterMap.giftCertificateID.value);
-
-
-	let r = require('~/cartridge/scripts/util/Response');
+    var responseUtils = require('~/cartridge/scripts/util/Response');
 
     if (giftCertificate && giftCertificate.isEnabled()) {
-        r.renderJSON({
+        responseUtils.renderJSON({
             ID : giftCertificate.getGiftCertificateCode(),
             balance : StringUtils.formatMoney(giftCertificate.getBalance())
         });
     } else {
-        r.renderJSON({
+        responseUtils.renderJSON({
             error : Resource.msg('billing.giftcertinvalid', 'checkout', null)
         });
     }
