@@ -6,7 +6,7 @@
 	
 		<isorderdetails order="${pdict.Order}" orderstatus="true"/>
 		
-		<div class="form-row order-detail-options">
+		<div class="actions">
 			<isif condition="${pdict.CurrentCustomer.authenticated}">
 				<a href="${URLUtils.https('Order-History')}" title="${Resource.msg('account.orderdetails.returnorder','account',null)}">
 					${Resource.msg('account.orderdetails.returnorder','account',null)}

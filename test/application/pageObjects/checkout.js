@@ -12,7 +12,7 @@ export const BTN_CONTINUE_BILLING_SAVE = 'button[name*="billing_save"]';
 export const BTN_CONTINUE_SHIPPING_SAVE = '[name*="shippingAddress_save"]';
 export const BTN_PLACE_ORDER = 'button[name*="submit"]';
 export const CSS_ORDER_SUBTOTAL = '.nav.summary .order-subtotal td:nth-child(2)';
-export const LABEL_ORDER_THANK_YOU = '.primary-content h1';
+export const LABEL_ORDER_THANK_YOU = '.confirmation-message h1';
 export const MINI_SECTION_SHIPPING_ADDR = '.mini-shipment';
 export const MINI_SECTION_BILLING_ADDR = '.mini-billing-address';
 export const MINI_SECTION_PMT_METHOD = '.mini-payment-instrument';

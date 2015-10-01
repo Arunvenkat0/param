@@ -1,11 +1,12 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscomment> TEMPLATENAME: confirmationregister.isml </iscomment>
 <iscomment>Provide a create account form for unregistered customers</iscomment>
+
 <isif condition="${!pdict.CurrentCustomer.authenticated}">
 
 	<div class="login-box login-create-account clearfix">
-
-		<h2 class="section-header">${Resource.msg('globalaccount.createheader','locale',null)}</h2>
+	
+		<h2>${Resource.msg('account.user.registration.createnew','account',null)}</h2>
 
 		<div class="login-box-content clearfix">
 

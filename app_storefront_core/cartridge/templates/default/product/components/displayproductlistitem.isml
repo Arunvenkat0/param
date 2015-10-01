@@ -11,8 +11,8 @@
 
 	<iscomment>See if the items is part of the site catalog, prior to rendering link</iscomment>
 	<isif condition="${p_productli.product != null && p_productli.type != p_productli.TYPE_GIFT_CERTIFICATE && !p_productli.product.assignedToSiteCatalog}">
-		<div class="error>
-				- This item is currently not part of our catalog.
+		<div class="error">           
+            ${Resource.msg('product.displayproductlistitems.notavailableitem','product',null)}
 		</div>
 		<div class="name><isprint value="${p_productli.product.name}"/></div>
 	</isif>
@@ -76,7 +76,7 @@
 		
 		<iscomment>display product pricing using module</iscomment>
 		<div class="price">
-			<span class="label">${Resource.msg('global.price','locale',null)}:</span>
+			<span class="label">${Resource.msg('global.price','locale',null)}</span>
 			<span class="value"><isdisplayproductpricing product="${p_productli.product}"/></span>
 		</div>
 	</isif>
