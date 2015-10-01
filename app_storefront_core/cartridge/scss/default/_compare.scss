@@ -140,6 +140,8 @@
 		color: $nobel;
 		float: right;
 		padding: .3rem;
+		z-index: 1;
+		position: relative;
 		transition: color .5s ease;
 		&:hover {
 			color: $citrus;
