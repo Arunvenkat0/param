@@ -33,7 +33,7 @@ var spyOrderMgr = sinon.spy(mockOrderMgr, 'getOrder');
 
 // Mock out module dependencies
 var modelsDirectory = '../../../../../app_storefront_controllers/cartridge/scripts/models/';
-var Order = mockRequire(modelsDirectory + 'Order.ds', {
+var OrderModel = mockRequire(modelsDirectory + 'OrderModel.ds', {
     './AbstractModel': mockAbstractModel,
     'dw/util/ArrayList': mockArrayList,
     'dw/order/OrderMgr': mockOrderMgr
@@ -51,7 +51,7 @@ describe('Order model', function () {
         it('should call getOrder when given a string parameter', function () {
             spyOrderMgr.reset();
 
-            Order.get('some param');
+            OrderModel.get('some param');
 
             sinon.assert.calledOnce(spyOrderMgr);
         });
@@ -59,23 +59,23 @@ describe('Order model', function () {
         it('should not call getOrder when not given a string parameter', function () {
             spyOrderMgr.reset();
 
-            Order.get();
+            OrderModel.get();
 
             sinon.assert.notCalled(spyOrderMgr);
         });
 
         it('should instantiate an Order with an string when given a string', function () {
-            var order = Order.get('sunny sky');
+            var order = OrderModel.get('sunny sky');
             expect(order.orderNo).to.equal('sunny sky');
         });
 
         it('should instantiate an Order with an object when given an object', function () {
-            var order = Order.get({nice: true});
+            var order = OrderModel.get({nice: true});
             expect(order.orderNo).to.deep.equal({nice: true});
         });
 
         it('should instantiate an Order with null when given null', function () {
-            var order = Order.get();
+            var order = OrderModel.get();
             /* jshint expr:true */
             expect(order.orderNo).to.be.null;
         });
