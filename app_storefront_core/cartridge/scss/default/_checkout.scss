@@ -50,9 +50,18 @@
 }
 
 .billing-coupon-code {
-    .form-row {
-        width: 50%;
-    }
+	.form-row,
+	.coupon-apply,
+	.giftcert-apply {
+		display: inline-block;
+	}
+	.form-row {
+		margin: 0;
+		width: 45%;
+	}
+	.tooltip {
+		padding-left: 1rem;
+	}
 }
 
 .redemption {

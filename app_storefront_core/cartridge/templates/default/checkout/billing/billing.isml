@@ -108,16 +108,22 @@
 		<div class="form-indent billing-coupon-code">
 		<iscomment>coupon code / gift certificate area</iscomment>
 
-			<isif condition="${gcApplicable == 'true'}">
-				<iscontentasset aid="checkout-giftcertcoupon-help"/>
-			<iselse/>
-				<iscontentasset aid="checkout-coupon-help"/>
-			</isif>
+			
 
 			<isinputfield formfield="${pdict.CurrentForms.billing.couponCode}" type="input" rowclass="label-above"/>
 
-			<div class="form-row">
+			<div class="coupon-apply">
 				<button class="apply cancel" id="add-coupon" type="submit" name="${pdict.CurrentForms.billing.applyCoupon.htmlName}" value="${Resource.msg('global.apply','locale',null)}"><span>${Resource.msg('global.apply','locale',null)}</span></button>
+				<a href="#" class="tooltip">
+					${Resource.msg('global.helplink','locale',null)}
+					<div class="tooltip-content" data-layout="small">
+						<isif condition="${gcApplicable == 'true'}">
+							<iscontentasset aid="checkout-giftcertcoupon-help"/>
+						<iselse/>
+							<iscontentasset aid="checkout-coupon-help"/>
+						</isif>
+					</div>
+				</a>
 			</div>
 			<div class="form-row coupon-error error">
 				<isif condition="${pdict.CouponStatus != null && pdict.CouponStatus.error}">
@@ -141,15 +147,21 @@
 				<iscomment>only provide gift certificate redemption, if the basket doesn't contain any gift certificates</iscomment>
 				<isif condition="${pdict.Basket.giftCertificateLineItems.size() == 0}">
 
-					<iscontentasset aid="checkout-giftcert-help"/>
-
 					<isinputfield formfield="${pdict.CurrentForms.billing.giftCertCode}" type="input" rowclass="label-above"/>
 
-					<div class="form-row">
-						<button class="apply cancel" id="add-giftcert" type="submit" name="${pdict.CurrentForms.billing.redeemGiftCert.htmlName}" value="${Resource.msg('global.apply','locale',null)}"><span>${Resource.msg('global.apply','locale',null)}</span></button>
-					</div>
-					<div class="form-row">
-						<button class="button-text cancel" id="check-giftcert" type="submit" name="${pdict.CurrentForms.billing.checkBalance.htmlName}" value="${Resource.msg('global.checkbalance','locale',null)}"><span>${Resource.msg('global.checkbalance','locale',null)}</span></button>
+					<div class="giftcert-apply">
+						<button class="apply cancel" id="add-giftcert" type="submit" name="${pdict.CurrentForms.billing.redeemGiftCert.htmlName}" value="${Resource.msg('global.apply','locale',null)}">
+                            <span>${Resource.msg('global.apply','locale',null)}</span>
+                        </button>
+						<button class="simple cancel" id="check-giftcert" type="submit" name="${pdict.CurrentForms.billing.checkBalance.htmlName}" value="${Resource.msg('global.checkbalance','locale',null)}">
+                            <span>${Resource.msg('global.checkbalance','locale',null)}</span>
+                        </button>
+						<a href="#" class="tooltip">
+							${Resource.msg('global.helplink','locale',null)}
+							<div class="tooltip-content" data-layout="small">
+								<iscontentasset aid="checkout-giftcert-help"/>
+							</div>
+						</a>
 					</div>
 
 					<div class="form-row balance"></div>
