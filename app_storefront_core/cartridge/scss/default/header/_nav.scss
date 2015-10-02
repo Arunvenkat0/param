@@ -47,8 +47,8 @@ nav[role="navigation"] {
 		width: 100%;
 	}
 	li {
-		list-style: none;
 		border-top: 1px solid darken($night-rider, 10%);
+		list-style: none;
 		@media screen and (min-width: 768px) {
 			border: none;
 			float: left;
@@ -59,12 +59,13 @@ nav[role="navigation"] {
 	}
 	a {
 		color: $citrus;
-		display: block;
-		font-size: 1.2em;
-		padding: 0.9rem 1rem;
+		display: inline-block;
+		font-size: .9rem;
+		padding: .9rem 1rem;
+		overflow: visible;
 		width: 100%;
 		@media screen and (min-width: 768px) {
-			font-size: 1em;
+			font-size: .75rem;
 			width: auto;
 		}
 		@media screen and (min-width: 960px) {
