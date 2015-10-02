@@ -28,13 +28,13 @@ describe('Countries Script', () => {
 			assert.equal(result, country);
 		});
 
-		it('should return undefined if locale has no country', () => {
+		it('should return the first country if locale has no country', () => {
 			let stubGetLocale = sinon.stub(Locale, 'getLocale', () => { return {}; });
 			let result = Countries.getCurrent({
 				CurrentRequest: {locale: countryCode}
 			});
 
-			assert.isUndefined(result);
+			assert.equal(result, country);
 
 			stubGetLocale.restore();
 		});
