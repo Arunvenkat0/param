@@ -7,7 +7,7 @@
 
 <isscript>
 // for variation groups use the master, because all variants are available in detail page
-if ( pdict.Product.variationGroup )
+if ( pdict.Product && pdict.Product.variationGroup )
 {
 	pdict.Product = pdict.Product.masterProduct;
 }

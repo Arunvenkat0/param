@@ -1,12 +1,15 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <isscript>
-	var Countries = require('~/cartridge/scripts/util/Countries');
-	var Url = require('~/cartridge/scripts/util/Url');
+	// Specify relative path as ~/cartridge will break this import if called from app_storefront_controllers
+	var Countries = require('../../../../scripts/util/Countries');
 	var currentCountry = Countries.getCurrent(pdict);
 	var currentLocale = pdict.CurrentRequest.locale;
 	var countriesGrouped = Countries.getCountriesGroupedBy('continent');
 	var continents = Object.keys(countriesGrouped);
-	var allowedLocales = dw.system.Site.getCurrent().getAllowedLocales();
+	var Site = dw.system.Site;
+	var allowedLocales = Site.getCurrent().getAllowedLocales();
+	var Url = require('../../../../scripts/util/Url');
+
 	// set currency of the current locale if there's a mismatch
 	if (session.currency.currencyCode !== currentCountry.currencyCode) {
 		session.setCurrency(dw.util.Currency.getCurrency(currentCountry.currencyCode));
