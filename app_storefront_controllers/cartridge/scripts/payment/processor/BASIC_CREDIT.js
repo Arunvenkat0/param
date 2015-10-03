@@ -11,6 +11,7 @@ var Transaction = require('dw/system/Transaction');
  */
 function Handle(args) {
 	var cart = Cart.get(args.Basket);
+	var PaymentMgr = require('dw/order/PaymentMgr');
 
 	var VerifyPaymentCardResult = new dw.system.Pipelet('VerifyPaymentCard', {
 		VerifySecurityCode : true
