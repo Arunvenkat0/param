@@ -37,7 +37,7 @@
 			<isdynamicform formobject="${pdict.CurrentForms.paymentinstruments.creditcards.newcreditcard.expiration}" formdata="${currentCountry.dynamicForms.expirationInfo}" />
 			
 			<div class="form-row form-row-button">
-				<button id="applyBtn" type="submit" value="${Resource.msg('global.apply','locale',null)}">
+				<button id="applyBtn" type="submit" name="${pdict.CurrentForms.paymentinstruments.creditcards.create.htmlName}" value="${Resource.msg('global.apply','locale',null)}">
 					${Resource.msg('global.apply', 'locale', null)}
 				</button>
 				<button class="cancel cancel-button simple" type="submit" name="${pdict.CurrentForms.paymentinstruments.creditcards.cancel.htmlName}" value="${Resource.msg('global.cancel','locale',null)}">

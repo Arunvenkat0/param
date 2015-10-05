@@ -5,36 +5,35 @@
  * @input PaymentInstrument : dw.customer.CustomerPaymentInstrument
  * @input CreditCardFormFields : dw.web.FormGroup
  */
-importPackage( dw.customer );
-importPackage( dw.order );
-importPackage( dw.system );
-importPackage( dw.web );
+var PaymentInstrument = require('dw/order/PaymentInstrument');
+var Logger = require('dw/system/Logger');
 
-function execute( pdict : PipelineDictionary ) : Number
-{
-	var paymentInstr : CustomerPaymentInstrument = pdict.PaymentInstrument;
-	var creditCardFields : FormGroup = pdict.CreditCardFormFields;
+function execute(pdict) {
+    var paymentInstr = pdict.PaymentInstrument;
+    var creditCardFields = pdict.CreditCardFormFields;
 
-	if( paymentInstr == null )
-	{
-		// no payment instrument given
-		Logger.debug("No customer payment instrument given to store credit card data");
-		return PIPELET_ERROR;
-	}
+    if( !paymentInstr ) {
+        // no payment instrument given
+        Logger.debug("No customer payment instrument given to store credit card data");
+        return PIPELET_ERROR;
+    }
 
-	if( !PaymentInstrument.METHOD_CREDIT_CARD.equals(paymentInstr.paymentMethod) )
-	{
-		// given payment instrument not a credit card
-		Logger.debug("Customer payment instrument is of type {0}, type {1} required.", paymentInstr.paymentMethod, PaymentInstrument.METHOD_CREDIT_CARD);
-		return PIPELET_ERROR;
-	}
+    if( !PaymentInstrument.METHOD_CREDIT_CARD.equals(paymentInstr.paymentMethod) ) {
+        // given payment instrument not a credit card
+        Logger.debug("Customer payment instrument is of type {0}, type {1} required.", paymentInstr.paymentMethod, PaymentInstrument.METHOD_CREDIT_CARD);
+        return PIPELET_ERROR;
+    }
 
-	// coy the credit card details to the payment instrument
-	paymentInstr.setCreditCardHolder( creditCardFields.owner.value );
-	paymentInstr.setCreditCardNumber( creditCardFields.number.value );
-	paymentInstr.setCreditCardExpirationMonth( creditCardFields.expiration.month.value );
-	paymentInstr.setCreditCardExpirationYear( creditCardFields.expiration.year.value );
-	paymentInstr.setCreditCardType( creditCardFields.type.value );
+    // copy the credit card details to the payment instrument
+    paymentInstr.setCreditCardHolder( creditCardFields.owner.value );
+    paymentInstr.setCreditCardNumber( creditCardFields.number.value );
+    paymentInstr.setCreditCardExpirationMonth( creditCardFields.expiration.month.value );
+    paymentInstr.setCreditCardExpirationYear( creditCardFields.expiration.year.value );
+    paymentInstr.setCreditCardType( creditCardFields.type.value );
 
     return PIPELET_NEXT;
 }
+
+exports = {
+    execute: execute
+};
