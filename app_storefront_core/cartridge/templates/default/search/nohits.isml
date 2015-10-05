@@ -14,7 +14,6 @@
 	<h1>${Resource.msg('search.nohits.header','search',null)}</h1>
 
 	<div class="section-header">
-
 		<p>
 			${Resource.msg('search.nohits.message','search',null)}
 			<span class="no-hits-search-term">
@@ -25,51 +24,10 @@
 		<iscomment>render a link to execute the search with an alternative suggested search phrase</iscomment>
 		<isif condition="${!empty(pdict.ProductSearchResult.getSuggestedSearchPhrase())}">
 			<p>
-				<iscomment>this isif is to keep the search suggestions consistent</iscomment>
-				<isif condition="${!dw.system.Site.getCurrent().getCustomPreferenceValue('enhancedSearchSuggestions')}">
-					${Resource.msg('search.nohits.didyoumean','search',null)}
-					<a class="no-hits-search-term-suggest" title="${pdict.ProductSearchResult.suggestedSearchPhrase}" href="${URLUtils.url('Search-Show', 'q', pdict.ProductSearchResult.suggestedSearchPhrase)}">
-						<isprint value="${pdict.ProductSearchResult.suggestedSearchPhrase}"/>
-					</a>
-					?
-				<iselse/>
-					<isscript>
-    					importPackage( dw.suggest );
-					    // instantiate and configure the SuggestModel
-					    var suggestModel = new dw.suggest.SuggestModel();
-					    // set search phrase
-					    suggestModel.setSearchPhrase(pdict.CurrentHttpParameterMap.q.value);
-					</isscript>
-					<isif condition="${suggestModel != null}">
-					    <!-- get some suggested content -->
-					    <isset name="productSuggestions" value="${suggestModel.getProductSuggestions()}" scope="page"/>
-					    <isset name="productSuggestionsAvailable" value="${productSuggestions != null && productSuggestions.hasSuggestions()}" scope="page"/>
-		                <isset name="suggestedPhrases" value="${productSuggestions.getSuggestedPhrases()}" scope="page"/>
-		                <isset name="suggestedProductTerms" value="${productSuggestions.getSuggestedTerms()}" scope="page"/>
-		                <isif condition="${suggestedPhrases.hasNext()}">
-							${Resource.msg('search.nohits.didyoumean','search',null)}
-							<a href="${URLUtils.url('Search-Show', 'q', suggestedPhrases.next().getPhrase())}">
-								<isloop items="${suggestedProductTerms}" alias="suggestedTerms" status="loopstate">
-									<isif condition="${!suggestedTerms.isEmpty()}">
-										<isset name="firstTerm" value="${suggestedTerms.getFirstTerm()}" scope="page"/>
-										<isif condition="${firstTerm.isExactMatch()}">
-											<span class="search-suggestion-normal-link" ><isprint value="${firstTerm.getValue()}" /></span>
-										<iselseif condition="${firstTerm.isCorrected()}">
-											<span class="first-term-bold search-suggestion-normal-link"><isprint value="${firstTerm.getValue()}" /></span>
-										<iselseif condition="${firstTerm.isCompleted() && !loopstate.last}">
-											<span class="first-term-italic"><isprint value="${firstTerm.getValue()}" /></span>
-										<iselseif condition="${firstTerm.isCompleted() && loopstate.last}">
-											<span class="whole-phrase"><span class="search-suggest-guess"><isprint value="${suggestedTerms.getOriginalTerm()}" /></span><isprint value="${firstTerm.getValue().substring(suggestedTerms.getOriginalTerm().length)}" /></span>
-										</isif>
-									</isif>
-								</isloop>
-							</a>?
-	                  	</isif>
-					</isif>
-				</isif>
+				${Resource.msg('search.nohits.didyoumean','search',null)}
+				<a class="no-hits-search-term-suggest" title="${pdict.ProductSearchResult.suggestedSearchPhrase}" href="${URLUtils.url('Search-Show', 'q', pdict.ProductSearchResult.suggestedSearchPhrase)}"><isprint value="${pdict.ProductSearchResult.suggestedSearchPhrase}"/></a>?
 			</p>
 		</isif>
-
 	</div>
 
 	<iscomment>render a link to content search results if any content was found</iscomment>
