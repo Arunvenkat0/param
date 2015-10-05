@@ -27,6 +27,16 @@ function initializeEvents() {
 	$('form input[name$="_couponCode"]').on('keydown', function (e) {
 		if (e.which === 13 && $(this).val().length === 0) { return false; }
 	});
+
+	//to prevent multiple submissions of the form when removing a product from the cart
+	var removeItemEvent = false;
+	$('button[name$="deleteProduct"]').on('click', function (e) {
+		if (removeItemEvent) {
+			e.preventDefault();
+		} else {
+			removeItemEvent = true;
+		}
+	});
 }
 
 exports.init = function () {
