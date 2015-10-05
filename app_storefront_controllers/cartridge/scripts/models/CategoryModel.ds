@@ -1,6 +1,9 @@
 'use strict';
 
-/** @module models/CategoryModel */
+/** 
+ * Model for category functionality.
+ * @module models/CategoryModel 
+ */
 
 /* API Includes */
 var AbstractModel = require('./AbstractModel');
@@ -8,18 +11,19 @@ var ArrayList = require('dw/util/ArrayList');
 var CatalogMgr = require('dw/catalog/CatalogMgr');
 
 /**
- * Category helper providing enhanced category functionality
+ * Category helper providing enhanced category functionality.
+ 
  * @class module:models/CategoryModel~CategoryModel
  * @extends module:models/AbstractModel
- *
  * @param {dw.catalog.Category} obj The category object to enhance/wrap.
  */
 var CategoryModel = AbstractModel.extend(
     /** @lends module:models/CategoryModel~CategoryModel.prototype */
     {
         /**
-         *    Prints out category's alternative url if maintained on custom attribute
-         *    uses custom attribute of type MarkupText to be able to maintain url-util styled urls - i.e $url('GiftCert-Purchase')$
+         * Prints out category's alternative URL if maintained in custom attribute.
+         * Uses custom attribute of type MarkupText to be able to maintain URLUtil styled URLs, such as <code>$url('GiftCert-Purchase')$<code>
+         * @alias module:models/CategoryModel~CategoryModel/getUrl
          */
         getUrl : function () {
             var category = this.object;
@@ -31,7 +35,8 @@ var CategoryModel = AbstractModel.extend(
         /**
          * Gets a list of online categories that have the showInMenu attribute set to true.
          *
-         * @param {Boolean} renderAllCategories Return all online subcategories if true.
+         * @param {Boolean} renderAllCategories Returns all online subcategories if true.
+         * @alias module:models/CategoryModel~CategoryModel/getMenuCategories
          * @return {Array} subcategories  : Array Subcategories for menu
          */
         getMenuCategories : function (renderAllCategories) {
@@ -51,7 +56,9 @@ var CategoryModel = AbstractModel.extend(
         },
 
         /**
-         * Returns top level online categories list if exists, otherwise returns sibling online categories list if exists otherwise returns empty list
+         * Returns top level online categories list if it exists, otherwise returns sibling online categories list if it exists. 
+         * If neither exist, it returns an empty list.
+         * @alias module:models/CategoryModel~CategoryModel/getTopLevelCategories
          */
         getTopLevelCategories : function () {
             if (this.object.getParent() !== null) {
@@ -69,8 +76,9 @@ var CategoryModel = AbstractModel.extend(
     });
 
 /**
- * Use this method to get a new instance for a given category.
+ * Gets a new instance of a given category.
  *
+ * @alias module:models/CategoryModel~CategoryModel/get
  * @param parameter {(dw.catalog.Category|String)} The category object to enhance/wrap or the category ID of the category
  * object.
  * @returns {module:models/CategoryModel~CategoryModel}
@@ -87,8 +95,9 @@ CategoryModel.get = function (parameter) {
 };
 
 /**
- * Returns the root category from site catalog.
+ * Returns the root category from the site catalog.
  *
+ * @alias module:models/CategoryModel~CategoryModel/getTopLevelCategory
  * @returns {dw.catalog.Category} The root catalog category
  */
 CategoryModel.getTopLevelCategory = function () {

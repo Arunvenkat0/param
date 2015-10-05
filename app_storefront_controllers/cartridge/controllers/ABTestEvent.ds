@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * This is the pipeline hook for reporting to the Demandware AB-test engine that a customer has started
- * checkout in the storefront.  This event is recorded only fore the purposes of updating AB-test statistics and
- * does not affect the basket.  This pipeline does not ordinarily need to be modified.
+ * This controller reports to the Demandware AB-test engine when a customer starts
+ * checkout in the storefront. This event is recorded only for the purposes of updating AB-test statistics and
+ * does not affect the basket. This controller does not ordinarily need to be customized.
  *
  * @module controllers/ABTestEvent
  */

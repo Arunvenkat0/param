@@ -1,9 +1,13 @@
 /**
- * Initializes the product list and creates a new list if none was found.
- * The pipeline additional determines a selected product list item based on the given ID.
+ * This controller initializes the product list and creates a new list if none was found.
+ * It also determines a selected product list item based on the given ID.
  *
  * @module  controllers/ProductList
  * @TODO this should be a library, not a controller
+ */
+ 
+ /**
+ * TODO 
  */
 function Init(args)
 {

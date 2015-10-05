@@ -1,11 +1,11 @@
 'use strict';
 
 /**
- * This controller is responsible to create an order from the current basket. It's a pure processing controller and does
- * no page rendering. The controller is used by the checkout and is called upon the triggered place order action.
+ * This controller creates an order from the current basket. It's a pure processing controller and does
+ * no page rendering. The controller is used by checkout and is called upon the triggered place order action.
  * It contains the actual logic to authorize the payment and create the order. The controller communicates the result
- * of the order creation process by named end nodes and uses a status object PlaceOrderError to set proper error states.
- * The calling pipeline is responsible to react on these end nodes and to evaluate the error status.
+ * of the order creation process and uses a status object PlaceOrderError to set proper error states.
+ * The calling controller is must handle the results of the order creation and evaluate any errors returned by it.
  *
  * @module controllers/COPlaceOrder
  */

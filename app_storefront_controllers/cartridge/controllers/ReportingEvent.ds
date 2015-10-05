@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * This is the module hook for the reporting events. Typically no modifications are needed here.
+ * This contoller is the module hook for reporting events. Typically no modifications are needed here.
  * Demandware analytics is based on log file analysis. Log file entries are generated using remote includes in page templates.
  *
  * @module controllers/ReportingEvent

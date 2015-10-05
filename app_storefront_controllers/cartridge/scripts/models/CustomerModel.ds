@@ -24,8 +24,9 @@ var CustomerModel = AbstractModel.extend(
 {
 
     /**
-     * Checks validity of a password reset token
+     * Checks the validity of a password reset token.
      * @transactional
+     * @alias module:models/CustomerModel~CustomerModel/resetPasswordByToken
      */
     resetPasswordByToken : function(token, password) {
         var customerInstance, resetCustomerPasswordWithTokenResult, result;
@@ -48,8 +49,9 @@ var CustomerModel = AbstractModel.extend(
     },
 
     /**
-     * Checks validity of a password reset token
+     * Checks the validity of a password reset token.
      * @transactional
+     * @alias module:models/CustomerModel~CustomerModel/generatePasswordResetToken
      */
     generatePasswordResetToken : function() {
         var token, customerInstance;
@@ -65,9 +67,10 @@ var CustomerModel = AbstractModel.extend(
 });
 
 /**
- * Use this method to get the the current customer or pass in a customer instance.
+ * Gets the current customer or passes in a customer instance.
  *
- * @param parameter {dw.customer.Customer=} The customer object to enhance/wrap. If NULL the current customer is
+ * @alias module:models/CustomerModel~CustomerModel/get
+ * @param parameter {dw.customer.Customer=} The customer object to enhance or wrap. If NULL the current customer is
  * retrieved from the session.
  * @returns {module:models/CustomerModel~CustomerModel}
  */
@@ -85,9 +88,10 @@ CustomerModel.get = function(parameter) {
  * Authenticates the current session using the supplied Login and Password. If a different customer is currently
  * authenticated in the session, then this customer is "logged out" and her/his privacy and form data are deleted.
  *
+ * @alias module:models/CustomerModel~CustomerModel/login
  * @param username {String} Login name.
  * @param password {String} Password.
- * @param rememberMe {Boolean=} Optional Boolean value indicating if the customer wants to be remembered on the current
+ * @param rememberMe {Boolean=} Optional Boolean value indicating whether the customer wants to be remembered on the current
  * computer. If a value of True is supplied a cookie identifying the customer is stored upon successful login. If a value
  * of False, or a null value, is supplied, then no cookie is stored and any existing cookie is removed.
  * @returns {boolean}
@@ -123,6 +127,7 @@ CustomerModel.login = function(username, password, rememberMe) {
 
 /**
  * Logs out the customer currently logged into the storefront.
+ * @alias module:models/CustomerModel~CustomerModel/logout
  */
 CustomerModel.logout = function() {
     new dw.system.Pipelet('LogoutCustomer').execute();
@@ -130,6 +135,8 @@ CustomerModel.logout = function() {
 
 /**
  * Looks up a customer by its login.
+ * @alias module:models/CustomerModel~CustomerModel/getCustomerbyLogin
+ * @param login login used to retrieve customer
  */
 CustomerModel.getCustomerByLogin = function(login) {
     var GetCustomerResult = new dw.system.Pipelet('GetCustomer').execute({
@@ -143,7 +150,10 @@ CustomerModel.getCustomerByLogin = function(login) {
 };
 
 /**
- * Registers customer
+ * Creates a customer. 
+ * @alias module:models/CustomerModel~CustomerModel/createCustomer
+ * @param login login for the customer
+ * @param password password for the customer
  */
 CustomerModel.createCustomer = function(login, password) {
     var CreateCustomerResult = new dw.system.Pipelet('CreateCustomer').execute({
@@ -158,8 +168,9 @@ CustomerModel.createCustomer = function(login, password) {
 };
 
 /**
- * Sets the customers login.
+ * Sets the customer's login.
  *
+ * @alias module:models/CustomerModel~CustomerModel/setLogin
  * @param customer the customer
  * @param login the user name of the customer
  * @param password the password of the current customer
@@ -175,7 +186,8 @@ CustomerModel.setLogin = function(customerToSet, login, password) {
 };
 
 /**
- * Logs in customer using login and password
+ * Logs in customer using login and password.
+ * @alias module:models/CustomerModel~CustomerModel/loginCustomer
  */
 CustomerModel.loginCustomer = function(login, password, rememberMe) {
     var LoginCustomerResult = new dw.system.Pipelet('LoginCustomer').execute({
@@ -190,13 +202,19 @@ CustomerModel.loginCustomer = function(login, password, rememberMe) {
 /**
  * Creates a new customer account.
  * @transactional
+ * @alias module:models/CustomerModel~CustomerModel/createAccount
+ * @param email the current customer email address to use for login
+ * @param password the password of the current customer
+ * @param form the form to invalidate
  * @return true, if the account was created successfully
+ * @see module:models/CustomerModel~CustomerModel/createCustomer
+ * @see module:models/CustomerModel~CustomerModel/setLogin
  */
 CustomerModel.createAccount = function(email, password, form) {
 
     Transaction.begin();
 
-    // create the new customer
+    // Creates a new customer.
     var newCustomer, rememberMe;
     newCustomer = CustomerModel.createCustomer(email, password);
     if (newCustomer === null || newCustomer.object === null) {
@@ -211,7 +229,7 @@ CustomerModel.createAccount = function(email, password, form) {
         return false;
     }
 
-    // set login / password
+    // Sets login and password for customer.
     if (!this.setLogin(newCustomer.object, email, password)) {
         Transaction.rollback();
         form.invalidate();
@@ -224,13 +242,14 @@ CustomerModel.createAccount = function(email, password, form) {
 
     rememberMe = Form.get('profile.login.rememberme').value();
 
-    // login the customer
+    // Logs the customer in.
     return CustomerModel.loginCustomer(email, password, rememberMe);
 };
 
 /**
- * Checks the given user name on existence and ends on a named end node to
- * communicated the status back.
+ * Checks if the user name exists and communicates the status back.
+ * 
+ * @alias module:models/CustomerModel~CustomerModel/checkUserName
  */
 CustomerModel.checkUserName = function() {
     //@FIXME get email as parameter
@@ -253,7 +272,8 @@ CustomerModel.checkUserName = function() {
 };
 
 /**
- * Checks validity of a password reset token
+ * Checks validity of a password reset token.
+ * @alias module:models/CustomerModel~CustomerModel/getByPasswordResetToken
  */
 CustomerModel.getByPasswordResetToken = function(token) {
     var result, ValidateResetPasswordTokenResult;
@@ -274,8 +294,12 @@ CustomerModel.getByPasswordResetToken = function(token) {
 };
 
 /**
- *	Update customer object with form
- *	@transactional
+ * Update a customer account with form data.
+ * @transactional
+ * @alias module:models/CustomerModel~CustomerModel/editAccount
+ * @param email the current customer email address to use for login
+ * @param password the password of the current customer
+ * @param form the form to invalidate
  */
 CustomerModel.editAccount = function(email, password, form) {
 

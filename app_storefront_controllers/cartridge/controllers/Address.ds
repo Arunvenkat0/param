@@ -1,8 +1,8 @@
 'use strict';
 
 /**
- * Controller : Address
- *
+ * Controller provides functions for editing, adding, and removing addresses to a customer addressbook.
+ * It also sets the default address in the addressbook.
  * @module controllers/Address
  */
 
@@ -31,7 +31,7 @@ function list() {
 }
 
 /**
- * Renders a dialog providing functionality to add a new address to the address
+ * Renders a dialog for adding a new address to the address
  * book.
  */
 function add() {
@@ -44,7 +44,7 @@ function add() {
 }
 
 /**
- * The form handler.
+ * The address form handler.
  */
 function handleForm() {
 	var Address, success;
@@ -95,7 +95,7 @@ function handleForm() {
 }
 
 /**
- * Renders a dialog providing functionality to edit an existing address.
+ * Renders a dialog for editing an existing address.
  */
 function edit() {
     var profileForm, addressBook, address;

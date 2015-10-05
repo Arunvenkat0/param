@@ -1,10 +1,8 @@
 'use strict';
 
 /**
- * <h3>Multiple Shipping Scenario</h3>
- *
- * This controller implements the logic for the multiple shipping scenario. It is responsible for dealing with more
- * than one shipments, respectively multiple shipping addresses as well as multiple selected shipping methods.
+ * This controller implements the logic for the multishipping scenario. Multishipping involves more
+ * than one shipment, shipping address, and/or shipping method per order.
  *
  * @module controllers/COShippingMultiple
  */
@@ -24,7 +22,7 @@ var Profile = app.getModel('Profile');
 var TransientAddress = app.getModel('TransientAddress');
 
 /**
- * Starting point for multi shipping scenario. Renders a page providing address selection for each product line item.
+ * Starting point for multishipping scenario. Renders a page providing address selection for each product line item.
  */
 function start() {
     var cart = Cart.get();
@@ -62,7 +60,7 @@ function start() {
 }
 
 /**
- * TODO
+ * Form handler for multishipping form.
  */
 function multiShippingAddresses() {
     var multiShippingForm = app.getForm('multishipping');
@@ -97,7 +95,7 @@ function multiShippingAddresses() {
 }
 
 /**
- * The second step of multi shipping: renders a page with each shipment, providing a shipping method selection per shipment.
+ * The second step of multishipping: renders a page for each shipment, providing a shipping method selection per shipment.
  */
 function startShipments() {
     var cart = Cart.get();
@@ -106,7 +104,7 @@ function startShipments() {
 
         app.getController('COShipping').PrepareShipments();
 
-        // Initializes the forms for the multi shipment setting.
+        // Initializes the forms for the multishipment setting.
         session.forms.multishipping.shippingOptions.clearFormElement();
 
         app.getForm(session.forms.multishipping.shippingOptions.shipments).copyFrom(cart.getShipments());
@@ -172,7 +170,7 @@ function multiShippingMethods() {
 }
 
 /**
- * Initializes the forms for the multi address selection.
+ * Initializes the forms for the multiaddress selection.
  */
 function initAddressForms(cart, quantityLineItems) {
 
@@ -201,7 +199,7 @@ function initAddressForms(cart, quantityLineItems) {
 
 /**
  * Renders a form dialog to edit an address. The dialog is supposed to be opened by an Ajax request and ends
- * in templates, which just trigger a certain JS event. The calling page of this dialog is responsible for
+ * in templates, which trigger a JavaScript event. The calling page of this dialog is responsible for
  * handling these events.
  */
 function editAddresses() {

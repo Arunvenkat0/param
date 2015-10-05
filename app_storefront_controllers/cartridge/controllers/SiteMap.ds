@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Controller handling site map requests.
+ * This controller handles site map requests.
  *
  * @module controllers/SiteMap
  */
@@ -30,7 +30,7 @@ function google() {
 }
 
 /**
- *
+ * Renders the sitemap template.
  */
 function start() {
 

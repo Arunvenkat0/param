@@ -1,8 +1,8 @@
 'use strict';
 
 /**
- * This controller implements the billing logic. It is used by both the single shipping and the multi shipping
- * scenario and is responsible for providing the payment method selection as well as entering a billing address.
+ * This controller provies the billing logic. It is used by both the single shipping and the multishipping
+ * functionality and is responsible for payment method selection and entering a billing address.
  *
  * @module controllers/COBilling
  */
@@ -28,10 +28,10 @@ var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
 /**
- * Initializes the address form: - if customer chose option "use as billing
+ * Initializes the address form: if customer chose option "use as billing
  * address" on single shipping page the form is prepopulated with the shipping
- * address, otherwise - prepopulate with already set billing address, otherwise -
- * prepopulate with default address of authenticated customer
+ * address, otherwise it prepopulates with the billing address that was already set.
+ * If neither address is availble, it prepopulates with the default address of the authenticated customer.
  */
 function initAddressForm(cart) {
 
@@ -57,10 +57,10 @@ function initAddressForm(cart) {
 }
 
 /**
- * initializes the email address form field: - if there's already a customer
- * email set at the basket this email address is taken, otherwise - if the
+ * Initializes the email address form field: if there is already a customer
+ * email set at the basket, that email address is used. If the
  * current customer is authenticated the email address of the customer's profile
- * is taken
+ * is used.
  */
 function initEmailAddress(cart) {
     if (cart.getCustomerEmail() !== null) {
@@ -73,10 +73,12 @@ function initEmailAddress(cart) {
 /**
  * TODO
  * @param cart
+ * @param params
  */
 function returnToForm(cart, params) {
     var pageMeta = require('~/cartridge/scripts/meta');
 
+    // if the payment method is set to gift certificate get the gift certificate code from the form
     if (!empty(cart.getPaymentInstrument()) && cart.getPaymentInstrument().getPaymentMethod() === PaymentInstrument.METHOD_GIFT_CERTIFICATE) {
         app.getForm('billing').copyFrom({
             giftCertCode : cart.getPaymentInstrument().getGiftCertificateCode()

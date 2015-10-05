@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Displays credit card information and other payment related information and
+ * This controller displays credit card and other payment information and
  * lets the user change it.
  *
  * @module controllers/PaymentInstruments
@@ -46,7 +46,7 @@ function list()
  * Provides functionality to add a new credit card payment instrument to the
  * saved payment instruments of the current customer.
  *
- * @param {boolean} clearForm true or missing will clear the form before displaying the page, false will skip it
+ * @param {boolean} clearForm true or missing clears the form before displaying the page, false skips it
  */
 function add(clearForm)
 {
@@ -64,7 +64,7 @@ function add(clearForm)
 }
 
 /**
- * Handles the submitted form for creating payment instruments
+ * Handles the submitted form for creating payment instruments.
  */
 function handlePaymentForm()
 {
@@ -170,7 +170,7 @@ function Delete()
 /**
  * Verifies if the entered credit card details are valid.
  *
- * @returns {boolean} True in case of success, false otherwise
+ * @returns {boolean} true in case of success, otherwise false.
  */
 function verifyCreditCard()
 {
@@ -189,19 +189,19 @@ function verifyCreditCard()
     {
         var status = VerifyPaymentCardResult.Status;
 
-        // verify that we have a status object and a valid credit card form
+        // Verify existance of a status object and a valid credit card form.
         if( !status || !newCreditCardForm.valid() )
         {
             return false;
         }
 
-        // we are fine, if status is OK
+        //If status is OK, return true.
         if( status.status === dw.system.Status.OK )
         {
             return true;
         }
 
-        // invalidate the payment card form elements
+        // Invalidate the payment card form elements.
         var items = status.items.iterator();
         while( items.hasNext() )
         {

@@ -20,8 +20,9 @@ var ContentModel = AbstractModel.extend(
     /** @lends module:models/ContentModel~ContentModel.prototype */
     {
         /**
-         *    Get navigation link from custom attribute "pipelineLink"
+         *  Get navigation link from custom attribute "pipelineLink"
          *  or creating new link of content page for current asset
+         * @alias module:models/ContentModel~ContentModel/getLink
          *    @returns {String} URL
          */
         getLink : function () {
@@ -33,9 +34,11 @@ var ContentModel = AbstractModel.extend(
         },
 
         /**
-         *    @param {String} folderId - folder id
-         *    @returns {Boolean} true if asset is in specified folder
-         */
+        * Checks whether current content asset is in the specified folder.
+        * @alias module:models/ContentModel~ContentModel/isInFolder
+        * @param {String} folderId - folder id
+        * @returns {Boolean} true if asset is in the specified folder.
+        */
         isInFolder : function (folderId) {
             if (this.object && !empty(this.object.folders)) {
                 for (let index in this.object.folders) {
@@ -48,8 +51,9 @@ var ContentModel = AbstractModel.extend(
         },
 
         /**
-         *  Returns actual markup of the asset in case defined, otherwise returns an empty string
-         *    @returns {String} url
+         *  Returns actual markup of the asset if it is defined, otherwise returns an empty string.
+         * @alias module:models/ContentModel~ContentModel/getMarkup
+         * @returns {String} url
          */
         getMarkup : function () {
             var body = this.getValue('body');
@@ -57,9 +61,10 @@ var ContentModel = AbstractModel.extend(
         },
 
         /**
-         * Returns the default folder which is either the classificationFolder or the first folder the asset is
-         * assigned to
+         * Returns the default folder. This is either the classification folder or the first folder the asset is
+         * assigned to.
          *
+         * @alias module:models/ContentModel~ContentModel/getDefaultFolder
          * @return {dw.content.Folder} The default folder for this asset
          */
         getDefaultFolder : function () {
@@ -74,7 +79,8 @@ var ContentModel = AbstractModel.extend(
         },
 
         /**
-         * Returns an array containing the folder path of the default folder
+         * Returns an array containing the folder path of the default folder.
+         * @alias module:models/ContentModel~ContentModel/getFolderPath
          * @return {Array} The fodler path for this asset
          */
         getFolderPath : function () {
@@ -94,9 +100,10 @@ var ContentModel = AbstractModel.extend(
     });
 
 /**
- * Use this method to get a new instance for a given content.
+ * Gets a new instance for a given content asset.
  *
- * @param parameter {(dw.content.Content|String)} The content object to enhance/wrap or the cotnent ID of the content object.
+ * @alias module:models/ContentModel~ContentModel/get
+ * @param parameter {(dw.content.Content|String)} The content object to enhance/wrap or the content ID of the content object.
  * @returns {module:models/ContentModel~ContentModel}
  */
 ContentModel.get = function (parameter) {

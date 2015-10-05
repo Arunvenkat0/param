@@ -1,6 +1,6 @@
 'use strict';
 /**
- * This module contains the custom logic for the product compare feature.
+ * Model for the custom logic of the product compare feature.
  * The implementation is bundled into a class which provides
  * method access the compare data. The compare data itself is stored as
  * a JSON string in the privacy attributes of the session.
@@ -85,11 +85,11 @@ function CompareList(){
             return new dw.util.LinkedHashSet();
         }
 
-        // Create list of paths from root to classification category for products
+        // Creates a list of paths from root to classification category for products.
         var paths = new dw.util.ArrayList();
         for (var i = 0; i < categoryProductArray.length; i++)
         {
-            // get the product with this ID
+            // Gets the product with this ID.
             var p = dw.catalog.ProductMgr.getProduct(categoryProductArray[i]);
             if (p !== null)
             {
@@ -121,7 +121,7 @@ function CompareList(){
             return null;
         }
 
-        // Assume no common category
+        // Assume no common category.
         /** @type {dw.catalog.Category} */
         var deepestCommonCategory = null;
 
@@ -130,25 +130,25 @@ function CompareList(){
         var comparePath = paths.get(0);
         for (var i = 0; i < comparePath.size(); i++)
         {
-            // Get category at level i in first path
+            // Get category at level i in the first path.
             var compareCategory = comparePath.get(i);
             if (compareCategory === null)
             {
                 return deepestCommonCategory;
             }
 
-            // Compare category to level i categories in other paths
+            // Compare category to level i categories in other paths.
             for (var j = 1; j < paths.size(); j++)
             {
                 var otherPath = paths.get(j);
 
-                // Quit if other path is shorter
+                // Quit if other path is shorter.
                 if (i >= otherPath.size())
                 {
                     return deepestCommonCategory;
                 }
 
-                // Quit if other path has different category at level i
+                // Quit if the other path has a different category at level i.
                 var otherCategory = otherPath.get(i);
                 if ((otherCategory === null) || (otherCategory.getID() !== compareCategory.getID()))
                 {
@@ -156,7 +156,7 @@ function CompareList(){
                 }
             }
 
-            // Update deepest common category among paths
+            // Update deepest common category among paths.
             deepestCommonCategory = compareCategory;
         }
 
@@ -166,11 +166,11 @@ function CompareList(){
     /**
      * Returns the set of attribute groups for the given classification category,
      * each one represented as a map.
-     * @param {dw.catalog.Category} classificationCategory the classification category
+     * @param {dw.catalog.Category} classificationCategory the classification category.
      */
     function findAttributeGroups(classificationCategory)
     {
-        // Get product attribute model
+        // Gets the product attribute model.
         var model;
         if (classificationCategory === null)
         {
@@ -181,7 +181,7 @@ function CompareList(){
             model = classificationCategory.getProductAttributeModel();
         }
 
-        // Get attribute groups for attribute model
+        // Gets the attribute groups for attribute model.
         var persistentAttributeGroups = model.getVisibleAttributeGroups().iterator();
 
         var attributeGroups = new dw.util.LinkedHashSet();
@@ -190,7 +190,7 @@ function CompareList(){
             var persistentAttributeGroup = persistentAttributeGroups.next();
             var persistentAttributeDescriptors = model.getVisibleAttributeDefinitions(persistentAttributeGroup).iterator();
 
-            // Create attributes in group
+            // Creates attributes.
             var groupAttributes = new dw.util.ArrayList();
             while (persistentAttributeDescriptors.hasNext())
             {
@@ -203,7 +203,7 @@ function CompareList(){
                 groupAttributes.add(attributeDesc);
             }
 
-            // Create attribute group
+            // Creates attribute group.
             var attributeGroup = new dw.util.HashMap();
             attributeGroup.put('descriptor', persistentAttributeGroup);
             attributeGroup.put('displayName', persistentAttributeGroup.getDisplayName());
@@ -275,21 +275,21 @@ function CompareList(){
     {
         var products = categoryProducts[c.getID()];
 
-        // Create set if necessary
+        // Creates set if necessary.
         if (!products)
         {
             products = [];
             categoryProducts[c.getID()] = products;
         }
 
-        // Check if product is already in set
+        // Checks if the product is already in set.
         var found = false;
         for (var i = 0; i < products.length; i++)
         {
             found |= (products[i] === p.getID());
         }
 
-        // Add the product if it is not
+        // Adds the product if it is not.
         if (!found)
         {
             products.push(p.getID());
@@ -304,40 +304,40 @@ function CompareList(){
      */
     function copyParentCategory()
     {
-        // Quit if no category set
+        // Quits if no category set is set.
         if (currentCategoryID === null)
         {
             return;
         }
 
-        // Quit if the category already has products
+        // Quits if the category already has products.
         if (categoryProducts[currentCategoryID])
         {
             return;
         }
 
-        // Get the category
+        // Gets the category.
         var category = dw.catalog.CatalogMgr.getCategory(currentCategoryID);
         if (category === null)
         {
             return;
         }
 
-        // Get the parent category
+        // Gets the parent category
         var parent = category.getParent();
         if (parent === null)
         {
             return;
         }
 
-        // Get product IDs for parent category
+        // Gets product IDs for parent category.
         var products = categoryProducts[parent.getID()];
         if (!products)
         {
             return;
         }
 
-        // Add products from parent category also assigned to the category
+        // Adds products from parent category also assigned to the category.
         for (var i = 0; i < products.length; i++)
         {
             var product = dw.catalog.ProductMgr.getProduct(products[i]);
@@ -385,13 +385,13 @@ function CompareList(){
     {
         var products = categoryProducts[c.getID()];
 
-        // Quit if no products for category
+        // Quits if there are no products for the category.
         if (!products)
         {
             return;
         }
 
-        // Build copy of products array without product
+        // Builds copy of products array without the product.
         var newProducts = [];
         for (var i = 0; i < products.length; i++)
         {
@@ -401,19 +401,19 @@ function CompareList(){
             }
         }
 
-        // Remove category if last product was removed
+        // Removes category if the last product was removed.
         if (newProducts.length === 0)
         {
             delete categoryProducts[c.getID()];
         }
 
-        // Otherwise set updated products array for category
+        // Otherwise, sets the updated products array for category.
         else
         {
             categoryProducts[c.getID()] = newProducts;
         }
 
-        // Remove the product from subcategories of the category
+        // Removes the product from subcategories of the category
         for (var it = c.getSubCategories().iterator(); it.hasNext(); )
         {
             this.remove(p, it.next());
@@ -430,11 +430,11 @@ function CompareList(){
  */
 exports.get = function ()
 {
-    // Create the transient compare list
+    // Creates the transient compare list.
     var compareList = new CompareList();
 
     // If there is compare data stored in the session
-    // restore the compare list with this data
+    // restores the compare list with this data.
     compareList.fromJSON(session.privacy.productComparison);
 
     return compareList;

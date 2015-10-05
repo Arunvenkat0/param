@@ -1,10 +1,8 @@
 'use strict';
 
 /**
- * <h3>Single Shipping Scenario</h3>
- *
- * This controller implements the logic for the default (single) shipping scenario. It is responsible for dealing with
- * one shipment only, respectively one shipping addresses as well as one shipping method.
+ * This controller implements the logic for the default single shipping scenario.
+ * Single shipping allows only one shipment, shipping address, and shipping method per order.
  *
  * @module controllers/COShipping
  */
@@ -23,10 +21,12 @@ var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
 /**
- * Prepares shipments by separating all gift certificate line items from product
- * line items and creating one shipment per gift certificate to purchase. As
- * second step empty shipments are removed. This start node can be called by any
- * checkout step to clean existing shipments according to these conditions.
+ * Prepares shipments. It separates gift certificate line items from product
+ * line items. It creates one shipment per gift certificate purchase
+ * and removes empty shipments. If in-store pickup is enabled, it combines the
+ * items for in-store pickup and removes them.  
+ * This function can be called by any checkout step to prepare shipments.
+ * 
  */
 function prepareShipments() {
     var cart, homeDeliveries;
@@ -55,19 +55,21 @@ function prepareShipments() {
 }
 
 /**
- * Starting point for single shipping scenario
+ * Starting point for single shipping scenario. Prepares shipment by removing gift certificate and in-store pickup line items from shipment.
+ * Redirects to multishipping scenario if more than one physical shipment is required and redirects to billing if all line items do not require
+ * shipping. 
  */
 function start() {
     var cart, physicalShipments, pageMeta, homeDeliveries;
     cart = app.getModel('Cart').get();
 
     if (cart) {
-        // redirect to multi shipping scenario if more than one physical shipment is contained in the basket.
+        // Redirects to multishipping scenario if more than one physical shipment is contained in the basket.
         physicalShipments = cart.getPhysicalShipments();
         if (!(Site.getCurrent().getCustomPreferenceValue('enableMultiShipping') && physicalShipments && physicalShipments.size() > 1)) {
 
-            // Initializes the address and shipping method form: - prepopulates form with shipping address of default
-            // shipment if address exists, otherwise preselects shipping method in list if set at shipment
+            // Initializes the singleshipping form and prepopulates it with the shipping address of the default
+            // shipment if the address exists, otherwise it preselects the default shipping method in the form. 
             if (cart.getDefaultShipment().getShippingAddress()) {
                 app.getForm(session.forms.singleshipping.shippingAddress.addressFields).copyFrom(cart.getDefaultShipment().getShippingAddress());
                 app.getForm(session.forms.singleshipping.shippingAddress.addressFields.states).copyFrom(cart.getDefaultShipment().getShippingAddress());
@@ -80,14 +82,14 @@ function start() {
             }
             session.forms.singleshipping.shippingAddress.shippingMethodID.value = cart.getDefaultShipment().getShippingMethodID();
 
-            // Clean shipments.
+            // Prepares shipments.
             homeDeliveries = prepareShipments();
 
             Transaction.wrap(function() {
                 cart.calculate();
             });
 
-            // Go to billing step, if we have no product line items, but only gift certificates in the basket, Shipping step is not required.
+            // Go to billing step, if we have no product line items, but only gift certificates in the basket, shipping is not required.
             if (cart.getProductLineItems().size() === 0) {
                 app.getController('COBilling').Start();
             } else {
@@ -113,9 +115,9 @@ function start() {
 }
 
 /**
- * Handles the selected shipping address and shipping method: - copies the
- * address details and gift options to the basket's default shipment - set the
- * selected shipping method at the default shipment
+ * Handles the selected shipping address and shipping method. Copies the
+ * address details and gift options to the basket's default shipment. Sets the
+ * selected shipping method to the default shipment.
  */
 function handleShippingSettings(cart) {
 
@@ -152,13 +154,14 @@ function handleShippingSettings(cart) {
 
 /**
  * TODO
+ * Updates shipping address for the current customer with information from the singleshipping form.
  */
 function updateAddressDetails() {
     var cart, addressID, segments, lookupCustomer, lookupID, address, defaultShipment, shippingAddress, profile;
+    //Gets an empty cart object from the CartModel.
     cart = app.getModel('Cart').get();
 
     if (cart) {
-
         addressID = !request.httpParameterMap.addressID.value ? request.httpParameterMap.dwfrm_singleshipping_addressList.value : request.httpParameterMap.addressID.value;
         segments = addressID.split("??");
 
@@ -200,6 +203,7 @@ function updateAddressDetails() {
 
 /**
  * TODO
+ * Form handler for the singleshipping form.
  */
 function singleShipping() {
     var singleShippingForm = app.getForm('singleshipping');
@@ -258,7 +262,7 @@ function singleShipping() {
 }
 
 /**
- * Select a shipping method for the default shipment. Sets the shipping method
+ * Selects a shipping method for the default shipment. Sets the shipping method
  * and returns the result as JSON response.
  */
 function selectShippingMethod() {
@@ -292,11 +296,11 @@ function selectShippingMethod() {
 }
 
 /**
- * Determine the list of applicable shipping methods for the default shipment of
+ * Determines the list of applicable shipping methods for the default shipment of
  * the current basket. The applicable shipping methods are based on the
  * merchandise in the cart and the address parameters included in the request
- * (if any). Change the shipping method of this shipment if the current method
- * is no longer applicable. Pre-calculate the shipping cost for each applicable
+ * (if any). Changes the shipping method of this shipment if the current method
+ * is no longer applicable. Pre-calculates the shipping cost for each applicable
  * shipping method by simulating the shipping selection i.e. explicitly add each
  * shipping method and then calculate cart (to get cost and
  * discounts/promotions). The simulation is done so that shipping cost along
@@ -353,10 +357,10 @@ function updateShippingMethodList() {
 }
 
 /**
- * Determine the list of applicable shipping methods for the default shipment of
+ * Determines the list of applicable shipping methods for the default shipment of
  * the current customer's basket and return the response as a JSON array. The
  * applicable shipping methods are based on the merchandise in the cart and any
- * address parameters included in the request parameters.
+ * address parameters are included in the request parameters.
  */
 function getApplicableShippingMethodsJSON() {
     var cart, address, applicableShippingMethods, TransientAddress;
@@ -379,8 +383,8 @@ function getApplicableShippingMethodsJSON() {
 }
 
 /**
- * Renders a form dialog to edit an address. The dialog is supposed to be opened
- * by an Ajax request and ends in templates, which just trigger a certain JS
+ * Renders a form dialog to edit an address. The dialog is opened
+ * by an Ajax request and ends in templates, which trigger a JavaScript
  * event. The calling page of this dialog is responsible for handling these
  * events.
  */

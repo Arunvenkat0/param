@@ -1,17 +1,19 @@
 'use strict';
-
+/**
+ * This controller renders a public gift registry, which can be accessed by people other than the owner.
+ *
+ * @module controllers/GiftRegistryCustomer
+ * @todo  Requires cleanup
+ */
+ 
 /* API Includes */
 var ISML = require('dw/template/ISML');
 var Pipelet = require('dw/system/Pipelet');
 
 /* Script Modules */
 var g = require('~/cartridges/scripts/guard');
-
 /**
- * Renders a public gift registry, which can be accessed by people other than the owner.
- *
- * @module controllers/GiftRegistryCustomer
- * @todo  Requires cleanup
+ * TODO
  */
 function Show()
 {
@@ -64,7 +66,9 @@ function Show()
     	Status: Status
     });
 }
-
+/**
+ * TODO
+ */
 // TODO fix form in template?
 function ShowInteraction()
 {

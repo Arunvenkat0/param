@@ -1,8 +1,8 @@
 'use strict';
 
 /**
- * Renders product detail pages, snippets/includes used on product detail pages as well as product tiles for product
- * listings.
+ * This controller renders product detail pages and  snippets or includes used on product detail pages.
+ * Also renders product tiles for product listings.
  *
  * @module controllers/Product
  */
@@ -14,8 +14,7 @@ var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
 /**
- * Renders a full product detail page. If the http parameter "format" is set to
- * "json" the product details are rendered as JSON response.
+ * Renders the product template.
  */
 function show() {
 
@@ -35,7 +34,7 @@ function show() {
         productView.render(product.getTemplate() || 'product/product');
     } else {
         // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
-        // remote includes which the WA won't resolve
+        // remote includes which the WA won't resolve.
         response.setStatus(410);
         app.getView().render('error/notfound');
     }
@@ -43,8 +42,7 @@ function show() {
 }
 
 /**
- * Renders a full product detail page. If the http parameter "format" is set to
- * "json" the product details are rendered as JSON response.
+ * Renders the productdetail template.
  */
 function detail() {
 
@@ -94,7 +92,7 @@ function getAvailability() {
 }
 
 /**
- * Renders a product tile, e.g. used within family and search result pages.
+ * Renders a product tile, used within family and search result pages.
  */
 function hitTile() {
 
@@ -111,7 +109,7 @@ function hitTile() {
             showcompare: true
         });
 
-        // special handling for dictionary key 'product' as the template requires it in lower case
+        // Special handling for dictionary key 'product' as the template requires it in lower case.
         delete productView.Product;
         productView.product = product.object;
 
@@ -133,14 +131,14 @@ function productNavigation() {
         var PagingModel;
         var productPagingModel;
 
-        // construct the search based on the HTTP params & set the categoryID
+        // Construct the search based on the HTTP params and set the categoryID.
         var Search = app.getModel('Search');
         var productSearchModel = Search.initializeProductSearchModel(params);
 
-        // need to reset pid in search
+        // Reset pid in search.
         productSearchModel.setProductID(null);
 
-        // special handling if no category ID is given in URL
+        // Special handling if no category ID is given in URL.
         if (!params.cgid.value) {
             var category = null;
 
@@ -156,7 +154,7 @@ function productNavigation() {
             }
         }
 
-        // execute the product search
+        // Execute the product searchs
         productSearchModel.search();
 
         // construct the paging model
@@ -196,7 +194,7 @@ function variation() {
             product = Product.get(selectedVariant);
         }
 
-        // TODO this is apparently nowhere set to true..
+        // TODO this is apparently nowhere set to true.
         var resetAttributes = false;
 
         if (product.isMaster()) {
@@ -332,7 +330,7 @@ function getSetItem() {
 
 /**
  * Renders the product detail page within the context of a category.
- * Note: this start node is not obsolete and needs to remain as it's by some hardcoded platform rewrite rules.
+ * Note: this function is not obsolete and must remain as it is used by hardcoded platform rewrite rules.
  */
 function showInCategory() {
     show();

@@ -1,6 +1,6 @@
 'use strict';
 /**
- * Module for cart related functionality.
+ * Model for cart functionality.
  *
  * @module models/AccountModel
  */
@@ -18,11 +18,14 @@ var accountLogin = require('~/cartridge/scripts/models/ContentModel').get('myacc
  * @class module:models/AccountModel~AccountModel
  */
 var AccountModel = AbstractModel.extend(
- /** @lends module:models/AccountModel~AccountModel.prototype */
+ /** 
+ * @lends module:models/AccountModel~AccountModel.prototype 
+ */
 	{
 	
 		/**
 		 * Looks up a customer by its login.
+		 * @alias module:models/AccountModel~AccountModel/getCustomerByLogin
 		 */
 		getCustomerByLogin : function (login)
 		{
@@ -36,7 +39,10 @@ var AccountModel = AbstractModel.extend(
 		
 		    return GetCustomerResult.Customer;
 		},
-		
+		/**
+		 * Creates a customer.
+		 * @alias module:models/AccountModel~AccountModel/createCustomer
+		 */
 		createCustomer : function (login, password)
 		{
 		    var CreateCustomerResult = new dw.system.Pipelet('CreateCustomer').execute({
@@ -52,11 +58,12 @@ var AccountModel = AbstractModel.extend(
 		},
 		
 		/**
-		 * Sets the customers login.
+		 * Sets the customer's login.
 		 * 
-		 * @param customer the customer
-		 * @param login the user name of the customer
-		 * @param password the password of the current customer
+		 * @param customer The customer
+		 * @param login The user name of the customer
+		 * @param password The password of the current customer
+		 * @alias module:models/AccountModel~AccountModel/setLogin
 		 * @return true, if the login / password was updated
 		 */
 		setLogin : function (customer, login, password)
@@ -83,7 +90,9 @@ var AccountModel = AbstractModel.extend(
 		/**
 		 * Creates a new customer account.
 		 * 
-		 * @return true, if the account was created successfully
+		 * @alias module:models/AccountModel~AccountModel/createAccount
+		 * @transactional
+		 * @return true, if the account was created successfully.
 		 */
 		createAccount : function ()
 		{
@@ -107,7 +116,7 @@ var AccountModel = AbstractModel.extend(
 		        return false;
 		    }
 		
-		    // check if login is already taken
+		    // Checks if login is already taken.
 		    var existingCustomer = this.getCustomerByLogin(email);
 		    if (existingCustomer != null)
 		    {
@@ -117,7 +126,7 @@ var AccountModel = AbstractModel.extend(
 		
 		    Transaction.begin();
 		
-		    // create the new customer
+		    // Creates the new customer.
 		    var newCustomer = this.createCustomer(email, password);
 		    if (newCustomer == null)
 		    {
@@ -136,7 +145,7 @@ var AccountModel = AbstractModel.extend(
 		    email = profileForm.customer.email.value;
 		    password = profileForm.login.password.value;
 		
-		    // set login / password
+		    // Sets the login and password.
 		    if (!this.setLogin(newCustomer, email, password))
 		    {
 		        Transaction.rollback();
@@ -152,13 +161,13 @@ var AccountModel = AbstractModel.extend(
 		    password = profileForm.login.password.value;
 		    var rememberMe = profileForm.login.rememberme.value;
 		
-		    // login the customer
+		    // Logs in the customer.
 		    return this.loginCustomer(login, password, rememberMe);
 		},
 		
 		/**
-		 * Checks the given user name on existence and ends on a named end node to
-		 * communicated the status back.
+		 * Checks whether a user name on exists.
+		 * @alias module:models/AccountModel~AccountModel/checkUserName
 		 */
 		checkUserName : function ()
 		{
@@ -179,7 +188,11 @@ var AccountModel = AbstractModel.extend(
 		
 		    return false;
 		},
-		
+		/**
+		 * Edits a customer account.
+		 * @alias module:models/AccountModel~AccountModel/editAccount
+		 * @transactional
+		 */		
 		editAccount : function ()
 		{
 		    var profileForm = session.forms.profile;

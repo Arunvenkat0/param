@@ -1,8 +1,14 @@
 'use strict';
 
 /**
+ * Model for prototype model functionality.
  * @module models/AbstractModel
  */
+var wash = exports.wash = function() {
+    // ...
+};
+
+
 
 /* API Includes */
 var Class = require('~/cartridge/scripts/util/Class').Class;
@@ -13,14 +19,14 @@ var AbstractModel = Class.extend(
 /** @lends module:models/AbstractModel~AbstractModel.prototype */
 {
     /**
-     * Property holding the wrapped object which is initialized in the child classes. Usually
-     * the static get() method of the module is used to obtain a model instance
+     * Property holding the wrapped object that is initialized in the child classes. Usually,
+     * the static get() method of the app.ds module is used to obtain a model instance.
      */
     object : null,
 
     /**
      * Abstract class for all modules implementing the {@tutorial Models} concept. Models typlcally wrap
-     * {@link dw.object.PersistenObject} instances (or more general instances of Demandware API classes).
+     * {@link dw.object.PersistenObject} instances or more general instances of Demandware API classes.
      *
      * @extends module:util/Class~Class
      * @constructs module:models/AbstractModel~AbstractModel
@@ -34,16 +40,17 @@ var AbstractModel = Class.extend(
     	}
     	
         this.object = obj;
-        // optionally intiatlize properties, be care of the potential performance impact
-        // which is why it is preferable to do this only for subclasses which really need it
+        // Optionally, intializes properties. Be careful of the potential performance impact,
+        // which is why it is preferable to do this only for subclasses that really need it
         //this.initProperties();
         return this;
     },
 
     /**
-     * Returns a wrapped object instance. This method needs to be implemented by the sub classes
+     * Returns a wrapped object instance. This method needs to be implemented by the subclasses.
      *
      * @abstract
+     * @alias module:models/AbstractModel~AbstractModel/get
      * @return {Void}
      */
     get : function () {
@@ -55,6 +62,7 @@ var AbstractModel = Class.extend(
      * Get value from prepopulated object.
      * If the key is point-delimited trying to parse JSON
      * If not - trying to obtain a value from "custom" property of an object
+     * @alias module:models/AbstractModel~AbstractModel/getValue
      * @return {Object}
      */
     getValue : function (key) {
@@ -71,6 +79,7 @@ var AbstractModel = Class.extend(
     /**
      * Set value to prepopulated object.
      * If the key is point-delimited trying to parse JSON and set up a target value
+     * @alias module:models/AbstractModel~AbstractModel/setValue
      * @return {Boolean}
      */
     setValue : function (key, value) {
@@ -88,6 +97,7 @@ var AbstractModel = Class.extend(
 
     /**
      * Creates property access and delegate it to the appropriate getters & setters of the wrapper or wrapped object
+     * @alias module:models/AbstractModel~AbstractModel/initProperties
      */
     initProperties : function() {
         var instance = this;
@@ -143,8 +153,8 @@ var AbstractModel = Class.extend(
      * @param {String} methodName
      * @param {Array} methodArgs
      *
-     * @return {*} Record function result (or exception if function not exists)
-     *
+     * @alias module:models/AbstractModel~AbstractModel/__noSuchMethod__
+     * @return {*} Record function result (or exception if function not exists.
      * @throws {TypeError}
      */
     __noSuchMethod__ : function (methodName, methodArgs) {

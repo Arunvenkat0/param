@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Controller used to update the current session currency.
+ * This controller updates the current session currency.
  *
  * @module controllers/Currency
  */
@@ -15,7 +15,7 @@ var guard = require('~/cartridge/scripts/guard');
 var Cart = require('~/cartridge/scripts/models/CartModel');
 
 /**
- * This controller is used in an ajax call to set the session variable 'currency'.
+ * This controller is used in an AJAX call to set the session variable 'currency'.
  */
 function setSessionCurrency() {
 

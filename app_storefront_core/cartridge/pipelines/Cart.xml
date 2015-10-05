@@ -2,16 +2,6 @@
 <?demandware-pipeline version="2.0"?>
 
 <pipeline group="Checkout">
-  <branch basename="_ANONYMOUS_BRANCH_1">
-    <segment>
-      <node>
-        <text-node>
-          <description>Should be used only for simple UI</description>
-        </text-node>
-        <node-display x="1" y="0"/>
-      </node>
-    </segment>
-  </branch>
   <branch basename="AddProduct">
     <segment>
       <node>
@@ -146,7 +136,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_3">
+  <branch basename="_ANONYMOUS_BRANCH_2">
     <segment>
       <node>
         <text-node>
@@ -156,7 +146,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_4">
+  <branch basename="_ANONYMOUS_BRANCH_3">
     <segment>
       <node>
         <text-node>
@@ -747,7 +737,7 @@
       <transition target-connector="in1" target-path="./-2"/>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_6">
+  <branch basename="_ANONYMOUS_BRANCH_5">
     <segment>
       <node>
         <text-node>
@@ -757,7 +747,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_7">
+  <branch basename="_ANONYMOUS_BRANCH_6">
     <segment>
       <node>
         <text-node>
@@ -939,7 +929,7 @@ just like miniaddproduct i.e. pid, options, quantiy.</description>
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_10">
+  <branch basename="_ANONYMOUS_BRANCH_9">
     <segment>
       <node>
         <text-node>
@@ -1106,7 +1096,7 @@ just like miniaddproduct i.e. pid, options, quantiy.</description>
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_12">
+  <branch basename="_ANONYMOUS_BRANCH_11">
     <segment>
       <node>
         <text-node>
@@ -1299,7 +1289,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_14">
+  <branch basename="_ANONYMOUS_BRANCH_13">
     <segment>
       <node>
         <text-node>
@@ -1318,7 +1308,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
       <transition target-connector="in2" target-path="/Show.3"/>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_16">
+  <branch basename="_ANONYMOUS_BRANCH_15">
     <segment>
       <node>
         <text-node>
@@ -1356,7 +1346,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_18">
+  <branch basename="_ANONYMOUS_BRANCH_17">
     <segment>
       <node>
         <text-node>
@@ -1366,7 +1356,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_19">
+  <branch basename="_ANONYMOUS_BRANCH_18">
     <segment>
       <node>
         <text-node>
@@ -1546,7 +1536,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_21">
+  <branch basename="_ANONYMOUS_BRANCH_20">
     <segment>
       <node>
         <text-node>
@@ -1683,7 +1673,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_23">
+  <branch basename="_ANONYMOUS_BRANCH_22">
     <segment>
       <node>
         <text-node>
@@ -1741,7 +1731,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_25">
+  <branch basename="_ANONYMOUS_BRANCH_24">
     <segment>
       <node>
         <text-node>
@@ -1751,7 +1741,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_26">
+  <branch basename="_ANONYMOUS_BRANCH_25">
     <segment>
       <node>
         <text-node>
@@ -1761,7 +1751,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_27">
+  <branch basename="_ANONYMOUS_BRANCH_26">
     <segment>
       <node>
         <text-node>
@@ -1836,7 +1826,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_29">
+  <branch basename="_ANONYMOUS_BRANCH_28">
     <segment>
       <node>
         <text-node>
@@ -1911,7 +1901,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_31">
+  <branch basename="_ANONYMOUS_BRANCH_30">
     <segment>
       <node>
         <text-node>
@@ -1921,7 +1911,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_32">
+  <branch basename="_ANONYMOUS_BRANCH_31">
     <segment>
       <node>
         <text-node>
@@ -2067,7 +2057,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_35">
+  <branch basename="_ANONYMOUS_BRANCH_34">
     <segment>
       <node>
         <text-node>
@@ -2296,7 +2286,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_37">
+  <branch basename="_ANONYMOUS_BRANCH_36">
     <segment>
       <node>
         <text-node>
@@ -2473,7 +2463,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_39">
+  <branch basename="_ANONYMOUS_BRANCH_38">
     <segment>
       <node>
         <text-node>
@@ -2745,7 +2735,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_43">
+  <branch basename="_ANONYMOUS_BRANCH_42">
     <segment>
       <node>
         <text-node>
@@ -3338,7 +3328,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_47">
+  <branch basename="_ANONYMOUS_BRANCH_46">
     <segment>
       <node>
         <text-node>
