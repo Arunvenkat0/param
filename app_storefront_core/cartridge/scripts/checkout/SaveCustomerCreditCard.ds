@@ -1,16 +1,27 @@
 /**
- * This script attempts to add the credit card contained in the given
- * credit card form group to the customer payment instrument.
+ * Pipeline Implementation of save function
  *
  * @input PaymentInstrument : dw.customer.CustomerPaymentInstrument
  * @input CreditCardFormFields : dw.web.FormGroup
  */
+function execute (pdict) {
+	return save(pdict);
+}
+
+/**
+ * This script attempts to add the credit card contained in the given
+ * credit card form group to the customer payment instrument.
+ *
+ * @param {Object} params - New credit card data
+ * @param {dw.customer.CustomerPaymentInstrument} params.PaymentInstrument - credit card object
+ * @param {dw.web.FormGroup} params.CreditCardFormFields - new credit card form
+ */
 var PaymentInstrument = require('dw/order/PaymentInstrument');
 var Logger = require('dw/system/Logger');
 
-function execute(pdict) {
-    var paymentInstr = pdict.PaymentInstrument;
-    var creditCardFields = pdict.CreditCardFormFields;
+function save(params) {
+    var paymentInstr = params.PaymentInstrument;
+    var creditCardFields = params.CreditCardFormFields;
 
     if( !paymentInstr ) {
         // no payment instrument given
@@ -34,6 +45,6 @@ function execute(pdict) {
     return PIPELET_NEXT;
 }
 
-exports = {
-    execute: execute
+module.exports = {
+    save: save,
 };
