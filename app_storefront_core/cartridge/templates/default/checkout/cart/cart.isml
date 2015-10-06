@@ -147,7 +147,7 @@
 								<isset name="lineItem" value="${FormLi.object}" scope="page" />
 								<isscript>
 									var isInWishList = false;
-									if (pdict.WishList) {
+									if (pdict.WishList.items) {
 										var wishListItems =	pdict.WishList.items;
 										var wishListItemsSize = wishListItems.size();
 										for each( var wishListItem in wishListItems ) {
