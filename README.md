@@ -1,7 +1,7 @@
 # Welcome to the SiteGenesis Repository
 
 Please note that `master` is under active development, so please use with caution.
-Check out our tagged versions if you'd like more stable, tested releases.
+Check out our tagged versions if you'd like more stable, tested releases.  We recommend starting any new project based off the latest [tag](https://bitbucket.org/demandware/sitegenesis#tags), and never from the HEAD of the `master` branch!
 
 # Purpose
 
@@ -102,4 +102,3 @@ For sourcemaps support, run `gulp` or `grunt` in development mode by specificyin
 
 We only support external sourcemaps because Eclipse tend to crash with inline sourcemaps.
 As a result, if you're using Grunt, sourcemaps is only available when the build steps are run explicitly, i.e. `grunt js --sourcemaps`. Sourcemaps is not enabled during `watch` mode.
-
