@@ -71,7 +71,7 @@ function handlePaymentForm() {
                 response.redirect(URLUtils.https('PaymentInstruments-List'));
             }
         },
-        error: function(){
+        error: function() {
             add(false);
         }
     });
@@ -79,7 +79,7 @@ function handlePaymentForm() {
 
 function save(params) {
     var saveCustomerCreditCard = require('app_storefront_core/cartridge/scripts/checkout/SaveCustomerCreditCard');
-    var result = saveCustomerCreditCard(params);
+    var result = saveCustomerCreditCard.save(params);
     if (result === PIPELET_ERROR) {
         throw new Error('Problem saving credit card');
     }
