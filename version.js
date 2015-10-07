@@ -17,6 +17,7 @@ var minimist = require('minimist');
 var argv = minimist(process.argv.slice(2));
 
 var files = [
+	'app_storefront_controllers/cartridge/templates/resources/revisioninfo.properties',
 	'app_storefront_core/cartridge/templates/resources/revisioninfo.properties',
 	'app_storefront_core/cartridge/templates/resources/revisioninfo_fr_FR.properties',
 	'app_storefront_core/cartridge/templates/resources/revisioninfo_it_IT.properties',
