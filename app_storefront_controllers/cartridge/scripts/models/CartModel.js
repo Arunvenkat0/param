@@ -474,7 +474,7 @@ var CartModel = AbstractModel.extend({
             // The ScriptFile reference should refer to the cart/ValidateCartForCheckout file in the
             // app_storefront_controller cartridge as there are some differences from the core cartridge script
             var result = new Pipelet('Script', {
-                ScriptFile    : 'cart/ValidateCartForCheckout.ds',
+                ScriptFile    : 'cart/ValidateCartForCheckout.js',
                 Transactional : false
             }).execute({
                     Basket      : this.object,

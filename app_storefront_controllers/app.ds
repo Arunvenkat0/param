@@ -1,2 +1,0 @@
-/** Convenience access for {@link module:app} */
-module.exports = require('~/cartridge/scripts/app');

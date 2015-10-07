@@ -20,7 +20,7 @@ var AbstractModel = Class.extend(
 {
     /**
      * Property holding the wrapped object that is initialized in the child classes. Usually,
-     * the static get() method of the app.ds module is used to obtain a model instance.
+     * the static get() method of the app.js module is used to obtain a model instance.
      */
     object : null,
 
@@ -38,7 +38,7 @@ var AbstractModel = Class.extend(
     	{
     		throw new Error('Wrapped object may not be null.');
     	}
-    	
+
         this.object = obj;
         // Optionally, intializes properties. Be careful of the potential performance impact,
         // which is why it is preferable to do this only for subclasses that really need it

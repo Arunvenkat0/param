@@ -6,7 +6,7 @@
  * @module controllers/Home
  */
 
-var app = require('~/app');
+var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
 /**
