@@ -28,8 +28,8 @@ var files = [
 	'pom.xml'
 ];
 
-var newVersion = argv._[0];
-var currentVersion = require('./package.json').version;
+var newVersion = require('@tridnguyen/version')();
+var currentVersion = fs.readFileSync('./old_version', 'utf8').replace(/\n$/, '');
 
 // use this for testing
 if (argv.from) {
