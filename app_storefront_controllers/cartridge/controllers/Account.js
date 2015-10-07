@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * This controller provides functions that render the account overview, manage customer registration and password reset, 
+ * This controller provides functions that render the account overview, manage customer registration and password reset,
  * and edit customer profile information.
  *
  * @module controllers/Account
@@ -50,9 +50,9 @@ function editProfile() {
     pageMeta.update(accountPersonalDataAsset);
     // @FIXME bctext2 should generate out of pagemeta - also action?!
     app.getView({
-        bctext2 : Resource.msg('account.user.registration.editaccount', 'account', null),
-        Action : 'edit',
-        ContinueURL : URLUtils.https('Account-EditForm')
+        bctext2: Resource.msg('account.user.registration.editaccount', 'account', null),
+        Action: 'edit',
+        ContinueURL: URLUtils.https('Account-EditForm')
     }).render('account/user/registration');
 }
 
@@ -61,11 +61,11 @@ function editProfile() {
  */
 function editForm() {
     app.getForm('profile').handleAction({
-        'cancel' : function() {
+        cancel: function () {
             app.getForm('profile').clear();
             response.redirect(URLUtils.https('Account-Show'));
         },
-        'confirm' : function() {
+        confirm: function () {
             var Customer, profileUpdateValidation;
             Customer = app.getModel('Customer');
             if (!Customer.checkUserName()) {
@@ -103,7 +103,7 @@ function editForm() {
 function passwordReset() {
     app.getForm('requestpassword').clear();
     app.getView({
-        ContinueURL : URLUtils.https('Account-PasswordResetForm')
+        ContinueURL: URLUtils.https('Account-PasswordResetForm')
     }).render('account/password/requestpasswordreset');
 }
 
@@ -116,12 +116,12 @@ function passwordResetFormHandler(templateName, continueURL) {
     var resetPasswordToken, passwordemail;
 
     app.getForm('profile').handleAction({
-        'cancel' : function() {
+        cancel: function () {
             app.getView({
-                ContinueURL : continueURL
+                ContinueURL: continueURL
             }).render(templateName);
         },
-        'send' : function() {
+        send: function () {
             var Customer, resettingCustomer, Email;
             Customer = app.getModel('Customer');
             Email = app.getModel('Email');
@@ -133,25 +133,25 @@ function passwordResetFormHandler(templateName, continueURL) {
                 passwordemail = Email.get('mail/resetpasswordemail', resettingCustomer.object.profile.email);
                 passwordemail.setSubject(Resource.msg('email.passwordassistance', 'email', null));
                 passwordemail.send({
-                    ResetPasswordToken : resetPasswordToken
+                    ResetPasswordToken: resetPasswordToken
                 });
 
                 app.getView({
-                    ErrorCode : null,
-                    ShowContinue : true,
-                    ContinueURL : continueURL
+                    ErrorCode: null,
+                    ShowContinue: true,
+                    ContinueURL: continueURL
                 }).render('account/password/requestpasswordreset_confirm');
             } else {
                 app.getView({
-                    ErrorCode : 'formnotvalid',
-                    ContinueURL : continueURL
+                    ErrorCode: 'formnotvalid',
+                    ContinueURL: continueURL
                 }).render(templateName);
             }
         },
-        'error' : function() {
+        error: function () {
             app.getView({
-                ErrorCode : 'formnotvalid',
-                ContinueURL : continueURL
+                ErrorCode: 'formnotvalid',
+                ContinueURL: continueURL
             }).render(templateName);
         }
     });
@@ -171,7 +171,7 @@ function passwordResetDialog() {
     // @FIXME reimplement using dialogify
     app.getForm('requestpassword').clear();
     app.getView({
-        ContinueURL : URLUtils.https('Account-PasswordResetDialogForm')
+        ContinueURL: URLUtils.https('Account-PasswordResetDialogForm')
     }).render('account/password/requestpasswordresetdialog');
 }
 
@@ -198,7 +198,7 @@ function setNewPassword() {
         response.redirect(URLUtils.https('Account-PasswordReset'));
     } else {
         app.getView({
-            ContinueURL : URLUtils.https('Account-SetNewPasswordForm')
+            ContinueURL: URLUtils.https('Account-SetNewPasswordForm')
         }).render('account/password/setnewpassword');
     }
 }
@@ -209,19 +209,19 @@ function setNewPassword() {
 function setNewPasswordForm() {
 
     app.getForm('profile').handleAction({
-        'cancel' : function() {
+        cancel: function () {
             app.getView({
-                ContinueURL : URLUtils.https('Account-SetNewPasswordForm')
+                ContinueURL: URLUtils.https('Account-SetNewPasswordForm')
             }).render('account/password/setnewpassword');
             return;
         },
-        'send' : function() {
+        send: function () {
             var resettingCustomer, success, passwordchangedmail, Customer, Email;
-            
+
             Customer = app.getModel('Customer');
             Customer = app.getModel('Email');
             resettingCustomer = Customer.getByPasswordResetToken(request.httpParameterMap.Token.getStringValue());
-            
+
             if (empty(resettingCustomer)) {
                 response.redirect(URLUtils.https('Account-PasswordReset'));
             } else {
@@ -229,15 +229,15 @@ function setNewPasswordForm() {
                 if (app.getForm('resetpassword.password').value() !== app.getForm('resetpassword.passwordconfirm').value()) {
                     app.getForm('resetpassword.passwordconfirm').invalidate();
                     app.getView({
-                        ContinueURL : URLUtils.https('Account-SetNewPasswordForm')
+                        ContinueURL: URLUtils.https('Account-SetNewPasswordForm')
                     }).render('account/password/setnewpassword');
                 } else {
 
                     success = resettingCustomer.resetPasswordByToken(request.httpParameterMap.Token.getStringValue(), app.getForm('resetpassword.password').value());
                     if (!success) {
                         app.getView({
-                            ErrorCode : 'formnotvalid',
-                            ContinueURL : URLUtils.https('Account-SetNewPasswordForm')
+                            ErrorCode: 'formnotvalid',
+                            ContinueURL: URLUtils.https('Account-SetNewPasswordForm')
                         }).render('account/password/setnewpassword');
                     } else {
                         passwordchangedmail = Email.get('mail/passwordchangedemail', resettingCustomer.object.profile.email);
@@ -265,7 +265,7 @@ function startRegister() {
     }
 
     app.getView({
-        ContinueURL : URLUtils.https('Account-RegistrationForm')
+        ContinueURL: URLUtils.https('Account-RegistrationForm')
     }).render('account/user/registration');
 }
 
@@ -274,7 +274,7 @@ function startRegister() {
  */
 function registrationForm() {
     app.getForm('profile').handleAction({
-        'confirm' : function() {
+        confirm: function () {
             var email, emailConfirmation, profileValidation, password, passwordConfirmation, existingCustomer, Customer, target;
 
             Customer = app.getModel('Customer');
@@ -309,7 +309,7 @@ function registrationForm() {
             if (!profileValidation) {
                 // TODO redirect
                 app.getView({
-                    ContinueURL : URLUtils.https('Account-RegistrationForm')
+                    ContinueURL: URLUtils.https('Account-RegistrationForm')
                 }).render('account/user/registration');
             } else {
                 app.getForm('profile').clear();
@@ -327,7 +327,7 @@ function registrationForm() {
     });
 
     app.getView({
-        ContinueURL : URLUtils.https('Account-RegistrationForm')
+        ContinueURL: URLUtils.https('Account-RegistrationForm')
     }).render('account/user/registration');
 }
 
