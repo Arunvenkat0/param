@@ -20,12 +20,11 @@ var guard = require('~/cartridge/scripts/guard');
  */
 function list() {
     var pageMeta = require('~/cartridge/scripts/meta');
-    
+
     var content = app.getModel('Content').get('myaccount-addresses');
-	if (content)
-	{
-		pageMeta.update(content.object);
-	}
+    if (content) {
+        pageMeta.update(content.object);
+    }
 
     app.getView().render('account/addressbook/addresslist');
 }
@@ -38,8 +37,8 @@ function add() {
     app.getForm('profile').clear();
 
     app.getView({
-        Action : 'add',
-        ContinueURL : URLUtils.https('Address-Form')
+        Action: 'add',
+        ContinueURL: URLUtils.https('Address-Form')
     }).render('account/addressbook/addressdetails');
 }
 
@@ -47,16 +46,16 @@ function add() {
  * The address form handler.
  */
 function handleForm() {
-	var Address, success;
-	Address = app.getModel('Address');
-    
+    var Address, success;
+    Address = app.getModel('Address');
+
     var addressForm = app.getForm('customeraddress');
-    
+
     success = addressForm.handleAction({
-        'cancel' : function() {
+        cancel: function () {
             return false;
         },
-        'create' : function() {
+        create: function () {
             if (!session.forms.profile.address.valid || !Address.create(session.forms.profile.address)) {
                 response.redirect(URLUtils.https('Address-Add'));
                 return false;
@@ -64,7 +63,7 @@ function handleForm() {
 
             return true;
         },
-        'edit' : function() {
+        edit: function () {
             if (!session.forms.profile.address.valid || !Address.update(request.httpParameterMap.addressid.value, session.forms.profile.address)) {
                 response.redirect(URLUtils.https('Address-Add'));
                 return false;
@@ -72,10 +71,10 @@ function handleForm() {
 
             return true;
         },
-        'error' : function() {
+        error: function () {
             return false;
         },
-        'remove' : function() {
+        remove: function () {
             if (Address.remove(session.forms.profile.address.addressid.value)) {
                 return false;
             }
@@ -84,9 +83,9 @@ function handleForm() {
 
     if (request.httpParameterMap.format.stringValue === 'ajax') {
         let r = require('~/cartridge/scripts/util/Response');
-        
+
         r.renderJSON({
-            success : success
+            success: success
         });
         return;
     }
@@ -111,9 +110,9 @@ function edit() {
     app.getForm(profileForm.address.states).copyFrom(address);
 
     app.getView({
-        Action : 'edit',
-        ContinueURL : URLUtils.https('Address-Form'),
-        Address : address
+        Action: 'edit',
+        ContinueURL: URLUtils.https('Address-Form'),
+        Address: address
     }).render('account/addressbook/addressdetails');
 }
 
@@ -126,7 +125,7 @@ function setDefault() {
     addressBook = customer.profile.addressBook;
     address = addressBook.getAddress(request.httpParameterMap.AddressID.value);
 
-    Transaction.wrap(function() {
+    Transaction.wrap(function () {
         addressBook.setPreferredAddress(address);
     });
 
@@ -144,7 +143,7 @@ function getAddressDetails() {
     address = addressBook.getAddress(request.httpParameterMap.AddressID.value);
 
     app.getView({
-        Address : address
+        Address: address
     }).render('account/addressbook/addressjson');
 }
 
@@ -152,6 +151,7 @@ function getAddressDetails() {
  * Deletes an existing address.
  */
 function Delete() {
+    var CustomerStatusCodes = require('dw/customer/CustomerStatusCodes');
     var deleteAddressResult = app.getModel('Address').remove(decodeURIComponent(request.httpParameterMap.AddressID.value));
 
     if (request.httpParameterMap.format.stringValue !== 'ajax') {
@@ -160,10 +160,10 @@ function Delete() {
     }
 
     let r = require('~/cartridge/scripts/util/Response');
-    
+
     r.renderJSON({
-        status : deleteAddressResult ? 'OK' : dw.customer.CustomerStatusCodes.CUSTOMER_ADDRESS_REFERENCED_BY_PRODUCT_LIST,
-        message : deleteAddressResult ? '' : Resource.msg('addressdetails.' + dw.customer.CustomerStatusCodes.CUSTOMER_ADDRESS_REFERENCED_BY_PRODUCT_LIST, 'account', null)
+        status: deleteAddressResult ? 'OK' : CustomerStatusCodes.CUSTOMER_ADDRESS_REFERENCED_BY_PRODUCT_LIST,
+        message: deleteAddressResult ? '' : Resource.msg('addressdetails.' + CustomerStatusCodes.CUSTOMER_ADDRESS_REFERENCED_BY_PRODUCT_LIST, 'account', null)
     });
 }
 
