@@ -14,9 +14,7 @@
 var OrderMgr = require('dw/order/OrderMgr');
 var PaymentMgr = require('dw/order/PaymentMgr');
 var Resource = require('dw/web/Resource');
-var Site = require('dw/system/Site');
 var Status = require('dw/system/Status');
-var Template = require('dw/util/Template');
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
@@ -43,7 +41,7 @@ function handlePayments(order) {
 
         if (paymentInstruments.length === 0) {
             return {
-                missingPaymentInfo : true
+                missingPaymentInfo: true
             };
         }
 
@@ -55,8 +53,7 @@ function handlePayments(order) {
                 Transaction.wrap(function () {
                     paymentInstrument.getPaymentTransaction().setTransactionID(order.getOrderNo());
                 });
-            }
-            else {
+            } else {
                 /*
                  * An Authorization Pipeline is being dynamically called based on a
                  * concatenation of the current Payment-Processor and a constant
@@ -73,7 +70,7 @@ function handlePayments(order) {
 
                 if (authorizationResult.not_supported || authorizationResult.error) {
                     return {
-                        error : true
+                        error: true
                     };
                 }
             }
@@ -90,15 +87,15 @@ function handlePayments(order) {
 function start() {
     var cart = Cart.get();
 
-	if (cart) {
-		
-		var COShipping = app.getController('COShipping');
-		 
+    if (cart) {
+
+        var COShipping = app.getController('COShipping');
+
         // Clean shipments.
         COShipping.PrepareShipments(cart);
 
         // Make sure there are valid shipping address, accounting for gift certificate that would not have one.
-        if (cart.getProductLineItems().size() > 0 && cart.getDefaultShipment().getShippingAddress() == null) {
+        if (cart.getProductLineItems().size() > 0 && cart.getDefaultShipment().getShippingAddress() === null) {
             COShipping.Start();
             return {};
         }
@@ -124,7 +121,6 @@ function start() {
 
         // TODO - what are those used for - do they need to be returned/passed to a template ?
         var BasketStatus = validationResult.BasketStatus;
-        var EnableCheckout = validationResult.EnableCheckout;
 
         // Recalculate the payments. If there is only gift certificates, make sure it covers the order total, if not
         // back to billing page.
@@ -138,8 +134,8 @@ function start() {
 
         if (!saveCCResult) {
             return {
-                error           : true,
-                PlaceOrderError : new Status(Status.ERROR, "confirm.error.technical")
+                error: true,
+                PlaceOrderError: new Status(Status.ERROR, 'confirm.error.technical')
             };
         }
 
@@ -149,26 +145,23 @@ function start() {
 
         if (!order) {
             // TODO - need to pass BasketStatus to Cart-Show ?
-            var BasketStatus = new Status(Status.ERROR);
+            BasketStatus = new Status(Status.ERROR);
             app.getController('Cart').Show();
 
-	        return {};
-        }
-        else {
+            return {};
+        } else {
             var handlePaymentsResult = handlePayments(order);
             if (handlePaymentsResult.error) {
                 OrderMgr.failOrder(order);
-                return {error : true};
-            }
-            else if (handlePaymentsResult.missingPaymentInfo) {
+                return {error: true};
+            } else if (handlePaymentsResult.missingPaymentInfo) {
                 OrderMgr.failOrder(order);
-                return {error : true};
+                return {error: true};
             }
 
             return submitImpl(order);
         }
-    }
-    else {
+    } else {
         app.getController('Cart').Show();
         return {};
     }
@@ -194,20 +187,20 @@ function submitImpl(order) {
     });
 
     if (orderPlacementStatus === Status.ERROR) {
-        return {error : true};
+        return {error: true};
     }
 
     // Creates purchased gift certificates with this order.
     if (!createGiftCertificates(order)) {
         OrderMgr.failOrder(order);
-        return {error : true};
+        return {error: true};
     }
 
     // Send order confirmation and clear used forms within the checkout process.
     Email.get('mail/orderconfirmation', order.getCustomerEmail())
-        .setSubject((Resource.msg('order.orderconfirmation-email.001', 'order', null) + " " + order.getOrderNo()).toString())
+        .setSubject((Resource.msg('order.orderconfirmation-email.001', 'order', null) + ' ' + order.getOrderNo()).toString())
         .send({
-            Order : order
+            Order: order
         });
 
     // Mark order as EXPORT_STATUS_READY.
@@ -222,8 +215,8 @@ function submitImpl(order) {
     session.forms.billing.clearFormElement();
 
     return {
-        Order         : order,
-        order_created : true
+        Order: order,
+        order_created: true
     };
 }
 
@@ -233,26 +226,25 @@ function submitImpl(order) {
  */
 function createGiftCertificates(order) {
 
-	var giftCertificates = Order.get(order).createGiftCertificates();
+    var giftCertificates = Order.get(order).createGiftCertificates();
 
-	if (giftCertificates) {
+    if (giftCertificates) {
 
-		for (var i = 0; i < giftCertificates.length; i++) {
-			var giftCertificate = giftCertificates[i];
+        for (var i = 0; i < giftCertificates.length; i++) {
+            var giftCertificate = giftCertificates[i];
 
             // Send order confirmation and clear used forms within the checkout process.
             Email.get('mail/giftcert', giftCertificate.recipientEmail)
-                .setSubject(Resource.msg('email.ordergcemsg', 'email', null) + " " + giftCertificate.senderName)
+                .setSubject(Resource.msg('email.ordergcemsg', 'email', null) + ' ' + giftCertificate.senderName)
                 .send({
-		            GiftCertificate : giftCertificate
+                    GiftCertificate: giftCertificate
                 });
         }
 
-		return true;
-	}
-	else {
-		return false;
-	}
+        return true;
+    } else {
+        return false;
+    }
 }
 
 /**
@@ -263,41 +255,40 @@ function submitPaymentJSON() {
     var order = Order.get(request.httpParameterMap.order_id.stringValue);
     if (order.object && (request.httpParameterMap.order_token.stringValue === order.getOrderToken())) {
 
-	    session.forms.billing.paymentMethods.clearFormElement();
+        session.forms.billing.paymentMethods.clearFormElement();
 
-	    var requestObject = JSON.parse(request.httpParameterMap.requestBodyAsString);
-	    var form = session.forms.billing.paymentMethods;
+        var requestObject = JSON.parse(request.httpParameterMap.requestBodyAsString);
+        var form = session.forms.billing.paymentMethods;
 
-	    for( var requestObjectItem in requestObject ) {
-		    var asyncPaymentMethodResponse = requestObject[requestObjectItem];
+        for (var requestObjectItem in requestObject) {
+            var asyncPaymentMethodResponse = requestObject[requestObjectItem];
 
-		    var terms = requestObjectItem.split('_');
-		    if (terms[0] === "creditCard" && terms[1] === "number")
-			    form["creditCard"]["number"].setValue(asyncPaymentMethodResponse);
-		    else if (terms[0] === "creditCard" && terms[1] === "cvn")
-			    form["creditCard"]["cvn"].setValue(asyncPaymentMethodResponse);
-		    else if (terms[0] === "creditCard" && terms[1] === "month")
-			    form["creditCard"]["month"].setValue(Number(asyncPaymentMethodResponse));
-		    else if (terms[0] === "creditCard" && terms[1] === "year")
-			    form["creditCard"]["year"].setValue(Number(asyncPaymentMethodResponse));
-		    else if (terms[0] === "creditCard" && terms[1] === "owner")
-			    form["creditCard"]["owner"].setValue(asyncPaymentMethodResponse);
-		    else if (terms[0] === "creditCard" && terms[1] === "type")
-			    form["creditCard"]["type"].setValue(asyncPaymentMethodResponse);
-		    else if (terms[0] === "selectedPaymentMethodID")
-			    form["selectedPaymentMethodID"].setValue(asyncPaymentMethodResponse);
-	    }
+            var terms = requestObjectItem.split('_');
+            if (terms[0] === 'creditCard' && terms[1] === 'number') {
+                form.creditCard.number.setValue(asyncPaymentMethodResponse);
+            } else if (terms[0] === 'creditCard' && terms[1] === 'cvn') {
+                form.creditCard.cvn.setValue(asyncPaymentMethodResponse);
+            } else if (terms[0] === 'creditCard' && terms[1] === 'month') {
+                form.creditCard.month.setValue(Number(asyncPaymentMethodResponse));
+            } else if (terms[0] === 'creditCard' && terms[1] === 'year') {
+                form.creditCard.year.setValue(Number(asyncPaymentMethodResponse));
+            } else if (terms[0] === 'creditCard' && terms[1] === 'owner') {
+                form.creditCard.owner.setValue(asyncPaymentMethodResponse);
+            } else if (terms[0] === 'creditCard' && terms[1] === 'type') {
+                form.creditCard.type.setValue(asyncPaymentMethodResponse);
+            } else if (terms[0] === 'selectedPaymentMethodID') {
+                form.selectedPaymentMethodID.setValue(asyncPaymentMethodResponse);
+            }
+        }
 
-	    if (app.getController('COBilling').HandlePaymentSelection(cart).error || handlePayments().error) {
-		    app.getView().render('checkout/components/faults');
-		    return;
-	    }
-	    else {
+        if (app.getController('COBilling').HandlePaymentSelection('cart').error || handlePayments().error) {
+            app.getView().render('checkout/components/faults');
+            return;
+        } else {
             app.getView().render('checkout/components/payment_methods_success');
-		    return;
-	    }
-    }
-    else {
+            return;
+        }
+    } else {
         app.getView().render('checkout/components/faults');
         return;
     }
@@ -312,8 +303,7 @@ function submit() {
     if (!order.object || (request.httpParameterMap.order_token.stringValue !== order.getOrderToken())) {
         app.getController('COSummary').Start();
         return;
-    }
-    else if (submitImpl().error) {
+    } else if (submitImpl().error) {
         app.getController('COSummary').Start();
         return;
     }
