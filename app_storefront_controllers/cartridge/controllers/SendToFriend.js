@@ -30,7 +30,7 @@ function Start() {
         Product = dw.catalog.ProductMgr.getProduct(CurrentHttpParameterMap.pid);
 
         var UpdateProductOptionSelectionsResult = new dw.system.Pipelet('UpdateProductOptionSelections').execute({
-            Product : Product
+            Product: Product
         });
         ProductOptionModel = UpdateProductOptionSelectionsResult.ProductOptionModel;
     }
@@ -46,14 +46,14 @@ function Start() {
      */
 
     if (customer.authenticated) {
-        sendToFriendForm.yourname.htmlValue = customer.profile.firstName + " " + customer.profile.lastName;
+        sendToFriendForm.yourname.htmlValue = customer.profile.firstName + ' ' + customer.profile.lastName;
     }
 
     ISML.renderTemplate('account/components/sendtofrienddialog', {
-        ViewMode           : 'Edit',
-        Product            : Product,
-        ProductOptionModel : ProductOptionModel,
-        ContinueURL        : dw.web.URLUtils.https('SendToFriend-SendToFriendForm')
+        ViewMode: 'Edit',
+        Product: Product,
+        ProductOptionModel: ProductOptionModel,
+        ContinueURL: dw.web.URLUtils.https('SendToFriend-SendToFriendForm')
     });
 }
 
@@ -64,41 +64,39 @@ function SendToFriendForm() {
     // TODO this should end in some redirect
     // but sometimes this is called with GET and not with POST
     var TriggeredAction = request.triggeredFormAction;
-    if (TriggeredAction != null) {
-        if (TriggeredAction.formId == 'edit') {
+    if (TriggeredAction !== null) {
+        if (TriggeredAction.formId === 'edit') {
             ISML.renderTemplate('account/components/sendtofrienddialog', {
-                ViewMode    : 'Edit',
-                ContinueURL : dw.web.URLUtils.https('SendToFriend-SendToFriendForm')
+                ViewMode: 'Edit',
+                ContinueURL: dw.web.URLUtils.https('SendToFriend-SendToFriendForm')
             });
             return;
-        }
-        else if (TriggeredAction.formId == 'preview') {
+        } else if (TriggeredAction.formId === 'preview') {
             var pid = request.httpParameterMap.pid;
 
             var sendToFriendForm = session.forms.sendtofriend;
 
-            if (sendToFriendForm.friendsemail.value != sendToFriendForm.confirmfriendsemail.value) {
+            if (sendToFriendForm.friendsemail.value !== sendToFriendForm.confirmfriendsemail.value) {
                 sendToFriendForm.confirmfriendsemail.invalidateFormElement();
             }
 
             var Product = null;
             var ProductOptionModel = null;
 
-            if (typeof (pid) != 'undefined' && pid != null) {
+            if (typeof (pid) !== 'undefined' && pid !== null) {
                 var GetProductResult = getProduct(pid);
                 Product = GetProductResult.Product;
                 ProductOptionModel = GetProductResult.ProductOptionModel;
             }
 
             ISML.renderTemplate('account/components/sendtofrienddialog', {
-                ViewMode           : 'preview',
-                Product            : Product,
-                ProductOptionModel : ProductOptionModel,
-                ContinueURL        : dw.web.URLUtils.https('SendToFriend-SendToFriendForm')
+                ViewMode: 'preview',
+                Product: Product,
+                ProductOptionModel: ProductOptionModel,
+                ContinueURL: dw.web.URLUtils.https('SendToFriend-SendToFriendForm')
             });
             return;
-        }
-        else if (TriggeredAction.formId == 'send') {
+        } else if (TriggeredAction.formId === 'send') {
             send();
             return;
         }
@@ -115,22 +113,23 @@ function SendToFriendForm() {
 
     // TODO view mode?
     ISML.renderTemplate('account/components/sendtofrienddialog', {
-        ContinueURL : dw.web.URLUtils.https('SendToFriend-SendToFriendForm')
+        ContinueURL: dw.web.URLUtils.https('SendToFriend-SendToFriendForm')
     });
 }
 
 function send() {
     var CurrentHttpParameterMap = request.httpParameterMap;
     var pid = request.httpParameterMap.pid;
+    var ProductList;//TODO : variable assignment
 
     var sendToFriendForm = session.forms.sendtofriend;
 
-    if (sendToFriendForm.friendsemail.value != sendToFriendForm.confirmfriendsemail.value) {
+    if (sendToFriendForm.friendsemail.value !== sendToFriendForm.confirmfriendsemail.value) {
         sendToFriendForm.confirmfriendsemail.invalidateFormElement();
 
         // TODO view mode?
         ISML.renderTemplate('account/components/sendtofrienddialog', {
-        	ContinueURL : dw.web.URLUtils.https('SendToFriend-SendToFriendForm')
+            ContinueURL: dw.web.URLUtils.https('SendToFriend-SendToFriendForm')
         });
         return;
     }
@@ -139,7 +138,7 @@ function send() {
      * Product List Email
      */
     // TODO where should this come from? plid?
-    if (typeof (ProductList) != 'undefined' && ProductList != null) {
+    if (typeof (ProductList) !== 'undefined' && ProductList !== null) {
         require('~/cartridge/scripts/models/EmailModel').get('mail/productlist', sendToFriendForm.friendsemail.value)
             .setSubject(sendToFriendForm.subject.value)
             .setFrom(customer.profile.email).send();
@@ -150,16 +149,14 @@ function send() {
                 var WishlistController = require('./Wishlist');
                 WishlistController.Show();
                 return;
-            }
-            else {
+            } else {
                 var GiftRegistryController = require('./GiftRegistry');
                 GiftRegistryController.ShowRegistry();
                 return;
             }
-        }
-        else {
+        } else {
             ISML.renderTemplate('account/components/sendtofrienddialogsuccess', {
-                ViewMode : 'edit'
+                ViewMode: 'edit'
             });
             return;
         }
@@ -168,9 +165,7 @@ function send() {
     /*
      * Product Email
      */
-    if (typeof (pid) != 'undefined' && pid != null) {
-        var GetProductResult = getProduct(pid);
-        var CurrentCustomer = customer;
+    if (typeof (pid) !== 'undefined' && pid !== null) {
 
         require('~/cartridge/scripts/models/EmailModel').get('mail/product', sendToFriendForm.friendsemail.value)
             .setSubject(sendToFriendForm.subject.value)
@@ -181,8 +176,7 @@ function send() {
             ProductController.Show();
             return;
         }
-    }
-    else {
+    } else {
         /*
          * Default
          */
@@ -193,7 +187,7 @@ function send() {
     }
 
     ISML.renderTemplate('account/components/sendtofrienddialogsuccess', {
-        ViewMode : 'edit'
+        ViewMode: 'edit'
     });
 }
 
@@ -202,23 +196,23 @@ function send() {
  */
 function getProduct(pid) {
     var GetProductResult = new dw.system.Pipelet('GetProduct').execute({
-        ProductID : pid.stringValue
+        ProductID: pid.stringValue
     });
-    if (GetProductResult.result == PIPELET_ERROR) {
+    if (GetProductResult.result === PIPELET_ERROR) {
         return {
-            error : true
+            error: true
         };
     }
     var Product = GetProductResult.Product;
 
     var UpdateProductOptionSelectionsResult = new dw.system.Pipelet('UpdateProductOptionSelections').execute({
-        Product : Product
+        Product: Product
     });
     var ProductOptionModel = UpdateProductOptionSelectionsResult.ProductOptionModel;
 
     return {
-        Product            : Product,
-        ProductOptionModel : ProductOptionModel
+        Product: Product,
+        ProductOptionModel: ProductOptionModel
     };
 }
 
@@ -229,8 +223,8 @@ function getProduct(pid) {
 function Login() {
     var accountController = require('./Account');
     accountController.requireLogin({
-        TargetAction     : 'SendToFriend-Start',
-        TargetParameters : ['pid', request.httpParameterMap.pid.stringValue]
+        TargetAction: 'SendToFriend-Start',
+        TargetParameters: ['pid', request.httpParameterMap.pid.stringValue]
     });
 }
 
