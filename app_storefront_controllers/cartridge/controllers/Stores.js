@@ -19,12 +19,12 @@ var guard = require('~/cartridge/scripts/guard');
  * Provides a form to locate stores by geographical information.
  */
 function find() {
-	var storeLocatorForm = app.getForm('storelocator');
+    var storeLocatorForm = app.getForm('storelocator');
     storeLocatorForm.clear();
 
     var Content = app.getModel('Content');
     var storeLocatorAsset = Content.get('store-locator');
-    
+
     var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update(storeLocatorAsset);
 
@@ -37,23 +37,22 @@ function find() {
 function findStores() {
     var Content = app.getModel('Content');
     var storeLocatorAsset = Content.get('store-locator');
-    
+
     var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update(storeLocatorAsset);
 
     var storeLocatorForm = app.getForm('storelocator');
     var searchResult = storeLocatorForm.handleAction({
-        'findbycountry' : function (formgroup) {
+        findbycountry: function (formgroup) {
             var searchKey = formgroup.address.country.value;
             var stores = SystemObjectMgr.querySystemObjects('Store', 'countryCode = {0}', 'countryCode desc', searchKey);
             if (empty(stores)) {
                 return null;
-            }
-            else {
-                return {'stores' : stores, 'searchKey' : searchKey, 'type' : 'findbycountry'};
+            } else {
+                return {'stores': stores, 'searchKey': searchKey, 'type': 'findbycountry'};
             }
         },
-        'findbystate'   : function (formgroup) {
+        findbystate: function (formgroup) {
             var searchKey = formgroup.address.states.stateUSCA.htmlValue;
             var stores = null;
 
@@ -63,20 +62,18 @@ function findStores() {
 
             if (empty(stores)) {
                 return null;
-            }
-            else {
-                return {'stores' : stores, 'searchKey' : searchKey, 'type' : 'findbystate'};
+            } else {
+                return {'stores': stores, 'searchKey': searchKey, 'type': 'findbystate'};
             }
         },
-        'findbyzip'     : function (formgroup) {
+        findbyzip: function (formgroup) {
             var searchKey = formgroup.postalCode.value;
             var storesMgrResult = StoreMgr.searchStoresByPostalCode(formgroup.countryCode.value, searchKey, formgroup.distanceUnit.value, formgroup.maxdistance.value);
             var stores = storesMgrResult.keySet();
             if (empty(stores)) {
                 return null;
-            }
-            else {
-                return {'stores' : stores, 'searchKey' : searchKey, 'type' : 'findbyzip'};
+            } else {
+                return {'stores': stores, 'searchKey': searchKey, 'type': 'findbyzip'};
             }
         }
     });
@@ -84,8 +81,7 @@ function findStores() {
     if (searchResult) {
         app.getView('StoreLocator', searchResult)
             .render('storelocator/storelocatorresults');
-    }
-    else {
+    } else {
         app.getView('StoreLocator')
             .render('storelocator/storelocator');
     }
@@ -99,11 +95,11 @@ function details() {
 
     var storeID = request.httpParameterMap.StoreID.value;
     var store = dw.catalog.StoreMgr.getStore(storeID);
-    
+
     var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update(store);
 
-    app.getView({Store : store})
+    app.getView({Store: store})
         .render('storelocator/storedetails');
 
 }
