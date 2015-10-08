@@ -37,7 +37,7 @@ function start() {
 
 /**
  * Hostname-only URLs (e.g. http://sitegenesis.com/) cannot be redirected using the URL mapping framework.
- * Instead, specify this controller in your site's hostname aliases in Business Manager. 
+ * Instead, specify this controller in your site's hostname aliases in Business Manager.
  * Per the default controller, a redirect to the homepage is performed.
  * The hostname in the URL is the site's HTTP Hostname, if one is configured in Business Manager.
  * Also, you can provide a URL to redirect to (parameter Location).
@@ -52,7 +52,6 @@ function hostName() {
 	app.getView({
 		Location : Redirect.validateURL(request.httpParameterMap.Location.stringValue)
 	}).render('util/redirectpermanent');
-
 }
 
 
