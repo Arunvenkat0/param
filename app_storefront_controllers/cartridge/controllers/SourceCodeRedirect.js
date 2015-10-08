@@ -12,18 +12,16 @@ var guard = require('~/cartridge/scripts/guard');
 /**
  * The handler function for a source code redirect.
  */
-function start()
-{
+function start() {
     var sourceCodeRedirectURLResult = new dw.system.Pipelet('SourceCodeRedirectURL').execute();
-    if (sourceCodeRedirectURLResult.result === PIPELET_ERROR)
-    {
+    if (sourceCodeRedirectURLResult.result === PIPELET_ERROR) {
         app.getController('Home').Show();
         return;
     }
     var location = sourceCodeRedirectURLResult.Location;
 
     app.getView().render('util/redirect', {
-    	Location: location
+        Location: location
     });
 }
 
