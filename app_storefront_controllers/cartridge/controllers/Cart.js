@@ -61,11 +61,11 @@ function submitForm() {
 
     formResult = cartForm.handleAction({
         //Add a coupon if a coupon was entered correctly and is active.
-        'addCoupon': function(formgroup) {
+        'addCoupon': function (formgroup) {
             var status, result;
             if (formgroup.couponCode.htmlValue) {
 
-                status = Transaction.wrap(function() {
+                status = Transaction.wrap(function () {
                     return cart.addCoupon(formgroup.couponCode.htmlValue);
                 });
 
@@ -89,13 +89,13 @@ function submitForm() {
             return result;
 
         },
-        'calculateTotal': function(formgroup) {
+        'calculateTotal': function () {
             // Nothing to do here as re-calculation happens during view anyways
             return {
                 cart: cart
             };
         },
-        'checkoutCart': function(formgroup) {
+        'checkoutCart': function () {
             var validationResult, result;
 
             validationResult = cart.validateForCheckout();
@@ -113,12 +113,12 @@ function submitForm() {
             }
             return result;
         },
-        'continueShopping': function(formgroup) {
+        'continueShopping': function () {
             continueShopping();
             return null;
         },
-        'deleteCoupon': function(formgroup) {
-            Transaction.wrap(function() {
+        'deleteCoupon': function (formgroup) {
+            Transaction.wrap(function () {
                 cart.removeCouponLineItem(formgroup.getTriggeredAction().object);
             });
 
@@ -126,8 +126,8 @@ function submitForm() {
                 cart: cart
             };
         },
-        'deleteGiftCertificate': function(formgroup) {
-            Transaction.wrap(function() {
+        'deleteGiftCertificate': function (formgroup) {
+            Transaction.wrap(function () {
                 cart.removeGiftCertificateLineItem(formgroup.getTriggeredAction().object);
             });
 
@@ -135,8 +135,8 @@ function submitForm() {
                 cart: cart
             };
         },
-        'deleteProduct': function(formgroup) {
-            Transaction.wrap(function() {
+        'deleteProduct': function (formgroup) {
+            Transaction.wrap(function () {
                 cart.removeProductLineItem(formgroup.getTriggeredAction().object);
             });
 
@@ -144,12 +144,12 @@ function submitForm() {
                 cart: cart
             };
         },
-        'editLineItem': function(formgroup) {
+        'editLineItem': function (formgroup) {
             var product, productOptionModel;
             product = app.getModel('Product').get(request.httpParameterMap.pid.stringValue).object;
             productOptionModel = product.updateOptionSelection(request.httpParameterMap);
 
-            Transaction.wrap(function() {
+            Transaction.wrap(function () {
                 cart.updateLineItem(formgroup.getTriggeredAction().object, product, request.httpParameterMap.Quantity.doubleValue, productOptionModel);
                 cart.calculate();
             });
@@ -157,7 +157,7 @@ function submitForm() {
             ISML.renderTemplate('checkout/cart/refreshcart');
             return null;
         },
-        'login': function() {
+        'login': function () {
             // TODO should not be processed here at all
             var success, result;
             success = app.getController('Login').Process();
@@ -171,35 +171,35 @@ function submitForm() {
             }
             return result;
         },
-        'logout': function() {
+        'logout': function () {
             var CustomerMgr = require('dw/customer/CustomerMgr');
             CustomerMgr.logoutCustomer();
             return {
                 cart: cart
             };
         },
-        'register': function() {
+        'register': function () {
             app.getController('Account').StartRegister();
-            Transaction.wrap(function() {
+            Transaction.wrap(function () {
                 cart.calculate();
             });
 
             return null;
         },
-        'unregistered': function() {
+        'unregistered': function () {
             app.getController('COShipping').Start();
             return null;
         },
-        'updateCart': function() {
+        'updateCart': function () {
 
-            Transaction.wrap(function() {
+            Transaction.wrap(function () {
                 var shipmentItem, item;
 
                 // remove zero quantity line items
-                for (var i=0; i < session.forms.cart.shipments.childCount; i++) {
+                for (var i = 0; i < session.forms.cart.shipments.childCount; i++) {
                     shipmentItem = session.forms.cart.shipments[i];
 
-                    for (var j=0; j < shipmentItem.items.childCount; j++) {
+                    for (var j = 0; j < shipmentItem.items.childCount; j++) {
                         item = shipmentItem.items[j];
 
                         if (item.quantity.value === 0) {
@@ -216,7 +216,7 @@ function submitForm() {
                 cart: cart
             };
         },
-        'error': function() {
+        'error': function () {
             return null;
         }
     });
@@ -239,6 +239,8 @@ function addProduct() {
     var params = request.httpParameterMap;
     var format = params.format.stringValue.toLowerCase();
     var Product = app.getModel('Product');
+    var productOptionModel;
+    var product;
     var template = 'checkout/cart/minicart';
     var newBonusDiscountLineItem;
 
@@ -257,11 +259,11 @@ function addProduct() {
         var lineItem = cart.getProductLineItemByUUID(params.uuid.stringValue);
         if (lineItem) {
             var productModel = Product.get(request.httpParameterMap.pid.stringValue);
-            var product = productModel.object;
+            product = productModel.object;
             var quantity = parseInt(params.Quantity.value);
-            var productOptionModel = productModel.updateOptionSelection(request.httpParameterMap);
+            productOptionModel = productModel.updateOptionSelection(request.httpParameterMap);
 
-            Transaction.wrap(function() {
+            Transaction.wrap(function () {
                 cart.updateLineItem(lineItem, product, quantity, productOptionModel);
             });
 
@@ -277,7 +279,7 @@ function addProduct() {
         cart.addProductListItem(productList && productList.getItem(params.itemid.stringValue), params.Quantity.doubleValue, params.cgid.value);
     } else {
         // Adds a product.
-        var product = Product.get(params.pid.stringValue);
+        product = Product.get(params.pid.stringValue);
         var previousBonusDiscountLineItems = cart.getBonusDiscountLineItems();
 
         if (product.object.isProductSet()) {
@@ -285,7 +287,7 @@ function addProduct() {
             var childQtys = params.childQtys.stringValue.split(',');
             var counter = 0;
 
-            for (var i=0; i < childPids.length; i++) {
+            for (var i = 0; i < childPids.length; i++) {
                 var childProduct = Product.get(childPids[i]);
 
                 if (childProduct.object && !childProduct.isProductSet()) {
@@ -295,7 +297,7 @@ function addProduct() {
                 counter++;
             }
         } else {
-            var productOptionModel = product.updateOptionSelection(request.httpParameterMap);
+            productOptionModel = product.updateOptionSelection(request.httpParameterMap);
             cart.addProductItem(product.object, params.Quantity.doubleValue, params.cgid.value, productOptionModel);
         }
 
@@ -317,7 +319,6 @@ function addProduct() {
  * Displays the current items in the cart in the minicart panel.
  */
 function miniCart() {
-    var Product = app.getModel('Product');
 
     var cart = app.getModel('Cart').get();
     app.getView({
@@ -359,7 +360,7 @@ function addBonusProductJson() {
     data = JSON.parse(request.httpParameterMap.getRequestBodyAsString());
     productsJSON = new ArrayList();
 
-    for ( h = 0; h < data.bonusproducts.length; h += 1) {
+    for (h = 0; h < data.bonusproducts.length; h += 1) {
         productsJSON.addAt(0, data.bonusproducts[h].product);
     }
 
@@ -368,7 +369,7 @@ function addBonusProductJson() {
     Transaction.begin();
     cart.removeBonusDiscountLineItemProducts(bonusDiscountLineItem);
 
-    for ( i = 0; i < productsJSON.length; i += 1) {
+    for (i = 0; i < productsJSON.length; i += 1) {
 
         product = Product.get(productsJSON[i].pid).object;
         lineItem = cart.addBonusProduct(bonusDiscountLineItem, product, new ArrayList(productsJSON[i].options), parseInt(productsJSON[i].qty, 10));
@@ -378,7 +379,7 @@ function addBonusProductJson() {
 
                 childPids = productsJSON[i].childPids.split(',');
 
-                for ( j = 0; j < childPids.length; j += 1) {
+                for (j = 0; j < childPids.length; j += 1) {
                     childProduct = Product.get(childPids[j]).object;
 
                     if (childProduct) {
@@ -431,7 +432,7 @@ function addCouponJson() {
     couponCode = request.httpParameterMap.couponCode.stringValue;
     cart = app.getModel('Cart').goc();
 
-    Transaction.wrap(function() {
+    Transaction.wrap(function () {
         couponStatus = cart.addCoupon(couponCode);
     });
 
