@@ -36,7 +36,7 @@ function show() {
     compareForm.copyFrom(map);
     compareForm.object.categories.setOptions(map.categories);
 
-    app.getView({CompareList : map}).render('product/compare/compareshow');
+    app.getView({CompareList: map}).render('product/compare/compareshow');
 }
 
 /**
@@ -48,26 +48,26 @@ function addProduct() {
     var product = Product.get(request.httpParameterMap.pid.value);
     if (!product) {
         r.renderJSON({
-            success : false
+            success: false
         });
         return;
     }
-    
+
     var category = Category.get(request.httpParameterMap.category.value);
     if (!category) {
         r.renderJSON({
-            success : false
+            success: false
         });
         return;
     }
-    
+
     // Get the product comparison object from the session or create a new one.
     var comparison = Compare.get();
     comparison.add(product.object, category.object);
     comparison.setCategory(category.getID());
 
     r.renderJSON({
-        success : true
+        success: true
     });
 }
 
@@ -80,26 +80,26 @@ function addProduct() {
     var product = Product.get(request.httpParameterMap.pid.value);
     if (!product) {
         r.renderJSON({
-            success : false
+            success: false
         });
         return;
     }
-    
+
     var category = Category.get(request.httpParameterMap.category.value);
     if (!category) {
         r.renderJSON({
-            success : false
+            success: false
         });
         return;
     }
-    
+
     // Get the product comparison object from the session or create a new one.
     var comparison = Compare.get();
     comparison.remove(product.object, category.object);
     comparison.setCategory(category.getID());
 
     r.renderJSON({
-        success : true
+        success: true
     });
 }
 
@@ -113,10 +113,10 @@ function controls() {
         app.getView().render('search/components/productcomparewidget');
         return;
     }
-    
+
     // Get the product comparison object from the session or create a new one.
     var comparison = Compare.get();
-    app.getView({CompareList : comparison, Category : category.object}).render('search/components/productcomparewidget');
+    app.getView({CompareList: comparison, Category: category.object}).render('search/components/productcomparewidget');
 }
 
 /*
