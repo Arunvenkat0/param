@@ -81,23 +81,23 @@ function returnToForm(cart, params) {
     // if the payment method is set to gift certificate get the gift certificate code from the form
     if (!empty(cart.getPaymentInstrument()) && cart.getPaymentInstrument().getPaymentMethod() === PaymentInstrument.METHOD_GIFT_CERTIFICATE) {
         app.getForm('billing').copyFrom({
-            giftCertCode : cart.getPaymentInstrument().getGiftCertificateCode()
+            giftCertCode: cart.getPaymentInstrument().getGiftCertificateCode()
         });
     }
 
     pageMeta.update({
-        pageTitle : Resource.msg('billing.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')
+        pageTitle: Resource.msg('billing.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')
     });
 
     if (params) {
         app.getView(require('~/cartridge/scripts/object').extend(params, {
-            Basket : cart.object,
-            ContinueURL : URLUtils.https('COBilling-Billing')
+            Basket: cart.object,
+            ContinueURL: URLUtils.https('COBilling-Billing')
         })).render('checkout/billing/billing');
     } else {
         app.getView({
-            Basket : cart.object,
-            ContinueURL : URLUtils.https('COBilling-Billing')
+            Basket: cart.object,
+            ContinueURL: URLUtils.https('COBilling-Billing')
         }).render('checkout/billing/billing');
     }
 }
@@ -110,13 +110,13 @@ function start(cart, params) {
 
     app.getController('COShipping').PrepareShipments();
 
-    Transaction.wrap(function() {
+    Transaction.wrap(function () {
         cart.calculate();
     });
 
     var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update({
-        pageTitle : Resource.msg('billing.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')
+        pageTitle: Resource.msg('billing.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')
     });
     returnToForm(cart, params);
 }
@@ -153,8 +153,8 @@ function initCreditCardList(cart) {
     }
 
     return {
-        ApplicablePaymentMethods : applicablePaymentMethods,
-        ApplicableCreditCards : applicableCreditCards
+        ApplicablePaymentMethods: applicablePaymentMethods,
+        ApplicableCreditCards: applicableCreditCards
     };
 }
 
@@ -202,14 +202,14 @@ function adjustGiftCertificates() {
     if (cart) {
         gcIdList = cart.getGiftCertIdList();
 
-        Transaction.wrap(function() {
-            for ( i = 0; i < gcIdList.length; i += 1) {
+        Transaction.wrap(function () {
+            for (i = 0; i < gcIdList.length; i += 1) {
                 cart.removeGiftCertificatePaymentInstrument(gcIdList[i]);
             }
 
             gcID = null;
 
-            for ( j = 0; j < gcIdList.length; j += 1) {
+            for (j = 0; j < gcIdList.length; j += 1) {
                 gcID = gcIdList[j];
 
                 gc = GiftCertificateMgr.getGiftCertificateByCode(gcID);
@@ -270,14 +270,14 @@ function redeemGiftCertificate(giftCertCode) {
         } else if (gc.balance.currencyCode !== cart.getCurrencyCode()) {// make sure the GC is in the right currency
             result = new Status(Status.ERROR, GiftCertificateStatusCodes.GIFTCERTIFICATE_CURRENCY_MISMATCH);
         } else {
-            newGCPaymentInstrument = Transaction.wrap(function() {
+            newGCPaymentInstrument = Transaction.wrap(function () {
                 gcPaymentInstrument = cart.createGiftCertificatePaymentInstrument(gc);
                 cart.calculate();
                 return gcPaymentInstrument;
             });
 
             status = new Status(Status.OK);
-            status.addDetail("NewGCPaymentInstrument", newGCPaymentInstrument);
+            status.addDetail('NewGCPaymentInstrument', newGCPaymentInstrument);
             result = status;
         }
     } else {
@@ -332,7 +332,7 @@ function resetPaymentForms() {
 
     var cart = app.getModel('Cart').get();
 
-    if (app.getForm('billing').object.paymentMethods.selectedPaymentMethodID.value.equals("PayPal")) {
+    if (app.getForm('billing').object.paymentMethods.selectedPaymentMethodID.value.equals('PayPal')) {
         app.getForm('billing').object.paymentMethods.creditCard.clearFormElement();
         app.getForm('billing').object.paymentMethods.bml.clearFormElement();
 
@@ -342,7 +342,7 @@ function resetPaymentForms() {
         app.getForm('billing').object.paymentMethods.bml.clearFormElement();
 
         cart.removePaymentInstruments(cart.getPaymentInstruments(PaymentInstrument.METHOD_BML));
-        cart.removePaymentInstruments(cart.getPaymentInstruments("PayPal"));
+        cart.removePaymentInstruments(cart.getPaymentInstruments('PayPal'));
     } else if (app.getForm('billing').object.paymentMethods.selectedPaymentMethodID.value.equals(PaymentInstrument.METHOD_BML)) {
         app.getForm('billing').object.paymentMethods.creditCard.clearFormElement();
 
@@ -351,7 +351,7 @@ function resetPaymentForms() {
         }
 
         cart.removePaymentInstruments(cart.getPaymentInstruments(PaymentInstrument.METHOD_CREDIT_CARD));
-        cart.removePaymentInstruments(cart.getPaymentInstruments("PayPal"));
+        cart.removePaymentInstruments(cart.getPaymentInstruments('PayPal'));
     }
 
     return true;
@@ -390,11 +390,11 @@ function handlePaymentSelection(cart) {
     if (empty(app.getForm('billing').object.paymentMethods.selectedPaymentMethodID.value)) {
         if (cart.getTotalGrossPrice() > 0) {
             result = {
-                error : true
+                error: true
             };
         } else {
             result = {
-                ok : true
+                ok: true
             };
         }
     }
@@ -402,14 +402,14 @@ function handlePaymentSelection(cart) {
     // skip the payment handling if the whole payment was made using gift cert
     if (app.getForm('billing').object.paymentMethods.selectedPaymentMethodID.value.equals(PaymentInstrument.METHOD_GIFT_CERTIFICATE)) {
         result = {
-            ok : true
+            ok: true
         };
     }
 
     if (empty(PaymentMgr.getPaymentMethod(app.getForm('billing').object.paymentMethods.selectedPaymentMethodID.value).paymentProcessor)) {
         result = {
-            error : true,
-            MissingPaymentProcessor : true
+            error: true,
+            MissingPaymentProcessor: true
         };
     }
     if (!result) {
@@ -427,7 +427,7 @@ function handlePaymentSelection(cart) {
 function handleBillingAddress(cart) {
 
     var billingAddress = cart.getBillingAddress();
-    Transaction.wrap(function() {
+    Transaction.wrap(function () {
 
         if (!billingAddress) {
             billingAddress = cart.createBillingAddress();
@@ -473,7 +473,7 @@ function updateAddressDetails() {
 function billing() {
 
     app.getForm('billing').handleAction({
-        'applyCoupon' : function(formgroup) {
+        applyCoupon: function () {
             var couponCode = request.httpParameterMap.couponCode.stringValue || request.httpParameterMap.dwfrm_billing_couponCode.stringValue;
 
             // TODO what happened to this start node?
@@ -482,21 +482,20 @@ function billing() {
             handleCoupon();
             return;
         },
-        'creditCardSelect' : function(formgroup) {
+        creditCardSelect: function () {
             updateCreditCardSelection();
             return;
         },
-        'paymentSelect' : function(formgroup) {
-            var selectedPaymentID = request.httpParameterMap.dwfrm_billing_paymentMethods_selectedPaymentMethodID.stringValue;
+        paymentSelect: function () {
             // ToDo - pass parameter ?
             publicStart();
             return;
         },
-        'redeemGiftCert' : function(formgroup) {
+        redeemGiftCert: function () {
             var status = redeemGiftCertificate(app.getForm('billing').object.giftCertCode.htmlValue);
             if (!status.isError()) {
                 returnToForm(app.getModel('Cart').get(), {
-                    NewGCPaymentInstrument : status.getDetail("NewGCPaymentInstrument")
+                    NewGCPaymentInstrument: status.getDetail('NewGCPaymentInstrument')
                 });
             } else {
                 returnToForm(app.getModel('Cart').get());
@@ -504,7 +503,7 @@ function billing() {
 
             return;
         },
-        'save' : function(formgroup) {
+        save: function () {
             var cart = app.getModel('Cart').get();
 
             if (!resetPaymentForms() || !validateBilling() || !handleBillingAddress(cart) || // Performs validation steps, based upon the entered billing address
@@ -525,7 +524,7 @@ function billing() {
                 return;
             }
         },
-        'selectAddress' : function(formgroup) {
+        selectAddress: function () {
             updateAddressDetails();
             return;
         }
@@ -548,10 +547,10 @@ function redeemGiftCertificateJson() {
         responseUtils.renderJSON({});
     } else {
         responseUtils.renderJSON({
-            status : giftCertStatus.code,
-            success : !giftCertStatus.error,
-            message : Resource.msgf('billing.' + giftCertStatus.code, 'checkout', null, giftCertCode),
-            code : giftCertCode
+            status: giftCertStatus.code,
+            success: !giftCertStatus.error,
+            message: Resource.msgf('billing.' + giftCertStatus.code, 'checkout', null, giftCertCode),
+            code: giftCertCode
         });
     }
 }
@@ -565,7 +564,7 @@ function removeGiftCertificate() {
     if (!empty(request.httpParameterMap.giftCertificateID.stringValue)) {
         var cart = app.getModel('Cart').get();
 
-        Transaction.wrap(function() {
+        Transaction.wrap(function () {
             cart.removeGiftCertificatePaymentInstrument(request.httpParameterMap.giftCertificateID.stringValue);
             cart.calculate();
         });
@@ -583,13 +582,13 @@ function updateSummary() {
 
     var cart = app.getModel('Cart').get();
 
-    Transaction.wrap(function() {
+    Transaction.wrap(function () {
         cart.calculate();
     });
 
     app.getView({
-        checkoutstep : 4,
-        Basket : cart.object
+        checkoutstep: 4,
+        Basket: cart.object
     }).render('checkout/minisummary');
 }
 
@@ -611,7 +610,7 @@ function editAddress() {
     }
 
     app.getView({
-        ContinueURL : URLUtils.https('COBilling-EditBillingAddress')
+        ContinueURL: URLUtils.https('COBilling-EditBillingAddress')
     }).render('checkout/billing/billingaddressdetails');
 }
 
@@ -621,22 +620,22 @@ function editAddress() {
 function editBillingAddress() {
 
     app.getForm('returnToForm').handleAction({
-        'apply' : function(formgroup) {
+        apply: function () {
             if (!app.getForm('billingaddress').copyTo(app.getForm('billingaddress').object)) {
                 app.getView({
-                    ContinueURL : URLUtils.https('COBilling-EditBillingAddress')
+                    ContinueURL: URLUtils.https('COBilling-EditBillingAddress')
                 }).render('checkout/billing/billingaddressdetails');
             } else {
                 app.getView().render('components/dialog/dialogapply');
             }
         },
-        'remove' : function(formgroup) {
+        remove: function () {
             if (ProductListMgr.getProductLists(app.getForm('billing').objectaddress.object).isEmpty()) {
                 customer.getAddressBook().removeAddress(app.getForm('billing').objectaddress.object);
                 app.getView().render('components/dialog/dialogdelete');
             } else {
                 app.getView({
-                    ContinueURL : URLUtils.https('COBilling-EditBillingAddress')
+                    ContinueURL: URLUtils.https('COBilling-EditBillingAddress')
                 }).render('checkout/billing/billingaddressdetails');
             }
         }
@@ -653,12 +652,12 @@ function getGiftCertificateBalance() {
 
     if (giftCertificate && giftCertificate.isEnabled()) {
         responseUtils.renderJSON({
-            ID : giftCertificate.getGiftCertificateCode(),
-            balance : StringUtils.formatMoney(giftCertificate.getBalance())
+            ID: giftCertificate.getGiftCertificateCode(),
+            balance: StringUtils.formatMoney(giftCertificate.getBalance())
         });
     } else {
         responseUtils.renderJSON({
-            error : Resource.msg('billing.giftcertinvalid', 'checkout', null)
+            error: Resource.msg('billing.giftcertinvalid', 'checkout', null)
         });
     }
 }
@@ -694,7 +693,7 @@ function selectCreditCard() {
     }
 
     app.getView({
-        SelectedCreditCard : selectedCreditCard
+        SelectedCreditCard: selectedCreditCard
     }).render('checkout/billing/creditcardjson');
 }
 
@@ -729,7 +728,7 @@ function validatePayment(cart) {
  * only unique cards as well as replacing expired cards.
  */
 function saveCreditCard() {
-    var i, creditCards, GetCustomerPaymentInstrumentsResult, newCreditCard, creditcard;
+    var i, creditCards, GetCustomerPaymentInstrumentsResult, newCreditCard;
 
     if (customer.authenticated && app.getForm('billing').object.paymentMethods.creditCard.saveCard.value) {
         // TODO - remove pipelet code once APP-30656 is fixed
@@ -737,15 +736,15 @@ function saveCreditCard() {
         creditCards = new ArrayList();
 
         GetCustomerPaymentInstrumentsResult = new Pipelet('GetCustomerPaymentInstruments').execute({
-            Customer : customer,
-            PaymentMethod : PaymentInstrument.METHOD_CREDIT_CARD
+            Customer: customer,
+            PaymentMethod: PaymentInstrument.METHOD_CREDIT_CARD
         });
 
         if (GetCustomerPaymentInstrumentsResult.result !== PIPELET_ERROR) {
             creditCards = GetCustomerPaymentInstrumentsResult.PaymentInstruments;
         }
 
-        Transaction.wrap(function() {
+        Transaction.wrap(function () {
             newCreditCard = customer.getProfile().getWallet().createPaymentInstrument(PaymentInstrument.METHOD_CREDIT_CARD);
 
             // coy the credit card details to the payment instrument
