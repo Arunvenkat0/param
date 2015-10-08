@@ -27,9 +27,8 @@ function show() {
         // remote includes which the WA won't resolve
         response.setStatus(410);
         app.getView().render('error/notfound');
-    }
-    else {
-    	var Search = app.getModel('Search');
+    } else {
+        var Search = app.getModel('Search');
         var contentSearchModel = Search.initializeContentSearchModel(request.httpParameterMap);
         contentSearchModel.setContentID(null);
         contentSearchModel.search();
@@ -37,8 +36,8 @@ function show() {
         require('~/cartridge/scripts/meta').update(content);
 
         app.getView({
-            Content             : content,
-            ContentSearchResult : contentSearchModel
+            Content: content,
+            ContentSearchResult: contentSearchModel
         }).render(content.template || 'content/content/contentpage');
     }
 
@@ -53,15 +52,14 @@ function include() {
     var Content = app.getModel('Content');
     var content = Content.get(request.httpParameterMap.cid.stringValue).object;
 
-    if(content){
+    if (content) {
         app.getView({
-            Content : content
+            Content: content
         }).render(content.template || 'content/content/contentassetinclude');
-    }else{
+    } else {
         Logger.warn('Content asset with ID {0} was included but not found',request.httpParameterMap.cid.stringValue);
     }
 }
-
 
 /*
  * Export the publicly available controller methods
