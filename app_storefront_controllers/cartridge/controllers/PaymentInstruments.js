@@ -71,7 +71,7 @@ function handlePaymentForm() {
                 response.redirect(URLUtils.https('PaymentInstruments-List'));
             }
         },
-        error: function() {
+        error: function () {
             add(false);
         }
     });
@@ -115,7 +115,6 @@ function create() {
 
     Transaction.begin();
         var paymentInstrument = wallet.createPaymentInstrument(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
-        var result;
 
         try {
             save({
@@ -146,14 +145,14 @@ function create() {
 function Delete() {
     var paymentForm = app.getForm('paymentinstruments');
     paymentForm.handleAction({
-        remove: function(formGroup, action){
-            Transaction.wrap(function(){
+        remove: function (formGroup, action) {
+            Transaction.wrap(function () {
                 var wallet = customer.getProfile().getWallet();
                 wallet.removePaymentInstrument(action.object);
             });
 
         },
-        error: function(){
+        error: function () {
             // @TODO When could this happen
         }
     });
@@ -200,7 +199,7 @@ function verifyCreditCard() {
         while (items.hasNext()) {
             var item = items.next();
 
-            switch( item.code ) {
+            switch (item.code) {
                 case dw.order.PaymentStatusCodes.CREDITCARD_INVALID_CARD_NUMBER:
                     newCreditCardForm.get('number').invalidate();
                     continue;
