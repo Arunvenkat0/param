@@ -20,11 +20,11 @@ var guard = require('~/cartridge/scripts/guard');
 function landingForm() {
     var wishlistForm = app.getForm('wishlist');
     wishlistForm.handleAction({
-        'register'             : function () {
+        register: function () {
            response.redirect(dw.web.URLUtils.https('Account-StartRegister'));
            return;
         },
-        'search'             : function () {
+        search: function () {
             search();
             return;
         }
@@ -36,10 +36,10 @@ function landingForm() {
  * Renders the wishlist page.
  */
 function show() {
-	var Content = app.getModel('Content');
-	var wishlistAsset = Content.get('myaccount-wishlist');
+    var Content = app.getModel('Content');
+    var wishlistAsset = Content.get('myaccount-wishlist');
 
-	var pageMeta = require('~/cartridge/scripts/meta');
+    var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update(wishlistAsset);
 
     var wishlistForm = app.getForm('wishlist');
@@ -52,8 +52,8 @@ function show() {
     wishlistForm.get('addressbook').get('addresses').copyFrom(customer.profile.addressBook.addresses);
 
     app.getView({
-        ProductList : productList.object,
-        ContinueURL : dw.web.URLUtils.https('Wishlist-WishListForm')
+        ProductList: productList.object,
+        ContinueURL: dw.web.URLUtils.https('Wishlist-WishListForm')
     }).render('account/wishlist/wishlist');
 }
 
@@ -66,53 +66,50 @@ function wishListForm() {
 
     var wishlistForm = app.getForm('wishlist');
     wishlistForm.handleAction({
-        'addGiftCertificate'     : function (formgroup) {
+        addGiftCertificate: function () {
             new dw.system.Pipelet('AddGiftCertificateToProductList')
                 .execute({
-                    ProductList : productList.object,
-                    Priority : 0
+                    ProductList: productList.object,
+                    Priority: 0
                 });
         },
-        'deleteItem'     : function (formgroup, action) {
+        deleteItem: function (formgroup, action) {
             dw.system.Logger.info('Deleting product {0} from wishlist.',action.object.productID);
             productList.remove(action.object);
         },
-        'updateItem'     : function (formgroup, action) {
+        updateItem: function (formgroup, action) {
             dw.system.Logger.info('Updating product {0} on wishlist.',action.object.productID);
             app.getForm(action.parent).copyTo(action.object);
         },
-        'setItemPrivate' : function(formgroup, action){
+        setItemPrivate: function (formgroup, action) {
             Transaction.wrap(function () {
                   action.object.public = false;
             });
         },
-        'setItemPublic' : function(formgroup, action){
+        setItemPublic: function (formgroup, action) {
             Transaction.wrap(function () {
                   action.object.public = true;
             });
         },
-        'setListPrivate' : function(){
+        setListPrivate: function () {
             dw.system.Logger.info('Customer {0} set wishlist private.',customer.ID);
             productList.setPublic(false);
         },
-        'setListPublic' : function(){
+        setListPublic: function () {
             dw.system.Logger.info('Customer {0} set wishlist public.',customer.ID);
             productList.setPublic(true);
         },
-        'selectAddressWishlist' : function(){
+        selectAddressWishlist: function () {
             setShippingAddress();
             return;
         },
-        'addToCart' : function(formgroup){
-            if (formgroup.items.triggeredFormAction.parent.object.type === formgroup.items.triggeredFormAction.parent.object.TYPE_GIFT_CERTIFICATE)
-            {
+        addToCart: function (formgroup) {
+            if (formgroup.items.triggeredFormAction.parent.object.type === formgroup.items.triggeredFormAction.parent.object.TYPE_GIFT_CERTIFICATE) {
                 // TODO redirect?
                 var GiftCertController = app.getController('GiftCert');
                 GiftCertController.Purchase();
                 return;
-            }
-            else
-            {
+            } else {
                 // TODO redirect?
                 var CartController = app.getController('Cart');
                 CartController.AddProduct();
@@ -137,8 +134,8 @@ function showOther() {
     wishlistForm.get('items').copyFrom(productList.object.items);
 
     app.getView({
-        ProductList : productList.object,
-        ContinueURL : dw.web.URLUtils.https('Wishlist-WishListForm')
+        ProductList: productList.object,
+        ContinueURL: dw.web.URLUtils.https('Wishlist-WishListForm')
     }).render('account/wishlist/wishlist');
 }
 
@@ -146,7 +143,7 @@ function showOther() {
  * Uses request parameters to add a product.
  */
 function addProduct() {
-	var Product = app.getModel('Product');
+    var Product = app.getModel('Product');
     var product = Product.get(request.httpParameterMap.pid.stringValue);
     var productOptionModel = product.updateOptionSelection(request.httpParameterMap);
 
@@ -166,7 +163,7 @@ function add() {
 
 
 /**
- * TODO 
+ * TODO
  * Expects (optional): - OwnerEmail - OwnerFirstName - OwnerLastName
  */
 function search() {
@@ -178,17 +175,16 @@ function search() {
     searchLastName = searchForm.get('lastname').value();
     searchEmail = searchForm.get('email').value();
 
-    if (searchForm.valid() && (!empty(searchFirstName) && !empty(searchLastName) && !empty(searchEmail)))
-    {
+    if (searchForm.valid() && (!empty(searchFirstName) && !empty(searchLastName) && !empty(searchEmail))) {
         // @TODO API is different from pipelet SearchProductLists
         // var queryString = 'OwnerFirstName = ' + searchFirstName + ' AND OwnerLastName = ' +
         //     searchLastName + ' AND OwnerEmail = ' + searchEmail;
         // var productLists = dw.customer.ProductListMgr.queryProductLists(queryString, null, null);
         var productLists = new dw.system.Pipelet('SearchProductLists').execute({
-            OwnerFirstName : searchFirstName,
-            OwnerLastName : searchLastName,
-            OwnerEmail : searchEmail,
-            Type : dw.customer.ProductList.TYPE_WISH_LIST
+            OwnerFirstName: searchFirstName,
+            OwnerLastName: searchLastName,
+            OwnerEmail: searchEmail,
+            Type: dw.customer.ProductList.TYPE_WISH_LIST
         }).ProductLists;
 
         app.getForm('wishlist.productlists').copyFrom(productLists);
@@ -197,15 +193,15 @@ function search() {
     }
 
     app.getView({
-        SearchFirstName : searchFirstName,
-        SearchLastName : searchLastName,
-        SearchEmail : searchEmail
+        SearchFirstName: searchFirstName,
+        SearchLastName: searchLastName,
+        SearchEmail: searchEmail
     }).render('account/wishlist/wishlistresults');
 }
 
 
 /**
- * Set the shipping address for the wishlist. 
+ * Set the shipping address for the wishlist.
  * Expects AddressID to be already stored in the httpParameterMap.
  */
 function setShippingAddress() {
@@ -231,12 +227,12 @@ function replaceProductListItem() {
     var plid = request.httpParameterMap.uuid.stringValue;
 
     var ProductList = app.getModel('ProductList');
-    var ProductList = ProductList.get();
 
+    // TODO : post hint cleenup - look into the use of ProductList in this function
+    ProductList = ProductList.get();
 
     var productListItem = ProductList.getItem(plid);
-    if (productListItem !== null)
-    {
+    if (productListItem !== null) {
 
         Transaction.wrap(function () {
             ProductList.removeItem(productListItem);
@@ -257,22 +253,22 @@ function replaceProductListItem() {
  */
 // own wishlist
 /** @see module:controllers/Wishlist~Add */
-exports.Add = guard.ensure(['get', 'https', 'loggedIn'], add, { scope : 'wishlist' });
+exports.Add = guard.ensure(['get', 'https', 'loggedIn'], add, {scope: 'wishlist'});
 /** @see module:controllers/Wishlist~Show */
-exports.Show = guard.ensure(['get', 'https', 'loggedIn'], show, { scope : 'wishlist' });
+exports.Show = guard.ensure(['get', 'https', 'loggedIn'], show, {scope: 'wishlist'});
 /** @see module:controllers/Wishlist~ReplaceProductListItem */
-exports.ReplaceProductListItem = guard.ensure(['get', 'https', 'loggedIn'], replaceProductListItem, { scope : 'wishlist' });
+exports.ReplaceProductListItem = guard.ensure(['get', 'https', 'loggedIn'], replaceProductListItem, {scope: 'wishlist'});
 /** @see module:controllers/Wishlist~SetShippingAddress */
-exports.SetShippingAddress = guard.ensure(['get', 'https', 'loggedIn'], setShippingAddress, { scope : 'wishlist' });
+exports.SetShippingAddress = guard.ensure(['get', 'https', 'loggedIn'], setShippingAddress, {scope: 'wishlist'});
 
 // others wishlist
 /** @see module:controllers/Wishlist~Search */
-exports.Search                  = guard.ensure(['post', 'https'], search);
+exports.Search = guard.ensure(['post', 'https'], search);
 /** @see module:controllers/Wishlist~ShowOther */
-exports.ShowOther               = guard.ensure(['get', 'https'], showOther);
+exports.ShowOther = guard.ensure(['get', 'https'], showOther);
 
 // form handlers
 /** @see module:controllers/Wishlist~LandingForm */
-exports.LandingForm             = guard.ensure(['post', 'https'], landingForm);
+exports.LandingForm = guard.ensure(['post', 'https'], landingForm);
 /** @see module:controllers/Wishlist~WishListForm */
-exports.WishListForm            = guard.ensure(['post', 'https', 'loggedIn'], wishListForm, { scope : 'wishlist' });
+exports.WishListForm = guard.ensure(['post', 'https', 'loggedIn'], wishListForm, {scope: 'wishlist'});
