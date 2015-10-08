@@ -144,12 +144,11 @@ function productNavigation() {
 
             if (product.getPrimaryCategory()) {
                 category = product.getPrimaryCategory();
-            }
-            else if (product.getVariationModel().getMaster()) {
+            } else if (product.getVariationModel().getMaster()) {
                 category = product.getVariationModel().getMaster().getPrimaryCategory();
             }
 
-            if(category && category.isOnline()){
+            if (category && category.isOnline()) {
                 productSearchModel.setCategoryID(category.getID());
             }
         }
