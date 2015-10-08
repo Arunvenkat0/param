@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * This controller initializes the product list and creates a new list if none was found.
  * It also determines a selected product list item based on the given ID.
@@ -9,29 +11,25 @@
  /**
  * TODO
  */
-function Init(args)
-{
+function Init(args) {
     var productListId = args.productListId;
     var listItemId = args.listItemId;
 
     var ProductList = null;
     var ProductListItem = null;
 
-
     var GetProductListResult = new dw.system.Pipelet('GetProductList', {
         Create: false
     }).execute({
         ProductListID: productListId
     });
-    if (GetProductListResult.result == PIPELET_NEXT)
-    {
+    if (GetProductListResult.result === PIPELET_NEXT) {
         ProductList = GetProductListResult.ProductList;
     }
 
     var ProductOptionModel = null;
 
-    if (ProductList != null)
-    {
+    if (ProductList !== null) {
         ProductListItem = ProductList.getItem(listItemId);
 
         var UpdateProductOptionSelectionsResult = new dw.system.Pipelet('UpdateProductOptionSelections').execute({
@@ -42,7 +40,7 @@ function Init(args)
 
     return {
         ProductListItem: ProductListItem,
-    	ProductOptionModel: ProductOptionModel
+        ProductOptionModel: ProductOptionModel
     };
 }
 
@@ -50,37 +48,32 @@ function Init(args)
 /**
  * Ensure shipment locates a shipment associated with a product list. If it cannot find one, one is created.
  */
-function EnsureShipment(args)
-{
+function EnsureShipment(args) {
     var ProductList = args.ProductList;
     var ProductListItem = args.ProductListItem;
     var Basket = args.Basket;
-
+    var Shipment;
 
     var ShipmentID = ProductListItem.list.name;
 
-    if (empty(ShipmentID) || ProductListItem.list.shippingAddress == null)
-    {
-        var GenerateShipmentNameResult = GenerateShipmentName({
-        	ProductList: ProductList
+    if (empty(ShipmentID) || ProductListItem.list.shippingAddress === null) {
+        var GenerateShipmentNameResult = new GenerateShipmentName({
+            ProductList: ProductList
         });
 
         ShipmentID = GenerateShipmentNameResult.ShipmentID;
     }
 
 
-    if (Basket.getShipment(ShipmentID) != null)
-    {
-        var Shipment = Basket.getShipment(ShipmentID);
-    }
-    else
-    {
+    if (Basket.getShipment(ShipmentID) !== null) {
+        Shipment = Basket.getShipment(ShipmentID);
+    } else {
         var CreateShipmentResult = new dw.system.Pipelet('CreateShipment').execute({
             Basket: Basket,
             ID: ShipmentID
         });
-        var Shipment = CreateShipmentResult.Shipment;
-   	}
+        Shipment = CreateShipmentResult.Shipment;
+    }
 
     // TODO define returns
 }
@@ -90,34 +83,32 @@ function EnsureShipment(args)
  * Generates a shipment ID based on the type of product list passed in. Also assigns this name to the product list itself.
  * Note that if the product list does not have a shipping address, the default shipping address name is used.
  */
-function GenerateShipmentName(args)
-{
-	var ProductList = args.ProductList;
+function GenerateShipmentName(args) {
+    var ProductList = args.ProductList;
+    var ShipmentID;//TODO : variable assignment
+    var Basket;//TODO : variable assignment
 
-
-    if (ProductList.shippingAddress != null)
-    {
-    	var ScriptResult = new dw.system.Pipelet('Script', {
+    if (ProductList.shippingAddress !== null) {
+        var ScriptResult = new dw.system.Pipelet('Script', {
             Transactional: true,
             OnError: 'PIPELET_ERROR',
             ScriptFile: 'app_storefront_core:productlist/GenerateShipmentName.ds'
         }).execute({
             ProductList: ProductList
         });
-        if (ScriptResult.result == PIPELET_NEXT)
-        {
-            var ShipmentID = ScriptResult.ShipmentID;
+        if (ScriptResult.result === PIPELET_NEXT) {
+            ShipmentID = ScriptResult.ShipmentID;
 
             return {
-            	ShipmentID: ShipmentID
+                ShipmentID: ShipmentID
             };
         }
     }
 
-    var ShipmentID = Basket.defaultShipment.ID;
+    ShipmentID = Basket.defaultShipment.ID;
 
     return {
-    	ShipmentID: ShipmentID
+        ShipmentID: ShipmentID
     };
 }
 
