@@ -40,10 +40,9 @@ function start() {
     if (customer.authenticated) {
         response.redirect(URLUtils.https('COShipping-Start'));
         return;
-    }
-    else {
-    	var loginForm = app.getForm('login');
-    	loginForm.clear();
+    } else {
+        var loginForm = app.getForm('login');
+        loginForm.clear();
 
         // Prepopulate login form field with customer's login name.
         if (customer.registered) {
@@ -51,12 +50,12 @@ function start() {
         }
 
         var loginAsset = Content.get('myaccount-login');
-        
+
         var pageMeta = require('~/cartridge/scripts/meta');
         pageMeta.update(loginAsset);
-        
+
         app.getView({
-            ContinueURL : URLUtils.https('COCustomer-LoginForm')
+            ContinueURL: URLUtils.https('COCustomer-LoginForm')
         }).render('checkout/checkoutlogin');
     }
 
@@ -70,24 +69,23 @@ function showLoginForm() {
     var loginForm = app.getForm('login');
 
     var formResult = loginForm.handleAction({
-        'login'        : function (formgroup) {
+        login: function () {
             // Delegate login to appropriate authentication controller and react on success/failure
             // @TODO find better solution
             if (app.getController('Login').Process()) {
                 response.redirect(URLUtils.https('COShipping-Start'));
                 return;
-            }
-            else {
+            } else {
                 return {};
             }
         },
-        'register'     : function (formgroup) {
+        register: function () {
             // TODO - redirect to COShipping-Start after registration was successful
             response.redirect(URLUtils.https('Account-StartRegister'));
 
             return;
         },
-        'unregistered' : function (formgroup) {
+        unregistered: function () {
             response.redirect(URLUtils.https('COShipping-Start'));
 
             return;
@@ -95,13 +93,13 @@ function showLoginForm() {
     });
 
     if (formResult) {
-    	var loginAsset = Content.get('myaccount-login');
-        
+        var loginAsset = Content.get('myaccount-login');
+
         var pageMeta = require('~/cartridge/scripts/meta');
         pageMeta.update(loginAsset);
-        
+
         app.getView({
-            ContinueURL : URLUtils.https('COCustomer-LoginForm')
+            ContinueURL: URLUtils.https('COCustomer-LoginForm')
         }).render('checkout/checkoutlogin');
     }
 }
