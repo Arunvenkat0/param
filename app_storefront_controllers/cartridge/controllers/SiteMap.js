@@ -19,12 +19,11 @@ var guard = require('~/cartridge/scripts/guard');
 function google() {
     // TODO - rework
     var SendGoogleSiteMapResult = new dw.system.Pipelet('SendGoogleSiteMap').execute({
-        FileName : request.httpParameterMap.name.stringValue
+        FileName: request.httpParameterMap.name.stringValue
     });
     if (SendGoogleSiteMapResult.result === PIPELET_ERROR) {
         app.getView().render('sitemap/http_404');
-    }
-    else {
+    } else {
         app.getView().render('sitemap/http_200');
     }
 }
