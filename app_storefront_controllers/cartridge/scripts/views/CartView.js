@@ -4,7 +4,6 @@
 var View = require('./View');
 
 var Cart = require('~/cartridge/scripts/models/CartModel');
-var FormGroup = require('dw/web/FormGroup');
 var Transaction = require('dw/system/Transaction');
 
 /** @lends module:views/CartView~CartView.prototype */
