@@ -1,4 +1,6 @@
+'use strict';
 var g = require('~/cartridges/scripts/guard');
+var ISML = require('dw/template/ISML');
 
 /**
  * Handles PowerReview Request (Product Reviews)
@@ -11,20 +13,18 @@ var g = require('~/cartridges/scripts/guard');
  * Renders a product XML description based on the given ID. Input: pid
  * (required) - product ID
  */
-function XmlProductDescription()
-{
+function XmlProductDescription() {
     var GetProductResult = new dw.system.Pipelet('GetProduct').execute({
-        ProductID : request.httpParameterMap.pid.stringValue
+        ProductID: request.httpParameterMap.pid.stringValue
     });
-    if (GetProductResult.result == PIPELET_ERROR)
-    {
+    if (GetProductResult.result === PIPELET_ERROR) {
         ISML.renderTemplate('error/notfound');
         return;
     }
     var Product = GetProductResult.Product;
 
     ISML.renderTemplate('product/components/powerreviews-xmlproduct', {
-        Product : Product
+        Product: Product
     });
 }
 
@@ -32,31 +32,27 @@ function XmlProductDescription()
 /**
  * Renders a form to create a product review.
  */
-function WriteReview()
-{
+function WriteReview() {
     var ProductID = request.httpParameterMap.pid.stringValue;
-    if (empty(ProductID))
-    {
+    if (empty(ProductID)) {
         ISML.renderTemplate('error/notfound');
         return;
     }
 
     var GetProductResult = new dw.system.Pipelet('GetProduct').execute({
-        ProductID : ProductID
+        ProductID: ProductID
     });
-    if (GetProductResult.result == PIPELET_ERROR)
-    {
+    if (GetProductResult.result === PIPELET_ERROR) {
         ISML.renderTemplate('error/notfound');
         return;
     }
     var Product = GetProductResult.Product;
 
-    if (!customer.authenticated)
-    {
+    if (!customer.authenticated) {
         var accountController = require('./Account');
         accountController.requireLogin({
-            TargetAction : 'PowerReviews-WriteReview',
-            TargetParameters : [ 'pid', ProductID ]
+            TargetAction: 'PowerReviews-WriteReview',
+            TargetParameters: ['pid', ProductID]
         });
         return;
     }
@@ -65,14 +61,14 @@ function WriteReview()
         Transactional : false,
         ScriptFile : 'app_storefront_core:common/FindLastClickStream.ds'
     }).execute({
-        lastMatchedClickUrl : Location,
-        pipelineName : "Product-Show"
+        lastMatchedClickUrl: Location,
+        pipelineName: 'Product-Show'
     });
     var Location = ScriptResult.lastMatchedClickUrl;
 
     ISML.renderTemplate('product/writereview', {
-        Location : Location,
-        Product : Product
+        Location: Location,
+        Product: Product
     });
 }
 
