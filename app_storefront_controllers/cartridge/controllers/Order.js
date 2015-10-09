@@ -19,8 +19,7 @@ var guard = require('~/cartridge/scripts/guard');
 /**
  * Renders a page with the order history of the current logged in customer.
  */
-function history()
-{
+function history() {
     var orders = OrderMgr.searchOrders('customerNo={0} AND status!={1}', 'creationDate desc',
                                         customer.profile.customerNo, dw.order.Order.ORDER_STATUS_REPLACED);
 
@@ -37,11 +36,11 @@ function history()
     orderListForm.copyFrom(orderPagingModel.pageElements);
 
     var pageMeta = require('~/cartridge/scripts/meta');
-    pageMeta.update(ContentMgr.getContent("myaccount-orderhistory"));
+    pageMeta.update(ContentMgr.getContent('myaccount-orderhistory'));
 
     app.getView({
-    	OrderPagingModel   : orderPagingModel,
-    	ContinueURL        : dw.web.URLUtils.https('Order-Orders')
+        OrderPagingModel: orderPagingModel,
+        ContinueURL: dw.web.URLUtils.https('Order-Orders')
     }).render('account/orderhistory/orders');
 }
 
@@ -49,16 +48,15 @@ function history()
 /**
  * Renders the order detail page.
  */
-function orders()
-{
+function orders() {
     var orderListForm = app.getForm('orders.orderlist');
     orderListForm.handleAction({
-        'show': function (formGroup, action) {
+        show: function (formGroup, action) {
             var Order = action.object;
 
-            app.getView({Order : Order}).render('account/orderhistory/orderdetails');
+            app.getView({Order: Order}).render('account/orderhistory/orderdetails');
         },
-        'error': function () {
+        error: function () {
             response.redirect(dw.web.URLUtils.https('Order-History'));
         }
     });
@@ -71,12 +69,10 @@ function orders()
  * renders the order details by the UUID of the order, therefore it can also be used
  * for unregistered customers to track the status of their orders.
  */
-function track()
-{
+function track () {
     var parameterMap = request.httpParameterMap;
 
-    if (empty(parameterMap.orderID.stringValue))
-    {
+    if (empty(parameterMap.orderID.stringValue)) {
         app.getView().render('account/orderhistory/orderdetails');
         return response;
     }
@@ -84,13 +80,12 @@ function track()
     var uuid = parameterMap.orderID.stringValue;
     var orders = OrderMgr.searchOrders('UUID={0} AND status!={1}', 'creationDate desc', uuid, dw.order.Order.ORDER_STATUS_REPLACED);
 
-    if (empty(orders))
-    {
+    if (empty(orders)) {
         app.getView().render('account/orderhistory/orderdetails');
     }
 
     var Order = orders.next();
-    app.getView({ Order : Order }).render('account/orderhistory/orderdetails');
+    app.getView({Order: Order}).render('account/orderhistory/orderdetails');
 }
 
 
@@ -103,4 +98,4 @@ function track()
  */
 exports.History = guard.ensure(['get', 'https', 'loggedIn'], history);
 exports.Orders = guard.ensure(['post', 'https', 'loggedIn'], orders);
-exports.Track = guard.ensure(['get', 'https'], orders);
+exports.Track = guard.ensure(['get', 'https'], track);
