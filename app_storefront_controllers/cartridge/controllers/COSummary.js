@@ -33,17 +33,16 @@ function start() {
     if (!COBilling.ValidatePayment(cart)) {
         COBilling.Start();
         return;
-    }
-    else {
+    } else {
 
         Transaction.wrap(function () {
             cart.calculate();
         });
 
         var pageMeta = require('~/cartridge/scripts/meta');
-        pageMeta.update({pageTitle : Resource.msg('summary.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')});
+        pageMeta.update({pageTitle: Resource.msg('summary.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')});
         app.getView({
-            Basket : cart.object
+            Basket: cart.object
         }).render('checkout/summary/summary');
     }
 }
@@ -53,15 +52,14 @@ function start() {
  * customer.
  */
 function submit() {
-    // Calls the COPlaceOrder controller that does the place order action and any payment authorization. 
-    // COPlaceOrder returns a JSON object with an order_created key and a boolean value if the order was created successfully. 
+    // Calls the COPlaceOrder controller that does the place order action and any payment authorization.
+    // COPlaceOrder returns a JSON object with an order_created key and a boolean value if the order was created successfully.
     // If the order creation failed, it returns a JSON object with an error key and a boolean value.
     var placeOrderResult = app.getController('COPlaceOrder').Start();
     if (placeOrderResult.error) {
         start();
         return;
-    }
-    else if (placeOrderResult.order_created) {
+    } else if (placeOrderResult.order_created) {
         showConfirmation(placeOrderResult.Order);
     }
 }
@@ -86,10 +84,10 @@ function showConfirmation(order) {
     app.getForm('profile.login.password').clear();
 
     var pageMeta = require('~/cartridge/scripts/meta');
-    pageMeta.update({pageTitle : Resource.msg('confirmation.meta.pagetitle', 'checkout', 'SiteGenesis Checkout Confirmation')});
+    pageMeta.update({pageTitle: Resource.msg('confirmation.meta.pagetitle', 'checkout', 'SiteGenesis Checkout Confirmation')});
     app.getView({
-        Order       : order,
-        ContinueURL : URLUtils.https('Account-RegistrationForm') // needed by registration form after anonymous checkouts
+        Order: order,
+        ContinueURL: URLUtils.https('Account-RegistrationForm') // needed by registration form after anonymous checkouts
     }).render('checkout/confirmation/confirmation');
 }
 
