@@ -15,15 +15,15 @@
  * <isdecorate template="${require('~/view').decorate('path/to/decorator')}">
  */
 exports.decorate = function(decoratorName, customValues){
-	// get the value of the 'format' HTTP parameter
-	var pageFormat = request.httpParameters.format && request.httpParameters.format.length && request.httpParameters.format[0];
+    // get the value of the 'format' HTTP parameter
+    var pageFormat = request.httpParameters.format && request.httpParameters.format.length && request.httpParameters.format[0];
 
-	// standard set of values that indicate an AJAX response.
-	var noDecoration = ['ajax'];
+    // standard set of values that indicate an AJAX response.
+    var noDecoration = ['ajax'];
 
-	// if pageFormat is within the standard OR the custom set of values, use the blank decorator
-	if (noDecoration.indexOf(pageFormat) > -1 || (customValues && customValues.indexOf(pageFormat) > -1)) {
-		decoratorName = 'util/pt_empty';
-	}
-	return decoratorName;
+    // if pageFormat is within the standard OR the custom set of values, use the blank decorator
+    if (noDecoration.indexOf(pageFormat) > -1 || (customValues && customValues.indexOf(pageFormat) > -1)) {
+        decoratorName = 'util/pt_empty';
+    }
+    return decoratorName;
 };
