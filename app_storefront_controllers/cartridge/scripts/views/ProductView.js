@@ -12,7 +12,7 @@ var ProductView = View.extend(
          * @constructs
          * @extends module:views/View~View
          */
-        init : function (params) {
+        init: function (params) {
             this._super(params);
 
             this.Product = params.product.object;
