@@ -4,7 +4,6 @@
 var View = require('./View');
 
 /* API Includes */
-var ArrayList = require('dw/util/ArrayList');
 var ContentMgr = require('dw/content/ContentMgr');
 var LinkedHashMap = require('dw/util/LinkedHashMap');
 
@@ -33,7 +32,8 @@ var CustomerServiceView = View.extend(
 
                 // get the content assets for the folder
                 var onlineContent = folder.getOnlineContent();
-                onlineContent && customerServiceLinks.put(folder.getDisplayName(), onlineContent);
+                //TODO : look at logic of this line - original line -> onlineContent && customerServiceLinks.put(folder.getDisplayName(), onlineContent);
+                customerServiceLinks.put(folder.getDisplayName(), onlineContent);
             }
 
             // output the target address
@@ -47,8 +47,8 @@ var CustomerServiceView = View.extend(
      */
     init : function (params) {
         this._super(params);
-	    this.CustomerServiceLinks = this.getCustomerServiceLinks();
-	    this.ContinueURL = dw.web.URLUtils.https('CustomerService-Submit');
+        this.CustomerServiceLinks = this.getCustomerServiceLinks();
+        this.ContinueURL = dw.web.URLUtils.https('CustomerService-Submit');
 
         return this;
     }
