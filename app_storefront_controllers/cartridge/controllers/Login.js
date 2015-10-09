@@ -22,18 +22,16 @@ var LOGGER         = dw.system.Logger.getLogger('login');
  * Contains the login page preparation and display, it is called from various
  * places implicitly when 'loggedIn' is ensured via the {@link module:guard}.
  */
-function show()
-{
+function show() {
     var loginForm = app.getForm('login');
     loginForm.clear();
-    
+
     var oauthLoginForm = app.getForm('oauthlogin');
     oauthLoginForm.clear();
-    
+
     app.getForm('ordertrack').clear();
 
-    if (customer.registered)
-    {
+    if (customer.registered) {
         loginForm.setValue('username', customer.profile.credentials.login);
         loginForm.setValue('rememberme', true);
     }
@@ -47,10 +45,10 @@ function show()
     }
 
     var v = app.getView('Login',{
-        RegistrationStatus : false
+        RegistrationStatus: false
     });
-    if(request.httpParameterMap.scope.submitted){
-        switch(request.httpParameterMap.scope.stringValue){
+    if (request.httpParameterMap.scope.submitted) {
+        switch (request.httpParameterMap.scope.stringValue) {
             case 'wishlist':
                 // @TODO Update metadata for wishlist login.
                 v.template = 'account/wishlist/wishlistlanding';
@@ -69,8 +67,7 @@ function show()
  * Internal function which reads the URL that should be redirected to after successful login
  * @return {dw.web.Url} The URL to redirect to in case of success
  */
-function getTargetUrl()
-{
+function getTargetUrl () {
     if (session.custom.TargetLocation) {
         var target = session.custom.TargetLocation;
         delete session.custom.TargetLocation;
@@ -85,18 +82,17 @@ function getTargetUrl()
 /**
  * Handles the login form actions.
  */
-function handleLoginForm()
-{
+function handleLoginForm () {
     var loginForm = app.getForm('login');
     loginForm.handleAction({
-        'login'     : function () {
+        login: function () {
             var success = Customer.login(loginForm.getValue('username'), loginForm.getValue('password'), loginForm.getValue('rememberme'));
 
-            if(!success){
+            if (!success) {
                 loginForm.get('loginsucceeded').invalidate();
                 app.getView('Login').render();
                 return;
-            }else{
+            } else {
                 loginForm.clear();
             }
 
@@ -106,18 +102,17 @@ function handleLoginForm()
 
             return;
         },
-        'register'  : function () {
+        register: function () {
             response.redirect(dw.web.URLUtils.https('Account-StartRegister'));
             return;
         },
-        'findorder' : function () {
+        findorder: function () {
             var orderTrackForm = app.getForm('ordertrack');
             var orderNumber = orderTrackForm.getValue('orderNumber');
             var orderFormEmail = orderTrackForm.getValue('orderEmail');
             var orderPostalCode = orderTrackForm.getValue('postalCode');
 
-            if (empty(orderNumber) || empty(orderPostalCode) || empty(orderFormEmail))
-            {
+            if (empty(orderNumber) || empty(orderPostalCode) || empty(orderFormEmail)) {
                 response.redirect(dw.web.URLUtils.https('Login-Show'));
                 return;
             }
@@ -125,35 +120,32 @@ function handleLoginForm()
             var orders = OrderMgr.searchOrders('orderNo={0} AND status!={1}', 'creationDate desc', orderNumber,
                 dw.order.Order.ORDER_STATUS_REPLACED);
 
-            if (empty(orders))
-            {
+            if (empty(orders)) {
                 response.redirect(dw.web.URLUtils.https('Login-Show'));
                 return;
             }
 
             var foundOrder = orders.next();
 
-            if (!foundOrder.billingAddress.postalCode.toUpperCase().equals(orderPostalCode.toUpperCase()))
-            {
+            if (!foundOrder.billingAddress.postalCode.toUpperCase().equals(orderPostalCode.toUpperCase())) {
                 response.redirect(dw.web.URLUtils.https('Login-Show'));
                 return;
             }
 
-            if (foundOrder.customerEmail !== orderFormEmail)
-            {
+            if (foundOrder.customerEmail !== orderFormEmail) {
                 response.redirect(dw.web.URLUtils.https('Login-Show'));
                 return;
             }
 
             app.getView({
-                Order : foundOrder
+                Order: foundOrder
             }).render('account/orderhistory/orderdetails');
         },
-        'search' : function(){
+        search: function () {
             app.getController('GiftRegistry').SearchGiftRegistry();
             return;
         },
-        'error' : function(){
+        error: function () {
             app.getView('Login').render();
             return;
         }
@@ -164,11 +156,10 @@ function handleLoginForm()
 /**
  * Handles the OAuth login form.
  */
-function handleOAuthLoginForm()
-{
+function handleOAuthLoginForm() {
     var oauthLoginForm = app.getForm('oauthlogin');
     oauthLoginForm.handleAction({
-        'login'     : function () {
+        login: function () {
             if (request.httpParameterMap.OAuthProvider.stringValue) {
                 session.custom.RememberMe = request.httpParameterMap.rememberme.booleanValue || false;
                 session.custom.ContinuationURL = getTargetUrl().toString();
@@ -177,7 +168,7 @@ function handleOAuthLoginForm()
                     session.custom.RememberMe,session.custom.ContinuationURL);
 
                 var initiateOAuthLoginResult = new dw.system.Pipelet('InitiateOAuthLogin').execute({
-                    OAuthProviderID  : request.httpParameterMap.OAuthProvider.stringValue
+                    OAuthProviderID: request.httpParameterMap.OAuthProvider.stringValue
                 });
                 if (initiateOAuthLoginResult.result === PIPELET_ERROR || initiateOAuthLoginResult.AuthorizationURL === null) {
                     oauthLoginForm.get('loginsucceeded').invalidate();
@@ -192,7 +183,7 @@ function handleOAuthLoginForm()
             }
             return;
         },
-        'error' : function(){
+        error: function () {
             app.getView('Login').render();
             return;
         }
@@ -203,8 +194,7 @@ function handleOAuthLoginForm()
  * This is a central place to login a user from the login form.
  * @deprecated Only kept until all controllers are migrated, functionality has been moved to other methods
  */
-function process()
-{
+function process() {
     // handle OAuth login
     if (request.httpParameterMap.OAuthProvider.stringValue) {
         session.custom.RememberMe = request.httpParameterMap.rememberme.booleanValue || false;
@@ -214,7 +204,7 @@ function process()
             session.custom.RememberMe,session.custom.ContinuationURL);
 
         var initiateOAuthLoginResult = new dw.system.Pipelet('InitiateOAuthLogin').execute({
-            OAuthProviderID  : request.httpParameterMap.OAuthProvider.stringValue
+            OAuthProviderID: request.httpParameterMap.OAuthProvider.stringValue
         });
         if (initiateOAuthLoginResult.result === PIPELET_ERROR) {
             var oauthLoginForm = app.getForm('oauthlogin.');
@@ -228,34 +218,30 @@ function process()
     } else {
         // handle 'normal' login
         var loginForm = app.getForm('login');
-        
+
         var success = Customer.login(loginForm.getValue('username'), loginForm.getValue('password'), loginForm.getValue('rememberme'));
 
-        if(!success){
+        if (!success) {
             loginForm.get('loginsucceeded').invalidate();
-        }else{
+        } else {
             loginForm.clear();
         }
         return success;
     }
 }
 
-function oAuthFailed()
-{
+function oAuthFailed() {
     app.getForm('oauthlogin').get('loginsucceeded').invalidate();
     finishOAuthLogin();
 }
-function oAuthSuccess()
-{
+function oAuthSuccess() {
     app.getForm('oauthlogin').clear();
     finishOAuthLogin();
 }
 
-function handleOAuthReentry()
-{
+function handleOAuthReentry() {
     var FinalizeOAuthLoginResult = new dw.system.Pipelet('FinalizeOAuthLogin').execute();
-    if (FinalizeOAuthLoginResult.result === PIPELET_ERROR)
-    {
+    if (FinalizeOAuthLoginResult.result === PIPELET_ERROR) {
         oAuthFailed();
         return;
     }
@@ -280,24 +266,21 @@ function handleOAuthReentry()
 
         // LinkedIn returns XML.
         var extProfile = {};
-        if(oAuthProviderID === 'LinkedIn'){
+        if (oAuthProviderID === 'LinkedIn') {
             var responseReader = new dw.io.Reader(responseText);
             var xmlStreamReader = new dw.io.XMLStreamReader(responseReader);
-            while (xmlStreamReader.hasNext())
-            {
-                if (xmlStreamReader.next() === dw.io.XMLStreamConstants.START_ELEMENT)
-                {
+            while (xmlStreamReader.hasNext()) {
+                if (xmlStreamReader.next() === dw.io.XMLStreamConstants.START_ELEMENT) {
                     var localElementName = xmlStreamReader.getLocalName();
                     // Ignore the top level person element and read the rest into a plain object.
-                    if (localElementName !== 'person')
-                    {
+                    if (localElementName !== 'person') {
                         extProfile[localElementName] = xmlStreamReader.getElementText();
                     }
                 }
             }
             xmlStreamReader.close();
             responseReader.close();
-        }else{
+        } else {
             // All other providers return JSON.
             extProfile = JSON.parse(responseText);
             if (null === extProfile) {
@@ -305,7 +288,7 @@ function handleOAuthReentry()
                 oAuthFailed();
                 return;
             }
-            if(oAuthProviderID === 'VKontakte'){
+            if (oAuthProviderID === 'VKontakte') {
                 // They use JSON, but thought it would be cool to add some extra top level elements
                 extProfile = extProfile.response[0];
             }
@@ -314,14 +297,14 @@ function handleOAuthReentry()
         // This is always id or uid for all providers.
         var userId = extProfile.id || extProfile.uid;
         if (!userId) {
-            LOGGER.warn( 'Undefined user identifier - make sure you are mapping the correct property from the response.' +
+            LOGGER.warn('Undefined user identifier - make sure you are mapping the correct property from the response.' +
                 ' We are mapping "id" which is not available in the response: \n', extProfile);
             oAuthFailed();
             return;
         }
         LOGGER.debug('Parsed UserId "{0}" from response: {1}', userId, JSON.stringify(extProfile));
 
-        if(oAuthProviderID === 'SinaWeibo'){
+        if (oAuthProviderID === 'SinaWeibo') {
             // requires additional requests to get the info
             extProfile = getSinaWeiboAccountInfo(accessToken, userId);
         }
@@ -329,10 +312,9 @@ function handleOAuthReentry()
         var profile = dw.customer.CustomerMgr.getExternallyAuthenticatedCustomerProfile(oAuthProviderID, userId);
         var customer;
 
-        if (profile === null)
-        {
-            Transaction.wrap(function(){
-                LOGGER.debug('User id: '+userId+' not found, creating a new profile.');
+        if (profile === null) {
+            Transaction.wrap(function () {
+                LOGGER.debug('User id: ' + userId + ' not found, creating a new profile.');
                 customer = dw.customer.CustomerMgr.createExternallyAuthenticatedCustomer(oAuthProviderID, userId);
                 profile = customer.getProfile();
                 var firstName, lastName, email;
@@ -341,22 +323,22 @@ function handleOAuthReentry()
                 if (typeof extProfile.name === 'object') {
                     firstName = extProfile.name.givenName;
                     lastName = extProfile.name.familyName;
-                }else{
+                } else {
                     // The other providers use one of these, GitHub & SinaWeibo have just a 'name'.
                     firstName = extProfile['first-name'] || extProfile.first_name || extProfile.name;
                     lastName = extProfile['last-name'] || extProfile.last_name || extProfile.name;
                 }
                 // Simple email addresses.
                 email =  extProfile['email-address'] || extProfile.email;
-                if(!email){
+                if (!email) {
                     var emails = extProfile.emails;
                     // Google comes with an array
                     if (emails && emails.length) {
                         //First element of the array is the account email according to Google.
                         profile.setEmail(extProfile.emails[0].value);
                     // While MS comes with an object.
-                    }else{
-                        email = emails['preferred'] || extProfile['emails.account'] || extProfile['emails.personal'] ||
+                    } else {
+                        email = emails.preferred || extProfile['emails.account'] || extProfile['emails.personal'] ||
                             extProfile['emails.business'];
                     }
                 }
@@ -370,12 +352,12 @@ function handleOAuthReentry()
         }
         var credentials = profile.getCredentials();
         if (credentials.isEnabled()) {
-            Transaction.wrap(function(){
+            Transaction.wrap(function () {
                 dw.customer.CustomerMgr.loginExternallyAuthenticatedCustomer(oAuthProviderID, userId, rememberMe);
             });
-            LOGGER.debug( 'Logged in external customer with id: {0}', userId);
+            LOGGER.debug('Logged in external customer with id: {0}', userId);
         } else {
-            LOGGER.warn( 'Customer attempting to login into a disabled profile: {0} with id: {1}',
+            LOGGER.warn('Customer attempting to login into a disabled profile: {0} with id: {1}',
                 profile.getCustomer().getCustomerNo(), userId);
             oAuthFailed();
             return;
@@ -397,7 +379,7 @@ function handleOAuthReentry()
  * @return {Object}             Account info
  * @todo Migrate httpClient calls to dw.svc.*
  */
-function getSinaWeiboAccountInfo(accessToken, userId){
+function getSinaWeiboAccountInfo(accessToken, userId) {
     var name, email;
     if (null === accessToken) {
         LOGGER.warn('Exiting because the AccessToken input parameter is null.');
@@ -411,7 +393,7 @@ function getSinaWeiboAccountInfo(accessToken, userId){
     //http://open.weibo.com/wiki/2/users/show/en -> https://api.weibo.com/2/users/show.json
     var urlUser = 'https://api.weibo.com/2/users/show.json' + accessTokenSuffix +
         '&uid=' + userId;
-    http.open( 'GET', urlUser );
+    http.open('GET', urlUser);
     http.send();
     var resultName  = http.getText();
     if (200 !== http.statusCode) {
@@ -432,7 +414,7 @@ function getSinaWeiboAccountInfo(accessToken, userId){
     //Obtain the email:
     //http://open.weibo.com/wiki/2/account/profile/email -> https://api.weibo.com/2/account/profile/email.json
     var urlEmail  = 'https://api.weibo.com/2/account/profile/email.json' + accessTokenSuffix;
-    http.open( 'GET', urlEmail );
+    http.open('GET', urlEmail);
     http.send();
     var resultEmail  = http.getText();
     if (200 !== http.statusCode) {//!
@@ -452,27 +434,27 @@ function getSinaWeiboAccountInfo(accessToken, userId){
             }
         }
     }
-    return {name : name, email : email};
+    return {name: name, email: email};
 }
 
 /**
  * Internal helper to finish the OAuth login.
  */
-function finishOAuthLogin()
-{
+function finishOAuthLogin() {
     // To continue to the destination that is already preserved in the session.
     var location = session.custom.ContinuationURL;
     delete session.custom.ContinuationURL;
     response.redirect(location);
 }
 
-function Logout()
-{
+function Logout() {
     Customer.logout();
 
-	app.getForm('login').clear();
-	app.getForm('profile').clear();
-	//Cart.get().calculate();
+    app.getForm('login').clear();
+    app.getForm('profile').clear();
+    
+    // TODO: Investigate whether this line should be removed
+    //Cart.get().calculate();
 
     response.redirect(dw.web.URLUtils.https('Account-Show'));
     return;
