@@ -8,7 +8,6 @@
 
 /* API Includes */
 var Status = require('dw/system/Status');
-var Template = require('dw/util/Template');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
@@ -41,10 +40,10 @@ function contactUs() {
  * The form handler for the contactus form.
  */
 function submit() {
-	var contactUsForm = app.getForm('contactus');
-	
+    var contactUsForm = app.getForm('contactus');
+
     var contactUsResult = contactUsForm.handleAction({
-        'send'  : function (formgroup) {
+        send: function (formgroup) {
             // Change the MailTo in order to send to the store's customer service email address. It defaults to the
             // user's email.
             var Email = app.getModel('Email');
@@ -53,7 +52,7 @@ function submit() {
                 .setSubject(formgroup.myquestion.value)
                 .send({});
         },
-        'error' : function (formgroup) {
+        error: function () {
             // No special error handling if the form is invalid.
             return null;
         }
@@ -61,10 +60,9 @@ function submit() {
 
     if (contactUsResult && (contactUsResult.getStatus() === Status.OK)) {
         app.getView('CustomerService', {
-            ConfirmationMessage : 'edit'
+            ConfirmationMessage: 'edit'
         }).render('content/contactus');
-    }
-    else {
+    } else {
         app.getView('CustomerService').render('content/contactus');
     }
 }
