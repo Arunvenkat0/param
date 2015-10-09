@@ -20,7 +20,7 @@ var View = Class.extend(
      * @extends module:util/Class~Class
      * @param {Object} params The parameters to pass
      */
-    init : function (params) {
+    init: function (params) {
         // copy all properties of params to the view
         if(params){
             object.extend(this, params);
@@ -35,7 +35,7 @@ var View = Class.extend(
      * @abstract
      * @return {Void}
      */
-    render : function (templateName) {
+    render: function (templateName) {
         templateName = templateName || this.template;
         // provide reference to View itself
         this.View = this;
