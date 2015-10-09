@@ -4,8 +4,8 @@
  */
 
 var HOME_BREADCRUMB = {
-    name : dw.web.Resource.msg('global.home','locale',null),
-    url  : dw.web.URLUtils.httpHome()
+    name: dw.web.Resource.msg('global.home', 'locale', null),
+    url: dw.web.URLUtils.httpHome()
 };
 
 /**
@@ -16,16 +16,16 @@ var HOME_BREADCRUMB = {
  *
  * @class
  */
-var Meta = function(){
+var Meta = function () {
     this.data = {
-        page : {
-            title : '',
-            description : '',
-            keywords : ''
+        page: {
+            title: '',
+            description: '',
+            keywords: ''
         },
         // supports elements with properties name and url
-        breadcrumbs : [ HOME_BREADCRUMB ],
-        resources : {}
+        breadcrumbs: [HOME_BREADCRUMB],
+        resources: {}
     };
 };
 
@@ -39,65 +39,65 @@ Meta.prototype = {
      * // using a product object
      * meta.update(product);
      * // using a plain object
-     * meta.update({resources : {
-     *     'MY_RESOURCE' : dw.web.Resource.msg('my.resource','mybundle',null)
+     * meta.update({resources: {
+     *     'MY_RESOURCE': dw.web.Resource.msg('my.resource', 'mybundle', null)
      * }});
      * // using a string
      * meta.update('account.landing')
      */
-    update : function(object){
+    update: function (object) {
         // check if object wrapped in AbstractModel and get system object if so get the system object
         if ('object' in object) {
-        	object = object.object;
+            object = object.object;
         }
         // check if it is a system object
-        if(object.class){
+        if (object.class) {
             // update metadata
             var title = null;
             if ('pageTitle' in object) {
-            	title = object.pageTitle;
+                title = object.pageTitle;
             }
-            if(!title && 'name' in object){
+            if (!title && 'name' in object) {
                 title = object.name;
-            }else if(!title && 'displayName' in object){
+            } else if (!title && 'displayName' in object) {
                 title = object.displayName;
             }
             this.data.page.title = title;
-            if('pageKeywords' in object && object.pageKeywords){
+            if ('pageKeywords' in object && object.pageKeywords) {
                 this.data.page.keywords = object.pageKeywords;
             }
-            if('pageDescription' in object && object.pageDescription){
+            if ('pageDescription' in object && object.pageDescription) {
                 this.data.page.description = object.pageDescription;
             }
 
             this.updatePageMetaData();
 
             // Update breadcrumbs for content
-            if(object.class === dw.content.Content){
+            if (object.class === dw.content.Content) {
                 var path = require('~/cartridge/scripts/models/ContentModel').get(object).getFolderPath();
-                this.data.breadcrumbs = path.map(function(folder){
+                this.data.breadcrumbs = path.map(function (folder) {
                     return {
-                        name : folder.displayName
+                        name: folder.displayName
                     };
                 });
                 this.data.breadcrumbs.unshift(HOME_BREADCRUMB);
                 this.data.breadcrumbs.push({
-                    name : object.name,
-                    url : dw.web.URLUtils.url('Page-Show','cid',object.ID)
+                    name: object.name,
+                    url: dw.web.URLUtils.url('Page-Show', 'cid', object.ID)
                 });
-                dw.system.Logger.debug('Content breadcrumbs calculated: '+JSON.stringify(this.data.breadcrumbs));
+                dw.system.Logger.debug('Content breadcrumbs calculated: ' + JSON.stringify(this.data.breadcrumbs));
             }
-        } else if(typeof object === 'string'){
+        } else if (typeof object === 'string') {
             // @TODO Should ideally allow to pass something like account.overview, account.wishlist etc.
             // and at least generate the breadcrumbs & page title
         } else {
-            if(object.pageTitle){
+            if (object.pageTitle) {
                 this.data.page.title = object.pageTitle;
             }
-            if(object.pageKeywords){
+            if (object.pageKeywords) {
                 this.data.page.keywords = object.pageKeywords;
             }
-            if(object.pageDescription){
+            if (object.pageDescription) {
                 this.data.page.description = object.pageDescription;
             }
             // @TODO do an _.extend(this.data, object) of the passed object
@@ -106,7 +106,7 @@ Meta.prototype = {
     /**
      * Update the Page Metadata with the current internal data
      */
-    updatePageMetaData : function(){
+    updatePageMetaData: function () {
         var pageMetaData = request.pageMetaData;
         pageMetaData.title = this.data.page.title;
         pageMetaData.keywords = this.data.page.keywords;
@@ -117,7 +117,7 @@ Meta.prototype = {
      *
      * @return {Array} an array containing the breadcrumb items
      */
-    getBreadcrumbs : function(){
+    getBreadcrumbs: function () {
         return this.data.breadcrumbs || [];
     },
     /**
@@ -126,7 +126,7 @@ Meta.prototype = {
      *
      * @example
      * // on the server
-     * require('meta').addResource('some.message.key','bundlename');
+     * require('meta').addResource('some.message.key', 'bundlename');
      * // on the client
      * console.log(app.resources['some.message.key']);
      *
@@ -134,7 +134,7 @@ Meta.prototype = {
      * @param {string} bundle       The bundle name
      * @param {string} defaultValue Optional default value, empty string otherwise
      */
-    addResource : function(key, bundle, defaultValue){
+    addResource: function (key, bundle, defaultValue) {
         this.data.resources[key] = dw.web.Resource.msg(key, bundle, defaultValue || '');
     },
     /**
@@ -142,8 +142,8 @@ Meta.prototype = {
      *
      * @return {String} A div with a data attribute containing all data as JSON
      */
-    renderClientData : function(){
-        return '<div class="page-context" data-dw-context="'+JSON.stringify(this.data)+'" />';
+    renderClientData: function () {
+        return '<div class="page-context" data-dw-context="' + JSON.stringify(this.data) + '" />';
     }
 };
 
