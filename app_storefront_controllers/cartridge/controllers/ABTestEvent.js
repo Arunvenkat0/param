@@ -24,7 +24,7 @@ function startCheckout() {
 
     if (cart) {
         new Pipelet('StartCheckout').execute({
-            Basket : cart.object
+            Basket: cart.object
         });
         ISML.renderTemplate('util/reporting/reporting');
     } else {
