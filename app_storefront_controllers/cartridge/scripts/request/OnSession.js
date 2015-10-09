@@ -14,8 +14,7 @@ var Status = require('dw/system/Status');
  * Gets the device type of the current user.
  * @return {String} the device type (desktop, mobile or tablet)
  */
-function getDeviceType()
-{
+function getDeviceType() {
     var deviceType = 'desktop';
     var iPhoneDevice = 'iPhone';
     var iPadDevice = 'iPad';
@@ -24,30 +23,23 @@ function getDeviceType()
     var httpUserAgent = request.httpUserAgent;
 
     //check if the device is iPhone
-    if (httpUserAgent.indexOf(iPhoneDevice) > 1)
-    {
+    if (httpUserAgent.indexOf(iPhoneDevice) > 1) {
         deviceType = 'mobile';
-    }
-    //check if the device is Android mobile device
-    else if (httpUserAgent.indexOf(androidDevice) > 1)
-    {
-        if (httpUserAgent.indexOf('mobile') > 1)
-        {
+    } else if (httpUserAgent.indexOf(androidDevice) > 1) { //check if the device is Android mobile device
+        if (httpUserAgent.indexOf('mobile') > 1) {
             deviceType = 'mobile';
         }
-    }
-    else if (httpUserAgent.indexOf(iPadDevice) > 1)
-    {
+    } else if (httpUserAgent.indexOf(iPadDevice) > 1) {
         deviceType = 'tablet';
     }
-    
+
     return deviceType;
 }
 
 /**
  * The onSession hook function.
  */
-exports.onSession = function() {
+exports.onSession = function () {
     session.custom.device = getDeviceType();
     return new Status(Status.OK);
 };
