@@ -26,8 +26,7 @@ var ProductList = app.getModel('ProductList');
 /**
  * Renders the page to purchase a gift certificate.
  */
-function purchase()
-{
+function purchase() {
     app.getForm('giftcert').clear();
 
     showPurchase();
@@ -36,8 +35,7 @@ function purchase()
 /**
  * Internal helper which prepares and shows the purchase page without clearing the form
  */
-function showPurchase()
-{
+function showPurchase() {
     var parameterMap = request.httpParameterMap;
     var purchaseForm = app.getForm('giftcert.purchase');
 
@@ -55,8 +53,7 @@ function showPurchase()
 
     if (!parameterMap.plid.empty) {
         var productList = ProductList.get(parameterMap.plid.value).object;
-        if (productList)
-        {
+        if (productList) {
             purchaseForm.setValue('recipient', productList.owner.profile.firstName + ' ' +
                 productList.owner.profile.lastName);
             purchaseForm.setValue('recipientEmail', productList.owner.profile.email);
@@ -66,9 +63,9 @@ function showPurchase()
     }
 
     app.getView({
-        bctext1 : 'gc',
-        bcurl1 : null,
-        ContinueURL : URLUtils.https('GiftCert-AddToBasket')
+        bctext1: 'gc',
+        bcurl1: null,
+        ContinueURL: URLUtils.https('GiftCert-AddToBasket')
     }).render('checkout/giftcert/giftcertpurchase');
 }
 
@@ -78,12 +75,11 @@ function showPurchase()
  * @param  {dw.util.Map} args.FormErrors
  * @param  {String} args.GeneralError
  */
-function showError(args)
-{
+function showError(args) {
     if (request.httpParameterMap.format.stringValue === 'ajax') {
         app.getView({
-            GeneralError : args.GeneralError,
-            FormErrors : args.FormErrors || new HashMap()
+            GeneralError: args.GeneralError,
+            FormErrors: args.FormErrors || new HashMap()
         }).render('checkout/giftcert/giftcertaddtobasketjson');
         return;
     }
@@ -94,19 +90,18 @@ function showError(args)
 
 /**
  * Assigns values from the gift certificate line item to the giftcert.purchase form
- * and renders an updated version of the giftcertepurchase template. 
+ * and renders an updated version of the giftcertepurchase template.
  * Parameters - GiftCertificateLineItemID: UUID of line item for gift
  * certificate to edit in basket.
  */
-function edit()
-{
+function edit() {
     var cart = Cart.get();
     if (!cart) {
         purchase();
         return;
     }
     var giftCertificateLineItem = cart.getGiftCertificateLineItemByUUID(request.httpParameterMap.GiftCertificateLineItemID.value);
-    if(!giftCertificateLineItem) {
+    if (!giftCertificateLineItem) {
         purchase();
         return;
     }
@@ -124,8 +119,8 @@ function edit()
     purchaseForm.setValue('amount', giftCertificateLineItem.price.value);
 
     app.getView({
-        GiftCertificateLineItem : giftCertificateLineItem,
-        ContinueURL : URLUtils.https('GiftCert-Update')
+        GiftCertificateLineItem: giftCertificateLineItem,
+        ContinueURL: URLUtils.https('GiftCert-Update')
     }).render('checkout/giftcert/giftcertpurchase');
 }
 
@@ -134,41 +129,39 @@ function edit()
  * Returns the details of a gift certificate as JSON in order to check the
  * current balance.
  */
-function checkBalance()
-{
+function checkBalance() {
     var params = request.httpParameterMap;
 
 
     var giftCertificate = null;
 
     var giftCertID = params.giftCertID.stringValue || params.dwfrm_giftcert_balance_giftCertID.stringValue;
-    if(giftCertID){
+    if (giftCertID) {
         giftCertificate = GiftCertificateMgr.getGiftCertificateByCode(giftCertID);
     }
-    
-	let r = require('~/cartridge/scripts/util/Response');
+
+    let r = require('~/cartridge/scripts/util/Response');
 
     if (!empty(giftCertificate) && giftCertificate.enabled) {
         r.renderJSON({
-            giftCertificate : {
-                ID : giftCertID,
-                balance : StringUtils.formatMoney(giftCertificate.balance)
+            giftCertificate: {
+                ID: giftCertID,
+                balance: StringUtils.formatMoney(giftCertificate.balance)
             }
         });
     } else {
         r.renderJSON({
-            error : Resource.msg('billing.giftcertinvalid', 'checkout', null)
+            error: Resource.msg('billing.giftcertinvalid', 'checkout', null)
         });
     }
 }
 
 
 /**
- * Adds a gift certificate to the basket. 
+ * Adds a gift certificate to the basket.
  * Parameters - post of giftcert.purchase
  */
-function addToBasket()
-{
+function addToBasket() {
     processAddToBasket(createGiftCert);
 }
 
@@ -176,8 +169,7 @@ function addToBasket()
  * Updates the gift certificate in the basket.
  * Parameters - post of giftcert.purchase
  */
-function update()
-{
+function update() {
     processAddToBasket(updateGiftCert);
 }
 
@@ -185,14 +177,16 @@ function update()
  * Internal helper which creates/updates the GiftCert
  * @param  {function} action The gift certificate action to execute.
  */
-function processAddToBasket(action)
-{
+function processAddToBasket(action) {
     var purchaseForm = app.getForm('giftcert.purchase');
-	
+
     // Validates confirmation of email address.
     var recipientEmailForm = purchaseForm.get('recipientEmail');
     var confirmRecipientEmailForm = purchaseForm.get('confirmRecipientEmail');
-      
+
+    // TODO: May be cause of RAP-4222
+    var form;
+
     if (recipientEmailForm.valid() && confirmRecipientEmailForm.valid() && (recipientEmailForm.value() !== confirmRecipientEmailForm.value)) {
         confirmRecipientEmailForm.invalidate('giftcert.confirmrecipientemailvalueerror');
     }
@@ -212,29 +206,26 @@ function processAddToBasket(action)
         }
     }
 
-    if (!formErrors.isEmpty())
-    {
+    if (!formErrors.isEmpty()) {
         showError({
-            FormErrors : formErrors
+            FormErrors: formErrors
         });
         return;
     }
 
     var cart = Cart.goc();
-    if (!cart)
-    {
+    if (!cart) {
         showError({
-            GeneralError : Resource.msg('checkout.giftcert.error.internal', 'checkout', null)
+            GeneralError: Resource.msg('checkout.giftcert.error.internal', 'checkout', null)
         });
         return;
     }
 
     var giftCertificateLineItem = action(cart);
 
-    if (!giftCertificateLineItem)
-    {
+    if (!giftCertificateLineItem) {
         showError({
-            GeneralError : Resource.msg('checkout.giftcert.error.internal', 'checkout', null)
+            GeneralError: Resource.msg('checkout.giftcert.error.internal', 'checkout', null)
         });
         return;
     }
@@ -243,11 +234,10 @@ function processAddToBasket(action)
         cart.calculate();
     });
 
-    if (request.httpParameterMap.format.stringValue === 'ajax')
-    {
+    if (request.httpParameterMap.format.stringValue === 'ajax') {
         app.getView({
-            FormErrors : formErrors,
-            GiftCertificateLineItem : giftCertificateLineItem
+            FormErrors: formErrors,
+            GiftCertificateLineItem: giftCertificateLineItem
         }).render('checkout/giftcert/giftcertaddtobasketjson');
         return;
     }
@@ -262,19 +252,17 @@ function processAddToBasket(action)
  * @param {String} args.lineItemId The OD of the Gift Certificate lineitem
  * @TODO Check why normal minicart cannot be used
  */
-function showMiniCart()
-{
+function showMiniCart() {
     var cart = Cart.get();
-    if (!cart)
-    {
+    if (!cart) {
         return;
     }
     var giftCertificateLineItem = cart.getGiftCertificateLineItemByUUID(request.httpParameterMap.lineItemId.value);
-    if(!giftCertificateLineItem){
+    if (!giftCertificateLineItem) {
         return;
     }
     app.getView({
-        Basket : cart.object,
+        Basket: cart.object,
         GiftCertificateLineItem: giftCertificateLineItem
     }).render('checkout/cart/minicart');
 }
@@ -285,16 +273,14 @@ function showMiniCart()
  *
  * @param {module:models/CartModel~CartModel} cart the current cart
  */
-function createGiftCert(cart)
-{
+function createGiftCert(cart) {
     var purchaseForm = app.getForm('giftcert.purchase');
 
     var plid = request.httpParameterMap.plid.stringValue;
 
     var productListItem = null;
 
-    if (plid)
-    {
+    if (plid) {
         var productList = ProductList.get(plid).object;
         if (productList) {
             productListItem = productList.getItem(purchaseForm.get('lineItemId').value());
@@ -307,18 +293,17 @@ function createGiftCert(cart)
     // });
 
     var AddGiftCertificateToBasketResult = new Pipelet('AddGiftCertificateToBasket').execute({
-        Amount : purchaseForm.get('amount').value(),
-        Basket : cart.object,
-        RecipientEmail : purchaseForm.get('recipientEmail').value(),
-        RecipientName : purchaseForm.get('recipient').value(),
-        SenderName : purchaseForm.get('from').value(),
-        Message : purchaseForm.get('message').value(),
-        ProductListItem : productListItem,
+        Amount: purchaseForm.get('amount').value(),
+        Basket: cart.object,
+        RecipientEmail: purchaseForm.get('recipientEmail').value(),
+        RecipientName: purchaseForm.get('recipient').value(),
+        SenderName: purchaseForm.get('from').value(),
+        Message: purchaseForm.get('message').value(),
+        ProductListItem: productListItem,
         // TODO originally Shipment : Shipment, but where should this come from?
-        Shipment : null
+        Shipment: null
     });
-    if (AddGiftCertificateToBasketResult.result === PIPELET_ERROR)
-    {
+    if (AddGiftCertificateToBasketResult.result === PIPELET_ERROR) {
         return null;
     }
     var giftCertificateLineItem = AddGiftCertificateToBasketResult.GiftCertificateLineItem;
@@ -333,12 +318,11 @@ function createGiftCert(cart)
  *
  * @param {module:models/CartModel~CartModel} cart the current cart
  */
-function updateGiftCert(cart)
-{
+function updateGiftCert(cart) {
     var purchaseForm = app.getForm('giftcert.purchase');
 
     var giftCertificateLineItem = cart.getGiftCertificateLineItemByUUID(purchaseForm.get('lineItemId').value());
-    if(!giftCertificateLineItem){
+    if (!giftCertificateLineItem) {
         return null;
     }
 
@@ -348,7 +332,7 @@ function updateGiftCert(cart)
         giftCertificateLineItem.recipientName = purchaseForm.get('recipient').value();
         giftCertificateLineItem.recipientEmail = purchaseForm.get('recipientEmail').value();
         giftCertificateLineItem.message = purchaseForm.get('message').value();
-        
+
         var amount = purchaseForm.get('amount').value();
         giftCertificateLineItem.basePrice = new Money(amount, giftCertificateLineItem.basePrice.currencyCode);
         giftCertificateLineItem.grossPrice = new Money(amount, giftCertificateLineItem.grossPrice.currencyCode);
