@@ -52,6 +52,7 @@ describe('Gift Registry', () => {
 	};
 
 	before(() => client.init()
+		.then(() => testData.load())
 		.then(() => testData.getCustomerByLogin(login))
 		.then(customer => {
 			let address = customer.getPreferredAddress();

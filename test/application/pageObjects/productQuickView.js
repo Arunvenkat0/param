@@ -1,10 +1,10 @@
 'use strict';
 
 import client from '../webdriver/client';
+import * as common from '../pageObjects/helpers/common';
 
 export const CONTAINER = '.ui-dialog';
 export const SWATCHES_SIZE = '.swatches.size';
-export const SIZE_SELECTED_VALUE = [SWATCHES_SIZE, 'li.selected-value'].join(' ');
 export const VARIATION_CONTAINER = '.product-variations';
 
 function getCssSizeByIdx (idx) {
@@ -23,4 +23,22 @@ export function getCssSizeLinkByIdx (idx) {
 export function getSizeTextByIdx(sizeIndex) {
 	return client.getText(getCssSizeByIdx(sizeIndex))
 		.then(text => text.trim());
+}
+
+export function selectAttributes (variant) {
+	return common.addProductVariationToBasket(variant, common.BTN_ADD_TO_CART)
+		.then(() => client.waitForVisible(CONTAINER, 5000, true));
+}
+
+export function deselectAllAttributes() {
+	return client.elements('.swatches .selected')
+		.then(attrsToDeselect => {
+			return attrsToDeselect.value.reduce((deselect) => {
+				return deselect.then(() => {
+					return client.element('.swatches .selected')
+						.click()
+						.waitForVisible('.loader-bg', 500, true);
+				});
+			}, Promise.resolve());
+		});
 }
