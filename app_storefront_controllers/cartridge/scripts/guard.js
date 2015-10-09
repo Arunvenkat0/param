@@ -23,14 +23,13 @@ var LOGGER   = dw.system.Logger.getLogger('guard');
  *
  * @param {Object} params Parameters passed along by by ensure
  */
-function requireLogin(params)
-{
-    if(customer.authenticated){
+function requireLogin(params) {
+    if (customer.authenticated) {
         return true;
     }
     var redirectUrl = dw.web.URLUtils.https('Login-Show','original', browsing.lastUrl());
 
-    if(params && params.scope){
+    if (params && params.scope) {
         redirectUrl.append('scope', params.scope);
     }
 
@@ -43,10 +42,8 @@ function requireLogin(params)
  *
  * @return false, if switching is not possible (for example, because its a POST request)
  */
-function switchToHttps()
-{
-    if (request.httpMethod !== 'GET')
-    {
+function switchToHttps() {
+    if (request.httpMethod !== 'GET') {
         // switching is not possible, send error 403 (forbidden)
         response.sendError(403);
         return false;
@@ -54,8 +51,7 @@ function switchToHttps()
 
     var url = 'https://' + request.httpHost + request.httpPath;
 
-    if (!empty(request.httpQueryString))
-    {
+    if (!empty(request.httpQueryString)) {
         url += '?' + request.httpQueryString;
     }
 
@@ -69,17 +65,17 @@ function switchToHttps()
  */
 var Filters = {
     /** Action must be accessed via HTTPS */
-    https : function() {return request.isHttpSecure();},
+    https: function() {return request.isHttpSecure();},
     /** Action must be accessed via HTTP */
-    http : function() {return !this.https();},
+    http: function() {return !this.https();},
     /** Action must be accessed via a GET request */
-    get : function() {return request.httpMethod === 'GET';},
+    get: function() {return request.httpMethod === 'GET';},
     /** Action must be accessed via a POST request */
-    post : function() {return request.httpMethod === 'POST';},
+    post: function() {return request.httpMethod === 'POST';},
     /** Action must only be accessed authenticated csutomers */
-    loggedIn : function() {return customer.authenticated;},
+    loggedIn: function() {return customer.authenticated;},
     /** Action must only be used as remote include */
-    include : function() {
+    include: function() {
         // the main request will be something like kjhNd1UlX_80AgAK-0-00, all includes
         // have incremented trailing counters
         return request.httpHeaders['x-is-requestid'].indexOf('-0-00') === -1;
@@ -115,7 +111,6 @@ function ensure (filters, action, params) {
                 }
                 break;
             }
-
         }
 
         if ( !error ) {
@@ -132,15 +127,13 @@ function ensure (filters, action, params) {
             return error(params);
         }
     });
-
 }
 
 /**
  * Exposes the given action to be accessible from the web. The action gets a property which marks it as exposed. This
  * property is checked by the platform.
  */
-function expose(action)
-{
+function expose(action) {
     action.public = true;
     return action;
 }
@@ -157,8 +150,7 @@ exports.all = expose;
  * @see module:guard~get
  * @deprecated Use ensure(['https','get'], action) instead
  */
-exports.httpsGet = function(action)
-{
+exports.httpsGet = function (action) {
     return ensure(['https','get'], action);
 };
 
@@ -167,8 +159,7 @@ exports.httpsGet = function(action)
  * @see module:guard~post
  * @deprecated Use ensure(['https','post'], action) instead
  */
-exports.httpsPost = function(action)
-{
+exports.httpsPost = function (action) {
     return ensure(['https','post'], action);
 };
 
