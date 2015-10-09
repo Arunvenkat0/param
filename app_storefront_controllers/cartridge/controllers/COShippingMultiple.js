@@ -49,11 +49,10 @@ function start() {
         });
 
         app.getView({
-            Basket      : cart.object,
-            ContinueURL : URLUtils.https('COShippingMultiple-MultiShippingAddresses')
+            Basket: cart.object,
+            ContinueURL: URLUtils.https('COShippingMultiple-MultiShippingAddresses')
         }).render('checkout/shipping/multishipping/multishippingaddresses');
-    }
-    else {
+    } else {
         app.getController('Cart').Show();
         return;
     }
@@ -66,7 +65,7 @@ function multiShippingAddresses() {
     var multiShippingForm = app.getForm('multishipping');
 
     multiShippingForm.handleAction({
-        'save' : function (formgroup) {
+        save: function () {
             var cart = Cart.get();
 
             var result = Transaction.wrap(function () {
@@ -82,11 +81,10 @@ function multiShippingAddresses() {
 
                 startShipments();
                 return;
-            }
-            else {
+            } else {
                 app.getView({
-                    Basket      : cart.object,
-                    ContinueURL : URLUtils.https('COShippingMultiple-MultiShippingAddresses')            
+                    Basket: cart.object,
+                    ContinueURL: URLUtils.https('COShippingMultiple-MultiShippingAddresses')
                 }).render('checkout/shipping/multishipping/multishippingaddresses');
                 return;
             }
@@ -123,11 +121,10 @@ function startShipments() {
         });
 
         app.getView({
-            Basket      : cart.object,
-            ContinueURL : URLUtils.https('COShippingMultiple-MultiShippingMethods')
+            Basket: cart.object,
+            ContinueURL: URLUtils.https('COShippingMultiple-MultiShippingMethods')
         }).render('checkout/shipping/multishipping/multishippingshipments');
-    }
-    else {
+    } else {
         app.getController('Cart').Show();
         return;
     }
@@ -138,12 +135,12 @@ function startShipments() {
  */
 function multiShippingMethods() {
     var multiShippingForm = app.getForm('multishipping');
-	
+
     multiShippingForm.handleAction({
-        'save' : function (formgroup) {
-	        Transaction.wrap(function () {
-	        	var count = session.forms.multishipping.shippingOptions.shipments.childCount;
-		        for (var i = 0; i < count; i++) {
+        save: function () {
+            Transaction.wrap(function () {
+                var count = session.forms.multishipping.shippingOptions.shipments.childCount;
+                for (var i = 0; i < count; i++) {
                     var shipmentForm = session.forms.multishipping.shippingOptions.shipments[i];
 
                     if (shipmentForm.shippingMethodID.selectedOptionObject !== null) {
@@ -152,8 +149,8 @@ function multiShippingMethods() {
 
                     if (!app.getForm(shipmentForm).copyTo(shipmentForm.object)) {
                         app.getView({
-                            Basket      : Cart.get().object,
-                            ContinueURL : URLUtils.https('COShippingMultiple-MultiShippingMethods')
+                            Basket: Cart.get().object,
+                            ContinueURL: URLUtils.https('COShippingMultiple-MultiShippingMethods')
                         }).render('checkout/shipping/multishipping/multishippingshipments');
                         return;
                     }
@@ -187,8 +184,7 @@ function initAddressForms(cart, quantityLineItems) {
     if (!addresses) {
         start();
         return;
-    }
-    else {
+    } else {
         for (var i = 0; i < session.forms.multishipping.addressSelection.quantityLineItems.childCount; i++) {
             var quantityLineItem = session.forms.multishipping.addressSelection.quantityLineItems[i];
             quantityLineItem.addressList.setOptions(addresses.iterator());
@@ -214,18 +210,16 @@ function editAddresses() {
         if (!addresses) {
             start();
             return;
-        }
-        else {
+        } else {
             session.forms.multishipping.editAddress.addressList.setOptions(addresses.iterator());
             app.getView({
-            	Basket         : cart.object,
-            	ContinueURL    : URLUtils.https('COShippingMultiple-EditForm')
+                Basket: cart.object,
+                ContinueURL: URLUtils.https('COShippingMultiple-EditForm')
             }).render('checkout/shipping/multishipping/editaddresses');
         }
 
         return;
-    }
-    else {
+    } else {
         app.getController('Cart').Show();
         return;
     }
@@ -238,15 +232,15 @@ function editForm() {
     var multiShippingForm = app.getForm('multishipping');
 
     multiShippingForm.handleAction({
-        'cancel'        : function (formgroup) {
+        cancel: function () {
             start();
             return;
         },
-        'save'          : function (formgroup) {
+        save: function () {
             var addEditAddressResult = addEditAddress();
             if (addEditAddressResult.error) {
                 app.getView({
-                	ContinueURL    : URLUtils.https('COShippingMultiple-EditForm')
+                    ContinueURL: URLUtils.https('COShippingMultiple-EditForm')
                 }).render('checkout/shipping/multishipping/editaddresses');
                 return;
             }
@@ -254,7 +248,7 @@ function editForm() {
             start();
             return;
         },
-        'selectAddress' : function (formgroup) {
+        selectAddress: function () {
             if (!session.forms.multishipping.editAddress.addressList.selectedOption) {
 
                 session.forms.multishipping.editAddress.clearFormElement();
@@ -266,8 +260,8 @@ function editForm() {
             app.getForm(session.forms.multishipping.editAddress.addressFields).copyFrom(session.forms.multishipping.editAddress.addressList.selectedOptionObject);
             app.getForm(session.forms.multishipping.editAddress.addressFields.states).copyFrom(session.forms.multishipping.editAddress.addressList.selectedOptionObject);
             app.getView({
-            	Basket : Cart.get().object,
-                ContinueURL    : URLUtils.https('COShippingMultiple-EditForm')
+                Basket: Cart.get().object,
+                ContinueURL: URLUtils.https('COShippingMultiple-EditForm')
             }).render('checkout/shipping/multishipping/editaddresses');
 
             return;
@@ -286,9 +280,8 @@ function addEditAddress() {
     newAddress.UUID = UUIDUtils.createUUID();
 
     if (!app.getForm(session.forms.multishipping.editAddress.addressFields).copyTo(newAddress) || !app.getForm(session.forms.multishipping.editAddress.addressFields.states).copyTo(newAddress)) {
-        return {success : false, error : true};
-    }
-    else {
+        return {success: false, error: true};
+    } else {
 
         var referenceAddress = session.forms.multishipping.editAddress.addressList.selectedOptionObject;
         var addToCustomerAddressBook = session.forms.multishipping.editAddress.addToAddressBook.checked;
@@ -301,8 +294,7 @@ function addEditAddress() {
                 if (referenceAddress.ID) {
                     customerAddress = Profile.get().getAddessBook().getAddress(referenceAddress.ID);
                 }
-            }
-            else {
+            } else {
                 customerAddress = Transaction.wrap(function () {
                     return Profile.get().addAddressToAddressBook(newAddress);
                 });
@@ -326,8 +318,7 @@ function addEditAddress() {
             Transaction.wrap(function () {
                 cart.updateAddressBookAddress(newAddress);
             });
-        }
-        else {
+        } else {
             Transaction.wrap(function () {
                 cart.addAddressToAddressBook(newAddress);
             });
@@ -338,7 +329,7 @@ function addEditAddress() {
             quantityLineItem.addressList.setOptions(cart.getAddressBookAddresses().iterator());
         }
 
-        return {sucess : true, address : newAddress};
+        return {sucess: true, address: newAddress};
     }
 }
 
@@ -348,10 +339,10 @@ function addEditAddress() {
 function addEditAddressJSON() {
     var addEditAddressResult = addEditAddress();
 
-	let r = require('~/cartridge/scripts/util/Response');
+    let r = require('~/cartridge/scripts/util/Response');
     r.renderJSON({
-        address : addEditAddressResult.address,
-        success : addEditAddressResult.success
+        address: addEditAddressResult.address,
+        success: addEditAddressResult.success
     });
 }
 
