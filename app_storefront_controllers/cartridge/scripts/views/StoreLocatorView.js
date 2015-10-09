@@ -16,8 +16,8 @@ var StoreLocatorView = View.extend(
      * @constructs
      * @extends module:views/View~View
      */
-    init : function (params) {
-    	/** backward compatibility to URLUtils.continueURL() methods in old templates **/
+    init: function (params) {
+        /** backward compatibility to URLUtils.continueURL() methods in old templates **/
         this.ContinueURL = dw.web.URLUtils.abs('Stores-FindStores');
 
         /** Search result for stores */
