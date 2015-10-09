@@ -35,29 +35,29 @@ function start(args) {
 
         // The requested output format is json so the error response needs to be JSON.
         if (format === 'json') {
-        	let r = require('~/cartridge/scripts/util/Response');
+            let r = require('~/cartridge/scripts/util/Response');
             r.renderJSON({
-                Success      : false,
-                LogRequestID : request.requestID.split('-')[0]
+                Success: false,
+                LogRequestID: request.requestID.split('-')[0]
             });
 
             return;
         }
-    }else{
+    } else {
         // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
         // remote includes which the WA won't resolve
-        if('isIncludeRequest' in request){
-            if(request.isIncludeRequest()){
+        if ('isIncludeRequest' in request) {
+            if (request.isIncludeRequest()) {
                 nodecorator = true;
-            }else{
+            } else {
                 response.setStatus(410);
             }
         }
         app.getView({
-            PipelineName : args.ControllerName,
-            CurrentStartNodeName : args.CurrentStartNodeName,
-            ErrorText    : args.ErrorText,
-            nodecorator  : nodecorator
+            PipelineName: args.ControllerName,
+            CurrentStartNodeName: args.CurrentStartNodeName,
+            ErrorText: args.ErrorText,
+            nodecorator: nodecorator
         }).render('error/generalerror');
     }
 }
@@ -66,7 +66,7 @@ function start(args) {
  * Called by the system when a session hijacking was detected.
  */
 function forbidden() {
-	app.getModel('Customer').logout();
+    app.getModel('Customer').logout();
     app.getView().render('error/forbidden');
 }
 
