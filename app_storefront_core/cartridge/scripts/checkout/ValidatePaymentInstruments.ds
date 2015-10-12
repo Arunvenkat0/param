@@ -28,7 +28,7 @@ function execute( pdict : PipelineDictionary ) : Number
     var customer : Customer = pdict.Customer;
     
     // get country code from pipeline dictionary
-    var countryCode = pdict.CountryCode;
+    var countryCode = pdict.CountryCode.toUpperCase();
     
     // get payment amount from pipeline dictionary
     var amount : Number = pdict.PaymentAmount;
