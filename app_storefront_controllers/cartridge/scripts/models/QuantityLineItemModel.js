@@ -21,17 +21,17 @@ var QuantityLineItemModel = Class.extend(
     /** @lends module:models/QuantityLineItemModel~QuantityLineItemModel.prototype */
     {
         /** */
-        productID    : null,
+        productID: null,
         /** */
-        lineItemText : null,
+        lineItemText: null,
         /** */
-        quantity     : null,
+        quantity: null,
         /** */
-        pliUUID      : null,
+        pliUUID: null,
         /** */
-        optionID     : null,
+        optionID: null,
 
-        init : function (pli) {
+        init: function (pli) {
 
             this.quantity = new Quantity(1, pli.quantity.getUnit());
             this.lineItemText = pli.lineItemText;
@@ -44,8 +44,7 @@ var QuantityLineItemModel = Class.extend(
                     var item = iter.next();
                     this.optionID = item.optionValueID;
                 }
-            }
-            else {
+            } else {
                 this.optionID = 'na';
             }
 
