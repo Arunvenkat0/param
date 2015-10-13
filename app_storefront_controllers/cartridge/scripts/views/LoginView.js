@@ -9,7 +9,7 @@ var LoginView = View.extend(
     // does not work, hence workaround via init()
     //ContinueURL : dw.web.URLUtils.https('Login-LoginForm'),
     template: 'account/login/accountlogin',
-    
+
     /**
      * Generates the view consumed by the login templates
      *
