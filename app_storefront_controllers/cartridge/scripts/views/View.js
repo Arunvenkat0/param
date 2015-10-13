@@ -22,7 +22,7 @@ var View = Class.extend(
      */
     init: function (params) {
         // copy all properties of params to the view
-        if(params){
+        if (params) {
             object.extend(this, params);
         }
 
@@ -48,10 +48,10 @@ var View = Class.extend(
         this.CurrentSession = session;
         this.CurrentPageMetaData = request.pageMetaData;
         this.CurrentRequest = request;
-        try{
+        try {
             ISML.renderTemplate(templateName, this);
-        }catch(e){
-            dw.system.Logger.error('Error while rendering template '+templateName);
+        } catch (e) {
+            dw.system.Logger.error('Error while rendering template ' + templateName);
             throw e;
         }
         return this;
