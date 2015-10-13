@@ -14,7 +14,7 @@
  * @example
  * <isdecorate template="${require('~/view').decorate('path/to/decorator')}">
  */
-exports.decorate = function(decoratorName, customValues){
+exports.decorate = function (decoratorName, customValues) {
     // get the value of the 'format' HTTP parameter
     var pageFormat = request.httpParameters.format && request.httpParameters.format.length && request.httpParameters.format[0];
 
