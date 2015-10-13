@@ -32,14 +32,13 @@ var PaymentProcessorModel = Class.extend({
  */
 PaymentProcessorModel.handle = function (cart, paymentMethodID) {
     var processor = PaymentMgr.getPaymentMethod(paymentMethodID).getPaymentProcessor();
-    if (dw.system.HookMgr.hasHook('app.payment.processor.' + processor.ID)){
+    if (dw.system.HookMgr.hasHook('app.payment.processor.' + processor.ID)) {
         return dw.system.HookMgr.callHook('app.payment.processor.' + processor.ID, 'Handle', {
-            Basket : cart
+            Basket: cart
         });
-    }
-    else {
+    } else {
         return dw.system.HookMgr.callHook('app.payment.processor.default', 'Handle', {
-            Basket : cart
+            Basket: cart
         });
     }
 };
@@ -57,16 +56,15 @@ PaymentProcessorModel.handle = function (cart, paymentMethodID) {
  */
 PaymentProcessorModel.authorize = function (order, paymentInstrument) {
     var processor = PaymentMgr.getPaymentMethod(paymentInstrument.getPaymentMethod()).getPaymentProcessor();
-    if (HookMgr.hasHook('app.payment.processor.' + processor.ID)){
+    if (HookMgr.hasHook('app.payment.processor.' + processor.ID)) {
         return HookMgr.callHook('app.payment.processor.' + processor.ID, 'Authorize', {
-            OrderNo           : order.getOrderNo(),
-            PaymentInstrument : paymentInstrument
+            OrderNo: order.getOrderNo(),
+            PaymentInstrument: paymentInstrument
         });
-    }
-    else {
+    } else {
         return HookMgr.callHook('app.payment.processor.default', 'Authorize', {
-            OrderNo           : order.getOrderNo(),
-            PaymentInstrument : paymentInstrument
+            OrderNo: order.getOrderNo(),
+            PaymentInstrument: paymentInstrument
         });
     }
 };
