@@ -12,6 +12,6 @@ var Status = require('dw/system/Status');
 /**
  * The onRequest hook function.
  */
-exports.onRequest = function() {
+exports.onRequest = function () {
     return new Status(Status.OK);
 };
