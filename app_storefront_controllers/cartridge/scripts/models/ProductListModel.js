@@ -21,9 +21,9 @@ var ProductListModel = AbstractModel.extend(
          * @alias module:models/ProductListModel~ProductListModel/remove
          * @param  {dw.customer.ProductListItem} item the item to remove
          */
-        remove : function(item){
+        remove: function (item) {
             var list = this.object;
-            Transaction.wrap(function(){
+            Transaction.wrap(function () {
                 list.removeItem(item);
             });
         },
@@ -37,14 +37,14 @@ var ProductListModel = AbstractModel.extend(
          * @param {Number} quantity - The quantity to add
          * @param {dw.catalog.ProductOptionModel} optionModel The option model for the given product
          */
-        addProduct : function(product, quantity, optionModel){
+        addProduct: function (product, quantity, optionModel) {
             var list = this.object;
-            Transaction.wrap(function(){
+            Transaction.wrap(function () {
                 var item = list.createProductItem(product);
-                if(quantity && !isNaN(quantity)){
+                if (quantity && !isNaN(quantity)) {
                     item.setQuantityValue(quantity);
                 }
-                if(optionModel){
+                if (optionModel) {
                     item.setProductOptionModel(optionModel);
                 }
                 // Inherit the public flag from the wishlist.
@@ -62,12 +62,12 @@ var ProductListModel = AbstractModel.extend(
          * @alias module:models/ProductListModel~ProductListModel/setPublic
          * @param {Boolean} isPublic is the value the public flag is set to.
          */
-        setPublic : function(isPublic){
+        setPublic: function (isPublic) {
             var list = this.object;
-            Transaction.wrap(function(){
+            Transaction.wrap(function () {
                 list.setPublic(isPublic);
                 var items = list.items.iterator();
-                while( items.hasNext() ) {
+                while (items.hasNext()) {
                     var anItem = items.next();
                     anItem.setPublic(isPublic);
                 }
@@ -75,7 +75,7 @@ var ProductListModel = AbstractModel.extend(
         }
 
     });
-    
+
 /**
  * Gets the wishlist for the current customer or creates a new wishlist
  * on the fly unless an instance of a product list is passed to it.
@@ -88,11 +88,11 @@ ProductListModel.get = function (parameter) {
     var obj = null;
     if (typeof parameter === 'undefined') {
         obj = ProductListMgr.getProductLists(customer, dw.customer.ProductList.TYPE_WISH_LIST);
-        if(obj.empty){
-            Transaction.wrap(function(){
+        if (obj.empty) {
+            Transaction.wrap(function () {
                 obj = ProductListMgr.createProductList(customer, dw.customer.ProductList.TYPE_WISH_LIST);
             });
-        }else{
+        } else {
             obj = obj[0];
         }
     } else if (typeof parameter === 'string') {
