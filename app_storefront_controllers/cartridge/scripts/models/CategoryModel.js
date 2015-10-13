@@ -1,8 +1,8 @@
 'use strict';
 
-/** 
+/**
  * Model for category functionality.
- * @module models/CategoryModel 
+ * @module models/CategoryModel
  */
 
 /* API Includes */
@@ -12,7 +12,7 @@ var CatalogMgr = require('dw/catalog/CatalogMgr');
 
 /**
  * Category helper providing enhanced category functionality.
- 
+
  * @class module:models/CategoryModel~CategoryModel
  * @extends module:models/AbstractModel
  * @param {dw.catalog.Category} obj The category object to wrap.
@@ -26,7 +26,7 @@ var CategoryModel = AbstractModel.extend(
          * @alias module:models/CategoryModel~CategoryModel/getUrl
          * @return {dw.web.URL} URL for the Search controller Show function with the category ID.
          */
-        getUrl : function () {
+        getUrl: function () {
             var category = this.object;
             var url = dw.web.URLUtils.http('Search-Show', 'cgid', category.getID());
 
@@ -42,7 +42,7 @@ var CategoryModel = AbstractModel.extend(
          * @alias module:models/CategoryModel~CategoryModel/getMenuCategories
          * @return {Array} Subcategories for menu.
          */
-        getMenuCategories : function (renderAllCategories) {
+        getMenuCategories: function (renderAllCategories) {
             var subcategories = this.object.getOnlineSubCategories(),
                 result        = [];
             if (renderAllCategories) {
@@ -59,21 +59,19 @@ var CategoryModel = AbstractModel.extend(
         },
 
         /**
-         * Returns top level online categories list if it exists, otherwise returns sibling online categories list if it exists. 
+         * Returns top level online categories list if it exists, otherwise returns sibling online categories list if it exists.
          * If neither exist, it returns an empty list.
          * @alias module:models/CategoryModel~CategoryModel/getTopLevelCategories
          * @return {Collection | ArrayList} Returns a collection of online subcategories or an empty list if there are no top level categories.
          */
-        getTopLevelCategories : function () {
+        getTopLevelCategories: function () {
             if (this.object.getParent() !== null) {
                 if (this.object.getParent().getParent() !== null) {
                     return this.object.getParent().getParent().getOnlineSubCategories();
-                }
-                else {
+                } else {
                     return this.object.getParent().getOnlineSubCategories();
                 }
-            }
-            else {
+            } else {
                 return new ArrayList();
             }
         }
@@ -91,8 +89,7 @@ CategoryModel.get = function (parameter) {
     var obj = null;
     if (typeof parameter === 'string') {
         obj = CatalogMgr.getCategory(parameter);
-    }
-    else if (typeof parameter === 'object') {
+    } else if (typeof parameter === 'object') {
         obj = parameter;
     }
     return new CategoryModel(obj);
