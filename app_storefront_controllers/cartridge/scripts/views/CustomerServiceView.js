@@ -18,7 +18,7 @@ var CustomerServiceView = View.extend(
      *
      * @returns {LinkedHashMap} List of customer service folders.
      */
-    getCustomerServiceLinks : function () {
+    getCustomerServiceLinks: function () {
         // get the customer service folder
         var content = ContentMgr.getFolder('customer-service');
 
@@ -45,7 +45,7 @@ var CustomerServiceView = View.extend(
      * @constructs
      * @extends module:views/View~View
      */
-    init : function (params) {
+    init: function (params) {
         this._super(params);
         this.CustomerServiceLinks = this.getCustomerServiceLinks();
         this.ContinueURL = dw.web.URLUtils.https('CustomerService-Submit');
