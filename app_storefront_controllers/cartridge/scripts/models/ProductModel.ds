@@ -42,9 +42,13 @@ var ProductModel = AbstractModel.extend(
             var formPrefix = optionalCustomPrefix || 'dwvar_';
 
             // get all variation related parameters for the prefix
-            var params = parameterMap.getParameterMap(formPrefix+
-                            this.object.ID.replace(/_/g,'__')+'_');
+            var params = parameterMap.getParameterMap(formPrefix + this.object.ID.replace(/_/g,'__') + '_');
             var paramNames = params.getParameterNames();
+
+            if (!paramNames.getLength() && this.object.variationModel) {
+            	return this.object.variationModel;
+            }
+
             var ProductVariationModel = app.getModel('ProductVariation');
             var variationModel = new ProductVariationModel(this.object.getVariationModel());
 
