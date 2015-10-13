@@ -10,7 +10,7 @@ var ArrayList = require('dw/util/ArrayList');
 var ProductMgr = require('dw/catalog/ProductMgr');
 
 /* Constants */
-var PRODUCT_ID_PARAMETER_NAME = "pid";
+var PRODUCT_ID_PARAMETER_NAME = 'pid';
 var PRODUCT_PIPELINE_NAMES = new ArrayList(
     'Product-Show',
     'Link-Product',
@@ -33,7 +33,7 @@ var RecentlyViewedItemsModel = ({
      * @param maxSize {Number} The maximum number of visited products to include in the returned list.
      * @returns {dw.util.ArrayList} The list of last visited products. If no products have been visited, the returned list is empty.
      */
-    getRecentlyViewedProducts : function (maxLength) {
+    getRecentlyViewedProducts: function (maxLength) {
 
         var numberOfProducts = maxLength || 5;
 
