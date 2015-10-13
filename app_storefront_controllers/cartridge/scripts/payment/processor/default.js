@@ -5,7 +5,7 @@
  * If the verification was successful a credit card payment instrument is created.
  */
 function Handle() {
-	return {not_supported : true};
+    return {not_supported: true};
 }
 
 /**
@@ -14,7 +14,7 @@ function Handle() {
  * logic to authorize credit card payment.
  */
 function Authorize() {
-	return {not_supported : true};
+    return {not_supported: true};
 }
 
 /*
