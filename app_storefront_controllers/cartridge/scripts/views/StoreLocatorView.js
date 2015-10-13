@@ -25,7 +25,7 @@ var StoreLocatorView = View.extend(
         /**  Number of found Stores */
         this.StoresCount = 0;
 
-        if(params && params.type){
+        if (params && params.type) {
             /** variables consumed by template storelocator/storelocatorresults */
 
             // determine number of found stores
