@@ -1,7 +1,7 @@
 'use strict';
 
-/** 
- * Model for transient address information. 
+/**
+ * Model for transient address information.
  * @module models/TransientAddressModel */
 var Class = require('~/cartridge/scripts/util/Class').Class;
 var CustomerAddress = require('dw/customer/CustomerAddress');
@@ -17,14 +17,14 @@ var ADDRESS_FIELDS = require('~/cartridge/scripts/config').address.fields;
  * @param  {Object} from The object providing the address fields to copy.
  * @param  {Object} to   The object the fields are copied to.
  */
-function copyFields(from, to){
+function copyFields(from, to) {
     // Copies system fields.
-    ADDRESS_FIELDS.forEach(function(fieldName){
+    ADDRESS_FIELDS.forEach(function (fieldName) {
         to[fieldName] = from[fieldName];
     });
     // Copies custom fields.
-    if('custom' in from && 'custom' in to){
-        for(var i in from.custom){
+    if ('custom' in from && 'custom' in to) {
+        for (var i in from.custom) {
             to.custom[i] = from.custom[i];
         }
     }
@@ -39,37 +39,37 @@ function copyFields(from, to){
 var TransientAddressModel = Class.extend(
 /** @lends module:models/TransientAddressModel~TransientAddressModel.prototype */
 {
-    UUID        : null,
-    ID          : null,
-    firstName   : null,
-    lastName    : null,
-    address1    : null,
-    address2    : null,
-    city        : null,
-    postalCode  : null,
-    stateCode   : null,
-    countryCode : null,
-    phone       : null,
-    custom      : {},
+    UUID: null,
+    ID: null,
+    firstName: null,
+    lastName: null,
+    address1: null,
+    address2: null,
+    city: null,
+    postalCode: null,
+    stateCode: null,
+    countryCode: null,
+    phone: null,
+    custom: {},
 
     /**
      * The UUID of the reference address. It is set when the attributes
      * are copied from a given customer or order address and is used
      * to preselect addresses on a per product line item base.
      */
-    referenceAddressUUID : null,
+    referenceAddressUUID: null,
 
     /**
      * Copies the attributes of this address to the given order address.
      */
-    copyTo : function (toAddress) {
+    copyTo: function (toAddress) {
         copyFields(this, toAddress);
     },
 
     /**
      * Copies the attributes of a store's address to the given order address.
      */
-    storeAddressTo : function (toAddress, storeObject) {
+    storeAddressTo: function (toAddress, storeObject) {
         toAddress.setFirstName('');
         toAddress.setLastName(storeObject.name);
         toAddress.setAddress1(storeObject.address1);
@@ -86,7 +86,7 @@ var TransientAddressModel = Class.extend(
      * order address to this address. The function supports both
      * copying from CustomerAddress and from OrderAddress.
      */
-    copyFrom : function (fromAddress) {
+    copyFrom: function (fromAddress) {
         // Sets the address ID if copying from a customer address.
         if (fromAddress instanceof CustomerAddress) {
             this.ID = fromAddress.ID;
@@ -94,10 +94,9 @@ var TransientAddressModel = Class.extend(
 
         copyFields(fromAddress, this);
 
-        if (fromAddress.countryCode.value !== null && typeof fromAddress.countryCode.value != 'undefined') {
+        if (fromAddress.countryCode.value !== null && typeof fromAddress.countryCode.value !== 'undefined') {
             this.countryCode = fromAddress.countryCode.value;
-        }
-        else {
+        } else {
             this.countryCode = fromAddress.countryCode;
         }
 
@@ -116,7 +115,7 @@ var TransientAddressModel = Class.extend(
      * Checks if the address already exists in an array of addresses
      * for multishipping checkout.
      */
-    addressExists : function (addresses) {
+    addressExists: function (addresses) {
 
         for (var i = 0; i < addresses.length; i++) {
             var address = addresses[i];
@@ -124,8 +123,7 @@ var TransientAddressModel = Class.extend(
                 if (this.referenceAddressUUID.equals(address.referenceAddressUUID)) {
                     return true;
                 }
-            }
-            else {
+            } else {
                 if (this.equals(address)) {
                     return true;
                 }
@@ -138,9 +136,9 @@ var TransientAddressModel = Class.extend(
      * @param  {Object} address - The address to compare the transient address to
      * @return {boolean} true if both addresses are equal, false otherwise.
      */
-    equals : function (address){
+    equals: function (address) {
         var that = this;
-        return ADDRESS_FIELDS.every(function(fieldName){
+        return ADDRESS_FIELDS.every(function (fieldName) {
             return that[fieldName] === address[fieldName];
         });
     }
