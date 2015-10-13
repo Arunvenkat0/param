@@ -26,7 +26,7 @@ var OrderModel = AbstractModel.extend(
          * @alias module:models/OrderModel~OrderModel/createGiftCertificates
          * @returns {dw.util.ArrayList} List containing all created gift certificates, null in case of an error.
          */
-        createGiftCertificates : function () {
+        createGiftCertificates: function () {
 
             var giftCertificates = new ArrayList();
             var giftCertificateLineItems = this.getGiftCertificateLineItems();
@@ -35,13 +35,13 @@ var OrderModel = AbstractModel.extend(
                 var giftCertificateLineItem = giftCertificateLineItems[i];
 
                 var CreateGiftCertificateResult = new dw.system.Pipelet('CreateGiftCertificate').execute({
-                    Amount                  : giftCertificateLineItem.netPrice.value,
-                    RecipientEmail          : giftCertificateLineItem.recipientEmail,
-                    RecipientName           : giftCertificateLineItem.recipientName,
-                    SenderName              : giftCertificateLineItem.senderName,
-                    GiftCertificateLineItem : giftCertificateLineItem,
-                    Message                 : giftCertificateLineItem.message,
-                    OrderNo                 : this.getOrderNo()
+                    Amount: giftCertificateLineItem.netPrice.value,
+                    RecipientEmail: giftCertificateLineItem.recipientEmail,
+                    RecipientName: giftCertificateLineItem.recipientName,
+                    SenderName: giftCertificateLineItem.senderName,
+                    GiftCertificateLineItem: giftCertificateLineItem,
+                    Message: giftCertificateLineItem.message,
+                    OrderNo: this.getOrderNo()
                 });
                 if (CreateGiftCertificateResult.result === PIPELET_ERROR) {
                     return null;
@@ -66,8 +66,7 @@ OrderModel.get = function (parameter) {
     var obj = null;
     if (typeof parameter === 'string') {
         obj = OrderMgr.getOrder(parameter);
-    }
-    else if (typeof parameter === 'object') {
+    } else if (typeof parameter === 'object') {
         obj = parameter;
     }
     return new OrderModel(obj);
