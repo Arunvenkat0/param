@@ -19,7 +19,7 @@ var ProductVariationModel = AbstractModel.extend(
          * @alias module:models/ProductVariationModel~ProductVariationModel/init
          * @param parameter method of of super class to call.
          */
-        init : function (parameter) {
+        inits: function (parameter) {
             var instance = this._super(parameter);
             this.initProperties();
             this.selectionMap = new dw.util.HashMap();
@@ -33,7 +33,7 @@ var ProductVariationModel = AbstractModel.extend(
          * @param {dw.catalog.ProductVariationAttrbute} variationAttribute - the attribute
          * @param {dw.catalog.ProductVariationAttrbuteValue} variationAttributeValue - the variation attribute value
          */
-        setSelectedVariationValue : function (variationAttribute, variationAttributeValue) {
+        setSelectedVariationValue: function (variationAttribute, variationAttributeValue) {
             this.selectionMap.put(variationAttribute.ID, variationAttributeValue.ID);
         },
 
@@ -43,7 +43,7 @@ var ProductVariationModel = AbstractModel.extend(
          * @alias module:models/ProductVariationModel~ProductVariationModel/getSelectedVariant
          * @return {dw.catalog.Variant} the selected variant.
          */
-        getSelectedVariant : function () {
+        getSelectedVariant: function () {
             var filteredList = this.object.getVariants(this.selectionMap);
             if (filteredList.size() === 1) {
                 return filteredList[0];
@@ -60,7 +60,7 @@ var ProductVariationModel = AbstractModel.extend(
          * @param {dw.catalog.ProductVariationAttrbuteValue} variationAttributeValue - the variation attribute value
          * @returns {Boolean} true if the value is selected
          */
-        isSelectedAttributeValue : function (variationAttribute, variationAttributeValue) {
+        isSelectedAttributeValue: function (variationAttribute, variationAttributeValue) {
             return this.selectionMap.get(variationAttribute.ID) === variationAttributeValue.ID;
         },
 
@@ -71,10 +71,10 @@ var ProductVariationModel = AbstractModel.extend(
          * @param {dw.catalog.ProductVariationAttrbute} variationAttribute - the attribute
          * @param {String} variationAttributeValueID - the variation attribute value ID
          */
-        getVariationAttributeValue : function (variationAttribute, variationAttributeValueID) {
+        getVariationAttributeValue: function (variationAttribute, variationAttributeValueID) {
             if (!empty(variationAttributeValueID)) {
                 var allValues = this.object.getAllValues(variationAttribute);
-                for (var i = 0; i< allValues.length; i++) {
+                for (var i = 0; i < allValues.length; i++) {
                     if (allValues[i].ID === variationAttributeValueID) {
                         return allValues[i];
                     }
@@ -89,7 +89,7 @@ var ProductVariationModel = AbstractModel.extend(
          * @param  {dw.catalog.ProductVariationAttrbute} variationAttribute the attribute
          * @return {dw.catalog.ProductVariationAttrbuteValue} the attribute value or null
          */
-        getSelectedValue : function(variationAttribute) {
+        getSelectedValue: function (variationAttribute) {
             if (!empty(variationAttribute)) {
                 return this.getVariationAttributeValue(variationAttribute, this.selectionMap.get(variationAttribute.ID));
             } else {
@@ -97,7 +97,7 @@ var ProductVariationModel = AbstractModel.extend(
             }
         },
 
-        urlSelectVariationValue : function (action, variationAttribute, variationAttributeValue) {
+        urlSelectVariationValue: function (action, variationAttribute, variationAttributeValue) {
             var url = this.object.urlSelectVariationValue(action, variationAttribute, variationAttributeValue);
             var entrySet = this.selectionMap.entrySet();
             for (var i = 0; i < entrySet.length; i++) {
