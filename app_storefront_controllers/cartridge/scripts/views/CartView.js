@@ -12,7 +12,7 @@ var CartView = View.extend({
     /**
      * TODO
      */
-    prepareView: function() {
+    prepareView: function () {
 
         var cart = this.Basket;
         if (cart) {
