@@ -22,16 +22,15 @@ var AbstractModel = require('./AbstractModel');
 var FormModel = AbstractModel.extend(
     /** @lends module:models/FormModel~FormModel.prototype */
     {
-    
-/**
- * Gets a new instance of FormModel.
- *
- * @param {dw.web.Form|dw.web.FormGroup} groupName - The form (group) instance to get from session.forms.
- * @alias module:models/FormModel~FormModel/get
- * @return {module:models/FormModel~FormModel} A new instance of a FormModel wrapping the passed form.
- */
-        get : function (groupName) {
-            if(this.object){
+        /**
+         * Gets a new instance of FormModel.
+         *
+         * @param {dw.web.Form|dw.web.FormGroup} groupName - The form (group) instance to get from session.forms.
+         * @alias module:models/FormModel~FormModel/get
+         * @return {module:models/FormModel~FormModel} A new instance of a FormModel wrapping the passed form.
+         */
+        get: function (groupName) {
+            if (this.object) {
                 return FormModel.get(require('~/cartridge/scripts/object').resolve(this.object,groupName));
             }
             return new FormModel();
@@ -39,7 +38,7 @@ var FormModel = AbstractModel.extend(
 
         /**
          * Handles the submitted form action or calls the error handler in case the form is not valid. If the form does
-         * not validate, the TriggeredAction is set to null. 
+         * not validate, the TriggeredAction is set to null.
          *
          * @alias module:models/FormModel~FormModel/handleAction
          * @param {Object<string|module:models/FormModel~ActionCallback>} formHandler Callbacks for each possible form action.
@@ -54,7 +53,7 @@ var FormModel = AbstractModel.extend(
          *     }
          * });
          */
-        handleAction : function (formHandler) {
+        handleAction: function (formHandler) {
             // Checks whether an action is defined and if the form is invalid.
             var action = request.triggeredFormAction;
             if (!action || !action.formId) {
@@ -67,11 +66,10 @@ var FormModel = AbstractModel.extend(
                     dw.system.Logger.warn('Action handler called without action ' + this.object.formId);
                     return null;
                 }
-            }
-            else {
-                if(formHandler[action.formId]){
+            } else {
+                if (formHandler[action.formId]) {
                     return formHandler[action.formId].apply(formHandler, [this.object, action]);
-                }else{
+                } else {
                     dw.system.Logger.error('Action handler for action "{0}"" not defined.', action.formId);
                     // Throws an error as this is an implementation bug.
                     throw new Error('Form handler undefined');
@@ -87,7 +85,7 @@ var FormModel = AbstractModel.extend(
          * @param {Boolean} clear - Optional. If true, clear the form before updating it.
          * @returns {module:models/FormModel~FormModel} Returns the updated form.
          */
-        copyFrom : function (updateObject, clear) {
+        copyFrom: function (updateObject, clear) {
 
             clear = (typeof clear !== 'undefined') ? clear : false;
 
@@ -107,14 +105,14 @@ var FormModel = AbstractModel.extend(
          * @transactional
          * @alias module:models/FormModel~FormModel/copyTo
          * @param {Object} updateObject - A Demandware system or custom object to update with form data.
-         * @returns {Boolean} true if the passed object is successfully updated using for the 
+         * @returns {Boolean} true if the passed object is successfully updated using for the
          * passed group properties specified in the form definition bindings. false if an error is thrown
          */
-        copyTo : function (updateObject) {
+        copyTo: function (updateObject) {
 
             try {
                 var group = this.object;
-                dw.system.Transaction.wrap(function(){
+                dw.system.Transaction.wrap(function () {
                     group.copyTo(updateObject);
                 });
                 return true;
@@ -131,7 +129,7 @@ var FormModel = AbstractModel.extend(
          * Clears the wrapped form instance.
          * @alias module:models/FormModel~FormModel/clear
          */
-        clear : function () {
+        clear: function () {
             this.object.clearFormElement();
         },
 
@@ -139,17 +137,14 @@ var FormModel = AbstractModel.extend(
          * Invalidates the wrapped form instance.
          *
          * @alias module:models/FormModel~FormModel/invalidate
-         * @param {String} Optional. If not specified, the error text is configured in the form definition. 
+         * @param {String} Optional. If not specified, the error text is configured in the form definition.
          * The "value-error" message is used for FormField instances and "form-error" is used for FormGroup instances.
          * If an error string is passed, it is used in the error message.
          */
-        invalidate : function (error) {
-            if (error)
-            {
+        invalidate: function (error) {
+            if (error) {
                 this.object.invalidateFormElement(error);
-            }
-            else
-            {
+            } else {
                 this.object.invalidateFormElement();
             }
         },
@@ -158,7 +153,7 @@ var FormModel = AbstractModel.extend(
          * Gets a value from a wrapped form element.
          * @alias module:models/FormModel~FormModel/value
          */
-        value : function () {
+        value: function () {
             return this.object.value;
         },
 
@@ -166,7 +161,7 @@ var FormModel = AbstractModel.extend(
          * Returns the value of a subelement.
          * @alias module:models/FormModel~FormModel/getValue
          */
-        getValue : function(groupName) {
+        getValue: function (groupName) {
             return this.get(groupName).value();
         },
 
@@ -174,10 +169,9 @@ var FormModel = AbstractModel.extend(
          * Sets the value of a subelement.
          * @alias module:models/FormModel~FormModel/setValue
          */
-        setValue : function(groupName, value) {
+        setValue: function (groupName, value) {
             var obj = this.get(groupName).object;
-            if (obj)
-            {
+            if (obj) {
                 obj.value = value;
             }
         },
@@ -186,7 +180,7 @@ var FormModel = AbstractModel.extend(
          * Gets the bound object of a wrapped form element. Objects are bound to form elements in the form definition.
          * @alias module:models/FormModel~FormModel/getBinding
          */
-        getBinding : function () {
+        getBinding: function () {
             var dwForm = this.object;
             return dwForm.object;
         }
@@ -204,8 +198,7 @@ FormModel.get = function (formReference) {
     var formInstance = null;
     if (typeof formReference === 'string') {
         formInstance = require('~/cartridge/scripts/object').resolve(session.forms,formReference);
-    }
-    else if (typeof formReference === 'object') {
+    } else if (typeof formReference === 'object') {
         formInstance = formReference;
     }
 
