@@ -23,7 +23,7 @@ var ContentModel = AbstractModel.extend(
          * @alias module:models/ContentModel~ContentModel/getLink
          * @returns {String} URL to page rendered by the page.ds controller Show function for the current content asset.
          */
-        getLink : function () {
+        getLink: function () {
             if (!this.object) {
                 return null;
             }
@@ -38,7 +38,7 @@ var ContentModel = AbstractModel.extend(
         * @param {String} folderId - The folder id.
         * @returns {Boolean} true if current content asset is in the specified folder.
         */
-        isInFolder : function (folderId) {
+        isInFolder: function (folderId) {
             if (this.object && !empty(this.object.folders)) {
                 for (let index in this.object.folders) {
                     if (this.object.folders[index].ID === folderId) {
@@ -54,7 +54,7 @@ var ContentModel = AbstractModel.extend(
          * @alias module:models/ContentModel~ContentModel/getMarkup
          * @returns {String} b
          */
-        getMarkup : function () {
+        getMarkup: function () {
             var body = this.getValue('body');
             return body && body.markup || '';
         },
@@ -66,7 +66,7 @@ var ContentModel = AbstractModel.extend(
          * @alias module:models/ContentModel~ContentModel/getDefaultFolder
          * @return {dw.content.Folder} The default folder for this asset
          */
-        getDefaultFolder : function () {
+        getDefaultFolder: function () {
             var folder = null;
             if (this.object) {
                 folder = this.object.classificationFolder;
@@ -82,7 +82,7 @@ var ContentModel = AbstractModel.extend(
          * @alias module:models/ContentModel~ContentModel/getFolderPath
          * @return {Array} The fodler path for this asset
          */
-        getFolderPath : function () {
+        getFolderPath: function () {
             var path = [];
             if (this.object) {
                 var folder = this.getDefaultFolder();
@@ -109,8 +109,7 @@ ContentModel.get = function (parameter) {
     var obj = null;
     if (typeof parameter === 'string') {
         obj = dw.content.ContentMgr.getContent(parameter);
-    }
-    else if (typeof parameter === 'object') {
+    } else if (typeof parameter === 'object') {
         obj = parameter;
     }
     return new ContentModel(obj);
