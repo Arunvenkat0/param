@@ -13,7 +13,7 @@
  * @constructor
  * @constructs module:models/CompareModel~CompareList
  */
-function CompareList(){
+function CompareList() {
     /** Copy of reference to this, for use in scopes where this refers to another object. */
     var that = this;
 
@@ -23,12 +23,11 @@ function CompareList(){
     /** Hash of category IDs to arrays of product IDs. */
     var categoryProducts = {};
 
-    /** Returns the current category of products to compare. 
-    * @alias module:models/CompareModel~CompareList/getCategory 
+    /** Returns the current category of products to compare.
+    * @alias module:models/CompareModel~CompareList/getCategory
     * @return {String} Current category ID.
     */
-    this.getCategory = function()
-    {
+    this.getCategory = function () {
         return currentCategoryID;
     };
 
@@ -39,17 +38,13 @@ function CompareList(){
      * @alias module:models/CompareModel~CompareList/getProducts
      * @return {dw.util.LinkedHashSet} Product IDs of any products being compared for the current category.
      */
-    this.getProducts = function()
-    {
+    this.getProducts = function () {
         var products = new dw.util.LinkedHashSet();
 
-        if (currentCategoryID !== null)
-        {
+        if (currentCategoryID !== null) {
             var categoryProductArray = categoryProducts[currentCategoryID];
-            if (categoryProductArray)
-            {
-                for (var i = 0; i < categoryProductArray.length; i++)
-                {
+            if (categoryProductArray) {
+                for (var i = 0; i < categoryProductArray.length; i++) {
                     products.add(categoryProductArray[i]);
                 }
             }
@@ -65,15 +60,12 @@ function CompareList(){
      * @alias module:models/CompareModel~CompareList/getCategories
      * @return {dw.util.LinkedHashMap} Map of category IDs and display names.
      */
-    this.getCategories = function()
-    {
+    this.getCategories = function () {
         var categories = new dw.util.LinkedHashMap();
 
-        for (var categoryID in categoryProducts)
-        {
+        for (var categoryID in categoryProducts) {
             var category = dw.catalog.CatalogMgr.getCategory(categoryID);
-            if (category !== null)
-            {
+            if (category !== null) {
                 categories.put(categoryID, category.getDisplayName());
             }
         }
@@ -81,39 +73,33 @@ function CompareList(){
         return categories;
     };
 
-    /** Returns a set of maps, each map representing an attribute group. 
+    /** Returns a set of maps, each map representing an attribute group.
     *
     * @alias module:models/CompareModel~CompareList/getAttributeGroups
     * @return {dw.util.LinkedHashSet} Attribute groups are returned as a set of maps, where each attribute group
     * is a separate map.
     * @see module:models/CompareModel~CompareList/findAttributeGroups for map structure information.
     */
-    this.getAttributeGroups = function()
-    {
-        if (currentCategoryID === null)
-        {
+    this.getAttributeGroups = function () {
+        if (currentCategoryID === null) {
             return new dw.util.LinkedHashSet();
         }
 
         var categoryProductArray = categoryProducts[currentCategoryID];
-        if (!categoryProductArray)
-        {
+        if (!categoryProductArray) {
             return new dw.util.LinkedHashSet();
         }
 
         // Creates a list of paths from root to classification category for products.
         var paths = new dw.util.ArrayList();
-        for (var i = 0; i < categoryProductArray.length; i++)
-        {
+        for (var i = 0; i < categoryProductArray.length; i++) {
             // Gets the product with this ID.
             var p = dw.catalog.ProductMgr.getProduct(categoryProductArray[i]);
-            if (p !== null)
-            {
+            if (p !== null) {
                 var category = p.getClassificationCategory();
 
                 var path = new dw.util.ArrayList();
-                while (category !== null)
-                {
+                while (category !== null) {
                     path.addAt(0, category);
                     category = category.getParent();
                 }
@@ -121,7 +107,6 @@ function CompareList(){
                 paths.add(path);
             }
         }
-
         return findAttributeGroups(findDeepestCommonCategory(paths));
     };
 
@@ -131,11 +116,9 @@ function CompareList(){
      * @alias module:models/CompareModel~CompareList/findDeepestCommonCategory
      * @param {dw.util.ArrayList} paths - List of paths from root to category.
      */
-    function findDeepestCommonCategory(paths)
-    {
+    function findDeepestCommonCategory(paths) {
         // No common category if no paths.
-        if ((paths === null) || paths.isEmpty())
-        {
+        if ((paths === null) || paths.isEmpty()) {
             return null;
         }
 
@@ -146,30 +129,25 @@ function CompareList(){
         // Compares the first path to the others.
         /** @type {dw.util.ArrayList} */
         var comparePath = paths.get(0);
-        for (var i = 0; i < comparePath.size(); i++)
-        {
+        for (var i = 0; i < comparePath.size(); i++) {
             // Gets category at level i in the first path.
             var compareCategory = comparePath.get(i);
-            if (compareCategory === null)
-            {
+            if (compareCategory === null) {
                 return deepestCommonCategory;
             }
 
             // Compares category to level i categories in other paths.
-            for (var j = 1; j < paths.size(); j++)
-            {
+            for (var j = 1; j < paths.size(); j++) {
                 var otherPath = paths.get(j);
 
-                // Quits if other path is shorter.
-                if (i >= otherPath.size())
-                {
+                // Quit if other path is shorter.
+                if (i >= otherPath.size()) {
                     return deepestCommonCategory;
                 }
 
                 // Quits if the other path has a different category at level i.
                 var otherCategory = otherPath.get(i);
-                if ((otherCategory === null) || (otherCategory.getID() !== compareCategory.getID()))
-                {
+                if ((otherCategory === null) || (otherCategory.getID() !== compareCategory.getID())) {
                     return deepestCommonCategory;
                 }
             }
@@ -187,8 +165,8 @@ function CompareList(){
      *
      * @alias module:models/CompareModel~CompareList/findAttributeGroups
      * @param {dw.catalog.Category} classificationCategory - The classification category.
-     * @return {dw.util.LinkedHashSet} Set of maps containing attribute groups. 
-     * Each map contains: 
+     * @return {dw.util.LinkedHashSet} Set of maps containing attribute groups.
+     * Each map contains:
      *<ul>
      *<li>descriptor - description of visible attributes in the group.</li>
      *<li>displayName - display name of visible attributes in the group.</li>
@@ -196,16 +174,12 @@ function CompareList(){
      *</ul>
      *
      */
-    function findAttributeGroups(classificationCategory)
-    {
+    function findAttributeGroups(classificationCategory) {
         // Gets the product attribute model.
         var model;
-        if (classificationCategory === null)
-        {
+        if (classificationCategory === null) {
             model = new dw.catalog.ProductAttributeModel();
-        }
-        else
-        {
+        } else {
             model = classificationCategory.getProductAttributeModel();
         }
 
@@ -213,15 +187,13 @@ function CompareList(){
         var persistentAttributeGroups = model.getVisibleAttributeGroups().iterator();
 
         var attributeGroups = new dw.util.LinkedHashSet();
-        while (persistentAttributeGroups.hasNext())
-        {
+        while (persistentAttributeGroups.hasNext()) {
             var persistentAttributeGroup = persistentAttributeGroups.next();
             var persistentAttributeDescriptors = model.getVisibleAttributeDefinitions(persistentAttributeGroup).iterator();
 
             // Creates attributes.
             var groupAttributes = new dw.util.ArrayList();
-            while (persistentAttributeDescriptors.hasNext())
-            {
+            while (persistentAttributeDescriptors.hasNext()) {
                 var persistentAttributeDescription = persistentAttributeDescriptors.next();
                 var attributeDesc = new dw.util.HashMap();
 
@@ -243,20 +215,18 @@ function CompareList(){
         return attributeGroups;
     }
 
-    /** Stores a representation of this product comparison in the session. 
+    /** Stores a representation of this product comparison in the session.
     *
     * @alias module:models/CompareModel~CompareList/store
     */
-    function store()
-    {
+    function store() {
         session.privacy.productComparison = toJSON();
     }
 
-    /** Returns a string representation of this compare list, used to store comparison information in the session. 
+    /** Returns a string representation of this compare list, used to store comparison information in the session.
     * @return {String} JSON object representing a product comparison.
     */
-    function toJSON()
-    {
+    function toJSON() {
         var o = {
             cid: (currentCategoryID ? currentCategoryID : null),
             prods: categoryProducts
@@ -271,21 +241,15 @@ function CompareList(){
      * @param {String} json JSON data
      * @see module:models/CompareModel~CompareList/store
      */
-    this.fromJSON = function(json)
-    {
-        if (!json)
-        {
+    this.fromJSON = function (json) {
+        if (!json) {
             return;
         }
-
-        try
-        {
+        try {
             var data = JSON.parse(json);
             currentCategoryID = data.cid ? data.cid : null;
             categoryProducts = data.prods ? data.prods : {};
-        }
-        catch (e)
-        {
+        } catch (e) {
             dw.system.Logger.error(e);
         }
     };
@@ -297,8 +261,7 @@ function CompareList(){
      * @param {String} categoryID - The category ID.
      * @see module:models/CompareModel~CompareList/store
      */
-    this.setCategory = function(categoryID)
-    {
+    this.setCategory = function (categoryID) {
         currentCategoryID = categoryID;
         copyParentCategory();
 
@@ -313,27 +276,23 @@ function CompareList(){
      * @param {dw.catalog.Category} c the category for which to add the object
      * @see module:models/CompareModel~CompareList/store
      */
-    this.add = function(p, c)
-    {
+    this.add = function (p, c) {
         var products = categoryProducts[c.getID()];
 
         // Creates set if necessary.
-        if (!products)
-        {
+        if (!products) {
             products = [];
             categoryProducts[c.getID()] = products;
         }
 
         // Checks if the product is already in set.
         var found = false;
-        for (var i = 0; i < products.length; i++)
-        {
+        for (var i = 0; i < products.length; i++) {
             found |= (products[i] === p.getID());
         }
 
         // Adds the product if it is not.
-        if (!found)
-        {
+        if (!found) {
             products.push(p.getID());
         }
 
@@ -346,54 +305,46 @@ function CompareList(){
      *
      * @alias module:models/CompareModel~CompareList/copyParentCategory
      */
-    function copyParentCategory()
-    {
+    function copyParentCategory() {
         // Quits if no category set is set.
-        if (currentCategoryID === null)
-        {
+        if (currentCategoryID === null) {
             return;
         }
 
         // Quits if the category already has products.
-        if (categoryProducts[currentCategoryID])
-        {
+        if (categoryProducts[currentCategoryID]) {
             return;
         }
 
         // Gets the category.
         var category = dw.catalog.CatalogMgr.getCategory(currentCategoryID);
-        if (category === null)
-        {
+        if (category === null) {
             return;
         }
 
         // Gets the parent category.
         var parent = category.getParent();
-        if (parent === null)
-        {
+        if (parent === null) {
             return;
         }
 
         // Gets product IDs for parent category.
         var products = categoryProducts[parent.getID()];
-        if (!products)
-        {
+        if (!products) {
             return;
         }
 
         // Adds products from parent category also assigned to the category.
-        for (var i = 0; i < products.length; i++)
-        {
+        for (var i = 0; i < products.length; i++) {
             var product = dw.catalog.ProductMgr.getProduct(products[i]);
-            if ((product !== null) && productAssignedToCategory(product, category))
-            {
+            if ((product !== null) && productAssignedToCategory(product, category)) {
                 that.add(product, category);
             }
         }
     }
 
     /**
-     * Checks if a product is assigned to a category or any child category of the category. 
+     * Checks if a product is assigned to a category or any child category of the category.
      *
      * @alias module:models/CompareModel~CompareList/productAssignedToCategory
      * @param {dw.catalog.Product} p product
@@ -401,18 +352,14 @@ function CompareList(){
      * @returns {Boolean} true if the product is assigned to the given category or one of its children,
      * or false if it is not.
      */
-    function productAssignedToCategory(p, c)
-    {
+    function productAssignedToCategory(p, c) {
         var assignments = p.getCategoryAssignments();
-        for (var it = assignments.iterator(); it.hasNext(); )
-        {
+        for (var it = assignments.iterator(); it.hasNext();) {
             var assignment = it.next();
 
             var assignedCategory = assignment.getCategory();
-            while (assignedCategory !== null)
-            {
-                if (assignedCategory.getID() === c.getID())
-                {
+            while (assignedCategory !== null) {
+                if (assignedCategory.getID() === c.getID()) {
                     return true;
                 }
 
@@ -432,41 +379,32 @@ function CompareList(){
      * @param {dw.catalog.Category} c the category for which to remove the object
      * @see module:models/CompareModel~CompareList/store
      */
-    this.remove = function(p, c)
-    {
+    this.remove = function (p, c) {
         var products = categoryProducts[c.getID()];
 
         // Quits if there are no products for the category.
-        if (!products)
-        {
+        if (!products) {
             return;
         }
 
         // Builds copy of products array without the product.
         var newProducts = [];
-        for (var i = 0; i < products.length; i++)
-        {
-            if (products[i] !== p.getID())
-            {
+        for (var i = 0; i < products.length; i++) {
+            if (products[i] !== p.getID()) {
                 newProducts.push(products[i]);
             }
         }
 
         // Removes category if the last product was removed.
-        if (newProducts.length === 0)
-        {
+        if (newProducts.length === 0) {
             delete categoryProducts[c.getID()];
-        }
-
         // Otherwise, sets the updated products array for category.
-        else
-        {
+        } else {
             categoryProducts[c.getID()] = newProducts;
         }
 
         // Removes the product from subcategories of the category
-        for (var it = c.getSubCategories().iterator(); it.hasNext(); )
-        {
+        for (var it = c.getSubCategories().iterator(); it.hasNext();) {
             this.remove(p, it.next());
         }
 
@@ -479,8 +417,7 @@ function CompareList(){
  *
  * @return {models/CompareModel~CompareList} The compare list
  */
-exports.get = function ()
-{
+exports.get = function () {
     // Creates the transient compare list.
     var compareList = new CompareList();
 
