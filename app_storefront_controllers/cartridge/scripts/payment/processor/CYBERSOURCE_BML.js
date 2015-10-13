@@ -14,15 +14,14 @@ function Handle(args) {
 
     if (!session.forms.billing.paymentMethods.bml.termsandconditions.checked) {
         session.forms.billing.paymentMethods.bml.termsandconditions.invalidateFormElement();
-        return {error : true};
-    }
-    else {
+        return {error: true};
+    } else {
         Transaction.wrap(function () {
             cart.removeExistingPaymentInstruments(dw.order.PaymentInstrument.METHOD_BML);
             cart.createPaymentInstrument(dw.order.PaymentInstrument.METHOD_BML, cart.getNonGiftCertificateAmount());
         });
 
-        return {sucess : true};
+        return {sucess: true};
     }
 }
 
@@ -41,7 +40,7 @@ function Authorize(args) {
         paymentInstrument.paymentTransaction.paymentProcessor = paymentProcessor;
     });
 
-    return {authorized : true};
+    return {authorized: true};
 }
 
 /*
