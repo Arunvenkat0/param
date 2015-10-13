@@ -1,8 +1,8 @@
 'use strict';
 
-/** 
+/**
  * Model for product functionality.
- * @module models/ProductModel 
+ * @module models/ProductModel
  */
 
 var AbstractModel = require('./AbstractModel');
@@ -23,12 +23,12 @@ var ProductModel = AbstractModel.extend(
          * for one or multiple products. The function uses the given HttpParameterMap, so the request parameters do not
          * need to be passed in. Variation value selections must be specified as HTTP parameters in the following form:
          * <pre>{prefix_}{pid}_varAttrID={varAttrValueID}</pre>
-         * 
+         *
          * A custom prefix can be set using the <code>optionalCustomPrefix</code> parameter.
-         * Otherwise, the default prefix <code>dwvar_</code> is used. {pid}is the product id. 
+         * Otherwise, the default prefix <code>dwvar_</code> is used. {pid}is the product id.
          *
          * Example: <pre>dwvar_PN00050_color=red</pre>
-         * 
+         *
          * For each product specified as {pid}, a ProductVariationModel instance is created and returned as an element of the
          * "ProductVariationModels" HashMap return parameter. The function processes variation attributes in their defined order
          * and ignores attributes or values not defined for a variation. The function returns a map of ProductVariationModels
@@ -48,7 +48,7 @@ var ProductModel = AbstractModel.extend(
          *
          * @returns {dw.catalog.ProductVariationModel}
          */
-        updateVariationSelection : function (parameterMap, optionalCustomPrefix) {
+        updateVariationSelection: function (parameterMap, optionalCustomPrefix) {
             var formPrefix = optionalCustomPrefix || 'dwvar_';
 
            // Gets all variation-related parameters for the prefix.
@@ -56,7 +56,7 @@ var ProductModel = AbstractModel.extend(
             var paramNames = params.getParameterNames();
 
             if (!paramNames.getLength() && this.object.variationModel) {
-            	return this.object.variationModel;
+                return this.object.variationModel;
             }
 
             var ProductVariationModel = app.getModel('ProductVariation');
@@ -85,19 +85,19 @@ var ProductModel = AbstractModel.extend(
         },
         /**
          * Processes option value selections and calculates and returns the ProductOptionModels
-         * for one or multiple products. 
+         * for one or multiple products.
          * Option value selections must be specified as HTTP parameters in the following form:
          * <pre>{prefix_}{pid}_optionID={optionValueID}</pre>
-         * 
-         * A custom prefix is set using the 'optionalCustomPrefix" parameter. Otherwise,
-         * the default prefix <code>dwopt_</code> is used. {pid} is the product id. 
          *
-         * Example: <pre>dwopt_PN00049_memory=2GB</pre> 
+         * A custom prefix is set using the 'optionalCustomPrefix" parameter. Otherwise,
+         * the default prefix <code>dwopt_</code> is used. {pid} is the product id.
+         *
+         * Example: <pre>dwopt_PN00049_memory=2GB</pre>
          *
          * For each product
          * specified as {pid}, a ProductOptionModel instance is created and returned as an element of the 'ProductOptionModels'
          * HashMap output parameter. The function validates both option id and option value id and selects the option in the
-         * related ProductOptionModel instance. 
+         * related ProductOptionModel instance.
          *
          * If an option is not specified as an HTTP parameter, or the specified optionValueID
          * is invalid, the default option value of this option is selected. Invalid optionIDs are silently ignored. The
@@ -113,12 +113,11 @@ var ProductModel = AbstractModel.extend(
          *
          * @returns {dw.catalog.ProductOptionModel} The product option model.
          */
-        updateOptionSelection : function (parameterMap, optionalCustomPrefix) {
+        updateOptionSelection: function (parameterMap, optionalCustomPrefix) {
             var formPrefix = optionalCustomPrefix || 'dwopt_';
 
             // Gets all option related parameters for the prefix.
-            var params = parameterMap.getParameterMap(formPrefix+
-                            this.object.ID.replace(/_/g,'__')+'_');
+            var params = parameterMap.getParameterMap(formPrefix + this.object.ID.replace(/_/g,'__') + '_');
             var paramNames = params.getParameterNames();
 
             var optionModel = this.object.getOptionModel();
@@ -149,11 +148,11 @@ var ProductModel = AbstractModel.extend(
          * @param  {boolean} onlyAvailable if set to true, only available products are returned.
          * @return {dw.catalog.Product} the default variant or the first variant if none is defined.
          */
-        getDefaultVariant : function (onlyAvailable) {
+        getDefaultVariant: function (onlyAvailable) {
             var product = this.object;
             onlyAvailable = typeof onlyAvailable === 'undefined' ? true : onlyAvailable;
             var firstProduct = !empty(product.getVariationModel().variants) ?
-                ( product.getVariationModel().getDefaultVariant() || this.getDefaultVariant() ) :
+                (product.getVariationModel().getDefaultVariant() || this.getDefaultVariant()) :
                 null;
             if (!firstProduct || !firstProduct.onlineFlag || (onlyAvailable && firstProduct.getAvailabilityModel().availability === 0)) {
                 var variantsIterator = product.getVariants().iterator();
@@ -176,7 +175,7 @@ var ProductModel = AbstractModel.extend(
          * @alias module:models/ProductModel~ProductModel/getOnlineProductSetProducts
          * @return {dw.util.Collection} Collection of online products that are assigned to this product and that are also available through the current site.
          */
-        getOnlineProductSetProducts : function () {
+        getOnlineProductSetProducts: function () {
 
             var onlineProductSetProducts = new dw.util.ArrayList();
 
@@ -201,7 +200,7 @@ var ProductModel = AbstractModel.extend(
          * @alias module:models/ProductModel~ProductModel/isVisible
          * @returns {boolean} true if the product is visible in the storefront, false otherwise
          */
-        isVisible : function () {
+        isVisible: function () {
 
             if (!this.object) {
                 return false;
@@ -225,7 +224,7 @@ var ProductModel = AbstractModel.extend(
          * @param {String} variationAttribute name of the attribute value to get
          * @returns {dw.catalog.ProductVariationAttributeValue}
          */
-        getSelectedAttributeValue : function (variationAttribute) {
+        getSelectedAttributeValue: function (variationAttribute) {
             var pvm = this.isVariant() ? this.getMasterProduct().getVariationModel() : this.getVariationModel();
             var pva = pvm.getProductVariationAttribute(variationAttribute);
             var selectedAttributeValue;
@@ -236,12 +235,10 @@ var ProductModel = AbstractModel.extend(
                     var variant;
                     if (this.isVariant()) {
                         variant = this.object;
-                    }
-                    else {
+                    } else {
                         if (!empty(pvm.defaultVariant)) {
                             variant = pvm.defaultVariant;
-                        }
-                        else if (pvm.variants.length > 0) {
+                        } else if (pvm.variants.length > 0) {
                             variant = pvm.variants[0];
                         }
                     }
@@ -262,14 +259,13 @@ var ProductModel = AbstractModel.extend(
          *
          * @returns {dw.catalog.Product}
          */
-        getVariantForVariationAttributeValue : function (attrValue, attrName) {
+        getVariantForVariationAttributeValue: function (attrValue, attrName) {
             var variants;
             var newProduct = this.object;
 
             if ('isVariant' in newProduct && newProduct.isVariant()) {
                 variants = newProduct.getVariationModel().getVariants();
-            }
-            else {
+            } else {
                 variants = newProduct.getVariants();
             }
 
@@ -298,14 +294,12 @@ var ProductModel = AbstractModel.extend(
          *
          * @returns {Boolean}
          */
-        hasValue : function (object, value) {
+        hasValue: function (object, value) {
             if (!value) {
                 return true;
-            }
-            else if (object === value) {
+            } else if (object === value) {
                 return true;
-            }
-            else if (object[0] instanceof dw.value.EnumValue) {
+            } else if (object[0] instanceof dw.value.EnumValue) {
                 // enumerate through the multiple values of the custom attribute
                 for (var prop in object) {
                     if (object[prop] === value) {
@@ -324,7 +318,7 @@ var ProductModel = AbstractModel.extend(
          * @param {dw.catalog.Category} category - The category to get the breadcrumb path for.
          * @return {String} The breadcrumb for the passed category.
          */
-        getBreadcrumbs : function (category) {
+        getBreadcrumbs: function (category) {
             if (!category) {
                 return null;
             }
@@ -346,29 +340,29 @@ var ProductModel = AbstractModel.extend(
          * @param quantity {String} the quantity. Usually, this is the amount the customer has selected to purchase.
          * @returns {{status: *, statusQuantity: number, inStock: *, ats: number, inStockDate: string, availableForSale: boolean, levels: {}}}
          */
-        getAvailability : function (quantity) {
-            var qty = isNaN(quantity) ? 1 : (new Number(quantity)).toFixed();
+        getAvailability: function (quantity) {
+            var qty = isNaN(quantity) ? 1 : parseInt(quantity).toFixed();
 
             /* product availability */
             var avm = this.getAvailabilityModel();
 
             var availability = {
-                status           : avm.getAvailabilityStatus(),
-                statusQuantity   : qty,
-                inStock          : avm.inStock,
-                ats              : empty(avm.inventoryRecord) ? 0 : avm.inventoryRecord.ATS.value.toFixed(),
-                inStockDate      : empty(avm.inventoryRecord) || empty(avm.inventoryRecord.inStockDate) ? "" : avm.inventoryRecord.inStockDate.toDateString(),
-                availableForSale : avm.availability > 0,
-                levels           : {}
+                status: avm.getAvailabilityStatus(),
+                statusQuantity: qty,
+                inStock: avm.inStock,
+                ats: empty(avm.inventoryRecord) ? 0 : avm.inventoryRecord.ATS.value.toFixed(),
+                inStockDate: empty(avm.inventoryRecord) || empty(avm.inventoryRecord.inStockDate) ? '' : avm.inventoryRecord.inStockDate.toDateString(),
+                availableForSale: avm.availability > 0,
+                levels: {}
             };
 
             var avmLevels = dw.catalog.ProductAvailabilityLevels = avm.getAvailabilityLevels((qty < 1) ? 1 : qty);
             availability.isAvailable = avmLevels.notAvailable.value === 0;
-            availability.inStockMsg = dw.web.Resource.msgf('global.quantityinstock', 'locale', "", avmLevels.inStock.value.toFixed());
-            availability.preOrderMsg = dw.web.Resource.msgf('global.quantitypreorder', 'locale', "", avmLevels.preorder.value.toFixed());
-            availability.backOrderMsg = dw.web.Resource.msgf('global.quantitybackorder', 'locale', "", avmLevels.backorder.value.toFixed());
+            availability.inStockMsg = dw.web.Resource.msgf('global.quantityinstock', 'locale', '', avmLevels.inStock.value.toFixed());
+            availability.preOrderMsg = dw.web.Resource.msgf('global.quantitypreorder', 'locale', '', avmLevels.preorder.value.toFixed());
+            availability.backOrderMsg = dw.web.Resource.msgf('global.quantitybackorder', 'locale', '', avmLevels.backorder.value.toFixed());
             if (avm && avm.inventoryRecord && !empty(avm.inventoryRecord.inStockDate)) {
-                availability.inStockDateMsg = dw.web.Resource.msgf('global.inStockDate', 'locale', "", avm.inventoryRecord.inStockDate.toDateString());
+                availability.inStockDateMsg = dw.web.Resource.msgf('global.inStockDate', 'locale', '', avm.inventoryRecord.inStockDate.toDateString());
             }
 
             availability.levels[dw.catalog.ProductAvailabilityModel.AVAILABILITY_STATUS_IN_STOCK] = avmLevels.inStock.value;
@@ -392,8 +386,7 @@ ProductModel.get = function (parameter) {
     var obj = null;
     if (typeof parameter === 'string') {
         obj = dw.catalog.ProductMgr.getProduct(parameter);
-    }
-    else if (typeof parameter === 'object') {
+    } else if (typeof parameter === 'object') {
         obj = parameter;
     }
     return new ProductModel(obj);
