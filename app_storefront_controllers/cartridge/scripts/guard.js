@@ -65,17 +65,17 @@ function switchToHttps() {
  */
 var Filters = {
     /** Action must be accessed via HTTPS */
-    https: function() {return request.isHttpSecure();},
+    https: function () {return request.isHttpSecure();},
     /** Action must be accessed via HTTP */
-    http: function() {return !this.https();},
+    http: function () {return !this.https();},
     /** Action must be accessed via a GET request */
-    get: function() {return request.httpMethod === 'GET';},
+    get: function () {return request.httpMethod === 'GET';},
     /** Action must be accessed via a POST request */
-    post: function() {return request.httpMethod === 'POST';},
+    post: function () {return request.httpMethod === 'POST';},
     /** Action must only be accessed authenticated csutomers */
-    loggedIn: function() {return customer.authenticated;},
+    loggedIn: function () {return customer.authenticated;},
     /** Action must only be used as remote include */
-    include: function() {
+    include: function () {
         // the main request will be something like kjhNd1UlX_80AgAK-0-00, all includes
         // have incremented trailing counters
         return request.httpHeaders['x-is-requestid'].indexOf('-0-00') === -1;
@@ -92,14 +92,14 @@ var Filters = {
  * @see module:guard
  */
 function ensure (filters, action, params) {
-    return expose(function(args) {
+    return expose(function (args) {
         var error;
         var filtersPassed = true;
         var errors = [];
         params = require('~/cartridge/scripts/object').extend(params,args);
 
         for (var i = 0; i < filters.length; i++) {
-            LOGGER.debug('Ensuring guard "{0}"...',filters[i]  );
+            LOGGER.debug('Ensuring guard "{0}"...',filters[i]);
 
             filtersPassed = Filters[filters[i]].apply(Filters);
             if (!filtersPassed) {
@@ -113,9 +113,9 @@ function ensure (filters, action, params) {
             }
         }
 
-        if ( !error ) {
-            error = function() {
-                throw new Error('Guard(s) '+errors.join('|')+' did not match the incoming request.');
+        if (!error) {
+            error = function () {
+                throw new Error('Guard(s) ' + errors.join('|') + ' did not match the incoming request.');
             };
         }
 
