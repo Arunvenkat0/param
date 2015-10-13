@@ -28,9 +28,9 @@ var AbstractModel = require('./AbstractModel');
 var EmailModel = AbstractModel.extend(
     /** @lends module:models/EmailModel~EmailModel.prototype */
     {
-        template : null,
+        template: null,
 
-        init : function (template, recipient) {
+        init: function (template, recipient) {
             this._super(new dw.net.Mail());
             this.template = template;
 
@@ -50,7 +50,7 @@ var EmailModel = AbstractModel.extend(
          * If the mandatory fields from, content, and subject are empty an IllegalArgumentException is thrown. An
          * llegalArgumentException is thrown if neither to, cc, nor bcc are set.
          */
-        send : function (args) {
+        send: function (args) {
             // Add some default keys
             var params = require('~/cartridge/scripts/object').toHashMap(args);
             params.CurrentForms = session.forms;
@@ -71,7 +71,7 @@ var EmailModel = AbstractModel.extend(
             return this.object.send();
         },
 
-        __noSuchMethod__ : function (methodName, methodArgs) {
+        __noSuchMethod__: function (methodName, methodArgs) {
             var result = this._super(methodName, methodArgs);
             return result === this.object ? this : result;
         }
