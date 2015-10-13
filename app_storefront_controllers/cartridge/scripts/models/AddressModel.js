@@ -1,6 +1,6 @@
 'use strict';
 
-/** 
+/**
  * Model for address functionality.
  * @module models/AddressModel
  */
@@ -27,20 +27,20 @@ var AddressModel = AbstractModel.extend(
      * @alias module:models/AddressModel~AddressModel/remove
      * @return {Boolean} true if the address was successfully deleted, false otherwise.
      */
-    remove : function () {
+    remove: function () {
         var addressBook = customer.profile.addressBook;
         var address = this.object;
-        if(!address){
-            return false
-        }
-        var priceModel;
-		/** @type {dw.campaign.ABTestMgr} */
-		priceModel = Form.get('form');
-        var listsWithAddress = ProductListMgr.getProductLists(address);
-        if(!listsWithAddress.empty){
+        if (!address) {
             return false;
         }
-        Transaction.wrap(function(){
+        var priceModel;
+        /** @type {dw.campaign.ABTestMgr} */
+        priceModel = Form.get('form');
+        var listsWithAddress = ProductListMgr.getProductLists(address);
+        if (!listsWithAddress.empty) {
+            return false;
+        }
+        Transaction.wrap(function () {
             addressBook.removeAddress(address);
         });
 
@@ -57,15 +57,14 @@ var AddressModel = AbstractModel.extend(
  * @returns {module:models/AddressModel~AddressModel} If passed an address object object, returns the address object. 
  * If passed a string, uses the string as the address ID to get the string.
  */
-Address.get = function (parameter) {
+AddressModel.get = function (parameter) {
     var obj = null;
     if (typeof parameter === 'string') {
         obj = customer.addressBook.getAddress(parameter);
-    }
-    else if (typeof parameter === 'object') {
+    } else if (typeof parameter === 'object') {
         obj = parameter;
     }
-    return new Address(obj);
+    return new AddressModel(obj);
 };
 
 /**
@@ -76,19 +75,19 @@ Address.get = function (parameter) {
  * @param {dw.web.FormGroup} [addressForm] The form which is used to update the address
  * @returns {module:models/AddressModel~AddressModel} The created address.
  */
-AddressModel.create = function(addressForm) {
+AddressModel.create = function (addressForm) {
     var addressBook = customer.profile.addressBook;
 
-    return Transaction.wrap(function(){
+    return Transaction.wrap(function () {
         var address = addressBook.createAddress(addressForm.addressid.value);
 
-        if(addressForm){
-            if (!Form.get(addressForm).copyTo(address)){
+        if (addressForm) {
+            if (!Form.get(addressForm).copyTo(address)) {
                 return null;
             }
 
-            if('states' in addressForm){
-                if (!Form.get(addressForm.states).copyTo(address)){
+            if ('states' in addressForm) {
+                if (!Form.get(addressForm.states).copyTo(address)) {
                     return null;
                 }
             }
@@ -113,20 +112,19 @@ AddressModel.update = function (addressId, addressForm) {
     var address = addressBook.getAddress(addressId);
 
     // check if new address id is already taken
-    if (address && address.ID !== addressForm.addressid.value)
-    {
+    if (address && address.ID !== addressForm.addressid.value) {
         address = addressBook.getAddress(addressForm.addressid.value);
     }
 
-    return Transaction.wrap(function(){
-        if(addressForm){
-            if (!Form.get(addressForm).copyTo(address)){
+    return Transaction.wrap(function () {
+        if (addressForm) {
+            if (!Form.get(addressForm).copyTo(address)) {
                 addressForm.invalidateFormElement();
                 return null;
             }
 
-            if('states' in addressForm){
-                if (!Form.get(addressForm.states).copyTo(address)){
+            if ('states' in addressForm) {
+                if (!Form.get(addressForm.states).copyTo(address)) {
                     addressForm.invalidateFormElement();
                     return null;
                 }
@@ -148,7 +146,7 @@ AddressModel.update = function (addressId, addressForm) {
  * @see module:models/AddressModel~AddressModel#remove
  */
 AddressModel.remove = function (addressId) {
-    return Address.get(addressId).remove();
+    return AddressModel.get(addressId).remove();
 };
 
 /** The order class */
