@@ -13,9 +13,9 @@ exports.lastUrl  = function lastUrl() {
     var click = session.clickStream.last;
     if (click) {
         location = dw.web.URLUtils.url(click.pipelineName);
-        if (!empty(click.queryString) && click.queryString.indexOf('=')!== -1) {
+        if (!empty(click.queryString) && click.queryString.indexOf('=') !== -1) {
             var params = click.queryString.split('&');
-            params.forEach(function(param) {
+            params.forEach(function (param) {
                 location.append.apply(location,param.split('='));
             });
         }
