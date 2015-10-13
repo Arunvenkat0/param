@@ -7,7 +7,6 @@
 */
 
 var AbstractModel = require('./AbstractModel');
-var CustomerMgr = require('dw/customer/CustomerMgr');
 var Transaction = require('dw/system/Transaction');
 var Form = require('~/cartridge/scripts/models/FormModel');
 var Email = require('~/cartridge/scripts/models/EmailModel');
@@ -27,15 +26,15 @@ var CustomerModel = AbstractModel.extend(
      * @transactional
      * @alias module:models/CustomerModel~CustomerModel/resetPasswordByToken
      */
-    resetPasswordByToken : function(token, password) {
+    resetPasswordByToken: function (token, password) {
         var customerInstance, resetCustomerPasswordWithTokenResult, result;
         customerInstance = this;
 
-        Transaction.wrap(function() {
+        Transaction.wrap(function () {
             resetCustomerPasswordWithTokenResult = new dw.system.Pipelet('ResetCustomerPasswordWithToken').execute({
-                Customer : customerInstance.object,
-                Token : token,
-                Password : password
+                Customer: customerInstance.object,
+                Token: token,
+                Password: password
             });
         });
 
@@ -52,12 +51,12 @@ var CustomerModel = AbstractModel.extend(
      * @transactional
      * @alias module:models/CustomerModel~CustomerModel/generatePasswordResetToken
      */
-    generatePasswordResetToken : function() {
+    generatePasswordResetToken: function () {
         var token, customerInstance;
         customerInstance = this;
-        Transaction.wrap(function() {
+        Transaction.wrap(function () {
             var GenerateResetPasswordTokenResult = new dw.system.Pipelet('GenerateResetPasswordToken').execute({
-                Customer : customerInstance.object
+                Customer: customerInstance.object
             });
             token = GenerateResetPasswordTokenResult.ResetPasswordToken;
         });
@@ -73,11 +72,11 @@ var CustomerModel = AbstractModel.extend(
  * retrieved from the session.
  * @returns {module:models/CustomerModel~CustomerModel}
  */
-CustomerModel.get = function(parameter) {
+CustomerModel.get = function (parameter) {
     var obj = null;
-    if ( typeof parameter === 'undefined') {
+    if (typeof parameter === 'undefined') {
         obj = customer;
-    } else if ( typeof parameter === 'object') {
+    } else if (typeof parameter === 'object') {
         obj = parameter;
     }
     return new CustomerModel(obj);
@@ -95,26 +94,26 @@ CustomerModel.get = function(parameter) {
  * of <code>false</code> or a null value is supplied, then no cookie is stored and any existing cookie is removed.
  * @returns {boolean}
  */
-CustomerModel.login = function(username, password, rememberMe) {
+CustomerModel.login = function (username, password, rememberMe) {
     var GetCustomerResult, TempCustomer, LoginCustomerResult;
 
     GetCustomerResult = new dw.system.Pipelet('GetCustomer').execute({
-        Login : username
+        Login: username
     });
     TempCustomer = GetCustomerResult.Customer;
 
     // @TODO customer locked currently not handled
-    if ( typeof (TempCustomer) !== 'undefined' && TempCustomer !== null && TempCustomer.profile !== null && TempCustomer.profile.credentials.locked) {
+    if (typeof (TempCustomer) !== 'undefined' && TempCustomer !== null && TempCustomer.profile !== null && TempCustomer.profile.credentials.locked) {
         return false;
     }
 
     LoginCustomerResult = new dw.system.Pipelet('LoginCustomer').execute({
-        Login : username,
-        Password : password,
-        RememberMe : rememberMe
+        Login: username,
+        Password: password,
+        RememberMe: rememberMe
     });
     if (LoginCustomerResult.result === PIPELET_ERROR) {
-        if ( typeof (TempCustomer) !== 'undefined' && TempCustomer !== null && TempCustomer.profile !== null && TempCustomer.profile.credentials.locked) {
+        if (typeof (TempCustomer) !== 'undefined' && TempCustomer !== null && TempCustomer.profile !== null && TempCustomer.profile.credentials.locked) {
             Email.get('mail/lockoutemail', TempCustomer.profile.email).setSubject((dw.web.Resource.msg('email.youraccount', 'email', null)).send({}));
         }
 
@@ -128,7 +127,7 @@ CustomerModel.login = function(username, password, rememberMe) {
  * Logs out the customer currently logged into the storefront.
  * @alias module:models/CustomerModel~CustomerModel/logout
  */
-CustomerModel.logout = function() {
+CustomerModel.logout = function () {
     new dw.system.Pipelet('LogoutCustomer').execute();
 };
 
@@ -137,9 +136,9 @@ CustomerModel.logout = function() {
  * @alias module:models/CustomerModel~CustomerModel/getCustomerbyLogin
  * @param {String} login - Login used to retrieve customer.
  */
-CustomerModel.getCustomerByLogin = function(login) {
+CustomerModel.getCustomerByLogin = function (login) {
     var GetCustomerResult = new dw.system.Pipelet('GetCustomer').execute({
-        Login : login
+        Login: login
     });
     if (GetCustomerResult.result === PIPELET_ERROR) {
         return null;
@@ -149,9 +148,9 @@ CustomerModel.getCustomerByLogin = function(login) {
 };
 
 /**
- * Creates a customer. 
+ * Creates a customer.
  * @alias module:models/CustomerModel~CustomerModel/createCustomer
- * @param {String} login - Login for the customer. 
+ * @param {String} login - Login for the customer.
  * A valid login name is between 1 and 256 characters in length, not counting leading or trailing whitespace,
  * and may contain only the following characters:
  *
@@ -163,10 +162,10 @@ CustomerModel.getCustomerByLogin = function(login) {
  * - @
  * @param {String} password - Plain customer password, which is encrypted before it is stored at the profile..
  */
-CustomerModel.createCustomer = function(login, password) {
+CustomerModel.createCustomer = function (login, password) {
     var CreateCustomerResult = new dw.system.Pipelet('CreateCustomer').execute({
-        Login : login,
-        Password : password
+        Login: login,
+        Password: password
     });
     if (CreateCustomerResult.result === PIPELET_ERROR) {
         return null;
@@ -180,7 +179,7 @@ CustomerModel.createCustomer = function(login, password) {
  *
  * @alias module:models/CustomerModel~CustomerModel/setLogin
  * @param customer - The customer.
- * @param {String} login - Login for the customer. 
+ * @param {String} login - Login for the customer.
  * A valid login name is between 1 and 256 characters in length, not counting leading or trailing whitespace,
  * and may contain only the following characters:
  *
@@ -193,7 +192,7 @@ CustomerModel.createCustomer = function(login, password) {
  * @param {String} password - Plain customer password for the current customer, which is encrypted before it is stored at the profile.
  * @return <code>true</code> if the login or password was updated.
  */
-CustomerModel.setLogin = function(customerToSet, login, password) {
+CustomerModel.setLogin = function (customerToSet, login, password) {
     //@FIXME Put on customer scope vs. passing in customer
     if ((customerToSet === null) || (login === null) || (password === null) || (customerToSet.profile === null)) {
         return false;
@@ -206,11 +205,11 @@ CustomerModel.setLogin = function(customerToSet, login, password) {
  * Logs in customer using login and password.
  * @alias module:models/CustomerModel~CustomerModel/loginCustomer
  */
-CustomerModel.loginCustomer = function(login, password, rememberMe) {
+CustomerModel.loginCustomer = function (login, password, rememberMe) {
     var LoginCustomerResult = new dw.system.Pipelet('LoginCustomer').execute({
-        Login : login,
-        Password : password,
-        RememberMe : rememberMe
+        Login: login,
+        Password: password,
+        RememberMe: rememberMe
     });
     //@FIXME return customer instance on sucess
     return (LoginCustomerResult.result !== PIPELET_ERROR);
@@ -227,7 +226,7 @@ CustomerModel.loginCustomer = function(login, password, rememberMe) {
  * @see module:models/CustomerModel~CustomerModel/createCustomer
  * @see module:models/CustomerModel~CustomerModel/setLogin
  */
-CustomerModel.createAccount = function(email, password, form) {
+CustomerModel.createAccount = function (email, password, form) {
 
     Transaction.begin();
 
@@ -265,11 +264,11 @@ CustomerModel.createAccount = function(email, password, form) {
 
 /**
  * Checks if the user name exists and communicates the status back.
- * 
+ *
  * @return <code>true</code> if the login matches the email for the customer
  * @alias module:models/CustomerModel~CustomerModel/checkUserName
  */
-CustomerModel.checkUserName = function() {
+CustomerModel.checkUserName = function () {
     //@FIXME get email as parameter
     var profileForm, GetCustomerResult;
 
@@ -280,7 +279,7 @@ CustomerModel.checkUserName = function() {
     }
 
     GetCustomerResult = new dw.system.Pipelet('GetCustomer').execute({
-        Login : profileForm.customer.email.value
+        Login: profileForm.customer.email.value
     });
     if (GetCustomerResult.result === PIPELET_ERROR) {
         return true;
@@ -296,13 +295,13 @@ CustomerModel.checkUserName = function() {
  * @return customer record assocated with the token or null if the token is expired or not associated with
  * a customer record.
  */
-CustomerModel.getByPasswordResetToken = function(token) {
+CustomerModel.getByPasswordResetToken = function (token) {
     var result, ValidateResetPasswordTokenResult;
     if (empty(token)) {
         result = null;
     } else {
         ValidateResetPasswordTokenResult = new dw.system.Pipelet('ValidateResetPasswordToken').execute({
-            Token : token
+            Token: token
         });
 
         if (ValidateResetPasswordTokenResult.result === PIPELET_ERROR) {
@@ -321,18 +320,18 @@ CustomerModel.getByPasswordResetToken = function(token) {
  * @param email the current customer email address to use for login
  * @param password the password of the current customer
  * @param form the form to invalidate
- * @return <code>true</code> if transaction is successfully committed, <code>false</code> if 
+ * @return <code>true</code> if transaction is successfully committed, <code>false</code> if
  * <ul><li>the customer password cannot be set
  * </li><li>the customer login cannot be set
  * </li><li>the new password cannot be saved to the customer profile.</li></ul>
  */
-CustomerModel.editAccount = function(email, password, form) {
+CustomerModel.editAccount = function (email, password, form) {
 
     Transaction.begin();
 
     var SetCustomerPasswordResult = new dw.system.Pipelet('SetCustomerPassword').execute({
-        Password : password,
-        Customer : customer
+        Password: password,
+        Customer: customer
     });
     if (SetCustomerPasswordResult.result === PIPELET_ERROR) {
         Transaction.rollback();
