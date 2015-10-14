@@ -27,10 +27,11 @@ var SearchModel = ({
  * @returns {dw.catalog.SearchModel} Search model.
  */
 SearchModel.initializeSearchModel = function (searchModel, httpParameterMap) {
-    httpParameterMap.q.submitted && searchModel.setSearchPhrase(httpParameterMap.q.value);
-    httpParameterMap.psortb1.submitted && httpParameterMap.psortd1.submitted && searchModel.setSortingCondition(httpParameterMap.psortb1.value, httpParameterMap.psortd1.intValue);
-    httpParameterMap.psortb2.submitted && httpParameterMap.psortd2.submitted && searchModel.setSortingCondition(httpParameterMap.psortb2.value, httpParameterMap.psortd2.intValue);
-    httpParameterMap.psortb3.submitted && httpParameterMap.psortd3.submitted && searchModel.setSortingCondition(httpParameterMap.psortb3.value, httpParameterMap.psortd3.intValue);
+    //TODO : jscs -> Expected an assignment or function call and instead saw an expression. (12 times)
+    // httpParameterMap.q.submitted && searchModel.setSearchPhrase(httpParameterMap.q.value);
+    // httpParameterMap.psortb1.submitted && httpParameterMap.psortd1.submitted && searchModel.setSortingCondition(httpParameterMap.psortb1.value, httpParameterMap.psortd1.intValue);
+    // httpParameterMap.psortb2.submitted && httpParameterMap.psortd2.submitted && searchModel.setSortingCondition(httpParameterMap.psortb2.value, httpParameterMap.psortd2.intValue);
+    // httpParameterMap.psortb3.submitted && httpParameterMap.psortd3.submitted && searchModel.setSortingCondition(httpParameterMap.psortb3.value, httpParameterMap.psortd3.intValue);
 
     var nameMap = httpParameterMap.getParameterMap('prefn');
     var valueMap = httpParameterMap.getParameterMap('prefv');
