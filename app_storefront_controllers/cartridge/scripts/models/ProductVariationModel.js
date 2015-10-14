@@ -19,7 +19,7 @@ var ProductVariationModel = AbstractModel.extend(
          * @alias module:models/ProductVariationModel~ProductVariationModel/init
          * @param parameter method of of super class to call.
          */
-        inits: function (parameter) {
+        init: function (parameter) {
             var instance = this._super(parameter);
             this.initProperties();
             this.selectionMap = new dw.util.HashMap();
