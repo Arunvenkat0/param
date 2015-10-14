@@ -75,9 +75,12 @@
 
 		// Generate link to product detail page: by default it's just the product of the product search hit.
 		// If a color variation is available, the first color is used as link URL.
-		var productUrl = URLUtils.url('Product-Show', 'pid', Product.ID);
+		
+		//RAP-3006 - added cgid because the breadcumb will not work otherwise.  It needs to pass the category ID
+		// in order to show the proper category the user clicked on
+		var productUrl = URLUtils.url('Product-Show', 'pid', Product.ID, 'cgid', pdict.CurrentHttpParameterMap.cgid);
 		if (selectedColor) {
-			productUrl = Product.variationModel.urlSelectVariationValue('Product-Show', colorVarAttr, selectedColor)
+			productUrl = Product.variationModel.urlSelectVariationValue('Product-Show', colorVarAttr, selectedColor) + '&cgid=' + pdict.CurrentHttpParameterMap.cgid;
 		}
 
 		if (recommendername) {
@@ -85,7 +88,6 @@
 		}
 	</isscript>
 	<div class="product-tile" ${recommendername} id="${Product.UUID}" data-itemid="${Product.ID}"><!-- dwMarker="product" dwContentID="${Product.UUID}" -->
-
 		<iscomment>Image</iscomment>
 		<iscomment>++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
 		<div class="product-image"><!-- dwMarker="product" dwContentID="${Product.UUID}" -->
