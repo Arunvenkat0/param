@@ -22,14 +22,14 @@ function getDeviceType() {
 
     var httpUserAgent = request.httpUserAgent;
 
-    //check if the device is iPhone
-    if (httpUserAgent.indexOf(iPhoneDevice) > 1) {
+    if (httpUserAgent.indexOf(iPhoneDevice) > -1) {
         deviceType = 'mobile';
-    } else if (httpUserAgent.indexOf(androidDevice) > 1) { //check if the device is Android mobile device
-        if (httpUserAgent.indexOf('mobile') > 1) {
+
+    } else if (httpUserAgent.indexOf(androidDevice) > -1) {
+        if (httpUserAgent.indexOf('mobile') > -1) {
             deviceType = 'mobile';
         }
-    } else if (httpUserAgent.indexOf(iPadDevice) > 1) {
+    } else if (httpUserAgent.indexOf(iPadDevice) > -1) {
         deviceType = 'tablet';
     }
 
