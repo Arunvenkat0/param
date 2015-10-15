@@ -1,4 +1,10 @@
-'use strict';
+/* jshint strict: false */
+
+/**
+* Special Note:  We are inserting the above jshint exception because of the argument.callee reference on line 105.
+*  Once a suitable alternative is implemented, we should be able to remove this exception.
+*/
+
 /**
  *
  * <p>This script provides inheritance support and is inspired by base2 and Prototype</p>
@@ -39,9 +45,7 @@ function Class() {}
 
 (function () {
     var initializing = false;
-    var fnTest = /xyz/.test(function () {
-        var xyz;
-    }) ? /\b_super\b/ : /.*/;
+    var fnTest = /xyz/.test(function () {}) ? /\b_super\b/ : /.*/;
 
     // The base Class implementation (does nothing)
     //this.Class = function(){};
@@ -62,27 +66,26 @@ function Class() {}
         initializing = false;
 
         // Copy the properties over onto the new prototype
+        var callback = function (name, fn) {
+            return function () {
+                var tmp = this._super;
+
+                // Add a new ._super() method that is the same method
+                // but on the super-class
+                this._super = _super[name];
+
+                // The method only need to be bound temporarily, so we
+                // remove it when we're done executing
+                var ret = fn.apply(this, arguments);
+                this._super = tmp;
+
+                return ret;
+            };
+        };
         for (var name in prop) {
             // Check if we're overwriting an existing function
             prototype[name] =
-                typeof prop[name] === 'function' && typeof _super[name] === 'function' &&
-                    fnTest.test(prop[name]) ?
-                    (function (name, fn) {
-                        return function () {
-                            var tmp = this._super;
-
-                            // Add a new ._super() method that is the same method
-                            // but on the super-class
-                            this._super = _super[name];
-
-                            // The method only need to be bound temporarily, so we
-                            // remove it when we're done executing
-                            var ret = fn.apply(this, arguments);
-                            this._super = tmp;
-
-                            return ret;
-                        };
-                    })(name, prop[name]) : prop[name];
+                typeof prop[name] === 'function' && typeof _super[name] === 'function' && fnTest.test(prop[name]) ? callback(name, prop[name]) : prop[name];
         }
 
         // The dummy class constructor
