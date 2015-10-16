@@ -24,7 +24,9 @@ var ShippingMgr = require('dw/order/ShippingMgr');
 var StoreMgr = require('dw/catalog/StoreMgr');
 var TransientAddress = require('~/cartridge/scripts/models/TransientAddressModel');
 var UUIDUtils = require('dw/util/UUIDUtils');
-var lineItem; //TODO
+
+//TODO
+var lineItem;
 
 /**
  * Cart helper providing enhanced cart functionality
@@ -122,27 +124,37 @@ var CartModel = AbstractModel.extend({
                      */
                     if (request.httpParameterMap.childPids.stringValue) {
                         var childPids = request.httpParameterMap.childPids.stringValue.split(',');
+                    }
 
-                        for (i = 0; i < childPids.length; i++) {
-                            var childProduct = Product.get(childPids[i]).object;
+                    if (product.bundle) {
+                        /**
+                         * By default, when a bundle is added to cart, all its child products are added too, but if those products are
+                         * variants then the code must replace the master products with the selected variants that get passed in the
+                         * HTTP params as childPids along with any options. Params: CurrentHttpParameterMap.childPids - comma separated list of
+                         * pids of the bundled products that are variations.
+                         */
+                        if (request.httpParameterMap.childPids.stringValue) {
+                            var childPids = request.httpParameterMap.childPids.stringValue.split(',');
 
-                            if (childProduct) {
-                                // why is this needed ?
-                                childProduct.updateOptionSelection(request.httpParameterMap);
+                            for (i = 0; i < childPids.length; i++) {
+                                var childProduct = Product.get(childPids[i]).object;
 
-                                var foundLineItem = null;
-                                foundLineItem = this.getBundledProductLineItemByPID(lineItem, (childProduct.isVariant() ? childProduct.masterProduct.ID : childProduct.ID));
+                                if (childProduct) {
+                                    // why is this needed ?
+                                    childProduct.updateOptionSelection(request.httpParameterMap);
 
-                                if (foundLineItem) {
-                                    foundLineItem.replaceProduct(childProduct);
+                                    var foundLineItem = null;
+                                    foundLineItem = this.getBundledProductLineItemByPID(lineItem, childProduct.isVariant() ? childProduct.masterProduct.ID : childProduct.ID);
+
+                                    if (foundLineItem) {
+                                        foundLineItem.replaceProduct(childProduct);
+                                    }
                                 }
                             }
                         }
                     }
                 }
-
                 cart.calculate();
-
             }
         });
     },
@@ -228,18 +240,15 @@ var CartModel = AbstractModel.extend({
      * @returns {dw.order.ProductLineItem} The newly created product line item.
      */
     addBonusProduct: function (bonusDiscountLineItem, product, selectedOptions) {
-        // var productModel = Product.get(product);
-        // productModel.updateOptionSelection();
-        var ScriptResult = new Pipelet('Script', {
-            Transactional: false,
-            OnError: 'PIPELET_ERROR',
-            ScriptFile: 'cart/UpdateProductOptionSelections.ds'
-        }).execute({
-                SelectedOptions: selectedOptions,
-                Product: product
-            });
+        // TODO: Should this actually be using the dw.catalog.ProductOptionModel.UpdateProductOptionSelections method instead?
+        var UpdateProductOptionSelections = require('app_storefront_core/cartridge/scripts/cart/UpdateProductOptionSelections');
+        var ScriptResult = UpdateProductOptionSelections.update({
+            SelectedOptions: selectedOptions,
+            Product: product
+        });
+        var shipment = null;
 
-        return this.object.createBonusProductLineItem(bonusDiscountLineItem, product, ScriptResult.ProductOptionModel);
+        return this.object.createBonusProductLineItem(bonusDiscountLineItem, product, ScriptResult, shipment);
     },
 
     /**
@@ -250,7 +259,6 @@ var CartModel = AbstractModel.extend({
      * @param {dw.order.GiftCertificateLineItem} giftCertificateLineItem - The gift certificate to remove from the basket.
      */
     removeGiftCertificateLineItem: function (giftCertificateLineItem) {
-
         // TODO - add check whether the given lineitem actually belongs to this cart object
         new Pipelet('RemoveGiftCertificateLineItem').execute({
             GiftCertificateLineItem: giftCertificateLineItem

@@ -385,12 +385,10 @@ function addBonusProductJson() {
                     if (childProduct) {
 
                         // TODO: CommonJSify cart/UpdateProductOptionSelections.ds and import here
-                        ScriptResult = new Pipelet('Script', {
-                            Transactional: false,
-                            OnError: 'PIPELET_ERROR',
-                            ScriptFile: 'cart/UpdateProductOptionSelections.ds'
-                        }).execute({
-                            SelectedOptions: new ArrayList(productsJSON[i].options),
+
+                        var UpdateProductOptionSelections = require('app_storefront_core/cartridge/scripts/cart/UpdateProductOptionSelections');
+                        var ScriptResult = UpdateProductOptionSelections.update({
+                            SelectedOptions:  new ArrayList(productsJSON[i].options),
                             Product: childProduct
                         });
 
