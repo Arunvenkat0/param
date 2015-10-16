@@ -5,9 +5,9 @@
  * @module  controllers/ProductList
  * @TODO this should be a library, not a controller
  */
- 
+
  /**
- * TODO 
+ * TODO
  */
 function Init(args)
 {
@@ -100,7 +100,7 @@ function GenerateShipmentName(args)
     	var ScriptResult = new dw.system.Pipelet('Script', {
             Transactional: true,
             OnError: 'PIPELET_ERROR',
-            ScriptFile: 'productlist/GenerateShipmentName.ds'
+            ScriptFile: 'app_storefront_core:productlist/GenerateShipmentName.ds'
         }).execute({
             ProductList: ProductList
         });

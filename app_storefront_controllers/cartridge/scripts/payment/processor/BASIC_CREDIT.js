@@ -30,7 +30,7 @@ function Handle(args) {
 		new dw.system.Pipelet('Script', {
 			Transactional : false,
 			OnError       : 'PIPELET_ERROR',
-			ScriptFile    : 'checkout/InvalidatePaymentCardFormElements.ds'
+			ScriptFile    : 'app_storefront_core:checkout/InvalidatePaymentCardFormElements.ds'
 		}).execute({
 				CreditCardForm : session.forms.billing.paymentMethods.creditCard,
 				Status         : CreditCardStatus
