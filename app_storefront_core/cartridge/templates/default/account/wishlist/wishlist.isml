@@ -8,9 +8,11 @@
 
 	<isinclude template="account/wishlist/wishlistsearch"/>
 
-	<isset name="formID" value="${pdict.CurrentForms.wishlist.htmlName + '_items'}" scope="page"/>
-	<isset name="isListOwner" value="${pdict.CurrentCustomer == pdict.ProductList.owner && pdict.TargetPipeline == 'Wishlist-Show'}" scope="page"/>
-
+	<isscript>
+		var formID = pdict.CurrentForms.wishlist.htmlName + '_items';
+ 		var isListOwner = pdict.TargetPipeline ? pdict.CurrentCustomer === pdict.ProductList.owner && pdict.TargetPipeline === 'Wishlist-Show' : pdict.CurrentCustomer === pdict.ProductList.owner;
+	</isscript>
+	
 	<iscomment>wishlist items form</iscomment>
 
 	<form action="${URLUtils.httpsContinue()}" method="post" class="form-horizontal" id="${pdict.CurrentForms.wishlist.htmlName}_shipping">
@@ -75,7 +77,6 @@
 				<isprint value="${pdict.ProductList.owner.profile.lastName}"/>
 				${Resource.msg('other.wishlistheader','account',null)}
 			</h2>
-			<button class="print-page">${Resource.msg('global.print','locale',null)}</button>
 		</isif>
 	</form>
 
