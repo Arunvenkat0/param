@@ -779,7 +779,7 @@
       <node>
         <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
-          <key-binding alias="!empty(CurrentHttpParameterMap.lang) ? CurrentHttpParameterMap.lang.value : null" key="From_0"/>
+          <key-binding alias="(CurrentRequest.locale == 'default') ? null : CurrentRequest.locale" key="From_0"/>
           <key-binding alias="CurrentLocale" key="To_0"/>
           <key-binding alias="null" key="From_1"/>
           <key-binding alias="null" key="To_1"/>
