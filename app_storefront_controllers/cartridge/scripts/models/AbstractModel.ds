@@ -5,7 +5,7 @@
  * @module models/AbstractModel
  */
 var wash = exports.wash = function() {
-    // ...
+
 };
 
 
@@ -59,10 +59,11 @@ var AbstractModel = Class.extend(
     },
 
     /**
-     * Get value from prepopulated object.
-     * If the key is point-delimited trying to parse JSON
-     * If not - trying to obtain a value from "custom" property of an object
+     * Gets value from prepopulated object.
+     * If the key is point-delimited, parses JSON
+     * If not, obtains a value from "custom" property of an object
      * @alias module:models/AbstractModel~AbstractModel/getValue
+     * @param {String} key The JSON key to retrieve a value for.
      * @return {Object}
      */
     getValue : function (key) {
@@ -70,20 +71,20 @@ var AbstractModel = Class.extend(
             return null;
         }
 
-        // add any special value handling here (i.e. automatic handling of JSON)
+        // Adds any special value handling here, such as automatic handling of JSON.
         var value = this.object.custom[key];
 
         return value;
     },
 
     /**
-     * Set value to prepopulated object.
-     * If the key is point-delimited trying to parse JSON and set up a target value
-     * @alias module:models/AbstractModel~AbstractModel/setValue
-     * @return {Boolean}
+     * Sets value to prepopulated object.
+     * If the key is point-delimited, parses JSON and sets up a target value.
+     * @alias module:models/AbstractModel~AbstractModel/setValue.
+     * @return {Boolean} true if value is successfully set.
      */
     setValue : function (key, value) {
-        // this will works under transactional nodes
+        // This works under transactional nodes.
         if (!this.object || empty(key)) {
             return false;
         }
@@ -150,18 +151,18 @@ var AbstractModel = Class.extend(
      * Fallback to use wrapped object's native functions in case method is not defined.
      * The logic will try to invoke method for this.object, and throw TypeError if the method does not exist
      *
-     * @param {String} methodName
-     * @param {Array} methodArgs
+     * @param {String} methodName The name of a method to use as a fallback.
+     * @param {Array} methodArgs The arguments for the method.
      *
      * @alias module:models/AbstractModel~AbstractModel/__noSuchMethod__
-     * @return {*} Record function result (or exception if function not exists.
+     * @return Record Result or exception if the method does not exist.
      * @throws {TypeError}
      */
     __noSuchMethod__ : function (methodName, methodArgs) {
         if (methodName in this.object && 'function' === typeof this.object[methodName]) {
             return this.object[methodName].apply(this.object, methodArgs);
         }
-        // If we get here, the method hasn't been found
+        // If the method cannot be found.
         Logger.error('Method "{0}" does not exist for {1}',methodName,this.object.class);
         throw new TypeError();
     }

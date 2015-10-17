@@ -1,6 +1,6 @@
 'use strict';
 /**
- * Model for cart functionality.
+ * Model for account functionality.
  *
  * @module models/AccountModel
  */
@@ -14,7 +14,7 @@ var pageMeta = require('~/cartridge/scripts/meta');
 var accountLogin = require('~/cartridge/scripts/models/ContentModel').get('myaccount-login');
 
 /**
- * Account helper providing enhanced account functionality
+ * Account helper providing enhanced account functionality.Provides methods to manage customers and accounts. 
  * @class module:models/AccountModel~AccountModel
  */
 var AccountModel = AbstractModel.extend(
@@ -24,8 +24,10 @@ var AccountModel = AbstractModel.extend(
 	{
 	
 		/**
-		 * Looks up a customer by its login.
+		 * Looks up a customer by login.
 		 * @alias module:models/AccountModel~AccountModel/getCustomerByLogin
+		 * @param {String} login The customer username for login.
+		 * @return {dw.customer.Customer} The customer with the given login username.
 		 */
 		getCustomerByLogin : function (login)
 		{
@@ -42,6 +44,9 @@ var AccountModel = AbstractModel.extend(
 		/**
 		 * Creates a customer.
 		 * @alias module:models/AccountModel~AccountModel/createCustomer
+		 * @param {String} login The customer username for login.
+		 * @param {String} password The customer password for login.
+		 * @return {dw.customer.Customer | null} The customer created by the method or null if the customer was not created.
 		 */
 		createCustomer : function (login, password)
 		{
@@ -60,11 +65,11 @@ var AccountModel = AbstractModel.extend(
 		/**
 		 * Sets the customer's login.
 		 * 
-		 * @param customer The customer
-		 * @param login The user name of the customer
-		 * @param password The password of the current customer
+		 * @param {dw.customer.Customer} customer The customer login to set.
+		 * @param {String} login The customer username for login.
+		 * @param {String} password The customer password for login.
 		 * @alias module:models/AccountModel~AccountModel/setLogin
-		 * @return true, if the login / password was updated
+		 * @return {Boolean} true if the login and password was updated, false if it was not or if any of the input parameters were set to null.
 		 */
 		setLogin : function (customer, login, password)
 		{
@@ -75,7 +80,17 @@ var AccountModel = AbstractModel.extend(
 		
 		    return customer.profile.credentials.setLogin(login, password);
 		},
-		
+		/**
+		 * Logs in a customer.
+		 * 
+		 * @param {String} login The customer username for login.
+		 * @param {String} password The customer password for login.
+		 * @param {Boolean} rememberMe true if the customer wants to be remembered on the current computer. 
+		 * If set to True a cookie identifying the customer is stored upon successful login for 180 days. 
+		 * If set to False, or a null value, then no cookie is stored and any existing cookie is removed.
+		 * @alias module:models/AccountModel~AccountModel/setLogin
+		 * @return {Boolean} true if the login and password was updated, false if it was not or if any of the input parameters were set to null.
+		 */		
 		loginCustomer : function (login, password, rememberMe)
 		{
 		    var LoginCustomerResult = new dw.system.Pipelet('LoginCustomer').execute({
@@ -88,11 +103,11 @@ var AccountModel = AbstractModel.extend(
 		},
 		
 		/**
-		 * Creates a new customer account.
+		 * Creates a new customer account and logs the customer in.
 		 * 
 		 * @alias module:models/AccountModel~AccountModel/createAccount
 		 * @transactional
-		 * @return true, if the account was created successfully.
+		 * @return true if the account is created successfully, false otherwise.
 		 */
 		createAccount : function ()
 		{
@@ -168,6 +183,7 @@ var AccountModel = AbstractModel.extend(
 		/**
 		 * Checks whether a user name on exists.
 		 * @alias module:models/AccountModel~AccountModel/checkUserName
+		 * @return {Boolean} true if the user name exists.
 		 */
 		checkUserName : function ()
 		{
@@ -190,8 +206,10 @@ var AccountModel = AbstractModel.extend(
 		},
 		/**
 		 * Edits a customer account.
+		 *
 		 * @alias module:models/AccountModel~AccountModel/editAccount
 		 * @transactional
+		 * @return true if the customer account is successfully updated.
 		 */		
 		editAccount : function ()
 		{
