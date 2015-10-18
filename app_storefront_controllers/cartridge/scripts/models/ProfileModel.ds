@@ -1,5 +1,7 @@
 'use strict';
-/** @module models/ProfileModel */
+/** 
+ * Model for customer profiles. 
+ * @module models/ProfileModel */
 
 /* API Includes */
 var AbstractModel = require('./AbstractModel');
@@ -16,29 +18,38 @@ var ProfileModel = AbstractModel.extend(
     /** @lends module:models/ProfileModel~ProfileModel.prototype */
     {
         /**
-         * Retrieve preferred customer address
+         * Retrieves the preferred customer address.
+         *
+         * @alias module:models/ProfileModel~ProfileModel/getPreferredAddress
+         * @return {dw.customer.CustomerAddress} Address defined as the preferred address in the profile.
          */
         getPreferredAddress : function () {
             return this.object.getAddressBook().getPreferredAddress();
         },
 
         /**
-         * Retrieve default customer shipping address
+         * Retrieves the default customer shipping address.
+         * @alias module:models/ProfileModel~ProfileModel/getDefaultShippingAddress
+         * @return {dw.customer.CustomerAddress} Address defined as the preferred address in the profile.
          */
         getDefaultShippingAddress : function () {
             return this.getPreferredAddress();
         },
 
         /**
-         * Retrieve default customer billing address
+         * Retrieves the default customer billing address.
+         * @alias module:models/ProfileModel~ProfileModel/getDefaultBillingAddress
+         * @return {dw.customer.CustomerAddress} Address defined as the preferred address in the profile.
          */
         getDefaultBillingAddress : function () {
             return this.getPreferredAddress;
         },
 
         /**
-         * Set default customer shipping address
-         * @param {CustomerAddress} address - new default shipping address
+         * Sets the default customer shipping address.
+         *
+         * @alias module:models/ProfileModel~ProfileModel/setDefaultShippingAddress
+         * @param {CustomerAddress} address  new preferred address to be set.
          */
         setDefaultShippingAddress : function (address) {
             if (this.object instanceof dw.customer.Profile && this.object.addressBook) {
@@ -47,8 +58,10 @@ var ProfileModel = AbstractModel.extend(
         },
 
         /**
-         * Set default customer billing address
-         * @param {CustomerAddress} address - new default billing address
+         * Sets the default customer billing address.
+         *
+         * @alias module:models/ProfileModel~ProfileModel/setDefaultBillingAddress
+         * @param {dw.customer.CustomerAddress} address new default billing address.
          */
         setDefaultBillingAddress : function (address) {
             if (this.object instanceof dw.customer.Profile && this.object.addressBook) {
@@ -57,8 +70,11 @@ var ProfileModel = AbstractModel.extend(
         },
 
         /**
-         * Check if address is default shipping
-         * @param {CustomerAddress} address - address for checking
+         * Checks if address is the default shipping address.
+         *
+         * @alias module:models/ProfileModel~ProfileModel/isDefaultShippingAddress
+         * @param {dw.customer.CustomerAddress} address address to check 
+         * @return {Boolean} true if the address is the default shipping address.
          */
         isDefaultShippingAddress : function (address) {
             var defaultShippingAddress = this.getDefaultShippingAddress();
@@ -66,8 +82,11 @@ var ProfileModel = AbstractModel.extend(
         },
 
         /**
-         * Check if address is default billing
-         * @param {CustomerAddress} address - address for checking
+         * Checks if the address is the default billing address.
+         *
+         * @alias module:models/ProfileModel~ProfileModel/isDefaultBillingAddress
+         * @param {CustomerAddress} address address to check
+         * @return {Boolean} true if the address is the default billing address.
          */
         isDefaultBillingAddress : function (address) {
             var defaultBillingAddress = this.getDefaultBillingAddress();
@@ -75,21 +94,34 @@ var ProfileModel = AbstractModel.extend(
         },
 
         /**
-         * This script attempts to add the given address to the address book of the current profile. The address
+         * Adds the given address to the address book of the current profile. The address
          * attribute "city" is used to generate the address ID within the address book.
          *
          * @transactional
-         * @param addressToAdd
-         * @returns {*}
+         * @alias module:models/ProfileModel~ProfileModel/addAddressToAddressBook
+         * @param {Object }addressToAdd Address with following attributes:
+         * <ul><li> address1 </li> 
+         * <li> address2 </li> 
+         * <li> city </li> 
+         * <li> companyName </li> 
+         * <li> countryCode </li> 
+         * <li> firstName </li> 
+         * <li> lastName </li> 
+         * <li> postalCode </li> 
+         * <li> postBox </li> 
+         * <li> stateCode </li></ul>   
+         * <b>Note:</b> dw.customer.CustomerAddress objects can be passed and meet this criteria.       
+         * @returns {dw.customer.CustomerAddress} Address object that is added to the address book.
          */
         addAddressToAddressBook : function (addressToAdd) {
             var addressBook = this.getAddressBook();
-            // get a possible equivalent address from the address book
+            // Gets a possible equivalent address from the address book
             var address = null;
             var that    = this;
 
             dw.system.Transaction.wrap(function(){
                 if (addressToAdd) {
+                	//Checks if the address already exists in the address book
                     for (var i = 0; i < addressBook.addresses.length; i++) {
                         address = addressBook.addresses[i];
                         if (address.isEquivalentAddress(addressToAdd)) {
@@ -97,13 +129,12 @@ var ProfileModel = AbstractModel.extend(
                         }
                     }
 
-                    // create the new address, if no equivalent address was found
-                    // and copy the address attributes
+                    // Creates the new address and copies the address attributes.
                     if (address === null) {
-                        // get a unique address ID
+                        // Gets a unique address ID.
                         var addressID = that.determineUniqueAddressID(addressToAdd.city);
 
-                        // check on empty address ID
+                        // Checks on empty address ID.
                         if (!addressID) {
                             dw.system.Logger.debug("Cannot add address to address book, with empty address ID.");
                             return;
@@ -121,8 +152,8 @@ var ProfileModel = AbstractModel.extend(
                         }
                     }
 
-                    // update the phone in either the equivalent found address
-                    // or in the newly created address
+                    // Updates the phone in either the equivalent found address
+                    // or in the newly created address.
                     address.setPhone(addressToAdd.phone);
                 }
             });
@@ -132,27 +163,28 @@ var ProfileModel = AbstractModel.extend(
 
         /**
          * Determines a unique address ID for an address to be saved in the profiles address book. The function first
-         * checks the city as the candidate ID or appends a counter to the city (if already used as address ID) and
+         * checks the city as the candidate ID or appends a counter to the city (if already used as address ID) and then
          * checks the existence of the resulting ID candidate. If the resulting ID is unique this ID is returned, if not
          * the counter is incremented and checked again.
          *
-         * @param city
-         * @returns {*}
+         * @param {String} city an address ID. Preferably the city used in the address. Must not be null. 
+         * @alias module:models/ProfileModel~ProfileModel/determineUniqueAddressID
+         * @returns {String | null} Returns a unique address ID. If the city parameter is null, returns null. 
          */
         determineUniqueAddressID : function (city) {
             var counter = 0;
 
-            // check, if attribute "city" is set and has a value
+            // Checks if the attribute "city" is set and has a value.
             if (city) {
-                // initialize the candidate ID
+                // Initializes the candidate ID.
                 var candidateID = city;
                 var existingAddress = null;
 
                 while (existingAddress == null) {
                     existingAddress = this.getAddressBook().getAddress(candidateID);
                     if (existingAddress != null) {
-                        // this ID is already taken, increment the counter
-                        // and try the next one
+                        // This ID is already taken, increment the counter
+                        // and try the next one.
                         counter++;
                         candidateID = city + "-" + counter;
                         existingAddress = null;
@@ -167,11 +199,12 @@ var ProfileModel = AbstractModel.extend(
         },
 
         /**
+         * Validates payment instruments and returns valid payment instruments.
          *
-         *
-         * @param countryCode
-         * @param amount
-         * @returns {*}
+         * @alias module:models/ProfileModel~ProfileModel/validateWalletPaymentInstruments
+         * @param {String} countryCode Billing country code or null.
+         * @param {Number} amount Payment amount to check valid payment instruments for.
+         * @returns {ArrayList} Returns an array with the valid PaymentInstruments.
          */
         validateWalletPaymentInstruments : function (countryCode, amount) {
 
@@ -189,46 +222,46 @@ var ProfileModel = AbstractModel.extend(
 		        paymentInstruments = GetCustomerPaymentInstrumentsResult.PaymentInstruments;
 	        }
 
-            // get applicable payment methods
+            // Gets applicable payment methods.
             var methods = PaymentMgr.getApplicablePaymentMethods(customer, countryCode, amount);
 
-            // get applicable payment cards from CREDIT_CARD payment method
+            // Gets applicable payment cards from CREDIT_CARD payment method.
             var ccMethod = PaymentMgr.getPaymentMethod(PaymentInstrument.METHOD_CREDIT_CARD);
             var cards = ccMethod != null ? ccMethod.getApplicablePaymentCards(customer, countryCode, amount) : List.EMPTY_LIST;
 
-            // collects all not applicable payment instruments
+            // Collects all invalid payment instruments.
             var validPaymentInstruments = new ArrayList(paymentInstruments);
             var invalidPaymentInstruments = new ArrayList();
 
             for (var i = 0; i < paymentInstruments.length; i++) {
                 var pi = paymentInstruments[i];
-                // ignore gift certificate payment instruments
+                // Ignores gift certificate payment instruments.
                 if (PaymentInstrument.METHOD_GIFT_CERTIFICATE.equals(pi.paymentMethod)) {
                     continue;
                 }
 
-                // get payment method
+                // Gets a payment method.
                 var method = PaymentMgr.getPaymentMethod(pi.getPaymentMethod());
 
-                // check, whether payment method is still applicable
+                // Checks whether payment method is still applicable.
                 if (method != null && methods.contains(method)) {
-                    // in case of method CREDIT_CARD, check payment cards
+                    // In case of method CREDIT_CARD, check payment cards
                     if (PaymentInstrument.METHOD_CREDIT_CARD.equals(pi.paymentMethod)) {
-                        // get payment card
+                        // Gets payment card.
                         var card = PaymentMgr.getPaymentCard(pi.creditCardType);
 
-                        // check, whether payment card is still applicable
+                        // Checks whether payment card is still applicable.
                         if (card != null && cards.contains(card)) {
                             continue;
                         }
                     }
                     else {
-                        // continue, if method is applicable
+                        // Continues if method is applicable.
                         continue;
                     }
                 }
 
-                // collect invalid payment instruments
+                // Collects invalid payment instruments.
                 invalidPaymentInstruments.add(pi);
                 validPaymentInstruments.remove(pi);
             }
@@ -250,7 +283,10 @@ var ProfileModel = AbstractModel.extend(
     });
     
 /**
- * Use this method to get a new instance for a given product.
+ * Gets a new instance of a profile.
+ * @alias module:models/ProfileModel~ProfileModel/get
+ * @param {String | Object } parameter Customer number of the profile to get if a string or 
+ * the profile object to wrap with a ProfileModel if an object.
  */
 ProfileModel.get = function (parameter) {
     var obj = null;
