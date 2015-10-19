@@ -33,9 +33,8 @@ var AddressModel = AbstractModel.extend(
         if (!address) {
             return false;
         }
-        var priceModel;
+
         /** @type {dw.campaign.ABTestMgr} */
-        priceModel = Form.get('form');
         var listsWithAddress = ProductListMgr.getProductLists(address);
         if (!listsWithAddress.empty) {
             return false;
