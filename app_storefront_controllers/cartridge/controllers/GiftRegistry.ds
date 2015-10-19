@@ -241,7 +241,7 @@ function participantAddresses() {
 	        new Pipelet('Script', {
 	            Transactional: false,
 	            OnError: 'PIPELET_ERROR',
-	            ScriptFile: 'account/giftregistry/CopyAddressFormFields.ds'
+	            ScriptFile: 'app_storefront_core:account/giftregistry/CopyAddressFormFields.ds'
 	        }).execute({
 	            GiftRegistryForm: currentForms.giftregistry
 	        });
@@ -256,7 +256,7 @@ function participantAddresses() {
 	            new Pipelet('Script', {
 	                Transactional: false,
 	                OnError: 'PIPELET_ERROR',
-	                ScriptFile: 'account/giftregistry/AssignPostEventShippingAddress.ds'
+	                ScriptFile: 'app_storefront_core:account/giftregistry/AssignPostEventShippingAddress.ds'
 	            }).execute({
 	                GiftRegistryForm: currentForms.giftregistry
 	            });
@@ -449,7 +449,7 @@ function confirmation() {
 
 
 	        var ScriptResult = new Pipelet('Script', {
-	            ScriptFile: 'account/giftregistry/AssignEventAddresses.ds',
+	            ScriptFile: 'app_storefront_core:account/giftregistry/AssignEventAddresses.ds',
 	            Transactional: true
 	        }).execute({
 	            ProductList: CreatedProductList,
@@ -990,7 +990,7 @@ function replaceProductListItem() {
     var ScriptResult = new Pipelet('Script', {
         Transactional: true,
         OnError: 'PIPELET_ERROR',
-        ScriptFile: 'account/ReplaceProductListItem.ds'
+        ScriptFile: 'app_storefront_core:account/ReplaceProductListItem.ds'
     }).execute({
         ProductList: ProductList,
         plid: currentHttpParameterMap.uuid.stringValue
@@ -1177,7 +1177,7 @@ function confirm() {
     var productList = ProductList.get();
 
     var ScriptResult = new Pipelet('Script', {
-        ScriptFile: 'account/giftregistry/AssignEventAddresses.ds',
+        ScriptFile: 'app_storefront_core:account/giftregistry/AssignEventAddresses.ds',
         Transactional: true
     }).execute({
         ProductList: productList.object,
