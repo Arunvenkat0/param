@@ -27,19 +27,34 @@ var SearchModel = ({
  * @returns {dw.catalog.SearchModel} Search model.
  */
 SearchModel.initializeSearchModel = function (searchModel, httpParameterMap) {
-    //TODO : jscs -> Expected an assignment or function call and instead saw an expression. (12 times)
-    // httpParameterMap.q.submitted && searchModel.setSearchPhrase(httpParameterMap.q.value);
-    // httpParameterMap.psortb1.submitted && httpParameterMap.psortd1.submitted && searchModel.setSortingCondition(httpParameterMap.psortb1.value, httpParameterMap.psortd1.intValue);
-    // httpParameterMap.psortb2.submitted && httpParameterMap.psortd2.submitted && searchModel.setSortingCondition(httpParameterMap.psortb2.value, httpParameterMap.psortd2.intValue);
-    // httpParameterMap.psortb3.submitted && httpParameterMap.psortd3.submitted && searchModel.setSortingCondition(httpParameterMap.psortb3.value, httpParameterMap.psortd3.intValue);
+    
+    if (searchModel) {
+        if (httpParameterMap.q.submitted) {
+            searchModel.setSearchPhrase(httpParameterMap.q.value);
+        }
 
-    var nameMap = httpParameterMap.getParameterMap('prefn');
-    var valueMap = httpParameterMap.getParameterMap('prefv');
+        if (httpParameterMap.psortb1.submitted && httpParameterMap.psortd1.submitted) {
+            searchModel.setSortingCondition(httpParameterMap.psortb1.value, httpParameterMap.psortd1.intValue);
+        }
 
-    for (var i in nameMap) {
-        valueMap[i] && searchModel.addRefinementValues(nameMap[i], valueMap[i]);
+        if (httpParameterMap.psortb2.submitted && httpParameterMap.psortd2.submitted) {
+            searchModel.setSortingCondition(httpParameterMap.psortb2.value, httpParameterMap.psortd2.intValue);
+        }
+
+        if (httpParameterMap.psortb3.submitted && httpParameterMap.psortd3.submitted) {
+            searchModel.setSortingCondition(httpParameterMap.psortb3.value, httpParameterMap.psortd3.intValue);
+        }
+
+        var nameMap = httpParameterMap.getParameterMap('prefn');
+        var valueMap = httpParameterMap.getParameterMap('prefv');
+
+        for (var i in nameMap) {
+            if (valueMap[i]) {
+                searchModel.addRefinementValues(nameMap[i], valueMap[i]);
+            }
+        }
+
     }
-
     return searchModel;
 };
 
@@ -54,17 +69,30 @@ SearchModel.initializeProductSearchModel = function (httpParameterMap) {
 
     productSearchModel.setRecursiveCategorySearch(true);
 
-    httpParameterMap.pid.submitted && productSearchModel.setProductID(httpParameterMap.pid.value);
-    httpParameterMap.pmin.submitted && productSearchModel.setPriceMin(httpParameterMap.pmin.doubleValue);
-    httpParameterMap.pmax.submitted && productSearchModel.setPriceMax(httpParameterMap.pmax.doubleValue);
-
+    if (httpParameterMap.pid.submitted ) {
+        productSearchModel.setProductID(httpParameterMap.pid.value);
+    }
+    
+    if (httpParameterMap.pmin.submitted) {
+        productSearchModel.setPriceMin(httpParameterMap.pmin.doubleValue);    
+    }
+    
+    if (httpParameterMap.pmax.submitted) {
+        productSearchModel.setPriceMax(httpParameterMap.pmax.doubleValue);
+    }
+    
     var sortingRule = httpParameterMap.srule.submitted ? CatalogMgr.getSortingRule(httpParameterMap.srule.value) : null;
-    sortingRule && productSearchModel.setSortingRule(sortingRule);
-
+    if (sortingRule) {
+        productSearchModel.setSortingRule(sortingRule);
+    }
+    
     // only add category to search model if the category is online
     if (httpParameterMap.cgid.submitted) {
         var category = CatalogMgr.getCategory(httpParameterMap.cgid.value);
-        category && category.isOnline() && productSearchModel.setCategoryID(category.getID());
+        if(category && category.isOnline() && productSearchModel) {
+            productSearchModel.setCategoryID(category.getID());
+        }
+        
     }
 
     return productSearchModel;
@@ -80,10 +108,13 @@ SearchModel.initializeContentSearchModel = function (httpParameterMap) {
     var contentSearchModel = this.initializeSearchModel(new ContentSearchModel(), httpParameterMap);
 
     contentSearchModel.setRecursiveFolderSearch(true);
-
-    httpParameterMap.cid.submitted && contentSearchModel.setContentID(httpParameterMap.cid.value);
-    httpParameterMap.fdid.submitted && contentSearchModel.setFolderID(httpParameterMap.fdid.value);
-
+    if (httpParameterMap.cid.submitted) {
+        contentSearchModel.setContentID(httpParameterMap.cid.value);
+    }
+    
+    if (httpParameterMap.fdid.submitted) {
+        contentSearchModel.setFolderID(httpParameterMap.fdid.value);
+    }
     return contentSearchModel;
 };
 
