@@ -47,7 +47,8 @@ export function deleteAllCreditCards () {
 								err => err.message !== 'no alert open'
 							)
 					))
-					.then(() =>client.alertAccept()));
+					.then(() => client.alertAccept())
+				);
 			}, Promise.resolve());
 		});
 }

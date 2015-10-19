@@ -1,15 +1,20 @@
 'use strict';
 
+import _ from 'lodash';
 import client from '../../webdriver/client';
 // using Q to be compliant with webdriver.
 // should switch to native Promise if it is used in webdriver v3
 // https://github.com/webdriverio/webdriverio/issues/498
 import Q from 'q';
+import nodeUrl from 'url';
+
+export const defaultCountryCode = 'x_default';
 
 // commonly used selectors
 export const PRIMARY_H1 = '#primary h1';
 export const BREADCRUMB_A = '.breadcrumb a';
 export const LAST_BREADCRUMB = '.breadcrumb-element:last-of-type';
+export const BTN_ADD_TO_CART = '#add-to-cart';
 
 
 export function getPageTitle() {
@@ -53,11 +58,26 @@ export function clickCheckbox(selector) {
 }
 
 export function selectAttributeByIndex (attributeName, index) {
-	let selector = '.swatches.' + attributeName + ' li:nth-child(' + index + ') a';
+	let selector = '.swatches.' + attributeName + ' li:nth-child(' + index + ')';
 	return client.waitForVisible(selector)
-		.click(selector)
-		.waitForText('.swatches.' + attributeName + ' .selected-value');
+		// Before clicking on an attribute value, we must check whether it has already been selected.
+		// Clicking on an already selected value will deselect it.
+		.then(() => _isAttributeSelected(selector))
+		.then(isAlreadySelected => {
+			if (!isAlreadySelected) {
+				return client.waitForVisible('.loader', 500, true)
+					.click(selector + ' a')
+					.waitForText('.swatches.' + attributeName + ' .selected-value');
+			}
+			return Promise.resolve();
+		});
 }
+
+function _isAttributeSelected (selector) {
+	return client.getAttribute(selector, 'class')
+		.then(classes => Promise.resolve(classes.indexOf('selectable') > -1 && classes.indexOf('selected') > -1));
+}
+
 /**
  * Adds a Product Variation to a Basket
  *
@@ -71,8 +91,6 @@ export function selectAttributeByIndex (attributeName, index) {
  */
 export function addProductVariationToBasket (product, btnAdd) {
 	return client.url(product.get('resourcePath'))
-		// The order of setting the attributes is important, as the selection
-		// of the Color value enables Size options if available.
 		.then(() => {
 			if (product.has('colorIndex')) {
 				return selectAttributeByIndex('color', product.get('colorIndex'));
@@ -91,9 +109,11 @@ export function addProductVariationToBasket (product, btnAdd) {
 			}
 			return Promise.resolve();
 		})
-		.then(() => client.waitForVisible(btnAdd)
+		.then(() => client.waitForVisible('.loader-bg', 500, true)
 			.waitForEnabled(btnAdd)
-			.click(btnAdd));
+			.click(btnAdd)
+		)
+		.then(() => Promise.resolve());
 }
 
 /**
@@ -118,4 +138,23 @@ function _clickFirstRemoveLink (removeLink) {
 export function clickAndWait(selectorToClick, selectorToWait) {
 	return client.click(selectorToClick)
 		.waitForVisible(selectorToWait);
-	}
+}
+
+export function getSearchParams () {
+	return client.url()
+		.then(url => {
+			let parsedUrl = nodeUrl.parse(url.value);
+			let search = parsedUrl.search ? parsedUrl.search.replace('?', '') : '';
+			let params = _.object(
+				_.map(search.split('&'), param => param.split('='))
+			);
+			return Promise.resolve(params);
+		});
+}
+
+export function getLang () {
+	return getSearchParams()
+		.then(params =>
+			Promise.resolve(params && params.lang ? params.lang : defaultCountryCode)
+		);
+}

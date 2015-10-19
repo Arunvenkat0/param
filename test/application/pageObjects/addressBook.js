@@ -100,5 +100,6 @@ export function editAddress(originalAddress, editAddressFormData) {
 			.click('.address-edit')
 		.then(() => client.waitForVisible(FORM_ADDRESS))
 		.then(() => fillAddressForm(editAddressFormData))
-		.then(() => client.click(BTN_EDIT_ADDRESS));
+		.then(() => client.click(BTN_EDIT_ADDRESS))
+		.waitForVisible(FORM_ADDRESS, 500, true);
 }

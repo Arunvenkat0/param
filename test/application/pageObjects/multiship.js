@@ -29,6 +29,8 @@ export const SHIPPMENT_METHOD_2 = '.checkoutmultishipping table:nth-of-type(2) '
 
 const basePath = '/checkout';
 
+testData.load();
+
 export function navigateTo () {
 	return client.url(basePath);
 }

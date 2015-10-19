@@ -6,12 +6,12 @@ import * as productQuickView from './productQuickView';
 
 export const CART_EMPTY = '.cart-empty';
 export const CART_ITEMS = '.item-list tbody tr';
-export const CSS_ORDER_SUBTOTAL = '.order-subtotal td:nth-child(2)';
+export const ORDER_SUBTOTAL = '.order-subtotal td:nth-child(2)';
 export const BTN_UPDATE_CART = '.cart-footer button[name*="_updateCart"]';
 export const BTN_CHECKOUT = 'button[name*="checkoutCart"]';
 export const LINK_REMOVE = 'button[value="Remove"]';
 export const ITEM_DETAILS = '.item-details';
-export const CSS_ITEM_QUANTITY = '.item-quantity';
+export const ITEM_QUANTITY = '.item-quantity';
 
 const basePath = '/cart';
 
@@ -21,7 +21,7 @@ function _createCssNthCartRow (idx) {
 }
 
 function _createCssUpdateQtyInput (idx) {
-	return [_createCssNthCartRow(idx), '.item-quantity input'].join(' ');
+	return [_createCssNthCartRow(idx), ITEM_QUANTITY, 'input'].join(' ');
 }
 
 // Public methods
@@ -61,7 +61,7 @@ export function getItemAttrByRow (rowNum, attr) {
 }
 //get the quantity in Cart for a particular row
 export function getQuantityByRow(rowNum) {
-	var selector = _createCssNthCartRow(rowNum) + ' .item-quantity ';
+	var selector = [_createCssNthCartRow(rowNum), ITEM_QUANTITY].join(' ');
 	return client.getText(selector);
 }
 
@@ -83,18 +83,16 @@ function getItemEditLinkByRow (rowNum) {
 	return [_createCssNthCartRow(rowNum), ITEM_DETAILS, '.item-edit-details a'].join(' ');
 }
 
-export function updateSizeByRow (rowNum, sizeIndex) {
+export function updateAttributesByRow (rowNum, selection) {
+
 	return client
 		.click(getItemEditLinkByRow(rowNum))
 		.waitForVisible(productQuickView.CONTAINER)
-		.click(productQuickView.getCssSizeLinkByIdx(sizeIndex))
-		.then(() => productQuickView.getSizeTextByIdx(sizeIndex))
-		.then(size => client.waitUntil(() =>
-			common.checkElementEquals(productQuickView.SIZE_SELECTED_VALUE, size)
-		))
-		.click('.ui-dialog #add-to-cart')
-		.waitForVisible(productQuickView.CONTAINER, 15000, true)
-		.getText(_createCssNthCartRow(rowNum) + ' .attribute[data-attribute="size"] .value');
+		// We must deselect all attributes before selecting the new variant choice as the selectable attributes are
+		// dependent on values that are currently selected.  By deselecting all attributes, we can be assured that the
+		// sequence of selecting color, then size, then width will set the desired attributes as selectable.
+		.then(() => productQuickView.deselectAllAttributes())
+		.then(() => productQuickView.selectAttributes(selection));
 }
 
 /**
@@ -102,7 +100,7 @@ export function updateSizeByRow (rowNum, sizeIndex) {
  *
  */
 export function getOrderSubTotal () {
-	return client.getText(CSS_ORDER_SUBTOTAL);
+	return client.getText(ORDER_SUBTOTAL);
 }
 
 /**

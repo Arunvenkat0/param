@@ -1,22 +1,10 @@
 'use strict';
 
 import _ from 'lodash';
+import * as common from '../helpers/common';
 
 let categoryAssignments = {};
-/**
- * Retrieves Product from Catalog
- *
- * @param {Object} parsedData - Subject data parsed from XML files
- * @param {string} productId - Product ID
- * @returns {Object} - Product* instance
- */
-export function getProductFromCatalog (parsedData, productId) {
-	return _getCatalogData(parsedData)[productId];
-}
-
-function _getCatalogData (parsedData) {
-	return _.merge(parsedData.catalogApparel, parsedData.catalogElectronics);
-}
+let defaultCountryCode = common.defaultCountryCode;
 
 /**
  * Processes parsed JSONified file data and sends back a map of Product
@@ -34,7 +22,7 @@ export function parseCatalog (fileData) {
 
 	for (let product of fileData.catalog.product) {
 		let id = product.$['product-id'];
-		let productType = _getProductType(product);
+		let productType = getProductType(product);
 
 		switch (productType) {
 			case 'standard':
@@ -55,83 +43,137 @@ export function parseCatalog (fileData) {
 	return proxy;
 }
 
-function _getProductType (product) {
-	if (_isProductSet(product)) {
+export function getProductType (product) {
+	if (isProductSet(product)) {
 		return 'set';
-	} else if (_isProductVariationMaster(product)) {
+	} else if (isProductVariationMaster(product)) {
 		return 'variationMaster';
-	} else if (_isProductStandard(product)) {
+	} else if (isProductStandard(product)) {
 		return 'standard';
-	} else if (_isProductBundle(product)) {
+	} else if (isProductBundle(product)) {
 		return 'bundle';
 	} else {
 		return 'unknown';
 	}
 }
 
-function _isProductSet (product) {
+export function isProductSet (product) {
 	return product.hasOwnProperty('product-set-products');
 }
 
-function _isProductVariationMaster (product) {
+export function isProductVariationMaster (product) {
 	return product.hasOwnProperty('variations');
 }
 
-function _isProductBundle (product) {
+export function isProductBundle (product) {
 	return product.hasOwnProperty('bundled-products');
 }
 
-function _isProductStandard (product) {
-	return !_isProductSet(product) &&
-		!_isProductVariationMaster(product) &&
-		!_isProductBundle(product);
+export function isProductStandard (product) {
+	return !isProductSet(product) &&
+		!isProductVariationMaster(product) &&
+		!isProductBundle(product);
 }
 
-class AbstractProductBase {
+/**
+ * Gets a Product* instance by checking whether product is already an instance.  If yes, just return product.
+ * If not, creates new instance from product properties.  New instance then has access to Class methods.
+ *
+ * @param {Object} catalog - JSON object of catalog data
+ * @param {String} productId - Product ID
+ * @returns {ProductStandard|ProductVariationMaster|ProductSet|ProductBundle} - product instance
+ */
+export function getProduct (catalog, productId) {
+	let product = catalog[productId];
+	if (product instanceof AbstractProductBase) {
+		return product;
+	}
+	return getInstance(product);
+}
+
+/**
+ * Creates instance of Product*
+ *
+ * @param {Object} product - JSON object comprised of product properties but no class convenience methods
+ * @returns {ProductStandard|ProductVariationMaster|ProductSet|ProductBundle} - product instance
+ */
+export function getInstance (product) {
+	switch (product.type) {
+		case 'set':
+			return new ProductSet(product);
+		case 'variationMaster':
+			return new ProductVariationMaster(product);
+		case 'standard':
+			return new ProductStandard(product);
+		case 'bundle':
+			return new ProductBundle(product);
+	}
+}
+
+export function getVariationMasterInstances (catalog) {
+	return _.filter(catalog, product =>
+		product.type === 'variationMaster'
+	);
+}
+
+export function getVariantParent (catalog, variant) {
+	let variationMasters = getVariationMasterInstances(catalog);
+	return _.find(variationMasters, master =>
+		master.hasOwnProperty('variants') ? master.variants.indexOf(variant) > -1 : undefined
+	);
+}
+
+export class AbstractProductBase {
 	constructor (product) {
-		this.id = product.$['product-id'];
-		this.type = _getProductType(product);
-		this.ean = product.ean[0];
-		this.upc = product.upc[0];
-		this.unit = product.unit[0];
-		this.minOrderQuantity = +product['min-order-quantity'][0];
-		this.stepQuantity = +product['step-quantity'][0];
-		this.onlineFlag = !!product['online-flag'][0];
-		this.availableFlag = !!product['available-flag'][0];
-		this.searchableFlag = !!product['searchable-flag'][0];
-		this.taxClassId = product['tax-class-id'] ? product['tax-class-id'][0] : null;
+		if (product.hasOwnProperty('id')) {
+			_.extend(this, product);
+			// Indicate to downstream inheriting class whether processing from loaded data or XML processed data
+			this.isLoaded = true;
+		} else {
+			this.id = product.$['product-id'];
+			this.type = getProductType(product);
+			this.isLoaded = false;
+			this.ean = product.ean[0];
+			this.upc = product.upc[0];
+			this.unit = product.unit[0];
+			this.minOrderQuantity = +product['min-order-quantity'][0];
+			this.stepQuantity = +product['step-quantity'][0];
+			this.onlineFlag = !!product['online-flag'][0];
+			this.availableFlag = !!product['available-flag'][0];
+			this.searchableFlag = !!product['searchable-flag'][0];
+			this.taxClassId = product['tax-export class-id'] ? product['tax-export class-id'][0] : null;
 
-		if (_.size(product['online-from'])) {
-			this.onlineFrom = new Date(product['online-from'][0]);
-		}
-		if (_.size(product.brand)) {
-			this.brand = product.brand[0];
-		}
-		if (_.size(product['page-attributes'])) {
-			this.pageAttributes = _parsePageAttrs(product['page-attributes'][0]);
-		}
-		if (_.size(product['custom-attributes'])) {
-			this.customAttributes = _parseCustomAttrs(product['custom-attributes'][0]['custom-attribute']);
-		}
-		if (_.size(product.images)) {
-			this.images = _parseImages(product.images[0]);
-		}
+			if (_.size(product['online-from'])) {
+				this.onlineFrom = new Date(product['online-from'][0]);
+			}
+			if (_.size(product.brand)) {
+				this.brand = product.brand[0];
+			}
+			if (_.size(product['page-attributes'])) {
+				this.pageAttributes = _parsePageAttrs(product['page-attributes'][0]);
+			}
+			if (_.size(product['custom-attributes'])) {
+				this.customAttributes = _parseCustomAttrs(product['custom-attributes'][0]['custom-attribute']);
+			}
+			if (_.size(product.images)) {
+				this.images = _parseImages(product.images[0]);
+			}
 
-		if (product.hasOwnProperty('display-name')) {
-			this.displayName = product['display-name'][0]._;
-		}
-		if (product.hasOwnProperty('short-description')) {
-			this.shortDescription = product['short-description'][0]._;
-		}
-		if (product.hasOwnProperty('long-description')) {
-			this.longDescription = product['long-description'][0]._;
-		}
-		if (product.hasOwnProperty('classification-category')) {
-			var category = product['classification-category'];
-			this.classificationCategory = category;
-		}
-		if (product.hasOwnProperty('options')) {
-			this.options = _parseOptions(product.options);
+			if (product.hasOwnProperty('display-name')) {
+				this.displayName = _getLocalizedValues(product['display-name']);
+			}
+			if (product.hasOwnProperty('short-description')) {
+				this.shortDescription = _getLocalizedValues(product['short-description']);
+			}
+			if (product.hasOwnProperty('long-description')) {
+				this.longDescription = _getLocalizedValues(product['long-description']);
+			}
+			if (product.hasOwnProperty('classification-category')) {
+				this.classificationCategory = product['classification-category'];
+			}
+			if (product.hasOwnProperty('options')) {
+				this.options = _parseOptions(product.options);
+			}
 		}
 	}
 
@@ -140,19 +182,22 @@ class AbstractProductBase {
 	}
 }
 
-class ProductStandard extends AbstractProductBase {
+export class ProductStandard extends AbstractProductBase {
 	constructor (product) {
 		super(product);
 	}
 }
 
-class ProductSet extends AbstractProductBase {
+export class ProductSet extends AbstractProductBase {
 	constructor (product) {
 		super(product);
-		this.productSetProducts = [];
 
-		var productSet = product['product-set-products'][0]['product-set-product'];
-		this.productSetProducts = _.pluck(productSet, '$.product-id');
+		if (!this.isLoaded) {
+			this.productSetProducts = [];
+
+			var productSet = product['product-set-products'][0]['product-set-product'];
+			this.productSetProducts = _.pluck(productSet, '$.product-id');
+		}
 	}
 
 	getProductIds () {
@@ -160,33 +205,43 @@ class ProductSet extends AbstractProductBase {
 	}
 }
 
-class ProductVariationMaster extends AbstractProductBase {
+export class ProductVariationMaster extends AbstractProductBase {
 	constructor (product) {
 		super(product);
 
-		let self = this;
-		this.variationAttributes = [];
-		let variationAttrs = product.variations[0].attributes[0]['variation-attribute'];
+		if (!this.isLoaded) {
+			this.variationAttributes = {};
+			let self = this;
+			let mainKey;
 
-		_.each(variationAttrs, function (value) {
-			let proxy = {};
+			let variationAttrs = product.variations[0].attributes[0]['variation-attribute'];
 
-			_.each(value.$, function (val, key) {
-				proxy[_.camelCase(key)] = val;
+			_.each(variationAttrs, value => {
+				let proxy = {};
+				proxy.values = [];
+
+				_.each(value.$, (val, key) => {
+					proxy[_.camelCase(key)] = val;
+					if (key === 'attribute-id') {
+						mainKey = val;
+					}
+				});
+
+				_.each(value['variation-attribute-values'][0]['variation-attribute-value'], val => {
+					proxy.values.push({
+						value: val.$.value,
+						displayValues: _getLocalizedValues(val['display-value'])
+					});
+				});
+
+				self.variationAttributes[mainKey] = proxy;
 			});
 
-			_.each(value['variation-attribute-values'][0]['variation-attribute-value'], function (val) {
-				proxy.values = {
-					value: val.$.value,
-					displayValue: val['display-value'][0]._
-				};
-			});
-
-			self.variationAttributes.push(proxy);
-		});
-
-		this.classificationCategory = categoryAssignments[this.id];
-		this.variants = _.pluck(product.variations[0].variants[0].variant, '$.product-id');
+			this.classificationCategory = categoryAssignments[this.id];
+			if (product.variations[0].hasOwnProperty('variants')) {
+				this.variants = _.pluck(product.variations[0].variants[0].variant, '$.product-id');
+			}
+		}
 
 	}
 
@@ -199,14 +254,39 @@ class ProductVariationMaster extends AbstractProductBase {
 	getVariantProductIds () {
 		return this.variants;
 	}
+
+	/**
+	 * Gets a Product Variation Master's Variant instances
+	 *
+	 * @param {Object} catalog - testData.parsedData.catalog
+	 * @returns {Array.<ProductStandard>} - Variants of VariationMaster
+	 */
+	getVariants (catalog) {
+		return _.map(this.getVariantProductIds(), id => getProduct(catalog, id));
+	}
+
+	getAttrTypeValueIndex (type, value) {
+		return _.findIndex(this.variationAttributes[type].values, {value: value});
+	}
+
+	/**
+	 * TODO: Add jsdoc comment
+	 */
+	getAttrDisplayValue (type, codedValue, countryCode = defaultCountryCode) {
+		let attrValues = _.find(this.variationAttributes[type].values, {value: codedValue});
+		countryCode = _validateCountryCode(attrValues.displayValues, countryCode);
+		return attrValues ? attrValues.displayValues[countryCode] : undefined;
+	}
 }
 
-class ProductBundle extends AbstractProductBase {
+export class ProductBundle extends AbstractProductBase {
 	constructor (product) {
 		super(product);
 
-		let bundleProducts = product['bundled-products'][0]['bundled-product'];
-		this.bundleProducts = _.pluck(bundleProducts, '$.product-id');
+		if (!this.isLoaded) {
+			let bundleProducts = product['bundled-products'][0]['bundled-product'];
+			this.bundleProducts = _.pluck(bundleProducts, '$.product-id');
+		}
 	}
 
 	getProductIds () {
@@ -250,27 +330,25 @@ function _parseImages (images) {
 }
 
 function _parsePageAttrs(attrs) {
-	let proxy = {};
-
-	_.each(attrs, function (value, key) {
-		proxy[_.camelCase(key)] = value[0]._;
-	});
-
-	return proxy;
+	return _.object(_.map(attrs, (attr, key) => [_.camelCase(key), _getLocalizedValues(attr)]));
 }
 
 function _parseCustomAttrs(attrs) {
-	let proxy = {};
-
-	for (let attr of attrs) {
-		let key = attr.$['attribute-id'];
-		let value = attr._;
-		proxy[key] = value;
-	}
-
-	return proxy;
+	return _.object(_.map(attrs, attr => [attr.$['attribute-id'], attr._]));
 }
 
 function _parseOptions (options) {
 	return _.pluck(options, 'shared-option[0].$.option-id');
+}
+
+function _getLocalizedValues (values) {
+	return _.object(_.map(values, value => {
+		// Format key to match country code values in countries.json
+		let key = value.$['xml:lang'].replace('-', '_');
+		return [key, value._];
+	}));
+}
+
+function _validateCountryCode(values, countryCode) {
+	return _.keys(values).indexOf(countryCode) > -1 ? countryCode : defaultCountryCode;
 }

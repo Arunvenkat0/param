@@ -16,6 +16,7 @@ describe('Multi Shipping', () => {
 	let shipmentText2 = Resource.msgf('multishippingshipments.shipment','checkout',null, 2);
 
 	before(() => client.init()
+		.then(() => testData.load())
 		.then(() => testData.getCustomerByLogin(login))
 		.then(customer => {
 

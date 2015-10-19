@@ -16,6 +16,7 @@ describe('Address', () => {
 	let editAddressFormData = {};
 
 	before(() => client.init()
+		.then(() => testData.load())
 		.then(() => testData.getCustomerByLogin(login))
 		.then(customer => {
 			let address = customer.getPreferredAddress();

@@ -15,7 +15,7 @@ describe('Storelocator', () => {
 			.then(title => assert.equal(title.split('|')[0].trim(), 'Site Genesis Store Locator'));
 	});
 
-	describe('Country form feild', () => {
+	describe('Country form field', () => {
 
 		beforeEach(() => storeLocatorPage.navigateTo());
 

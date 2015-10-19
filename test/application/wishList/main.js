@@ -5,6 +5,7 @@ import client from '../webdriver/client';
 import config from '../webdriver/config';
 import url from 'url';
 import * as cartPage from '../pageObjects/cart';
+import * as common from '../pageObjects/helpers/common';
 import * as giftCertPurchasePage from '../pageObjects/giftCertPurchase';
 import * as loginForm from '../pageObjects/helpers/forms/login';
 import * as navHeader from '../pageObjects/navHeader';
@@ -13,7 +14,9 @@ import * as testData from '../pageObjects/testData/main';
 import * as wishListPage from '../pageObjects/wishList';
 
 describe('Wishlist', () => {
-	before(() => client.init());
+	before(() => client.init()
+		.then(() => testData.load())
+	);
 
 	after(() => client.end());
 
@@ -183,6 +186,7 @@ describe('Wishlist', () => {
 
 	describe('Adding Items', () => {
 		let productVariationMaster;
+		let lang;
 
 		function addProductVariationMasterToWishList () {
 			return testData.getProductVariationMaster()
@@ -204,6 +208,8 @@ describe('Wishlist', () => {
 
 		describe('as a returning customer', () => {
 			before(() => wishListPage.navigateTo()
+					.then(() => common.getLang())
+					.then(currentLang => lang = currentLang)
 					.then(() => loginForm.loginAsDefaultCustomer())
 					.then(() => client.waitForVisible(wishListPage.BTN_TOGGLE_PRIVACY))
 					.then(() => wishListPage.emptyWishList())
@@ -224,7 +230,7 @@ describe('Wishlist', () => {
 
 			it('should display the product name in the Wish List page after add items', () =>
 					wishListPage.getItemNameByRow(2)
-						.then(name => assert.equal('Navy Single Pleat Wool Suit', name))
+						.then(name => assert.equal(productVariationMaster.displayName[lang], name))
 			);
 		});
 
