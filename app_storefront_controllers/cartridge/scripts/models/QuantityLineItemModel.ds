@@ -1,13 +1,15 @@
 'use strict';
 
-/** @module models/QuantityLineItemModel */
+/** 
+ * Model for quantity line items.
+ * @module models/QuantityLineItemModel */
 var Class = require('~/cartridge/scripts/util/Class').Class;
 
 /* API Includes */
 var Quantity = require('dw/value/Quantity');
 
 /**
- * Helper object to store ProductLineItem information for each quantity. Used in Multi-Shipping Checkout to save
+ * Helper object to store ProductLineItem information for each quantity. Used in multishipping checkout to save
  * creation of new PLIs for each quantity.
  *
  * @class module:models/QuantityLineItemModel~QuantityLineItemModel
@@ -36,7 +38,7 @@ var QuantityLineItemModel = Class.extend(
             this.productID = pli.productID;
             this.pliUUID = pli.UUID;
 
-            //persisting the optionID, if the product does not have an option is set to 'na'
+            //Persists the optionID. If the product does not have an option, it is set to 'na'.
             if (pli.optionProductLineItems.size() > 0) {
                 for (var iter = pli.optionProductLineItems.iterator(); iter.hasNext();) {
                     var item = iter.next();

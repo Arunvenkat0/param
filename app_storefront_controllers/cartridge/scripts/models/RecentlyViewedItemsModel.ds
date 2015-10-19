@@ -1,6 +1,9 @@
 'use strict';
 
-/** @module models/RecentlyViewedItemsModel */
+/** 
+ * Model for manaaging information about last visited items based on the current session. Currently only products are
+ * supported.
+ * @module models/RecentlyViewedItemsModel */
 
 /* API Includes */
 var ArrayList = require('dw/util/ArrayList');
@@ -22,8 +25,8 @@ var PRODUCT_PIPELINE_NAMES = new ArrayList(
 var RecentlyViewedItemsModel = ({
 
     /**
-     * The function returns the set of Products visited in the current session. The set is retrieved from the live click
-     * stream recorded in the session. All clicks on a "Product-Show", "Link-Product", or "Link-CategoryProduct" pipeline
+     * Returns an array of products visited in the current session. The array is retrieved from the live click
+     * stream recorded in the session. All clicks on a page rendered from a "Product-Show", "Link-Product", or "Link-CategoryProduct" URL
      * are interpreted as a product visit. Clicks on different variations of the same master product are merged and
      * treated as one click.
      *
@@ -34,7 +37,7 @@ var RecentlyViewedItemsModel = ({
 
         var numberOfProducts = maxLength || 5;
 
-        // get the click stream
+        // Gets the click stream.
         var clicks = session.getClickStream().getClicks();
 
         // build the last visted
@@ -43,30 +46,30 @@ var RecentlyViewedItemsModel = ({
         for (var i = clicks.size() - 1; i >= 0; i--) {
             var click = clicks[i];
 
-            // check, whether it was a product click
+            // Checks whether it was a product click.
             if (PRODUCT_PIPELINE_NAMES.contains(click.getPipelineName())) {
 
                 var sku = click.getParameter(PRODUCT_ID_PARAMETER_NAME);
 
                 if (sku && sku.length > 0) {
-                    // get the product
+                    // Gets the product.
                     var product = ProductMgr.getProduct(sku);
                     if (product) {
-                        // check that we don't have the product yet or a shared master
+                        // Checks for the product or a shared master.
                         var duplicate = false;
                         for (var j = 0; j < products.size(); j++) {
-                            // calc a potential master
+                            // Calculates a potential master.
                             var p1 = (product.isVariant() ? product.getVariationModel().getMaster() : product);
                             var p2 = (products[j].isVariant() ? products[j].getVariationModel().getMaster() : products[j]);
 
-                            // same product
+                            // Checks if it is the same product.
                             if (p1 === p2) {
                                 duplicate = true;
                                 break;
                             }
                         }
 
-                        // no duplicate so add it
+                        // Adds the product if it is not a duplicate.
                         if (!duplicate) {
                             products.add(product);
                         }
@@ -74,7 +77,7 @@ var RecentlyViewedItemsModel = ({
                 }
             }
 
-            // check whether we have reached the maximum
+            // Checks whether the maximum is reached.
             if (products.size() >= numberOfProducts) {
                 break;
             }

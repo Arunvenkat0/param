@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Module for search related functionality.
+ * Model for search functionality.
  *
  * @module models/SearchModel
  */
@@ -12,7 +12,7 @@ var ContentSearchModel = require('dw/content/ContentSearchModel');
 var ProductSearchModel = require('dw/catalog/ProductSearchModel');
 
 /**
- * Search model providing enhanced search functionality
+ * Search helper class providing enhanced search functionality.
  * @class module:models/SearchModel~SearchModel
  */
 var SearchModel = ({
@@ -20,11 +20,11 @@ var SearchModel = ({
 });
 
 /**
- * Initializes the given search model using the given HttpParameterMap.
+ * Initializes the given search model using the HttpParameterMap.
  *
  * @param {dw.catalog.SearchModel} searchModel SearchModel to initialize.
  * @param {dw.web.HttpParameterMap} httpParameterMap HttpParameterMap to read common search parameters from.
- * @returns {dw.catalog.SearchModel} Initialized search model.
+ * @returns {dw.catalog.SearchModel} Search model.
  */
 SearchModel.initializeSearchModel = function (searchModel, httpParameterMap) {
     httpParameterMap.q.submitted && searchModel.setSearchPhrase(httpParameterMap.q.value);
@@ -43,7 +43,7 @@ SearchModel.initializeSearchModel = function (searchModel, httpParameterMap) {
 };
 
 /**
- * Creates and initializes a {dw.catalog.ProductSearchModel} based on the given http parameters.
+ * Creates and initializes a {dw.catalog.ProductSearchModel} based on the given HTTP parameters.
  *
  * @param {dw.web.HttpParameterMap} httpParameterMap HttpParameterMap to read product search parameters from.
  * @returns {dw.catalog.ProductSearchModel} Created and initialized product serach model.
@@ -70,7 +70,7 @@ SearchModel.initializeProductSearchModel = function (httpParameterMap) {
 };
 
 /**
- * Creates and initializes a {dw.content.ContentSearchModel} based on the given http parameters.
+ * Creates and initializes a {dw.content.ContentSearchModel} based on the given HTTP parameters.
  *
  * @param {dw.web.HttpParameterMap} httpParameterMap HttpParameterMap to read content search parameters from.
  * @returns {dw.content.ContentSearchModel} Created and initialized product serach model.
