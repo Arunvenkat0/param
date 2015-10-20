@@ -14,6 +14,7 @@
 
 /* API Includes */
 var URLUtils = require('dw/web/URLUtils');
+var URLRedirectMgr = require('dw/web/URLRedirectMgr');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
@@ -23,16 +24,13 @@ var guard = require('~/cartridge/scripts/guard');
  * Renders the template for a redirect.
  */
 function start() {
+    var redirect = URLRedirectMgr.getRedirect();
 
-    // TODO - rework
-    var RedirectURLResult = new dw.system.Pipelet('RedirectURL').execute();
-
-    if (RedirectURLResult.result === PIPELET_ERROR) {
+    if (redirect == null) {
         app.getView().render('util/redirecterrorutil/redirecterror');
-    }
-    else {
+    } else {
         app.getView({
-            Location : RedirectURLResult.Location
+            Location: redirect.location
         }).render('util/redirectpermanent');
     }
 }
@@ -50,10 +48,10 @@ function start() {
  * Location (optional)
  */
 function hostName() {
-
-    app.getView({
-        Location : request.httpParameterMap.Location.stringValue || URLUtils.httpHome()
-    }).render('util/redirectpermanent');
+	var Redirect = require('app_storefront_core/cartridge/scripts/util/Redirect');
+	app.getView({
+		Location : Redirect.validateURL(request.httpParameterMap.Location.stringValue)
+	}).render('util/redirectpermanent');
 
 }
 
