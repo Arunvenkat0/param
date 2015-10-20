@@ -1,11 +1,9 @@
 'use strict';
 
-/*
- usage
- var content = require('~/cartridge/scripts/models/ContentModel');
+/**
+* Model for managing content assets.
+ * @module models/ContentModel
  */
-
-/** @module models/ContentModel */
 
 var AbstractModel = require('./AbstractModel');
 
@@ -14,16 +12,16 @@ var AbstractModel = require('./AbstractModel');
  * @class module:models/ContentModel~ContentModel
  *
  * @extends module:models/AbstractModel
- * @param parameter {dw.content.Content} The content object to enhance/wrap.
  */
 var ContentModel = AbstractModel.extend(
     /** @lends module:models/ContentModel~ContentModel.prototype */
     {
         /**
          *  Get navigation link from custom attribute "pipelineLink"
-         *  or creating new link of content page for current asset
+         *  or creating new link of content page for current asset.
+         *
          * @alias module:models/ContentModel~ContentModel/getLink
-         *    @returns {String} URL
+         * @returns {String} URL to page rendered by the page.ds controller Show function for the current content asset.
          */
         getLink : function () {
             if (!this.object) {
@@ -35,9 +33,10 @@ var ContentModel = AbstractModel.extend(
 
         /**
         * Checks whether current content asset is in the specified folder.
+        * 
         * @alias module:models/ContentModel~ContentModel/isInFolder
-        * @param {String} folderId - folder id
-        * @returns {Boolean} true if asset is in the specified folder.
+        * @param {String} folderId - The folder id.
+        * @returns {Boolean} true if current content asset is in the specified folder.
         */
         isInFolder : function (folderId) {
             if (this.object && !empty(this.object.folders)) {
@@ -51,9 +50,9 @@ var ContentModel = AbstractModel.extend(
         },
 
         /**
-         *  Returns actual markup of the asset if it is defined, otherwise returns an empty string.
+         * Returns actual markup of the content asset if it is defined, otherwise returns an empty string.
          * @alias module:models/ContentModel~ContentModel/getMarkup
-         * @returns {String} url
+         * @returns {String} b
          */
         getMarkup : function () {
             var body = this.getValue('body');
