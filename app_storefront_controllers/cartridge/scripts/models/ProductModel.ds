@@ -1,6 +1,9 @@
 'use strict';
 
-/** @module models/ProductModel */
+/** 
+ * Model for product functionality.
+ * @module models/ProductModel 
+ */
 
 var AbstractModel = require('./AbstractModel');
 var app = require('~/cartridge/scripts/app');
@@ -10,29 +13,36 @@ var app = require('~/cartridge/scripts/app');
  * @class module:models/ProductModel~ProductModel
  * @extends module:models/AbstractModel
  *
- * @param {dw.catalog.Product} obj The product object to enhance/wrap.
+ * @param {dw.catalog.Product} obj - The product object to enhance and wrap.
  */
 var ProductModel = AbstractModel.extend(
     /** @lends module:models/ProductModel~ProductModel.prototype */
     {
-            /**
-         * The purpose of this function is to process variation value selections, and calculate and return the ProductVariationModels
-         * for one or multiple products. The function uses the given HttpParameterMap and so the request parameters do not
-         * have to be passed in. Variation value selections must be specified as HTTP parameters in the following form:
-         * "{prefix_}{pid}_varAttrID={varAttrValueID}". A custom prefix can be set using the "optionalCustomPrefix" parameter.
-         * Otherwise, the default prefix "dwvar_" is used. {pid} is the product id. Example: "dwvar_PN00050_color=red". For
-         * each product specified as {pid}, a ProductVariationModel instance is created and returned as an element of the
+         /**
+         * Processes variation value selections and calculates and returns the ProductVariationModels
+         * for one or multiple products. The function uses the given HttpParameterMap, so the request parameters do not
+         * need to be passed in. Variation value selections must be specified as HTTP parameters in the following form:
+         * <pre>{prefix_}{pid}_varAttrID={varAttrValueID}</pre>
+         * 
+         * A custom prefix can be set using the <code>optionalCustomPrefix</code> parameter.
+         * Otherwise, the default prefix <code>dwvar_</code> is used. {pid}is the product id. 
+         *
+         * Example: <pre>dwvar_PN00050_color=red</pre>
+         * 
+         * For each product specified as {pid}, a ProductVariationModel instance is created and returned as an element of the
          * "ProductVariationModels" HashMap return parameter. The function processes variation attributes in their defined order
          * and ignores attributes or values not defined for a variation. The function returns a map of ProductVariationModels
          * with the product instance as the key and the ProductVariationModel as the value. For backwards compatibility reasons,
-         * the function accepts an optional Product instance as input parameter. The product may either be a master or a variant.
+         * the function accepts an optional Product instance as an input parameter. The product may either be a master or a variant.
+         *
          * If specified, the function returns the ProductVariationModel for this product as "ProductVariationModel" and also as
-         * element of the "ProductVariationModels" HashMap parameter. Also, the system tries to find a variant which matches
+         * an element of the "ProductVariationModels" HashMap parameter. Also, the system tries to find a variant that matches
          * the attributes selected in the HttpParameterMap as closely as possible. The matching product is returned under the
          * key "SelectedProduct". If the passed product is neither a master or a variant, then the product itself is simply
-         * returned under the key "SelectedProduct". No value will be returned under the "SelectedProduct" key unless a Product
+         * returned under the key "SelectedProduct". No value is returned under the "SelectedProduct" key unless a Product
          * instance was passed to the function.
          *
+         * @alias module:models/ProductModel~ProductModel/updateVariationSelection
          * @param parameterMap {dw.web.HttpParameterMap} Variation value selections as HTTP parameters.
          * @param optionalCustomPrefix {String} Optional prefix for HTTP parameters. If nothing is passed, the default prefix "dwvar_" is assumed.
          *
@@ -41,7 +51,7 @@ var ProductModel = AbstractModel.extend(
         updateVariationSelection : function (parameterMap, optionalCustomPrefix) {
             var formPrefix = optionalCustomPrefix || 'dwvar_';
 
-            // get all variation related parameters for the prefix
+           // Gets all variation-related parameters for the prefix.
             var params = parameterMap.getParameterMap(formPrefix + this.object.ID.replace(/_/g,'__') + '_');
             var paramNames = params.getParameterNames();
 
@@ -74,29 +84,39 @@ var ProductModel = AbstractModel.extend(
             return variationModel;
         },
         /**
-         * The purpose of this function is to process option value selections, and calculate and return the ProductOptionModels
-         * for one or multiple products. Option value selections must be specified as HTTP parameters in the following form:
-         * {prefix_}{pid}_optionID={optionValueID}. A custom prefix can be set using the 'optionalCustomPrefix" parameter. Otherwise,
-         * the default prefix 'dwopt_' is used. {pid} is the product id. Example: dwopt_PN00049_memory=2GB. For each product
+         * Processes option value selections and calculates and returns the ProductOptionModels
+         * for one or multiple products. 
+         * Option value selections must be specified as HTTP parameters in the following form:
+         * <pre>{prefix_}{pid}_optionID={optionValueID}</pre>
+         * 
+         * A custom prefix is set using the 'optionalCustomPrefix" parameter. Otherwise,
+         * the default prefix <code>dwopt_</code> is used. {pid} is the product id. 
+         *
+         * Example: <pre>dwopt_PN00049_memory=2GB</pre> 
+         *
+         * For each product
          * specified as {pid}, a ProductOptionModel instance is created and returned as an element of the 'ProductOptionModels'
-         * hashmap output parameter. The function validates both option id and option value id and selects the option in the
-         * related ProductOptionModel instance. If an option is not specified as HTTP parameter, or the specified optionValueID
+         * HashMap output parameter. The function validates both option id and option value id and selects the option in the
+         * related ProductOptionModel instance. 
+         *
+         * If an option is not specified as an HTTP parameter, or the specified optionValueID
          * is invalid, the default option value of this option is selected. Invalid optionIDs are silently ignored. The
          * function returns a map of ProductOptionModels with the product instance as the key and the ProductOptionModel as
          * the value. For compatibility reasons, the function does still accept an individual product instance as input
          * parameter. If specified, the function returns the ProductOptionModel for this product as 'ProductOptionModel' and
          * also as element of the 'ProductOptionModels' hashmap parameter.
          *
-         * @param product {dw.catalog.Product} An optional product instance for which the ProductOptionModel should be updated.
+         * @alias module:models/ProductModel~ProductModel/updateOptionSelection
+         * @param product {dw.catalog.Product} An optional product instance for which the ProductOptionModel is updated.
          * @param parameterMap {dw.web.HttpParameterMap} Product option selections as HTTP parameters.
          * @param optionalCustomPrefix {String} Optional prefix for HTTP parameters. If nothing is passed, the default prefix "dwopt_" is assumed.
          *
-         * @returns {dw.catalog.ProductOptionModel} The option modeo
+         * @returns {dw.catalog.ProductOptionModel} The product option model.
          */
         updateOptionSelection : function (parameterMap, optionalCustomPrefix) {
             var formPrefix = optionalCustomPrefix || 'dwopt_';
 
-            // get all option related parameters for the prefix
+            // Gets all option related parameters for the prefix.
             var params = parameterMap.getParameterMap(formPrefix+
                             this.object.ID.replace(/_/g,'__')+'_');
             var paramNames = params.getParameterNames();
@@ -123,10 +143,11 @@ var ProductModel = AbstractModel.extend(
             return optionModel;
         },
         /**
-         * Return the default variant or the first variant if none defined
+         * Returns the default variant or the first variant if none is defined.
          *
-         * @param  {boolean} onlyAvailable If set to true only available products are returned
-         * @return {dw.catalog.Product} the variant
+         * @alias module:models/ProductModel~ProductModel/getDefaultVariant
+         * @param  {boolean} onlyAvailable if set to true, only available products are returned.
+         * @return {dw.catalog.Product} the default variant or the first variant if none is defined.
          */
         getDefaultVariant : function (onlyAvailable) {
             var product = this.object;
@@ -148,11 +169,12 @@ var ProductModel = AbstractModel.extend(
         },
 
         /**
-         * Returns a collection of all online products which are assigned to this product and
-         * which are also available through the current site. If this product does not represent a
-         * product set then an empty collection will be returned.
+         * Returns a collection of all online products that are assigned to this product and
+         * that are also available through the current site. If this product does not represent a
+         * product set then an empty collection is returned.
          *
-         * @return {dw.util.Collection} Collection of online products which are assigned to this product and which are also available through the current site.
+         * @alias module:models/ProductModel~ProductModel/getOnlineProductSetProducts
+         * @return {dw.util.Collection} Collection of online products that are assigned to this product and that are also available through the current site.
          */
         getOnlineProductSetProducts : function () {
 
@@ -173,9 +195,10 @@ var ProductModel = AbstractModel.extend(
         },
 
         /**
-         * Returns true if the product is visible in the storefront. The function check ths online flag of the product
-         * itself as well as the online flag of all product set products if the product is a product set.
+         * Returns true if the product is visible in the storefront. The function checks the online flag of the product
+         * itself and if the product is a product set, checks the online flag of all products in the product set.
          *
+         * @alias module:models/ProductModel~ProductModel/isVisible
          * @returns {boolean} true if the product is visible in the storefront, false otherwise
          */
         isVisible : function () {
@@ -196,10 +219,10 @@ var ProductModel = AbstractModel.extend(
         },
 
         /**
-         * This function used to get selected ProductVariationAttributeValue
+         * Gets a selected ProductVariationAttributeValue.
          *
-         * @param {String} variationAttribute
-         *
+         * @alias module:models/ProductModel~ProductModel/getSelectedAttributeValue
+         * @param {String} variationAttribute name of the attribute value to get
          * @returns {dw.catalog.ProductVariationAttributeValue}
          */
         getSelectedAttributeValue : function (variationAttribute) {
@@ -231,10 +254,11 @@ var ProductModel = AbstractModel.extend(
         },
 
         /**
-         * This function is used to get the product variant for the given custom attribute name and value
+         * Gets the product variant for the given custom attribute name and value.
          *
-         * @param {String} attrValue The custom attribute value
-         * @param {String} attrName The custom attribute name
+         * @alias module:models/ProductModel~ProductModel/getVariantForVariationAttributeValue
+         * @param {String} attrValue - The custom attribute value.
+         * @param {String} attrName - The custom attribute name.
          *
          * @returns {dw.catalog.Product}
          */
@@ -266,10 +290,11 @@ var ProductModel = AbstractModel.extend(
         },
 
         /**
-         * This function is used to check if the given object is equal or has the given value
+         * Checks if the given String or EnumValue is equal to or has the given value.
          *
-         * @param {Object} object The object can be a string or a dw.value.EnumValue
-         * @param {String} value The value to check
+         * @alias module:models/ProductModel~ProductModel/hasValue
+         * @param {Object} object - The object can be a string or a dw.value.EnumValue.
+         * @param {String} value - The value to check.
          *
          * @returns {Boolean}
          */
@@ -292,10 +317,12 @@ var ProductModel = AbstractModel.extend(
         },
 
         /**
-         * Function that returns a string that represents the category paths of that category up to the root category,
-         * also known as the 'breadcrumbs' in webpages
-         * @param category {dw.catalog.Category} The category of which to return the breadcrumbs
-         * @return {String}
+         * Returns a string that represents the category paths of that category up to the root category,
+         * also known as the 'breadcrumbs' in web pages
+         *
+         * @alias module:models/ProductModel~ProductModel/getBreadcrumbs
+         * @param {dw.catalog.Category} category - The category to get the breadcrumb path for.
+         * @return {String} The breadcrumb for the passed category.
          */
         getBreadcrumbs : function (category) {
             if (!category) {
@@ -312,10 +339,11 @@ var ProductModel = AbstractModel.extend(
         },
 
         /**
-         * Function that returns a JSON object holding availability information for the current product and the given
+         * Returns a JSON object holding availability information for the current product and the given
          * quantity.
          *
-         * @param quantity {String}
+         * @alias module:models/ProductModel~ProductModel/getAvailability
+         * @param quantity {String} the quantity. Usually, this is the amount the customer has selected to purchase.
          * @returns {{status: *, statusQuantity: number, inStock: *, ats: number, inStockDate: string, availableForSale: boolean, levels: {}}}
          */
         getAvailability : function (quantity) {
@@ -354,8 +382,9 @@ var ProductModel = AbstractModel.extend(
     });
 
 /**
- * Use this method to get a new instance for a given product or product ID.
+ * Gets a new instance of a given product or product ID.
  *
+ * @alias module:models/ProductModel~ProductModel/get
  * @param parameter {(dw.catalog.Product|String)} The product object to enhance/wrap or the product ID of the product object.
  * @returns {module:models/ProductModel~ProductModel}
  */

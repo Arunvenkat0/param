@@ -1,18 +1,23 @@
 'use strict';
-/** @module models/ProductVariationModel */
+/** 
+ * Model for product variation functionality.
+ * @module models/ProductVariationModel 
+ */
 
 /* API Includes */
 var AbstractModel = require('./AbstractModel');
 
 /**
- * ProductVariationModel helper providing enhanced profile functionality
+ * ProductVariationModel helper class providing enhanced profile functionality
  * @class module:models/ProductVariationModel~ProductVariationModel
  */
 var ProductVariationModel = AbstractModel.extend(
     /** @lends module:models/ProductVariationModel~ProductVariationModel.prototype */
     {
         /**
-         * Use this method to get a new instance for a given product variation model.
+         * Gets a new instance for a given product variation model.
+         * @alias module:models/ProductVariationModel~ProductVariationModel/init
+         * @param parameter method of of super class to call.
          */
         init : function (parameter) {
             var instance = this._super(parameter);
@@ -22,8 +27,9 @@ var ProductVariationModel = AbstractModel.extend(
         },
 
         /**
-         * Update the model with given variation attribute to the given value
+         * Updates the model with the given variation attribute to the given value.
          *
+         * @alias module:models/ProductVariationModel~ProductVariationModel/setSelectedVariationValue
          * @param {dw.catalog.ProductVariationAttrbute}      variationAttribute      the attribute
          * @param {dw.catalog.ProductVariationAttrbuteValue} variationAttributeValue the variation attribute value
          */
@@ -32,9 +38,10 @@ var ProductVariationModel = AbstractModel.extend(
         },
 
         /**
-         * Get the currently selected variant or null if none
+         * Gets the currently selected variant or null if no variant is selected.
          *
-         * @return {dw.catalog.Variant} the selected variant
+         * @alias module:models/ProductVariationModel~ProductVariationModel/getSelectedVariant
+         * @return {dw.catalog.Variant} the selected variant.
          */
         getSelectedVariant : function () {
             var filteredList = this.object.getVariants(this.selectionMap);
@@ -46,8 +53,9 @@ var ProductVariationModel = AbstractModel.extend(
         },
 
         /**
-         * Check if the given attribute/value combination is currently selected
+         * Checks if the given attribute/value combination is currently selected.
          *
+         * @alias module:models/ProductVariationModel~ProductVariationModel/isSelectedAttributeValue
          * @param {dw.catalog.ProductVariationAttrbute}      variationAttribute      the attribute
          * @param {dw.catalog.ProductVariationAttrbuteValue} variationAttributeValue the variation attribute value
          * @returns {Boolean} true if the value is selected
@@ -57,8 +65,9 @@ var ProductVariationModel = AbstractModel.extend(
         },
 
         /**
-         * Returns the ProductVariationAttrbuteValue object for the given attribute and the value ID
+         * Returns the ProductVariationAttrbuteValue object for the given attribute and the value ID.
          *
+         * @alias module:models/ProductVariationModel~ProductVariationModel/getVariationAttributeValue
          * @param {dw.catalog.ProductVariationAttrbute} variationAttribute      the attribute
          * @param {String}                      variationAttributeValueID       the variation attribute value ID
          */
@@ -75,10 +84,10 @@ var ProductVariationModel = AbstractModel.extend(
         },
 
         /**
-         * Get the currently selsected value for a given attribute
+         * Gets the currently selected value for a given attribute.
          *
-         * @param  {dw.catalog.ProductVariationAttrbute} variationAttribute the attribute
-         * @return {dw.catalog.ProductVariationAttrbuteValue}               the attribute value or null
+         * @param  {dw.catalog.ProductVariationAttrbute} variationAttribute the attribute.
+         * @return {dw.catalog.ProductVariationAttrbuteValue}               the attribute value or null.
          */
         getSelectedValue : function(variationAttribute) {
             if (!empty(variationAttribute)) {
