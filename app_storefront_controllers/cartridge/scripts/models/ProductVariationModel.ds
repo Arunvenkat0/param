@@ -114,8 +114,36 @@ var ProductVariationModel = AbstractModel.extend(
             }
             return url;
 
-        }
+        },
 
+        hasOrderableVariants: function (attr, value) {
+            var lookupMap = {};
+            var selectedIter = this.selectionMap.keySet().iterator();
+            var variantsIter = this.variants.iterator();
+
+            while (selectedIter.hasNext()) {
+                var selectionKey = selectedIter.next();
+                lookupMap[selectionKey] = this.selectionMap.get(selectionKey);
+            }
+            lookupMap[attr.attributeID] = value.value;
+
+            while (variantsIter.hasNext()) {
+                var variant = variantsIter.next();
+                var hasAllAttrsMatching = true;
+
+                // If all lookup values match a Variant, then has Orderable Variant
+                Object.keys(lookupMap).forEach(function(selectionKey) {
+                    if(variant.custom[selectionKey] !== lookupMap[selectionKey]) {
+                        hasAllAttrsMatching = false;
+                    }
+                });
+
+                if (hasAllAttrsMatching) {
+                    return true;
+                }
+            }
+            return false;
+        }
     });
 
 /** The model class */
