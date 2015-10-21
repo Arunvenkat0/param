@@ -74,14 +74,6 @@
         color: $dim-gray;
         padding: .5em;
     }
-    button {
-        background: none repeat scroll 0 0 $very-light-gray;
-        border: 0 none;
-        color: $night-rider;
-        font-size: 0.9em;
-        padding: 0.3em;
-        width: auto;
-    }
     .pagination {
         float: right;   
         @media screen and (min-width: 768px) {
