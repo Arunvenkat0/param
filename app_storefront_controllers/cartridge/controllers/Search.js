@@ -22,7 +22,6 @@ var guard = require('~/cartridge/scripts/guard');
 function show() {
 
     var params = request.httpParameterMap;
-    var ISML = require('dw/template/ISML');
 
     if (params.format.stringValue === 'ajax' || params.format.stringValue === 'page-element') {
         // TODO refactor and merge showProductGrid() code into here

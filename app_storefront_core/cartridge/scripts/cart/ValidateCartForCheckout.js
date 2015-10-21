@@ -24,9 +24,7 @@
  */
 
 function execute (pdict) {
-    var status = validate(pdict);
-    pdict.BasketStatus = status.BasketStatus;
-    pdict.EnableCheckout = status.EnableCheckout;
+    validate(pdict);
 
     return PIPELET_NEXT;
 }

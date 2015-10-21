@@ -33,7 +33,7 @@ var spyOrderMgr = sinon.spy(mockOrderMgr, 'getOrder');
 
 // Mock out module dependencies
 var modelsDirectory = '../../../../../app_storefront_controllers/cartridge/scripts/models/';
-var OrderModel = mockRequire(modelsDirectory + 'OrderModel.ds', {
+var OrderModel = mockRequire(modelsDirectory + 'OrderModel.js', {
     './AbstractModel': mockAbstractModel,
     'dw/util/ArrayList': mockArrayList,
     'dw/order/OrderMgr': mockOrderMgr
