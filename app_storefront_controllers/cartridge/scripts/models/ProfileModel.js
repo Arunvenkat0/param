@@ -121,7 +121,7 @@ var ProfileModel = AbstractModel.extend(
 
             dw.system.Transaction.wrap(function () {
                 if (addressToAdd) {
-                	//Checks if the address already exists in the address book
+                    //Checks if the address already exists in the address book
                     for (var i = 0; i < addressBook.addresses.length; i++) {
                         address = addressBook.addresses[i];
                         if (address.isEquivalentAddress(addressToAdd)) {

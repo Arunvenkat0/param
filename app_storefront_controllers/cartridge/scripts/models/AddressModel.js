@@ -54,7 +54,7 @@ var AddressModel = AbstractModel.extend(
  *
  * @alias module:models/AddressModel~AddressModel/get
  * @param parameter {dw.order.OrderAddress|dw.customer.CustomerAddress|String} The address object to enhance/wrap or an address ID.
- * @returns {module:models/AddressModel~AddressModel} If passed an address object object, returns the address object. 
+ * @returns {module:models/AddressModel~AddressModel} If passed an address object object, returns the address object.
  * If passed a string, uses the string as the address ID to get the string.
  */
 AddressModel.get = function (parameter) {
@@ -103,7 +103,7 @@ AddressModel.create = function (addressForm) {
  * @alias module:models/AddressModel~AddressModel/update
  * @param {String} address ID used to get an address.
  * @param {dw.web.FormGroup} [addressForm] The form that is used to update the address.
- * @returns {module:models/AddressModel~AddressModel | null} The updated address or null if 
+ * @returns {module:models/AddressModel~AddressModel | null} The updated address or null if
  * the address cannot be saved to the associated Demandware system object.
  */
 AddressModel.update = function (addressId, addressForm) {

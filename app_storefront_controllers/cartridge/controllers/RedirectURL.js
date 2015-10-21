@@ -13,7 +13,6 @@
  */
 
 /* API Includes */
-var URLUtils = require('dw/web/URLUtils');
 var URLRedirectMgr = require('dw/web/URLRedirectMgr');
 
 /* Script Modules */
@@ -26,7 +25,7 @@ var guard = require('~/cartridge/scripts/guard');
 function start() {
     var redirect = URLRedirectMgr.getRedirect();
 
-    if (redirect == null) {
+    if (redirect === null) {
         app.getView().render('util/redirecterrorutil/redirecterror');
     } else {
         app.getView({
@@ -48,10 +47,10 @@ function start() {
  * Location (optional)
  */
 function hostName() {
-	var Redirect = require('app_storefront_core/cartridge/scripts/util/Redirect');
-	app.getView({
-		Location : Redirect.validateURL(request.httpParameterMap.Location.stringValue)
-	}).render('util/redirectpermanent');
+    var Redirect = require('app_storefront_core/cartridge/scripts/util/Redirect');
+    app.getView({
+        Location: Redirect.validateURL(request.httpParameterMap.Location.stringValue)
+    }).render('util/redirectpermanent');
 }
 
 

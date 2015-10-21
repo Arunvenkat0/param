@@ -1,6 +1,6 @@
 'use strict';
 
-/** 
+/**
  * Model for manaaging information about last visited items based on the current session. Currently only products are
  * supported.
  * @module models/RecentlyViewedItemsModel */

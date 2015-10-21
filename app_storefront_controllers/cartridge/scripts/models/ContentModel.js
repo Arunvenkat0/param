@@ -33,7 +33,7 @@ var ContentModel = AbstractModel.extend(
 
         /**
         * Checks whether current content asset is in the specified folder.
-        * 
+        *
         * @alias module:models/ContentModel~ContentModel/isInFolder
         * @param {String} folderId - The folder id.
         * @returns {Boolean} true if current content asset is in the specified folder.

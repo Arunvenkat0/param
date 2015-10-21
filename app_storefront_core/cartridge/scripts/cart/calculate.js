@@ -25,71 +25,71 @@ var Status = require('dw/system/Status');
  *
  * @param {object} basket The basket to be calculated
  */
-exports.calculate = function(basket) {
+exports.calculate = function (basket) {
     // ===================================================
-	// =====   CALCULATE PRODUCT LINE ITEM PRICES    =====
-    // ===================================================
-
-	calculateProductPrices(basket);
-
-    // ===================================================
-	// =====    CALCULATE GIFT CERTIFICATE PRICES    =====
+    // =====   CALCULATE PRODUCT LINE ITEM PRICES    =====
     // ===================================================
 
-	calculateGiftCertificatePrices(basket);
+    calculateProductPrices(basket);
 
     // ===================================================
-	// =====   Note: Promotions must be applied      =====
-	// =====   after the tax calculation for         =====
-	// =====   storefronts based on GROSS prices     =====
+    // =====    CALCULATE GIFT CERTIFICATE PRICES    =====
+    // ===================================================
+
+    calculateGiftCertificatePrices(basket);
+
+    // ===================================================
+    // =====   Note: Promotions must be applied      =====
+    // =====   after the tax calculation for         =====
+    // =====   storefronts based on GROSS prices     =====
     // ===================================================
 
     // ===================================================
-	// =====   APPLY PROMOTION DISCOUNTS			 =====
-	// =====   Apply product and order promotions.   =====
-	// =====   Must be done before shipping 		 =====
-	// =====   calculation. 					     =====
+    // =====   APPLY PROMOTION DISCOUNTS			 =====
+    // =====   Apply product and order promotions.   =====
+    // =====   Must be done before shipping 		 =====
+    // =====   calculation. 					     =====
     // ===================================================
 
-	PromotionMgr.applyDiscounts(basket);
+    PromotionMgr.applyDiscounts(basket);
 
     // ===================================================
-	// =====        CALCULATE SHIPPING COSTS         =====
+    // =====        CALCULATE SHIPPING COSTS         =====
     // ===================================================
 
-	// apply product specific shipping costs
-	// and calculate total shipping costs
-	ShippingMgr.applyShippingCost(basket);
+    // apply product specific shipping costs
+    // and calculate total shipping costs
+    ShippingMgr.applyShippingCost(basket);
 
     // ===================================================
-	// =====   APPLY PROMOTION DISCOUNTS			 =====
-	// =====   Apply product and order and 			 =====
-	// =====   shipping promotions.                  =====
+    // =====   APPLY PROMOTION DISCOUNTS			 =====
+    // =====   Apply product and order and 			 =====
+    // =====   shipping promotions.                  =====
     // ===================================================
 
-	PromotionMgr.applyDiscounts(basket);
+    PromotionMgr.applyDiscounts(basket);
 
-	// since we might have bonus product line items, we need to
-	// reset product prices
-	calculateProductPrices(basket);
-
-    // ===================================================
-	// =====         CALCULATE TAX                   =====
-    // ===================================================
-
-	calculateTax(basket);
+    // since we might have bonus product line items, we need to
+    // reset product prices
+    calculateProductPrices(basket);
 
     // ===================================================
-	// =====         CALCULATE BASKET TOTALS         =====
+    // =====         CALCULATE TAX                   =====
     // ===================================================
 
-	basket.updateTotals();
+    calculateTax(basket);
 
     // ===================================================
-	// =====            DONE                         =====
+    // =====         CALCULATE BASKET TOTALS         =====
     // ===================================================
 
-	return new Status(Status.OK);
+    basket.updateTotals();
+
+    // ===================================================
+    // =====            DONE                         =====
+    // ===================================================
+
+    return new Status(Status.OK);
 };
 
 /**
@@ -101,75 +101,72 @@ exports.calculate = function(basket) {
  * @param {object} basket The basket containing the elements to be computed
  */
 function calculateProductPrices (basket) {
-	// get total quantities for all products contained in the basket
-	var productQuantities = basket.getProductQuantities();
-	var productQuantitiesIt = productQuantities.keySet().iterator();
+    // get total quantities for all products contained in the basket
+    var productQuantities = basket.getProductQuantities();
+    var productQuantitiesIt = productQuantities.keySet().iterator();
 
-	// get product prices for the accumulated product quantities
-	var productPrices = new HashMap();
+    // get product prices for the accumulated product quantities
+    var productPrices = new HashMap();
 
-	while (productQuantitiesIt.hasNext()) {
-		var prod = productQuantitiesIt.next();
-		var quantity = productQuantities.get(prod);
-		productPrices.put(prod, prod.priceModel.getPrice(quantity));
-	}
+    while (productQuantitiesIt.hasNext()) {
+        var prod = productQuantitiesIt.next();
+        var quantity = productQuantities.get(prod);
+        productPrices.put(prod, prod.priceModel.getPrice(quantity));
+    }
 
-	// iterate all product line items of the basket and set prices
-	var productLineItems = basket.getAllProductLineItems().iterator();
-	while (productLineItems.hasNext()) {
-		var productLineItem = productLineItems.next();
+    // iterate all product line items of the basket and set prices
+    var productLineItems = basket.getAllProductLineItems().iterator();
+    while (productLineItems.hasNext()) {
+        var productLineItem = productLineItems.next();
 
-		// handle non-catalog products
-		if (!productLineItem.catalogProduct) {
-			productLineItem.setPriceValue(productLineItem.basePrice.valueOrNull);
-			continue;
-		}
+        // handle non-catalog products
+        if (!productLineItem.catalogProduct) {
+            productLineItem.setPriceValue(productLineItem.basePrice.valueOrNull);
+            continue;
+        }
 
-		var product = productLineItem.product;
+        var product = productLineItem.product;
 
-		// handle option line items
-		if (productLineItem.optionProductLineItem) {
-			// for bonus option line items, we do not update the price
-			// the price is set to 0.0 by the promotion engine
-			if (!productLineItem.bonusProductLineItem) {
-				productLineItem.updateOptionPrice();
-			}
-		}
-		// handle bundle line items, but only if they're not a bonus
-		else if (productLineItem.bundledProductLineItem) {
-			// no price is set for bundled product line items
-		}
-		// handle bonus line items
-		// the promotion engine set the price of a bonus product to 0.0
-		// we update this price here to the actual product price just to
-		// provide the total customer savings in the storefront
-		// we have to update the product price as well as the bonus adjustment
-		else if (productLineItem.bonusProductLineItem && product !== null) {
-			var price = product.priceModel.price;
-			productLineItem.setPriceValue(price.valueOrNull);
-			// get the product quantity
-			var quantity2 = productLineItem.quantity;
-			// we assume that a bonus line item has only one price adjustment
-			var adjustments = productLineItem.priceAdjustments;
-			if (!adjustments.isEmpty()) {
-				var adjustment = adjustments.iterator().next();
-				var adjustmentPrice = price.multiply(quantity2.value).multiply(-1.0);
-				adjustment.setPriceValue(adjustmentPrice.valueOrNull);
-			}
-		}
+        // handle option line items
+        if (productLineItem.optionProductLineItem) {
+            // for bonus option line items, we do not update the price
+            // the price is set to 0.0 by the promotion engine
+            if (!productLineItem.bonusProductLineItem) {
+                productLineItem.updateOptionPrice();
+            }
+        // handle bundle line items, but only if they're not a bonus
+        } else if (productLineItem.bundledProductLineItem) {
+            // no price is set for bundled product line items
+        // handle bonus line items
+        // the promotion engine set the price of a bonus product to 0.0
+        // we update this price here to the actual product price just to
+        // provide the total customer savings in the storefront
+        // we have to update the product price as well as the bonus adjustment
+        } else if (productLineItem.bonusProductLineItem && product !== null) {
+            var price = product.priceModel.price;
+            productLineItem.setPriceValue(price.valueOrNull);
+            // get the product quantity
+            var quantity2 = productLineItem.quantity;
+            // we assume that a bonus line item has only one price adjustment
+            var adjustments = productLineItem.priceAdjustments;
+            if (!adjustments.isEmpty()) {
+                var adjustment = adjustments.iterator().next();
+                var adjustmentPrice = price.multiply(quantity2.value).multiply(-1.0);
+                adjustment.setPriceValue(adjustmentPrice.valueOrNull);
+            }
 
-		// set the product price. Updates the 'basePrice' of the product line item,
-		// and either the 'netPrice' or the 'grossPrice' based on the current taxation
-		// policy
 
-		// handle product line items unrelated to product
-		else if (product === null) {
-			productLineItem.setPriceValue(null);
-		}
-		// handle normal product line items
-		else {
-			productLineItem.setPriceValue(productPrices.get(product).valueOrNull);
-		}
+        // set the product price. Updates the 'basePrice' of the product line item,
+        // and either the 'netPrice' or the 'grossPrice' based on the current taxation
+        // policy
+
+        // handle product line items unrelated to product
+        } else if (product === null) {
+            productLineItem.setPriceValue(null);
+        // handle normal product line items
+        } else {
+            productLineItem.setPriceValue(productPrices.get(product).valueOrNull);
+        }
     }
 }
 
@@ -182,11 +179,11 @@ function calculateProductPrices (basket) {
  * @param {object} basket The basket containing the gift certificates
  */
 function calculateGiftCertificatePrices (basket) {
-	var giftCertificates = basket.getGiftCertificateLineItems().iterator();
-	while(giftCertificates.hasNext()) {
-		var giftCertificate = giftCertificates.next();
-		giftCertificate.setPriceValue(giftCertificate.basePrice.valueOrNull);
-	}
+    var giftCertificates = basket.getGiftCertificateLineItems().iterator();
+    while (giftCertificates.hasNext()) {
+        var giftCertificate = giftCertificates.next();
+        giftCertificate.setPriceValue(giftCertificate.basePrice.valueOrNull);
+    }
 }
 
 /**
@@ -209,94 +206,94 @@ function calculateGiftCertificatePrices (basket) {
  * @param {object} basket The basket containing the elements for which taxes need to be calculated
  */
 function calculateTax (basket) {
-	var shipments = basket.getShipments().iterator();
-	while (shipments.hasNext()) {
-		var shipment = shipments.next();
+    var shipments = basket.getShipments().iterator();
+    while (shipments.hasNext()) {
+        var shipment = shipments.next();
 
-		// first we reset all tax fields of all the line items
-		// of the shipment
-		var shipmentLineItems = shipment.getAllLineItems().iterator();
-		while (shipmentLineItems.hasNext()) {
-			var _lineItem = shipmentLineItems.next();
-			// do not touch tax rate for fix rate items
-			if (_lineItem.taxClassID === TaxMgr.customRateTaxClassID) {
-				_lineItem.updateTax(_lineItem.taxRate);
-			} else {
-				_lineItem.updateTax(null);
-			}
-		}
+        // first we reset all tax fields of all the line items
+        // of the shipment
+        var shipmentLineItems = shipment.getAllLineItems().iterator();
+        while (shipmentLineItems.hasNext()) {
+            var _lineItem = shipmentLineItems.next();
+            // do not touch tax rate for fix rate items
+            if (_lineItem.taxClassID === TaxMgr.customRateTaxClassID) {
+                _lineItem.updateTax(_lineItem.taxRate);
+            } else {
+                _lineItem.updateTax(null);
+            }
+        }
 
-		// identify the appropriate tax jurisdiction
-		var taxJurisdictionID = null;
+        // identify the appropriate tax jurisdiction
+        var taxJurisdictionID = null;
 
-		// if we have a shipping address, we can determine a tax jurisdiction for it
-		if (shipment.shippingAddress !== null) {
-			var location = new ShippingLocation(shipment.shippingAddress);
-			taxJurisdictionID = TaxMgr.getTaxJurisdictionID(location);
-		}
+        // if we have a shipping address, we can determine a tax jurisdiction for it
+        if (shipment.shippingAddress !== null) {
+            var location = new ShippingLocation(shipment.shippingAddress);
+            taxJurisdictionID = TaxMgr.getTaxJurisdictionID(location);
+        }
 
-		if (taxJurisdictionID === null) {
-			taxJurisdictionID = TaxMgr.defaultTaxJurisdictionID;
-		}
+        if (taxJurisdictionID === null) {
+            taxJurisdictionID = TaxMgr.defaultTaxJurisdictionID;
+        }
 
-		// if we have no tax jurisdiction, we cannot calculate tax
-		if (taxJurisdictionID === null) {
-			continue;
-		}
+        // if we have no tax jurisdiction, we cannot calculate tax
+        if (taxJurisdictionID === null) {
+            continue;
+        }
 
-		// shipping address and tax juridisction are available
-		var shipmentLineItems2 = shipment.getAllLineItems().iterator();
-		while (shipmentLineItems2.hasNext()) {
-			var lineItem = shipmentLineItems2.next();
-			var taxClassID = lineItem.taxClassID;
+        // shipping address and tax juridisction are available
+        var shipmentLineItems2 = shipment.getAllLineItems().iterator();
+        while (shipmentLineItems2.hasNext()) {
+            var lineItem = shipmentLineItems2.next();
+            var taxClassID = lineItem.taxClassID;
 
-			Logger.debug('1. Line Item {0} with Tax Class {1} and Tax Rate {2}', lineItem.lineItemText, lineItem.taxClassID, lineItem.taxRate);
+            Logger.debug('1. Line Item {0} with Tax Class {1} and Tax Rate {2}', lineItem.lineItemText, lineItem.taxClassID, lineItem.taxRate);
 
-			// do not touch line items with fix tax rate
-			if (taxClassID === TaxMgr.customRateTaxClassID) {
-				continue;
-			}
+            // do not touch line items with fix tax rate
+            if (taxClassID === TaxMgr.customRateTaxClassID) {
+                continue;
+            }
 
-			// line item does not define a valid tax class; let's fall back to default tax class
-			if (taxClassID === null) {
-				taxClassID = TaxMgr.defaultTaxClassID;
-			}
+            // line item does not define a valid tax class; let's fall back to default tax class
+            if (taxClassID === null) {
+                taxClassID = TaxMgr.defaultTaxClassID;
+            }
 
-			// if we have no tax class, we cannot calculate tax
-			if (taxClassID === null) {
-				Logger.debug('Line Item {0} has invalid Tax Class {1}', lineItem.lineItemText, lineItem.taxClassID);
-				continue;
-			}
+            // if we have no tax class, we cannot calculate tax
+            if (taxClassID === null) {
+                Logger.debug('Line Item {0} has invalid Tax Class {1}', lineItem.lineItemText, lineItem.taxClassID);
+                continue;
+            }
 
-			// get the tax rate
-			var taxRate = TaxMgr.getTaxRate(taxClassID, taxJurisdictionID);
-			// w/o a valid tax rate, we cannot calculate tax for the line item
-			if (taxRate === null) {
-				continue;
-			}
+            // get the tax rate
+            var taxRate = TaxMgr.getTaxRate(taxClassID, taxJurisdictionID);
+            // w/o a valid tax rate, we cannot calculate tax for the line item
+            if (taxRate === null) {
+                continue;
+            }
 
-			// calculate the tax of the line item
-	    lineItem.updateTax(taxRate);
-		Logger.debug('2. Line Item {0} with Tax Class {1} and Tax Rate {2}', lineItem.lineItemText, lineItem.taxClassID, lineItem.taxRate);
-	}
-	}
+            // calculate the tax of the line item
+            lineItem.updateTax(taxRate);
+            Logger.debug('2. Line Item {0} with Tax Class {1} and Tax Rate {2}', lineItem.lineItemText, lineItem.taxClassID, lineItem.taxRate);
+        }
+    }
 
-	// besides shipment line items, we need to calculate tax for possible order-level price adjustments
-	// this includes order-level shipping price adjustments
-	if (!basket.getPriceAdjustments().empty || !basket.getShippingPriceAdjustments().empty) {
-	// calculate a mix tax rate from
-	var basketPriceAdjustmentsTaxRate = (basket.getMerchandizeTotalGrossPrice().value / basket.getMerchandizeTotalNetPrice().value) - 1;
+    // besides shipment line items, we need to calculate tax for possible order-level price adjustments
+    // this includes order-level shipping price adjustments
+    if (!basket.getPriceAdjustments().empty || !basket.getShippingPriceAdjustments().empty) {
+    // calculate a mix tax rate from
+    var basketPriceAdjustmentsTaxRate = (basket.getMerchandizeTotalGrossPrice().value / basket.getMerchandizeTotalNetPrice().value) - 1;
 
-		var basketPriceAdjustments = basket.getPriceAdjustments().iterator();
-		while (basketPriceAdjustments.hasNext()) {
-			var basketPriceAdjustment = basketPriceAdjustments.next();
-			basketPriceAdjustment.updateTax(basketPriceAdjustmentsTaxRate);
-		}
+        var basketPriceAdjustments = basket.getPriceAdjustments().iterator();
+        while (basketPriceAdjustments.hasNext()) {
+            var basketPriceAdjustment = basketPriceAdjustments.next();
+            basketPriceAdjustment.updateTax(basketPriceAdjustmentsTaxRate);
+        }
 
-		var basketShippingPriceAdjustments = basket.getShippingPriceAdjustments().iterator();
-		while (basketShippingPriceAdjustments.hasNext()) {
-			var basketShippingPriceAdjustment = basketShippingPriceAdjustments.next();
-			basketShippingPriceAdjustment.updateTax(basketPriceAdjustmentsTaxRate);
-	    }
-	}
+        var basketShippingPriceAdjustments = basket.getShippingPriceAdjustments().iterator();
+        while (basketShippingPriceAdjustments.hasNext()) {
+            var basketShippingPriceAdjustment = basketShippingPriceAdjustments.next();
+            basketShippingPriceAdjustment.updateTax(basketPriceAdjustmentsTaxRate);
+        }
+    }
 }

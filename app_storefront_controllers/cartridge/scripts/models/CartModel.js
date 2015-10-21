@@ -122,11 +122,8 @@ var CartModel = AbstractModel.extend({
                      * HTTP params as childPids along with any options. Params: CurrentHttpParameterMap.childPids - comma separated list of
                      * pids of the bundled products that are variations.
                      */
-                    if (request.httpParameterMap.childPids.stringValue) {
-                        var childPids = request.httpParameterMap.childPids.stringValue.split(',');
-                    }
 
-                    if (product.bundle) {
+                    if (request.httpParameterMap.childPids.stringValue && product.bundle) {
                         /**
                          * By default, when a bundle is added to cart, all its child products are added too, but if those products are
                          * variants then the code must replace the master products with the selected variants that get passed in the

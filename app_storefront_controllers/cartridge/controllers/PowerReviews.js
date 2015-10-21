@@ -58,8 +58,8 @@ function WriteReview() {
     }
 
     var ScriptResult = new dw.system.Pipelet('Script', {
-        Transactional : false,
-        ScriptFile : 'app_storefront_core:common/FindLastClickStream.ds'
+        Transactional: false,
+        ScriptFile: 'app_storefront_core:common/FindLastClickStream.ds'
     }).execute({
         lastMatchedClickUrl: Location,
         pipelineName: 'Product-Show'

@@ -1,8 +1,8 @@
 'use strict';
 
-/** 
+/**
 * Module for ordering functionality.
-* @module models/OrderModel 
+* @module models/OrderModel
 */
 
 /* API Includes */

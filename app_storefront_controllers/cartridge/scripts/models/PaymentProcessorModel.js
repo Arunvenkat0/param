@@ -1,8 +1,8 @@
 'use strict';
 
-/** 
+/**
 Model for payment processing functionality.
-@module models/PaymentProcessorModel 
+@module models/PaymentProcessorModel
 */
 var Class = require('~/cartridge/scripts/util/Class').Class;
 var HookMgr = require('dw/system/HookMgr');
@@ -52,7 +52,7 @@ PaymentProcessorModel.handle = function (cart, paymentMethodID) {
  * @alias module:models/PaymentProcessorModel~PaymentProcessorModel/authorize
  * @param {dw.order.Order} order The order to authorize.
  * @param {dw.order.PaymentInstrument} paymentInstrument The payment instrument to execute the authorization logic for.
- * @returns whatever is returned from calling the hook. 
+ * @returns whatever is returned from calling the hook.
  */
 PaymentProcessorModel.authorize = function (order, paymentInstrument) {
     var processor = PaymentMgr.getPaymentMethod(paymentInstrument.getPaymentMethod()).getPaymentProcessor();

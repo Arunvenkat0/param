@@ -34,8 +34,8 @@ var CategoryModel = AbstractModel.extend(
         },
 
         /**
-         * Gets a list of online categories that have the showInMenu attribute set to true. 
-         * The showInMenu attribute is a custom attribute for SiteGenesis that determines whether a 
+         * Gets a list of online categories that have the showInMenu attribute set to true.
+         * The showInMenu attribute is a custom attribute for SiteGenesis that determines whether a
          * category is shown in the site navigation.
          *
          * @param {Boolean} renderAllCategories Returns all online subcategories if true.

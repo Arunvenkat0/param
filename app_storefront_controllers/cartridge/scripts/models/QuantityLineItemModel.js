@@ -1,6 +1,6 @@
 'use strict';
 
-/** 
+/**
  * Model for quantity line items.
  * @module models/QuantityLineItemModel */
 var Class = require('~/cartridge/scripts/util/Class').Class;
