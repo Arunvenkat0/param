@@ -479,19 +479,11 @@ var CartModel = AbstractModel.extend({
      * @returns {Boolean} EnableCheckout
      */
     validateForCheckout: function () {
-
-        // The ScriptFile reference should refer to the cart/ValidateCartForCheckout file in the
-        // app_storefront_controller cartridge as there are some differences from the core cartridge script
-        var result = new Pipelet('Script', {
-            ScriptFile: 'cart/ValidateCartForCheckout.js',
-            Transactional: false
-        }).execute({
-                Basket: this.object,
-                ValidateTax: false
-            });
-
-        return result;
-
+        var ValidateCartForCheckout = require('app_storefront_core/cartridge/scripts/cart/ValidateCartForCheckout');
+        return ValidateCartForCheckout.validate({
+            Basket: this.object,
+            ValidateTax: false
+        });
     },
 
     /**
@@ -648,7 +640,6 @@ var CartModel = AbstractModel.extend({
      * @returns {boolean} true if there is a home delivery found in the basket, false otherwise.
      */
     consolidateInStoreShipments: function () {
-
         var sliArrayList = new ArrayList();
         var homeDeliveries = false;
         var storeObject, shippingAddress, orderAddress;

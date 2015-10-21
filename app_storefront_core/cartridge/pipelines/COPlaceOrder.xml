@@ -362,7 +362,7 @@
             </simple-transition>
             <node>
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-                <config-property key="ScriptFile" value="cart/ValidateCartForCheckout.ds"/>
+                <config-property key="ScriptFile" value="cart/ValidateCartForCheckout.js"/>
                 <config-property key="Transactional" value="false"/>
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="Basket" key="Basket"/>

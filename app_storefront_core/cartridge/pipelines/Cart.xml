@@ -1009,7 +1009,7 @@ just like miniaddproduct i.e. pid, options, quantiy.</description>
             </simple-transition>
             <node>
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-                <config-property key="ScriptFile" value="cart/ValidateCartForCheckout.ds"/>
+                <config-property key="ScriptFile" value="cart/ValidateCartForCheckout.js"/>
                 <config-property key="Transactional" value="false"/>
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="Basket" key="Basket"/>
@@ -2023,7 +2023,7 @@ CurrentHttpParameterMap.childPids - comma separated list of pids of the bundled 
       </simple-transition>
       <node>
         <pipelet-node custom-name="Validates the basket against additional conditions" pipelet-name="Script" pipelet-set-identifier="bc_api">
-          <config-property key="ScriptFile" value="cart/ValidateCartForCheckout.ds"/>
+          <config-property key="ScriptFile" value="cart/ValidateCartForCheckout.js"/>
           <config-property key="Transactional" value="false"/>
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="Basket" key="Basket"/>

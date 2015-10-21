@@ -25,14 +25,21 @@
 
 function execute (pdict) {
     var status = validate(pdict);
-    pdict.BasketStatus = status;
+    pdict.BasketStatus = status.BasketStatus;
+    pdict.EnableCheckout = status.EnableCheckout;
+
     return PIPELET_NEXT;
 }
 
 /**
- * Function: execute
+ * Function: validate
  *
  * Main function of the validation script.
+ *
+ * @param {dw.system.PipelineDictionary} pdict
+ * @param {dw.order.Basket} pdict.Basket
+ * @param {Boolean} pdict.ValidateTax
+ * @returns {dw.system.Status}
  */
 function validate(pdict) {
     var Status = require('dw/system/Status');
@@ -86,23 +93,23 @@ function validate(pdict) {
     // =====           EVALUATE CONDITIONS           =====
     // ===================================================
 
-    if(!pricesAvailable || !productExistence) {
+    if (!pricesAvailable || !productExistence) {
         // there are either any product line items without existing
         // product or one or more line items has no price
         pdict.BasketStatus = new Status(Status.ERROR);
         return PIPELET_ERROR;
-    } else if(!allCouponsValid) {
+    } else if (!allCouponsValid) {
         // there are invalid coupon line items.
         // exit with an error.
-        pdict.BasketStatus = new Status(Status.ERROR, "CouponError");
+        pdict.BasketStatus = new Status(Status.ERROR, 'CouponError');
         return PIPELET_ERROR;
-    } else if(!hasContent) {
+    } else if (!hasContent) {
         // there are neither products nor gift certificates in the
         // basket; we exit with an error however the basket status is OK
         pdict.BasketStatus = new Status(Status.OK);
         return PIPELET_ERROR;
     } else if (!hasTotalTax) {
-        pdict.BasketStatus = new Status(Status.ERROR, "TaxError");
+        pdict.BasketStatus = new Status(Status.ERROR, 'TaxError');
         return PIPELET_ERROR;
     }
 
@@ -111,7 +118,10 @@ function validate(pdict) {
     // =====            DONE                         =====
     // ===================================================
 
-    return new Status(Status.OK);
+    return {
+        BasketStatus: new Status(Status.OK),
+        EnableCheckout: pdict.EnableCheckout
+    };
 }
 
 /**
@@ -124,7 +134,7 @@ function validateProductExistence(basket, pdict) {
     // type: Iterator
     var plis = basket.getProductLineItems().iterator();
 
-    while(plis.hasNext()) {
+    while (plis.hasNext()) {
         var ProductInventoryMgr = require('dw/catalog/ProductInventoryMgr');
         var StoreMgr = require('dw/catalog/StoreMgr');
         // type: dw.order.ProductLineItem
@@ -134,7 +144,7 @@ function validateProductExistence(basket, pdict) {
         }
 
         //RAP-2490 : if this pli is marked as an instore item use the store inventory instead of the default inventory when diabling the cart based on inventory levels
-        if (pli.custom.hasOwnProperty("fromStoreId") && !empty(pli.custom.fromStoreId)) {
+        if (pli.custom.hasOwnProperty('fromStoreId') && !empty(pli.custom.fromStoreId)) {
             // type: dw.catalog.Store
             var store = StoreMgr.getStore(pli.custom.fromStoreId);
             // type: dw.catalog.ProductInventoryList
@@ -171,17 +181,14 @@ function validateContent(basket) {
  *
  * @param {dw.order.Basket} basket
  */
-function validateCoupons(basket)
-{
+function validateCoupons(basket) {
     // type: Iterator
     var clis = basket.getCouponLineItems().iterator();
 
-    while (clis.hasNext())
-    {
+    while (clis.hasNext()) {
         // type: dw.order.CouponLineItem
         var cli = clis.next();
-        if (!cli.isValid())
-        {
+        if (!cli.isValid()) {
             return false;
         }
     }
