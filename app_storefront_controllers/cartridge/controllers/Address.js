@@ -46,37 +46,45 @@ function add() {
  * The address form handler.
  */
 function handleForm() {
-    var Address, success;
+    var Address;
+    var success;
+    var message;
+
     Address = app.getModel('Address');
 
     var addressForm = app.getForm('customeraddress');
 
-    success = addressForm.handleAction({
+    addressForm.handleAction({
         cancel: function () {
-            return false;
+            success = false;
         },
         create: function () {
             if (!session.forms.profile.address.valid || !Address.create(session.forms.profile.address)) {
                 response.redirect(URLUtils.https('Address-Add'));
-                return false;
+                success = false;
             }
 
-            return true;
+            success = true;
         },
         edit: function () {
-            if (!session.forms.profile.address.valid || !Address.update(request.httpParameterMap.addressid.value, session.forms.profile.address)) {
-                response.redirect(URLUtils.https('Address-Add'));
-                return false;
+            if (!session.forms.profile.address.valid) {
+                success = false;
+                message = 'Form is invalid';
             }
-
-            return true;
+            try {
+                Address.update(request.httpParameterMap.addressid.value, session.forms.profile.address);
+                success = true;
+            } catch (e) {
+                success = false;
+                message = e.message;
+            }
         },
         error: function () {
-            return false;
+            success = false;
         },
         remove: function () {
             if (Address.remove(session.forms.profile.address.addressid.value)) {
-                return false;
+                success = false;
             }
         }
     });
@@ -85,7 +93,8 @@ function handleForm() {
         let r = require('~/cartridge/scripts/util/Response');
 
         r.renderJSON({
-            success: success
+            success: success,
+            message: message
         });
         return;
     }

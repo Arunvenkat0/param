@@ -10,7 +10,6 @@ var AbstractModel = require('./AbstractModel');
 var ProductListMgr = require('dw/customer/ProductListMgr');
 var Transaction = require('dw/system/Transaction');
 var Form = require('~/cartridge/scripts/models/FormModel');
-
 /**
  * Address helper providing enhanced address functionality.
  * @class module:models/AddressModel~AddressModel
@@ -110,22 +109,30 @@ AddressModel.update = function (addressId, addressForm) {
     var addressBook = customer.profile.addressBook;
     var address = addressBook.getAddress(addressId);
 
-    // check if new address id is already taken
-    if (address && address.ID !== addressForm.addressid.value) {
-        address = addressBook.getAddress(addressForm.addressid.value);
+    if (!address) {
+        throw new Error('No address found');
+    }
+
+    if (address.ID !== addressForm.addressid.value) {
+        for (var i = 0; i < addressBook.addresses.length; i++) {
+            if (addressBook.addresses[i].ID === addressForm.addressid.value) {
+                addressForm.addressid.invalidateFormElement();
+                throw new Error('Address name already exists');
+            }
+        }
     }
 
     return Transaction.wrap(function () {
         if (addressForm) {
             if (!Form.get(addressForm).copyTo(address)) {
                 addressForm.invalidateFormElement();
-                return null;
+                throw new Error('Unable to update new address');
             }
 
             if ('states' in addressForm) {
                 if (!Form.get(addressForm.states).copyTo(address)) {
                     addressForm.invalidateFormElement();
-                    return null;
+                    throw new Error('Unable to update address state');
                 }
             }
         }
