@@ -11,25 +11,25 @@
  * @return {Object}
  */
 exports.extend = function (target, source) {
-	var _source;
+    var _source;
 
-	if (!target){
-		return source;
-	}
+    if (!target) {
+        return source;
+    }
 
-	for (var i = 1; i < arguments.length; i++) {
-		_source = arguments[i];
-		for (var prop in _source) {
-			// recurse for non-API objects
-			if (_source[prop] && 'object' === typeof _source[prop] && !_source[prop].class) {
-				target[prop] = this.extend(target[prop], _source[prop]);
-			} else {
-				target[prop] = _source[prop];
-			}
-		}
-	}
+    for (var i = 1; i < arguments.length; i++) {
+        _source = arguments[i];
+        for (var prop in _source) {
+            // recurse for non-API objects
+            if (_source[prop] && 'object' === typeof _source[prop] && !_source[prop].class) {
+                target[prop] = this.extend(target[prop], _source[prop]);
+            } else {
+                target[prop] = _source[prop];
+            }
+        }
+    }
 
-	return target;
+    return target;
 };
 
 /**
@@ -42,17 +42,17 @@ exports.extend = function (target, source) {
  * var prop1 = require('~/object').resolve(obj, 'data.myValue.prop1')
  */
 exports.resolve = function (object, propertyString) {
-	var result = object;
-	var propPath = propertyString.split('.');
+    var result = object;
+    var propPath = propertyString.split('.');
 
-	propPath.forEach(function(prop){
-		if(result && prop in result){
-			result = result[prop];
-		}else{
-			result = undefined;
-		}
-	});
-	return result;
+    propPath.forEach(function (prop) {
+        if (result && prop in result) {
+            result = result[prop];
+        } else {
+            result = undefined;
+        }
+    });
+    return result;
 };
 
 /**
@@ -62,9 +62,9 @@ exports.resolve = function (object, propertyString) {
  * @return {Array}
  */
 exports.values = function (object) {
-	return empty(object) ? [] : Object.keys(object).map(function (key) {
-		return object[key];
-	});
+    return !object ? [] : Object.keys(object).map(function (key) {
+        return object[key];
+    });
 };
 
 /**
@@ -74,7 +74,7 @@ exports.values = function (object) {
  * @return {Array}
  */
 exports.keys = function (object) {
-	return !empty(object) ? Object.keys(object) : [];
+    return object ? Object.keys(object) : [];
 };
 
 /**
@@ -84,15 +84,16 @@ exports.keys = function (object) {
  * @return {dw.util.HashMap} all the data which will be used in mail template.
  */
 exports.toHashMap = function (object) {
-	var hashmap = new dw.util.HashMap();
+    var HashMap = require('dw/util/HashMap');
+    var hashmap = new HashMap();
 
-	for (var key in object) {
-		if (object.hasOwnProperty(key)) {
-			hashmap.put(key, object[key]);
-		}
-	}
+    for (var key in object) {
+        if (object.hasOwnProperty(key)) {
+            hashmap.put(key, object[key]);
+        }
+    }
 
-	return hashmap;
+    return hashmap;
 };
 
 /**
@@ -102,11 +103,11 @@ exports.toHashMap = function (object) {
  * @return {Object} all the data which will be used in mail template.
  */
 exports.fromHashMap = function (map) {
-	var object = {};
+    var object = {};
 
-	for each(var entry in map.entrySet()) {
-		object[entry.key] = entry.value;
-	}
+    for (var entry in map.entrySet()) {
+        object[entry.key] = entry.value;
+    }
 
-	return object;
+    return object;
 };
