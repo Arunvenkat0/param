@@ -1,7 +1,7 @@
 'use strict';
-/** 
+/**
  * Model for product variation functionality.
- * @module models/ProductVariationModel 
+ * @module models/ProductVariationModel
  */
 
 /* API Includes */
@@ -30,8 +30,8 @@ var ProductVariationModel = AbstractModel.extend(
          * Updates the model with the given variation attribute to the given value.
          *
          * @alias module:models/ProductVariationModel~ProductVariationModel/setSelectedVariationValue
-         * @param {dw.catalog.ProductVariationAttrbute}      variationAttribute      the attribute
-         * @param {dw.catalog.ProductVariationAttrbuteValue} variationAttributeValue the variation attribute value
+         * @param {dw.catalog.ProductVariationAttrbute} variationAttribute - the attribute
+         * @param {dw.catalog.ProductVariationAttrbuteValue} variationAttributeValue - the variation attribute value
          */
         setSelectedVariationValue : function (variationAttribute, variationAttributeValue) {
             this.selectionMap.put(variationAttribute.ID, variationAttributeValue.ID);
@@ -56,8 +56,8 @@ var ProductVariationModel = AbstractModel.extend(
          * Checks if the given attribute/value combination is currently selected.
          *
          * @alias module:models/ProductVariationModel~ProductVariationModel/isSelectedAttributeValue
-         * @param {dw.catalog.ProductVariationAttrbute}      variationAttribute      the attribute
-         * @param {dw.catalog.ProductVariationAttrbuteValue} variationAttributeValue the variation attribute value
+         * @param {dw.catalog.ProductVariationAttrbute} variationAttribute - the attribute
+         * @param {dw.catalog.ProductVariationAttrbuteValue} variationAttributeValue - the variation attribute value
          * @returns {Boolean} true if the value is selected
          */
         isSelectedAttributeValue : function (variationAttribute, variationAttributeValue) {
@@ -68,8 +68,8 @@ var ProductVariationModel = AbstractModel.extend(
          * Returns the ProductVariationAttrbuteValue object for the given attribute and the value ID.
          *
          * @alias module:models/ProductVariationModel~ProductVariationModel/getVariationAttributeValue
-         * @param {dw.catalog.ProductVariationAttrbute} variationAttribute      the attribute
-         * @param {String}                      variationAttributeValueID       the variation attribute value ID
+         * @param {dw.catalog.ProductVariationAttrbute} variationAttribute - the attribute
+         * @param {String} variationAttributeValueID - the variation attribute value ID
          */
         getVariationAttributeValue : function (variationAttribute, variationAttributeValueID) {
             if (!empty(variationAttributeValueID)) {
@@ -86,8 +86,8 @@ var ProductVariationModel = AbstractModel.extend(
         /**
          * Gets the currently selected value for a given attribute.
          *
-         * @param  {dw.catalog.ProductVariationAttrbute} variationAttribute the attribute.
-         * @return {dw.catalog.ProductVariationAttrbuteValue}               the attribute value or null.
+         * @param  {dw.catalog.ProductVariationAttrbute} variationAttribute the attribute
+         * @return {dw.catalog.ProductVariationAttrbuteValue} the attribute value or null
          */
         getSelectedValue : function(variationAttribute) {
             if (!empty(variationAttribute)) {
@@ -114,8 +114,31 @@ var ProductVariationModel = AbstractModel.extend(
             }
             return url;
 
-        }
+        },
 
+        /**
+         * Unfortunately, we need to override this function as the instance has no way of updating
+         * the selected variations with Controllers.  We can, however, mimic a ProductVariationMaster
+         * with updated selected variations by calling ProductVariationMaster.getVariants() with a
+         * HashMap of the known selected attributes, as well as with any other attribute under
+         * consideration.
+         *
+         * @param {dw.catalog.ProductVariationAttribute} attr - attribute type
+         * @param {dw.catalog.ProductVariationAttributeValue} value - attribute value
+         */
+        hasOrderableVariants: function (attr, value) {
+            var lookupMap = this.selectionMap.clone();
+            var variantsIter;
+
+            lookupMap.put(attr.attributeID, value.value);
+            variantsIter = this.object.getVariants(lookupMap).iterator();
+
+            while (variantsIter.hasNext()) {
+                var variant = variantsIter.next();
+                var variationModel = variant.masterProduct.variationModel;
+                return variationModel.hasOrderableVariants(attr, value);
+            }
+        }
     });
 
 /** The model class */
