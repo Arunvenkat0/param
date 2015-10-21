@@ -452,7 +452,7 @@ function Logout() {
 
     app.getForm('login').clear();
     app.getForm('profile').clear();
-    
+
     // TODO: Investigate whether this line should be removed
     //Cart.get().calculate();
 

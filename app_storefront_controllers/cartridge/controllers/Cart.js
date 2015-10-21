@@ -10,7 +10,6 @@
 /* API Includes */
 var ArrayList = require('dw/util/ArrayList');
 var ISML = require('dw/template/ISML');
-var Pipelet = require('dw/system/Pipelet');
 var ProductListMgr = require('dw/customer/ProductListMgr');
 var Resource = require('dw/web/Resource');
 var Transaction = require('dw/system/Transaction');
@@ -387,7 +386,7 @@ function addBonusProductJson() {
                         // TODO: CommonJSify cart/UpdateProductOptionSelections.ds and import here
 
                         var UpdateProductOptionSelections = require('app_storefront_core/cartridge/scripts/cart/UpdateProductOptionSelections');
-                        var ScriptResult = UpdateProductOptionSelections.update({
+                        ScriptResult = UpdateProductOptionSelections.update({
                             SelectedOptions:  new ArrayList(productsJSON[i].options),
                             Product: childProduct
                         });

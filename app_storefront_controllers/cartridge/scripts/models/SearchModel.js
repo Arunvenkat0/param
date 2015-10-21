@@ -27,7 +27,7 @@ var SearchModel = ({
  * @returns {dw.catalog.SearchModel} Search model.
  */
 SearchModel.initializeSearchModel = function (searchModel, httpParameterMap) {
-    
+
     if (searchModel) {
         if (httpParameterMap.q.submitted) {
             searchModel.setSearchPhrase(httpParameterMap.q.value);
@@ -69,30 +69,30 @@ SearchModel.initializeProductSearchModel = function (httpParameterMap) {
 
     productSearchModel.setRecursiveCategorySearch(true);
 
-    if (httpParameterMap.pid.submitted ) {
+    if (httpParameterMap.pid.submitted) {
         productSearchModel.setProductID(httpParameterMap.pid.value);
     }
-    
+
     if (httpParameterMap.pmin.submitted) {
-        productSearchModel.setPriceMin(httpParameterMap.pmin.doubleValue);    
+        productSearchModel.setPriceMin(httpParameterMap.pmin.doubleValue);
     }
-    
+
     if (httpParameterMap.pmax.submitted) {
         productSearchModel.setPriceMax(httpParameterMap.pmax.doubleValue);
     }
-    
+
     var sortingRule = httpParameterMap.srule.submitted ? CatalogMgr.getSortingRule(httpParameterMap.srule.value) : null;
     if (sortingRule) {
         productSearchModel.setSortingRule(sortingRule);
     }
-    
+
     // only add category to search model if the category is online
     if (httpParameterMap.cgid.submitted) {
         var category = CatalogMgr.getCategory(httpParameterMap.cgid.value);
-        if(category && category.isOnline() && productSearchModel) {
+        if (category && category.isOnline() && productSearchModel) {
             productSearchModel.setCategoryID(category.getID());
         }
-        
+
     }
 
     return productSearchModel;
@@ -111,7 +111,7 @@ SearchModel.initializeContentSearchModel = function (httpParameterMap) {
     if (httpParameterMap.cid.submitted) {
         contentSearchModel.setContentID(httpParameterMap.cid.value);
     }
-    
+
     if (httpParameterMap.fdid.submitted) {
         contentSearchModel.setFolderID(httpParameterMap.fdid.value);
     }

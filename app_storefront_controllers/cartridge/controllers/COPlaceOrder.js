@@ -45,14 +45,17 @@ function handlePayments(order) {
             };
         }
 
+        var handlePaymentTransaction = function () {
+            paymentInstrument.getPaymentTransaction().setTransactionID(order.getOrderNo());
+        };
+
         for (var i = 0; i < paymentInstruments.length; i++) {
             var paymentInstrument = paymentInstruments[i];
 
             if (PaymentMgr.getPaymentMethod(paymentInstrument.getPaymentMethod()).getPaymentProcessor() === null) {
 
-                Transaction.wrap(function () {
-                    paymentInstrument.getPaymentTransaction().setTransactionID(order.getOrderNo());
-                });
+                Transaction.wrap(handlePaymentTransaction);
+
             } else {
                 /*
                  * An Authorization Pipeline is being dynamically called based on a
