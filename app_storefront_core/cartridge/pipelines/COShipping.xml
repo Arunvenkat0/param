@@ -1001,7 +1001,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="cart/ValidateCartForCheckout.ds"/>
+          <config-property key="ScriptFile" value="cart/ValidateCartForCheckout.js"/>
           <key-binding alias="ScriptLog" key="ScriptLog"/>
           <key-binding alias="Basket" key="Basket"/>
           <key-binding alias="BasketStatus" key="BasketStatus"/>

@@ -7,7 +7,7 @@
  *
  **/
 function sanitize(inS) {
-	return inS.replace(/\W/g,'');
+    return inS.replace(/\W/g, '');
 }
 
 /**
@@ -16,8 +16,8 @@ function sanitize(inS) {
  * @param anURL URL String to sanitize
  *
  **/
-function unsanitizeOR( anURL ) {
-	return anURL.toString().replace('%7c','|','g');
+function unsanitizeOR(anURL) {
+    return anURL.toString().replace('%7c', '|', 'g');
 }
 
 /**
@@ -27,7 +27,7 @@ function unsanitizeOR( anURL ) {
  *
  **/
 function cleanupID(s) {
-	return (s === null) ? s : s.replace(new RegExp( "[^a-z0-9_\-]", "gi" ), "_" ).toLowerCase();
+    return (s === null) ? s : s.replace(new RegExp('[^a-z0-9_\-]', 'gi'), '_').toLowerCase();
 }
 
 module.exports.sanitize = sanitize;

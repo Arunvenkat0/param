@@ -24,10 +24,9 @@ function Authorize(args) {
     Transaction.commit();
 
     if (status.isError()) {
-        return {error : true};
-    }
-    else {
-        return {authorized : true};
+        return {error: true};
+    } else {
+        return {authorized: true};
     }
 }
 

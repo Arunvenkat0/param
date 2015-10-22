@@ -13,11 +13,11 @@ function Handle(args) {
     var cart = Cart.get(args.Basket);
 
     Transaction.wrap(function () {
-        cart.removeExistingPaymentInstruments("PayPal");
-        cart.createPaymentInstrument("PayPal", cart.getNonGiftCertificateAmount());
+        cart.removeExistingPaymentInstruments('PayPal');
+        cart.createPaymentInstrument('PayPal', cart.getNonGiftCertificateAmount());
     });
 
-    return {success : true};
+    return {success: true};
 }
 
 /**
@@ -35,7 +35,7 @@ function Authorize(args) {
         paymentInstrument.paymentTransaction.paymentProcessor = paymentProcessor;
     });
 
-    return {authorized : true};
+    return {authorized: true};
 }
 
 /*

@@ -102,7 +102,7 @@ function getPhraseSuggestions(product, brand, category, content, custom) {
 	};
 }
 
-module.exports = function(searchPhrase, maxSuggestions) {
+module.exports = function (searchPhrase, maxSuggestions) {
 	var suggestModel = new SuggestModel();
 	suggestModel.setSearchPhrase(searchPhrase);
 	suggestModel.setMaxSuggestions(maxSuggestions);

@@ -10,7 +10,7 @@
 	"disallowSpacesInsideParentheses": true,
 	"disallowTrailingWhitespace": true,
 	"disallowTrailingComma": true,
-	"excludeFiles": ["**/static/**", "**/scripts/**", "node_modules/**", "storefront_refapp/**", "docs/**", "**/lib/**", "**/dist/**", "**/.tmp/**"],
+	"excludeFiles": ["**/static/**", "node_modules/**", "storefront_refapp/**", "docs/**", "**/lib/**", "**/dist/**", "**/.tmp/**", "**/*.ds"],
 	"requireBlocksOnNewline": 1,
 	"requireCommaBeforeLineBreak": true,
 	"requireSpaceAfterBinaryOperators": true,
