@@ -15546,6 +15546,10 @@
                 <amount quantity="1">287.36</amount>
             </price-table>
 
+            <price-table product-id="womens-jewelry-bundle">
+                <amount quantity="1">73.40</amount>
+            </price-table>
+
         </price-tables>
     </pricebook>
 </pricebooks>
