@@ -71,10 +71,7 @@ describe('Address', () => {
         client.click(addressPage.LINK_CREATE_ADDRESS)
             .then(() => client.waitForVisible(addressPage.FORM_ADDRESS))
             .then(() => client.isVisible(addressPage.FORM_ADDRESS))
-            .then(visible => {
-                assert.isTrue(visible);
-                return Promise.resolve(visible);
-            })
+            .then(visible => assert.isTrue(visible))
     );
 
     it('should fill out the form to add test address', () =>
@@ -86,8 +83,7 @@ describe('Address', () => {
                     .then(
                         text => text === testAddressTitle,
                         () => false
-                ),
-                () => false
+                    )
             ))
             .then(() => client.getText(addressPage.LAST_ADDRESS_TITLE))
             .then(displayText => assert.equal(displayText, testAddressTitle))
@@ -97,14 +93,16 @@ describe('Address', () => {
         addressPage.editAddress(testAddressTitle, editAddressFormData)
         .then(() => client.waitUntil(() =>
             addressPage.getAddressTitles()
-                .then(titles => titles.indexOf(editAddressFormData.addressid) > -1)
+                .then(
+                    titles => titles.indexOf(editAddressFormData.addressid) > -1,
+                    () => false
+                )
         ))
         .then(() => client.getText(addressPage.TITLE_ADDRESS_SELECTOR))
         .then(addressTexts =>
             assert.isAbove(addressTexts.indexOf(testAddressEditedTextTitle), -1,
                 testAddressEditedTextTitle + 'is found in the address')
         )
-
     );
 
     it('should make the Last Address (test address) the default address', () => {
