@@ -1,16 +1,21 @@
 'use strict';
-
-/** @module views/ProductView */
+/**
+ * View to render product templates.
+ * @module views/ProductView
+ */
 var View = require('./View');
-
+/**
+ * Helper function for rendering product functionality.
+ * @class module:views/ProductView~ProductView
+ * @extends module:views/View
+ * @lends module:views/ProductView~ProductView.prototype
+*/
 var ProductView = View.extend(
-/** @lends module:views/ProductView~ProductView.prototype */
     {
         /**
-         * View for store locator functionality.
-         *
-         * @constructs
-         * @extends module:views/View~View
+         * View for product functionality.
+         * @constructs module:views/ProductView~ProductView
+         * @param {Object} params The parameters to pass to the template.
          */
         init: function (params) {
             this._super(params);
