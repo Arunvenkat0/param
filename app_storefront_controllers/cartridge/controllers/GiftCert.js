@@ -184,23 +184,20 @@ function processAddToBasket(action) {
     var recipientEmailForm = purchaseForm.get('recipientEmail');
     var confirmRecipientEmailForm = purchaseForm.get('confirmRecipientEmail');
 
-    // TODO: May be cause of RAP-4222
-    var form;
-
-    if (recipientEmailForm.valid() && confirmRecipientEmailForm.valid() && (recipientEmailForm.value() !== confirmRecipientEmailForm.value)) {
-        confirmRecipientEmailForm.invalidate('giftcert.confirmrecipientemailvalueerror');
+    if (recipientEmailForm.isValid() && confirmRecipientEmailForm.isValid() && (recipientEmailForm.value() !== confirmRecipientEmailForm.value())) {
+        confirmRecipientEmailForm.invalidateFormElement('giftcert.confirmrecipientemailvalueerror');
     }
 
     // Validates amount in range.
     var amountForm = purchaseForm.get('amount');
-    if (amountForm.valid() && ((amountForm.value() < 5) || (amountForm.value() > 5000))) {
-        amountForm.invalidate('giftcert.amountvalueerror');
+    if (amountForm.isValid() && ((amountForm.value() < 5) || (amountForm.value() > 5000))) {
+        amountForm.invalidateFormElement('giftcert.amountvalueerror');
     }
 
     // Extracts any error messages from validation.
     var formErrors = new HashMap();
     for (var i = 0; i < purchaseForm.object.getChildCount(); i++) {
-        var field = form[i];
+        var field = purchaseForm.object[i];
         if (!field.isValid()) {
             formErrors.put(field.getHtmlName(), Resource.msg(field.getError(), 'forms', null));
         }
