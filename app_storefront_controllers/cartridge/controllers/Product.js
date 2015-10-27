@@ -308,18 +308,29 @@ function includeLastVisited() {
  */
 function getBonusProducts() {
     var Cart = app.getModel('Cart');
+    var getBonusDiscountLineItemDS = require('app_storefront_core/cartridge/scripts/cart/GetBonusDiscountLineItem');
+    var currentHttpParameterMap = request.httpParameterMap;
     var bonusDiscountLineItems = Cart.get().getBonusDiscountLineItems();
-    var bonusDiscountLineItem = null;
+    var bonusDiscountLineItem;
 
-    for (var i = 0; i < bonusDiscountLineItems.length; i++) {
-        if (bonusDiscountLineItems[i].UUID === params.bonusDiscountLineItemUUID.stringValue) {
-            bonusDiscountLineItem = bonusDiscountLineItems[i];
-            break;
-        }
+    bonusDiscountLineItem = getBonusDiscountLineItemDS.getBonusDiscountLineItem(bonusDiscountLineItems, currentHttpParameterMap.bonusDiscountLineItemUUID);
+    var bpCount = bonusDiscountLineItem.bonusProducts.length;
+    var bpTotal;
+    var bonusDiscountProducts;
+    if (currentHttpParameterMap.pageSize && !bpCount) {
+
+        var BPLIObj = getBonusDiscountLineItemDS.getBonusPLIs(currentHttpParameterMap.pageSize, currentHttpParameterMap.pageStart, bonusDiscountLineItem);
+
+        bpTotal = BPLIObj.bpTotal;
+        bonusDiscountProducts = BPLIObj.bonusDiscountProducts;
+    } else {
+        bpTotal = -1;
     }
 
     app.getView({
-        BonusDiscountLineItem: bonusDiscountLineItem
+        BonusDiscountLineItem: bonusDiscountLineItem,
+        BPTotal: bpTotal,
+        BonusDiscountProducts: bonusDiscountProducts
     }).render('product/bonusproductgrid');
 
 }

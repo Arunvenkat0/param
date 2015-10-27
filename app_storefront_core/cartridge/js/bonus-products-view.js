@@ -236,6 +236,45 @@ function initializeGrid () {
 		.always(function () {
 			$bonusProduct.dialog('close');
 		});
+	})
+	.on('click', '#more-bonus-products', function (e) {
+		e.preventDefault();
+		var uuid = $('#bonus-product-list').data().lineItemDetail.uuid;
+
+		//get the next page of choice of bonus products
+		var lineItemDetail = JSON.parse($('#bonus-product-list').attr('data-line-item-detail'));
+		lineItemDetail.pageStart = lineItemDetail.pageStart + lineItemDetail.pageSize;
+		$('#bonus-product-list').attr('data-line-item-detail', JSON.stringify(lineItemDetail));
+
+		var url = util.appendParamsToUrl(Urls.getBonusProducts, {
+			bonusDiscountLineItemUUID: uuid,
+			format: 'ajax',
+			lazyLoad: 'true',
+			pageStart: lineItemDetail.pageStart,
+			pageSize: $('#bonus-product-list').data().lineItemDetail.pageSize,
+			bonusProductsTotal: $('#bonus-product-list').data().lineItemDetail.bpTotal
+		});
+
+		$.ajax({
+			type: 'GET',
+			cache: false,
+			contentType: 'application/json',
+			url: url
+		})
+		.done(function (data) {
+			//add the new page to DOM and remove 'More' link if it is the last page of results
+			$('#more-bonus-products').before(data);
+			if ((lineItemDetail.pageStart + lineItemDetail.pageSize) >= $('#bonus-product-list').data().lineItemDetail.bpTotal) {
+				$('#more-bonus-products').remove();
+			}
+		})
+		.fail(function (xhr, textStatus) {
+			if (textStatus === 'parsererror') {
+				window.alert(Resources.BAD_RESPONSE);
+			} else {
+				window.alert(Resources.SERVER_CONNECTION_ERROR);
+			}
+		});
 	});
 }
 
@@ -284,7 +323,12 @@ var bonusProductsView = {
 						var uuid = $('.bonus-product-promo').data('lineitemid'),
 							url = util.appendParamsToUrl(Urls.getBonusProducts, {
 								bonusDiscountLineItemUUID: uuid,
-								source: 'bonus'
+								source: 'bonus',
+								format: 'ajax',
+								lazyLoad: 'false',
+								pageStart: 0,
+								pageSize: 10,
+								bonusProductsTotal: -1
 							});
 						$(this).dialog('close');
 						self.show(url);
