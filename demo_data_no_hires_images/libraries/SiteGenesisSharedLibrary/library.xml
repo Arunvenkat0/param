@@ -6866,32 +6866,6 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         </folder-links>
     </content>
 
-    <content content-id="gift-certificates-banner">
-        <display-name xml:lang="x-default">Gift Certificate Banner</display-name>
-        <display-name xml:lang="fr-FR">Bannière de chèque-cadeau</display-name>
-        <display-name xml:lang="it-IT">Banner certificato regalo</display-name>
-        <display-name xml:lang="ja-JP">ギフト券のバナー</display-name>
-        <display-name xml:lang="zh-CN">礼券横幅</display-name>
-        <description xml:lang="x-default">Flash gift certificates banner</description>
-        <description xml:lang="fr-FR">Bannière flash de chèque-cadeau</description>
-        <description xml:lang="it-IT">Banner flash certificato regalo</description>
-        <description xml:lang="ja-JP">ギフト券のフラッシュバナー</description>
-        <description xml:lang="zh-CN">Flash 礼券横幅</description>
-        <online-flag>true</online-flag>
-        <searchable-flag>false</searchable-flag>
-        <page-attributes/>
-        <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;img width="789" height="136" src="images/slot/sub_banners/mens-clothing-shorts.png?$staticlink$" alt="" /&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;img width="789" height="136" src="images/slot/sub_banners/mens-clothing-shorts.png?$staticlink$" alt="" /&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;img width="789" height="136" src="images/slot/sub_banners/mens-clothing-shorts.png?$staticlink$" alt="" /&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;img width="789" height="136" src="images/slot/sub_banners/mens-clothing-shorts.png?$staticlink$" alt="" /&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;img width="789" height="136" src="images/slot/sub_banners/mens-clothing-shorts.png?$staticlink$" alt="" /&gt;</custom-attribute>
-        </custom-attributes>
-        <folder-links>
-            <classification-link folder-id="gift-certificates"/>
-        </folder-links>
-    </content>
-
     <content content-id="gift-check-balance">
         <display-name xml:lang="x-default">Gift Certificate Check Balance</display-name>
         <display-name xml:lang="fr-FR">Solde de chèque-cadeau</display-name>

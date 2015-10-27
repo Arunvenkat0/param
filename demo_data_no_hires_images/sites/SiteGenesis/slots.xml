@@ -817,12 +817,15 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
     </slot-configuration>
 
     <slot-configuration slot-id="search-result-banner" context="global" configuration-id="search-results-banner" default="true" assigned-to-site="true">
-        <template>slots/content/giftcertificates.isml</template>
+        <description>Slot Banner that displays above search results</description>
+        <template>slots/html/htmlslotcontainer.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
-            <content-assets>
-                <content-asset content-id="gift-certificates-banner"/>
-            </content-assets>
+            <html>
+                <body xml:lang="x-default">&lt;div class="html-slot"&gt;
+&lt;h1&gt;Can't find what you are looking for? Consider a &lt;a href="$httpsURL('GiftCert-Purchase')$" title="Go to Gift Certificates"&gt;gift certificate&lt;/a&gt;!&lt;/h1&gt;
+&lt;/div&gt;</body>
+            </html>
         </content>
     </slot-configuration>
 
