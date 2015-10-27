@@ -31,7 +31,7 @@ var guard = require('~/cartridge/scripts/guard');
  * Initializes the address form: if customer chose option "use as billing
  * address" on single shipping page the form is prepopulated with the shipping
  * address, otherwise it prepopulates with the billing address that was already set.
- * If neither address is availble, it prepopulates with the default address of the authenticated customer.
+ * If neither address is available, it prepopulates with the default address of the authenticated customer.
  */
 function initAddressForm(cart) {
 
@@ -706,8 +706,12 @@ function validatePayment(cart) {
     var paymentAmount, countryCode, invalidPaymentInstruments, result;
     if (app.getForm('billing').object.fulfilled.value) {
         paymentAmount = cart.getNonGiftCertificateAmount();
-        countryCode = app.getForm('billing').object.billingAddress.addressFields.country.value;
-
+        countryCode = Countries.getCurrent({
+            CurrentRequest: {
+                locale: request.locale
+            }
+        }).countryCode;
+        
         invalidPaymentInstruments = cart.validatePaymentInstruments(customer, countryCode, paymentAmount.value).InvalidPaymentInstruments;
 
         if (!invalidPaymentInstruments && cart.calculatePaymentTransactionTotal()) {
