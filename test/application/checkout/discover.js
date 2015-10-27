@@ -7,12 +7,20 @@ import * as checkoutPage from '../pageObjects/checkout';
 import * as orderConfPage from '../pageObjects/orderConfirmation';
 import * as productDetailPage from '../pageObjects/productDetail';
 import * as testData from '../pageObjects/testData/main';
+import {config} from '../webdriver/wdio.conf';
+
+let locale = config.locale;
 
 describe('Checkout with Discover Card', () => {
     let login = 'testuser1@demandware.com';
     let shippingData = {};
     let billingFormData = {};
     let successfulCheckoutTitle = 'Thank you for your order.';
+
+    //checkout with discover card is disabled on global site, so skip this test
+    if (locale && locale !== 'x_default') {
+        return;
+    }
 
     before(() =>
         testData.load()
@@ -71,10 +79,10 @@ describe('Checkout with Discover Card', () => {
 
     it('should verify that Discover is available as a credit card option', () =>
         checkoutPage.pressBtnCheckoutAsGuest()
-            .then(() => checkoutPage.fillOutShippingForm(shippingFormData))
+            .then(() => checkoutPage.fillOutShippingForm(shippingFormData, locale))
             .then(() => checkoutPage.checkUseAsBillingAddress())
-        .then(() => browser.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
-        .then(() => browser.isExisting(checkoutPage.DISCOVER_CARD))
+            .then(() => browser.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
+            .then(() => browser.isExisting(checkoutPage.DISCOVER_CARD))
             .then(doesExist => assert.isTrue(doesExist))
     );
 
@@ -89,5 +97,4 @@ describe('Checkout with Discover Card', () => {
                 .then(() => checkoutPage.getLabelOrderConfirmation())
                 .then(title => assert.equal(title, successfulCheckoutTitle)))
     );
-
 });

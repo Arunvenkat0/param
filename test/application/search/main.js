@@ -1,6 +1,7 @@
 'use strict';
 
 import {assert} from 'chai';
+import {config} from '../webdriver/wdio.conf';
 import * as homePage from '../pageObjects/home';
 import * as searchResultsPage from '../pageObjects/searchResults';
 import * as testData from '../pageObjects/testData/main';
@@ -13,6 +14,7 @@ describe('Search', () => {
     let catalog;
     let productVariationMaster;
     let variantIds;
+    let locale = config.locale;
 
     before(() => testData.load()
         .then(() => catalog = testData.parsedData.catalog)
@@ -37,21 +39,27 @@ describe('Search', () => {
             .then(doesExist => assert.isTrue(doesExist))
     );
 
-    it('should return a PDP when searching for a specific product that has no variants', () =>
-        browser.setValue('#q', productNoVariantsKeyword)
+    it('should return a PDP when searching for a specific product that has no variants', () => {
+        if (locale && locale !== 'x_default') {
+            return;
+        }
+        return browser.setValue('#q', productNoVariantsKeyword)
             .then(() => browser.submitForm(searchResultsPage.SEARCH_FORM))
             .then(() => browser.waitForExist(searchResultsPage.PDP_MAIN))
             .then(() => browser.isExisting(searchResultsPage.PDP_MAIN))
-            .then(doesExist => assert.isTrue(doesExist))
-    );
+            .then(doesExist => assert.isTrue(doesExist));
+    });
 
-    it('should return a PDP when searching for a Product Bundle', () =>
-        browser.setValue('#q', bundleKeyword)
+    it('should return a PDP when searching for a Product Bundle', () => {
+        if (locale && locale !== 'x_default') {
+            return;
+        }
+        return browser.setValue('#q', bundleKeyword)
             .then(() => browser.submitForm(searchResultsPage.SEARCH_FORM))
             .then(() => browser.waitForExist(searchResultsPage.PDP_MAIN))
             .then(() => browser.isExisting(searchResultsPage.PDP_MAIN))
-            .then(doesExist => assert.isTrue(doesExist))
-    );
+            .then(doesExist => assert.isTrue(doesExist));
+    });
 
     it('should return a PDP when searching for a Product Set', () =>
         browser.setValue('#q', productSetKeyword)

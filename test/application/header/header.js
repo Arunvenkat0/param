@@ -5,10 +5,13 @@ import * as footer from '../pageObjects/footer';
 import * as homePage from '../pageObjects/home';
 import url from 'url';
 import * as common from '../pageObjects/helpers/common';
+import {config} from '../webdriver/wdio.conf';
 
 
 describe('Header #C147202', () => {
-    var sparams;
+    let sparams;
+
+    let locale = config.locale;
     before(() => homePage.navigateTo());
 
     it('#1 Navigate to NewArrivals', () =>
@@ -44,17 +47,22 @@ describe('Header #C147202', () => {
            })
     );
 
-    it('#4 Navigate to Electronics', () =>
-       browser.waitForVisible(footer.FOOTER_CONTAINER)
-          .click(homePage.ELECTRONICS)
-          .waitForVisible(common.PRIMARY_CONTENT)
-           .url()
-          .then(currentURL => {
-             let parseUrl = url.parse(currentURL.value);
-             return assert.isTrue(parseUrl.pathname.endsWith('electronics/'));
-           })
 
-    );
+    it('#4 Navigate to Electronics', () => {
+        if (locale !== 'x_default') {
+            return;
+        } else {
+            browser.waitForVisible(footer.FOOTER_CONTAINER)
+                .click(homePage.ELECTRONICS)
+                .waitForVisible(common.PRIMARY_CONTENT)
+                .url()
+                .then(currentURL => {
+                    let parseUrl = url.parse(currentURL.value);
+                    return assert.isTrue(parseUrl.pathname.endsWith('electronics/'));
+                });
+        }
+
+    });
 
     it('#5 Navigate to Top Sellers', () =>
        browser.waitForVisible(footer.FOOTER_CONTAINER)

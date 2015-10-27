@@ -8,9 +8,13 @@ import * as addressPage from '../pageObjects/addressBook';
 import * as testData from '../pageObjects/testData/main';
 import * as loginForm from '../pageObjects/helpers/forms/login';
 import * as navHeader from '../pageObjects/navHeader';
+import {config} from '../webdriver/wdio.conf';
+import * as gCustomer from '../pageObjects/testData/customers';
+
 
 describe('Address', () => {
     let login = 'testuser1@demandware.com';
+    let locale = config.locale;
 
     let testAddressEditedTextTitle = 'Test Address Edited';
     let testAddressTitle = 'ZZZZZ Test Address';
@@ -21,6 +25,10 @@ describe('Address', () => {
     before(() => testData.load()
         .then(() => testData.getCustomerByLogin(login))
         .then(customer => {
+            customer.addresses[0].postalCode = gCustomer.globalPostalCode[locale];
+            customer.addresses[0].countryCode = gCustomer.globalCountryCode[locale];
+            customer.addresses[0].phone = gCustomer.globalPhone[locale];
+
             let address = customer.getPreferredAddress();
 
             addressFormData = {
@@ -29,11 +37,13 @@ describe('Address', () => {
                 lastname: 'Mann',
                 address1: '211 Drury Lane',
                 city: 'Far Far Away',
-                states_state: address.stateCode,
-                postal: '04330',
+                postal: address.postalCode,
                 country: address.countryCode,
                 phone: address.phone
             };
+             if (locale && locale === 'x_default') {
+                 addressFormData.states_state = address.stateCode;
+              }
 
             editAddressFormData = {
                 addressid: 'Test Address Edited',
@@ -41,17 +51,19 @@ describe('Address', () => {
                 lastname: 'Mann',
                 address1: '211 Drury Lane',
                 city: 'Far Far Away',
-                states_state: address.stateCode,
-                postal: '04330',
+                postal: address.postalCode,
                 country: address.countryCode,
                 phone: address.phone
-            };
+             };
+            if (locale && locale === 'x_default') {
+                editAddressFormData.states_state = address.stateCode;
+            }
         })
-
         .then(() => addressPage.navigateTo())
         .then(() => loginForm.loginAsDefaultCustomer())
         .then(() => browser.waitForVisible(addressPage.LINK_CREATE_ADDRESS))
         .then(() => addressPage.removeAddresses())
+
     );
 
     // We have deleted all of the address except for 'Home' and 'Work'.

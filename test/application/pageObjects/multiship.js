@@ -1,8 +1,5 @@
 'use strict';
 
-import _ from 'lodash';
-
-import * as formHelpers from './helpers/forms/common';
 import * as testData from './testData/main';
 import * as productDetailPage from './productDetail';
 
@@ -45,23 +42,4 @@ export function addProductVariationMasterToCart (num1, num2, num3) {
 			return product;
 		})
 		.then(product => productDetailPage.addProductVariationToCart(product));
-}
-
-export function fillBillingForm (billingFields) {
-	let fieldsPromise = [];
-
-	let fieldTypes = {
-        creditCard_type: 'selectByValue',
-		creditCard_owner: 'input',
-		creditCard_number: 'input',
-		creditCard_expiration_year: 'selectByValue',
-		creditCard_cvn: 'input'
-	};
-
-	_.each(billingFields, (value, key) => {
-		let selector = '[name*=billing_paymentMethods_' + key + ']';
-		fieldsPromise.push(formHelpers.populateField(selector, value, fieldTypes[key]));
-	});
-
-	return Promise.all(fieldsPromise);
 }

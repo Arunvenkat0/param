@@ -9,6 +9,7 @@ export const WOMENS = '.menu-category li:nth-child(2) .has-sub-menu';
 export const MENS = '.menu-category li:nth-child(3) .has-sub-menu';
 export const ELECTRONICS = '.menu-category li:nth-child(4) .has-sub-menu';
 export const TOP_SELLERS = '.menu-category a[href*="top-seller"]';
+
 export function navigateTo() {
 	return browser.url(basePath);
 }

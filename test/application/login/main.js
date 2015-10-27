@@ -6,7 +6,7 @@ import * as loginPage from '../pageObjects/loginPage';
 import * as testData from '../pageObjects/testData/main';
 import * as loginForm from '../pageObjects/helpers/forms/login';
 import * as navHeader from '../pageObjects/navHeader';
-import Resource from '../../mocks/dw/web/Resource';
+import * as Resource from '../../mocks/dw/web/Resource';
 
 describe('Login Page', () => {
     let login = 'testuser1@demandware.com';

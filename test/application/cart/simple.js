@@ -7,9 +7,10 @@ import * as productDetailPage from '../pageObjects/productDetail';
 import * as productQuickViewPage from '../pageObjects/productQuickView';
 import * as testData from '../pageObjects/testData/main';
 import * as products from '../pageObjects/testData/products';
+import {config} from '../webdriver/wdio.conf';
 
 describe('Cart - Simple', () => {
-    let locale = common.defaultLocale;
+    let locale = config.locale;
     let catalog;
     let productVariationMaster;
     let resourcePath;
@@ -45,6 +46,16 @@ describe('Cart - Simple', () => {
         }
     };
 
+    //This price is after updated the product quantity the new total
+    let updatedPrice = {
+        'x_default': '$149.97',
+        'en_GB': '£95.97',
+        'fr_FR': '107,97 €',
+        'it_IT': '€ 107,97',
+        'ja_JP': '¥ 18,084',
+        'zh_CN': '¥960.00'
+    };
+
     before(() => {
         return testData.load()
             .then(() => catalog = testData.parsedData.catalog)
@@ -52,10 +63,10 @@ describe('Cart - Simple', () => {
             .then(variationMaster => {
                 let variantIds;
                 let variant1Selection = new Map();
-
                 productVariationMaster = variationMaster;
-
                 resourcePath = productVariationMaster.getUrlResourcePath();
+                browser.url(resourcePath);
+
                 variantIds = productVariationMaster.getVariantProductIds();
                 variant1.instance = products.getProduct(catalog, variantIds[0]);
                 variant2.instance = products.getProduct(catalog, variantIds[10]);
@@ -69,10 +80,6 @@ describe('Cart - Simple', () => {
                 variant1Selection.set('colorIndex', variant1.color.index);
                 variant1Selection.set('sizeIndex', variant1.size.index);
                 variant1Selection.set('widthIndex', variant1.width.index);
-
-                variant2.color.displayValue = productVariationMaster.getAttrDisplayValue('color', variant2.instance.customAttributes.color);
-                variant2.size.displayValue = productVariationMaster.getAttrDisplayValue('size', variant2.instance.customAttributes.size);
-                variant2.width.displayValue = productVariationMaster.getAttrDisplayValue('width', variant2.instance.customAttributes.width);
 
                 return productDetailPage.addProductVariationToCart(variant1Selection);
             })
@@ -88,25 +95,25 @@ describe('Cart - Simple', () => {
     it('should display the correct name', () =>
         cartPage
             .getItemNameByRow(1)
-            .then(name => assert.equal(productVariationMaster.displayName[locale], name))
+            .then(name => assert.equal(common.getProductProperties(productVariationMaster.displayName, locale), name))
     );
 
     it('should display the correct color', () => {
-        let expectedColor = productVariationMaster.variationAttributes.color.values[variant1.color.index - 1].displayValues[locale];
+        let expectedColor = common.getProductProperties(productVariationMaster.variationAttributes.color.values[variant1.color.index - 1].displayValues, locale);
         return cartPage
             .getItemAttrByRow(1, 'color')
             .then(color => assert.equal(color, expectedColor));
     });
 
     it('should display the correct size', () => {
-        let expectedSize = productVariationMaster.variationAttributes.size.values[variant1.size.index - 1].displayValues[locale];
+        let expectedSize = common.getProductProperties(productVariationMaster.variationAttributes.size.values[variant1.size.index - 1].displayValues,locale);
         return cartPage
             .getItemAttrByRow(1, 'size')
             .then(size => assert.equal(size, expectedSize));
     });
 
     it('should display the correct width', () => {
-        let expectedWidth = productVariationMaster.variationAttributes.width.values[variant1.width.index - 1].displayValues[locale];
+        let expectedWidth = common.getProductProperties(productVariationMaster.variationAttributes.width.values[variant1.width.index - 1].displayValues,locale);
         return cartPage
             .getItemAttrByRow(1, 'width')
             .then(size => assert.equal(size, expectedWidth));
@@ -123,14 +130,17 @@ describe('Cart - Simple', () => {
         variant2Selection.set('sizeIndex', variant2.size.index);
         variant2Selection.set('widthIndex', variant2.width.index);
 
+        let expectedColor = common.getProductProperties(productVariationMaster.variationAttributes.color.values[variant2.color.index - 1].displayValues, locale);
+        let expectedSize = common.getProductProperties(productVariationMaster.variationAttributes.size.values[variant2.size.index - 1].displayValues, locale);
+        let expectedWidth = common.getProductProperties(productVariationMaster.variationAttributes.width.values[variant2.width.index - 1].displayValues, locale);
         return cartPage
             .updateAttributesByRow(itemRow, variant2Selection)
             .then(() => browser.getText('tr.cart-row:nth-child(1) .attribute[data-attribute=color] .value'))
-            .then(color => assert.equal(color, variant2.color.displayValue))
+            .then(color => assert.equal(color, expectedColor))
             .then(() => browser.getText('tr.cart-row:nth-child(1) .attribute[data-attribute=size] .value'))
-            .then(size => assert.equal(size, variant2.size.displayValue))
+            .then(size => assert.equal(size, expectedSize))
             .then(() => browser.getText('tr.cart-row:nth-child(1) .attribute[data-attribute=width] .value'))
-            .then(width => assert.equal(width, variant2.width.displayValue));
+            .then(width => assert.equal(width, expectedWidth));
     });
 
     it('should allow deselection of an attribute without deselecting other selected attributes', () => {
@@ -181,7 +191,7 @@ describe('Cart - Simple', () => {
         var editDetailsLink = cartPage.getItemEditLinkByRow(1);
         var variationMaster;
 
-    return browser.waitForVisible(editDetailsLink)
+        return browser.waitForVisible(editDetailsLink)
             .click(cartPage.getItemEditLinkByRow(1))
             .waitForVisible(productQuickViewPage.VARIATION_CONTAINER)
             .then(() => productQuickViewPage.getMasterId())
@@ -210,12 +220,13 @@ describe('Cart - Simple', () => {
             .updateQuantityByRow(itemRow, 3)
             .then(quantity => assert.equal(quantity, 3))
     );
-
+    //TODO : consider to grabbing the text value of the product's price, converting it to a number,
+    // then multiplying it by the updated quantity and compare that against what is displayed in the updated Cart
     it('should update price in cart when quantity updated', () =>
         cartPage
             .getPriceByRow(itemRow)
             .then(updatedItemSubTotal =>
-                assert.equal(updatedItemSubTotal, '$149.97')
+                assert.equal(updatedItemSubTotal, updatedPrice[locale])
             )
     );
 

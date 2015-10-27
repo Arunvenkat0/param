@@ -5,6 +5,7 @@ import * as testData from '../pageObjects/testData/main';
 import * as cartPage from '../pageObjects/cart';
 import * as productDetailPage from '../pageObjects/productDetail';
 import * as products from '../pageObjects/testData/products';
+import {config} from '../webdriver/wdio.conf';
 
 // This Test will only work for US sites due to the fact that we only have US store locations.
 
@@ -14,7 +15,11 @@ describe('Cart - select store', () => {
     let catalog;
     let productVariation;
     let resourcePath;
+    let locale = config.locale;
 
+    if (locale && locale !== 'x_default') {
+        return;
+    }
     before(() => {
         return testData.load()
             .then(() => catalog = testData.parsedData.catalog)

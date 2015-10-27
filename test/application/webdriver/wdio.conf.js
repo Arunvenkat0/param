@@ -10,7 +10,8 @@ var opts = _.assign({}, getConfig({
     url: 'https://staging-sitegenesis-dw.demandware.net/s/SiteGenesis',
     suite: '*',
     reporter: 'spec',
-    timeout: 60000
+    timeout: 60000,
+    locale: 'x_default'
 }, './config.json'), argv);
 
 var specs = 'test/application/' + opts.suite;
@@ -37,5 +38,6 @@ exports.config = {
     reporter: opts.reporter,
     reporterOptions: {
         outputDir: 'test/reports'
-    }
+    },
+    locale: opts.locale
 };
