@@ -17,82 +17,81 @@ const basePath = '/cart';
 
 // Pseudo private methods
 function _createCssNthCartRow (idx) {
-	return CART_ITEMS + ':nth-child(' + idx + ')';
+    return CART_ITEMS + ':nth-child(' + idx + ')';
 }
 
 function _createCssUpdateQtyInput (idx) {
-	return [_createCssNthCartRow(idx), ITEM_QUANTITY, 'input'].join(' ');
+    return [_createCssNthCartRow(idx), ITEM_QUANTITY, 'input'].join(' ');
 }
 
 // Public methods
 export function navigateTo () {
-	return client.url(basePath);
+    return client.url(basePath);
 }
 
 export function removeItemByRow (rowNum) {
-	var linkRemoveItem = _createCssNthCartRow(rowNum) + ' .item-user-actions button[value="Remove"]';
-	return client.click(linkRemoveItem)
-		// TODO: Find a way to waitForVisible instead of this pause. When there
-		// are more than one item in the cart, the page elements will be the same
-		// after one item has been removed, so waitForVisible will resolve
-		// immediately
-		.pause(500);
+    var linkRemoveItem = _createCssNthCartRow(rowNum) + ' .item-user-actions button[value="Remove"]';
+    return client.click(linkRemoveItem)
+        // TODO: Find a way to waitForVisible instead of this pause. When there
+        // are more than one item in the cart, the page elements will be the same
+        // after one item has been removed, so waitForVisible will resolve
+        // immediately
+        .pause(500);
 }
 
 export function verifyCartEmpty () {
-	return client.isExisting(CART_EMPTY);
+    return client.isExisting(CART_EMPTY);
 }
 
 export function getItemList () {
-	return client
-		.waitForExist(CART_ITEMS, 5000)
-		.elements(CART_ITEMS);
+    return client
+        .waitForExist(CART_ITEMS, 5000)
+        .elements(CART_ITEMS);
 }
 
 export function getItemNameByRow (rowNum) {
-	let selector = _createCssNthCartRow(rowNum) + ' .name';
-	return client.waitForVisible(selector)
-		.getText(selector);
+    let selector = _createCssNthCartRow(rowNum) + ' .name';
+    return client.waitForVisible(selector)
+        .getText(selector);
 }
 
 export function getItemAttrByRow (rowNum, attr) {
-	var itemAttr = _createCssNthCartRow(rowNum) + ' .attribute[data-attribute="' + attr + '"] .value';
-	return client.getText(itemAttr);
+    var itemAttr = _createCssNthCartRow(rowNum) + ' .attribute[data-attribute="' + attr + '"] .value';
+    return client.getText(itemAttr);
 }
 //get the quantity in Cart for a particular row
 export function getQuantityByRow(rowNum) {
-	var selector = [_createCssNthCartRow(rowNum), ITEM_QUANTITY].join(' ');
-	return client.getText(selector);
+    var selector = [_createCssNthCartRow(rowNum), ITEM_QUANTITY].join(' ');
+    return client.getText(selector);
 }
 
 export function updateQuantityByRow (rowNum, value) {
-	let selector = _createCssUpdateQtyInput(rowNum);
-	return client.waitForVisible(selector)
-		.setValue(selector, value)
-		.click(BTN_UPDATE_CART)
-		// TODO: Replace with waitUntil to check for quantity change
-		.pause(1000)
-		.getValue(selector);
+    let selector = _createCssUpdateQtyInput(rowNum);
+    return client.waitForVisible(selector)
+        .setValue(selector, value)
+        .click(BTN_UPDATE_CART)
+        // TODO: Replace with waitUntil to check for quantity change
+        .pause(1000)
+        .getValue(selector);
 }
 
 export function getPriceByRow (rowNum) {
-	return client.getText(_createCssNthCartRow(rowNum) + ' .item-total .price-total');
+    return client.getText(_createCssNthCartRow(rowNum) + ' .item-total .price-total');
 }
 
-function getItemEditLinkByRow (rowNum) {
-	return [_createCssNthCartRow(rowNum), ITEM_DETAILS, '.item-edit-details a'].join(' ');
+export function getItemEditLinkByRow (rowNum) {
+    return [_createCssNthCartRow(rowNum), ITEM_DETAILS, '.item-edit-details a'].join(' ');
 }
 
 export function updateAttributesByRow (rowNum, selection) {
-
-	return client
-		.click(getItemEditLinkByRow(rowNum))
-		.waitForVisible(productQuickView.CONTAINER)
-		// We must deselect all attributes before selecting the new variant choice as the selectable attributes are
-		// dependent on values that are currently selected.  By deselecting all attributes, we can be assured that the
-		// sequence of selecting color, then size, then width will set the desired attributes as selectable.
-		.then(() => productQuickView.deselectAllAttributes())
-		.then(() => productQuickView.selectAttributes(selection));
+    return client
+        .click(getItemEditLinkByRow(rowNum))
+        .waitForVisible(productQuickView.CONTAINER)
+        // We must deselect all attributes before selecting the new variant choice as the selectable attributes are
+        // dependent on values that are currently selected.  By deselecting all attributes, we can be assured that the
+        // sequence of selecting color, then size, then width will set the desired attributes as selectable.
+        .then(() => productQuickView.deselectAllAttributes())
+        .then(() => productQuickView.selectAttributesByVariant(selection));
 }
 
 /**
@@ -100,7 +99,7 @@ export function updateAttributesByRow (rowNum, selection) {
  *
  */
 export function getOrderSubTotal () {
-	return client.getText(ORDER_SUBTOTAL);
+    return client.getText(ORDER_SUBTOTAL);
 }
 
 /**
@@ -108,19 +107,19 @@ export function getOrderSubTotal () {
  *
  */
 export function emptyCart () {
-	return navigateTo()
-		.then(() => client.elements('.item-quantity input'))
-		.then(items => {
-			if (items.value.length) {
-				items.value.forEach(item =>
-					client.elementIdClear(item.ELEMENT)
-						.elementIdValue(item.ELEMENT, '0'));
-				return client.click(BTN_UPDATE_CART);
-			}
-		})
-		// There are some products, like Gift Certificates, whose
-		// quantities cannot be changed in the Cart. For these, we
-		// must click the Remove link on each.
-		.then(() => common.removeItems(LINK_REMOVE))
-		.then(() => client.waitForExist(CART_EMPTY));
+    return navigateTo()
+        .then(() => client.elements('.item-quantity input'))
+        .then(items => {
+            if (items.value.length) {
+                items.value.forEach(item =>
+                    client.elementIdClear(item.ELEMENT)
+                        .elementIdValue(item.ELEMENT, '0'));
+                return client.click(BTN_UPDATE_CART);
+            }
+        })
+        // There are some products, like Gift Certificates, whose
+        // quantities cannot be changed in the Cart. For these, we
+        // must click the Remove link on each.
+        .then(() => common.removeItems(LINK_REMOVE))
+        .then(() => client.waitForExist(CART_EMPTY));
 }
