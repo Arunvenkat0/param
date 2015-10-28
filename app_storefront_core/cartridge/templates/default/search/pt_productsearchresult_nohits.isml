@@ -37,7 +37,6 @@
 
 		<div id="main" role="main" class="page-content clearfix">
 			<isinclude template="components/browsertoolscheck"/>
-			<isinclude template="search/components/productsearchbreadcrumbs"/>
 
 			<div id="primary" class="primary-content">
 				<isreplace/>
