@@ -15,7 +15,7 @@ export const PRIMARY_H1 = '#primary h1';
 export const BREADCRUMB_A = '.breadcrumb a';
 export const LAST_BREADCRUMB = '.breadcrumb-element:last-of-type';
 export const BTN_ADD_TO_CART = '#add-to-cart';
-
+export const PRIMARY_CONTENT = '.primary-content';
 
 export function getPageTitle() {
     return Q.Promise(resolve => {

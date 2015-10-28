@@ -7,6 +7,7 @@ import * as formLogin from './helpers/forms/login';
 export const USER_INFO_ICON = '.user-info i';
 export const LINK_LOGIN = '.user-links a[href*="account"]';
 export const BTN_LOGOUT = 'a.user-logout';
+export const REFINEMENT = '.breadcrumb-refinement';
 const userPanel = '.user-panel';
 
 export function login () {
