@@ -828,7 +828,7 @@
           <key-binding alias="null" key="To_8"/>
           <key-binding alias="null" key="From_9"/>
           <key-binding alias="null" key="To_9"/>
-          <key-binding alias="!empty(CurrentLocale)?CurrentLocale.substring(CurrentLocale.length-2,CurrentLocale.length) : CurrentForms.billing.billingAddress.addressFields.country.value" key="From_0"/>
+          <key-binding alias="CurrentLocale ? CurrentLocale.substring(CurrentLocale.length-2,CurrentLocale.length) : CurrentForms.billing.billingAddress.addressFields.country.value.toUpperCase()" key="From_0"/>
           <key-binding alias="CountryCode" key="To_0"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
@@ -3272,7 +3272,7 @@ The handle pipeline is responsible for payment provider / payment method specifi
                 <config-property key="OnError" value="PIPELET_ERROR"/>
                 <config-property key="ScriptFile" value="checkout/ValidatePaymentInstruments.ds"/>
                 <key-binding alias="null" key="ScriptLog"/>
-                <key-binding alias="CurrentForms.billing.billingAddress.addressFields.country.value" key="CountryCode"/>
+                <key-binding alias="CountryCode" key="CountryCode"/>
                 <key-binding alias="CurrentCustomer" key="Customer"/>
                 <key-binding alias="PaymentAmount" key="PaymentAmount"/>
                 <key-binding alias="Basket.paymentInstruments" key="PaymentInstruments"/>
