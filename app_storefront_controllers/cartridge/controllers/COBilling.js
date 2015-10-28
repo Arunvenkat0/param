@@ -710,7 +710,7 @@ function validatePayment(cart) {
                 locale: request.locale
             }
         }).countryCode;
-        
+
         invalidPaymentInstruments = cart.validatePaymentInstruments(customer, countryCode, paymentAmount.value).InvalidPaymentInstruments;
 
         if (!invalidPaymentInstruments && cart.calculatePaymentTransactionTotal()) {
