@@ -1,293 +1,301 @@
 .checkout-progress-indicator {
-	overflow: hidden;
-	div {
-		display: inline;
-		padding: 0 .83em 0 0;
-	}
-	span {
-		text-transform: uppercase;
-	}
-	.active span {
-		font-weight: 700;
-		color: $black;
-	}
-	a {
-		color: $night-rider;
-	}
-	i {
-		padding-left: .83em;
-		color: $very-light-gray;
-	}
-	.step-3 {
-		padding-right: 0;
-	}
+    overflow: hidden;
+    div {
+        display: inline;
+        padding: 0 .83em 0 0;
+    }
+    span {
+        text-transform: uppercase;
+    }
+    .active span {
+        font-weight: 700;
+        color: $black;
+    }
+    a {
+        color: $night-rider;
+    }
+    i {
+        padding-left: .83em;
+        color: $very-light-gray;
+    }
+    .step-3 {
+        padding-right: 0;
+    }
 }
 
 .shipping-method {
-	margin-top: 1.83em;
-	label {
-		display: inline;
-		float: none !important;
-		padding-right: .42em !important;
-	}
-	.shipping-description {
-		display: inline;
-	}
+    margin-top: 1.83em;
+    label {
+        display: inline;
+        float: none !important;
+        padding-right: .42em !important;
+    }
+    .shipping-description {
+        display: inline;
+    }
 }
 
 .gift-message-text {
-	&.hidden {
-		display: none;
-	}
+    overflow: visible;
+    opacity: 1;
+    transition: all 1s ease;
+    &.hidden {
+        height: 0;
+        opacity: 0;
+        overflow: hidden;
+    }
+    textarea {
+        width: 100%;
+    }
 }
 
 .billing-coupon-code {
-	.form-row {
-		width: 50%;
-	}
+    .form-row {
+        width: 50%;
+    }
 }
 
 .redemption {
-	.success {
-		color: $islamic-green;
-	}
-	color: $sangria;
-	span.error {
-		margin-left: 0;
-	}
+    .success {
+        color: $islamic-green;
+    }
+    color: $sangria;
+    span.error {
+        margin-left: 0;
+    }
 }
 
 .payment-method-options {
-	.form-row {
-		clear: none;
-		float: left;
-		width: 30%;
-	}
+    .form-row {
+        clear: none;
+        float: left;
+        width: 30%;
+    }
 }
 
 .payment-method {
-	clear: both;
-	display: none;
+    clear: both;
+    display: none;
 }
 
 .payment-method-expanded {
-	display: block;
+    display: block;
 }
 
 .month,
 .year,
 .day {
-	clear: none;
-	float: left;
-	margin: 0 0 2% 2%;
-	label {
-		@extend .visually-hidden;
-	}
-	select {
-		width: auto;
-	}
+    clear: none;
+    float: left;
+    margin: 0 0 2% 2%;
+    label {
+        @extend .visually-hidden;
+    }
+    select {
+        width: auto;
+    }
 }
 
 .month .form-caption {
-	margin-left: 0;
+    margin-left: 0;
 }
 
 .cvn {
-	clear: left;
-	.field-wrapper {
-		width: 50px;
-	}
+    clear: left;
+    .field-wrapper {
+        width: 50px;
+    }
 }
 
 .ssn {
-	clear: left;
+    clear: left;
 }
 
 .bml-terms-and-conditions {
-	border: 1px solid $dark-gray;
-	font-size: 0.8em;
-	height: 400px;
-	overflow: auto;
-	padding: 1em;
+    border: 1px solid $dark-gray;
+    font-size: 0.8em;
+    height: 400px;
+    overflow: auto;
+    padding: 1em;
 }
 
 .bml-table-col-1 {
-	width: 25%;
+    width: 25%;
 }
 
 .pt_checkout h3 {
-	padding-bottom: 1em;
+    padding-bottom: 1em;
 }
 
 .checkout-mini-cart {
-	background-color: $white-smoke;
-	max-height: 330px;
-	overflow: auto;
+    background-color: $white-smoke;
+    max-height: 330px;
+    overflow: auto;
 }
 
 .checkout-order-totals {
-	background-color: $white-smoke;
-	padding: 0.3rem .5rem;
+    background-color: $white-smoke;
+    padding: 0.3rem .5rem;
 }
 
 .place-order-totals {
-	clear: both;
-	.order-totals-table {
-		float: right;
-		width: 50%;
-	}
-	.content-asset {}
+    clear: both;
+    .order-totals-table {
+        float: right;
+        width: 50%;
+    }
+    .content-asset {}
 }
 
 .order-component-block {
-	margin: 1.67em 0;
-	.section-header a {
-		float: right;
-		font-weight: normal;
-	}
-	.details {
-		background: none repeat scroll 0 0 $gainsboro;
-		color: $dark-gray;
-		padding: 0.5em 1em;
-	}
+    margin: 1.67em 0;
+    .section-header a {
+        float: right;
+        font-weight: normal;
+    }
+    .details {
+        background: none repeat scroll 0 0 $gainsboro;
+        color: $dark-gray;
+        padding: 0.5em 1em;
+    }
 }
 
 .order-summary-footer {
-	position: relative;
-	h2 {
-		font-size: 2em;
-		font-style: italic;
-		font-weight: normal;
-	}
+    position: relative;
+    h2 {
+        font-size: 2em;
+        font-style: italic;
+        font-weight: normal;
+    }
 }
 
 .summary-help {
-	float: right;
-	font-size: 0.8em;
-	margin: 1em 0;
+    float: right;
+    font-size: 0.8em;
+    margin: 1em 0;
 }
 
 .submit-order {
-	clear: both;
-	display: block;
-	padding: 1.67em 0 0;
-	text-align: right;
-	.back-to-cart {
-		font-size: 1.1em;
-		&:hover {
-			text-decoration: underline;
-		}
-	}
-	button {
-		margin-left: 1.5em;
-	}
+    clear: both;
+    display: block;
+    padding: 1.67em 0 0;
+    text-align: right;
+    .back-to-cart {
+        font-size: 1.1em;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    button {
+        margin-left: 1.5em;
+    }
 }
 
 .pt_order-confirmation {
-	h1 {
-		font-size: 2.5em;
-	}
-	.order-shipment-table {
-		margin: 0 0 1.67em;
-		.order-shipment-details {
-			border-right: 1px solid $gainsboro;
-			min-width: 200px;
-		}
-	}
-	#primary h2 {
-		font-size: 2em;
-		font-style: italic;
-		font-weight: normal;
-	}
-	.print-page {
-		float: right;
-	}
+    h1 {
+        font-size: 2.5em;
+    }
+    .order-shipment-table {
+        margin: 0 0 1.67em;
+        .order-shipment-details {
+            border-right: 1px solid $gainsboro;
+            min-width: 200px;
+        }
+    }
+    #primary h2 {
+        font-size: 2em;
+        font-style: italic;
+        font-weight: normal;
+    }
+    .print-page {
+        float: right;
+    }
 }
 
 .confirmation-message {
-	border-bottom: 3px solid $citrus;
-	margin-bottom: 1.67em;
-	padding-bottom: 1.67em;
+    border-bottom: 3px solid $citrus;
+    margin-bottom: 1.67em;
+    padding-bottom: 1.67em;
 }
 
 .order-discount {
-	color: $sangria;
+    color: $sangria;
 }
 
 .gift-cert-used {
-	padding: .83em 0;
+    padding: .83em 0;
 }
 
 .order-detail-options {
-	border-top: 1px solid $gainsboro;
-	margin: 1.67em 0 0;
-	padding: 1.67em 0 0;
-	text-align: right;
-	a {
-		margin: 0 .83em;
-	}
+    border-top: 1px solid $gainsboro;
+    margin: 1.67em 0 0;
+    padding: 1.67em 0 0;
+    text-align: right;
+    a {
+        margin: 0 .83em;
+    }
 }
 
 .summary .edit {
-	position: absolute;
-	text-transform: uppercase;
-	right: 10px;
-	font-size: 0.9em;
-	line-height: 1.5em;
+    position: absolute;
+    text-transform: uppercase;
+    right: 10px;
+    font-size: 0.9em;
+    line-height: 1.5em;
 }
 
 .pt_checkout #main,
 .pt_cart #main,
 .pt_order-confirmation #main {
-	padding: 0 1.15em;
+    padding: 0 1.15em;
 }
 
 .pt_cart .breadcrumb {
-	padding-left: 0;
+    padding-left: 0;
 }
 
 .pt_order-confirmation .order-confirmation-details .content-header {
-	margin: .6em 0 !important;
+    margin: .6em 0 !important;
 }
 
 .order-shipment-details {
-	.label,
-	.firstname,
-	.lastname {
-		font-weight: bold;
-	}
+    .label,
+    .firstname,
+    .lastname {
+        font-weight: bold;
+    }
 }
 
 .item-shipping-address {
-	min-width: 120px;
+    min-width: 120px;
 }
 
 .order-shipment-gift-message-header {
-	font-weight: bold;
-	font-size: 1.2em;
-	padding-bottom: 0px;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding-bottom: 0px;
 }
 
 .order-shipment-gift-message {
-	font-size: 1.1em;
+    font-size: 1.1em;
 }
 
 .billing-error {
-	color: red;
-	margin: 0 0 .83em 24%;
+    color: red;
+    margin: 0 0 .83em 24%;
 }
 
 .cvn-tooltip {
-	font-weight: bold;
-	margin: 5px;
-	text-align: center;
+    font-weight: bold;
+    margin: 5px;
+    text-align: center;
 
-	img {
-		height: 150px;
-		width: 110px;
-	}
+    img {
+        height: 150px;
+        width: 110px;
+    }
 }
 
 #shipping-method-list {
-	position: relative;
+    position: relative;
 }
