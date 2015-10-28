@@ -1,4 +1,4 @@
-<isif condition="${false&&pdict.resetAttributes}">
+<isif condition="${pdict.resetAttributes}">
 	<isscript>
 		var ProductUtils = require('~/cartridge/scripts/product/ProductUtils.js');
 		var url = dw.web.URLUtils.url('Product-Variation', 'pid', pdict.Product.ID, 'format', 'ajax');
@@ -88,7 +88,6 @@
 				product promotions
 				=============================================================
 			</iscomment>
-			
 			<isset name="showTieredPrice" value="${false}" scope="page"/>
 			<isinclude template="product/components/promotions"/>
 
@@ -181,7 +180,7 @@
 				</isif>
 				<input type="hidden" name="cartAction" id="cartAction" value="${cartAction}" />
 				<input type="hidden" name="pid" id="pid" value="${pdict.Product.ID}" />
-				<isset name="disabledAttr" value="${pdict.available&&!pdict.Product.master&&!pdict.Product.variationGroup ? '' : ' disabled="disabled"'}" scope="page"/>
+				<isset name="disabledAttr" value="${pdict.available && !pdict.Product.master && !pdict.Product.variationGroup ? '' : ' disabled="disabled"'}" scope="page"/>
 				<isif condition="${disabledAttr.length == 0}">
 					<button id="add-to-cart" type="submit" title="${buttonTitle}" value="${buttonTitle}" class="button-fancy-large add-to-cart">${buttonTitle}</button>
 				<iselse/>

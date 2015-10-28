@@ -183,6 +183,7 @@ function variation() {
 
     var Product = app.getModel('Product');
     var product = Product.get(params.pid.stringValue);
+    var resetAttributes = false;
 
     if (product.isVisible()) {
 
@@ -191,14 +192,6 @@ function variation() {
         var selectedVariant = currentVariationModel.getSelectedVariant();
         if (selectedVariant) {
             product = Product.get(selectedVariant);
-        }
-
-        // TODO this is apparently nowhere set to true.
-        var resetAttributes = false;
-
-        if (product.isMaster()) {
-            product = Product.get(product.getDefaultVariant());
-            resetAttributes = false;
         }
 
         if (params.source.stringValue === 'bonus') {
