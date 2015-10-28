@@ -172,7 +172,6 @@ function handleOAuthLoginForm() {
                 });
                 if (initiateOAuthLoginResult.result === PIPELET_ERROR || initiateOAuthLoginResult.AuthorizationURL === null) {
                     oauthLoginForm.get('loginsucceeded').invalidate();
-                    finishOAuthLogin();
 
                     // Show login page with error.
                     app.getView('Login').render();
@@ -197,36 +196,9 @@ function handleOAuthLoginForm() {
 function process() {
     // handle OAuth login
     if (request.httpParameterMap.OAuthProvider.stringValue) {
-        session.custom.RememberMe = request.httpParameterMap.rememberme.booleanValue || false;
-        session.custom.ContinuationURL = dw.web.URLUtils.https('Login-OAuthReentry').toString();
-
-        LOGGER.debug('Initiating OAuth login (RememberMe: {0}, ContinuationURL: {1}',
-            session.custom.RememberMe,session.custom.ContinuationURL);
-
-        var initiateOAuthLoginResult = new dw.system.Pipelet('InitiateOAuthLogin').execute({
-            OAuthProviderID: request.httpParameterMap.OAuthProvider.stringValue
-        });
-        if (initiateOAuthLoginResult.result === PIPELET_ERROR) {
-            var oauthLoginForm = app.getForm('oauthlogin.');
-            oauthLoginForm.get('loginsucceeded').invalidate();
-            finishOAuthLogin();
-            return false;
-        }
-
-        response.redirect(initiateOAuthLoginResult.AuthorizationURL);
-        return false;
+        handleOAuthLoginForm();
     } else {
-        // handle 'normal' login
-        var loginForm = app.getForm('login');
-
-        var success = Customer.login(loginForm.getValue('username'), loginForm.getValue('password'), loginForm.getValue('rememberme'));
-
-        if (!success) {
-            loginForm.get('loginsucceeded').invalidate();
-        } else {
-            loginForm.clear();
-        }
-        return success;
+        handleLoginForm();
     }
 }
 
@@ -466,7 +438,7 @@ function Logout() {
 /** @see module:controllers/Login~show */
 exports.Show                    = guard.ensure(['https'], show);
 /** @see module:controllers/Login~handleLoginForm */
-exports.LoginForm               = guard.ensure(['https','post'], handleLoginForm);
+exports.LoginForm               = guard.ensure(['https','post'], process);
 /** @see module:controllers/Login~handleOAuthLoginForm */
 exports.OAuthLoginForm          = guard.ensure(['https','post'], handleOAuthLoginForm);
 /** @see module:controllers/Login~handleOAuthReentry */
