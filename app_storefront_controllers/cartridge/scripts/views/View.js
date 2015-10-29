@@ -17,9 +17,9 @@ var object = require('~/cartridge/scripts/object');
  * @extends module:util/Class~Class
  * @returns {module:views/View~View}
  */
-var View = Class.extend(
-/** @lends module:views/View~View.prototype */
-{
+var View = Class.extend({
+    /** @lends module:views/View~View.prototype */
+
     /**
      * Base class for all view modules. See also {@tutorial Views}.
      * Loops through the parameters and passes them to the view.
@@ -75,8 +75,8 @@ var View = Class.extend(
             throw e;
         }
         return this;
-    }
-});
+
+}});
 
 /** @type {module:views/View~View.prototype} */
 module.exports = View;
