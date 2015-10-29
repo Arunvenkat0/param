@@ -1,19 +1,25 @@
 'use strict';
-/** @module views/StoreLocatorView */
-
+/**
+ * View to render store location templates.
+ * @module views/StoreLocatorView
+ */
 var Resource = require('dw/web/Resource');
 var View = require('./View');
-
+/**
+ * Helper function for rendering store locator functionality.
+ * @class module:views/StoreLocatorView~StoreLocatorView
+ * @extends module:views/View
+ * @lends module:views/StoreLocatorView~StoreLocatorView.prototype
+*/
 var StoreLocatorView = View.extend(
-/** @lends module:views/StoreLocatorView~StoreLocatorView.prototype */
 {
     /**
      * Generates the view consumed by template storelocator/storelocatorresults
      *
-     * @param {object} params stores (Search result for stores), type (Supported values are findbyzip, findbystate and findbycountry)
-     * searchKey (The value used to find Stores) properties are supported
+     * @param {object} params - The following properties are supported: stores (Search result for stores), type (Supported values are findbyzip, findbystate and findbycountry)
+     * searchKey (The value used to find Stores).
      *
-     * @constructs
+     * @constructs module:views/StoreLocatorView~StoreLocatorView
      * @extends module:views/View~View
      */
     init: function (params) {
