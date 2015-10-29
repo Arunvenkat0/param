@@ -219,22 +219,85 @@
 	    .order-shipment-details {
 		border: none;
 		width: 100%;
-	    }
-	    .shipping-method {
-		padding-left: 0;
-	    }
 	}
-    }
-    .order-history-header button {
-	font-size: 1em;
-	padding: .25em;
-    }
-    .page-content-tab-navigaton button {
-	width: 100%;
-    }
-    .pt_gift-registry {
-	.add-gift-cert {
-	    p {
+	.scrollable {
+		height: auto;
+		li {
+			float: left;
+			a {
+				border: 1px solid #d9d9d9;
+				border-radius: 6px;
+				display: block;
+				padding: .2em .8em;
+			}
+		}
+	}
+	#header {
+		height: auto;
+		padding: 1% 1% 30px;
+		.primary-logo {
+			float: left;
+			position: relative;
+			top: auto;
+			width: 65%;
+			img {
+				max-width: 100%;
+			}
+		}
+	}
+	.mini-cart-products {
+		max-height: 100%;
+	}
+	.mini-cart-content {
+		max-width: 220px;
+	}
+	#quickviewbutton {
+		display: none !important;
+	}
+	ul.search-result-items .grid-tile {
+		margin: 2%;
+		width: 92%;
+	}
+	.product-tile {
+		height: auto !important;
+	}
+	.wide-tiles .product-tile {
+		.product-image {
+			width: 41%;
+		}
+		.product-name,
+		.product-pricing,
+		.product-promo,
+		.pr_stars,
+		.product-swatches {
+			float: right;
+		}
+		.product-name h2 {
+			margin-top: 0px;
+		}
+	}
+	.product-tile .product-swatches .swatch img {
+		height: 2em;
+		width: 2em;
+	}
+	.product-listing-1x4 ul.search-result-items .grid-tile {
+		margin: 2%;
+		width: 92%;
+	}
+	.product-compare,
+	.compareitems {
+		display: none !important;
+	}
+	.pt_product-details {
+		.primary-content {
+			padding-bottom: 68px;
+		}
+		.breadcrumb .last {
+			display: none;
+		}
+	}
+	#product-nav-container {
+		bottom: 0;
 		width: 100%;
 	    }
 	}
