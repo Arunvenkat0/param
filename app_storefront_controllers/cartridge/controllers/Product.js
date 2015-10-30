@@ -109,10 +109,7 @@ function hitTile() {
             showcompare: true
         });
 
-        // Special handling for dictionary key 'product' as the template requires it in lower case.
-        delete productView.Product;
         productView.product = product.object;
-
         productView.render(product.getTemplate() || 'product/producttile');
     }
 
