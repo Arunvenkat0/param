@@ -140,9 +140,11 @@ describe('Cart - Simple', () => {
     it('should allow deselection of an attribute without deselecting other selected attributes', () => {
         var attrToDeselect = 'size';
         var selectedAttrIndexes = {};
+        var editDetailsLink = cartPage.getItemEditLinkByRow(1);
         var variationMaster;
 
-        return client.click(cartPage.getItemEditLinkByRow(1))
+        return client.waitForVisible(editDetailsLink)
+            .click(editDetailsLink)
             .waitForVisible(productQuickViewPage.VARIATION_CONTAINER)
 
             // Retrieve variation master
@@ -171,6 +173,36 @@ describe('Cart - Simple', () => {
             // Test that deselected attribute is no longer selected
             .then(() => productQuickViewPage.isAttrValueSelected('size', selectedAttrIndexes.size))
             .then(isSelected => assert.isFalse(isSelected))
+
+            // Tear down - Close the dialog box
+            .then(() => client.click(productQuickViewPage.BTN_CLOSE))
+            .waitForVisible(productQuickViewPage.CONTAINER, 500, true);
+    });
+
+    it ('should disable the Add to Cart button until all required attributes are selected', () => {
+        var attrToDeselect = 'size';
+        var selectedAttrIndexes = {};
+        var editDetailsLink = cartPage.getItemEditLinkByRow(1);
+        var variationMaster;
+
+        return client.waitForVisible(editDetailsLink)
+            .click(cartPage.getItemEditLinkByRow(1))
+            .waitForVisible(productQuickViewPage.VARIATION_CONTAINER)
+            .then(() => productQuickViewPage.getMasterId())
+            .then(masterId => testData.getProductById(masterId))
+            .then(master => variationMaster = master)
+            .then(() => client.getAttribute(productQuickViewPage.VARIATION_CONTAINER, 'data-attributes'))
+            .then(attrs => {
+                attrs = JSON.parse(attrs);
+                Object.keys(attrs).forEach(attr => {
+                    selectedAttrIndexes[attr] = variationMaster.getAttrTypeValueIndex(attr, attrs[attr].value) + 1;
+                });
+            })
+            .then(() => common.selectAttributeByIndex(attrToDeselect, selectedAttrIndexes.size, true))
+
+            // Verify Add to Cart button is disabled
+            .then(() => client.getAttribute(common.BTN_ADD_TO_CART, 'disabled'))
+            .then(isDisabled => assert.equal(isDisabled, 'true'))
 
             // Tear down - Close the dialog box
             .then(() => client.click(productQuickViewPage.BTN_CLOSE))
