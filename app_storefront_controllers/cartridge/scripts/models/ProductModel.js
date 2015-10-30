@@ -63,9 +63,8 @@ var ProductModel = AbstractModel.extend(
             var variationModel = new ProductVariationModel(this.object.getVariationModel());
 
             for (var k = 0; k < paramNames.length; k++) {
-                var attributeID   = paramNames[k];
-                var valueID       = params.get(attributeID).getStringValue();
-                dw.system.Logger.info('Updating variation attribute "{0}" to "{1}".',attributeID, valueID);
+                var attributeID = paramNames[k];
+                var valueID = params.get(attributeID).getStringValue();
 
                 if (valueID) {
                     var variationAttribute = variationModel.getProductVariationAttribute(attributeID);
@@ -125,7 +124,6 @@ var ProductModel = AbstractModel.extend(
             for (var k = 0; k < paramNames.length; k++) {
                 var optionID      = paramNames[k];
                 var optionValueID = params.get(optionID).getStringValue();
-                dw.system.Logger.info('Setting option "{0}" to "{1}".',optionID, optionValueID);
 
                 if (optionValueID) {
                     var option = optionModel.getOption(optionID);
@@ -151,7 +149,7 @@ var ProductModel = AbstractModel.extend(
         getDefaultVariant: function (onlyAvailable) {
             var product = this.object;
             onlyAvailable = typeof onlyAvailable === 'undefined' ? true : onlyAvailable;
-            var firstProduct = !empty(product.getVariationModel().variants) ?
+            var firstProduct = product.getVariationModel().variants ?
                 (product.getVariationModel().getDefaultVariant() || this.getDefaultVariant()) :
                 null;
             if (!firstProduct || !firstProduct.onlineFlag || (onlyAvailable && firstProduct.getAvailabilityModel().availability === 0)) {
@@ -236,7 +234,7 @@ var ProductModel = AbstractModel.extend(
                     if (this.isVariant()) {
                         variant = this.object;
                     } else {
-                        if (!empty(pvm.defaultVariant)) {
+                        if (pvm.defaultVariant) {
                             variant = pvm.defaultVariant;
                         } else if (pvm.variants.length > 0) {
                             variant = pvm.variants[0];
@@ -350,8 +348,8 @@ var ProductModel = AbstractModel.extend(
                 status: avm.getAvailabilityStatus(),
                 statusQuantity: qty,
                 inStock: avm.inStock,
-                ats: empty(avm.inventoryRecord) ? 0 : avm.inventoryRecord.ATS.value.toFixed(),
-                inStockDate: empty(avm.inventoryRecord) || empty(avm.inventoryRecord.inStockDate) ? '' : avm.inventoryRecord.inStockDate.toDateString(),
+                ats: !avm.inventoryRecord ? 0 : avm.inventoryRecord.ATS.value.toFixed(),
+                inStockDate: !avm.inventoryRecord || !avm.inventoryRecord.inStockDate ? '' : avm.inventoryRecord.inStockDate.toDateString(),
                 availableForSale: avm.availability > 0,
                 levels: {}
             };
@@ -361,7 +359,7 @@ var ProductModel = AbstractModel.extend(
             availability.inStockMsg = dw.web.Resource.msgf('global.quantityinstock', 'locale', '', avmLevels.inStock.value.toFixed());
             availability.preOrderMsg = dw.web.Resource.msgf('global.quantitypreorder', 'locale', '', avmLevels.preorder.value.toFixed());
             availability.backOrderMsg = dw.web.Resource.msgf('global.quantitybackorder', 'locale', '', avmLevels.backorder.value.toFixed());
-            if (avm && avm.inventoryRecord && !empty(avm.inventoryRecord.inStockDate)) {
+            if (avm && avm.inventoryRecord && avm.inventoryRecord.inStockDate) {
                 availability.inStockDateMsg = dw.web.Resource.msgf('global.inStockDate', 'locale', '', avm.inventoryRecord.inStockDate.toDateString());
             }
 
