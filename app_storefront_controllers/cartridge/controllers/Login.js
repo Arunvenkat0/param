@@ -29,7 +29,8 @@ function show() {
     var oauthLoginForm = app.getForm('oauthlogin');
     oauthLoginForm.clear();
 
-    app.getForm('ordertrack').clear();
+    var orderTrackForm = app.getForm('ordertrack');
+    orderTrackForm.clear();
 
     if (customer.registered) {
         loginForm.setValue('username', customer.profile.credentials.login);
@@ -121,19 +122,18 @@ function handleLoginForm () {
                 dw.order.Order.ORDER_STATUS_REPLACED);
 
             if (empty(orders)) {
-                response.redirect(dw.web.URLUtils.https('Login-Show'));
+                app.getView('Login', {
+                    OrderNotFound: true
+                }).render();
                 return;
             }
 
             var foundOrder = orders.next();
 
-            if (!foundOrder.billingAddress.postalCode.toUpperCase().equals(orderPostalCode.toUpperCase())) {
-                response.redirect(dw.web.URLUtils.https('Login-Show'));
-                return;
-            }
-
-            if (foundOrder.customerEmail !== orderFormEmail) {
-                response.redirect(dw.web.URLUtils.https('Login-Show'));
+            if (foundOrder.billingAddress.postalCode.toUpperCase() !== orderPostalCode.toUpperCase() || foundOrder.customerEmail !== orderFormEmail) {
+                 app.getView('Login', {
+                    OrderNotFound: true
+                }).render();
                 return;
             }
 
