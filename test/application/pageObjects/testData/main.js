@@ -8,42 +8,43 @@ import xml2js from 'xml2js';
 import * as customers from './customers.js';
 import * as products from './products.js';
 import * as prices from './prices.js';
+import * as pricingHelpers from '../helpers/pricing';
 
 export const defaultPassword = 'Test123!';
 export const creditCard1 = {
-	number: '4111111111111111',
-	yearIndex: _getCurrentYear() + 1,
-	cvn: 987
+    number: '4111111111111111',
+    yearIndex: _getCurrentYear() + 1,
+    cvn: 987
 };
 
 let demoDataDir = 'demo_data_no_hires_images';
 let subjectMeta = {
-	customers: {
-		files: [demoDataDir + '/sites/SiteGenesis/customers.xml'],
-		processor: customers.parseCustomers
-	},
-	catalog: {
-		files: [
-			demoDataDir + '/catalogs/electronics-catalog/catalog.xml',
-			demoDataDir + '/catalogs/apparel-catalog/catalog.xml'
-		],
-		processor: products.parseCatalog
-	},
-	pricebooks: {
-		files: [
-			demoDataDir + '/pricebooks/cny-list-prices.xml',
-			demoDataDir + '/pricebooks/cny-sale-prices.xml',
-			demoDataDir + '/pricebooks/eur-list-prices.xml',
-			demoDataDir + '/pricebooks/eur-sale-prices.xml',
-			demoDataDir + '/pricebooks/gbp-list-prices.xml',
-			demoDataDir + '/pricebooks/gbp-sale-prices.xml',
-			demoDataDir + '/pricebooks/jpy-list-prices.xml',
-			demoDataDir + '/pricebooks/jpy-sale-prices.xml',
-			demoDataDir + '/pricebooks/usd-list-prices.xml',
-			demoDataDir + '/pricebooks/usd-sale-prices.xml'
-		],
-		processor: prices.parsePriceBooks
-	}
+    customers: {
+        files: [demoDataDir + '/sites/SiteGenesis/customers.xml'],
+        processor: customers.parseCustomers
+    },
+    catalog: {
+        files: [
+            demoDataDir + '/catalogs/electronics-catalog/catalog.xml',
+            demoDataDir + '/catalogs/apparel-catalog/catalog.xml'
+        ],
+        processor: products.parseCatalog
+    },
+    pricebooks: {
+        files: [
+            demoDataDir + '/pricebooks/cny-list-prices.xml',
+            demoDataDir + '/pricebooks/cny-sale-prices.xml',
+            demoDataDir + '/pricebooks/eur-list-prices.xml',
+            demoDataDir + '/pricebooks/eur-sale-prices.xml',
+            demoDataDir + '/pricebooks/gbp-list-prices.xml',
+            demoDataDir + '/pricebooks/gbp-sale-prices.xml',
+            demoDataDir + '/pricebooks/jpy-list-prices.xml',
+            demoDataDir + '/pricebooks/jpy-sale-prices.xml',
+            demoDataDir + '/pricebooks/usd-list-prices.xml',
+            demoDataDir + '/pricebooks/usd-sale-prices.xml'
+        ],
+        processor: prices.parsePriceBooks
+    }
 };
 
 const standardProductId = '750518548296';
@@ -60,46 +61,46 @@ export let parsedDataFile = './test/application/pageObjects/testData/parsedData.
  * @returns {Promise} - Indicates when data has been loaded and processed
  */
 export function load () {
-	return new Promise (resolve => {
-		fs.exists(parsedDataFile, exists => {
-			if (exists) {
-				fs.readFile(parsedDataFile, (err, data) => {
-					parsedData = JSON.parse(data);
-					resolve(parsedData);
-				});
-			} else {
-				let promises = [];
+    return new Promise (resolve => {
+        fs.exists(parsedDataFile, exists => {
+            if (exists) {
+                fs.readFile(parsedDataFile, (err, data) => {
+                    parsedData = JSON.parse(data);
+                    resolve(parsedData);
+                });
+            } else {
+                let promises = [];
 
-				_.each(_.keys(subjectMeta), subject => {
-					promises.push(_loadAndJsonifyXmlData(subject));
-				});
+                _.each(_.keys(subjectMeta), subject => {
+                    promises.push(_loadAndJsonifyXmlData(subject));
+                });
 
-				return Promise.all(promises).then(() => {
-					fs.writeFile(parsedDataFile, JSON.stringify(parsedData));
-					resolve();
-				});
-			}
-		});
-	});
+                return Promise.all(promises).then(() => {
+                    fs.writeFile(parsedDataFile, JSON.stringify(parsedData));
+                    resolve();
+                });
+            }
+        });
+    });
 }
 
 function _loadAndJsonifyXmlData (subject) {
-	return new Promise((resolve) => {
-		let localPromises = [];
-		parsedData[subject] = parsedData.hasOwnProperty(subject) ? parsedData[subject] : {};
-		_.each(subjectMeta[subject].files, file => {
-			localPromises.push(new Promise((resolve) => {
-				fs.readFile(file, (err, data) => {
-					let parser = xml2js.Parser();
-					parser.parseString(data, (err, result) => {
-						let parsed = _.extend(parsedData[subject], subjectMeta[subject].processor(result));
-						resolve(parsed);
-					});
-				});
-			}));
-		});
-		resolve(Promise.all(localPromises));
-	});
+    return new Promise((resolve) => {
+        let localPromises = [];
+        parsedData[subject] = parsedData.hasOwnProperty(subject) ? parsedData[subject] : {};
+        _.each(subjectMeta[subject].files, file => {
+            localPromises.push(new Promise((resolve) => {
+                fs.readFile(file, (err, data) => {
+                    let parser = xml2js.Parser();
+                    parser.parseString(data, (err, result) => {
+                        let parsed = _.extend(parsedData[subject], subjectMeta[subject].processor(result));
+                        resolve(parsed);
+                    });
+                });
+            }));
+        });
+        resolve(Promise.all(localPromises));
+    });
 }
 
 /* PRODUCTS */
@@ -107,13 +108,13 @@ function _loadAndJsonifyXmlData (subject) {
 /**
  * Returns a Promise that returns a JSON object of a specific product's test data
  *
- * @param {string} productId - product ID
+ * @param {String} productId - product ID
  * @returns {Promise.Object} - JSON object of product
  */
 export function getProductById (productId) {
-	let catalog = parsedData.catalog;
-	catalog[productId] = products.getProduct(catalog, productId);
-	return Promise.resolve(catalog[productId]);
+    let catalog = parsedData.catalog;
+    catalog[productId] = products.getProduct(catalog, productId);
+    return Promise.resolve(catalog[productId]);
 }
 
 /**
@@ -122,7 +123,7 @@ export function getProductById (productId) {
  * @returns {Promise.Object} - ProductStandard instance
  */
 export function getProductStandard () {
-	return Promise.resolve(getProductById(standardProductId));
+    return Promise.resolve(getProductById(standardProductId));
 }
 
 /**
@@ -131,7 +132,7 @@ export function getProductStandard () {
  * @returns {Promise.Object} - ProductVariationMaster instance
  */
 export function getProductVariationMaster () {
-	return Promise.resolve(getProductById(variationMasterProductId));
+    return Promise.resolve(getProductById(variationMasterProductId));
 }
 
 /**
@@ -140,7 +141,7 @@ export function getProductVariationMaster () {
  * @returns {Promise.Object} - ProductSet instance
  */
 export function getProductSet () {
-	return Promise.resolve(getProductById(setProductId));
+    return Promise.resolve(getProductById(setProductId));
 }
 
 /**
@@ -149,7 +150,7 @@ export function getProductSet () {
  * @returns {Promise.Object} - ProductBundle instance
  */
 export function getProductBundle () {
-	return Promise.resolve(getProductById(bundleProductId));
+    return Promise.resolve(getProductById(bundleProductId));
 }
 
 /* CUSTOMERS */
@@ -157,34 +158,46 @@ export function getProductBundle () {
 /**
  * Returns a Promise that returns a JSON object of a specific customer's test data
  *
- * @param {string} login - test customer's login value
+ * @param {String} login - test customer's login value
  * @returns {Promise.Object} - JSON object with Customer's test data
  */
 export function getCustomerByLogin (login) {
-	let customersData = parsedData.customers;
-	let customer = customers.getCustomer(customersData, login);
-	customersData[login] = customer;
-	return Promise.resolve(customersData[login]);
+    let customersData = parsedData.customers;
+    let customer = customers.getCustomer(customersData, login);
+    customersData[login] = customer;
+    return Promise.resolve(customersData[login]);
 }
 
 /* PRICES */
 
 /**
- * Returns a Promise that returns a JSON object with a specific product's prices
- *     test data
+ * Returns a JSON object with a specific product's prices test data
  *
- * @param {string} productId - product ID
- * @param {string} currencyCode - currency code for price book selection
- * @returns {Promise.Object} - Product* instance
+ * @param {String} productId - product ID
+ * @param {String} [locale=x_default] - page locale
+ * @returns {Object} - Product* instance
  */
-export function getPricesByProductId (productId, currencyCode = 'usd') {
-	return Promise.resolve(prices.getPricesForProduct(parsedData.pricebooks, productId, currencyCode));
+export function getPricesByProductId (productId, locale = 'x_default') {
+    let normalizedLocale = locale.replace(/_/g, '-');
+    let currencyCode = pricingHelpers.localeCurrency[normalizedLocale].currencyCode;
+
+    return getProductById(productId)
+        .then(product => {
+            let applicablePricebooks = {};
+
+            products.priceTypes.forEach(type => {
+                let pricebookName = [currencyCode, type, 'prices'].join('-');
+                applicablePricebooks[type] = parsedData.pricebooks[pricebookName];
+            });
+
+            return Promise.resolve(product.getPrices(applicablePricebooks, locale, parsedData.catalog));
+        });
 }
 
 export function getVariationMasterInstances () {
-	return products.getVariationMasters(parsedData.catalog);
+    return products.getVariationMasters(parsedData.catalog);
 }
 
 function _getCurrentYear() {
-	return moment(new Date()).year();
+    return moment(new Date()).year();
 }

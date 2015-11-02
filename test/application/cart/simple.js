@@ -10,7 +10,7 @@ import * as testData from '../pageObjects/testData/main';
 import * as products from '../pageObjects/testData/products';
 
 describe('Cart - Simple', () => {
-    let countryCode = common.defaultCountryCode;
+    let locale = common.defaultLocale;
     let catalog;
     let productVariationMaster;
     let resourcePath;
@@ -92,25 +92,25 @@ describe('Cart - Simple', () => {
     it('should display the correct name', () =>
         cartPage
             .getItemNameByRow(1)
-            .then(name => assert.equal(productVariationMaster.displayName[countryCode], name))
+            .then(name => assert.equal(productVariationMaster.displayName[locale], name))
     );
 
     it('should display the correct color', () => {
-        let expectedColor = productVariationMaster.variationAttributes.color.values[variant1.color.index - 1].displayValues[countryCode];
+        let expectedColor = productVariationMaster.variationAttributes.color.values[variant1.color.index - 1].displayValues[locale];
         return cartPage
             .getItemAttrByRow(1, 'color')
             .then(color => assert.equal(color, expectedColor));
     });
 
     it('should display the correct size', () => {
-        let expectedSize = productVariationMaster.variationAttributes.size.values[variant1.size.index - 1].displayValues[countryCode];
+        let expectedSize = productVariationMaster.variationAttributes.size.values[variant1.size.index - 1].displayValues[locale];
         return cartPage
             .getItemAttrByRow(1, 'size')
             .then(size => assert.equal(size, expectedSize));
     });
 
     it('should display the correct width', () => {
-        let expectedWidth = productVariationMaster.variationAttributes.width.values[variant1.width.index - 1].displayValues[countryCode];
+        let expectedWidth = productVariationMaster.variationAttributes.width.values[variant1.width.index - 1].displayValues[locale];
         return cartPage
             .getItemAttrByRow(1, 'width')
             .then(size => assert.equal(size, expectedWidth));
