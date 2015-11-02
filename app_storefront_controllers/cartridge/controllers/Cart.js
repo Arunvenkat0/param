@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * This controller provides functions to add and remove products and coupons in the cart.
+ * Controller that provides functions to add and remove products and coupons in the cart.
  * Also provides functions for the continue shopping button and minicart.
  *
  * @module controllers/Cart
