@@ -325,10 +325,6 @@ function registrationForm() {
             }
         }
     });
-
-    app.getView({
-        ContinueURL: URLUtils.https('Account-RegistrationForm')
-    }).render('account/user/registration');
 }
 
 /**
