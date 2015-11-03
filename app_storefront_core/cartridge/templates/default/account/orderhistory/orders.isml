@@ -57,7 +57,7 @@
 											<th class="order-shipped-to">${Resource.msg('account.orders.shippedto','account',null)}</td>
 										</isif>	
 										<th class="order-items">${Resource.msg('account.orders.items','account',null)}</td>
-										<th class="order-total-price">${Resource.msg('account.orders.ordertotal','account',null)}</td>
+										<th class="order-total-price">${Resource.msg('global.ordertotal','locale',null)}</td>
 									</tr>
 								<iselse/>
 									<tr>
