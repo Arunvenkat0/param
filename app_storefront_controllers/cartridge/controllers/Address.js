@@ -121,7 +121,7 @@ function edit() {
 
     // Gets address to be edited.
     addressBook = customer.profile.addressBook;
-    address = addressBook.getAddress(decodeURIComponent(request.httpParameterMap.AddressID.value));
+    address = addressBook.getAddress(request.httpParameterMap.AddressID.value);
     app.getForm(profileForm.address).copyFrom(address);
     app.getForm(profileForm.address.states).copyFrom(address);
 
@@ -170,7 +170,7 @@ function getAddressDetails() {
  */
 function Delete() {
     var CustomerStatusCodes = require('dw/customer/CustomerStatusCodes');
-    var deleteAddressResult = app.getModel('Address').remove(request.httpParameterMap.AddressID.value);
+    var deleteAddressResult = app.getModel('Address').remove(decodeURIComponent(request.httpParameterMap.AddressID.value));
 
     if (request.httpParameterMap.format.stringValue !== 'ajax') {
         response.redirect(URLUtils.https('Address-List'));
