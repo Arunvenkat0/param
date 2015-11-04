@@ -121,8 +121,7 @@ function edit() {
 
     // Gets address to be edited.
     addressBook = customer.profile.addressBook;
-    address = addressBook.getAddress(request.httpParameterMap.AddressID.value);
-
+    address = addressBook.getAddress(decodeURIComponent(request.httpParameterMap.AddressID.value));
     app.getForm(profileForm.address).copyFrom(address);
     app.getForm(profileForm.address.states).copyFrom(address);
 
