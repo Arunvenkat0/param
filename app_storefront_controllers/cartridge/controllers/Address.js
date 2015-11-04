@@ -170,7 +170,7 @@ function getAddressDetails() {
  */
 function Delete() {
     var CustomerStatusCodes = require('dw/customer/CustomerStatusCodes');
-    var deleteAddressResult = app.getModel('Address').remove(decodeURIComponent(request.httpParameterMap.AddressID.value));
+    var deleteAddressResult = app.getModel('Address').remove(request.httpParameterMap.AddressID.value);
 
     if (request.httpParameterMap.format.stringValue !== 'ajax') {
         response.redirect(URLUtils.https('Address-List'));
