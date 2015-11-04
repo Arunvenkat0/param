@@ -9,6 +9,8 @@
 /* API Includes */
 var OrderMgr = require('dw/order/OrderMgr');
 var Transaction = require('dw/system/Transaction');
+var URLUtils = require('dw/web/URLUtils');
+var Pipelet = require('dw/system/Pipelet');
 
 /* Script Modules */
 var app            = require('~/cartridge/scripts/app');
@@ -76,7 +78,7 @@ function getTargetUrl () {
         dw.system.Logger.info('Redirecting to "{0}" after successful login',target);
         return decodeURI(target);
     } else {
-        return dw.web.URLUtils.https('Account-Show');
+        return URLUtils.https('Account-Show');
     }
 }
 
@@ -104,7 +106,7 @@ function handleLoginForm () {
             return;
         },
         register: function () {
-            response.redirect(dw.web.URLUtils.https('Account-StartRegister'));
+            response.redirect(URLUtils.https('Account-StartRegister'));
             return;
         },
         findorder: function () {
@@ -114,7 +116,7 @@ function handleLoginForm () {
             var orderPostalCode = orderTrackForm.getValue('postalCode');
 
             if (empty(orderNumber) || empty(orderPostalCode) || empty(orderFormEmail)) {
-                response.redirect(dw.web.URLUtils.https('Login-Show'));
+                response.redirect(URLUtils.https('Login-Show'));
                 return;
             }
 
@@ -164,10 +166,7 @@ function handleOAuthLoginForm() {
                 session.custom.RememberMe = request.httpParameterMap.rememberme.booleanValue || false;
                 session.custom.ContinuationURL = getTargetUrl().toString();
 
-                LOGGER.debug('Initiating OAuth login (RememberMe: {0}, ContinuationURL: {1}',
-                    session.custom.RememberMe,session.custom.ContinuationURL);
-
-                var initiateOAuthLoginResult = new dw.system.Pipelet('InitiateOAuthLogin').execute({
+                var initiateOAuthLoginResult = new Pipelet('InitiateOAuthLogin').execute({
                     OAuthProviderID: request.httpParameterMap.OAuthProvider.stringValue
                 });
                 if (initiateOAuthLoginResult.result === PIPELET_ERROR || initiateOAuthLoginResult.AuthorizationURL === null) {
@@ -189,6 +188,16 @@ function handleOAuthLoginForm() {
     });
 }
 
+
+function processLoginForm () {
+    if (request.httpParameterMap.OAuthProvider.stringValue) {
+        handleOAuthLoginForm();
+    } else {
+        handleLoginForm();
+    }
+}
+
+
 /**
  * This is a central place to login a user from the login form.
  * @deprecated Only kept until all controllers are migrated, functionality has been moved to other methods
@@ -196,9 +205,35 @@ function handleOAuthLoginForm() {
 function process() {
     // handle OAuth login
     if (request.httpParameterMap.OAuthProvider.stringValue) {
-        handleOAuthLoginForm();
+        session.custom.RememberMe = request.httpParameterMap.rememberme.booleanValue || false;
+        session.custom.ContinuationURL = URLUtils.https('Login-OAuthReentry').toString();
+
+        var initiateOAuthLoginResult = new Pipelet('InitiateOAuthLogin').execute({
+            OAuthProviderID: request.httpParameterMap.OAuthProvider.stringValue
+        });
+
+        if (initiateOAuthLoginResult.result === PIPELET_ERROR) {
+            var oauthLoginForm = app.getForm('oauthlogin.');
+            oauthLoginForm.get('loginsucceeded').invalidate();
+            finishOAuthLogin();
+            return false;
+        }
+
+        response.redirect(initiateOAuthLoginResult.AuthorizationURL);
+
+        return false;
     } else {
-        handleLoginForm();
+         // handle 'normal' login
+        var loginForm = app.getForm('login');
+
+        var success = Customer.login(loginForm.getValue('username'), loginForm.getValue('password'), loginForm.getValue('rememberme'));
+
+        if (!success) {
+            loginForm.get('loginsucceeded').invalidate();
+        } else {
+            loginForm.clear();
+        }
+        return success;
     }
 }
 
@@ -212,7 +247,7 @@ function oAuthSuccess() {
 }
 
 function handleOAuthReentry() {
-    var FinalizeOAuthLoginResult = new dw.system.Pipelet('FinalizeOAuthLogin').execute();
+    var FinalizeOAuthLoginResult = new Pipelet('FinalizeOAuthLogin').execute();
     if (FinalizeOAuthLoginResult.result === PIPELET_ERROR) {
         oAuthFailed();
         return;
@@ -428,7 +463,7 @@ function Logout() {
     // TODO: Investigate whether this line should be removed
     //Cart.get().calculate();
 
-    response.redirect(dw.web.URLUtils.https('Account-Show'));
+    response.redirect(URLUtils.https('Account-Show'));
     return;
 }
 
@@ -438,7 +473,7 @@ function Logout() {
 /** @see module:controllers/Login~show */
 exports.Show                    = guard.ensure(['https'], show);
 /** @see module:controllers/Login~handleLoginForm */
-exports.LoginForm               = guard.ensure(['https','post'], process);
+exports.LoginForm               = guard.ensure(['https','post'], processLoginForm);
 /** @see module:controllers/Login~handleOAuthLoginForm */
 exports.OAuthLoginForm          = guard.ensure(['https','post'], handleOAuthLoginForm);
 /** @see module:controllers/Login~handleOAuthReentry */
