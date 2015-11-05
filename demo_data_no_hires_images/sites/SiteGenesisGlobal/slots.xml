@@ -228,12 +228,12 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
     </slot-configuration>
 
     <slot-configuration slot-id="404-promo" context="global" configuration-id="Promo Zune" default="true" assigned-to-site="true">
-        <description>Free Microsoft Zune With Purchase Of $500 Or More In Electronics</description>
+        <description>Free Microsoft Zune with Purchase of $500 or More in Electronics</description>
         <template>slots/html/htmlslotcontainer.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
             <html>
-                <body xml:lang="x-default">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Free Microsoft Zune With Purchase Of $500 Or More In Electronics" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
+                <body xml:lang="x-default">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Free Microsoft Zune with Purchase of $500 or More in Electronics" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
                 <body xml:lang="fr-FR">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Microsoft Zune offert pour tout achat d'un montant égal ou supérieur à 500 euros dans le rayon électronique" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
                 <body xml:lang="it-IT">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Microsoft Zune gratuito con acquisti di almeno € 500 in prodotti di elettronica" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
                 <body xml:lang="ja-JP">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="電子機器を ¥50,000 以上購入すると Microsoft Zune を無料で進呈" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
@@ -263,7 +263,7 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <enabled-flag>true</enabled-flag>
         <content>
             <html>
-                <body xml:lang="x-default">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Free Microsoft Zune With Purchase Of $500 Or More In Electronics" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
+                <body xml:lang="x-default">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Free Microsoft Zune with Purchase of $500 or More in Electronics" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
                 <body xml:lang="fr-FR">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Microsoft Zune offert pour tout achat d'un montant égal ou supérieur à 500 euros dans le rayon électronique" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
                 <body xml:lang="it-IT">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="Microsoft Zune gratuito con acquisti di almeno € 500 in prodotti di elettronica" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
                 <body xml:lang="ja-JP">&lt;p style="margin:10px 0 0 0"&gt;&lt;img height="139" width="350" alt="電子機器を ¥50,000 以上購入すると Microsoft Zune を無料で進呈" src="images/slot/404-promo-zune.jpg?$staticlink$" /&gt;&lt;/p&gt;</body>
@@ -671,7 +671,7 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
     </slot-configuration>
 
     <slot-configuration slot-id="cat-banner" context="category" context-id="newarrivals-mens" configuration-id="newarrivals-men" default="true" assigned-to-site="true">
-        <description>Default banner for this catagory</description>
+        <description>Default banner for this category</description>
         <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
@@ -682,7 +682,7 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
     </slot-configuration>
 
     <slot-configuration slot-id="cat-banner" context="category" context-id="newarrivals-womens" configuration-id="newarrivals-women" default="true" assigned-to-site="true">
-        <description>Default banner for this catagory</description>
+        <description>Default banner for this category</description>
         <template>slots/category/cat-banner.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>
@@ -811,7 +811,7 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
     </slot-configuration>
 
     <slot-configuration slot-id="cat-landing-slotbottom" context="category" context-id="womens" configuration-id="womens-subcategories" default="true" assigned-to-site="true">
-        <description>Default slot to link to sub-categories under women's</description>
+        <description>Default slot to link to sub-categories under Womens</description>
         <template>slots/category/category-tile.isml</template>
         <enabled-flag>true</enabled-flag>
         <content>

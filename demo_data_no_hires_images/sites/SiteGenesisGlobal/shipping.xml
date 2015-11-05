@@ -94,7 +94,7 @@
         <display-name xml:lang="it-IT">Consegna espressa in 2 giorni</display-name>
         <display-name xml:lang="ja-JP">2 日お急ぎ便</display-name>
         <display-name xml:lang="zh-CN">2 天速递</display-name>
-        <description xml:lang="x-default">Order received in 2 business days</description>
+        <description xml:lang="x-default">Order received within 2 business days</description>
         <description xml:lang="fr-FR">Commande reçue en 2 jours ouvrés</description>
         <description xml:lang="it">Ricezione ordine entro 2 giorni lavorativi</description>
         <description xml:lang="it-IT">Ricezione ordine entro 2 giorni lavorativi</description>
@@ -233,7 +233,7 @@
         <display-name xml:lang="it-IT">Spedizione ridotta</display-name>
         <display-name xml:lang="ja-JP">超おトク</display-name>
         <display-name xml:lang="zh-CN">Super Saver</display-name>
-        <description xml:lang="x-default">Super Saver Delivery (arrives in 3-7 business days)</description>
+        <description xml:lang="x-default">Super Saver delivery (arrives in 3-7 business days)</description>
         <description xml:lang="fr-FR">Livraison ultra-économique (en 3 à 7 jours ouvrés)</description>
         <description xml:lang="it">Spedizione ridotta (consegna in 3-7 giorni lavorativi)</description>
         <description xml:lang="it-IT">Spedizione ridotta (consegna in 3-7 giorni lavorativi)</description>
@@ -320,7 +320,7 @@
         <display-name xml:lang="it-IT">Ritiro in negozio</display-name>
         <display-name xml:lang="ja-JP">店舗にて受け取り</display-name>
         <display-name xml:lang="zh-CN">到店提货</display-name>
-        <description xml:lang="x-default">Store Pickup</description>
+        <description xml:lang="x-default">Pickup in store</description>
         <description xml:lang="fr-FR">Livraison en magasin</description>
         <description xml:lang="it">Ritiro in negozio</description>
         <description xml:lang="it-IT">Ritiro in negozio</description>
@@ -430,7 +430,7 @@
         <display-name xml:lang="it-IT">Consegna espressa in 2 giorni</display-name>
         <display-name xml:lang="ja-JP">2 日お急ぎ便</display-name>
         <display-name xml:lang="zh-CN">2 天速递</display-name>
-        <description xml:lang="x-default">Order received in 2 business days</description>
+        <description xml:lang="x-default">Order received within 2 business days</description>
         <description xml:lang="fr-FR">Commande reçue en 2 jours ouvrés</description>
         <description xml:lang="it">Ricezione ordine entro 2 giorni lavorativi</description>
         <description xml:lang="it-IT">Ricezione ordine entro 2 giorni lavorativi</description>
@@ -560,7 +560,7 @@
         <display-name xml:lang="it-IT">Spedizione ridotta</display-name>
         <display-name xml:lang="ja-JP">超おトク</display-name>
         <display-name xml:lang="zh-CN">Super Saver</display-name>
-        <description xml:lang="x-default">Super Saver Delivery (arrives in 3-7 business days)</description>
+        <description xml:lang="x-default">Super Saver delivery (arrives in 3-7 business days)</description>
         <description xml:lang="fr-FR">Livraison ultra-économique (en 3 à 7 jours ouvrés)</description>
         <description xml:lang="it">Spedizione ridotta (consegna in 3-7 giorni lavorativi)</description>
         <description xml:lang="it-IT">Spedizione ridotta (consegna in 3-7 giorni lavorativi)</description>
@@ -630,7 +630,7 @@
         <display-name xml:lang="it-IT">EUR Ritiro in negozio</display-name>
         <display-name xml:lang="ja-JP">EUR 店舗にて受け取り</display-name>
         <display-name xml:lang="zh-CN">欧元到店提货</display-name>
-        <description xml:lang="x-default">EUR Store Pickup</description>
+        <description xml:lang="x-default">EUR Pickup in store</description>
         <description xml:lang="fr-FR">EUR Livraison en magasin</description>
         <description xml:lang="it">EUR Ritiro in negozio</description>
         <description xml:lang="it-IT">EUR Ritiro in negozio</description>
@@ -740,7 +740,7 @@
         <display-name xml:lang="it-IT">Consegna espressa in 2 giorni</display-name>
         <display-name xml:lang="ja-JP">2 日お急ぎ便</display-name>
         <display-name xml:lang="zh-CN">2 天速递</display-name>
-        <description xml:lang="x-default">Order received in 2 business days</description>
+        <description xml:lang="x-default">Order received within 2 business days</description>
         <description xml:lang="fr-FR">Commande reçue en 2 jours ouvrés</description>
         <description xml:lang="it">Ricezione ordine entro 2 giorni lavorativi</description>
         <description xml:lang="it-IT">Ricezione ordine entro 2 giorni lavorativi</description>
@@ -879,7 +879,7 @@
         <display-name xml:lang="it-IT">Spedizione ridotta</display-name>
         <display-name xml:lang="ja-JP">超おトク</display-name>
         <display-name xml:lang="zh-CN">Super Saver</display-name>
-        <description xml:lang="x-default">Super Saver Delivery (arrives in 3-7 business days)</description>
+        <description xml:lang="x-default">Super Saver delivery (arrives in 3-7 business days)</description>
         <description xml:lang="fr-FR">Livraison ultra-économique (en 3 à 7 jours ouvrés)</description>
         <description xml:lang="it">Spedizione ridotta (consegna in 3-7 giorni lavorativi)</description>
         <description xml:lang="it-IT">Spedizione ridotta (consegna in 3-7 giorni lavorativi)</description>
@@ -966,7 +966,7 @@
         <display-name xml:lang="it-IT">Ritiro in negozio</display-name>
         <display-name xml:lang="ja-JP">店舗にて受け取り</display-name>
         <display-name xml:lang="zh-CN">到店提货</display-name>
-        <description xml:lang="x-default">Store Pickup</description>
+        <description xml:lang="x-default">Pickup in store</description>
         <description xml:lang="fr-FR">Livraison en magasin</description>
         <description xml:lang="it">Ritiro in negozio</description>
         <description xml:lang="it-IT">Ritiro in negozio</description>
@@ -1044,7 +1044,7 @@
         <display-name xml:lang="it-IT">Consegna espressa in 2 giorni</display-name>
         <display-name xml:lang="ja-JP">2 日お急ぎ便</display-name>
         <display-name xml:lang="zh-CN">2 天速递</display-name>
-        <description xml:lang="x-default">Order received in 2 business days</description>
+        <description xml:lang="x-default">Order received within 2 business days</description>
         <description xml:lang="fr-FR">Commande reçue en 2 jours ouvrés</description>
         <description xml:lang="it">Ricezione ordine entro 2 giorni lavorativi</description>
         <description xml:lang="it-IT">Ricezione ordine entro 2 giorni lavorativi</description>
@@ -1110,7 +1110,7 @@
         <display-name xml:lang="it-IT">Spedizione ridotta</display-name>
         <display-name xml:lang="ja-JP">超おトク</display-name>
         <display-name xml:lang="zh-CN">Super Saver</display-name>
-        <description xml:lang="x-default">Super Saver Delivery (arrives in 3-7 business days)</description>
+        <description xml:lang="x-default">Super Saver delivery (arrives in 3-7 business days)</description>
         <description xml:lang="fr-FR">Livraison ultra-économique (en 3 à 7 jours ouvrés)</description>
         <description xml:lang="it">Spedizione ridotta (consegna in 3-7 giorni lavorativi)</description>
         <description xml:lang="it-IT">Spedizione ridotta (consegna in 3-7 giorni lavorativi)</description>
@@ -1148,7 +1148,7 @@
         <display-name xml:lang="it-IT">Ritiro in negozio</display-name>
         <display-name xml:lang="ja-JP">店舗にて受け取り</display-name>
         <display-name xml:lang="zh-CN">欧元到店提货</display-name>
-        <description xml:lang="x-default">Store Pickup</description>
+        <description xml:lang="x-default">Pickup in store</description>
         <description xml:lang="fr-FR">Livraison en magasin</description>
         <description xml:lang="it">Ritiro in negozio</description>
         <description xml:lang="it-IT">Ritiro in negozio</description>

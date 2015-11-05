@@ -39,8 +39,7 @@
 
 			<p>
 				${Resource.msg('giftregistryresults.emptymessage','account',null)}
-				${Resource.msgf('global.user.name', 'locale', null, pdict.CurrentForms.giftregistry.search.simple.registrantFirstName.value, pdict.CurrentForms.giftregistry.search.simple.registrantLastName.value)}
-				${Resource.msg('giftregistryresults.emptymessage2','account',null)}
+				${Resource.msgf('global.user.name', 'locale', null, pdict.CurrentForms.giftregistry.search.simple.registrantFirstName.value, pdict.CurrentForms.giftregistry.search.simple.registrantLastName.value)}${Resource.msg('giftregistryresults.emptymessage2','account',null)}
 			</p>
 
 		</isif>
