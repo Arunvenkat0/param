@@ -1,14 +1,14 @@
 'use strict';
-
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var minimist = require('minimist');
 var sourcemaps = require('gulp-sourcemaps');
 
-var paths = require('./package.json').paths;
+var pkg = require('./package.json');
+var paths = pkg.paths;
 var opts = minimist(process.argv.slice(2));
 
-require('babel/register');
+require('babel-core/register');
 
 var gif = require('gulp-if');
 var merge = require('merge-stream');

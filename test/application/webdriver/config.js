@@ -6,8 +6,8 @@ import _ from 'lodash';
 
 let opts = minimist(process.argv.slice(2));
 
-var config = _.assign(getConfig('./config.json', {
+var config = _.assign(getConfig({
 	client: 'phantomjs'
-}), _.pick(opts, ['client', 'url', 'host', 'port']));
+}, './config.json'), _.pick(opts, ['client', 'url', 'host', 'port']));
 
 export default config;
