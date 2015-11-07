@@ -49,11 +49,10 @@ var ProductVariationModel = AbstractModel.extend({
      */
     getSelectedVariant: function () {
         var filteredList = this.object.getVariants(this.selectionMap);
-        if (filteredList.size() === 1) {
+        if (this.selectionMap.size() === this.productVariationAttributes.size() && filteredList.size() === 1) {
             return filteredList[0];
-        } else {
-            return null;
         }
+        return null;
     },
 
     /**
