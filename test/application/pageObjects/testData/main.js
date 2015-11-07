@@ -52,6 +52,10 @@ const variationMasterProductId = '25604455';
 const setProductId = 'spring-look';
 const bundleProductId = 'microsoft-xbox360-bundle';
 
+// Used to determine whether parsedData should be regenerated.  Please modify this any time a change to the structure of
+// parsedData is made.  In an OS X Terminal, please use 'date -u' to generate this value.
+const version = 'Sun Nov 15 04:06:13 UTC 2015';
+
 export let parsedData = {};
 export let parsedDataFile = './test/application/pageObjects/testData/parsedData.txt';
 /**
@@ -66,21 +70,31 @@ export function load () {
             if (exists) {
                 fs.readFile(parsedDataFile, (err, data) => {
                     parsedData = JSON.parse(data);
-                    resolve(parsedData);
+                    if (parsedData.hasOwnProperty('version') && parsedData.version === version) {
+                        resolve(parsedData);
+                    } else {
+                        _generateParsedDataFile(resolve);
+                    }
                 });
             } else {
-                let promises = [];
-
-                _.each(_.keys(subjectMeta), subject => {
-                    promises.push(_loadAndJsonifyXmlData(subject));
-                });
-
-                return Promise.all(promises).then(() => {
-                    fs.writeFile(parsedDataFile, JSON.stringify(parsedData));
-                    resolve();
-                });
+                _generateParsedDataFile(resolve);
             }
+
         });
+    });
+}
+
+function _generateParsedDataFile (resolve) {
+    let promises = [];
+
+    Object.keys(subjectMeta).forEach(subject => {
+        promises.push(_loadAndJsonifyXmlData(subject));
+    });
+
+    return Promise.all(promises).then(() => {
+        parsedData.version = version;
+        fs.writeFile(parsedDataFile, JSON.stringify(parsedData));
+        resolve();
     });
 }
 
@@ -88,7 +102,7 @@ function _loadAndJsonifyXmlData (subject) {
     return new Promise((resolve) => {
         let localPromises = [];
         parsedData[subject] = parsedData.hasOwnProperty(subject) ? parsedData[subject] : {};
-        _.each(subjectMeta[subject].files, file => {
+        subjectMeta[subject].files.forEach(file => {
             localPromises.push(new Promise((resolve) => {
                 fs.readFile(file, (err, data) => {
                     let parser = xml2js.Parser();
