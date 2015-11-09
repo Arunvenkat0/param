@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * This controller implements the logic for the multishipping scenario. Multishipping involves more
+ * Controller for the multishipping scenario. Multishipping involves more
  * than one shipment, shipping address, and/or shipping method per order.
  *
  * @module controllers/COShippingMultiple
@@ -23,6 +23,8 @@ var TransientAddress = app.getModel('TransientAddress');
 
 /**
  * Starting point for multishipping scenario. Renders a page providing address selection for each product line item.
+ *
+ * @transaction
  */
 function start() {
     var cart = Cart.get();
@@ -59,7 +61,8 @@ function start() {
 }
 
 /**
- * Form handler for multishipping form.
+ * Form handler for multishipping form. Handles the save action. Updates the cart calculation, creates shipments
+ * and renders the multishippingaddress template.
  */
 function multiShippingAddresses() {
     var multiShippingForm = app.getForm('multishipping');
@@ -94,6 +97,9 @@ function multiShippingAddresses() {
 
 /**
  * The second step of multishipping: renders a page for each shipment, providing a shipping method selection per shipment.
+ * If a basket exists, renders the multishippingshipments template. If no basket exists, calls the
+ * {@link module:controllers/Cart~Show|Cart controller Show function}.
+ * @transaction
  */
 function startShipments() {
     var cart = Cart.get();
@@ -131,7 +137,11 @@ function startShipments() {
 }
 
 /**
- * TODO
+ * Form handler for the multishipping form. Handles the save action.
+ * Sets the shipping method for each shipment and copies it to the shipmentForm.
+ * If the copy fails, it renders the multishippingshipments template. If it succeeds,
+ * it calls the {@link module:controllers/COBilling~Start|COBilling controller Start function}.
+ * @transaction
  */
 function multiShippingMethods() {
     var multiShippingForm = app.getForm('multishipping');
@@ -194,9 +204,8 @@ function initAddressForms(cart, quantityLineItems) {
 }
 
 /**
- * Renders a form dialog to edit an address. The dialog is supposed to be opened by an Ajax request and ends
- * in templates, which trigger a JavaScript event. The calling page of this dialog is responsible for
- * handling these events.
+ * Renders a form dialog to edit an address. The dialog is opened by an Ajax request and renders templates,
+ * which trigger a JavaScript event. The calling page of this dialog is responsible for handling these events.
  */
 function editAddresses() {
     var cart = Cart.get();
@@ -226,7 +235,10 @@ function editAddresses() {
 }
 
 /**
- * TODO
+ * Form handler for the multishipping form. Handles the following actions:
+ * - __cancel__ - calls the {@link module:controllers/COShippingMultiple~start|start function}.
+ * - __save__ - calls the {@link module:controllers/COShippingMultiple~addEditAddress|addEditAddress function}. If it returns an error, renders the editaddresses template.
+ * - __selectAddress__ - clears the multishipping form and calls the {@link module:controllers/COShippingMultiple~editAddress|editAddress function}.
  */
 function editForm() {
     var multiShippingForm = app.getForm('multishipping');
@@ -270,8 +282,10 @@ function editForm() {
 }
 
 /**
- * TODO
- * @returns {*}
+  * Creates a new transient address. Attempts to copy address information from the multishipping form to the transient address.
+  * Updates the customer address book. Updates the session address book.
+  * If address information cannot be saved to the transient address, returns a JSON object containing success and error information.
+ * @returns {object} JSON object indicating success, error and/or address information.
  */
 function addEditAddress() {
     var cart = Cart.get();
@@ -287,10 +301,10 @@ function addEditAddress() {
         var addToCustomerAddressBook = session.forms.multishipping.editAddress.addToAddressBook.checked;
         var customerAddress = null;
 
-        // Handle customer address book update process
+        // Handles customer address book update process.
         if (addToCustomerAddressBook && addToCustomerAddressBook === true) {
             if (referenceAddress) {
-                // Get address from adress book
+                // Gets address from address book.
                 if (referenceAddress.ID) {
                     customerAddress = Profile.get().getAddessBook().getAddress(referenceAddress.ID);
                 }
@@ -334,7 +348,8 @@ function addEditAddress() {
 }
 
 /**
- * TODO
+ * Calls the {@link module:controllers/COShippingMultiple~addEditAddress|addEditAddress function} and renders a JSON message
+ * with information about the address and the success of the edit.
  */
 function addEditAddressJSON() {
     var addEditAddressResult = addEditAddress();
@@ -353,17 +368,24 @@ function addEditAddressJSON() {
 /*
  * Web exposed methods
  */
-/** @see module:controllers/COShippingMultiple~start */
+/** Starting point for multishipping scenario.
+ * @see module:controllers/COShippingMultiple~start */
 exports.Start = guard.ensure(['https'], start);
-/** @see module:controllers/COShippingMultiple~startShipments */
+/** The second step of multishipping: renders a page for each shipment, providing a shipping method selection per shipment.
+ * @see module:controllers/COShippingMultiple~startShipments */
 exports.StartShipments = guard.ensure(['https', 'get'], startShipments);
-/** @see module:controllers/COShippingMultiple~editAddresses */
+/** Renders a form dialog to edit an address.
+ * @see module:controllers/COShippingMultiple~editAddresses */
 exports.EditAddresses = guard.ensure(['https', 'get'], editAddresses);
-/** @see module:controllers/COShippingMultiple~addEditAddressJSON */
+/** Edits addresses and updates the customer address book and the session address book. Renders a JSON message indicating success or failure.
+ * @see module:controllers/COShippingMultiple~addEditAddressJSON */
 exports.AddEditAddressJSON = guard.ensure(['https', 'get'], addEditAddressJSON);
-/** @see module:controllers/COShippingMultiple~multiShippingAddresses */
+/** Form handler for multishipping form. Handles the save action.
+ * @see module:controllers/COShippingMultiple~multiShippingAddresses */
 exports.MultiShippingAddresses = guard.ensure(['https', 'post'], multiShippingAddresses);
-/** @see module:controllers/COShippingMultiple~multiShippingMethods */
+/** Form handler for multishipping form. Handles the save action.
+ * @see module:controllers/COShippingMultiple~multiShippingMethods */
 exports.MultiShippingMethods = guard.ensure(['https', 'post'], multiShippingMethods);
-/** @see module:controllers/COShippingMultiple~editForm */
+/** Form handler for multishipping form. Handles cancel, save, and selectAddress actions.
+ * @see module:controllers/COShippingMultiple~editForm */
 exports.EditForm = guard.ensure(['https', 'post'], editForm);
