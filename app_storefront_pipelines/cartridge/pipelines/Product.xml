@@ -53,7 +53,7 @@
                     <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                       <config-property key="Transactional" value="false"/>
                       <config-property key="OnError" value="PIPELET_ERROR"/>
-                      <config-property key="ScriptFile" value="product/GetDefaultVariant.ds"/>
+                      <config-property key="ScriptFile" value="app_storefront_core:product/GetDefaultVariant.ds"/>
                       <key-binding alias="ScriptLog" key="ScriptLog"/>
                       <key-binding alias="Product" key="Prod"/>
                       <key-binding alias="DefaultVariant" key="newProduct"/>
@@ -890,7 +890,7 @@ Expects Product instance</description>
                     <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                       <config-property key="Transactional" value="false"/>
                       <config-property key="OnError" value="PIPELET_ERROR"/>
-                      <config-property key="ScriptFile" value="product/GetDefaultVariant.ds"/>
+                      <config-property key="ScriptFile" value="app_storefront_core:product/GetDefaultVariant.ds"/>
                       <key-binding alias="ScriptLog" key="ScriptLog"/>
                       <key-binding alias="Product" key="Prod"/>
                       <key-binding alias="DefaultVariant" key="newProduct"/>
@@ -992,7 +992,7 @@ Expects Product instance</description>
                     <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                       <config-property key="Transactional" value="false"/>
                       <config-property key="OnError" value="PIPELET_ERROR"/>
-                      <config-property key="ScriptFile" value="cart/GetBonusDiscountLineItem.ds"/>
+                      <config-property key="ScriptFile" value="app_storefront_core:cart/GetBonusDiscountLineItem.ds"/>
                       <key-binding alias="BonusDiscountLineItem" key="BonusDiscountLineItem"/>
                       <key-binding alias="CurrentHttpParameterMap.bonusDiscountLineItemUUID.stringValue" key="uuid"/>
                       <key-binding alias="Basket.bonusDiscountLineItems" key="BonusDiscountLineItems"/>
@@ -1148,7 +1148,7 @@ Expects Product instance</description>
                     <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                       <config-property key="Transactional" value="false"/>
                       <config-property key="OnError" value="PIPELET_ERROR"/>
-                      <config-property key="ScriptFile" value="product/GetDefaultVariant.ds"/>
+                      <config-property key="ScriptFile" value="app_storefront_core:product/GetDefaultVariant.ds"/>
                       <key-binding alias="ScriptLog" key="ScriptLog"/>
                       <key-binding alias="Product" key="Prod"/>
                       <key-binding alias="Product" key="newProduct"/>
@@ -1329,7 +1329,7 @@ formatted prices as json</description>
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="cart/GetBonusDiscountLineItem.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:cart/GetBonusDiscountLineItem.ds"/>
           <key-binding alias="BonusDiscountLineItem" key="BonusDiscountLineItem"/>
           <key-binding alias="CurrentHttpParameterMap.bonusDiscountLineItemUUID.stringValue" key="uuid"/>
           <key-binding alias="Basket.bonusDiscountLineItems" key="BonusDiscountLineItems"/>

@@ -935,7 +935,7 @@
                     <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                       <config-property key="Transactional" value="false"/>
                       <config-property key="OnError" value="PIPELET_ERROR"/>
-                      <config-property key="ScriptFile" value="account/giftregistry/CopyAddressFormFields.ds"/>
+                      <config-property key="ScriptFile" value="app_storefront_core:account/giftregistry/CopyAddressFormFields.ds"/>
                       <key-binding alias="test" key="ScriptLog"/>
                       <key-binding alias="CurrentForms.giftregistry" key="GiftRegistryForm"/>
                     </pipelet-node>
@@ -984,7 +984,7 @@
                           <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                             <config-property key="Transactional" value="false"/>
                             <config-property key="OnError" value="PIPELET_ERROR"/>
-                            <config-property key="ScriptFile" value="account/giftregistry/AssignPostEventShippingAddress.ds"/>
+                            <config-property key="ScriptFile" value="app_storefront_core:account/giftregistry/AssignPostEventShippingAddress.ds"/>
                             <key-binding alias="null" key="ScriptLog"/>
                             <key-binding alias="CurrentForms.giftregistry" key="GiftRegistryForm"/>
                           </pipelet-node>
@@ -1529,7 +1529,7 @@
                         <simple-transition/>
                         <node>
                           <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-                            <config-property key="ScriptFile" value="account/giftregistry/AssignEventAddresses.ds"/>
+                            <config-property key="ScriptFile" value="app_storefront_core:account/giftregistry/AssignEventAddresses.ds"/>
                             <config-property key="Transactional" value="true"/>
                             <key-binding alias="ProductList" key="ProductList"/>
                             <key-binding alias="CurrentForms.giftregistry" key="GiftRegistryForm"/>
@@ -2943,7 +2943,7 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="account/ReplaceProductListItem.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:account/ReplaceProductListItem.ds"/>
           <key-binding alias="ProductList" key="ProductList"/>
           <key-binding alias="CurrentHttpParameterMap.uuid.stringValue" key="plid"/>
         </pipelet-node>
@@ -3361,7 +3361,7 @@
             <simple-transition/>
             <node>
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-                <config-property key="ScriptFile" value="account/giftregistry/AssignEventAddresses.ds"/>
+                <config-property key="ScriptFile" value="app_storefront_core:account/giftregistry/AssignEventAddresses.ds"/>
                 <config-property key="Transactional" value="true"/>
                 <key-binding alias="ProductList" key="ProductList"/>
                 <key-binding alias="CurrentCustomer" key="Customer"/>

@@ -184,7 +184,7 @@
                           <pipelet-node custom-name="SetLogin" pipelet-name="Script" pipelet-set-identifier="bc_api">
                             <config-property key="Transactional" value="true"/>
                             <config-property key="OnError" value="PIPELET_ERROR"/>
-                            <config-property key="ScriptFile" value="account/login/SetLogin.ds"/>
+                            <config-property key="ScriptFile" value="app_storefront_core:account/login/SetLogin.ds"/>
                             <key-binding alias="null" key="ScriptLog"/>
                             <key-binding alias="CurrentForms.profile.customer.email.value" key="Login"/>
                             <key-binding alias="CurrentForms.profile.login.password.value" key="Password"/>
@@ -598,7 +598,7 @@
                                 <pipelet-node custom-name="SetLogin" pipelet-name="Script" pipelet-set-identifier="bc_api">
                                   <config-property key="Transactional" value="true"/>
                                   <config-property key="OnError" value="PIPELET_ERROR"/>
-                                  <config-property key="ScriptFile" value="account/login/SetLogin.ds"/>
+                                  <config-property key="ScriptFile" value="app_storefront_core:account/login/SetLogin.ds"/>
                                   <key-binding alias="null" key="ScriptLog"/>
                                   <key-binding alias="CurrentForms.profile.customer.email.value" key="Login"/>
                                   <key-binding alias="CurrentForms.profile.login.password.value" key="Password"/>

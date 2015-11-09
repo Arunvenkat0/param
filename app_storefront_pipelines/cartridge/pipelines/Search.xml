@@ -220,7 +220,7 @@
                           <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                             <config-property key="Transactional" value="false"/>
                             <config-property key="OnError" value="PIPELET_ERROR"/>
-                            <config-property key="ScriptFile" value="search/GetProductID.ds"/>
+                            <config-property key="ScriptFile" value="app_storefront_core:search/GetProductID.ds"/>
                             <key-binding alias="ScriptLog" key="ScriptLog"/>
                             <key-binding alias="ProductSearchResult" key="ProductSearchModel"/>
                             <key-binding alias="ProductID" key="ProductID"/>

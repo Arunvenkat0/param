@@ -507,7 +507,7 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="storelocator/GetStore.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:storelocator/GetStore.ds"/>
           <key-binding alias="CurrentHttpParameterMap.StoreID.value" key="StoreID"/>
           <key-binding alias="Store" key="Store"/>
         </pipelet-node>

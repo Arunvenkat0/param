@@ -408,7 +408,7 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
         <pipelet-node custom-name="Get the shipping addresses from the session" pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="checkout/multishipping/GetSessionAddresses.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/multishipping/GetSessionAddresses.ds"/>
           <key-binding alias="Basket" key="CBasket"/>
           <key-binding alias="ShippingAddresses" key="SessionAddresses"/>
         </pipelet-node>
@@ -549,7 +549,7 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
         <pipelet-node custom-name="Stores addresses in the sessionAddressBook attribute." pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="checkout/multishipping/InitSessionAddressBook.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/multishipping/InitSessionAddressBook.ds"/>
           <key-binding alias="Basket" key="CBasket"/>
           <key-binding alias="CurrentCustomer" key="CCustomer"/>
         </pipelet-node>
@@ -786,7 +786,7 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="checkout/multishipping/GetSessionAddresses.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/multishipping/GetSessionAddresses.ds"/>
           <key-binding alias="Basket" key="CBasket"/>
           <key-binding alias="Addresses" key="SessionAddresses"/>
         </pipelet-node>
@@ -950,7 +950,7 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
         <pipelet-node custom-name="Merges quantity line items with same product ID and shipping address to new product line items." pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="checkout/multishipping/MergeQuantities.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/multishipping/MergeQuantities.ds"/>
           <key-binding alias="CurrentForms.multishipping.addressSelection.quantityLineItems" key="QuantityLineItems"/>
           <key-binding alias="Basket" key="CBasket"/>
         </pipelet-node>
@@ -1122,7 +1122,7 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
               <pipelet-node custom-name="Separates product quantities to QuantityLineItems." pipelet-name="Script" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="false"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="checkout/multishipping/SeperateQuantities.ds"/>
+                <config-property key="ScriptFile" value="app_storefront_core:checkout/multishipping/SeperateQuantities.ds"/>
                 <key-binding alias="Basket" key="CBasket"/>
                 <key-binding alias="PLI" key="ProductLineItem"/>
                 <key-binding alias="QuantityLineItems" key="QuantityLineItemsOut"/>
@@ -1208,7 +1208,7 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="checkout/multishipping/CreateSessionAddress.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/multishipping/CreateSessionAddress.ds"/>
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="NewAddress" key="Address"/>
         </pipelet-node>
@@ -1244,7 +1244,7 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="checkout/multishipping/AddAddressToSessionAddressBook.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/multishipping/AddAddressToSessionAddressBook.ds"/>
           <key-binding alias="CurrentForms.multishipping.editAddress.addToAddressBook.checked" key="AddToAddressBook"/>
           <key-binding alias="Basket" key="CBasket"/>
           <key-binding alias="NewAddress" key="FormAddress"/>

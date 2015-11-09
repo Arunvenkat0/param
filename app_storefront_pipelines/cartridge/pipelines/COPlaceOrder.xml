@@ -362,7 +362,7 @@
             </simple-transition>
             <node>
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-                <config-property key="ScriptFile" value="cart/ValidateCartForCheckout.js"/>
+                <config-property key="ScriptFile" value="app_storefront_core:cart/ValidateCartForCheckout.js"/>
                 <config-property key="Transactional" value="false"/>
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="Basket" key="Basket"/>
@@ -392,7 +392,7 @@
             </simple-transition>
             <node>
               <pipelet-node custom-name="Recalculate payment transaction totals" pipelet-name="Script" pipelet-set-identifier="bc_api">
-                <config-property key="ScriptFile" value="checkout/CalculatePaymentTransactionTotals.ds"/>
+                <config-property key="ScriptFile" value="app_storefront_core:checkout/CalculatePaymentTransactionTotals.ds"/>
                 <config-property key="Transactional" value="true"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
                 <key-binding alias="null" key="ScriptLog"/>
@@ -975,7 +975,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="checkout/SetOrderStatus.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/SetOrderStatus.ds"/>
           <key-binding alias="Order" key="Order"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
@@ -1567,7 +1567,7 @@ Additionally the authorization pipeline may put a dw.system.Status object into t
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="checkout/CopyPaymentMethodsFromOCAPIRequest.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/CopyPaymentMethodsFromOCAPIRequest.ds"/>
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="CurrentForms.billing.paymentMethods" key="PaymentMethodsForm"/>
           <key-binding alias="CurrentHttpParameterMap" key="HttpParamMap"/>

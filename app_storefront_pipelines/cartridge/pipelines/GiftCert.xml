@@ -301,7 +301,7 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="Exception"/>
-          <config-property key="ScriptFile" value="checkout/GetGiftCertLineItem.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/GetGiftCertLineItem.ds"/>
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="Basket" key="Basket"/>
           <key-binding alias="GiftCertificateLineItem" key="GiftCertificateLineItem"/>
@@ -578,7 +578,7 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="Exception"/>
-          <config-property key="ScriptFile" value="checkout/ValidateGiftCertPurchaseForm.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/ValidateGiftCertPurchaseForm.ds"/>
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="CurrentForms.giftcert.purchase" key="Form"/>
           <key-binding alias="FormErrors" key="FormErrors"/>
@@ -879,7 +879,7 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="Exception"/>
-          <config-property key="ScriptFile" value="checkout/GetGiftCertLineItem.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/GetGiftCertLineItem.ds"/>
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="Basket" key="Basket"/>
           <key-binding alias="GiftCertificateLineItem" key="GiftCertificateLineItem"/>
@@ -1055,7 +1055,7 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="Exception"/>
-          <config-property key="ScriptFile" value="checkout/GetGiftCertLineItem.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/GetGiftCertLineItem.ds"/>
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="Basket" key="Basket"/>
           <key-binding alias="GiftCertificateLineItem" key="GiftCertificateLineItem"/>
