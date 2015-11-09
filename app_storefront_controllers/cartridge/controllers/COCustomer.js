@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * This controller implements the first step of the cart checkout process, which is to ask the customer to login, register or
+ * Controller for the first step of the cart checkout process, which is to ask the customer to login, register, or
  * checkout anonymously.
  *
  * @module controllers/COCustomer
@@ -19,15 +19,14 @@ var Cart = require('~/cartridge/scripts/models/CartModel');
 var Content = require('~/cartridge/scripts/models/ContentModel');
 
 /**
- * First step of the checkout: provide to choose checkout type (returning, guest or create account)
+ * First step of the checkout is to choose the checkout type: returning, guest or create account checkout.
+ * Prepares the checkout initially: removes all payment instruments from the basket and clears all
+ * forms used in the checkout process, when the customer enters the checkout. The single steps (shipping, billing etc.)
+ * may not contain the form clearing, in order to support navigating forth and back in the checkout steps without losing
+ * already entered form values.
  */
 function start() {
-    /**
-     * Prepares the checkout initially: removes all payment instruments from the basket and clears all
-     * forms used in the checkout process, when the customer enters the checkout. The single steps (shipping, billing etc.)
-     * may not contain the form clearing in order to support navigating forth and back in the checkout steps without losing
-     * already entered form values.
-     */
+
     app.getForm('singleshipping').clear();
     app.getForm('multishipping').clear();
     app.getForm('billing').clear();
@@ -62,8 +61,11 @@ function start() {
 }
 
 /**
- * Form handler for the login form.
- *
+ * Form handler for the login form. Handles the following actions:
+ * - __login__ - Calls the {@link module:controllers/Login~process|Login controller Process function}. If this returns successfully, calls
+ * the {@link module:controllers/COShipping~Start|COShipping controller Start function}.
+ * - __register__ - Calls the {@link module:controllers/Account~StartRegister|Account controller StartRegister function}.
+ * - __unregistered__ - Calls the {@link module:controllers/COShipping~Start|COShipping controller Start function}.
  */
 function showLoginForm() {
     var loginForm = app.getForm('login');
@@ -111,7 +113,9 @@ function showLoginForm() {
 /*
  * Web exposed methods
  */
-/** @see module:controllers/COCustomer~start */
+/** Selects the type of checkout: returning, guest, or create account. The first step in the checkout process.
+ * @see module:controllers/COCustomer~start */
 exports.Start = guard.ensure(['https'], start);
-/** @see module:controllers/COCustomer~showLoginForm */
+/** Form handler for the login form.
+ * @see module:controllers/COCustomer~showLoginForm */
 exports.LoginForm = guard.ensure(['https', 'post'], showLoginForm);
