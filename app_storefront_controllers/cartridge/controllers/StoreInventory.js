@@ -158,13 +158,15 @@ function inventory() {
     var storesList = lookupByZipCode().Stores;
 
     var Product = app.getModel('Product');
-    var product = Product.get(request.httpParameterMap.pid.stringValue).object;
-    var lineitem;
-    // @FIXME Why can pid be a lineitem ID?
-    if (!product) {
-        lineitem = getProductLineItem(request.httpParameterMap.pid.stringValue);
+    var lineitem = getProductLineItem(request.httpParameterMap.pid.stringValue);
+
+    var product;
+    if (!lineitem) {
+        product = Product.get(request.httpParameterMap.pid.stringValue).object;
+    } else {
         product  = lineitem.product;
     }
+
     var storeAvailabilityMap = getStoreAvailabilityMap(storesList, product, lineitem);
 
     // Creates JSON representation.
