@@ -128,16 +128,39 @@ var ProductVariationModel = AbstractModel.extend({
      */
     hasOrderableVariants: function (attr, value) {
         var lookupMap = this.selectionMap.clone();
+        var variant;
         var variantsIter;
+        var variationModel;
 
         lookupMap.put(attr.attributeID, value.value);
         variantsIter = this.object.getVariants(lookupMap).iterator();
 
-        while (variantsIter.hasNext()) {
-            var variant = variantsIter.next();
-            var variationModel = variant.masterProduct.variationModel;
+        if (variantsIter.hasNext()) {
+            variant = variantsIter.next();
+            variationModel = variant.masterProduct.variationModel;
             return variationModel.hasOrderableVariants(attr, value);
         }
+    },
+
+    /**
+     * Overrides the ProductVariationModel.getImage() function which accepts 1-3 arguments.  Please refer to
+     * the Class ProductVariationModel page on https://documentation.demandware.com for more info.
+     *
+     * @param {...number} var_args
+     * @returns {dw.content.MediaFile}
+     */
+    getImage: function () {
+        var firstVariant = _getFirstMatchingVariant(this.object, this.selectionMap);
+
+        if (3 === arguments.length) {
+            return firstVariant.variationModel.getImage(arguments[0], arguments[1], arguments[2]);
+        }
+
+        return firstVariant.getImage(arguments[0], arguments[1]);
+    },
+
+    getImages: function (viewtype) {
+        return _getFirstMatchingVariant(this.object, this.selectionMap).getImages(viewtype);
     }
 });
 
@@ -167,6 +190,17 @@ function _generateUrl(url, pvm, attrId) {
         }
     }
     return url;
+}
+
+function _getFirstMatchingVariant (variationModel, selectionMap) {
+    var variantsIter = variationModel.getVariants(selectionMap).iterator();
+    var firstVariant;
+
+    if (variantsIter.hasNext()) {
+        firstVariant = variantsIter.next();
+    }
+
+    return firstVariant;
 }
 
 /** The model class */
