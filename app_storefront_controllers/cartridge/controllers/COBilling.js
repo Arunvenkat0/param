@@ -434,6 +434,7 @@ function handleBillingAddress(cart) {
         }
 
         app.getForm('billing.billingAddress.addressFields').copyTo(billingAddress);
+        app.getForm('billing.billingAddress.addressFields.states').copyTo(billingAddress);
 
         cart.setCustomerEmail(app.getForm('billing').object.billingAddress.email.emailAddress.value);
     });
