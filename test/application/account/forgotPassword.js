@@ -1,5 +1,15 @@
 'use strict';
 
+/**
+ * Test resetting password with email format
+ * TODO:
+ * Need to verify the content of the error form and confirmation form
+ * Note :
+ * For security reason starting SG100.1.0 we no longer indicating the matching email
+ * address was found or not, as long as the email format is correct, user will see
+ * a "Request to Reset Your Password Received" confirmation dialog. Although nothing will be
+ * process if the email address was not found.
+ */
 import {assert} from 'chai';
 import client from '../webdriver/client';
 
