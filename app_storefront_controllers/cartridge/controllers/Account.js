@@ -235,7 +235,7 @@ function setNewPasswordForm() {
             var resettingCustomer, success, passwordchangedmail, Customer, Email;
 
             Customer = app.getModel('Customer');
-            Customer = app.getModel('Email');
+            Email = app.getModel('Email');
             resettingCustomer = Customer.getByPasswordResetToken(request.httpParameterMap.Token.getStringValue());
 
             if (empty(resettingCustomer)) {
