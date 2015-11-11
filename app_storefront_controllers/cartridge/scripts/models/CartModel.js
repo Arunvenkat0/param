@@ -399,10 +399,9 @@ var CartModel = AbstractModel.extend({
     getNewBonusDiscountLineItem: function (previousBonusDiscountLineItems) {
         if (previousBonusDiscountLineItems) {
             var newBonusDiscountLineItems = this.getBonusDiscountLineItems();
-            newBonusDiscountLineItems.removeAll(previousBonusDiscountLineItems);
 
-            if (!newBonusDiscountLineItems.isEmpty()) {
-                // FIXME: Originally specified undefined i variable.  Opted to return 1st element.
+            if (newBonusDiscountLineItems.size()) {
+                newBonusDiscountLineItems.removeAll(previousBonusDiscountLineItems);
                 return newBonusDiscountLineItems[0];
             }
         }
