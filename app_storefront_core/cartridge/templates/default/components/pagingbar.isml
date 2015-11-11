@@ -39,10 +39,10 @@
 		<ul>
 		<isif condition="${(currentPage > 0) && (maxPage > 4)}">
 			<li class="first-last">
-				<a class="page-first" title="${Resource.msg('global.paginginformation.first.label', 'locale', null)}" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, 0))}"><i class="fa fa-angle-double-left fa-lg"></i><span class="visually-hidden">${Resource.msg('global.paginginformation.first', 'locale', null)}</span></a>
+				<a class="page-first" title="${Resource.msg('global.paginginformation.first.label', 'locale', null)}" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, 0))}"><i class="fa fa-angle-double-left"></i><span class="visually-hidden">${Resource.msg('global.paginginformation.first', 'locale', null)}</span></a>
 			</li>
 			<li class="first-last">
-				<a class="page-previous" title="${Resource.msg('global.paginginformation.previous.label', 'locale', null)}" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current - pageSize))}"><i class="fa fa-angle-left fa-lg"></i><span class="visually-hidden">${Resource.msg('global.paginginformation.previous.label', 'locale', null)}</span></a>
+				<a class="page-previous" title="${Resource.msg('global.paginginformation.previous.label', 'locale', null)}" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current - pageSize))}"><i class="fa fa-angle-left"></i><span class="visually-hidden">${Resource.msg('global.paginginformation.previous.label', 'locale', null)}</span></a>
 			</li>
 		</isif>
 
@@ -62,10 +62,10 @@
 
 			<isif condition="${(current < totalCount - pageSize) && (maxPage > 4)}">
 				<li class="first-last">
-					<a class="page-next" title="${Resource.msg('global.paginginformation.next.label', 'locale', null)}" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current + pageSize))}"><i class="fa fa-angle-right fa-lg"></i><span class="visually-hidden">${Resource.msg('global.paginginformation.next', 'locale', null)}</span></a>
+					<a class="page-next" title="${Resource.msg('global.paginginformation.next.label', 'locale', null)}" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current + pageSize))}"><i class="fa fa-angle-right"></i><span class="visually-hidden">${Resource.msg('global.paginginformation.next', 'locale', null)}</span></a>
 				</li>
 				<li class="first-last">
-					<a class="page-last" title="${Resource.msg('global.paginginformation.last.label', 'locale', null)}" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current + (maxPage - currentPage) * pageSize))}"><i class="fa fa-angle-double-right fa-lg"></i><span class="visually-hidden">${Resource.msg('global.paginginformation.last', 'locale', null)}</span></a>
+					<a class="page-last" title="${Resource.msg('global.paginginformation.last.label', 'locale', null)}" href="${decodeURI(pdict.pagingmodel.appendPaging( pageURL, current + (maxPage - currentPage) * pageSize))}"><i class="fa fa-angle-double-right"></i><span class="visually-hidden">${Resource.msg('global.paginginformation.last', 'locale', null)}</span></a>
 				</li>
 			</isif>
 		</isif>

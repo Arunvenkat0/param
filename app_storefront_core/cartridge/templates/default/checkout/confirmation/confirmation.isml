@@ -10,23 +10,27 @@
 		creation date, payment information, order totals and shipments of
 		the order.
 	</iscomment>
-
-		<h1>${Resource.msg('confirmation.thankyou','checkout',null)}</h1>
-
-		<button class="print-page">${Resource.msg('confirmation.print','checkout',null)}</button>
-
+	
+	<div class="confirmation <isif condition="${!pdict.CurrentCustomer.authenticated}">create-account</isif>">
 		<div class="confirmation-message">
+			<button class="print-page">${Resource.msg('confirmation.print','checkout',null)}</button>
+		
+			<h1>${Resource.msg('confirmation.thankyou','checkout',null)}</h1>
+
 			<iscontentasset aid="confirmation-message" />
 		</div>
 
-		<div class="order-confirmation-details">
-			<isorderdetails order="${pdict.Order}"/>
-		</div>
-
-		<div class="actions">
-			<a href="${URLUtils.http('Cart-ContinueShopping')}" class="continue">
-				${Resource.msg('confirmation.returnshop','checkout',null)}
-			</a>
-		</div>
-
+        <div class="order-confirmation-details">
+            <isorderdetails order="${pdict.Order}"/>
+        </div>
+        
+        <isinclude template="checkout/confirmation/confirmationregister"/>
+        
+        <div class="actions">
+            <a href="${URLUtils.http('Cart-ContinueShopping')}" class="continue">
+            	${Resource.msg('confirmation.returnshop','checkout',null)}
+            </a>
+        </div>
+	</div>
+	
 </isdecorate>

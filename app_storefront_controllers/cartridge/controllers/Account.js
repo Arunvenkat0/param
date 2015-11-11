@@ -1,8 +1,8 @@
 'use strict';
 
 /**
- * This controller provides functions that render the account overview, manage customer registration and password reset,
- * and edit customer profile information.
+ * Controller that renders the account overview, manages customer registration and password reset,
+ * and edits customer profile information.
  *
  * @module controllers/Account
  */
@@ -16,7 +16,8 @@ var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
 /**
- * Renders the account overview.
+ * Gets a ContentModel object that wraps the myaccount-home content asset,
+ * updates the page metadata, and renders the account/accountoverview template.
  */
 function show() {
     var accountHomeAsset, pageMeta, Content;
@@ -31,7 +32,9 @@ function show() {
 }
 
 /**
- * Updates the profile of an authenticated customer.
+ * Clears the profile form and copies customer profile information from the customer global variable
+ * to the form. Gets a ContentModel object that wraps the myaccount-personaldata content asset, and updates the page
+ * meta data. Renders the account/user/registration template using an anonymous view.
  */
 function editProfile() {
     var Content, pageMeta, accountPersonalDataAsset;
@@ -57,7 +60,10 @@ function editProfile() {
 }
 
 /**
- * Handles the form submission on profile update of edit profile.
+ * Handles the form submission on profile update of edit profile. Handles cancel and confirm actions.
+ *  - cancel - clears the profile form and redirects to the Account-Show controller function.
+ *  - confirm - gets a CustomerModel object that wraps the current customer. Validates several form fields.
+ * If any of the profile validation conditions fail, the user is redirected to the Account-EditProfile controller function. If the profile is valid, the user is redirected to the Account-Show controller function.
  */
 function editForm() {
     app.getForm('profile').handleAction({
@@ -97,8 +103,8 @@ function editForm() {
 }
 
 /**
- * Renders the password reset screen. This is very similar to the password reset
- * dialog but has a screen-based interaction instead of a popup interaction.
+ * Gets the requestpassword form and renders the requestpasswordreset template. This is similar to the password reset
+ * dialog, but has a screen-based interaction instead of a popup interaction.
  */
 function passwordReset() {
     app.getForm('requestpassword').clear();
@@ -108,9 +114,13 @@ function passwordReset() {
 }
 
 /**
- * Utility that handles form submission from dialog and full page
- *  password reset.
- * @private
+ * Handles form submission from dialog and full page password reset. Handles cancel, send, and error actions.
+ *  - cancel - renders the given template.
+ *  - send - gets a CustomerModel object that wraps the current customer. Gets an EmailModel object that wraps an Email object.
+ * Checks whether the customer requested the their login password be reset.
+ * If the customer wants to reset, a password reset token is generated and an email is sent to the customer using the mail/resetpasswordemail template.
+ * Then the account/password/requestpasswordreset_confirm template is rendered.
+ *  - error - the given template is rendered and passed an error code.
  */
 function passwordResetFormHandler(templateName, continueURL) {
     var resetPasswordToken, passwordemail;
@@ -165,7 +175,7 @@ function passwordResetForm() {
 }
 
 /**
- * Renders the password reset dialog.
+ * Clears the requestpassword form and renders the account/password/requestpasswordresetdialog template.
  */
 function passwordResetDialog() {
     // @FIXME reimplement using dialogify
@@ -184,8 +194,9 @@ function passwordResetDialogForm() {
 }
 
 /**
- * Renders the screen for setting a new password. If token not valid, just
- * quietly forward to PasswordReset screen. This is the link sent by email.
+ * Gets a CustomerModel wrapping the current customer. Clears the resetpassword form. Checks if the customer wants to reset their password.
+ * If there is no reset token, redirects to the Account-PasswordReset controller function. If there is a reset token,
+ * renders the screen for setting a new password.
  */
 function setNewPassword() {
     var Customer, resettingCustomer;
@@ -204,8 +215,13 @@ function setNewPassword() {
 }
 
 /**
- * Handles the set new password form submit
- */
+ * Gets a profile form and handles the cancel and send actions.
+ *  - cancel - renders the setnewpassword template.
+ *  - send - gets a CustomerModel object that wraps the current customer and gets an EmailModel object that wraps an Email object.
+ * Checks whether the customer can be retrieved using a reset password token.
+ * If the customer does not have a valid token, the controller redirects to the Account-PasswordReset controller function.
+ * If they do, then an email is sent to the customer using the mail/setpasswordemail template and the setnewpassword_confirm template is rendered.
+ * */
 function setNewPasswordForm() {
 
     app.getForm('profile').handleAction({
@@ -219,7 +235,7 @@ function setNewPasswordForm() {
             var resettingCustomer, success, passwordchangedmail, Customer, Email;
 
             Customer = app.getModel('Customer');
-            Customer = app.getModel('Email');
+            Email = app.getModel('Email');
             resettingCustomer = Customer.getByPasswordResetToken(request.httpParameterMap.Token.getStringValue());
 
             if (empty(resettingCustomer)) {
@@ -252,9 +268,8 @@ function setNewPasswordForm() {
     });
 }
 
-/**
- * Start the customer registration process and renders customer registration
- * page.
+/** Clears the profile form, adds the email address from login as the profile email address,
+ *  and renders customer registration page.
  */
 function startRegister() {
 
@@ -270,7 +285,14 @@ function startRegister() {
 }
 
 /**
- * Handles registration form submit
+ * Gets a CustomerModel object wrapping the current customer.
+ * Gets a profile form and handles the confirm action.
+ *  confirm - validates the profile by checking  that the email and password fields:
+ *  - match the emailconfirm and passwordconfirm fields
+ *  - are not duplicates of existing username and password fields for the profile
+ * If the fields are not valid, the registration template is rendered.
+ * If the fields are valid, a new customer account is created, the profile form is cleared and
+ * the customer is redirected to the Account-Show controller function.
  */
 function registrationForm() {
     app.getForm('profile').handleAction({
@@ -295,7 +317,7 @@ function registrationForm() {
                 profileValidation = false;
             }
 
-            // check if login is already taken
+            // Checks if login is already taken.
             existingCustomer = Customer.getCustomerByLogin(email);
             if (existingCustomer !== null) {
                 app.getForm('profile.customer.email').invalidate();
@@ -325,14 +347,10 @@ function registrationForm() {
             }
         }
     });
-
-    app.getView({
-        ContinueURL: URLUtils.https('Account-RegistrationForm')
-    }).render('account/user/registration');
 }
 
 /**
- * Renders the account navigation.
+ * Renders the accountnavigation template.
  */
 function includeNavigation() {
     app.getView().render('account/accountnavigation');
@@ -340,27 +358,39 @@ function includeNavigation() {
 
 /* Web exposed methods */
 
-/** @see module:controllers/Account~Show */
+/** Renders the account overview.
+ * @see {@link module:controllers/Account~show} */
 exports.Show = guard.ensure(['get', 'https', 'loggedIn'], show);
-/** @see module:controllers/Account~EditProfile */
+/** Updates the profile of an authenticated customer.
+ * @see {@link module:controllers/Account~editProfile} */
 exports.EditProfile = guard.ensure(['get', 'https', 'loggedIn'], editProfile);
-/** @see module:controllers/Account~EditForm */
+/** Handles the form submission on profile update of edit profile.
+ * @see {@link module:controllers/Account~editForm} */
 exports.EditForm = guard.ensure(['post', 'https', 'loggedIn'], editForm);
-/** @see module:controllers/Account~PasswordResetDialog */
+/** Renders the password reset dialog.
+ * @see {@link module:controllers/Account~passwordResetDialog} */
 exports.PasswordResetDialog = guard.ensure(['get', 'https'], passwordResetDialog);
-/** @see module:controllers/Account~PasswordReset */
+/** Renders the password reset screen.
+ * @see {@link module:controllers/Account~passwordReset} */
 exports.PasswordReset = guard.ensure(['get', 'https'], passwordReset);
-/** @see module:controllers/Account~PasswordResetDialogForm */
+/** Handles the password reset form.
+ * @see {@link module:controllers/Account~passwordResetDialogForm} */
 exports.PasswordResetDialogForm = guard.ensure(['post', 'https'], passwordResetDialogForm);
-/** @see module:controllers/Account~PasswordResetForm */
+/** The form handler for password resets.
+ * @see {@link module:controllers/Account~passwordResetForm} */
 exports.PasswordResetForm = guard.ensure(['post', 'https'], passwordResetForm);
-/** @see module:controllers/Account~SetNewPassword */
+/** Renders the screen for setting a new password.
+ * @see {@link module:controllers/Account~setNewPassword} */
 exports.SetNewPassword = guard.ensure(['get', 'https'], setNewPassword);
-/** @see module:controllers/Account~SetNewPasswordForm */
+/** Handles the set new password form submit.
+ * @see {@link module:controllers/Account~setNewPasswordForm} */
 exports.SetNewPasswordForm = guard.ensure(['post', 'https'], setNewPasswordForm);
-/** @see module:controllers/Account~StartRegister */
+/** Start the customer registration process and renders customer registration page.
+ * @see {@link module:controllers/Account~startRegister} */
 exports.StartRegister = guard.ensure(['https'], startRegister);
-/** @see module:controllers/Account~RegistrationForm */
+/** Handles registration form submit.
+ * @see {@link module:controllers/Account~registrationForm} */
 exports.RegistrationForm = guard.ensure(['post', 'https'], registrationForm);
-/** @see module:controllers/Account~IncludeNavigation */
+/** Renders the account navigation.
+ * @see {@link module:controllers/Account~includeNavigation} */
 exports.IncludeNavigation = guard.ensure(['get'], includeNavigation);

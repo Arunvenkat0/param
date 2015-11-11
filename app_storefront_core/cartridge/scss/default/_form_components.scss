@@ -122,9 +122,6 @@ select {
 	background-color: #fff; // set background color to make height work
 	width: 100%;
 	height: 2rem;
-	.search-result-options & {
-		height: auto;
-	}
 }
 
 input[type="checkbox"],

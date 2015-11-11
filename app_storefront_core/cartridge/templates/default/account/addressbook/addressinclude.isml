@@ -28,16 +28,16 @@
 			<isminiaddress p_address="${address}"/>
 			
 			<isif condition="${!isDefault}">
-				<a href="${URLUtils.url('Address-SetDefault','AddressID', encodeURIComponent(address.ID))}" class="address-make-default"> 
+				<a href="${URLUtils.url('Address-SetDefault','AddressID', address.ID)}" class="address-make-default"> 
 					${Resource.msg('account.addressbook.editaddress.makedefaultaddress','account',null)} 
 				</a> |
 			</isif>
 			
-			<a href="${URLUtils.url('Address-Edit','AddressID', encodeURIComponent(address.ID))}" title="${Resource.msg('account.addressbook.addressinclude.edit.label','account',null)}" class="address-edit">
+			<a href="${URLUtils.url('Address-Edit','AddressID', address.ID)}" title="${Resource.msg('account.addressbook.addressinclude.edit.label','account',null)}" class="address-edit">
 				${Resource.msg('global.edit','locale',null)}
 			</a> |
 			
-			<a href="${URLUtils.url('Address-Delete','AddressID', encodeURIComponent(address.ID))}" title="${Resource.msg('account.addressbook.addressinclude.delete.label','account',null)}" class="address-delete delete">
+			<a href="${URLUtils.url('Address-Delete','AddressID', address.ID)}" title="${Resource.msg('account.addressbook.addressinclude.delete.label','account',null)}" class="address-delete delete">
 				${Resource.msg('account.addressbook.addressinclude.delete','account',null)}
 			</a>
 			

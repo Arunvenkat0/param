@@ -10,7 +10,7 @@
 	<isloop items="${pdict.product.variationModel.getProductVariationAttributes()}" var="VA">
 		<isset name="SelectedVariationValue" value="${pdict.product.variationModel.getSelectedValue(VA)}" scope="page"/>
 		<div class="attribute" data-attribute="${VA.ID}">
-			<span class="label">${VA.displayName}:</span>
+			<span class="label">${VA.displayName}</span>
 			<span class="value">
 				<isif condition="${SelectedVariationValue != null}">
 					<isprint value="${SelectedVariationValue.displayValue}"/>

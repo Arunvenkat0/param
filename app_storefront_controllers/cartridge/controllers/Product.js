@@ -109,10 +109,7 @@ function hitTile() {
             showcompare: true
         });
 
-        // Special handling for dictionary key 'product' as the template requires it in lower case.
-        delete productView.Product;
         productView.product = product.object;
-
         productView.render(product.getTemplate() || 'product/producttile');
     }
 
@@ -183,6 +180,7 @@ function variation() {
 
     var Product = app.getModel('Product');
     var product = Product.get(params.pid.stringValue);
+    var resetAttributes = false;
 
     if (product.isVisible()) {
 
@@ -191,14 +189,6 @@ function variation() {
         var selectedVariant = currentVariationModel.getSelectedVariant();
         if (selectedVariant) {
             product = Product.get(selectedVariant);
-        }
-
-        // TODO this is apparently nowhere set to true.
-        var resetAttributes = false;
-
-        if (product.isMaster()) {
-            product = Product.get(product.getDefaultVariant());
-            resetAttributes = false;
         }
 
         if (params.source.stringValue === 'bonus') {

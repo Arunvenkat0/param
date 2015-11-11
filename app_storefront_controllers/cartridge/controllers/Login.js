@@ -9,6 +9,8 @@
 /* API Includes */
 var OrderMgr = require('dw/order/OrderMgr');
 var Transaction = require('dw/system/Transaction');
+var URLUtils = require('dw/web/URLUtils');
+var Pipelet = require('dw/system/Pipelet');
 
 /* Script Modules */
 var app            = require('~/cartridge/scripts/app');
@@ -29,7 +31,8 @@ function show() {
     var oauthLoginForm = app.getForm('oauthlogin');
     oauthLoginForm.clear();
 
-    app.getForm('ordertrack').clear();
+    var orderTrackForm = app.getForm('ordertrack');
+    orderTrackForm.clear();
 
     if (customer.registered) {
         loginForm.setValue('username', customer.profile.credentials.login);
@@ -75,7 +78,7 @@ function getTargetUrl () {
         dw.system.Logger.info('Redirecting to "{0}" after successful login',target);
         return decodeURI(target);
     } else {
-        return dw.web.URLUtils.https('Account-Show');
+        return URLUtils.https('Account-Show');
     }
 }
 
@@ -103,7 +106,7 @@ function handleLoginForm () {
             return;
         },
         register: function () {
-            response.redirect(dw.web.URLUtils.https('Account-StartRegister'));
+            response.redirect(URLUtils.https('Account-StartRegister'));
             return;
         },
         findorder: function () {
@@ -113,7 +116,7 @@ function handleLoginForm () {
             var orderPostalCode = orderTrackForm.getValue('postalCode');
 
             if (empty(orderNumber) || empty(orderPostalCode) || empty(orderFormEmail)) {
-                response.redirect(dw.web.URLUtils.https('Login-Show'));
+                response.redirect(URLUtils.https('Login-Show'));
                 return;
             }
 
@@ -121,19 +124,18 @@ function handleLoginForm () {
                 dw.order.Order.ORDER_STATUS_REPLACED);
 
             if (empty(orders)) {
-                response.redirect(dw.web.URLUtils.https('Login-Show'));
+                app.getView('Login', {
+                    OrderNotFound: true
+                }).render();
                 return;
             }
 
             var foundOrder = orders.next();
 
-            if (!foundOrder.billingAddress.postalCode.toUpperCase().equals(orderPostalCode.toUpperCase())) {
-                response.redirect(dw.web.URLUtils.https('Login-Show'));
-                return;
-            }
-
-            if (foundOrder.customerEmail !== orderFormEmail) {
-                response.redirect(dw.web.URLUtils.https('Login-Show'));
+            if (foundOrder.billingAddress.postalCode.toUpperCase() !== orderPostalCode.toUpperCase() || foundOrder.customerEmail !== orderFormEmail) {
+                 app.getView('Login', {
+                    OrderNotFound: true
+                }).render();
                 return;
             }
 
@@ -164,15 +166,11 @@ function handleOAuthLoginForm() {
                 session.custom.RememberMe = request.httpParameterMap.rememberme.booleanValue || false;
                 session.custom.ContinuationURL = getTargetUrl().toString();
 
-                LOGGER.debug('Initiating OAuth login (RememberMe: {0}, ContinuationURL: {1}',
-                    session.custom.RememberMe,session.custom.ContinuationURL);
-
-                var initiateOAuthLoginResult = new dw.system.Pipelet('InitiateOAuthLogin').execute({
+                var initiateOAuthLoginResult = new Pipelet('InitiateOAuthLogin').execute({
                     OAuthProviderID: request.httpParameterMap.OAuthProvider.stringValue
                 });
                 if (initiateOAuthLoginResult.result === PIPELET_ERROR || initiateOAuthLoginResult.AuthorizationURL === null) {
                     oauthLoginForm.get('loginsucceeded').invalidate();
-                    finishOAuthLogin();
 
                     // Show login page with error.
                     app.getView('Login').render();
@@ -190,6 +188,16 @@ function handleOAuthLoginForm() {
     });
 }
 
+
+function processLoginForm () {
+    if (request.httpParameterMap.OAuthProvider.stringValue) {
+        handleOAuthLoginForm();
+    } else {
+        handleLoginForm();
+    }
+}
+
+
 /**
  * This is a central place to login a user from the login form.
  * @deprecated Only kept until all controllers are migrated, functionality has been moved to other methods
@@ -198,14 +206,12 @@ function process() {
     // handle OAuth login
     if (request.httpParameterMap.OAuthProvider.stringValue) {
         session.custom.RememberMe = request.httpParameterMap.rememberme.booleanValue || false;
-        session.custom.ContinuationURL = dw.web.URLUtils.https('Login-OAuthReentry').toString();
+        session.custom.ContinuationURL = URLUtils.https('Login-OAuthReentry').toString();
 
-        LOGGER.debug('Initiating OAuth login (RememberMe: {0}, ContinuationURL: {1}',
-            session.custom.RememberMe,session.custom.ContinuationURL);
-
-        var initiateOAuthLoginResult = new dw.system.Pipelet('InitiateOAuthLogin').execute({
+        var initiateOAuthLoginResult = new Pipelet('InitiateOAuthLogin').execute({
             OAuthProviderID: request.httpParameterMap.OAuthProvider.stringValue
         });
+
         if (initiateOAuthLoginResult.result === PIPELET_ERROR) {
             var oauthLoginForm = app.getForm('oauthlogin.');
             oauthLoginForm.get('loginsucceeded').invalidate();
@@ -214,9 +220,10 @@ function process() {
         }
 
         response.redirect(initiateOAuthLoginResult.AuthorizationURL);
+
         return false;
     } else {
-        // handle 'normal' login
+         // handle 'normal' login
         var loginForm = app.getForm('login');
 
         var success = Customer.login(loginForm.getValue('username'), loginForm.getValue('password'), loginForm.getValue('rememberme'));
@@ -240,7 +247,7 @@ function oAuthSuccess() {
 }
 
 function handleOAuthReentry() {
-    var FinalizeOAuthLoginResult = new dw.system.Pipelet('FinalizeOAuthLogin').execute();
+    var FinalizeOAuthLoginResult = new Pipelet('FinalizeOAuthLogin').execute();
     if (FinalizeOAuthLoginResult.result === PIPELET_ERROR) {
         oAuthFailed();
         return;
@@ -456,7 +463,7 @@ function Logout() {
     // TODO: Investigate whether this line should be removed
     //Cart.get().calculate();
 
-    response.redirect(dw.web.URLUtils.https('Account-Show'));
+    response.redirect(URLUtils.https('Account-Show'));
     return;
 }
 
@@ -466,7 +473,7 @@ function Logout() {
 /** @see module:controllers/Login~show */
 exports.Show                    = guard.ensure(['https'], show);
 /** @see module:controllers/Login~handleLoginForm */
-exports.LoginForm               = guard.ensure(['https','post'], handleLoginForm);
+exports.LoginForm               = guard.ensure(['https','post'], processLoginForm);
 /** @see module:controllers/Login~handleOAuthLoginForm */
 exports.OAuthLoginForm          = guard.ensure(['https','post'], handleOAuthLoginForm);
 /** @see module:controllers/Login~handleOAuthReentry */

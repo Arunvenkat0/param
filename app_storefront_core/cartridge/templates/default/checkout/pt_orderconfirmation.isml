@@ -26,18 +26,11 @@
 
 <body>
 	<div id="wrapper" class="pt_order-confirmation">
+	
 		<isinclude template="components/header/header"/>
 
 		<div id="main" role="main" class="clearfix primary-focus">
-
-			<div id="primary" class="primary-content">
-				<isreplace/>
-			</div>
-
-			<div id="secondary" class="nav summary">
-				<isinclude template="checkout/confirmation/confirmationregister"/>
-			</div>
-
+			<isreplace/>					
 		</div>
 
 		<isinclude template="components/footer/footer"/>
