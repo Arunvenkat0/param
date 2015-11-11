@@ -46,7 +46,7 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="cart/storepickup/SetStoreInLineItem.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:cart/storepickup/SetStoreInLineItem.ds"/>
           <key-binding alias="Basket" key="Basket"/>
           <key-binding alias="CurrentHttpParameterMap.plid.stringValue" key="LineItemUUID"/>
           <key-binding alias="CurrentHttpParameterMap.storeid.stringValue" key="StoreId"/>
@@ -71,7 +71,7 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="checkout/RemoveEmptyShipments.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/RemoveEmptyShipments.ds"/>
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="Basket" key="Basket"/>
         </pipelet-node>
@@ -421,7 +421,7 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="storelocator/storepickup/InventoryLookup.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:storelocator/storepickup/InventoryLookup.ds"/>
           <key-binding alias="Stores" key="stores"/>
           <key-binding alias="storeAvailabilityMap" key="storeAvailability"/>
           <key-binding alias="Product" key="product"/>
@@ -710,7 +710,7 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="cart/storepickup/SetStoreInLineItem.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:cart/storepickup/SetStoreInLineItem.ds"/>
           <key-binding alias="Basket" key="Basket"/>
           <key-binding alias="CurrentHttpParameterMap.plid.stringValue" key="LineItemUUID"/>
           <key-binding alias="CurrentHttpParameterMap.storeid.stringValue" key="StoreId"/>
@@ -727,7 +727,7 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="checkout/RemoveEmptyShipments.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/RemoveEmptyShipments.ds"/>
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="Basket" key="Basket"/>
         </pipelet-node>
@@ -861,7 +861,7 @@ dge), if the storeID is not set it will be set within the session object.</descr
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="storelocator/storepickup/InventoryLookup.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:storelocator/storepickup/InventoryLookup.ds"/>
           <key-binding alias="Stores" key="stores"/>
           <key-binding alias="storeAvailabilityMap" key="storeAvailability"/>
           <key-binding alias="Product" key="product"/>

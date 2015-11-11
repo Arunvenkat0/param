@@ -821,7 +821,7 @@ Input:
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="account/addressbook/SetDefaultAddress.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:account/addressbook/SetDefaultAddress.ds"/>
           <key-binding alias="test" key="ScriptLog"/>
           <key-binding alias="CustomerAddress" key="CustomerAddress"/>
           <key-binding alias="CurrentCustomer" key="CurrentCustomer"/>

@@ -99,7 +99,7 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="customerservice/GetCustomerServiceContent.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:customerservice/GetCustomerServiceContent.ds"/>
           <key-binding alias="CustomerServiceLinks" key="CustomerServiceLinks"/>
           <key-binding alias="&quot;customer-service&quot;" key="FolderID"/>
         </pipelet-node>

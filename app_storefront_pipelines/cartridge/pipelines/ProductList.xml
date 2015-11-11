@@ -321,7 +321,7 @@
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="true"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="productlist/GenerateShipmentName.ds"/>
+                <config-property key="ScriptFile" value="app_storefront_core:productlist/GenerateShipmentName.ds"/>
                 <key-binding alias="ccoolscript" key="ScriptLog"/>
                 <key-binding alias="ProductList" key="ProductList"/>
                 <key-binding alias="ShipmentID" key="ShipmentID"/>

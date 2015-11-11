@@ -564,7 +564,7 @@
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="false"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="checkout/CopyAddressFormFields.ds"/>
+                <config-property key="ScriptFile" value="app_storefront_core:checkout/CopyAddressFormFields.ds"/>
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="CurrentForms.billing.billingAddress.addressFields" key="BillingAddressForm"/>
                 <key-binding alias="CurrentForms.singleshipping.shippingAddress.addressFields" key="ShippingAddressForm"/>
@@ -764,7 +764,7 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="Exception"/>
-          <config-property key="ScriptFile" value="checkout/GetNonGiftCertificatePaymentAmount.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/GetNonGiftCertificatePaymentAmount.ds"/>
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="Basket" key="Basket"/>
           <key-binding alias="PaymentAmount" key="Amount"/>
@@ -867,7 +867,7 @@
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="false"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="checkout/ValidatePaymentInstruments.ds"/>
+                <config-property key="ScriptFile" value="app_storefront_core:checkout/ValidatePaymentInstruments.ds"/>
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="CountryCode" key="CountryCode"/>
                 <key-binding alias="CurrentCustomer" key="Customer"/>
@@ -1021,7 +1021,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="checkout/GetGiftCertIdList.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/GetGiftCertIdList.ds"/>
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="Basket" key="Basket"/>
           <key-binding alias="gcIdList" key="gcIdList"/>
@@ -1063,7 +1063,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="true"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="checkout/RemoveGiftCertificatePaymentInstrument.ds"/>
+                <config-property key="ScriptFile" value="app_storefront_core:checkout/RemoveGiftCertificatePaymentInstrument.ds"/>
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="Basket" key="Basket"/>
                 <key-binding alias="gcID" key="GiftCertificateID"/>
@@ -1144,7 +1144,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
           <segment>
             <node>
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-                <config-property key="ScriptFile" value="checkout/CreateGiftCertificatePaymentInstrument.ds"/>
+                <config-property key="ScriptFile" value="app_storefront_core:checkout/CreateGiftCertificatePaymentInstrument.ds"/>
                 <config-property key="Transactional" value="true"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
                 <key-binding alias="null" key="ScriptLog"/>
@@ -1283,7 +1283,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </simple-transition>
       <node>
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-          <config-property key="ScriptFile" value="checkout/CreateGiftCertificatePaymentInstrument.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/CreateGiftCertificatePaymentInstrument.ds"/>
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <key-binding alias="null" key="ScriptLog"/>
@@ -1518,7 +1518,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="true"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="checkout/RemoveGiftCertificatePaymentInstrument.ds"/>
+                <config-property key="ScriptFile" value="app_storefront_core:checkout/RemoveGiftCertificatePaymentInstrument.ds"/>
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="Basket" key="Basket"/>
                 <key-binding alias="CurrentHttpParameterMap.giftCertificateID.stringValue" key="GiftCertificateID"/>
@@ -1712,7 +1712,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="true"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="checkout/UpdateBillingAddress.ds"/>
+                <config-property key="ScriptFile" value="app_storefront_core:checkout/UpdateBillingAddress.ds"/>
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="CurrentForms.billing.billingAddress" key="AddressForm"/>
                 <key-binding alias="Basket.billingAddress" key="BillingAddress"/>
@@ -2343,7 +2343,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="checkout/GetCustomerCreditCard.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/GetCustomerCreditCard.ds"/>
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="CurrentHttpParameterMap.creditCardUUID.value" key="CreditCardUUID"/>
           <key-binding alias="ApplicableCreditCards" key="CustomerPaymentInstruments"/>
@@ -2459,7 +2459,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="checkout/GetCustomerCreditCard.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/GetCustomerCreditCard.ds"/>
           <key-binding alias="ScriptLog" key="ScriptLog"/>
           <key-binding alias="UUID" key="CreditCardUUID"/>
           <key-binding alias="ApplicableCreditCards" key="CustomerPaymentInstruments"/>
@@ -2613,7 +2613,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="checkout/UpdateBillingAddress.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/UpdateBillingAddress.ds"/>
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="CurrentForms.billing.billingAddress" key="AddressForm"/>
           <key-binding alias="Basket.billingAddress" key="BillingAddress"/>
@@ -2905,7 +2905,7 @@ The handle pipeline is responsible for payment provider / payment method specifi
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="Exception"/>
-          <config-property key="ScriptFile" value="checkout/GetNonGiftCertificatePaymentAmount.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/GetNonGiftCertificatePaymentAmount.ds"/>
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="Basket" key="Basket"/>
           <key-binding alias="PaymentAmount" key="Amount"/>
@@ -2928,7 +2928,7 @@ The handle pipeline is responsible for payment provider / payment method specifi
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="checkout/ValidatePaymentInstruments.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/ValidatePaymentInstruments.ds"/>
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="CurrentHttpParameterMap.countryCode.value" key="CountryCode"/>
           <key-binding alias="CurrentCustomer" key="Customer"/>
@@ -3022,7 +3022,7 @@ The handle pipeline is responsible for payment provider / payment method specifi
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="false"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="checkout/ValidatePaymentInstruments.ds"/>
+                <config-property key="ScriptFile" value="app_storefront_core:checkout/ValidatePaymentInstruments.ds"/>
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="CurrentHttpParameterMap.countryCode.value" key="CountryCode"/>
                 <key-binding alias="CurrentCustomer" key="Customer"/>
@@ -3254,7 +3254,7 @@ The handle pipeline is responsible for payment provider / payment method specifi
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="false"/>
                 <config-property key="OnError" value="Exception"/>
-                <config-property key="ScriptFile" value="checkout/GetNonGiftCertificatePaymentAmount.ds"/>
+                <config-property key="ScriptFile" value="app_storefront_core:checkout/GetNonGiftCertificatePaymentAmount.ds"/>
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="Basket" key="Basket"/>
                 <key-binding alias="PaymentAmount" key="Amount"/>
@@ -3270,7 +3270,7 @@ The handle pipeline is responsible for payment provider / payment method specifi
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="false"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="checkout/ValidatePaymentInstruments.ds"/>
+                <config-property key="ScriptFile" value="app_storefront_core:checkout/ValidatePaymentInstruments.ds"/>
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="CountryCode" key="CountryCode"/>
                 <key-binding alias="CurrentCustomer" key="Customer"/>
@@ -3289,7 +3289,7 @@ The handle pipeline is responsible for payment provider / payment method specifi
             </simple-transition>
             <node>
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
-                <config-property key="ScriptFile" value="checkout/CalculatePaymentTransactionTotals.ds"/>
+                <config-property key="ScriptFile" value="app_storefront_core:checkout/CalculatePaymentTransactionTotals.ds"/>
                 <config-property key="Transactional" value="true"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
                 <key-binding alias="null" key="ScriptLog"/>
@@ -3443,7 +3443,7 @@ The handle pipeline is responsible for payment provider / payment method specifi
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="true"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="checkout/SaveCustomerCreditCard.ds"/>
+                <config-property key="ScriptFile" value="app_storefront_core:checkout/SaveCustomerCreditCard.ds"/>
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="NewCreditCard" key="PaymentInstrument"/>
                 <key-binding alias="CurrentForms.billing.paymentMethods.creditCard" key="CreditCardFormFields"/>
@@ -3624,7 +3624,7 @@ The handle pipeline is responsible for payment provider / payment method specifi
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="true"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="checkout/AddAddressToAddressBook.ds"/>
+                <config-property key="ScriptFile" value="app_storefront_core:checkout/AddAddressToAddressBook.ds"/>
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="CurrentCustomer.profile" key="Profile"/>
                 <key-binding alias="Basket.billingAddress" key="OrderAddress"/>

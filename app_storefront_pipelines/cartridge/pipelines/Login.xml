@@ -42,7 +42,7 @@
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="false"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="account/login/oauth/PreInitiateOAuthLogin.ds"/>
+                <config-property key="ScriptFile" value="app_storefront_core:account/login/oauth/PreInitiateOAuthLogin.ds"/>
               </pipelet-node>
               <node-display x="1" y="0"/>
               <branch basename="b2" source-connector="error">
@@ -102,7 +102,7 @@
                     <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                       <config-property key="Transactional" value="false"/>
                       <config-property key="OnError" value="PIPELET_ERROR"/>
-                      <config-property key="ScriptFile" value="account/login/oauth/PostFinalizeOAuthLogin.ds"/>
+                      <config-property key="ScriptFile" value="app_storefront_core:account/login/oauth/PostFinalizeOAuthLogin.ds"/>
                       <key-binding alias="Location" key="Location"/>
                     </pipelet-node>
                     <node-display x="0" y="1"/>
@@ -328,7 +328,7 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="account/login/oauth/ObtainAccountFromLinkedInProviderAndLogin.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:account/login/oauth/ObtainAccountFromLinkedInProviderAndLogin.ds"/>
           <key-binding alias="rememberMe" key="rememberMe"/>
           <key-binding alias="CurrentSession.privacy.ContinuationURL" key="ContinuationURL"/>
           <key-binding alias="OAuthProviderID" key="OAuthProviderId"/>
@@ -403,7 +403,7 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="account/login/oauth/ObtainAccountFromGoogleProviderAndLogin.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:account/login/oauth/ObtainAccountFromGoogleProviderAndLogin.ds"/>
           <key-binding alias="rememberMe" key="rememberMe"/>
           <key-binding alias="CurrentSession.['oauthProvider']" key="oauthProvider"/>
           <key-binding alias="OAuthProvider" key="OAuthProvider"/>
@@ -459,7 +459,7 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="account/login/oauth/ObtainAccountFromGooglePlusProviderAndLogin.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:account/login/oauth/ObtainAccountFromGooglePlusProviderAndLogin.ds"/>
           <key-binding alias="logger" key="ScriptLog"/>
           <key-binding alias="rememberMe" key="rememberMe"/>
           <key-binding alias="CurrentSession.['oauthProvider']" key="oauthProvider"/>
@@ -520,7 +520,7 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="account/login/oauth/ObtainAccountFromMicrosoftProviderAndLogin.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:account/login/oauth/ObtainAccountFromMicrosoftProviderAndLogin.ds"/>
           <key-binding alias="rememberMe" key="rememberMe"/>
           <key-binding alias="CurrentSession.['oauthProvider']" key="oauthProvider"/>
           <key-binding alias="OAuthProvider" key="OAuthProvider"/>
@@ -579,7 +579,7 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="account/login/oauth/ObtainAccountFromFacebookProviderAndLogin.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:account/login/oauth/ObtainAccountFromFacebookProviderAndLogin.ds"/>
           <key-binding alias="rememberMe" key="rememberMe"/>
           <key-binding alias="CurrentSession.privacy.ContinuationURL" key="ContinuationURL"/>
           <key-binding alias="OAuthProviderID" key="OAuthProviderId"/>
@@ -636,7 +636,7 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="account/login/oauth/ObtainAccountFromGitHubProviderAndLogin.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:account/login/oauth/ObtainAccountFromGitHubProviderAndLogin.ds"/>
           <key-binding alias="rememberMe" key="rememberMe"/>
           <key-binding alias="CurrentSession.privacy.ContinuationURL" key="ContinuationURL"/>
           <key-binding alias="OAuthProviderID" key="OAuthProviderId"/>
@@ -693,7 +693,7 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="account/login/oauth/ObtainAccountFromSinaWeiboProviderAndLogin.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:account/login/oauth/ObtainAccountFromSinaWeiboProviderAndLogin.ds"/>
           <key-binding alias="rememberMe" key="rememberMe"/>
           <key-binding alias="CurrentSession.privacy.ContinuationURL" key="ContinuationURL"/>
           <key-binding alias="OAuthProviderID" key="OAuthProviderId"/>
@@ -762,7 +762,7 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="account/login/oauth/ObtainAccountFromVKontakteProviderAndLogin.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:account/login/oauth/ObtainAccountFromVKontakteProviderAndLogin.ds"/>
           <key-binding alias="rememberMe" key="rememberMe"/>
           <key-binding alias="CurrentSession.privacy.ContinuationURL" key="ContinuationURL"/>
           <key-binding alias="OAuthProviderID" key="OAuthProviderId"/>

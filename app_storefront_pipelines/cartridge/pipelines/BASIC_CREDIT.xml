@@ -45,7 +45,7 @@
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="false"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="checkout/InvalidatePaymentCardFormElements.ds"/>
+                <config-property key="ScriptFile" value="app_storefront_core:checkout/InvalidatePaymentCardFormElements.ds"/>
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="CurrentForms.billing.paymentMethods.creditCard" key="CreditCardForm"/>
                 <key-binding alias="CreditCardStatus" key="Status"/>
@@ -76,7 +76,7 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="checkout/CreatePaymentInstrument.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/CreatePaymentInstrument.ds"/>
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="dw.order.PaymentInstrument.METHOD_CREDIT_CARD" key="PaymentType"/>
           <key-binding alias="true" key="RemoveExisting"/>

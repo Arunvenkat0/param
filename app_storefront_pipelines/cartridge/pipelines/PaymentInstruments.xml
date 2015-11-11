@@ -252,7 +252,7 @@
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="true"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="checkout/SaveCustomerCreditCard.ds"/>
+                <config-property key="ScriptFile" value="app_storefront_core:checkout/SaveCustomerCreditCard.ds"/>
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="PaymentInstrument" key="PaymentInstrument"/>
                 <key-binding alias="CurrentForms.paymentinstruments.creditcards.newcreditcard" key="CreditCardFormFields"/>
@@ -275,7 +275,7 @@
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="false"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="account/payment/DuplicateCheck.ds"/>
+                <config-property key="ScriptFile" value="app_storefront_core:account/payment/DuplicateCheck.ds"/>
                 <key-binding alias="CurrentForms.paymentinstruments.creditcards.newcreditcard.number.value" key="NoIn"/>
                 <key-binding alias="DuplicateCard" key="Duplicate"/>
                 <key-binding alias="PaymentInstruments" key="PIList"/>
@@ -416,7 +416,7 @@
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="false"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="checkout/InvalidatePaymentCardFormElements.ds"/>
+                <config-property key="ScriptFile" value="app_storefront_core:checkout/InvalidatePaymentCardFormElements.ds"/>
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="CurrentForms.paymentinstruments.creditcards.newcreditcard" key="CreditCardForm"/>
                 <key-binding alias="Status" key="Status"/>

@@ -23,7 +23,7 @@
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="checkout/CreatePaymentInstrument.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/CreatePaymentInstrument.ds"/>
           <key-binding alias="null" key="ScriptLog"/>
           <key-binding alias="&quot;PayPal&quot;" key="PaymentType"/>
           <key-binding alias="true" key="RemoveExisting"/>

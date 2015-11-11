@@ -561,7 +561,7 @@
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="true"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="productlist/MakeItemsPrivate.ds"/>
+                <config-property key="ScriptFile" value="app_storefront_core:productlist/MakeItemsPrivate.ds"/>
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="ProductList" key="ProductList"/>
               </pipelet-node>
@@ -611,7 +611,7 @@
               <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="true"/>
                 <config-property key="OnError" value="PIPELET_ERROR"/>
-                <config-property key="ScriptFile" value="productlist/MakeItemsPublic.ds"/>
+                <config-property key="ScriptFile" value="app_storefront_core:productlist/MakeItemsPublic.ds"/>
                 <key-binding alias="null" key="ScriptLog"/>
                 <key-binding alias="ProductList" key="ProductList"/>
               </pipelet-node>
@@ -1299,7 +1299,7 @@ Expects: AddressID</description>
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="account/wishlist/SetShippingAddress.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:account/wishlist/SetShippingAddress.ds"/>
           <key-binding alias="test" key="ScriptLog"/>
           <key-binding alias="ProductList" key="ProductList"/>
           <key-binding alias="Address" key="Address"/>
@@ -1542,7 +1542,7 @@ Expects: AddressID</description>
         <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="account/ReplaceProductListItem.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:account/ReplaceProductListItem.ds"/>
           <key-binding alias="ProductList" key="ProductList"/>
           <key-binding alias="CurrentHttpParameterMap.uuid.stringValue" key="plid"/>
         </pipelet-node>
