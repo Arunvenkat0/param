@@ -17,9 +17,8 @@
     <artifactId>sitegen</artifactId>
     <name>SiteGenesis</name>
     <packaging>pom</packaging>
-    <version>100.1.0</version>
+    <version>101.0.0</version>
     <description>SiteGenesis Source</description>
-
 
     <build>
         <plugins>
@@ -49,14 +48,8 @@
                         <fileset dir="${project.basedir}">
                           <include name="app_storefront_core/*/**" />
                           <include name="app_storefront_controllers*/**" />
+                          <include name="app_storefront_pipelines*/**" />
                         </fileset>
-                      </copy>
-                      <copy todir="${project.build.directory}/sg-resources/app_storefront_richUI">
-                        <fileset dir="${project.basedir}/app_storefront_core" includes="**/*/*" excludes="**/*/app_storefront_core.properties" >
-                        </fileset>
-                      </copy>
-                      <copy todir="${project.build.directory}/sg-resources/app_storefront_richUI">
-                        <fileset dir="${project.basedir}/app_storefront_richUI" includes="**/*/app_storefront_richUI.properties"/>
                       </copy>
                       <copy todir="${project.build.directory}/sg-resources/demosite-creation">
                         <fileset dir="${project.basedir}/demo_data_no_hires_images" />
