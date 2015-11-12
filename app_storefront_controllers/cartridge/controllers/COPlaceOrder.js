@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * This controller creates an order from the current basket. It's a pure processing controller and does
+ * Controller that creates an order from the current basket. It's a pure processing controller and does
  * no page rendering. The controller is used by checkout and is called upon the triggered place order action.
  * It contains the actual logic to authorize the payment and create the order. The controller communicates the result
  * of the order creation process and uses a status object PlaceOrderError to set proper error states.
@@ -27,11 +27,15 @@ var Order = app.getModel('Order');
 var PaymentProcessor = app.getModel('PaymentProcessor');
 
 /**
- * Responsible for payment handling. This pipeline calls the specific
- * authorization pipelines for each individual payment type. It ends on an named
- * "error" end node if either any of the authorizations failed or a payment
+ * Responsible for payment handling. This function uses PaymentProcessorModel methods to
+ * handle payment processing specific to each payment instrument. It returns an
+ * error if any of the authorizations failed or a payment
  * instrument is of an unknown payment method. If a payment method has no
- * payment processor assigned, the payment is deemed as authorized.
+ * payment processor assigned, the payment is accepted as authorized.
+ *
+ * @transactional
+ * @param {dw.order.Order} order - the order to handle payments for.
+ * @return {Object} JSON object containing information about missing payments, errors, or an empty object if the function is successful.
  */
 function handlePayments(order) {
 
@@ -44,7 +48,9 @@ function handlePayments(order) {
                 missingPaymentInfo: true
             };
         }
-
+        /**
+         * Sets the transaction ID for the payment instrument.
+         */
         var handlePaymentTransaction = function () {
             paymentInstrument.getPaymentTransaction().setTransactionID(order.getOrderNo());
         };
@@ -57,18 +63,7 @@ function handlePayments(order) {
                 Transaction.wrap(handlePaymentTransaction);
 
             } else {
-                /*
-                 * An Authorization Pipeline is being dynamically called based on a
-                 * concatenation of the current Payment-Processor and a constant
-                 * suffix (-Authorize). For example: Credit Cards processor ID =
-                 * BASIC_CREDIT Authorization Pipeline = BASIC_CREDIT-Authorize
-                 *
-                 * The authorization pipeline must end in a named "error" end node
-                 * to communicate any authorization error back to this pipeline.
-                 * Additionally the authorization pipeline may put a
-                 * dw.system.Status object into the pipeline dictionary under key
-                 * PlaceOrderError, which contains provider specific error messages.
-                 */
+
                 var authorizationResult = PaymentProcessor.authorize(order, paymentInstrument);
 
                 if (authorizationResult.not_supported || authorizationResult.error) {
@@ -84,8 +79,11 @@ function handlePayments(order) {
 }
 
 /**
- * The entry point for the order creation. The start node needs to be private
- * since it is supposed to be called by pipelines only.
+ * The entry point for order creation. This function is not exported, as this controller must only
+ * be called by another controller.
+ *
+ * @transactional
+ * @return {Object} JSON object that is empty, contains error information, or PlaceOrderError status information.
  */
 function start() {
     var cart = Cart.get();
@@ -97,13 +95,13 @@ function start() {
         // Clean shipments.
         COShipping.PrepareShipments(cart);
 
-        // Make sure there are valid shipping address, accounting for gift certificate that would not have one.
+        // Make sure there is a valid shipping address, accounting for gift certificates that do not have one.
         if (cart.getProductLineItems().size() > 0 && cart.getDefaultShipment().getShippingAddress() === null) {
             COShipping.Start();
             return {};
         }
 
-        // Make sure, the billing step has been fulfilled, otherwise restart checkout.
+        // Make sure the billing step is fulfilled, otherwise restart checkout.
         if (!session.forms.billing.fulfilled.value) {
             app.getController('COCustomer').Start();
             return {};
@@ -171,10 +169,12 @@ function start() {
 }
 
 /**
- * Submit order implementation.
+ * Submits an order.
  *
- * @param order
- * @returns {*}
+ * @transactional
+ * @param {dw.order.Order} order - the order to submit.
+ * @return {Boolean | Object} false if order cannot be placed. true if the order confirmation status is CONFIRMED.
+ * JSON object containing error information, or the order and/or order creation information.
  */
 function submitImpl(order) {
 
@@ -226,6 +226,9 @@ function submitImpl(order) {
 /**
  * Creates a gift certificate for each gift certificate line item in the order
  * and sends an email to the gift certificate receiver.
+ *
+ * @param {dw.order.Order} order - the order to create the gift certificates for.
+ * @return {Boolean} true if the order successfully created the gift certificates, false otherwise.
  */
 function createGiftCertificates(order) {
 
@@ -252,6 +255,9 @@ function createGiftCertificates(order) {
 
 /**
  * Asynchronous Callbacks for OCAPI. These functions result in a JSON response.
+ * Sets the payment instrument information in the form from values in the httpParameterMap.
+ * Checks that the payment instrument selected is valid and authorizes the payment. Renders error
+ * message information if the payment is not authorized.
  */
 function submitPaymentJSON() {
 
@@ -298,7 +304,8 @@ function submitPaymentJSON() {
 }
 
 /*
- * Asynchronous Callbacks for SiteGenesis
+ * Asynchronous Callbacks for SiteGenesis.
+ * Identifies if an order exists, submits the order, and shows a confirmation message.
  */
 function submit() {
 

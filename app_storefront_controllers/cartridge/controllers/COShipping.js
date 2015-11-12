@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * This controller implements the logic for the default single shipping scenario.
+ * Controller for the default single shipping scenario.
  * Single shipping allows only one shipment, shipping address, and shipping method per order.
  *
  * @module controllers/COShipping
@@ -21,12 +21,14 @@ var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
 /**
- * Prepares shipments. It separates gift certificate line items from product
+ * Prepares shipments. Theis function separates gift certificate line items from product
  * line items. It creates one shipment per gift certificate purchase
  * and removes empty shipments. If in-store pickup is enabled, it combines the
  * items for in-store pickup and removes them.
  * This function can be called by any checkout step to prepare shipments.
  *
+ * @transactional
+ * @return {Boolean} true if shipments are successfully prepared, false if they are not.
  */
 function prepareShipments() {
     var cart, homeDeliveries;
@@ -55,9 +57,11 @@ function prepareShipments() {
 }
 
 /**
- * Starting point for single shipping scenario. Prepares shipment by removing gift certificate and in-store pickup line items from shipment.
+ * Starting point for the single shipping scenario. Prepares a shipment by removing gift certificate and in-store pickup line items from the shipment.
  * Redirects to multishipping scenario if more than one physical shipment is required and redirects to billing if all line items do not require
  * shipping.
+ *
+ * @transactional
  */
 function start() {
     var cart, physicalShipments, pageMeta, homeDeliveries;
@@ -118,6 +122,9 @@ function start() {
  * Handles the selected shipping address and shipping method. Copies the
  * address details and gift options to the basket's default shipment. Sets the
  * selected shipping method to the default shipment.
+ *
+ * @transactional
+ * @param {module:models/CartModel~CartModel} cart - A CartModel wrapping the current Basket.
  */
 function handleShippingSettings(cart) {
 
@@ -153,8 +160,10 @@ function handleShippingSettings(cart) {
 }
 
 /**
- * TODO
- * Updates shipping address for the current customer with information from the singleshipping form.
+ * Updates shipping address for the current customer with information from the singleshipping form. If a cart exists, redirects to the
+ * {@link module:controllers/COShipping~start|start} function. If one does not exist, calls the {@link module:controllers/Cart~Show|Cart controller Show function}.
+ *
+ * @transactional
  */
 function updateAddressDetails() {
     var cart, addressID, segments, lookupCustomer, lookupID, address, defaultShipment, shippingAddress, profile;
@@ -202,8 +211,14 @@ function updateAddressDetails() {
 }
 
 /**
- * TODO
- * Form handler for the singleshipping form.
+ * Form handler for the singleshipping form. Handles the following actions:
+ * - __save__ - saves the shipping address from the form to the customer address book. If in-store
+ * shipments are enabled, saves information from the form about in-store shipments to the order shipment.
+ * Flags the save action as done and calls the {@link module:controllers/Cart~Show|Cart controller Show function}.
+ * If it is not able to save the information, calls the {@link module:controllers/Cart~Show|Cart controller Show function}.
+ * - __selectAddress__ - updates the address details and page metadata, sets the ContinueURL property to COShipping-SingleShipping,  and renders the singleshipping template.
+ * - __shipToMultiple__ - calls the {@link module:controllers/COShippingMultiple~Start|COShippingMutliple controller Start function}.
+ * - __error__ - calls the {@link module:controllers/COShipping~Start|COShipping controller Start function}.
  */
 function singleShipping() {
     var singleShippingForm = app.getForm('singleshipping');
@@ -262,8 +277,10 @@ function singleShipping() {
 }
 
 /**
- * Selects a shipping method for the default shipment. Sets the shipping method
- * and returns the result as JSON response.
+ * Selects a shipping method for the default shipment. Creates a transient address object, sets the shipping
+ * method, and returns the result as JSON response.
+ *
+ * @transaction
  */
 function selectShippingMethod() {
     var cart, address, applicableShippingMethods, TransientAddress;
@@ -298,14 +315,15 @@ function selectShippingMethod() {
 /**
  * Determines the list of applicable shipping methods for the default shipment of
  * the current basket. The applicable shipping methods are based on the
- * merchandise in the cart and the address parameters included in the request
- * (if any). Changes the shipping method of this shipment if the current method
- * is no longer applicable. Pre-calculates the shipping cost for each applicable
- * shipping method by simulating the shipping selection i.e. explicitly add each
- * shipping method and then calculate cart (to get cost and
- * discounts/promotions). The simulation is done so that shipping cost along
+ * merchandise in the cart and any address parameters included in the request.
+ * Changes the shipping method of this shipment if the current method
+ * is no longer applicable. Precalculates the shipping cost for each applicable
+ * shipping method by simulating the shipping selection i.e. explicitly adds each
+ * shipping method and then calculates the cart.
+ * The simulation is done so that shipping cost along
  * with discounts and promotions can be shown to the user before making a
  * selection.
+ * @transaction
  */
 function updateShippingMethodList() {
     var i, cart, address, applicableShippingMethods, shippingCosts, currentShippingMethod, method, TransientAddress;
@@ -358,7 +376,7 @@ function updateShippingMethodList() {
 
 /**
  * Determines the list of applicable shipping methods for the default shipment of
- * the current customer's basket and return the response as a JSON array. The
+ * the current customer's basket and returns the response as a JSON array. The
  * applicable shipping methods are based on the merchandise in the cart and any
  * address parameters are included in the request parameters.
  */
@@ -405,7 +423,10 @@ function editAddress() {
 }
 
 /**
- * TODO
+ * Form handler for the shippingAddressForm. Handles the following actions:
+ *  - __apply__ - if form information cannot be copied to the platform, it sets the ContinueURL property to COShipping-EditShippingAddress and
+ *  renders the shippingAddressDetails template. Otherwise, it renders the dialogapply template.
+ *  - __remove__ - removes the address from the current customer's address book and renders the dialogdelete template.
  */
 function editShippingAddress() {
     var shippingAddressForm, formResult;
@@ -440,21 +461,29 @@ function editShippingAddress() {
 /*
 * Web exposed methods
 */
-/** @see module:controllers/COShipping~start */
+/** Starting point for the single shipping scenario.
+ * @see module:controllers/COShipping~start */
 exports.Start = guard.ensure(['https'], start);
-/** @see module:controllers/COShipping~selectShippingMethod */
+/** Selects a shipping method for the default shipment.
+ * @see module:controllers/COShipping~selectShippingMethod */
 exports.SelectShippingMethod = guard.ensure(['https', 'get'], selectShippingMethod);
-/** @see module:controllers/COShipping~updateShippingMethodList */
+/** Determines the list of applicable shipping methods for the default shipment of the current basket.
+ * @see module:controllers/COShipping~updateShippingMethodList */
 exports.UpdateShippingMethodList = guard.ensure(['https', 'get'], updateShippingMethodList);
-/** @see module:controllers/COShipping~getApplicableShippingMethodsJSON */
+/** Determines the list of applicable shipping methods for the default shipment of the current customer's basket and returns the response as a JSON array.
+ * @see module:controllers/COShipping~getApplicableShippingMethodsJSON */
 exports.GetApplicableShippingMethodsJSON = guard.ensure(['https', 'get'], getApplicableShippingMethodsJSON);
-/** @see module:controllers/COShipping~editAddress */
+/** Renders a form dialog to edit an address.
+ * @see module:controllers/COShipping~editAddress */
 exports.EditAddress = guard.ensure(['https', 'get'], editAddress);
-/** @see module:controllers/COShipping~updateAddressDetails */
+/** Updates shipping address for the current customer with information from the singleshipping form.
+ * @see module:controllers/COShipping~updateAddressDetails */
 exports.UpdateAddressDetails = guard.ensure(['https', 'get'], updateAddressDetails);
-/** @see module:controllers/COShipping~singleShipping */
+/** Form handler for the singleshipping form.
+ * @see module:controllers/COShipping~singleShipping */
 exports.SingleShipping = guard.ensure(['https', 'post'], singleShipping);
-/** @see module:controllers/COShipping~editShippingAddress */
+/** Form handler for the shippingAddressForm.
+ * @see module:controllers/COShipping~editShippingAddress */
 exports.EditShippingAddress = guard.ensure(['https', 'post'], editShippingAddress);
 
 /*
