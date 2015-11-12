@@ -667,11 +667,11 @@ ProductUtils.getProductType = function (product) {
         productType = 'master';
     } else if (product.variant) {
         productType = 'variant';
-    } else if (product.variation_group) {
+    } else if (product.variationGroup) {
         productType = 'variationGroup';
     } else if (product.bundle) {
         productType = 'bundle';
-    } else if (product.set) {
+    } else if (product.productSet) {
         productType = 'set';
     } else {
         productType = 'standard';
