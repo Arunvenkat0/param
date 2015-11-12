@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * This controller provides functions for creating, modifying and showing a product comparison.
+ * Controller for creating, modifying, and showing a product comparison.
  * @module controllers/Compare
  */
 
@@ -18,6 +18,7 @@ var Compare = app.getModel('Compare');
 
 /**
  * Gets a compare form and gets or creates a comparison object associated with the session.
+ * Renders the product/compare/compareshow template.
  */
 function show() {
     var compareForm = app.getForm('compare');
@@ -40,7 +41,10 @@ function show() {
 }
 
 /**
- * Adds a product to a comparison.
+ * Adds a product to a comparison. Gets the product and category from the httpParameterMap pid and category.
+ * If there is no product or category, the function renders a JSON message indicating failure. If both are available,
+ * gets the comparison object and adds the product. If successful, renders a JSON message indicating success.
+ * @return {object} JSON object indicating success or failure.
  */
 function addProduct() {
 	let r = require('~/cartridge/scripts/util/Response');
@@ -72,7 +76,10 @@ function addProduct() {
 }
 
 /**
- * Removes a product from a comparison.
+ * Removes a product from a comparison. Gets the product and category from the httpParameterMap pid and category.
+ * If there is no product or category, the function renders a JSON message indicating failure.
+ * If both are available, gets the comparison object and removes the product. If successful, renders a JSON message indicating success.
+ * @return {object} JSON object indicating success or failure.
  */
  function removeProduct() {
 	let r = require('~/cartridge/scripts/util/Response');
@@ -104,7 +111,9 @@ function addProduct() {
 }
 
 /**
- * Renders the product comparison widget.
+ * Renders the controls for the comparison, including the product images, Compare Items button, and Clear All button.
+ * Gets the category from the httpParameterMap category value. If there is no category, renders the search/components/productcomparewidget template.
+ * Gets the comparison object and renders the search/components/productcomparewidget template.
  */
 function controls() {
 
@@ -122,11 +131,14 @@ function controls() {
 /*
  * Web exposed methods
  */
-/** @see module:controllers/Compare~Show */
+/** Creates a product comparison.
+ * @see module:controllers/Compare~show */
 exports.Show = guard.all(show);
-/** @see module:controllers/Compare~AddProduct */
+/** Adds a product to a comparison.
+ * @see module:controllers/Compare~addProduct */
 exports.AddProduct = guard.ensure(['get'], addProduct);
-/** @see module:controllers/Compare~RemoveProduct */
+/** @see module:controllers/Compare~removeProduct */
 exports.RemoveProduct = guard.ensure(['get'], removeProduct);
-/** @see module:controllers/Compare~Controls */
+/** Renders the product comparison widget.
+ * @see module:controllers/Compare~controls */
 exports.Controls = guard.ensure(['get'], controls);

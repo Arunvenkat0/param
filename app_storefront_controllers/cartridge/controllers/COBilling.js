@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * This controller provies the billing logic. It is used by both the single shipping and the multishipping
+ * Controller for the billing logic. It is used by both the single shipping and the multishipping
  * functionality and is responsible for payment method selection and entering a billing address.
  *
  * @module controllers/COBilling
@@ -28,8 +28,8 @@ var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
 /**
- * Initializes the address form: if customer chose option "use as billing
- * address" on single shipping page the form is prepopulated with the shipping
+ * Initializes the address form. If the customer chose "use as billing
+ * address" option on the single shipping page the form is prepopulated with the shipping
  * address, otherwise it prepopulates with the billing address that was already set.
  * If neither address is available, it prepopulates with the default address of the authenticated customer.
  */
@@ -57,7 +57,7 @@ function initAddressForm(cart) {
 }
 
 /**
- * Initializes the email address form field: if there is already a customer
+ * Initializes the email address form field. If there is already a customer
  * email set at the basket, that email address is used. If the
  * current customer is authenticated the email address of the customer's profile
  * is used.
@@ -71,9 +71,12 @@ function initEmailAddress(cart) {
 }
 
 /**
- * TODO
- * @param cart
- * @param params
+ * Updates data for the billing page and renders it.
+ * If payment method is set to gift certificate, gets the gift certificate code from the form.
+ * Updates the page metadata. Gets a view and adds any passed parameters to it. Sets the Basket and ContinueURL properties.
+ * Renders the checkout/billing/billing template.
+ * @param {module:models/CartModel~CartModel} cart - A CartModel wrapping the current Basket.
+ * @param {object} params - (optional) if passed, added to view properties so they can be accessed in the template.
  */
 function returnToForm(cart, params) {
     var pageMeta = require('~/cartridge/scripts/meta');
@@ -103,8 +106,10 @@ function returnToForm(cart, params) {
 }
 
 /**
- * TODO
- * @param cart
+ * Updates cart calculation and page information and renders the billing page.
+ * @transactional
+ * @param {module:models/CartModel~CartModel} cart - A CartModel wrapping the current Basket.
+ * @param {object} params - (optional) if passed, added to view properties so they can be accessed in the template.
  */
 function start(cart, params) {
 
@@ -122,8 +127,9 @@ function start(cart, params) {
 }
 
 /**
- * Initializes the credit card list by determining the saved customer payment
- * instruments of type credit card.
+ * Initializes the credit card list by determining the saved customer payment methods for the current locale.
+ * @param {module:models/CartModel~CartModel} cart - A CartModel wrapping the current Basket.
+ * @return {object} JSON object with members ApplicablePaymentMethods and ApplicableCreditCards.
  */
 function initCreditCardList(cart) {
     var paymentAmount = cart.getNonGiftCertificateAmount();
@@ -159,8 +165,8 @@ function initCreditCardList(cart) {
 }
 
 /**
- * Starting point for billing. After a successful shipping setup both COShipping
- * and COShippingMultiple jump to this node.
+ * Starting point for billing. After a successful shipping setup, both COShipping
+ * and COShippingMultiple call this function.
  */
 function publicStart() {
     var cart = app.getModel('Cart').get();
@@ -191,9 +197,8 @@ function publicStart() {
 }
 
 /**
- * Adjust gift certificate redemptions as after applying coupon(s), order total
- * is changed. AdjustGiftCertificate pipeline removes and then adds currently
- * added gift certificates to reflect order total changes.
+ * Adjusts gift certificate redemptions after applying coupon(s), because this changes the order total.
+ * Removes and then adds currently added gift certificates to reflect order total changes.
  */
 function adjustGiftCertificates() {
     var i, j, cart, gcIdList, gcID, gc;
@@ -227,7 +232,11 @@ function adjustGiftCertificates() {
 }
 
 /**
- * TODO
+ * Used to adjust gift certificate totals, update page metadata, and render the billing page.
+ * This function is called whenever a billing form action is handled.
+ * @see {@link module:controllers/COBilling~returnToForm|returnToForm}
+ * @see {@link module:controllers/COBilling~adjustGiftCertificates|adjustGiftCertificates}
+ * @see {@link module:controllers/COBilling~billing|billing}
  */
 function handleCoupon() {
     var CouponError;
@@ -246,10 +255,12 @@ function handleCoupon() {
 }
 
 /**
- * Attempts to redeem a gift certificate. If the gift certificate wasn't
+ * Redeems a gift certificate. If the gift certificate was not successfully
  * redeemed, the form field is invalidated with the appropriate error message.
- * If the gift certificate was redeemed, the form gets cleared. This start node
+ * If the gift certificate was redeemed, the form gets cleared. This function
  * is called by an Ajax request and generates a JSON response.
+ * @param {String} giftCertCode - Gift certificate code entered into the giftCertCode field in the billing form.
+ * @returns {object} JSON object containing the status of the gift certificate.
  */
 function redeemGiftCertificate(giftCertCode) {
     var cart, gc, newGCPaymentInstrument, gcPaymentInstrument, status, result;
@@ -287,7 +298,9 @@ function redeemGiftCertificate(giftCertCode) {
 }
 
 /**
- * TODO
+ * Updates credit card information from the httpParameterMap and determines if there is a currently selected credit card.
+ * If a credit card is selected, it adds the the credit card number to the billing form. Otherwise, the {@link module:controllers/COBilling~publicStart|publicStart} method is called.
+ * In either case, it will initialize the credit card list in the billing form and call the {@link module:controllers/COBilling~start|start} function.
  */
 function updateCreditCardSelection() {
     var cart, applicableCreditCards, UUID, selectedCreditCard, instrumentsIter, creditCardInstrument;
@@ -325,8 +338,10 @@ function updateCreditCardSelection() {
 }
 
 /**
- * Reset the forms of all payment methods, except the one of the current
- * selected payment method.
+ * Clears the form element for the currently selected payment method and removes the other payment methods.
+ *
+ * @return {Boolean} Returns true if payment is successfully reset. Returns false if the currently selected payment
+ * method is bml and the ssn cannot be validated.
  */
 function resetPaymentForms() {
 
@@ -358,8 +373,8 @@ function resetPaymentForms() {
 }
 
 /**
- * TODO
- * @returns {boolean}
+ * Validates the billing form.
+ * @returns {boolean} Returns true if the billing address is valid or no payment is needed. Returns false if the billing form is invalid.
  */
 function validateBilling() {
     if (!app.getForm('billing').object.billingAddress.valid) {
@@ -380,9 +395,9 @@ function validateBilling() {
 }
 
 /**
- * Handles the selection of the payment method and performs payment method
- * specific validation and verification upon the entered form fields. If the
- * order total is 0 (in case user has product promotions etc.) then we do not
+ * Handles the selection of the payment method and performs payment method-specific
+ * validation and verification on the entered form fields. If the
+ * order total is 0 (if the user has product promotions) then we do not
  * need a valid payment method.
  */
 function handlePaymentSelection(cart) {
@@ -419,10 +434,11 @@ function handlePaymentSelection(cart) {
 }
 
 /**
- * TODO
- *
- * @param cart
- * @returns {boolean}
+ * Gets or creates a billing address and copies it to the billingaddress form. Also sets the customer email address
+ * to the value in the billingAddress form.
+ * @transaction
+ * @param {module:models/CartModel~CartModel} cart - A CartModel wrapping the current Basket.
+ * @returns {boolean} true
  */
 function handleBillingAddress(cart) {
 
@@ -443,7 +459,9 @@ function handleBillingAddress(cart) {
 }
 
 /**
- * TODO
+ * Checks if there is currently a cart and if one exists, gets the customer address from the httpParameterMap and saves it to the customer address book.
+ * Initializes the list of credit cards and calls the {@link module:controllers/COBilling~start|start} function.
+ * If a cart does not already exist, calls the {@link module:controllers/Cart~Show|Cart controller Show function}.
  */
 function updateAddressDetails() {
     var cart, address, billingAddress;
@@ -469,7 +487,15 @@ function updateAddressDetails() {
 }
 
 /**
- * TODO
+ * Form handler for the billing form. Handles the following actions:
+ * - __applyCoupon__ - gets the coupon to add from the httpParameterMap couponCode property and calls {@link module:controllers/COBilling~handleCoupon|handleCoupon}
+ * - __creditCardSelect__ - calls the {@link module:controllers/COBilling~updateCreditCardSelection|updateCreditCardSelection} function.
+ * - __paymentSelect__ - calls the {@link module:controllers/COBilling~publicStart|publicStart} function.
+ * - __redeemGiftCert__ - redeems the gift certificate entered into the billing form and returns to the cart.
+ * - __save__ - validates payment and address information and handles any errors. If the billing form is valid,
+ * saves the billing address to the customer profile, sets a flag to indicate the billing step is successful, and calls
+ * the {@link module:controllers/COSummary~start|COSummary controller Start function}.
+ * - __selectAddress__ - calls the {@link module:controllers/COBilling~updateAddressDetails|updateAddressDetails} function.
  */
 function billing() {
 
@@ -533,8 +559,9 @@ function billing() {
 }
 
 /**
- * TODO
- */
+* Gets the gift certificate code from the httpParameterMap and redeems it. For an ajax call, renders an empty JSON object.
+* Otherwise, renders a JSON object with information about the gift certificate code and the success and status of the redemption.
+*/
 function redeemGiftCertificateJson() {
     var giftCertCode, giftCertStatus;
 
@@ -557,8 +584,8 @@ function redeemGiftCertificateJson() {
 }
 
 /**
- * Attempts to remove a gift certificate from the basket payment instruments and
- * generates a JSON response with a status. This start node is called by an Ajax
+ * Removes gift certificate from the basket payment instruments and
+ * generates a JSON response with a status. This function is called by an Ajax
  * request.
  */
 function removeGiftCertificate() {
@@ -575,9 +602,8 @@ function removeGiftCertificate() {
 }
 
 /**
- * Renders the order summary including mini cart order totals and shipment
- * summary. This is used to update the order totals in the UI based on the
- * recalculated basket after a coupon code has been applied.
+ * Updates the order totals and recalculates the basket after a coupon code is applied.
+ * Renders the checkout/minisummary template, which includes the mini cart order totals and shipment summary.
  */
 function updateSummary() {
 
@@ -595,7 +621,7 @@ function updateSummary() {
 
 /**
  * Renders a form dialog to edit an address. The dialog is supposed to be opened
- * by an Ajax request and ends in templates, which just trigger a certain JS
+ * by an Ajax request and ends in templates, which trigger a certain JavaScript
  * event. The calling page of this dialog is responsible for handling these
  * events.
  */
@@ -616,7 +642,13 @@ function editAddress() {
 }
 
 /**
- * TODO
+ * Form handler for the returnToForm form.
+ * - __apply __ - attempts to save billing address information to the platform. If there is an error, renders the
+ * components/dialog/dialogapply template. If it is successful, sets the ContinueURL to {@link module:controllers/COBilling~EditBillingAddress|EditBillingAddress} and renders the
+ * checkout/billing/billingaddressdetails template.
+ * - __remove __ - Checks if the customer owns any product lists. If they do not, removes the address from the customer address book
+ * and renders the components/dialog/dialogdelete template.
+ * If they do own product lists, sets the ContinueURL to {@link module:controllers/COBilling~EditBillingAddress|EditBillingAddress} and renders the checkout/billing/billingaddressdetails template.
  */
 function editBillingAddress() {
 
@@ -699,8 +731,10 @@ function selectCreditCard() {
 }
 
 /**
- * This branch is used to revalidate existing payment instruments in later
- * checkout steps.
+ * Revalidates existing payment instruments in later checkout steps.
+ *
+ * @param {module:models/CartModel~CartModel} cart - A CartModel wrapping the current Basket.
+ * @return {Boolean} true if existing payment instruments are valid, false if not.
  */
 function validatePayment(cart) {
     var paymentAmount, countryCode, invalidPaymentInstruments, result;
@@ -731,6 +765,8 @@ function validatePayment(cart) {
  * The logic replaces an old saved credit card with the same masked credit card
  * number of the same card type with the new credit card. This ensures creating
  * only unique cards as well as replacing expired cards.
+ * @transactional
+ * @return {Boolean} true if credit card is successfully saved.
  */
 function saveCreditCard() {
     var i, creditCards, GetCustomerPaymentInstrumentsResult, newCreditCard;
@@ -779,32 +815,49 @@ function saveCreditCard() {
 /*
 * Web exposed methods
 */
-/** @see module:controllers/COBilling~Start */
+/** Starting point for billing.
+ * @see module:controllers/COBilling~publicStart */
 exports.Start = guard.ensure(['https'], publicStart);
-/** @see module:controllers/COBilling~redeemGiftCertificateJson */
+/** Redeems gift certificates.
+ * @see module:controllers/COBilling~redeemGiftCertificateJson */
 exports.RedeemGiftCertificateJson = guard.ensure(['https', 'get'], redeemGiftCertificateJson);
-/** @see module:controllers/COBilling~removeGiftCertificate */
+/** Removes gift certificate from the basket payment instruments.
+ * @see module:controllers/COBilling~removeGiftCertificate */
 exports.RemoveGiftCertificate = guard.ensure(['https', 'get'], removeGiftCertificate);
-/** @see module:controllers/COBilling~updateSummary */
+/** Updates the order totals and recalculates the basket after a coupon code is applied.
+ * @see module:controllers/COBilling~updateSummary */
 exports.UpdateSummary = guard.ensure(['https', 'get'], updateSummary);
-/** @see module:controllers/COBilling~updateAddressDetails */
+/** Gets the customer address and saves it to the customer address book.
+ * @see module:controllers/COBilling~updateAddressDetails */
 exports.UpdateAddressDetails = guard.ensure(['https', 'get'], updateAddressDetails);
-/** @see module:controllers/COBilling~editAddress */
+/** Renders a form dialog to edit an address.
+ * @see module:controllers/COBilling~editAddress */
 exports.EditAddress = guard.ensure(['https', 'get'], editAddress);
-/** @see module:controllers/COBilling~getGiftCertificateBalance */
+/** Returns information of a gift certificate including its balance as JSON response.
+ * @see module:controllers/COBilling~getGiftCertificateBalance */
 exports.GetGiftCertificateBalance = guard.ensure(['https', 'get'], getGiftCertificateBalance);
-/** @see module:controllers/COBilling~selectCreditCard */
+/** Selects a customer credit card and returns the details of the credit card as JSON response.
+ * @see module:controllers/COBilling~selectCreditCard */
 exports.SelectCreditCard = guard.ensure(['https', 'get'], selectCreditCard);
-/** @see module:controllers/COBilling~updateCreditCardSelection */
+/** Adds the currently selected credit card to the billing form and initializes the credit card selection list.
+ * @see module:controllers/COBilling~updateCreditCardSelection */
 exports.UpdateCreditCardSelection = guard.ensure(['https', 'get'], updateCreditCardSelection);
-/** @see module:controllers/COBilling~billing */
+/** Form handler for the billing form.
+ * @see module:controllers/COBilling~billing */
 exports.Billing = guard.ensure(['https'], billing);
-/** @see module:controllers/COBilling~editBillingAddress */
+/** Form handler for the returnToForm form.
+ * @see module:controllers/COBilling~editBillingAddress */
 exports.EditBillingAddress = guard.ensure(['https', 'post'], editBillingAddress);
 
 /*
  * Local methods
  */
+/** Saves the credit card used in the billing form in the customer payment instruments.
+ * @see module:controllers/COBilling~saveCreditCard */
 exports.SaveCreditCard = saveCreditCard;
+/** Revalidates existing payment instruments in later checkout steps.
+ * @see module:controllers/COBilling~validatePayment */
 exports.ValidatePayment = validatePayment;
+/** Handles the selection of the payment method and performs payment method specific validation and verification upon the entered form fields.
+ * @see module:controllers/COBilling~handlePaymentSelection */
 exports.HandlePaymentSelection = handlePaymentSelection;
