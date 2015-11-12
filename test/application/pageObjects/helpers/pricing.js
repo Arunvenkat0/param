@@ -40,12 +40,12 @@ export const localeCurrency = {
  */
 export function getFormattedPrice(price, locale = 'en-US') {
     let normalizedLocale = locale.replace('_', '-');
+    let formatOptions = {minimumFractionDigits: localeCurrency[normalizedLocale].fractionDigits};
     let normalizedPrice = price.replace(/\$|£|€|¥|,/g, '');
     let formattedAmount;
 
-    normalizedPrice = parseFloat(normalizedPrice).toFixed(2).toString();
-    formattedAmount = new Intl.NumberFormat(normalizedLocale,
-        {minimumFractionDigits: localeCurrency[normalizedLocale].fractionDigits}).format(normalizedPrice);
+    normalizedPrice = parseFloat(normalizedPrice);
+    formattedAmount = normalizedPrice.toLocaleString(normalizedLocale, formatOptions);
 
     switch (normalizedLocale) {
         case 'en-GB':
