@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * This controller implements functionality for gift registry business logic.
+ * Controller for gift registry business logic.
  *
  * @module  controllers/GiftRegistry
  */
@@ -23,7 +23,8 @@ var Form = app.getModel('Form');
 //var giftRegistryForm = Form.get('giftregistry');
 
 /**
- * Controls the login, which is required to access gift registry related actions.
+ * Controls the login that is required to access gift registry actions.
+ * @FIXME Doesn't appear to actually be called by anything.
  */
 function submitFormLanding() {
     var TriggeredAction = request.triggeredFormAction;
@@ -38,7 +39,10 @@ function submitFormLanding() {
 
 
 /**
- * Renders a list of gift registries.
+ * Renders a list of gift registries associated with the current customer.
+ * Clears the productlists form and gets the product lists associated with a customer. Gets the
+ * myaccount-giftregistry content asset, updates the page metadata and renders the registry list
+ * page (account/giftregistry/registrylist template).
  */
 function start() {
     var productListsForm = session.forms.productlists;
@@ -63,7 +67,8 @@ function start() {
 }
 
 /**
- * Creates or searches for a gift registry.
+ * Creates or searches for a gift registry. Renders the registry list
+ * page (account/giftregistry/registrylist template).
  */
 function registrymain() {
     // TODO this should trigger some redirect
@@ -167,8 +172,8 @@ function addProduct() {
 
 
 /**
- * Provides the actual creation logic for the gift registry in 3 steps: event participants, participant addresses
- * and a final confirmation.
+ * Provides the actual creation logic for the gift registry in three steps: event participants, participant addresses
+ * and a final confirmation. Renders the event participant page (account/giftregistry/eventparticipant template).
  */
 function createOne() {
     var participantForm = session.forms.giftregistry.event.participant;
@@ -183,7 +188,13 @@ function createOne() {
 }
 
 /**
- * TODO
+ * Event handler for gift registry addresses.
+ * Checks the last triggered action and handles them depending on the formId associated with the triggered action.
+ * If the formId is:
+ * - __back__ - calls the {@link module:controllers/GiftRegistry~start|start} function
+ * - __confirm__ - if there are no addresses in the customer address book, sets a flag to indicate the
+ * before event shipping address is new. Calls the {@link module:controllers/GiftRegistry~showAddresses|showAddresses} function.
+ * @FIXME Doesn't appear to ever be called.
  */
 function eventParticipant() {
     var currentForms = session.forms;
@@ -204,7 +215,7 @@ function eventParticipant() {
 }
 
 /**
- * TODO
+ * Renders the gift registry addresses page (account/giftregistry/addresses template).
  */
 function showAddresses() {
     app.getView().render('account/giftregistry/addresses');
@@ -276,15 +287,23 @@ function showAddresses() {
 // }
 
 /**
- * TODO
+ * Renders the gift registry confirmation page (account/giftregistry/giftregistryconfirmation template).
  */
 function showConfirmation() {
     app.getView().render('account/giftregistry/giftregistryconfirmation');
 }
 
 /**
- * TODO
- */
+ * Gift registry event handler. Handles the last triggered action based in the formId.
+ *
+ * If the formId is:
+ *  - __back__ -  calls the {@link module:controllers/GiftRegistry~showAddresses|showAddresses} function.
+ *  - __confirm__ - gets the product list associated with the customer and calls the {@link module:controllers/GiftRegistry~showRegistry|showRegistry} function.
+ *  If neither of these actions was the last triggered action, then the function checks if the before-or after-event shipping address is a new address
+ *  and if it is already in the customer address book, calls showAddresses. The function creates the product list and the registrants.
+ *  It also calls a script (account/giftregistry/AssignEventAddresses.ds) to assign the event addresses and then calls {@link module:controllers/GiftRegistry~showConfirmation|showConfirmation}.
+ *  @transaction
+*/
 function confirmation() {
     var currentForms = session.forms;
     var CreateProductListRegistrantResult;
@@ -434,6 +453,7 @@ function confirmation() {
 
 /**
  * Selects a gift registry from a list of gift registries that are found by the registry search.
+ * Called by {@link module:controllers/GiftRegistry~addProduct}.
  */
 function selectOne() {
     var currentForms = session.forms;
@@ -469,7 +489,8 @@ function selectProductListInteraction() {
 }
 
 /**
- * TODO
+ * Clears the giftregistry form and prepopulates event and participant information from the current ProductListModel.
+ * Calls the {@link module:controllers/GiftRegistry~showEditParticipantForm|showEditParticipantForm} function.
  */
 function editEvent() {
     var currentForms = session.forms;
@@ -492,7 +513,7 @@ function editEvent() {
 }
 
 /**
- * TODO
+ * Renders the event participant page (account/giftregistry/eventparticipant template).
  */
 function showEditParticipantForm() {
     app.getView().render('account/giftregistry/eventparticipant');
@@ -585,7 +606,8 @@ function showEditParticipantForm() {
 // }
 
 /**
- * TODO
+ * Clears the giftregistry.purchases form and calls the {@link module:controllers/GiftRegistry~showPurchases|showPurchases} function.
+ * @FIXME Should line 610 "copyForm" be "copyFrom"? And why is there another showPurchases function?
  */
 function showPurchases() {
     var currentForms = session.forms;
@@ -599,6 +621,7 @@ function showPurchases() {
 }
 
 /**
+ * Renders the gift registry purchases page.
  * @FIXME Why are there two identically named functions?
  */
 function showPurchases() {
@@ -606,7 +629,13 @@ function showPurchases() {
 }
 
 /**
- * TODO
+ * Event handler for gift registry navigation.
+ * Checks the last triggered action and handles them depending on the formId associated
+ * with the triggered action. If the formId is:
+ * - __navEvent__ - calls the {@link module:controllers/GiftRegistry~editEvent|editEvent} function.
+ * - __navRegistry__ - calls the {@link module:controllers/GiftRegistry~showRegistry|showRegistry} function.
+ * - __navShipping __ - - {@link module:controllers/GiftRegistry~editAddresses|editAddresses} function.
+ * If the last triggered action is none of these or null, the function calls the {@link module:controllers/GiftRegistry~showPurchases|showPurchases} function.
  */
 // @secure
 function showPurchasesInteraction() {
@@ -632,7 +661,8 @@ function showPurchasesInteraction() {
 
 
 /**
- * Renders a gift registry details page and provides basic actions such as item updates and publishing.
+ * Renders a gift registry details page (account/giftregistry/registry template) and provides basic actions such as item updates and publishing.
+ * @param {object} args - object containing a ProductList object.
  */
 function showRegistry(args) {
     var giftregistryForm = session.forms.giftregistry;
@@ -650,7 +680,20 @@ function showRegistry(args) {
 }
 
 /**
- * TODO
+ * Event handler for gift registry interactions.
+ * Checks the last triggered action and handles them depending on the formId associated with the triggered action.
+ * If the formId is:
+ * - __addGiftCertificate__ - adds a gift certificate to the product list and alls the {@link module:controllers/GiftRegistry~showRegistry|showRegistry} function.
+ * - __addToCart__ - calls the {@link module:controllers/GiftCert~purchase|purchase} function.
+ * - __deleteItem __ - changes the purchased quantity to zero. If this fails , it renders the registry page (account/giftregistry/registry template) with a status message.
+ * - __navEvent__ - calls the {@link module:controllers/GiftRegistry~editEvent|editEvent} function
+ * - __navPurchases__ - calls the {@link module:controllers/GiftRegistry~showPurchases|showPurchases} function.
+ * - __navShipping __ - calls the {@link module:controllers/GiftRegistry~editAddresses|editAddresses} function.
+ * - __purchaseGiftCertificate __ - calls the {@link module:controllers/GiftRegistryCustomer~PurchaseGiftCertificate|GiftRegistryCustomer controller PurchaseGiftCertificate function}.
+ * - __setPrivate__ - sets the current product list as private and calls the {@link module:controllers/GiftRegistry~showRegistry|showRegistry} function.
+ * - __setPublic __ - sets the current product list as public and calls the {@link module:controllers/GiftRegistry~showRegistry|showRegistry} function.
+ * - __updateItem__ -  calls the {@link module:controllers/GiftRegistry~showRegistry|showRegistry} function.
+ * If the last triggered action is none of these or null, the function renders the registry page (account/giftregistry/registry template).
  */
 function showRegistryInteraction() {
     var currentForms = session.forms;
@@ -778,7 +821,11 @@ function search() {
     });
 }
 
-
+/**
+ * Renders the gift registry results page account/giftregistry/giftregistryresults).
+ * @param {object} args - JSON object with ProductLists member and ProductLists value.
+ * @FIXME only called by the search() function - no need for separate function.
+ */
 function showSearch(args) {
     app.getView().render('account/giftregistry/giftregistryresults', {
         ProductLists: args.ProductLists
@@ -786,7 +833,9 @@ function showSearch(args) {
 }
 
 /**
- * TODO
+ * Event handler for gift registry search.
+ * Checks the last triggered action and handles it ifthe formId associated with the triggered action is 'search'.
+ * calls the {@link module:controllers/GiftRegistry~search|search} function.
  */
 function searchGiftRegistry() {
     // TODO this should end with a redirect
@@ -803,7 +852,10 @@ function searchGiftRegistry() {
 
 
 /**
- * Looks up a gift registry by its public UUID.
+ * Looks up a gift registry by its public UUID. If the customer is authenticated, it calls
+ * the {@link module:controllers/GiftRegistry~showRegistry|showRegistry} function. If the customer
+ * is not authenticated, it calls calls the {@link module:controllers/Account~show|Account
+ * controller show function}.
  */
 function showRegistryByID() {
     var currentHttpParameterMap = request.httpParameterMap;
@@ -882,6 +934,7 @@ function showRegistryByID() {
 
 /**
  * Attempts to replace a product in the gift registry.
+ * @return {Object} JSON object indicating the error state if any pipelets called throw a PIPELET_ERROR.
  */
 function replaceProductListItem() {
     var currentHttpParameterMap = request.httpParameterMap;
@@ -950,7 +1003,12 @@ function replaceProductListItem() {
 
 
 /**
- * Provides address related gift registry actions such as address changes.
+ * Provides gift registry actions such as address changes.
+ * Clears the giftregistry form. If there is a shipping address for the current product list, copies that to the
+ * before-the-event shipping address  in the form. If there is an after-the-event shipping address set for the current product list,
+ * copies that to the gift registry form.
+ * Calls the {@link module:controllers/GiftRegistry~showAddresses|showAddresses} function.
+ * @FIXME Why are there two functions with the same name?
  */
 function editAddresses() {
     var currentForms = session.forms;
@@ -974,15 +1032,26 @@ function editAddresses() {
 }
 
 /**
- * TODO
+ * Renders the gift registry address page (account/giftregistry/addresses template).
  */
 function showAddresses() {
     app.getView().render('account/giftregistry/addresses');
 }
 
 /**
- * TODO
- @FIXME Why are there two functions with the same name?
+ * Event handler for gift registry addresses.
+ * Checks the last triggered action and handles them depending on the formId associated with the triggered action.
+ * If the formId is:
+ * - __back__ -  calls the {@link module:controllers/GiftRegistry~showRegistry|showRegistry} function.
+ * - __confirm__ - calls {@link module:controllers/GiftRegistry~confirm|confirm} function.
+ * - __navEvent__ - calls the {@link module:controllers/GiftRegistry~editEvent|editEvent} function
+ * - __navPurchases__ - calls the {@link module:controllers/GiftRegistry~showPurchases|showPurchases} function.
+ * - __navRegistry__ - calls the {@link module:controllers/GiftRegistry~showRegistry|showRegistry} function.
+ * If none of these are the formId of the last triggered action, then if the event addresses are not valid or are new
+ * the {@link module:controllers/GiftRegistry~showAddresses|showAddresses} function is called.
+ * Otherwise, the {@link module:controllers/GiftRegistry~confirm|confirm} function is called.
+ *
+ * @FIXME Why are there two functions with the same name?
  */
 // @secure
 function editAddresses() {
@@ -1031,7 +1100,14 @@ function editAddresses() {
 }
 
 /**
- * TODO
+ * Handles the confirm action for the giftregistry form. Checks to makes sure the before and after
+ * event addresses do not already exist in the customer profile. If the addresses are duplicates,
+ * calls the {@link module:controllers/GiftRegistry~showAddresses|showAddresses} function.
+ * If they are not duplicates, calls the AssignEventAddresses.ds script to assign the event addresses
+ * to the product list and then calls the {@link module:controllers/GiftRegistry~showRegistry|showRegistry} function.
+ *
+ * @transaction
+ * @returns {Object} JSON object indicating an error occurred in the AssignEventAddresses.ds script.
  */
 function confirm() {
     var currentForms = session.forms;
@@ -1089,7 +1165,8 @@ function confirm() {
 
 
 /**
- * Deletes a gift registry. Only the logged in owner of the gift registry can delete it.
+ * Deletes a gift registry. Only the logged-in owner of the gift registry can delete it.
+ * @FIXME This should be delete() since it's exported as Delete.
  */
 // @secure
 function Delete() {
@@ -1117,7 +1194,7 @@ function Delete() {
 
 
 /**
- * Creates a gift registry.
+ * Creates a gift registry. Calls the {@link module:controllers/GiftRegistry~createOne|createOne} function.
  */
 function create() {
     createOne();
@@ -1142,36 +1219,56 @@ function create() {
 /*
  * Web exposed methods
  */
-/** @see module:controllers/GiftRegistry~Confirmation */
+/** Gift registry event handler.
+ * @see module:controllers/GiftRegistry~confirmation */
 exports.Confirmation = guard.ensure(['post', 'https'], confirmation);
-/** @see module:controllers/GiftRegistry~Confirmation */
+/** Deletes a gift registry.
+ * @see module:controllers/GiftRegistry~confirmation */
 exports.Delete = guard.ensure(['get', 'https'], Delete);
-/** @see module:controllers/GiftRegistry~EditAddresses */
+/** Event handler for gift registry addresses.
+ * @see module:controllers/GiftRegistry~editAddresses */
 exports.EditAddresses = guard.ensure(['post', 'https'], editAddresses);
-/** @see module:controllers/GiftRegistry~EventParticipant */
+/** Event handler for gift registry addresses.
+ * @see module:controllers/GiftRegistry~eventParticipant */
 exports.EventParticipant = guard.ensure(['post', 'https'], eventParticipant);
-/** @see module:controllers/GiftRegistry~SearchGiftRegistry */
+/** Event handler for gift registry search.
+ * @see module:controllers/GiftRegistry~searchGiftRegistry */
 exports.SearchGiftRegistry = guard.ensure(['post'], searchGiftRegistry);
-/** @see module:controllers/GiftRegistry~SelectProductListInteraction */
+/** Provides actions to edit a gift registry event.
+ * @see module:controllers/GiftRegistry~selectProductListInteraction */
 exports.SelectProductListInteraction = guard.ensure(['post', 'https'], selectProductListInteraction);
-/** @see module:controllers/GiftRegistry~ShowPurchasesInteraction */
+/** Event handler for gift registry navigation.
+ * @see module:controllers/GiftRegistry~showPurchasesInteraction */
 exports.ShowPurchasesInteraction = guard.ensure(['post', 'https'], showPurchasesInteraction);
-/** @see module:controllers/GiftRegistry~ShowRegistryByID */
+/** Looks up a gift registry by its public UUID.
+ * @see module:controllers/GiftRegistry~showRegistryByID */
 exports.ShowRegistryByID = guard.ensure(['get', 'https'], showRegistryByID);
-/** @see module:controllers/GiftRegistry~ShowRegistryInteraction */
+/** Event handler for gift registry interactions.
+ * @see module:controllers/GiftRegistry~showRegistryInteraction */
 exports.ShowRegistryInteraction = guard.ensure(['get', 'https'], showRegistryInteraction);
-/** @see module:controllers/GiftRegistry~SubmitFormLanding */
+/** Controls the login that is required to access gift registry actions.
+ * @see module:controllers/GiftRegistry~submitFormLanding */
 exports.SubmitFormLanding = guard.ensure(['post', 'https'], submitFormLanding);
-/** @see module:controllers/GiftRegistry~registrymain */
+/** Creates or searches for a gift registry.
+ * @FIXME Why is this exported as lowercase?
+ * @see module:controllers/GiftRegistry~registrymain */
 exports.registrymain = guard.ensure(['post', 'https'], registrymain);
-/** @see module:controllers/GiftRegistry~Start */
+/** Renders a list of gift registries associated with the current customer.
+ * @see module:controllers/GiftRegistry~start */
 exports.Start = guard.ensure(['get', 'https', 'loggedIn'], start, {scope: 'giftregistry'});
-/** @see module:controllers/GiftRegistry~AddProduct */
+/** Adds a product to the gift registry.
+ * @see module:controllers/GiftRegistry~addProduct */
 exports.AddProduct = guard.ensure(['get', 'https', 'loggedIn'], addProduct);
 
 /*
  * Local methods
  */
+/** Attempts to replace a product in the gift registry.
+ * @see module:controllers/GiftRegistry~replaceProductListItem */
 exports.ReplaceProductListItem = replaceProductListItem;
+/** Searches a gift registry by various parameters.
+ * @see module:controllers/GiftRegistry~search */
 exports.Search = search;
+/** Renders the gift registry details page.
+ * @see module:controllers/GiftRegistry~showRegistry */
 exports.ShowRegistry = showRegistry;

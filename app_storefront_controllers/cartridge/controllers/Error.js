@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * This controller is called whenever a technical error occurs while processing a
+ * Controller that is called whenever a technical error occurs while processing a
  * request. A standard error page is rendered.
  *
  * @module controllers/Error
@@ -12,21 +12,19 @@ var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
 /**
- * Called by the system when an error was not handled locally (general error
- * page).
+ * Called by the system when an error is not handled locally. Renders a general error
+ * page.
+ * Determines if it is an AJAX request by looking at
+ * X-Requested-With=XMLHttpRequest request header. This header is set by
+ * jQuery for every AJAX request. If the requested response format is not set to json
+ * then the decorator is empty. If it is set to json, a JSON response is sent.
  *
- * @param {Object} args The arguments
- * @param {String} args.ErrorText The error message
- * @param {String} args.ControllerName The controller which caused the error
+ * @param {Object} args The argument object
+ * @param {String} args.ErrorText The error message.
+ * @param {String} args.ControllerName The controller that caused the error.
  * @param {String} args.CurrentStartNodeName The endpoint name causing the error.
  */
 function start(args) {
-    /*
-     * Determine if it was an AJAX request by looking at
-     * X-Requested-With=XMLHttpRequest request header. This header is set by
-     * jQuery for every AJAX request. If the requested response format is not json
-     * then the decorator is empty. If it is json, a JSON response is sent.
-     */
     var nodecorator = false;
 
     if (request.getHttpHeaders().get('x-requested-with') === 'XMLHttpRequest') {
@@ -63,7 +61,8 @@ function start(args) {
 }
 
 /**
- * Called by the system when a session hijacking was detected.
+ * Called by the system when a session hijacking is detected.
+ * Renders an error page (error/forbidden template.)
  */
 function forbidden() {
     app.getModel('Customer').logout();
@@ -73,7 +72,9 @@ function forbidden() {
 /*
  * Web exposed methods
  */
-/** @see module:controllers/Error~start */
+/** Called by the system when an error is not handled locally.
+ * @see module:controllers/Error~start */
 exports.Start = guard.all(start);
-/** @see module:controllers/Error~forbidden */
+/** Called by the system when a session hijacking is detected.
+ * @see module:controllers/Error~forbidden */
 exports.Forbidden = guard.all(forbidden);
