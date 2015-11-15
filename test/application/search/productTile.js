@@ -8,13 +8,13 @@ import * as testData from '../pageObjects/testData/main';
 describe('Search Results - Product Tile', () => {
     let categoryPath = '/mens/clothing/dress%20shirts/';
 
-    // Mens Clothing Dress Shirts Modern Dress Shirt in Pink
-    let productIdSinglePrice = '25585429';
+    // Mens Clothing > Dress Shirts > Modern Dress Shirt
+    let productIdSinglePrice = '74974310';
 
-    // Mens Clothing Dress Shirts Modern Striped Dress Shirt
+    // Mens Clothing > Dress Shirts > Modern Striped Dress Shirt
     let productIdPriceRange = '69309284';
 
-    // Mens Clothing Dress Shirts No-Iron Textured Dress Shirt
+    // Mens Clothing > Dress Shirts > No-Iron Textured Dress Shirt
     let productIdListAndSalePrice = '25604455';
 
     let displayPrice;
