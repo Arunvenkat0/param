@@ -1,8 +1,8 @@
 'use strict';
 
 /**
- * Default entry point when www.mydomain.com is opened.
- *
+ * Controller that determines the page rendered when a customer accesses the site domain (www.mydomain.com).
+ * The Start function that it exports points at the controller that renders the home page.
  * @module controllers/Default
  */
 
@@ -11,7 +11,7 @@ var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
 /**
- * Called when site is turned offline (not live)
+ * This function is called when the site is turned offline (not live).
  */
 function offline() {
     app.getView().render('error/siteoffline');
@@ -24,7 +24,9 @@ function offline() {
 /*
  * Web exposed methods
  */
-/** @see module:controllers/Home~show */
+/** Sets the page rendered when the site domain is accessed.
+ * @see module:controllers/Home~show */
 exports.Start = app.getController('Home').Show;
-/** @see module:controllers/Default~offline */
+/** Sets the controller called when the site is offline.
+ * @see module:controllers/Default~offline */
 exports.Offline = guard.ensure(['get'], offline);

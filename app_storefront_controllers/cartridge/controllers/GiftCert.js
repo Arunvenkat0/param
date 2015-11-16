@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * This controller implements gift certificate purchase business logic.
+ * Controller for gift certificate purchases.
  *
  * @module controllers/GiftCert
  */
@@ -24,7 +24,9 @@ var Cart = app.getModel('Cart');
 var ProductList = app.getModel('ProductList');
 
 /**
- * Renders the page to purchase a gift certificate.
+ * Clears the giftcert form and calls the {@link module:controllers/GiftCert~showPurchase|showPurchase} function to
+ * render the page to purchase a gift certificate.
+ *
  */
 function purchase() {
     app.getForm('giftcert').clear();
@@ -33,7 +35,10 @@ function purchase() {
 }
 
 /**
- * Internal helper which prepares and shows the purchase page without clearing the form
+ * Internal helper function that prepares and shows the purchase page without clearing the form.
+ * Populates the giftcert.purchase with information from the httpParameterMap and the customer profile.
+ * Sets the ContinueURL to {@link module:controllers/GiftCert~addToBasket|GiftCert-AddToBasket}
+ *  and renders the purchase page (checkout/giftcert/giftcertpurchase template).
  */
 function showPurchase() {
     var parameterMap = request.httpParameterMap;
@@ -70,10 +75,12 @@ function showPurchase() {
 }
 
 /**
- * Internal helper to show errors on the purchase page
+ * Internal helper to show errors on the purchase page.
+ * For an ajax request, renders a JSON object (checkout/giftcert/giftcertaddtobasketjson template).
+ * Otherwise, calls the {@link module:controllers/GiftCert~showPurchase|showPurchase} function.
  * @param  {Object} args
- * @param  {dw.util.Map} args.FormErrors
- * @param  {String} args.GeneralError
+ * @param  {dw.util.Map} args.FormErrors Errors from the form.
+ * @param  {String} args.GeneralError Errors from the page.
  */
 function showError(args) {
     if (request.httpParameterMap.format.stringValue === 'ajax') {
@@ -89,10 +96,10 @@ function showError(args) {
 
 
 /**
- * Assigns values from the gift certificate line item to the giftcert.purchase form
- * and renders an updated version of the giftcertepurchase template.
- * Parameters - GiftCertificateLineItemID: UUID of line item for gift
- * certificate to edit in basket.
+ * Updates and renders the gift certificate purchase page.
+ * Clears the giftcert form and assigns values to the giftcert.purchase form from the gift certificate line item. Sets ContinueURL to GiftCert-Update
+ * and renders the gift certificate purchase page (checkout/giftcert/giftcertpurchase template).
+ * If there is no existing cart or no gift certificate line item, calls the {@link module:controllers/GiftCert~purchase|purchase} function.
  */
 function edit() {
     var cart = Cart.get();
@@ -126,8 +133,8 @@ function edit() {
 
 
 /**
- * Returns the details of a gift certificate as JSON in order to check the
- * current balance.
+ * Displays the details of a gift certificate as a JSON object in order to check the
+ * current balance. If an error occurs, renders an error message.
  */
 function checkBalance() {
     var params = request.httpParameterMap;
@@ -159,7 +166,7 @@ function checkBalance() {
 
 /**
  * Adds a gift certificate to the basket.
- * Parameters - post of giftcert.purchase
+ * This is called when the giftcert.purchase form is posted in the giftcertpurchase.isml template.
  */
 function addToBasket() {
     processAddToBasket(createGiftCert);
@@ -167,15 +174,19 @@ function addToBasket() {
 
 /**
  * Updates the gift certificate in the basket.
- * Parameters - post of giftcert.purchase
+ * This is called when the giftcert.purchase is posted in the giftcertpurchase.isml template.
  */
 function update() {
     processAddToBasket(updateGiftCert);
 }
 
 /**
- * Internal helper which creates/updates the GiftCert
- * @param  {function} action The gift certificate action to execute.
+ * Internal helper function that creates/updates the gift certificate.
+ * Validates the giftcert.purchase form and handles any errors. Gets or
+ * creates a CartModel and creates or updates the gift certificate line item.
+ * It then recalculates the cart. For ajax requests, renders the checkout/giftcert/giftcertaddtobasketjson
+ * template. For all other requests, calls the {@link module:controllers/Cart~show|Cart controller show function}.
+ * @param {function} action The gift certificate function to execute.
  */
 function processAddToBasket(action) {
     var purchaseForm = app.getForm('giftcert.purchase');
@@ -243,10 +254,8 @@ function processAddToBasket(action) {
 }
 
 /**
- * Shows the minicart
+ * Gets the gift certificate line item and renders the minicart (checkout/cart/minicart) template.
  *
- * @param {Object} args
- * @param {String} args.lineItemId The OD of the Gift Certificate lineitem
  * @TODO Check why normal minicart cannot be used
  */
 function showMiniCart() {
@@ -266,9 +275,13 @@ function showMiniCart() {
 
 /**
  * Creates a gift certificate in the customer basket using form input values.
- * The form must be valid before calling this pipeline.
+ * If a gift certificate is added to a product list, a ProductListItem is added, otherwise a GiftCertificateLineItem
+ * is added.
+ * __Note:__ the form must be validated before this function is called.
  *
- * @param {module:models/CartModel~CartModel} cart the current cart
+ * @param {module:models/CartModel~CartModel} cart - A CartModel wrapping the current Basket.
+ * @return {dw.order.GiftCertificateLineItem} gift certificate line item added to the
+ * current basket or product list.
  */
 function createGiftCert(cart) {
     var purchaseForm = app.getForm('giftcert.purchase');
@@ -284,7 +297,7 @@ function createGiftCert(cart) {
         }
     }
 
-    // @TODO Replace pipelet once API is available
+    // @TODO Replace pipelet with dw.order.LineItemCtnr.createGiftCertificateLineItem
     // Transaction.wrap(function () {
     //     basket.createGiftCertificateLineItem();
     // });
@@ -311,9 +324,12 @@ function createGiftCert(cart) {
 
 /**
  * Updates a gift certificate in the customer basket using form input values.
- * The form must be valid before calling this pipeline.
+ * Gets the input values from the purchase form and assigns them to the gift certificate line item.
+ * __Note:__ the form must be validated before calling this function.
  *
- * @param {module:models/CartModel~CartModel} cart the current cart
+ * @transaction
+ * @param {module:models/CartModel~CartModel} cart - CartModel that wraps the current Basket.
+ * @return {dw.order.GiftCertificateLineItem }gift certificate line item.
  */
 function updateGiftCert(cart) {
     var purchaseForm = app.getForm('giftcert.purchase');
@@ -343,15 +359,21 @@ function updateGiftCert(cart) {
 /*
  * Web exposed methods
  */
-/** @see module:controllers/GiftCert~purchase */
+/** Renders the page to purchase a gift certificate.
+ * @see module:controllers/GiftCert~purchase */
 exports.Purchase        = guard.ensure(['https','get'],purchase);
-/** @see module:controllers/GiftCert~edit */
+/** Updates and renders the gift certificate purchase page.
+ * @see module:controllers/GiftCert~edit */
 exports.Edit            = guard.ensure(['https','get'],edit);
-/** @see module:controllers/GiftCert~checkBalance */
+/** Displays the details of a gift certificate to check the current balance.
+ * @see module:controllers/GiftCert~checkBalance */
 exports.CheckBalance    = guard.ensure(['https','post'],checkBalance);
-/** @see module:controllers/GiftCert~addToBasket */
+/** Adds a gift certificate to the basket.
+ * @see module:controllers/GiftCert~addToBasket */
 exports.AddToBasket     = guard.ensure(['https','post'],addToBasket);
-/** @see module:controllers/GiftCert~update */
+/** Updates the gift certificate in the basket.
+ * @see module:controllers/GiftCert~update */
 exports.Update          = guard.ensure(['https','post'],update);
-/** @see module:controllers/GiftCert~showMiniCart */
+/** Renders the minicart.
+ * @see module:controllers/GiftCert~showMiniCart */
 exports.ShowMiniCart    = guard.ensure(['https','get'],showMiniCart);
