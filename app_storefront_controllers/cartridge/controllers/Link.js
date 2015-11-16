@@ -1,8 +1,8 @@
 'use strict';
 
 /**
- * This controller forwards calls to another controller. It is here to support legacy code where
- * content assets could link to this controller only. For all new code, link to the respective
+ * Controller that forwards calls to other controllers. It supports legacy code where
+ * content assets linked to this controller only. For all new code, link to the respective
  * controller directly (Search-Show, Product-Show, etc.)
  *
  * @module controllers/Link
