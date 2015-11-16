@@ -148,10 +148,11 @@ var ProductModel = AbstractModel.extend(
          */
         getDefaultVariant: function (onlyAvailable) {
             var product = this.object;
+            var variationModel = product.getVariationModel();
+            var firstProduct = !variationModel.variants.size() ? product :
+                (product.getVariationModel().getDefaultVariant() || this.getDefaultVariant());
+
             onlyAvailable = typeof onlyAvailable === 'undefined' ? true : onlyAvailable;
-            var firstProduct = product.getVariationModel().variants ?
-                (product.getVariationModel().getDefaultVariant() || this.getDefaultVariant()) :
-                null;
             if (!firstProduct || !firstProduct.onlineFlag || (onlyAvailable && firstProduct.getAvailabilityModel().availability === 0)) {
                 var variantsIterator = product.getVariants().iterator();
                 while (variantsIterator.hasNext()) {

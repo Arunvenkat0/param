@@ -8,6 +8,9 @@ import * as testData from '../pageObjects/testData/main';
 
 describe('Search', () => {
     let singleResultKeyword = 'pack and go';
+    let productNoVariantsKeyword = 'sony-xel-1';
+    let bundleKeyword = 'Playstation 3 Bundle';
+    let productSetKeyword = 'Fall Look';
     let catalog;
     let productVariationMaster;
     let variantIds;
@@ -33,6 +36,30 @@ describe('Search', () => {
     // searching for "pack and go" it would result in an error page.
     it('should return a PDP when searching for keywords that return only one result', () =>
         client.setValue('#q', singleResultKeyword)
+            .then(() => client.submitForm(searchResultsPage.SEARCH_FORM))
+            .then(() => client.waitForExist(searchResultsPage.PDP_MAIN))
+            .then(() => client.isExisting(searchResultsPage.PDP_MAIN))
+            .then(doesExist => assert.isTrue(doesExist))
+    );
+
+    it('should return a PDP when searching for a specific product that has no variants', () =>
+        client.setValue('#q', productNoVariantsKeyword)
+            .then(() => client.submitForm(searchResultsPage.SEARCH_FORM))
+            .then(() => client.waitForExist(searchResultsPage.PDP_MAIN))
+            .then(() => client.isExisting(searchResultsPage.PDP_MAIN))
+            .then(doesExist => assert.isTrue(doesExist))
+    );
+
+    it('should return a PDP when searching for a Product Bundle', () =>
+        client.setValue('#q', bundleKeyword)
+            .then(() => client.submitForm(searchResultsPage.SEARCH_FORM))
+            .then(() => client.waitForExist(searchResultsPage.PDP_MAIN))
+            .then(() => client.isExisting(searchResultsPage.PDP_MAIN))
+            .then(doesExist => assert.isTrue(doesExist))
+    );
+
+    it('should return a PDP when searching for a Product Set', () =>
+        client.setValue('#q', productSetKeyword)
             .then(() => client.submitForm(searchResultsPage.SEARCH_FORM))
             .then(() => client.waitForExist(searchResultsPage.PDP_MAIN))
             .then(() => client.isExisting(searchResultsPage.PDP_MAIN))
