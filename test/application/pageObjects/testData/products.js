@@ -311,6 +311,10 @@ export class ProductVariationMaster extends AbstractProductBase {
         return attrValues ? attrValues.displayValues[locale] : undefined;
     }
 
+    getAttrValuesByType (type) {
+        return _.pluck(this.variationAttributes[type].values, 'value');
+    }
+
     getPrices (pricebooks, locale, catalog) {
         let prices = {};
 
@@ -326,6 +330,28 @@ export class ProductVariationMaster extends AbstractProductBase {
         });
 
         return prices;
+    }
+
+    /**
+     * Retrieve first image matching size and attribute value
+     *
+     * @param {String} viewType - image size, typically 'large' for primary images and 'small' for thumbnails
+     * @param {String} attrValue - attribute value
+     * @returns {String} Image path value, i.e., 'large/PG.15J0037EJ.WHITEFB.PZ.jpg'
+     */
+    getImage (viewType, attrValue) {
+        return this.getImages(viewType, attrValue)[0];
+    }
+
+    /**
+     * Retrieve images matching size and attribute value
+     *
+     * @param {String} viewType - image size, typically 'large' for primary images and 'small' for thumbnails
+     * @param {String} attrValue - attribute value
+     * @returns {Array.<String>} Image path values, i.e., ['small/PG.15J0037EJ.SLABLFB.PZ.jpg', small/PG.15J0037EJ.SLABLFB.BZ.jpg]
+     */
+    getImages (viewType, attrValue) {
+        return _.find(this.images, {viewType: viewType, variationValue: attrValue}).paths;
     }
 }
 
@@ -358,32 +384,22 @@ export class ProductBundle extends AbstractProductBase {
 }
 
 function _parseImages (images) {
-    var imageList = images['image-group'];
-    var parsed = [];
+    let imageList = images['image-group'];
+    let parsed = [];
 
-    for (let image of imageList) {
-        /**
-         * It's possible for a raw XML catalog file to contain two separate
-         * entries for the same viewType:  One with a variant-value and one
-         * without.  We wish to avoid creating a duplicate.
-         */
-        if (_.any(parsed, 'viewType', image.$['view-type']) &&
-            image.$.hasOwnProperty('variation-value')) {
-            let proxy = _.findWhere(parsed, {viewType: image.$['view-type']});
-                proxy.variationValue = image.$['variation-value'];
-        } else {
-            let proxy = {
-                viewType: image.$['view-type'],
-                paths: []
-            };
+    imageList.forEach(image => {
+        let proxy = {
+            viewType: image.$['view-type'],
+            variationValue: image.$['variation-value'] || undefined,
+            paths: []
+        };
 
-            for (let path of image.image) {
-                proxy.paths.push(path.$.path);
-            }
+        image.image.forEach (path => {
+            proxy.paths.push(path.$.path);
+        });
 
-            parsed.push(proxy);
-        }
-    }
+        parsed.push(proxy);
+    });
 
     return parsed;
 }

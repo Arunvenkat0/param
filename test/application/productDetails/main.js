@@ -115,9 +115,12 @@ describe('Product Details Page', () => {
         );
     });
 
-    describe('Single item', () => {
+    describe('Variation Master', () => {
+        let defaultVariant;
         let expectedListPrice;
         let expectedSalePrice;
+        let firstAttributeID;
+        let firstAttributeValues;
         let locale;
         let variationMaster;
 
@@ -125,8 +128,12 @@ describe('Product Details Page', () => {
             return testData.getProductVariationMaster()
                 .then(master => {
                     variationMaster = master;
-                    return client.url(variationMaster.getUrlResourcePath());
+                    firstAttributeID = Object.keys(variationMaster.variationAttributes)[0];
+                    firstAttributeValues = variationMaster.getAttrValuesByType(firstAttributeID);
+                    return testData.getProductById(variationMaster.variants[0]);
                 })
+                .then(product => defaultVariant = product)
+                .then(() => client.url(variationMaster.getUrlResourcePath()))
                 .then(() => common.getLocale())
                 .then(code => locale = code);
         });
@@ -141,13 +148,76 @@ describe('Product Details Page', () => {
                 .then(exists => assert.isTrue(exists))
         );
 
+        it('should display the default Variant primary image', () => {
+            return client.element(productDetailPage.PRIMARY_IMAGE)
+                .then(el => client.elementIdAttribute(el.value.ELEMENT, 'src'))
+                .then(src => {
+                    let primaryImagePath = variationMaster.getImage('large', defaultVariant.customAttributes[firstAttributeID]);
+                    assert.isTrue(src.value.endsWith(primaryImagePath));
+                });
+        });
+
+        it('should display the default Variant thumbnail images', () => {
+            let displayedThumbnailPaths;
+            let defaultThumbnailPaths = variationMaster.getImages('small', defaultVariant.customAttributes[firstAttributeID]);
+            return client.waitUntil(
+                    () => productDetailPage.getDisplayedThumbnailPaths()
+                        .then(paths => paths.length === defaultThumbnailPaths.length)
+                )
+                .then(() => productDetailPage.getDisplayedThumbnailPaths())
+                .then(paths => displayedThumbnailPaths = paths)
+
+                // Retrieve default thumbnail paths to test whether they are currently displayed
+                .then(() => defaultThumbnailPaths.reduce(
+                    (promise, defaultPath) => assert.isTrue(displayedThumbnailPaths.indexOf(defaultPath) > -1),
+                    Promise.resolve()
+                ));
+        });
+
+        it('should display the primary image of the first Variant matching selected attributes', () => {
+            let expectedPrimaryImage = variationMaster.getImage('large', firstAttributeValues[0]);
+
+            // Click first color swatch and test displayed images against what is expected
+            return client.element(productDetailPage.SWATCH_COLOR_ANCHORS)
+                .then(el => client.elementIdClick(el.value.ELEMENT))
+                .element(productDetailPage.PRIMARY_IMAGE)
+                .then(el => client.elementIdAttribute(el.value.ELEMENT, 'src'))
+                .then(displayedImgSrc =>
+                    assert.equal(productDetailPage.getImagePath(displayedImgSrc.value), expectedPrimaryImage)
+                );
+        });
+
+        it('should display the thumbnail images of the first Variant matching selected attributes', () => {
+            let attrValue = firstAttributeValues[0];
+            let displayedThumbnailPaths;
+            // This waitUntil is necessary to ensure that the thumbnail images have been replaced with the images that
+            // match the newly selected value before assertions are made.  This only checks the first thumbnail.
+            return client.waitUntil(() =>
+                client.element(productDetailPage.PRODUCT_THUMBNAILS_IMAGES)
+                    .then(el => client.elementIdAttribute(el.value.ELEMENT, 'src'))
+                    .then(src => src.value.indexOf(attrValue) > -1)
+                )
+                .then(() => productDetailPage.getDisplayedThumbnailPaths())
+                .then(paths => displayedThumbnailPaths = paths)
+
+                // Retrieve default thumbnail paths to test whether they are currently displayed
+                .then(() => variationMaster.getImages('small', attrValue))
+                .then(expectedThumbnailPaths =>
+                    expectedThumbnailPaths.reduce(
+                        (promise, defaultPath) =>
+                        assert.isTrue(displayedThumbnailPaths.indexOf(defaultPath) > -1),
+                        Promise.resolve()
+                    )
+                );
+        });
+
         it('should display a struck out list price when applicable', () =>
             testData.getPricesByProductId(variationMaster.id)
                 .then(prices => {
                     expectedListPrice = pricingHelpers.getFormattedPrice(prices.list);
                     expectedSalePrice = pricingHelpers.getFormattedPrice(prices.sale);
+                    return client.getText(productDetailPage.PRICE_SALE);
                 })
-                .then(() => client.getText(productDetailPage.PRICE_SALE))
                 .then(price => assert.equal(price, expectedSalePrice))
         );
 
@@ -156,10 +226,12 @@ describe('Product Details Page', () => {
                 .then(price => assert.equal(price, expectedListPrice))
         );
 
-        it('should have add to cart button enabled', () =>
+        it('should not enable the "Add to Cart" button if required attributes are not selected', () =>
             client.isEnabled('#add-to-cart')
-                .then(enabled => assert.notOk(enabled, 'Add to Cart button is disabled'))
+                .then(enabled => assert.isFalse(enabled))
         );
+
+        // TODO: Write tests to select all required attributes and check for Add to Cart button enablement
     });
 
 });
