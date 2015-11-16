@@ -2,9 +2,12 @@
 
 import _ from 'lodash';
 import * as common from '../helpers/common';
+import * as pricingHelpers from '../helpers/pricing';
+
+export let priceTypes = ['list', 'sale'];
 
 let categoryAssignments = {};
-let defaultCountryCode = common.defaultCountryCode;
+let defaultLocale = common.defaultLocale;
 
 /**
  * Processes parsed JSONified file data and sends back a map of Product
@@ -14,9 +17,9 @@ let defaultCountryCode = common.defaultCountryCode;
  * @returns {Object} - Map of Product* instances grouped by Product IDs
  */
 export function parseCatalog (fileData) {
-    var proxy = {};
+    let proxy = {};
     for (let category of fileData.catalog['category-assignment']) {
-        var productId = category.$['product-id'];
+        let productId = category.$['product-id'];
         categoryAssignments[productId] = category.$['category-id'];
     }
 
@@ -186,6 +189,19 @@ export class ProductStandard extends AbstractProductBase {
     constructor (product) {
         super(product);
     }
+
+    getPrices (pricebooks, locale) {
+        let prices = {};
+
+        priceTypes.forEach(type => {
+            let entry = _.find(pricebooks[type].products, {productId: this.id});
+            if (entry) {
+                prices[type] = pricingHelpers.getFormattedPrice(entry.amount, locale);
+            }
+        });
+
+        return prices;
+    }
 }
 
 export class ProductSet extends AbstractProductBase {
@@ -195,13 +211,33 @@ export class ProductSet extends AbstractProductBase {
         if (!this.isLoaded) {
             this.productSetProducts = [];
 
-            var productSet = product['product-set-products'][0]['product-set-product'];
+            let productSet = product['product-set-products'][0]['product-set-product'];
             this.productSetProducts = _.pluck(productSet, '$.product-id');
         }
     }
 
     getProductIds () {
         return this.productSetProducts;
+    }
+
+    getProducts (catalog) {
+        return this.getProductIds().map(id => getProduct(catalog, id));
+    }
+
+    getPrices (pricebooks, locale, catalog) {
+        let price = 0.00;
+
+        this.getProducts(catalog).forEach(product => {
+            let values = Object.values(product.getPrices(pricebooks, locale, catalog));
+            let minValue;
+
+            values = values.map(value => value.replace(/\$|£|€|¥|,/g, ''));
+            minValue = _.min(values);
+
+            price += parseFloat(minValue);
+        });
+
+        return pricingHelpers.getFormattedPrice(price.toString(), locale);
     }
 }
 
@@ -262,20 +298,34 @@ export class ProductVariationMaster extends AbstractProductBase {
      * @returns {Array.<ProductStandard>} - Variants of VariationMaster
      */
     getVariants (catalog) {
-        return _.map(this.getVariantProductIds(), id => getProduct(catalog, id));
+        return this.getVariantProductIds().map(id => getProduct(catalog, id));
     }
 
     getAttrTypeValueIndex (type, value) {
         return _.findIndex(this.variationAttributes[type].values, {value: value});
     }
 
-    /**
-     * TODO: Add jsdoc comment
-     */
-    getAttrDisplayValue (type, codedValue, countryCode = defaultCountryCode) {
+    getAttrDisplayValue (type, codedValue, locale = defaultLocale) {
         let attrValues = _.find(this.variationAttributes[type].values, {value: codedValue});
-        countryCode = _validateCountryCode(attrValues.displayValues, countryCode);
-        return attrValues ? attrValues.displayValues[countryCode] : undefined;
+        locale = _validateLocale(attrValues.displayValues, locale);
+        return attrValues ? attrValues.displayValues[locale] : undefined;
+    }
+
+    getPrices (pricebooks, locale, catalog) {
+        let prices = {};
+
+        this.getVariants(catalog).forEach(variant => {
+            let variantPrices = variant.getPrices(pricebooks, locale);
+            priceTypes.forEach(type => {
+                if (variantPrices[type]) {
+                    prices[type] = !prices[type] || variantPrices[type] < prices[type] ?
+                        pricingHelpers.getFormattedPrice(variantPrices[type], locale) :
+                        pricingHelpers.getFormattedPrice(prices[type], locale);
+                }
+            });
+        });
+
+        return prices;
     }
 }
 
@@ -293,8 +343,17 @@ export class ProductBundle extends AbstractProductBase {
         return this.bundleProducts;
     }
 
+    getProducts (catalog) {
+        return this.getProductIds().map(id => getProduct(catalog, id));
+    }
+
     getOptions () {
         return this.options || [];
+    }
+
+    getPrices (pricebooks, locale) {
+        let entry = _.find(pricebooks.list.products, {productId: this.id});
+        return pricingHelpers.getFormattedPrice(entry.amount, locale);
     }
 }
 
@@ -349,6 +408,6 @@ function _getLocalizedValues (values) {
     }));
 }
 
-function _validateCountryCode(values, countryCode) {
-    return _.keys(values).indexOf(countryCode) > -1 ? countryCode : defaultCountryCode;
+function _validateLocale(values, locale) {
+    return _.keys(values).indexOf(locale) > -1 ? locale : defaultLocale;
 }

@@ -208,7 +208,7 @@ describe('Wishlist', () => {
 
 		describe('as a returning customer', () => {
 			before(() => wishListPage.navigateTo()
-					.then(() => common.getLang())
+					.then(() => common.getLocale())
 					.then(currentLang => lang = currentLang)
 					.then(() => loginForm.loginAsDefaultCustomer())
 					.then(() => client.waitForVisible(wishListPage.BTN_TOGGLE_PRIVACY))

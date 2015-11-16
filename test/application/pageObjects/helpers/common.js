@@ -8,7 +8,14 @@ import client from '../../webdriver/client';
 import Q from 'q';
 import nodeUrl from 'url';
 
-export const defaultCountryCode = 'x_default';
+export const defaultLocale = 'x_default';
+export const supportedLocales = [
+    'en_GB',
+    'fr_FR',
+    'it_IT',
+    'ja_JP',
+    'zh_CN'
+];
 
 // commonly used selectors
 export const PRIMARY_H1 = '#primary h1';
@@ -133,12 +140,13 @@ function _clickFirstRemoveLink (removeLink) {
             return Promise.resolve();
         });
 }
-    /**
-     * Clicks on an selector and wait for the page to reload
-     * @param selectorToClick
-     * @param selectorToWait
-     * @returns {*|Promise.<T>}
-     */
+
+/**
+ * Clicks on an selector and wait for the page to reload
+ * @param selectorToClick
+ * @param selectorToWait
+ * @returns {*|Promise.<T>}
+ */
 export function clickAndWait(selectorToClick, selectorToWait) {
     return client.click(selectorToClick)
         .waitForVisible(selectorToWait);
@@ -156,9 +164,9 @@ export function getSearchParams () {
         });
 }
 
-export function getLang () {
+export function getLocale () {
     return getSearchParams()
         .then(params =>
-            Promise.resolve(params && params.lang ? params.lang : defaultCountryCode)
+            Promise.resolve(params && params.lang && supportedLocales.indexOf(params.lang) > -1 ? params.lang : defaultLocale)
         );
 }
