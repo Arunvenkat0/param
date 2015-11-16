@@ -4,14 +4,23 @@ import client from '../webdriver/client';
 import * as common from './helpers/common';
 import * as productQuickView from './productQuickView';
 
+export const BTN_SEARCH_FOR_STORE = '.ui-dialog-buttonset button[role*=button]';
+export const BTN_SELECT_STORE = '.select-store-button';
+export const BTN_SELECT_STORE_CONTINUE = '.ui-dialog-buttonset button:nth-of-type(2)';
 export const CART_EMPTY = '.cart-empty';
 export const CART_ITEMS = '.item-list tbody tr';
+export const CHANGE_LOCATION = '.ui-dialog-buttonset button:nth-of-type(1)';
 export const ORDER_SUBTOTAL = '.order-subtotal td:nth-child(2)';
 export const BTN_UPDATE_CART = '.cart-footer button[name*="_updateCart"]';
 export const BTN_CHECKOUT = 'button[name*="checkoutCart"]';
 export const LINK_REMOVE = 'button[value="Remove"]';
 export const ITEM_DETAILS = '.item-details';
 export const ITEM_QUANTITY = '.item-quantity';
+export const SELECT_STORE = '.set-preferred-store';
+export const SELECTED_STORE_ADDRESS = '.selected-store-address';
+export const STORE_ADDRESS_TEXT = '.store-list .store-tile:nth-of-type(1) .store-address';
+export const STORE_LIST_CONTAINER = '.store-list-container';
+export const ZIP_CODE_POP_UP = '#preferred-store-panel';
 
 const basePath = '/cart';
 
