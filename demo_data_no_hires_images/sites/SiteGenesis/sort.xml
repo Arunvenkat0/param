@@ -202,7 +202,7 @@
         </sorting-option>
         <sorting-option option-id="price-high-to-low">
             <rule-id>price-high-to-low</rule-id>
-            <display-name xml:lang="x-default">Price High To Low</display-name>
+            <display-name xml:lang="x-default">Price High to Low</display-name>
             <display-name xml:lang="fr-FR">Prix : décroissant</display-name>
             <display-name xml:lang="it-IT">Prezzo dal più alto al più basso</display-name>
             <display-name xml:lang="ja-JP">価格が高い順</display-name>

@@ -685,7 +685,7 @@
         <display-name xml:lang="it-IT">Spedizione ridotta</display-name>
         <display-name xml:lang="ja-JP">超おトク</display-name>
         <display-name xml:lang="zh-CN">Super Saver</display-name>
-        <description xml:lang="x-default">Super Saver Delivery (arrives in 3-7 business days)</description>
+        <description xml:lang="x-default">Super Saver delivery (arrives in 3-7 business days)</description>
         <description xml:lang="fr-FR">Livraison ultra-économique (en 3 à 7 jours ouvrés)</description>
         <description xml:lang="it">Spedizione ridotta (consegna in 3-7 giorni lavorativi)</description>
         <description xml:lang="it-IT">Spedizione ridotta (consegna in 3-7 giorni lavorativi)</description>
@@ -755,7 +755,7 @@
         <display-name xml:lang="it-IT">EUR Ritiro in negozio</display-name>
         <display-name xml:lang="ja-JP">EUR 店舗にて受け取り</display-name>
         <display-name xml:lang="zh-CN">欧元到店提货</display-name>
-        <description xml:lang="x-default">EUR Store Pickup</description>
+        <description xml:lang="x-default">EUR Pickup in store</description>
         <description xml:lang="fr-FR">EUR Livraison en magasin</description>
         <description xml:lang="it">EUR Ritiro in negozio</description>
         <description xml:lang="it-IT">EUR Ritiro in negozio</description>

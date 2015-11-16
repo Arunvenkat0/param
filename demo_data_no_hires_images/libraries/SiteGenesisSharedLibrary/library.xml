@@ -8,7 +8,7 @@
             <page-title xml:lang="it-IT">Negozio online SiteGenesis</page-title>
             <page-title xml:lang="ja-JP">SiteGenesis オンラインストア</page-title>
             <page-title xml:lang="zh-CN">SiteGenesis 网上商店</page-title>
-            <page-description xml:lang="x-default">Online shopping with the leader in On-Demand eCommerce solutions.</page-description>
+            <page-description xml:lang="x-default">Online shopping with the leader in on-demand eCommerce solutions.</page-description>
             <page-description xml:lang="fr-FR">Achat en ligne avec le leader des solutions e-commerce à la demande.</page-description>
             <page-description xml:lang="it-IT">Shopping online con il leader delle soluzioni di e-commerce on-demand.</page-description>
             <page-description xml:lang="ja-JP">オンデマンド eコマースソリューションの最先端プラットフォームでオンラインショッピング。</page-description>
@@ -265,7 +265,7 @@
         <display-name xml:lang="it-IT">La pagina Asset di contenuto include</display-name>
         <display-name xml:lang="ja-JP">コンテンツアセットページの内容</display-name>
         <display-name xml:lang="zh-CN">内容素材页面包含</display-name>
-        <description xml:lang="x-default">This folder contains all content assets that are included within the storefront including home page assets, marketing landing page assets etc.</description>
+        <description xml:lang="x-default">This folder contains all content assets that are included within the Storefront including home page assets, marketing landing page assets etc.</description>
         <description xml:lang="fr-FR">Ce dossier contient tous les éléments de contenu qui font partie de la boutique en ligne, notamment les éléments de la page d'accueil, les éléments marketing de la page principale, etc.</description>
         <description xml:lang="it-IT">Questa cartella contiene tutti gli asset di contenuto inclusi nello storefront, tra questi gli asset della pagina principale, gli asset della pagina di destinazione degli annunci pubblicitari ecc.</description>
         <description xml:lang="ja-JP">このフォルダーには、ホームページの資産、マーケティングのランディングページの資産など、ストアフロント内にあるすべてのコンテンツアセットが含まれています。</description>
@@ -399,9 +399,9 @@
         <page-attributes/>
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div style="padding:24px 16px 0 16px"&gt;&#13;
-&lt;h2&gt;&amp;nbsp;&lt;span style="color: rgb(86, 79, 71); "&gt;Shipping |&lt;/span&gt;&amp;nbsp;&lt;span style="color: rgb(225, 185, 149);"&gt;Free 2 Day Shipping On Orders over $300&lt;/span&gt;&lt;/h2&gt;&#13;
+&lt;h2&gt;&amp;nbsp;&lt;span style="color: rgb(86, 79, 71); "&gt;Shipping |&lt;/span&gt;&amp;nbsp;&lt;span style="color: rgb(225, 185, 149);"&gt;Free 2 Day Shipping on Orders over $300&lt;/span&gt;&lt;/h2&gt;&#13;
 &lt;hr /&gt;&#13;
-&lt;h2&gt;Free 2 Day Shipping On Orders over $300&lt;/h2&gt;&#13;
+&lt;h2&gt;Free 2 Day Shipping on Orders over $300&lt;/h2&gt;&#13;
 &lt;p style="text-align: left;"&gt;SiteGenesis is offering Free 2 Day Shipping an any orders over $300 to the contiguous states. Free shipping offer is limited to 2 Day Shipping Only. &lt;em&gt;Free shipping offer not valid for AK, HI, or P.O. Boxes. &lt;/em&gt;Free shipping is determined by the merchandise total after discounts are applied.&lt;/p&gt;&#13;
 &lt;h2&gt;Shipping Bands&lt;/h2&gt;&#13;
 &lt;table class="shippingpromotable" summary="Shipping Promotion Table"&gt;&#13;
@@ -438,7 +438,7 @@
         &lt;/tr&gt;&#13;
     &lt;/tbody&gt;&#13;
 &lt;/table&gt;&#13;
-&lt;p style="margin:24px 0 8px 0;"&gt;&lt;strong&gt;Note:&lt;/strong&gt; All Televisions must ship using ground shipping, 2nd Day Air and Next Day Air are not available shipping options for televisions.&lt;/p&gt;&#13;
+&lt;p style="margin:24px 0 8px 0;"&gt;&lt;strong&gt;Note:&lt;/strong&gt; All televisions must ship using Ground shipping, 2nd Day Air and Next Day Air are not available shipping options for televisions.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;div style="padding:24px 16px 0 16px"&gt;&#13;
 &lt;h2&gt; &lt;span style="color: rgb(86, 79, 71); "&gt;Livraison |&lt;/span&gt; &lt;span style="color: rgb(225, 185, 149);"&gt;Livraison en 2 jours gratuite pour les commandes de plus de 300 €&lt;/span&gt;&lt;/h2&gt;&#13;
@@ -624,8 +624,8 @@
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">We’re Sorry...&lt;br /&gt;&#13;
-We seem to have misplaced this page result in an unfortunate error: (Page or File Not Found: 404 error), Please feel free to use the search below to assist you in finding what you were looking for.</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="x-default">We’re sorry!&lt;br /&gt;&#13;
+We seem to have misplaced this page: (Page or File Not Found: 404 error). Please try the search function below to help you find what you were looking for.</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">Désolé...&lt;br /&gt;&#13;
 Le résultat de cette page est à l'origine d'une erreur malencontreuse : (page ou fichier introuvable : erreur 404). Veuillez utiliser l'option de recherche ci-dessous pour trouver ce que vous recherchez.</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">Siamo spiacenti...&lt;br /&gt;&#13;
@@ -656,8 +656,8 @@ La pagina non è più disponibile. Errore 404: pagina non trovata. Usa la casell
             <page-title xml:lang="zh-CN">404 错误</page-title>
         </page-attributes>
         <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;p style="font-size:1.2em; font-weight:bold;"&gt;We’re Sorry…&lt;/p&gt;&#13;
-&lt;p style="font-size:1.1em; font-weight:bold;"&gt;We seem to have misplaced this page result in an unfortunate error: (Page or File Not Found: 404 error), Please feel free to use the search below to assist you in finding what you were looking for.&lt;/p&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;p style="font-size:1.2em; font-weight:bold;"&gt;We’re sorry!&lt;/p&gt;&#13;
+&lt;p style="font-size:1.1em; font-weight:bold;"&gt;We seem to have misplaced this page: (Page or File Not Found: 404 error). Please try the search function below to help you find what you were looking for.&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;p style="font-size:1.2em; font-weight:bold;"&gt;Désolé...&lt;/p&gt;&#13;
 &lt;p style="font-size:1.1em; font-weight:bold;"&gt;Le résultat de cette page est à l'origine d'une erreur malencontreuse : (page ou fichier introuvable : erreur 404). Veuillez utiliser l'option de recherche ci-dessous pour trouver ce que vous recherchez.&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;p style="font-size:1.2em; font-weight:bold;"&gt;Siamo spiacenti...&lt;/p&gt;&#13;
@@ -681,7 +681,7 @@ La pagina non è più disponibile. Errore 404: pagina non trovata. Usa la casell
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;If you can’t find what you are looking for, why not let our trained staff recommend something?&lt;/p&gt;&#13;
-&lt;p&gt;Our Customer Service Representatives are available now to help. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Email us&lt;/a&gt; or call 800-555-XXXX.&lt;/p&gt;&#13;
+&lt;p&gt;Our Customer Service representatives are available now to help. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Email us&lt;/a&gt; or call 800-555-XXXX.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;Vous ne trouvez pas ce que vous recherchez. Demandez l'aide de notre personnel qualifié.&lt;/p&gt;&#13;
@@ -708,7 +708,7 @@ La pagina non è più disponibile. Errore 404: pagina non trovata. Usa la casell
         <display-name xml:lang="it-IT">Chi siamo</display-name>
         <display-name xml:lang="ja-JP">Demandware について</display-name>
         <display-name xml:lang="zh-CN">关于我们</display-name>
-        <description xml:lang="x-default">It all started with a series of observations: eCommerce merchandising and marketing innovation is what generates the revenue, yet most operations are spending 80% of their budgets simply maintaining current infrastructure. The pace of ecommerce accelerates daily, yet most operations are scrambling to stand still. Merchandisers and marketers are supremely frustrated, spending more time chasing outsourced providers and internal IT organizations, than actually merchandising and marketing their own businesses. There had to be a better way.</description>
+        <description xml:lang="x-default">It all started with a series of observations: eCommerce merchandising and marketing innovation is what generates revenue, yet most operations are spending 80% of their budgets simply maintaining current infrastructure. The pace of ecommerce accelerates daily, but most operations are scrambling only to stand still. Merchandisers and marketers are supremely frustrated, spending more time chasing outsourced providers and internal IT organizations than actually merchandising and marketing their own businesses. There had to be a better way...</description>
         <description xml:lang="fr-FR">Tout a débuté par une série d'observations : dans l'e-commerce, l'innovation en matière de merchandising et de marketing est le générateur de recettes ; pourtant, la plupart des entreprises consacrent 80 % de leur budget au seul maintien de leur infrastructure actuelle. Alors que le rythme du commerce s'accélère chaque jour, la plupart des entreprises ont toutes les peines à simplement se maintenir à jour. Les spécialistes du merchandising et du marketing sont d'autant plus frustrés qu'ils passent davantage de temps à rechercher des prestataires d'infogérance et des ressources informatiques internes qu'à déployer leurs propres actions de merchandising et de marketing. Une vision</description>
         <description xml:lang="it-IT">Tutto è iniziato da una serie di osservazioni: le innovazioni nei campi di merchandising e marketing e-commerce sono il motore che genera i profitti, tuttavia la maggior parte delle aziende spende ancora l'80% dei budget per la manutenzione dell'infrastruttura esistente. L'e-commerce ormai avanza inesorabilmente ogni giorno di più, mentre nelle aziende si fanno i salti mortali per cercare il modo di non adeguarsi ai cambiamenti. I venditori e gli esperti di marketing lavorano in continua frustrazione, costretti a correre dietro ai fornitori esterni e ai reparti IT interni, piuttosto che dedicarsi alla commercializzazione e al marketing per la loro attività. Deve esserci una soluzione.</description>
         <description xml:lang="ja-JP">始まりは現状を見つめるところから: eコマースによるマーチャンダイジングとマーケティングのイノベーションは、収益を生み出すものであるにもかかわらず、大部分の事業では予算の 80% を現在のインフラを保守するためだけに使っています。eコマースは日々加速しているのにもかかわらず、大部分の事業は混乱してただ立ち尽くしています。マーチャンダイザーとマーケット担当者の葛藤は度合いを増し、実際に自社ビジネスのマーチャンダイジングとマーケティングを行うことよりも、外注先のプロバイダーや社内の IT 部門への対応に、より多くの時間を費やしています。他にもっとよい方法があるのではないか、私達はそう考えました。</description>
@@ -720,15 +720,15 @@ La pagina non è più disponibile. Errore 404: pagina non trovata. Usa la casell
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header"&gt;About Us&lt;/h1&gt;&#13;
 &lt;h2&gt;It all started with a series of observations:&lt;/h2&gt;      &#13;
 &lt;ul&gt;&#13;
-&lt;li&gt;eCommerce merchandising and marketing innovation is what generates the revenue, yet most operations are spending 80% of their budgets simply maintaining current infrastructure.&lt;/li&gt;&#13;
-&lt;li&gt;The pace of ecommerce accelerates daily, yet most operations are scrambling to stand still.&lt;/li&gt;&#13;
-&lt;li&gt;Merchandisers and marketers are supremely frustrated, spending more time chasing outsourced providers and internal IT organizations, than actually merchandising and marketing their own businesses.&lt;/li&gt;&#13;
+&lt;li&gt;eCommerce merchandising and marketing innovation is what generates revenue, yet most operations are spending 80% of their budgets simply maintaining current infrastructure.&lt;/li&gt;&#13;
+&lt;li&gt;The pace of eCommerce accelerates daily, yet most operations are scrambling only to stand still.&lt;/li&gt;&#13;
+&lt;li&gt;Merchandisers and marketers are supremely frustrated, spending more time chasing outsourced providers and internal IT organizations than actually merchandising and marketing their own businesses.&lt;/li&gt;&#13;
 &lt;/ul&gt; &#13;
-&lt;h2&gt;There had to be a better way.&lt;/h2&gt;          &#13;
-&lt;p&gt;So in 2004, we set out to find it. The vision&amp;mdash;then and now&amp;mdash;was clear: bring to market an enterprise-class ecommerce solution that would put more power and innovation in the hands of merchandisers and at the same time would remove the technical costs, risks and complexities of running an ecommerce operation. We took what we knew of great ecommerce merchandising (our founders have been in ecommerce since 1994) and applied to it the then-emerging advancements in Software-as-a-Service architectures and dynamic grid computing. Then we worked hard. We stayed up late. We drank lots of coffee. And ultimately, in late 2005, we delivered the market&amp;rsquo;s first on-demand enterprise ecommerce platform.&lt;/p&gt;                &#13;
+&lt;h2&gt;There had to be a better way...&lt;/h2&gt;          &#13;
+&lt;p&gt;So in 2004, we set out to find it. The vision&amp;mdash;then and now&amp;mdash;was clear: bring to market an enterprise-class eCommerce solution that would put more power and innovation in the hands of merchandisers and at the same time would remove the technical costs, risks and complexities of running an ecommerce operation. We took what we knew of great eCommerce merchandising (our founders have been in ecommerce since 1994) and applied to it the then-emerging advancements in Software-as-a-Service architectures and dynamic grid computing. Then we just worked hard. We stayed up late. We drank lots of coffee. And ultimately, in late 2005, we delivered the market&amp;rsquo;s first on-demand enterprise ecommerce platform.&lt;/p&gt;                &#13;
 &lt;h2&gt;Our customers could not be happier with the results.&lt;/h2&gt;       &#13;
-&lt;p&gt;With Demandware ecommerce, they're spending more time leading with merchandising and marketing. They're in complete control over their site, making changes and launching new storefronts whenever they like. They're spending more time developing their own proprietary innovations (versus building commodity functionality). They receive new software upgrades from Demandware continuously. And they never-ever-worry about site uptime, availability and security.&lt;/p&gt;&#13;
-&lt;p&gt;In short, they're free. Free to merchandise. Free to grow. Free to innovate. Free to change. Isn't that how ecommerce is supposed to be?&lt;/p&gt;&#13;
+&lt;p&gt;With Demandware eCommerce, they're spending more time leading with merchandising and marketing. They're in complete control of their site, making changes and launching new storefronts whenever they like. They're spending more time developing their own proprietary innovations (versus building commodity functionality). They receive new software upgrades from Demandware continuously. And they never ever worry about site uptime, availability and security.&lt;/p&gt;&#13;
+&lt;p&gt;In short, they're free. Free to merchandise. Free to grow. Free to innovate. Free to change. Isn't that how eCommerce is supposed to be?&lt;/p&gt;&#13;
 &#13;
 &lt;p&gt;&#13;
 For more information please browse our &lt;a title="About Us Content" href="$url(Search-ShowContent,fdid,about-us)$"&gt;About Us&lt;/a&gt; and  &lt;a title="About Us Content" href="$url(Search-ShowContent,fdid,customer-service)$"&gt;Customer Service&lt;/a&gt; pages.&#13;
@@ -910,10 +910,10 @@ Per ulteriori informazioni visita le pagine &lt;a title="Contenuto Chi siamo" hr
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li&gt;&#13;
-        &lt;a title="Manage Credit Cards" href="$httpsUrl(PaymentInstruments-List)$"&gt;&#13;
+        &lt;a title="Manage credit cards" href="$httpsUrl(PaymentInstruments-List)$"&gt;&#13;
             &lt;i class="fa fa-money"&gt;&lt;/i&gt;&#13;
             &lt;h2&gt;Payment Settings&lt;/h2&gt;&#13;
-            &lt;p&gt;Manage Credit Cards&lt;/p&gt;&#13;
+            &lt;p&gt;Manage credit cards&lt;/p&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li&gt;&#13;
@@ -1120,7 +1120,7 @@ Per ulteriori informazioni visita le pagine &lt;a title="Contenuto Chi siamo" hr
 &lt;ul&gt;&#13;
 &lt;li&gt;&lt;a title="Show or update your personal information" href="$httpsUrl(Account-EditProfile)$"&gt;Personal Data&lt;/a&gt;&lt;/li&gt;&#13;
 &lt;li&gt;&lt;a title="Manage your billing and shipping addresses" href="$httpsUrl(Address-List)$"&gt;Addresses&lt;/a&gt;&lt;/li&gt;&#13;
-&lt;li&gt;&lt;a title="Manage Credit Cards" href="$httpsUrl(PaymentInstruments-List)$"&gt;Payment Settings&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;li&gt;&lt;a title="Manage credit cards" href="$httpsUrl(PaymentInstruments-List)$"&gt;Payment Settings&lt;/a&gt;&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
 &#13;
 &lt;span class="toggle"&gt;Order Information&lt;/span&gt;&#13;
@@ -1261,8 +1261,8 @@ $include(Page-Include, cid, account-nav-service)$</custom-attribute>
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;span class="toggle"&gt;Shop Confidently&lt;/span&gt;&#13;
 &lt;ul&gt;&#13;
-&lt;li&gt;&lt;a title="View privacy policy" href="$url(Page-Show,cid,privacy-policy)$"&gt;Privacy Policy&lt;/a&gt;&lt;/li&gt;&#13;
-&lt;li&gt;&lt;a title="Secure shopping" href="$url(Page-Show,cid,security-policy)$"&gt;Secure Shopping&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;li&gt;&lt;a title="View Privacy Policy" href="$url(Page-Show,cid,privacy-policy)$"&gt;Privacy Policy&lt;/a&gt;&lt;/li&gt;&#13;
+&lt;li&gt;&lt;a title="Secure Shopping" href="$url(Page-Show,cid,security-policy)$"&gt;Secure Shopping&lt;/a&gt;&lt;/li&gt;&#13;
 &lt;/ul&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;span class="toggle"&gt;Acheter en toute confiance&lt;/span&gt;&#13;
 &lt;ul&gt;&#13;
@@ -1351,7 +1351,7 @@ Lunedì-venerdì&lt;br /&gt;&#13;
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;span class="toggle"&gt;Account Settings&lt;/span&gt;&#13;
 &#13;
 &lt;ul&gt;&#13;
-    &lt;li&gt;&lt;a title="Create an Account" href="$httpsUrl(Account-StartRegister)$"&gt;Create an Account&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;&lt;a title="Create an Account" href="$httpsUrl(Account-StartRegister)$"&gt;Create Account&lt;/a&gt;&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
 &#13;
 $include(Page-Include, cid, account-nav-service)$</custom-attribute>
@@ -1397,7 +1397,7 @@ $include(Page-Include, cid, account-nav-service)$</custom-attribute>
         <page-attributes/>
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;p style="margin:5px;font-weight:bold"&gt;Using An APO/FPO Address&lt;/p&gt;&#13;
-&lt;p style="margin:5px"&gt;Demandware is pleased to support the Billing and Shipping of your order to an Armed Forces APO or FPO address. To take advantage of this service, please enter either APO or FPO in the &amp;quot;City&amp;quot; field. All APO and FPO orders will be shipped via the U.S. Postal Service. &amp;quot;Express&amp;quot; and &amp;quot;Next-Day&amp;quot; service is not available.&lt;/p&gt;</custom-attribute>
+&lt;p style="margin:5px"&gt;Demandware is pleased to support billing and shipping of your order to an Armed Forces APO or FPO address. To take advantage of this service, please enter either APO or FPO in the &amp;quot;City&amp;quot; field. All APO and FPO orders will be shipped via the U.S. Postal Service. &amp;quot;Express&amp;quot; and &amp;quot;Next-Day&amp;quot; service is not available.&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;p style="margin:5px;font-weight:bold"&gt;Utiliser une adresse APO/FPO&lt;/p&gt;&#13;
 &lt;p style="margin:5px"&gt;Demandware se réjouit de pouvoir facturer et livrer votre commande à une adresse des forces armées (APO ou FPO). Pour bénéficier de ce service, saisissez APO ou FPO dans le champ Ville. Toutes les commandes de type APO et FPO seront livrées par le service de la poste américaine. Les livraisons « Express » et « J+1 » ne sont pas possibles.&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;p style="margin:5px;font-weight:bold"&gt;Uso di indirizzi militari APO/FPO&lt;/p&gt;&#13;
@@ -1418,7 +1418,7 @@ $include(Page-Include, cid, account-nav-service)$</custom-attribute>
         <display-name xml:lang="it-IT">Instyle</display-name>
         <display-name xml:lang="ja-JP">Instyle</display-name>
         <display-name xml:lang="zh-CN">Instyle</display-name>
-        <description xml:lang="x-default">As Seen In Style Magazine including Women's Margherite Cable Handbag</description>
+        <description xml:lang="x-default">As Seen in Style Magazine including Women's Margherite Cable Handbag</description>
         <description xml:lang="fr-FR">Vu dans In Style Magazine, avec le sac à main pour femmes Margherite Cable.</description>
         <description xml:lang="it-IT">Visto sulla rivista In Style Magazine con la borsa Margherite Cable</description>
         <description xml:lang="ja-JP">InStyle マガジンで紹介されているレディースのマルガリート縄編みハンドバッグなど</description>
@@ -1459,7 +1459,7 @@ $include(Page-Include, cid, account-nav-service)$</custom-attribute>
         <display-name xml:lang="it-IT">People</display-name>
         <display-name xml:lang="ja-JP">People</display-name>
         <display-name xml:lang="zh-CN">People</display-name>
-        <description xml:lang="x-default">As Seen In People including Women's Essential Twill Chino</description>
+        <description xml:lang="x-default">As Seen in People including Women's Essential Twill Chino</description>
         <description xml:lang="fr-FR">Vu dans People, avec le pantalon Essential Twill Chino pour femmes.</description>
         <description xml:lang="it-IT">Visto sulla rivista People con i pantaloni chino da donna Essential Twill</description>
         <description xml:lang="ja-JP">People で紹介されているレディースの綾織りチノパンなど</description>
@@ -1500,7 +1500,7 @@ $include(Page-Include, cid, account-nav-service)$</custom-attribute>
         <display-name xml:lang="it-IT">Termini e condizioni di BML</display-name>
         <display-name xml:lang="ja-JP">BML の利用条件</display-name>
         <display-name xml:lang="zh-CN">BML 条款与条件</display-name>
-        <description xml:lang="x-default">Bill Me Later terms and conditions shown on the billing page during basket checkout.</description>
+        <description xml:lang="x-default">Bill Me Later terms and conditions shown on the billing page during checkout.</description>
         <description xml:lang="fr-FR">Conditions générales de Bill Me Later affichées sur la page de facturation lors du paiement du panier.</description>
         <description xml:lang="it-IT">Termini e condizioni di “Bill Me Later” mostrati nella pagina di fatturazione durante il pagamento del carrello.</description>
         <description xml:lang="ja-JP">注文手続きの際に請求ページに表示される Bill Me Later の利用条件。</description>
@@ -1619,7 +1619,7 @@ Tulsa OK 74121-1998&lt;br /&gt;&#13;
 &lt;p&gt;&lt;strong&gt;Bill Me Later&amp;reg; Account Agreement&lt;/strong&gt;&lt;/p&gt;&#13;
 &lt;p&gt;This Agreement sets forth the terms and conditions of the Bill Me Later Credit Account (the &amp;quot;Account&amp;quot;) offered through Chase Bank USA, N.A., located in Wilmington, Delaware, U.S.A. Please read this Agreement and keep a copy.&lt;/p&gt;&#13;
 &lt;p&gt;&lt;strong&gt;1. DEFINITIONS.&lt;/strong&gt; In this Bill Me Later Account Agreement, the following definitions apply:&lt;/p&gt;&#13;
-&lt;p&gt;&amp;quot;Agreement&amp;quot;  means the Bill Me Later Important Disclosures, Account Agreement, and any  amendment or addendum to this Agreement.&lt;br /&gt;&#13;
+&lt;p&gt;&amp;quot;Agreement&amp;quot; means the Bill Me Later Important Disclosures, Account Agreement, and any  amendment or addendum to this Agreement.&lt;br /&gt;&#13;
 &amp;quot;Bill Me Later Payment System&amp;quot; is the payment system which allows me to pay for purchases from participating Merchants by charging the Costs to my Account. In this Agreement it may be called simply &amp;quot;Bill Me Later.&amp;quot;&lt;br /&gt;&#13;
 &amp;quot;Purchases&amp;quot; are loans made on the Account to the Borrower, when the Borrower chooses the Bill Me Later payment option to pay for a purchase from a Merchant.&lt;br /&gt;&#13;
 a. Parties to this Agreement.&lt;br /&gt;&#13;
@@ -1694,7 +1694,7 @@ a. Parts of the Account. For the purposes of the Finance Charge, each part of th
 &lt;/ul&gt;&#13;
 &lt;p&gt;&lt;strong&gt;11. MINIMUM PAYMENT DUE.&lt;/strong&gt; The Minimum Payment will be due each Billing Cycle, on or before the Payment Due Date. The amount of the Minimum Payment Due will be the sum of the Monthly Plan Payments due on each Installment Purchase part plus the payment due for the revolving parts plus any amounts past due from previous Billing Cycles.&lt;/p&gt;&#13;
 &lt;ul&gt;&#13;
-    &lt;li&gt;a. Revolving  Parts. The payment due for the revolving parts will be the greater of  (A) $10.00; or (B) 3% of the sum of the balances on the revolving parts (excluding  any balance subject to a Deferred Payment option), on the last day of the  Billing Cycle. The payment will be rounded down to the next whole dollar. In no event, however, will the payment due be greater than the sum of the  total outstanding balances on those parts.&lt;/li&gt;&#13;
+    &lt;li&gt;a. Revolving Parts. The payment due for the revolving parts will be the greater of  (A) $10.00; or (B) 3% of the sum of the balances on the revolving parts (excluding  any balance subject to a Deferred Payment option), on the last day of the  Billing Cycle. The payment will be rounded down to the next whole dollar. In no event, however, will the payment due be greater than the sum of the  total outstanding balances on those parts.&lt;/li&gt;&#13;
     &lt;li&gt;b. Installment Parts. The Monthly Plan Payment due for each Installment  Purchase which has not reached its End Date and on which a balance is outstanding  will be the installment payment amount I agree to when I make an Installment  Purchase. The Monthly Plan Payments for an Installment Purchase will be calculated  so that they are substantially equal over the term of the Installment Purchase.  In no event, however, will the Monthly Plan Payment due for any Installment  Purchase be greater than the outstanding balance due on that part of the Account.  The Monthly Plan Payment due on the End Date may be more or less than the  others, because it will be adjusted as necessary to pay the actual balance  and accrued Finance Charge owing on the End Date.&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
 &lt;p&gt;&lt;strong&gt;12. PREPAYMENT.&lt;/strong&gt; If I pay an amount greater than the Minimum Payment Due in any Billing Cycle, this will not affect the way you calculate the amount of the next Minimum Payment, and I will nevertheless make the Minimum Payment the next Billing Cycle.&lt;/p&gt;&#13;
@@ -1704,12 +1704,12 @@ a. Parts of the Account. For the purposes of the Finance Charge, each part of th
 &lt;p&gt;&lt;strong&gt;13. PAYMENT APPLICATION.&lt;/strong&gt; You will use each payment that I make, when I am not in default, first to pay billed Monthly Plan Payments on the Installment Purchases (in any order you choose), then billed Finance Charge, then billed other charges, then the principal balance of the revolving parts (in any order you choose), and then any other amounts due.&lt;/p&gt;&#13;
 &lt;p&gt;&lt;strong&gt;14. BILLING STATEMENTS.&lt;/strong&gt; You will send me a billing statement for each Billing Cycle in which:&lt;/p&gt;&#13;
 &lt;ul&gt;&#13;
-    &lt;li&gt;a. You  impose a Finance Charge to this Account; or b. The New Balance is more than $1.00 (whether a credit or debit balance). I agree to notify you in writing of any errors in the billing statement within 60 days from the date it is mailed. I agree to examine the billing statement and to notify you in writing, immediately, of any purchases which were not made or authorized by me. You need not mail a billing statement to me if you deem this Account uncollectible or if delinquency collection proceedings have been started.&lt;/li&gt;&#13;
+    &lt;li&gt;a. You impose a Finance Charge to this Account; or b. The New Balance is more than $1.00 (whether a credit or debit balance). I agree to notify you in writing of any errors in the billing statement within 60 days from the date it is mailed. I agree to examine the billing statement and to notify you in writing, immediately, of any purchases which were not made or authorized by me. You need not mail a billing statement to me if you deem this Account uncollectible or if delinquency collection proceedings have been started.&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
 &lt;p&gt;&lt;strong&gt;15. DEFAULT.&lt;/strong&gt; I will be in default if any of the following happen:&lt;/p&gt;&#13;
 &lt;ul&gt;&#13;
-    &lt;li&gt;a. If  I fail to pay any Minimum Payment Due on or before the Payment Due Date.&lt;/li&gt;&#13;
-    &lt;li&gt;b. If I fail to keep any promise or perform any duty in this Agreement,  or in any other loan or agreement with you.&lt;/li&gt;&#13;
+    &lt;li&gt;a. If I fail to pay any Minimum Payment Due on or before the Payment Due Date.&lt;/li&gt;&#13;
+    &lt;li&gt;b. If I fail to keep any promise or perform any duty in this Agreement, or in any other loan or agreement with you.&lt;/li&gt;&#13;
     &lt;li&gt;If default occurs, you will have no duty to make loans or advances from this Account and this Account will be Terminated. You may refuse to make any new loans and may cancel any approved loans from the Account for any Purchase or transaction that has not yet appeared on a billing statement sent to me. This may happen without any prior notice to me. If you choose, at your sole option, to make new loans from this Account after default, I agree that you may charge those loans to this Account. In addition, if a default occurs, all amounts which I owe under this Agreement shall be due and payable immediately, at your option (subject to any applicable law to the contrary); you may apply any payments I make after default to satisfy the amounts I owe on any part of the Account, in any order you choose. The other provisions of this Agreement will continue to apply to this Account. If you get a judgment after default and/or if I am a debtor in an action filed by or against me under the Bankruptcy Code, unless prohibited by applicable law, the rates of Finance Charge applicable to this Account will continue to apply to the balances on this Account. A default under this Agreement is a default under every other account or loan which I have with you.&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
 &lt;p&gt;&lt;strong&gt;16. TERMINATION OF THE ACCOUNT.&lt;/strong&gt; In addition to Termination by default, you may Terminate this Agreement at any time and for any reason subject to the requirements of applicable law. I can terminate my Account by sending written notice to the address on the billing statement. After Termination, I will not be able to make new purchases on this Account. Termination under this paragraph will not affect any purchase which complies with this Agreement and which was made before the date of the Termination notice. If you choose, at your sole option, to allow purchases after you have Terminated this Account (whether or not I have given you notice Terminating this Account), I agree that you may charge those purchases to this Account. After Termination under this paragraph, balances will continue to accrue Finance Charges until paid in full and I agree to pay the balance on this Account, the Finance Charges and all other amounts due in accordance with the terms of this Agreement. All other provisions of this Agreement will continue to apply.&lt;/p&gt;&#13;
@@ -1733,7 +1733,7 @@ This notice contains important information about your rights and our responsibil
     &lt;li&gt;The dollar amount of the suspected error.&lt;/li&gt;&#13;
     &lt;li&gt;Describe the error and explain, if you can, why you believe there is an error. If you need more information, describe the item you are not sure about.&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
-&lt;p&gt;Your Rights and Our  Responsibilities After We Receive Your Written Notice.&lt;br /&gt;&#13;
+&lt;p&gt;Your Rights and Our Responsibilities After We Receive Your Written Notice.&lt;br /&gt;&#13;
 We must acknowledge your letter within 30 days, unless we have corrected the error by then.&lt;br /&gt;&#13;
 Within 90 days we must either correct the error or explain why we believe the bill was correct.&lt;br /&gt;&#13;
 After we receive your letter, we cannot try to collect any amount you question, or report you as delinquent. We can continue to bill you for the amount you question, including Finance Charges. You do not have to pay any questioned amount while we are investigating, but you are still obligated to pay the parts of your bill that are not in question. If we find that we made a mistake on your bill, you will not have to pay any Finance Charges related to the questioned amount. If we did not make a mistake, you may have to pay Finance Charges, and you will have to make up any missed payments on the questioned amount. In either case, we will send you a statement of the amount you owe and the date that it is due.&lt;br /&gt;&#13;
@@ -2958,7 +2958,7 @@ a.账户各部分出于财务费用的目的，账户各部分将单独计算。
 &lt;p&gt;User profiles: &lt;a href = "#Snapshooter"&gt;Snapshooter&lt;/a&gt; | &lt;a href = "#Trendsetter"&gt;Trendsetter&lt;/a&gt; | &lt;a href = "#Business"&gt;Business user&lt;/a&gt; | &lt;a href = "#Serious"&gt;Serious amateur&lt;/a&gt; | &lt;a href = "#Budget"&gt;Budget buyer&lt;/a&gt; | &lt;a href = "#Undecided"&gt;Undecided&lt;/a&gt;   &#13;
 &lt;a id = "snapshooter"&gt;&lt;/a&gt;&#13;
 &lt;p&gt;&lt;h3&gt;Snapshooter&lt;/h3&gt;&lt;/p&gt;  &#13;
-&lt;p&gt;&lt;h4&gt;I want to take photos that I can e-mail to friends and family, post on the Web, or print in sizes smaller than 8x10 inches. I'd like a digital camera that is easy enough for the whole family to use and small enough to take anywhere. I'll be printing on an inexpensive, all-purpose inkjet printer or getting photo prints from the local drugstore, though I'll consider buying a photo printer if I like the pictures enough.   The specs that matter  Resolution It doesn't matter. Most cameras on the market today have sufficient resolution for your needs.  Price $150 to $300  Lens type Zoom (range encompassing at least 38mm to 114mm, 35mm equivalent)  Storage media Internal memory, CompactFlash, Memory Stick, xD-Picture Card, or Secure Digital/MultiMediaCard  Photo file format JPEG  Interfaces USB, NTSC/PAL television connection  Exposure controls Automatic, programmed scene modes, exposure compensation (for tweaking the automatic exposure)  Focus controls Automatic  Flash modes Automatic, fill, red-eye reduction  Software Photo stitching, photo album, slide show  Multimedia VGA (640x480), 30fps video-clip recording with sound  Cool features to look for Direct-to-printer (PictBridge) output compatibility, in-camera red-eye removal, automatic exposure fix, optical or mechanical image stabilization, face detection   &amp;raquo; &lt;a href = "#top"&gt;Back to top&lt;/a&gt;&lt;/h4&gt;&lt;/p&gt;&#13;
+&lt;p&gt;&lt;h4&gt;I want to take photos that I can email to friends and family, post on the Web, or print in sizes smaller than 8x10 inches. I'd like a digital camera that is easy enough for the whole family to use and small enough to take anywhere. I'll be printing on an inexpensive, all-purpose inkjet printer or getting photo prints from the local drugstore, though I'll consider buying a photo printer if I like the pictures enough.  The specs that matter  Resolution It doesn't matter. Most cameras on the market today have sufficient resolution for your needs.  Price $150 to $300  Lens type Zoom (range encompassing at least 38mm to 114mm, 35mm equivalent)  Storage media Internal memory, CompactFlash, Memory Stick, xD-Picture Card, or Secure Digital/MultiMediaCard  Photo file format JPEG  Interfaces USB, NTSC/PAL television connection  Exposure controls Automatic, programmed scene modes, exposure compensation (for tweaking the automatic exposure)  Focus controls Automatic  Flash modes Automatic, fill, red-eye reduction  Software Photo stitching, photo album, slide show  Multimedia VGA (640x480), 30fps video-clip recording with sound  Cool features to look for Direct-to-printer (PictBridge) output compatibility, in-camera red-eye removal, automatic exposure fix, optical or mechanical image stabilization, face detection   &amp;raquo; &lt;a href = "#top"&gt;Back to top&lt;/a&gt;&lt;/h4&gt;&lt;/p&gt;&#13;
 &lt;a id = "Trendsetter"&gt;&lt;/a&gt;&#13;
 &lt;p&gt;&lt;h3&gt;Trendsetter&lt;/h3&gt;&lt;/p&gt; &#13;
 &lt;p&gt;&lt;h4&gt;I like to buy the newest, shiniest toys before anyone else does. I want to impress my friends and business associates with the latest technologies and coolest features, but not if it makes the product too complicated to use. I care about how much I spend, though it's not one of my top concerns.   The specs that matter  Resolution 8 megapixels or greater.  Price Less than $1,000  Lens type Zoom (range encompassing at least 36mm to 108mm, 35mm equivalent)  Storage media Internal memory, CompactFlash, Memory Stick, xD-Picture Card, or SD/HC  Photo file format JPEG  Interfaces USB, HDMI, or component HDTV television connection  Exposure controls Automatic, programmed scene modes, exposure compensation (for tweaking the automatic exposure)  Focus controls Automatic  Flash modes Automatic, fill, red-eye reduction  Software Photo-stitching, photo album, slide show  Multimedia 720p (1,280x720) video-clip recording with sound and functioning zoom during video  Cool features to look for Ultracompact design, Webcam capabilities, voice recording, Wi-Fi support, 3-inch LCD, simultaneous video and photo capture, 12X or greater optical zoom, optical or mechanical image stabilization, face detection   &amp;raquo; &lt;a href = "#top"&gt;Back to top&lt;/a&gt;&lt;/h4&gt;&lt;/p&gt;&#13;
@@ -2970,7 +2970,7 @@ a.账户各部分出于财务费用的目的，账户各部分将单独计算。
 &lt;p&gt;&lt;h4&gt;I want to use creative effects when shooting and manipulating images, have professional-level control, output prints that are 8x10 inches or larger on a high-quality photo printer, and use accessories and different lenses.   The specs that matter  Resolution 8 megapixels or greater.  Price $400 and up  Lens type Supports lens converters or interchangeable lenses or zoom with widest focal range possible  Storage media High-capacity CompactFlash, Hitachi Microdrive, or SD/HC  Photo file format JPEG, RAW  Interfaces USB 2.0  Exposure controls Automatic, aperture- and shutter-priority, manual, choice of metering modes, bracketing  Focus controls Automatic with selectable focus points, manual  Flash modes Automatic, fill, slow sync, hot shoe or contact for external flash  Software Full-featured photo editor, software for PC-controlled capture  Multimedia Voice annotation  Cool features to look for Compatibility with existing 35mm-camera lenses and accessories, customizable user modes, dynamic histogram display, optical or mechanical image stabilization   &amp;raquo; &lt;a href = "#top"&gt;Back to top&lt;/a&gt;&lt;/h4&gt;&lt;/p&gt;&#13;
 &lt;a id = "Budget"&gt;&lt;/a&gt;&#13;
 &lt;p&gt;&lt;h3&gt;Budget buyer&lt;/h3&gt;&lt;/p&gt;&#13;
-&lt;h4&gt;I want to find a basic digicam costing less than $200 that will let me post snapshots on the Web; e-mail them to friends; print them in small sizes (4x6 or smaller) on my inexpensive, multipurpose inkjet printer; and get me up and running quickly without requiring me to read the manual. I want a camera that will satisfy me for a few years.   The specs that matter  Resolution It doesn't matter. Most cameras on the market today have sufficient resolution for your needs.  Price Less than $200  Lens type Zoom (range at least encompassing 38mm to 76mm, 35mm equivalent)  Storage media Internal memory, CompactFlash Type I, Memory Stick, xD-Picture Card, or Secure Digital/MultiMediaCard  Photo file format JPEG  Interfaces USB, NTSC/PAL television connection  Exposure controls Automatic, exposure compensation (for tweaking the automatic exposure)  Focus controls Autofocus or fixed focus  Flash modes Automatic, fill, red-eye reduction  Software Basic photo editor  Cool features to look for Webcam capabilities, automatic scene modes, continuous-shooting mode, autofocus assist lamp   &amp;raquo; &lt;a href = "#top"&gt;Back to top&lt;/a&gt;&lt;/h4&gt;&lt;/p&gt;&#13;
+&lt;h4&gt;I want to find a basic digicam costing less than $200 that will let me post snapshots on the Web; email them to friends; print them in small sizes (4x6 or smaller) on my inexpensive, multipurpose inkjet printer; and get me up and running quickly without requiring me to read the manual. I want a camera that will satisfy me for a few years.   The specs that matter  Resolution It doesn't matter. Most cameras on the market today have sufficient resolution for your needs.  Price Less than $200  Lens type Zoom (range at least encompassing 38mm to 76mm, 35mm equivalent)  Storage media Internal memory, CompactFlash Type I, Memory Stick, xD-Picture Card, or Secure Digital/MultiMediaCard  Photo file format JPEG  Interfaces USB, NTSC/PAL television connection  Exposure controls Automatic, exposure compensation (for tweaking the automatic exposure)  Focus controls Autofocus or fixed focus  Flash modes Automatic, fill, red-eye reduction  Software Basic photo editor  Cool features to look for Webcam capabilities, automatic scene modes, continuous-shooting mode, autofocus assist lamp   &amp;raquo; &lt;a href = "#top"&gt;Back to top&lt;/a&gt;&lt;/h4&gt;&lt;/p&gt;&#13;
 &lt;a id = "Undecided"&lt;/a&gt;&#13;
 &lt;p&gt;&lt;h3&gt;Undecided&lt;/h3&gt;&lt;/p&gt;  &#13;
 &lt;p&gt;&lt;h4&gt;I want a camera that's easy to use but that I can grow into if I get hooked on digital photography. I want to be able to print good-looking photos at sizes smaller than 8x10 inches on my inexpensive inkjet printer, but I'd like prints that will look OK if I decide to print larger or get a better printer. I want to spend less than $500.   The specs that matter  Resolution 7 megapixels or greater  Price $300 to $500  Lens type Zoom (range encompassing at least 34mm to 136mm, 35mm equivalent)  Storage media Internal memory, CompactFlash, Memory Stick, xD-Picture Card, or SD/HC  Photo file format JPEG, RAW  Interfaces USB, NTSC/PAL television connection  Exposure controls Automatic, aperture- and shutter-priority, manual, choice of metering modes, autobracketing  Focus controls Automatic, manual  Flash modes Automatic, fill, slow sync  Software Midrange photo editor  Multimedia VGA (640x480) 30fps video-clip recording with sound  Cool features to look for Remote control, dynamic histogram display, compatibility with lens converters and accessories, built-in help features, mechanical or optical image stabilization, face detection, 720p or better HD movie capture, HDMI or component output to HDTV   &amp;raquo; &lt;a href = "#top"&gt;Back to top&lt;/a&gt;&lt;/h4&gt;&lt;/p&gt;</custom-attribute>
@@ -3142,7 +3142,7 @@ a.账户各部分出于财务费用的目的，账户各部分将单独计算。
         <display-name xml:lang="it-IT">Guida all'acquisto dei lettori MP3</display-name>
         <display-name xml:lang="ja-JP">MP3 プレーヤーご購入案内</display-name>
         <display-name xml:lang="zh-CN">MP3 播放器购物指南</display-name>
-        <description xml:lang="x-default">MP3 players are definitely not one-size-fits-all. They come in a range of shapes and sizes, use different types of memory, and support different formats. Based on these and other features, certain players are better suited to certain uses--you should choose the player (or players) that meets your needs. Check out the various uses for an MP3 player and figure out which players are up to the task.</description>
+        <description xml:lang="x-default">MP3 players are definitely not one-size-fits-all. They come in a range of shapes and sizes, use different types of memory, and support different formats. Based on these and other features, certain players are better suited to certain uses. Check out the various uses for an MP3 player and figure out which players best meet your needs.</description>
         <description xml:lang="fr-FR">Les lecteurs MP3 disponibles sur le marché offrent un large éventail de choix. Ils se présentent sous diverses formes et dimensions, utilisent différents types de mémoire et prennent en charge différents formats. De ce fait, et de par les diverses fonctionnalités proposées, un lecteur est plus ou moins adapté à certaines utilisations. C'est pourquoi vous devez choisir le ou les lecteurs correspondant le mieux à vos besoins. Découvrez les différentes utilisations possibles d'un lecteur MP3 et déterminez celui qui sera à la hauteur de vos attentes.</description>
         <description xml:lang="it-IT">Esistono tanti tipi di lettori MP3. Ve ne sono di tanti tipi diversi, con differenti tipi di memoria, in grado di supportare vari tipi di formati. Sulla base delle varie funzionalità, alcuni sono più adatti a certi usi piuttosto che altri, e bisogna pertanto scegliere il lettore che funziona meglio per le proprie esigenze. Comincia col controllare i vari utilizzi offerti da un lettore MP3, per capire quali si adattano meglio all'uso che ne vuoi fare.</description>
         <description xml:lang="ja-JP">MP3 プレーヤーは、1 つのサイズですべてを満たすというタイプのものではありません。形状やサイズは様々で、メモリのタイプも様々、サポートする形式も異なります。こうした違いやその他の機能に基づくと、特定の目的には特定のプレーヤーがあっています。ユーザーは、自分のニーズに見合ったプレーヤーを選ばなければなりません。 MP3 プレーヤーの様々な用途を調査して、ご自分のニーズを満たすプレーヤーを把握してください。</description>
@@ -3154,7 +3154,7 @@ a.账户各部分出于财务费用的目的，账户各部分将单独计算。
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h2&gt;&lt;span style="color: rgb(86, 79, 71); "&gt;Buying Guide |&lt;/span&gt; &lt;span style="color: rgb(225, 185, 149); "&gt;MP3 Player&lt;/span&gt;&lt;/h2&gt;&#13;
 &lt;hr /&gt;&#13;
 &lt;div class="subArticle"&gt;&#13;
-&lt;p class="Summary"&gt;MP3 players are definitely not one-size-fits-all. They come in a range of shapes and sizes, use different types of memory, and support different formats. Based on these and other features, certain players are better suited to certain uses--you should choose the player (or players) that meets your needs. Check out the various uses for an MP3 player and figure out which players are up to the task.&lt;/p&gt;&#13;
+&lt;p class="Summary"&gt;MP3 players are definitely not one-size-fits-all. They come in a range of shapes and sizes, use different types of memory, and support different formats. Based on these and other features, certain players are better suited to certain uses. Check out the various uses for an MP3 player and figure out which players best meet your needs.&lt;/p&gt;&#13;
 &lt;/div&gt;&#13;
 &lt;p class="anchors"&gt;Usage profiles: &lt;a href="#1"&gt;Commuting&lt;/a&gt; | &lt;a href="#2"&gt;Working out&lt;/a&gt; | &lt;a href="#3"&gt;Traveling&lt;/a&gt; | &lt;a href="#4"&gt;Listening to audiobooks &lt;/a&gt; |&lt;br /&gt;&#13;
 &lt;a href="#5"&gt;File hoarding&lt;/a&gt; | &lt;a href="#6"&gt;Recording audio&lt;/a&gt; | &lt;a href="#7"&gt;Watching video&lt;/a&gt;&lt;/p&gt;&#13;
@@ -3558,12 +3558,12 @@ a.账户各部分出于财务费用的目的，账户各部分将单独计算。
     </content>
 
     <content content-id="buying-guide-tv">
-        <display-name xml:lang="x-default">Buying Guide for TV's</display-name>
+        <display-name xml:lang="x-default">Buying Guide for TVs</display-name>
         <display-name xml:lang="fr-FR">Guide d'achat pour téléviseurs</display-name>
         <display-name xml:lang="it-IT">Guida all'acquisto dei televisori</display-name>
         <display-name xml:lang="ja-JP">テレビご購入案内</display-name>
         <display-name xml:lang="zh-CN">电视购物指南</display-name>
-        <description xml:lang="x-default">After you have your budget squared away, you need to decide how large of a screen you want. Usually, the largest screens cost the most, but regardless, the TV should deliver the right-size picture for where you'll sit relative to the screen. Sitting closer to a smaller TV means you won't have to spend as much on a big screen. But if you sit too close, the picture will look poor. Regular TV-viewing distances. Most viewers feel comfortable sitting away from the set at a distance that's between three and six times the width of the screen. The following chart can give you a rough estimate of the minimum and maximum viewing distances for regular 4:3 televisions.</description>
+        <description xml:lang="x-default">After you have your budget squared away, you need to decide how large a screen you want. Usually, the largest screens cost the most, but regardless, the TV should deliver the right-size picture for where you'll sit relative to the screen. Sitting closer to a smaller TV means you won't have to spend as much on a big screen. But if you sit too close, the picture will look poor. Regular TV-viewing distances. Most viewers feel comfortable sitting away from the set at a distance that's between three and six times the width of the screen. The following chart can give you a rough estimate of the minimum and maximum viewing distances for regular 4:3 televisions.</description>
         <description xml:lang="fr-FR">Une fois votre budget déterminé, vous devez décider de la taille de votre écran. De manière générale, plus un écran est grand, plus il coûte cher. Toutefois, il importe avant tout d'adapter la taille de votre téléviseur à votre distance de visionnage. Si votre écran est petit mais que vous êtes assis plus près, il est inutile de dépenser davantage pour un téléviseur plus grand. Mais si vous êtes assis trop près, l'image sera mauvaise. Distances standard de visionnage. La plupart des personnes trouvent leur confort de visionnage à une distance comprise entre trois et six fois la largeur de l'écran. Le tableau suivant vous permet d'évaluer approximativement les distances minimale et maximale avec des téléviseurs 4:3 standard.</description>
         <description xml:lang="it-IT">Una volta stabilito il budget, si tratta di decidere le dimensioni dello schermo. Di norma, i televisori con gli schermi più grandi costano di più, ma in ogni caso è importante scegliere le dimensioni giuste per l'ambiente e in relazione a dove ci si siede. Se scegli un televisore più piccolo ma ti siedi più vicino, costa meno. Ma se ti siedi troppo vicino, l'immagine appare peggiore di quanto sia effettivamente. Distanze dal televisore Per la maggior parte delle persone, la distanza ideale dallo schermo corrisponde a 3-6 volte la larghezza dello schermo stesso. La tabella che segue offre una stima approssimativa delle distanze massima e minima per i televisori 4:3 standard.</description>
         <description xml:lang="ja-JP">予算の調整が終わったら、欲しい画面のサイズを決める必要があります。通常、画面が大きいほど値段も高くなりますが、それとは関係なくテレビは、画面から座る場所までの距離に対して適正な映像を表示しなければなりません。小さなテレビには近づいて見れば良く、画面の大きなテレビに大金を使う必要はありません。座る場所が近すぎると、映像は粗く見えます。通常のテレビ視聴距離大半の視聴者は、テレビ画面の幅の 3 倍から 6 倍を掛けた距離で座ってテレビを観ると快適に感じます。以下の表は、通常の 4:3 テレビの場合の最短視聴距離と最長視聴距離を大まかに見積もったものです。</description>
@@ -3598,7 +3598,7 @@ Since the first HDTVs appeared in 1998, high-definition television has been on t
 &lt;h3 class="a3"&gt;HDTV tuners&lt;/h3&gt;&#13;
 &lt;div class="prodshot v1"&gt;&lt;a href="http://cnet.com/tv-hdtv-tuners-receivers/samsung-dtb-h260f-hdtv/4505-6487_7-32385887.html"&gt;&lt;img width="120" height="90" border="0" alt="Samsung's DTB-H260F" src="images/buyingGuides/hdtv tuner.gif?$staticlink$" /&gt;&lt;/a&gt;&lt;br /&gt;&#13;
 Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
-&lt;p&gt;&lt;b&gt;Over the air:&lt;/b&gt;  By law, as of March 1, 2007, almost all televisions should include a built-in tuner (called HDTV, digital, or ATSC tuners) that can receive high-definition programs over the air by simply connecting an antenna. If your HDTV doesn't have such a tuner, you'll also need to connect an external tuner (or cable or satellite box) to watch high-definition programming. External over-the-air HDTV tuners currently cost at least $150.&lt;/p&gt;&#13;
+&lt;p&gt;&lt;b&gt;Over the air:&lt;/b&gt; By law, as of March 1, 2007, almost all televisions should include a built-in tuner (called HDTV, digital, or ATSC tuners) that can receive high-definition programs over the air by simply connecting an antenna. If your HDTV doesn't have such a tuner, you'll also need to connect an external tuner (or cable or satellite box) to watch high-definition programming. External over-the-air HDTV tuners currently cost at least $150.&lt;/p&gt;&#13;
 &lt;p&gt;&amp;nbsp;&lt;/p&gt;&#13;
 &lt;p&gt;&lt;b&gt;&lt;a name="fcc" class="b"&gt;FCC tuner mandate:&lt;/a&gt;&lt;/b&gt; You may have heard that all TVs will have to be HDTVs by a certain date. That's not technically correct. The FCC has mandated that as of March 1, 2007, all new TV and video products imported into the U.S. or shipped to retailers that include an analog (&lt;a href="http://cnet.com/4520-6029_7-6159727-1.html"&gt;NTSC&lt;/a&gt;) tuner need to have a digital ATSC tuner as well. There's a loophole though: if the product contains no tuner whatsoever--for TVs, this means it's a &amp;quot;monitor&amp;quot;--then the mandate does not apply. As a result of the mandate, nearly all televisions sold after that date should be ready for the analog switch-off.&lt;/p&gt;&#13;
 &lt;p&gt;&lt;b&gt;Analog TV broadcast switch-off:&lt;/b&gt; Congress has passed a bill that requires over-the-air television stations to switch completely over to digital broadcasting after February 17, 2009. After that date, TVs and other gear with NTSC tuners will be unable to receive over-the-air broadcasts. Anyone who watches TV via &amp;quot;rabbit ears&amp;quot; or a rooftop antenna (as opposed to cable or satellite), and whose TV does not have a built-in or separate digital tuner, will stop receiving programs on that TV. Because the switch-off of analog TV broadcasts would deprive many viewers of their only source of television, Congress also created a subsidy program. Run by the government's National Telecommunications and Information Administration (NTIA), the program will provide $40 coupons, limit of two per household, each of which can be used to pay for one digital converter box. The boxes, which are supposed to sell for $50-$70 each and be available from electronics retailers, can receive digital broadcasts to provide standard-definition programming to an existing analog-tuner TV. These coupons (which cannot be combined or used for other products) should be available from early 2008 through March 31, 2009 but must be used within 90 days of their issuance and only on certain converter products. As 2008 approaches, you can find more information on this program at &lt;a href="http://www.dtvtransition.org"&gt;www.dtvtransition.org&lt;/a&gt;.&lt;br /&gt;&#13;
@@ -3606,7 +3606,7 @@ Samsung's DTB-H260F external ATSC tuner&lt;/div&gt;&#13;
 &lt;b&gt;Cable and satellite:&lt;/b&gt; The FCC's plans for ATSC tuners have nothing to do with HDTV over cable and satellite. Subscribers to pay TV services can simply get a set-top box that tunes HDTV channels, plug it into their HDTV-ready sets, and watch HDTV.&lt;/p&gt;&#13;
 &lt;p&gt;&amp;nbsp;&lt;/p&gt;&#13;
 &lt;div class="prodshot v1"&gt;&lt;img width="120" height="90" border="0" alt="DCR" src="images/buyingGuides/120_DCRlogo.gif?$staticlink$" /&gt;&lt;/div&gt;&#13;
-&lt;p&gt;Some new HDTVs are  &lt;i&gt;digital cable ready&lt;/i&gt; (DCR), meaning they can tune digital cable channels, including HDTV if the cable provider has HDTV channels, without needing an external cable box. To use a DCR television, you'll need to get a special access card from your cable provider, called a CableCard. Unlike actual digital cable boxes, current DCR TVs can't do video-on-demand at all, and you must pick up a phone if you want to order pay-per-view programs. Using the card with some sets also means you can't access the &lt;a href="http://www.cnet.com/4520-7874_1-5107912-6.html?tag=txt#epg"&gt;electronic program guide (EPG)&lt;/a&gt;, although many new DCR HDTVs include a third-party EPG, such as the TV Guide system, as a substitute.&lt;/p&gt;&#13;
+&lt;p&gt;Some new HDTVs are &lt;i&gt;digital cable ready&lt;/i&gt; (DCR), meaning they can tune digital cable channels, including HDTV if the cable provider has HDTV channels, without needing an external cable box. To use a DCR television, you'll need to get a special access card from your cable provider, called a CableCard. Unlike actual digital cable boxes, current DCR TVs can't do video-on-demand at all, and you must pick up a phone if you want to order pay-per-view programs. Using the card with some sets also means you can't access the &lt;a href="http://www.cnet.com/4520-7874_1-5107912-6.html?tag=txt#epg"&gt;electronic program guide (EPG)&lt;/a&gt;, although many new DCR HDTVs include a third-party EPG, such as the TV Guide system, as a substitute.&lt;/p&gt;&#13;
 &lt;p&gt;&amp;nbsp;&lt;/p&gt;&#13;
 &lt;div align="right" class="v1" style="padding-top:5px;padding-bottom:20px;"&gt;&amp;raquo;&amp;nbsp;&lt;a href="#top"&gt;Back to top&lt;/a&gt;&lt;/div&gt;&#13;
 &lt;p&gt;&lt;a name="resolutions"&gt;&lt;/a&gt;&lt;/p&gt;&#13;
@@ -5443,7 +5443,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <display-name xml:lang="it-IT">Banner attivo pagina moda maschile</display-name>
         <display-name xml:lang="ja-JP">メンズランディングバナー</display-name>
         <display-name xml:lang="zh-CN">男士登录横幅</display-name>
-        <description xml:lang="x-default">Banner for Men's Landing Page</description>
+        <description xml:lang="x-default">Banner for Mens Landing Page</description>
         <description xml:lang="fr-FR">Bannière de la page principale Hommes</description>
         <description xml:lang="it-IT">Banner per pagina di destinazione moda maschile</description>
         <description xml:lang="ja-JP">メンズランディングページのバナー</description>
@@ -5484,12 +5484,12 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
     </content>
 
     <content content-id="cat-landing-womens">
-        <display-name xml:lang="x-default">Women's Landing Banner</display-name>
+        <display-name xml:lang="x-default">Womens Landing Banner</display-name>
         <display-name xml:lang="fr-FR">Bannière de la page principale Femmes</display-name>
         <display-name xml:lang="it-IT">Banner attivo pagina di moda femminile</display-name>
         <display-name xml:lang="ja-JP">レディースランディングバナー</display-name>
         <display-name xml:lang="zh-CN">女士登录横幅</display-name>
-        <description xml:lang="x-default">Banner for Men's Landing Page</description>
+        <description xml:lang="x-default">Banner for Womens Landing Page</description>
         <description xml:lang="fr-FR">Bannière de la page principale Hommes</description>
         <description xml:lang="it-IT">Banner per pagina di destinazione moda maschile</description>
         <description xml:lang="ja-JP">メンズランディングページのバナー</description>
@@ -5532,11 +5532,11 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header"&gt;Checkout&lt;/h1&gt;&#13;
 &#13;
-&lt;h2&gt;When you are ready to complete your purchase, simply go to Checkout and follow these steps to place your order:&lt;/h2&gt;&#13;
+&lt;h2&gt;When you are ready to complete your purchase, simply go to the Checkout and follow these steps to place your order:&lt;/h2&gt;&#13;
 &#13;
 &#13;
 &lt;h3&gt;For registered users:&lt;/h3&gt;&#13;
-&lt;p&gt;If you are a returning customer and have an account at Timberland, please sign in using your email address and password and you will be taken directly to the first Checkout tab.&lt;/p&gt;&#13;
+&lt;p&gt;If you are a returning customer and already have an account, please sign in using your email address and password and you will be taken directly to the first Checkout tab.&lt;/p&gt;&#13;
 &#13;
 &lt;h3&gt;For non-registered users:&lt;/h3&gt;&#13;
 &lt;p&gt;If you are not registered, you can proceed without creating an account or you can create an account.&lt;/p&gt;&#13;
@@ -5545,19 +5545,19 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
 &lt;p&gt;Enter your billing information as it appears on your credit card statement. Your credit card will not be accepted without the appropriate billing address and telephone number. If you are a returning customer, your billing address will automatically appear on the Billing and Shipping page. If the shipping address is different than the billing address, enter the address where you would like your order shipped.&lt;/p&gt;&#13;
 &#13;
 &lt;h3&gt;Shipping Options.&lt;/h3&gt;&#13;
-&lt;p&gt;From the options provided, select from the shipping methods that are available for the item(s) you wish to purchase. For more information on shipping, &lt;a href="$url('Page-Show', 'cid', 'shipping-methods')$"&gt;click here&lt;/a&gt;.&lt;/p&gt;&#13;
+&lt;p&gt;From the options provided, select from the shipping methods that are available for the items you wish to purchase. For more information on shipping, &lt;a href="$url('Page-Show', 'cid', 'shipping-methods')$"&gt;click here&lt;/a&gt;.&lt;/p&gt;&#13;
 &#13;
 &lt;h3&gt;Payment Information.&lt;/h3&gt;&#13;
 &lt;p&gt;At this time, you must verify your address information is correct, review your order and then enter your payment method and click &amp;quot;Place Order&amp;quot;. For more information on payment, &lt;a href="$url('Page-Show', 'cid', 'payment')$"&gt;click here&lt;/a&gt;.&lt;/p&gt;&#13;
 &#13;
 &lt;h3&gt;Purchase Summary.&lt;/h3&gt;&#13;
-&lt;p&gt;After you complete the checkout process, the Purchase Summary page confirms detailed of the order you have placed and also provides you with a Purchase Summary reference number. We recommend that you print this Purchase Summary page for your records as it may be needed for order references.&lt;/p&gt;&#13;
+&lt;p&gt;After you complete the checkout process, the Purchase Summary page confirms details of the order you have placed and also provides you with a reference number. We recommend that you print this Purchase Summary page for your records as it may be needed for order references.&lt;/p&gt;&#13;
 &#13;
 &lt;h3&gt;Order and Shipment Confirmations.&lt;/h3&gt;&#13;
-&lt;p&gt;You will receive an order confirmation email which will include an order number - you can use this to track your order in My Account. Once your items have been shipped, you will receive a shipping confirmation email with details of which item/items have been sent. Please note that if you order more than one item, it is possible that different items may arrive on different days depending on stock availability.&lt;/p&gt;&#13;
+&lt;p&gt;You will receive an order confirmation email which will include an order number - you can use this to track your order in My Account. Once your items have been shipped, you will receive a shipping confirmation email with details of which items have been sent. Please note that if you order more than one item, it is possible that different items may arrive on different days depending on stock availability.&lt;/p&gt;&#13;
 &#13;
 &lt;h3&gt;VAT Invoice.&lt;/h3&gt;&#13;
-&lt;p&gt;After your items are invoiced, you will receive an email which includes a link for you to retrieve a VAT invoice for items purchased and shipped to you. This email will be in addition to the Shipment Confirmation email you will receive.&lt;/p&gt;</custom-attribute>
+&lt;p&gt;After your items are invoiced, you will receive an email which includes a link for retrieval of a VAT invoice for items purchased and shipped to you. This email will be sent in addition to the Shipment Confirmation email you will receive.&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h1 class="content-header"&gt;Paiement&lt;/h1&gt;&#13;
 &#13;
 &lt;h2&gt;Lorsque vous avez terminé vos achats, il ne vous reste plus qu'à les régler et à suivre les étapes ci-dessous pour passer votre commande :&lt;/h2&gt;&#13;
@@ -5716,7 +5716,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <display-name xml:lang="it-IT">Guida per certificati regalo</display-name>
         <display-name xml:lang="ja-JP">ギフト券ヘルプ</display-name>
         <display-name xml:lang="zh-CN">礼券帮助</display-name>
-        <description xml:lang="x-default">Help text for Gift Certificates on the checkout billing step.</description>
+        <description xml:lang="x-default">Help text for gift certificates on the checkout billing step.</description>
         <description xml:lang="fr-FR">Texte d'aide pour les chèques-cadeaux à l'étape du paiement.</description>
         <description xml:lang="it-IT">Testo guida per certificati regalo durante la fase di fatturazione del checkout.</description>
         <description xml:lang="ja-JP">注文手続きの請求書ステップにあるギフト券のヘルプテキスト。</description>
@@ -5743,7 +5743,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <display-name xml:lang="it-IT">Guida per certificato regalo/coupon</display-name>
         <display-name xml:lang="ja-JP">ギフト券/クーポンのヘルプ</display-name>
         <display-name xml:lang="zh-CN">礼券／优惠券帮助</display-name>
-        <description xml:lang="x-default">Help text for the coupons and Gift Certificates located on the checkout payment page.</description>
+        <description xml:lang="x-default">Help text for the coupons and gift certificates located on the checkout payment page.</description>
         <description xml:lang="fr-FR">Texte d'aide pour les bons de réduction et les chèques-cadeaux figurant sur la page de paiement.</description>
         <description xml:lang="it-IT">Testo guida per coupon e certificati regalo nella pagina di pagamento del checkout.</description>
         <description xml:lang="ja-JP">注文手続きの支払いページにあるクーポンとギフト券のヘルプテキスト。</description>
@@ -5790,7 +5790,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <page-attributes/>
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div class="cvn-tooltip"&gt;&lt;img src="images/Cart/cvnimage.jpg?$staticlink$" alt="CVN Number" /&gt;&lt;p&gt;What is a Card Verification Number (CVN)?&lt;/p&gt;&#13;
-&lt;p&gt;For Discover, MasterCard and Visa, enter last three digits on the signature strip. For American Express, enter the four digits in small print on the front of the card.&lt;/p&gt;&lt;/div&gt;</custom-attribute>
+&lt;p&gt;For Discover, MasterCard and Visa, enter the last three digits on the signature strip. For American Express, enter the four digits in small print on the front of the card.&lt;/p&gt;&lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;div class="cvn-tooltip"&gt;&lt;img src="images/Cart/cvnimage.jpg?$staticlink$" alt="Numéro de vérification de la carte" /&gt;&lt;p&gt;Qu'est-ce que le numéro de vérification de la carte ?&lt;/p&gt;&#13;
 &lt;p&gt;Pour les cartes Discover, MasterCard et Visa, saisissez les trois derniers chiffres de la zone de signature. Pour les cartes American Express, saisissez les quatre chiffres en petits caractères situés au recto de la carte.&lt;/p&gt;&lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;div class="cvn-tooltip"&gt;&lt;img src="images/Cart/cvnimage.jpg?$staticlink$" alt="Numero CV2" /&gt;&lt;p&gt;Cos'è il numero di sicurezza della carta di credito (CV2)?&lt;/p&gt;&#13;
@@ -5835,7 +5835,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div class="privacy_policy_message_box"&gt;           &#13;
     &lt;h2&gt;Privacy and Cookie Policy&lt;/h2&gt;  &#13;
-    &lt;p&gt;Demandware uses cookies to give you the best experience. With the cookies we allow you to make full use of the online shopping and personalized features available on our website.&lt;/p&gt;&#13;
+    &lt;p&gt;Demandware uses cookies to allow you to make full use of the online shopping and personalized features available on our website.&lt;/p&gt;&#13;
     &lt;p&gt;View our &lt;a href="$url('Page-Show', 'cid', 'privacy-policy')$"&gt;Privacy and Cookie Policy&lt;/a&gt; to learn more about this.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;div class="privacy_policy_message_box"&gt;           &#13;
@@ -5908,7 +5908,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
     </content>
 
     <content content-id="create-giftregistry-benefits">
-        <display-name xml:lang="x-default">Create a Gift Registry</display-name>
+        <display-name xml:lang="x-default">Create Gift Registry</display-name>
         <display-name xml:lang="fr-FR">Créer une liste de cadeaux</display-name>
         <display-name xml:lang="it-IT">Crea una lista regali</display-name>
         <display-name xml:lang="ja-JP">ギフトレジストリの作成</display-name>
@@ -5917,11 +5917,11 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;p&gt;Create your very own Gift Registry of items you would like to have. You may share your list with family and friends, or you can choose to keep it to yourself.&lt;/p&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;p&gt;Create your very own gift registry of items you would like to have. You may share your list with family and friends, or you can choose to keep it to yourself.&lt;/p&gt;&#13;
 &lt;ul style="margin: 0 0 0 16px;"&gt;&#13;
-&lt;li&gt;&lt;p&gt;&lt;span style="font-weight:bold;"&gt;Step 1 &lt;/span&gt;Log in to see your Gift Registries OR Register for an account to create your own Gift Registry.&lt;/p&gt;&lt;/li&gt;&#13;
-&lt;li&gt;&lt;p&gt;&lt;span style="font-weight:bold;"&gt;Step 2 &lt;/span&gt;Find an item you'd like to add and Click the "Add to Registry" button.&lt;/p&gt;&lt;/li&gt;&#13;
-&lt;li&gt;&lt;p&gt;&lt;span style="font-weight:bold;"&gt;Step 3 &lt;/span&gt;You will be brought to your Gift Registry where the item will be added.&lt;/p&gt;&lt;/li&gt;&#13;
+&lt;li&gt;&lt;p&gt;&lt;span style="font-weight:bold;"&gt;Step 1 &lt;/span&gt;Log in to see your gift registries or register for an account to create your own gift registry.&lt;/p&gt;&lt;/li&gt;&#13;
+&lt;li&gt;&lt;p&gt;&lt;span style="font-weight:bold;"&gt;Step 2 &lt;/span&gt;Find an item you'd like to add and click the "Add to Registry" button.&lt;/p&gt;&lt;/li&gt;&#13;
+&lt;li&gt;&lt;p&gt;&lt;span style="font-weight:bold;"&gt;Step 3 &lt;/span&gt;You will be brought to your gift registry where the item will be added.&lt;/p&gt;&lt;/li&gt;&#13;
 &lt;/ul&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;p&gt;Créez votre propre liste des cadeaux avec les articles qui vous combleraient. Vous pourrez partager cette liste avec vos parents et amis, ou choisir de la garder pour vous.&lt;/p&gt;&#13;
 &lt;ul style="margin: 0 0 0 16px;"&gt;&#13;
@@ -5960,7 +5960,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <display-name xml:lang="it-IT">Vantaggi della lista desideri</display-name>
         <display-name xml:lang="ja-JP">ほしい物リストの利点</display-name>
         <display-name xml:lang="zh-CN">愿望清单优势</display-name>
-        <description xml:lang="x-default">Create your very own Wish List of items you would like to have. You may share your list with family and friends, or you can choose to keep it to yourself.</description>
+        <description xml:lang="x-default">Create your very own wish list of items you would like to have. You may share your list with family and friends, or you can choose to keep it to yourself.</description>
         <description xml:lang="fr-FR">Créez votre propre liste de souhaits avec les articles qui vous combleraient. Vous pourrez partager cette liste avec vos parents et amis, ou choisir de la garder pour vous.</description>
         <description xml:lang="it-IT">Crea la tua lista desideri personalizzata con tutti gli articoli che vorresti comprare. Puoi condividere la lista con amici e familiari o scegliere di mantenerla privata.</description>
         <description xml:lang="ja-JP">希望する商品を集めて、自分専用のほしい物リストを作成しましょう。リストはご家族やお友達と共有することも、非公開にすることもできます。</description>
@@ -5969,11 +5969,11 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <searchable-flag>true</searchable-flag>
         <page-attributes/>
         <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;p&gt;Create your very own Wish List of items you would like to have. You may share your list with family and friends, or you can choose to keep it to yourself.&lt;/p&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;p&gt;Create your very own wish list of items you would like to have. You may share your list with family and friends, or you can choose to keep it to yourself.&lt;/p&gt;&#13;
 &lt;ul style="margin: 0 0 0 16px;"&gt;&#13;
-&lt;li&gt;&lt;p&gt;&lt;span style="font-weight:bold;"&gt;Step 1 &lt;/span&gt;Register for an Account to create your own Wish List.&lt;/p&gt;&lt;/li&gt;&#13;
+&lt;li&gt;&lt;p&gt;&lt;span style="font-weight:bold;"&gt;Step 1 &lt;/span&gt;Register for an account to create your own wish list.&lt;/p&gt;&lt;/li&gt;&#13;
 &lt;li&gt;&lt;p&gt;&lt;span style="font-weight:bold;"&gt;Step 2 &lt;/span&gt;Find an item you'd like to add and click the "Add to Wish List" button.&lt;/p&gt;&lt;/li&gt;&#13;
-&lt;li&gt;&lt;p&gt;&lt;span style="font-weight:bold;"&gt;Step 3 &lt;/span&gt;You will be brought to your Wish List where the item will be added.&lt;/p&gt;&lt;/li&gt;&#13;
+&lt;li&gt;&lt;p&gt;&lt;span style="font-weight:bold;"&gt;Step 3 &lt;/span&gt;You will be brought to your wish list where the item will be added.&lt;/p&gt;&lt;/li&gt;&#13;
 &lt;/ul&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;p&gt;Créez votre propre liste de souhaits avec les articles qui vous combleraient. Vous pourrez partager cette liste avec vos parents et amis, ou choisir de la garder pour vous.&lt;/p&gt;&#13;
 &lt;ul style="margin: 0 0 0 16px;"&gt;&#13;
@@ -6046,7 +6046,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
             <page-title xml:lang="it-IT">Servizio clienti</page-title>
             <page-title xml:lang="ja-JP">カスタマーサービス</page-title>
             <page-title xml:lang="zh-CN">客户服务</page-title>
-            <page-description xml:lang="x-default">Here you will find answers to your questions about shopping at our online store, your order, payment options and more. Simply select from the categories below for you complete information.</page-description>
+            <page-description xml:lang="x-default">Here you will find answers to your questions about shopping at our online store, your order, payment options and more. Simply select from the categories below for your complete information.</page-description>
             <page-description xml:lang="fr-FR">Vous trouverez ici toutes les réponses à vos questions relatives aux achats dans notre magasin en ligne, à votre commande, à votre mode de règlement, etc. Pour obtenir des informations complètes, choisissez simplement parmi les catégories ci-dessous.</page-description>
             <page-description xml:lang="it-IT">In questa sezione troverai tante risposte alle tue domande sullo shopping online nel nostro negozio, sulla gestione degli ordini, sui metodi di pagamento e non solo. Basta selezionare una categoria per visualizzare tutte le informazioni pertinenti.</page-description>
             <page-description xml:lang="ja-JP">弊社のオンラインストアでのお買い物、お客様のご注文、支払いオプションその他に関するご質問への回答をこちらにご用意しております。以下のカテゴリから選択し、ご希望の情報をご覧ください。</page-description>
@@ -6085,7 +6085,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
             <page-title xml:lang="zh-CN">常规错误！</page-title>
         </page-attributes>
         <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;p style="font-size:1.1em; font-weight:bold;"&gt;We're sorry that your order could not be placed. This probably happened due to a high order volume or temporary connection errors. Please wait a few minutes and resubmit your order. We won't process your payment until you successfully place your order. If you have further questions, please contact us via &lt;a href="mailto:noreply@demandware.com"&gt;noreply@demandware.com&lt;/a&gt;&lt;/p&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;p style="font-size:1.1em; font-weight:bold;"&gt;We're sorry that your order could not be placed. This probably happened due to a very high order volume or temporary connection errors. Please wait a few minutes and resubmit your order. We won't process your payment until your order is placed successfully. If you have further questions, please contact us via &lt;a href="mailto:noreply@demandware.com"&gt;noreply@demandware.com&lt;/a&gt;&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;p style="font-size:1.1em; font-weight:bold;"&gt;Nous sommes désolés mais votre commande n'a pu être validée. Cela est probablement dû à son volume élevé ou à des erreurs temporaires de connexion. Veuillez patienter quelques minutes avant de soumettre à nouveau votre commande. Votre paiement ne sera traité qu'une fois votre commande validée. Pour toute question, n'hésitez pas à nous contacter à l'adresse &lt;a href="mailto:noreply@demandware.com"&gt;info@demandware.fr&lt;/a&gt;&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;p style="font-size:1.1em; font-weight:bold;"&gt;Siamo spiacenti che il tuo ordine non sia andato a buon fine. Probabilmente il problema è dovuto all'elevato volume di ordini o a errori della connessione. Attendi qualche minuto e riprova. Non elaboriamo il pagamento fino all'invio corretto dell'ordine. In caso di domande, non esitare a contattarci scrivendo a &lt;a href="mailto:noreply@demandware.com"&gt;noreply@demandware.com&lt;/a&gt;&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;p style="font-size:1.1em; font-weight:bold;"&gt;申し訳ございませんが、ご注文を完了することができませんでした。ご注文が殺到しているため、または一時的な接続エラーが原因だと思われます。数分後にご注文を再度送信してください。ご注文が正しく完了するまで、お支払いが処理されることはありません。その他にもご不明な点がございましたら、次の Eメールで弊社までお問い合わせください:  &lt;a href="mailto:noreply@demandware.com"&gt;noreply@demandware.com&lt;/a&gt;&lt;/p&gt;</custom-attribute>
@@ -6135,7 +6135,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <display-name xml:lang="it-IT">FAQ (Domande frequenti)</display-name>
         <display-name xml:lang="ja-JP">よくあるご質問 (FAQ)</display-name>
         <display-name xml:lang="zh-CN">常见问题</display-name>
-        <description xml:lang="x-default">Many of customers share the same questions and concerns regarding orders, the capturing and storage of personal information, shipping methods and shipping charges. Here are a list of the most common questions and answers provided for customers.</description>
+        <description xml:lang="x-default">Many of our customers have the the same questions and concerns regarding orders, the capturing and storage of personal information, shipping methods and shipping charges. Here is a list of the most common questions and answers provided for customers.</description>
         <description xml:lang="fr-FR">De nombreux clients ont les mêmes questions et préoccupations en ce qui concerne les commandes, l'enregistrement et le stockage des informations personnelles, les modes de livraison et les frais de port. Voici une liste des questions fréquemment posées et des réponses couramment fournies aux clients.</description>
         <description xml:lang="it-IT">Molti clienti hanno le stesse domande e nutrono gli stessi dubbi sugli ordini, sull'acquisizione e l'archiviazione dei dati personali, sui metodi e sui costi di spedizione. Ecco un elenco delle domande più frequenti e delle risposte fornite ai clienti.</description>
         <description xml:lang="ja-JP">多くのお客様が、ご注文、個人情報の収集と保存、配送方法、配送料について、同様のご質問やご懸念をお持ちです。こちらに、最も一般的な質問と回答の一覧をご用意しました。</description>
@@ -6147,7 +6147,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header" id="faq-top"&gt;Frequently Asked Questions&lt;/h1&gt;&#13;
 &#13;
 &lt;ul&gt;&#13;
-    &lt;li&gt;01. &lt;a href="#q01"&gt;Can I preorder items for delivery?&lt;/a&gt;&lt;/li&gt;&#13;
+    &lt;li&gt;01. &lt;a href="#q01"&gt;Can I pre-order items for delivery?&lt;/a&gt;&lt;/li&gt;&#13;
     &lt;li&gt;02. &lt;a href="#q02"&gt;Can I change my order?&lt;/a&gt;&lt;/li&gt;&#13;
     &lt;li&gt;03. &lt;a href="#q03"&gt;Do you offer gift wrapping options?&lt;/a&gt;&lt;/li&gt;&#13;
     &lt;li&gt;04. &lt;a href="#q04"&gt;Can I return items to a store?&lt;/a&gt;&lt;/li&gt;&#13;
@@ -6163,64 +6163,64 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
 &#13;
 &lt;h2&gt;Answers&lt;/h2&gt;&#13;
 &#13;
-&lt;h3 id="q01"&gt;01. Can I preorder items for delivery?&lt;/h3&gt;&#13;
-&lt;p&gt;Yes. However these will be on items that are specifically indicated as a preorder; this generally applies on new releases, we will only accept orders on items that we have in stock at the time.&#13;
-&lt;a href="#faq-top"&gt;Back to top&lt;/a&gt;&#13;
+&lt;h3 id="q01"&gt;01. Can I pre-order items for delivery?&lt;/h3&gt;&#13;
+&lt;p&gt;Yes. However, pre-order items will be specifically indicated as such; this generally applies to new releases. We will only accept orders on items that we have in stock at the time.&#13;
+&lt;a href="#faq-top"&gt;Back to Top&lt;/a&gt;&#13;
 &#13;
 &#13;
 &lt;h3 id="q02"&gt;02. Can I change my order?&lt;/h3&gt;&#13;
-&lt;p&gt;Once the order has been placed, it cannot be changed online. If you want to change your order, please telephone on 800 555 1212, and if it has not yet been processed we will change or re-issue a new amended order.&#13;
-&lt;br /&gt;&lt;a href="#faq-top"&gt;Back to top&lt;/a&gt;&lt;/p&gt;&#13;
+&lt;p&gt;Once the order has been placed, it cannot be changed online. If you want to change your order, please call 1 (800) 555 XXXX, and if it has not yet been processed we will change or re-issue a new amended order.&#13;
+&lt;br /&gt;&lt;a href="#faq-top"&gt;Back to Top&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
 &lt;h3 id="q03"&gt;03. Do you offer gift wrapping options?&lt;/h3&gt;&#13;
-&lt;p&gt;Yes, Your gifts can be delivered in our beautifully presented gift boxes for just $4.99 per item. Each box carries the Demandware logo and comes with a gift card for your personal message. Enter your personal message into the fields provided, (up to a maximum of 4 lines and 80 characters). If you would like to change your gift wrap options, simply select from the drop down box. Once you are happy with your selections, click 'continue' to proceed with your purchase. Please note: Gift wrap is not available on all items, (extra large items such as rocking horses and sit and ride vehicles are excluded).&#13;
-&lt;a href="#faq-top"&gt;Back to top&lt;/a&gt;&#13;
+&lt;p&gt;Yes. Your gifts can be delivered in our beautifully presented gift boxes for just $4.99 per item. Each box carries the Demandware logo and comes with a gift card for your personal message. Enter your personal message into the fields provided (up to a maximum of 4 lines and 80 characters). If you would like to change your gift wrap options, simply select from the dropdown box. Once you are happy with your selections, click "Continue" to proceed with your purchase. Please note: Gift wrap is not available on all items, extra large items such as rocking horses and sit-and-ride vehicles are excluded.&#13;
+&lt;a href="#faq-top"&gt;Back to Top&lt;/a&gt;&#13;
 &#13;
 &#13;
 &lt;h3 id="q04"&gt;04. Can I return items to a store?&lt;/h3&gt;&#13;
-&lt;p&gt;Yes, with the exception of notified non-returnable0 goods. You must provide proof of purchase such as a delivery invoice or your email order confirmation. Your goods will be taken and your exchange or refund will be processed on the card you used to place your order.&#13;
-&lt;br /&gt;&lt;a href="#faq-top"&gt;Back to top&lt;/a&gt;&lt;/p&gt;&#13;
+&lt;p&gt;Yes. With the exception of notified non-returnable goods. You must provide proof of purchase such as a delivery invoice or your email order confirmation. Your goods will be taken and your exchange or refund will be processed on the card you used to place your order.&#13;
+&lt;br /&gt;&lt;a href="#faq-top"&gt;Back to Top&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
 &lt;h3 id="q05"&gt;05. When do I get my refund once I have returned an item?&lt;/h3&gt;&#13;
-&lt;p&gt;Once we have received the item into our warehouse we aim to process a refund onto the original payment card within two weeks.&#13;
-&lt;br /&gt;&lt;a href="#faq-top"&gt;Back to top&lt;/a&gt;&lt;/p&gt;&#13;
+&lt;p&gt;Once we have received the item in our warehouse, we aim to process a refund onto the original payment card within two weeks.&#13;
+&lt;br /&gt;&lt;a href="#faq-top"&gt;Back to Top&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
 &lt;h3 id="q06"&gt;06. If I return all the items in my order will I still be charged for delivery?&lt;/h3&gt;&#13;
 &lt;p&gt;If any of the items we deliver are damaged or incorrect, we will refund the delivery charge. If you change your mind about wanting to keep them, you may return them free of charge but we will not refund the original delivery charge.&#13;
-&lt;br /&gt;&lt;a href="#faq-top"&gt;Back to top&lt;/a&gt;&lt;/p&gt;&#13;
+&lt;br /&gt;&lt;a href="#faq-top"&gt;Back to Top&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
 &lt;h3 id="q07"&gt;07. What should I do if my credit/debit card has been refused when placing an order?&lt;/h3&gt;&#13;
 &lt;p&gt;Check that all the details you have entered on the checkout page are correct. If it is refused after that, try another credit card.&#13;
-&lt;br /&gt;&lt;a href="#faq-top"&gt;Back to top&lt;/a&gt;&lt;/p&gt;&#13;
+&lt;br /&gt;&lt;a href="#faq-top"&gt;Back to Top&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
 &lt;h3 id="q08"&gt;08. Do I get charged for delivery of each item I order?&lt;/h3&gt;&#13;
-&lt;p&gt;Postage and packaging for each Gift Basket is charged for separately but all other items will attract one delivery charge, no matter how many you buy.&#13;
-&lt;br /&gt;&lt;a href="#faq-top"&gt;Back to top&lt;/a&gt;&lt;/p&gt;&#13;
+&lt;p&gt;Postage and packaging for each gift basket are charged separately but all other items will have one delivery charge, no matter how many you buy.&#13;
+&lt;br /&gt;&lt;a href="#faq-top"&gt;Back to Top&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
 &lt;h3 id="q09"&gt;09. Do you deliver overseas?&lt;/h3&gt;&#13;
-&lt;p&gt;With the exception of Gift Vouchers&#13;
-&lt;br /&gt;&lt;a href="#faq-top"&gt;Back to top&lt;/a&gt;&lt;/p&gt;&#13;
+&lt;p&gt;Yes, with the exception of gift certificates.&#13;
+&lt;br /&gt;&lt;a href="#faq-top"&gt;Back to Top&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
 &lt;h3 id="q10"&gt;10. I have a complaint, who should I speak to?&lt;/h3&gt;&#13;
-&lt;p&gt;If it is about a product you have bought from our stores, please get in touch with the store you purchased from &amp;ndash; the telephone numbers of all our stores can be found on this website. If the complaint is about an online shopping experience please call one of our customer service representatives on 800 555 1212 or complete the form on the &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Contact Us&lt;/a&gt; page.&#13;
-&lt;br /&gt;&lt;a href="#faq-top"&gt;Back to top&lt;/a&gt;&lt;/p&gt;&#13;
+&lt;p&gt;If it is about a product you have bought from our stores, please get in touch with the store you purchased from &amp;ndash; the telephone numbers of all our stores can be found on this website. If the complaint is about an online shopping experience please call one of our customer service representatives at 1 (800) 555 1212 or complete the form on the &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Contact Us&lt;/a&gt; page.&#13;
+&lt;br /&gt;&lt;a href="#faq-top"&gt;Back to Top&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
 &lt;h3 id="q11"&gt;11. What do I do if my product breaks down during the guarantee period?&lt;/h3&gt;&#13;
 &lt;p&gt;If products are under guarantee, your order confirmation email/delivery note is your proof of purchase/receipt and you should follow the manufacturer&amp;rsquo;s instructions for notifying the manufacturer of any problems within the guarantee period.&#13;
-&lt;br /&gt;&lt;a href="#faq-top"&gt;Back to top&lt;/a&gt;&lt;/p&gt;&#13;
+&lt;br /&gt;&lt;a href="#faq-top"&gt;Back to Top&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
 &lt;h3 id="q12"&gt;12. Do you offer discounts on corporate or bulk orders?&lt;/h3&gt;&#13;
-&lt;p&gt;We offer discounts for deliveries to the same address over certain order values. Please telephone on 800 555 1212 to discuss your requirements&#13;
-&lt;br /&gt;&lt;a href="#faq-top"&gt;Back to top&lt;/a&gt;&lt;/p&gt;</custom-attribute>
+&lt;p&gt;We offer discounts for deliveries to the same address over certain order values. Please call 1(800) 555 XXXX to discuss your requirements&#13;
+&lt;br /&gt;&lt;a href="#faq-top"&gt;Back to Top&lt;/a&gt;&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h1 class="content-header" id="faq-top"&gt;FAQ&lt;/h1&gt;&#13;
 &#13;
 &lt;ul&gt;&#13;
@@ -6644,8 +6644,8 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <page-attributes/>
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div class="copyright"&gt;&amp;copy; 2004-2015 Demandware or its affiliates. All rights reserved.&lt;/div&gt;&#13;
-                &lt;div class="postscript"&gt;This is a demo store only. Orders made WILL NOT be processed.&lt;/div&gt;&#13;
-		&lt;!-- SG.100.1.0 --&gt;</custom-attribute>
+                &lt;div class="postscript"&gt;This is a demo store only. Orders made will NOT be processed.&lt;/div&gt;&#13;
+		&lt;!-- SG.100.0.1 --&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;div class="copyright"&gt;© 2004-2015 Demandware ou ses affiliés. Tous droits réservés.&lt;/div&gt;&#13;
                 &lt;div class="postscript"&gt;Ceci est une boutique de démonstration uniquement. Les commandes NE SERONT PAS traitées.&lt;/div&gt;&#13;
 		&lt;!-- SG.100.1.0 --&gt;</custom-attribute>
@@ -6808,13 +6808,13 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div class="terms-of-use"&gt;&#13;
 &lt;p&gt;&lt;strong&gt;Terms Of Use&lt;/strong&gt;&lt;/p&gt;&#13;
 &lt;ul&gt;&#13;
-    &lt;li&gt;You cannot purchase an Online Gift Certificate with another Gift Certificate&lt;/li&gt;&#13;
-    &lt;li&gt;If the amount of your Online Gift Certificate(s) does NOT cover the total order amount, you will need to pay the remainder of the purchase with a valid credit card&lt;/li&gt;&#13;
-    &lt;li&gt;If the amount of your Online Gift Certificate(s) is for MORE than the total order amount, the balance will be stored with your demandware.com account for your next purchase using the same Gift Certificate code.&lt;/li&gt;&#13;
-    &lt;li&gt;If you have any additional questions, please contact our Customer Service team&lt;/li&gt;&#13;
-    &lt;li&gt;Online Gift Certificates are non-transferable, non-refundable and are not redeemable for cash (except where required by state law).&lt;/li&gt;&#13;
-    &lt;li&gt;We cannot replace lost or stolen Online Gift Certificates.&lt;/li&gt;&#13;
-    &lt;li&gt;We do not charge sales tax when you buy an Online Gift Certificate because it is charged when the Gift Certificate is used. State tax may be added to all orders shipped to addresses in the states indicated here.&lt;/li&gt;&#13;
+    &lt;li&gt;You cannot purchase an online gift certificate with another gift certificate.&lt;/li&gt;&#13;
+    &lt;li&gt;If the amount of your online gift certificates does NOT cover the total order amount, you will need to pay the remainder of the purchase with a valid credit card.&lt;/li&gt;&#13;
+    &lt;li&gt;If the amount of your online gift certificates is for MORE than the total order amount, the balance will be stored with your demandware.com account for your next purchase using the same gift certificate code.&lt;/li&gt;&#13;
+    &lt;li&gt;If you have any additional questions, please contact our Customer Service team.&lt;/li&gt;&#13;
+    &lt;li&gt;Online gift certificates are non-transferable, non-refundable and are not redeemable for cash (except where required by state law).&lt;/li&gt;&#13;
+    &lt;li&gt;We cannot replace lost or stolen online gift certificates.&lt;/li&gt;&#13;
+    &lt;li&gt;We do not charge sales tax when you buy an online gift certificate because it is charged when the gift certificate is used. State tax may be added to all orders shipped to addresses in the states indicated here.&lt;/li&gt;&#13;
 &lt;/ul&gt;&lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;div class="terms-of-use"&gt;&#13;
 &lt;p&gt;&lt;strong&gt;Conditions d'utilisation&lt;/strong&gt;&lt;/p&gt;&#13;
@@ -6883,7 +6883,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h2&gt;Check Balance of Existing Certificate&lt;/h2&gt;&#13;
 &lt;div style="padding:20px 0;"&gt;&#13;
-To redeem a gift certificate, provide the card’s 16-digit number code on the billing page of the checkout process. To check the balance of your online Gift Certificate, enter the number below:&lt;/div&gt;</custom-attribute>
+To redeem a gift certificate, provide the card’s 16-digit number code on the billing page of the checkout process. To check the balance of your online gift certificate, enter the number below:&lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h2&gt;Solde d'un chèque existant&lt;/h2&gt;&#13;
 &lt;div style="padding:20px 0;"&gt;&#13;
 Pour utiliser un chèque-cadeau, saisissez son code à 16 chiffres sur la page de facturation, au moment du paiement. Pour consulter le solde de votre chèque-cadeau en ligne, saisissez le numéro ci-dessous :&lt;/div&gt;</custom-attribute>
@@ -6940,7 +6940,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
 &lt;/ul&gt;&#13;
 &#13;
 &lt;p&gt;&lt;strong&gt;Online Gift Certificate General Information&lt;/strong&gt;&lt;/p&gt;&#13;
-&lt;p&gt;Online Gift Certificates can be ordered in any amount between $5.00 and $5000.00. They are sent via e-mail to any individual with a valid e-mail address. The recipient of an Online Gift Certificate will receive an e-mail with a Gift Certificate Code redeemable only at demandware.com. The code is activated within 24 hours after receiving the e-mail.&lt;/p&gt;</custom-attribute>
+&lt;p&gt;Online Gift Certificates can be ordered in any amount between $5.00 and $5000.00. They are sent via email to any individual with a valid email address. The recipient of an online gift certificate will receive an email with a gift certificate code redeemable only at demandware.com. The code is activated within 24 hours after receiving the email.&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h2&gt;Acheter un chèque-cadeau en ligne&lt;/h2&gt;&#13;
 &#13;
 &lt;img height="162" width="312" src="images/gift-certificates.png?$staticlink$" alt="" /&gt;&#13;
@@ -7013,7 +7013,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
 &lt;p&gt;This phone number is required in the event the shipping partner needs to arrange a delivery time with you.&lt;/p&gt;&#13;
 &#13;
 &lt;p&gt;&lt;strong&gt;Billing Phone Number&lt;/strong&gt;&lt;/p&gt;&#13;
-&lt;p&gt;The billing phone number must match the telephone number on your CREDIT CARD account, otherwise the card will not be authorized.&lt;/p&gt;</custom-attribute>
+&lt;p&gt;The billing phone number must match the telephone number on your credit card account, otherwise the card will not be authorized.&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;p&gt;&lt;strong&gt;Numéro de téléphone pour la livraison&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Ce numéro de téléphone est nécessaire si notre partenaire de livraison doit vous contacter pour convenir d'une heure de livraison.&lt;/p&gt;&#13;
 &#13;
@@ -7043,7 +7043,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
         <display-name xml:lang="it-IT">La nostra storia</display-name>
         <display-name xml:lang="ja-JP">ストーリー</display-name>
         <display-name xml:lang="zh-CN">我们的故事</display-name>
-        <description xml:lang="x-default">With Demandware ecommerce, our customers are spending more time leading with merchandising and marketing. They're in complete control over their site, making changes and launching new storefronts whenever they like. They're spending more time developing their own proprietary innovations (versus building commodity functionality). They receive new software upgrades from Demandware continuously. And they never-ever-worry about site uptime, availability and security.</description>
+        <description xml:lang="x-default">With Demandware eCommerce, our customers are spending more time leading with merchandising and marketing. They're in complete control over their site, making changes and launching new storefronts whenever they like. They're spending more time developing their own proprietary innovations (versus building commodity functionality). They receive new software upgrades from Demandware continuously. And they never ever worry about site uptime, availability and security!</description>
         <description xml:lang="fr-FR">Avec Demandware ecommerce, nos clients restent à la pointe dans leur domaine, avec des outils de merchandising et de marketing. Ils ont la maîtrise totale de leur site, apportent des changements et lancent de nouvelles boutiques en ligne, à leur gré. Ils se consacrent davantage au développement de leurs propres innovations (et non plus à personnaliser une fonctionnalité standard). Ils reçoivent en permanence de nouvelles mises à jour logicielles de Demandware. Ils n'ont jamais à se soucier des questions de fonctionnement, de disponibilité et de sécurité.</description>
         <description xml:lang="it-IT">Con l'e-commerce di Demandware, i nostri clienti possono perfezionare la loro leadership nelle attività di merchandising e marketing. Dispongono del controllo completo del loro sito, possono apportare modifiche e aprire nuovi storefront come e quando vogliono. Possono dedicarsi allo sviluppo e all'innovazione di prodotti propri e non alla creazione di funzionalità. Ricevono gli aggiornamenti del software continuamente da Demandware e non devono mai preoccuparsi della funzionalità, della disponibilità e della sicurezza del sito.</description>
         <description xml:lang="ja-JP">Demandware eコマースを使用すれば、お客様はマーチャンダイジングとマーケティングに、より多くの時間を費やせます。サイトをすべて自分たちで管理し、いつでも変更を加え、新しいストアフロントを起ち上げることができます。そして、(一般的な機能の構築ではなく) 独自のイノベーションを推し進めることに多くの時間を費やせるようになります。Demandware から新しいソフトウェアアップグレードを継続的に受け取ることができるため、サイトのアップタイム、可用性、セキュリティについて一切心配しなくてよいのです。</description>
@@ -7056,19 +7056,19 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &#13;
                 &lt;ul&gt;&#13;
                     &lt;li&gt;eCommerce merchandising and marketing innovation is what generates the revenue, yet most operations are spending 80% of their budgets simply maintaining current infrastructure.&#13;
-                    &lt;li&gt;The pace of ecommerce accelerates daily, yet most operations are scrambling to stand still.&#13;
+                    &lt;li&gt;The pace of eCommerce accelerates daily, yet most operations are scrambling only to stand still.&#13;
                     &lt;li&gt;Merchandisers and marketers are supremely frustrated, spending more time chasing outsourced providers and internal IT organizations, than actually merchandising and marketing their own businesses.&#13;
                 &lt;/ul&gt;&#13;
                 &#13;
                 &lt;h5 class="internal"&gt;There had to be a better way.&lt;/h5&gt;&#13;
                 &#13;
-                &lt;p&gt;So in 2004, we set out to find it. The vision&amp;mdash;then and now&amp;mdash;was clear: bring to market an enterprise-class ecommerce solution that would put more power and innovation in the hands of merchandisers and at the same time would remove the technical costs, risks and complexities of running an ecommerce operation. We took what we knew of great ecommerce merchandising (our founders have been in ecommerce since 1994) and applied to it the then-emerging advancements in Software-as-a-Service architectures and dynamic grid computing. Then we worked hard. We stayed up late. We drank lots of coffee. And ultimately, in late 2005, we delivered the market&amp;rsquo;s first on-demand enterprise ecommerce platform.&lt;/p&gt;&#13;
+                &lt;p&gt;So in 2004, we set out to find it. The vision&amp;mdash;then and now&amp;mdash;was clear: bring to market an enterprise-class eCommerce solution that would put more power and innovation in the hands of merchandisers and at the same time would remove the technical costs, risks and complexities of running an eCommerce operation. We took what we knew of great eCommerce merchandising (our founders have been in eCommerce since 1994) and applied to it the then-emerging advancements in Software-as-a-Service architectures and dynamic grid computing. Then we worked hard. We stayed up late. We drank lots of coffee. And ultimately, in late 2005, we delivered the market&amp;rsquo;s first on-demand enterprise ecommerce platform.&lt;/p&gt;&#13;
                 &#13;
                 &lt;h5 class="internal"&gt;Our customers could not be happier with the results.&lt;/h5&gt;&#13;
                 &#13;
-                &lt;p&gt;With Demandware ecommerce, our customers are spending more time leading with merchandising and marketing. They're in complete control over their site, making changes and launching new storefronts whenever they like. They're spending more time developing their own proprietary innovations (versus building commodity functionality). They receive new software upgrades from Demandware continuously. And they never-ever-worry about site uptime, availability and security.&lt;/p&gt;&#13;
+                &lt;p&gt;With Demandware eCommerce, our customers are spending more time leading with merchandising and marketing. They're in complete control over their site, making changes and launching new storefronts whenever they like. They're spending more time developing their own proprietary innovations (versus building commodity functionality). They receive new software upgrades from Demandware continuously. And they never ever worry about site uptime, availability and security.&lt;/p&gt;&#13;
 &#13;
-                &lt;p&gt;In short, they're free. Free to merchandise. Free to grow. Free to innovate. Free to change. Isn't that how ecommerce is supposed to be?&lt;/p&gt;</custom-attribute>
+                &lt;p&gt;In short, they're free. Free to merchandise. Free to grow. Free to innovate. Free to change. Isn't that how eCommerce is supposed to be?&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;p&gt;&lt;strong&gt;Trois observations :&lt;/strong&gt;&lt;/p&gt;&#13;
                 &#13;
                 &lt;ul&gt;&#13;
@@ -7155,7 +7155,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;img alt="Free Shipping for order over $150" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;img alt="Free shipping on orders over $150" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
 &lt;div class="home-bottom-center-text"&gt;&#13;
 &lt;h1&gt;Free&lt;/h1&gt;&#13;
 &lt;h2&gt;Ground Shipping&lt;/h2&gt;&#13;
@@ -7280,7 +7280,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
     &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Open Toe&lt;/a&gt;&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
 &#13;
-&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Go to category: Women's Shoes"&gt;&lt;img alt="Women's Shoes" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Go to Category: Women's Shoes"&gt;&lt;img alt="Women's Shoes" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h1&gt;Magasin&lt;/h1&gt;&#13;
 &#13;
 &lt;ul&gt;&#13;
@@ -7599,12 +7599,12 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
     </content>
 
     <content content-id="home-free-shipping-orders-over-150">
-        <display-name xml:lang="x-default">Free Ground Shipping on orders of $150 or more</display-name>
+        <display-name xml:lang="x-default">Free ground shipping on orders of $150 or more</display-name>
         <online-flag>true</online-flag>
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;img alt="Free Shipping for order over $150" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;img alt="Free Shipping on orders over $150" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
 &lt;div class="home-bottom-center-text"&gt;&#13;
 &lt;h1&gt;Free&lt;/h1&gt;&#13;
 &lt;h2&gt;Ground Shipping&lt;/h2&gt;&#13;
@@ -7661,7 +7661,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
         <display-name xml:lang="it-IT">HOME_RIGHT</display-name>
         <display-name xml:lang="ja-JP">HOME_RIGHT</display-name>
         <display-name xml:lang="zh-CN">HOME_RIGHT</display-name>
-        <description xml:lang="x-default">Place holder for Product Scroller</description>
+        <description xml:lang="x-default">Placeholder for Product Scroller</description>
         <description xml:lang="fr-FR">Espace réservé pour la barre de défilement du produit</description>
         <description xml:lang="it-IT">Segnaposto per scorrimento prodotti</description>
         <description xml:lang="ja-JP">商品スクローラーのプレースホルダー</description>
@@ -7696,7 +7696,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
         <display-name xml:lang="it-IT">Pagina di destinazione Lavora con noi</display-name>
         <display-name xml:lang="ja-JP">採用情報のランディングページ</display-name>
         <display-name xml:lang="zh-CN">工作机会登录页面</display-name>
-        <description xml:lang="x-default">Welcome to Demandware. At Demandware we recognize all good success starts with people. At Demandware we value individuals who are passionate about delivering a strong product and services to all of our customers. At Demandware we will provide you with an opportunity to work in an employee friendly environment as well improve Demandware's offering and services to our customers. The possibilities are endless, not to mention the extensive benefits package, training and development opportunities along with employee discounts for all of our employees.</description>
+        <description xml:lang="x-default">Welcome to Demandware! At Demandware we recognize all success starts with people. At Demandware we value individuals who are passionate about delivering a strong product and services to all of our customers. At Demandware we will provide you with an opportunity to work in an employee-friendly environment as well as improve Demandware's offering and services to our customers. The possibilities are endless, not to mention the extensive benefits package, training and development opportunities along with discounts for all of our employees.</description>
         <description xml:lang="fr-FR">Bienvenue à Demandware. Chez Demandware, nous avons conscience que la réussite commence par les personnes. Chez Demandware, nous valorisons les hommes et les femmes passionnés, mus par la volonté d'offrir un produit et des services performants à tous nos clients. Chez Demandware, nous vous donnons la possibilité de travailler dans un environnement de travail agréable mais également d'améliorer l'offre et les services destinés à nos clients. Les possibilités sont illimitées, sans compter une offre complète d'avantages, les opportunités de formation et de développement personnel, ainsi que les remises dont bénéficient tous nos employés.</description>
         <description xml:lang="it-IT">Benvenuto in Demandware. Noi di Demandware sappiamo bene che il successo si ottiene grazie al lavoro delle persone. Riconosciamo il merito delle persone che si impegnano nel loro lavoro con l'obiettivo di distribuire un prodotto solido e servizi efficienti per tutti i nostri clienti. Demandware offre l'opportunità di lavorare in un ambiente dinamico e di migliorare i prodotti e i servizi Demandware per i clienti. Le possibilità sono infinite, senza contare il pacchetto di benefit esclusivi, le opportunità di sviluppo e formazione e gli sconti riservati a tutti i dipendenti.</description>
         <description xml:lang="ja-JP">Demandware へようこそ。成功は人から始まる、Demandware はそれを熟知しています。Demandware では、強力な商品とサービスをお客様全員にお届けしようという熱意をもった社員を大切にしています。Demandware では、社員が働きやすい環境を提供すると同時に、Demandware の商品とサービスをお客様のために向上させる機会を用意しています。可能性は無限。充実した多数の福利厚生、教育・研修、そして開発の機会は言うまでもありません。さらに、社員全員に割引の特典があります。</description>
@@ -7819,12 +7819,12 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
     </content>
 
     <content content-id="managing-account">
-        <display-name xml:lang="x-default">Managing An Account</display-name>
+        <display-name xml:lang="x-default">Managing Your Account</display-name>
         <display-name xml:lang="fr-FR">Gestion d'un compte</display-name>
         <display-name xml:lang="it-IT">Gestione di un account</display-name>
         <display-name xml:lang="ja-JP">アカウントの管理</display-name>
         <display-name xml:lang="zh-CN">管理账户</display-name>
-        <description xml:lang="x-default">Your email address serves as a convenient way to receive important information about your order and serves as your Demandware account identification. Your account stores information such as order history and your billing and shipping address. It also offers you the ability to track your order(s). The password assures that only you have access to your account information</description>
+        <description xml:lang="x-default">Your email address serves as a convenient way to receive important information about your order and serves as your Demandware account identification. Your account stores information such as order history and your billing and shipping address. It also offers you the ability to track your order(s). The password assures that only you have access to your account information.</description>
         <description xml:lang="fr-FR">Votre adresse e-mail est un moyen pratique pour recevoir des informations importantes relatives à votre commande et permet d'identifier votre compte Demandware. Votre compte contient des informations telles que votre historique de commandes, vos adresses de facturation et de livraison. Il vous permet également de suivre vos commandes. Le mot de passe garantit que seul vous avez accès à vos informations de compte.</description>
         <description xml:lang="it-IT">Il tuo indirizzo e-mail ti permette di ricevere informazioni importanti relative ai tuoi ordini e funge da identificativo per accedere all'account Demandware. Nel tuo account vengono conservate diverse informazioni, ad esempio la cronologia degli ordini e i tuoi indirizzi di spedizione e fatturazione. È inoltre possibile monitorare i tuoi ordini. La password garantisce l'accesso alle informazioni archiviate nel tuo account</description>
         <description xml:lang="ja-JP">ご注文に関する重要な情報をお客様の Eメールアドレスにお届けします。また、ご登録の Eメールアドレスは Demandware アカウント ID となります。アカウントには、注文履歴、請求先住所と配送先住所などの情報が保存されます。また、アカウントからご注文状況を確認することもできます。パスワードを設定していただきますので、お客様のアカウント情報にアクセスできるのはお客様ご自身だけです。</description>
@@ -7835,10 +7835,10 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header"&gt;Managing Your Account&lt;/h1&gt;&#13;
 &#13;
-&lt;p&gt;It's easy tp change your account information online, at any time. Simply click &lt;a href="$httpsURL('Account-Show')$"&gt;My Account&lt;/a&gt; now to access your account. If you have forgotten your password, &lt;a href="$httpsURL('Account-Show')$"&gt;click here&lt;/a&gt;.&lt;/p&gt;&#13;
+&lt;p&gt;It's easy to change your account information online at any time. Simply click &lt;a href="$httpsURL('Account-Show')$"&gt;My Account&lt;/a&gt; now to access your account. If you have forgotten your password, &lt;a href="$httpsURL('Account-Show')$"&gt;click here&lt;/a&gt;.&lt;/p&gt;&#13;
 &lt;ul&gt;&#13;
     &lt;li&gt;Your email address serves as a convenient way to receive important information about your order and serves as your Demandware account identification.&lt;/li&gt;&#13;
-    &lt;li&gt;Your account stores information such as order history and your billing and shipping address. It also offers you the ability to track your order(s). The password assures that only you have access to your account information.&lt;/li&gt;&#13;
+    &lt;li&gt;Your account stores information such as order history and your billing and shipping address. It also offers you the ability to track your orders. The password assures that only you have access to your account information.&lt;/li&gt;&#13;
 &lt;/ul&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h1 class="content-header"&gt;Gestion de votre compte&lt;/h1&gt;&#13;
 &#13;
@@ -10648,7 +10648,7 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
 &lt;ul class="grayarrow"&gt;&#13;
     &lt;li&gt;Double check the spelling. Try varying the spelling.&lt;/li&gt;&#13;
     &lt;li&gt;Limit the search to one or two words.&lt;/li&gt;&#13;
-    &lt;li&gt;Be less specific in your wording. Sometimes a more general term will lead you to the similar products.&lt;/li&gt;&#13;
+    &lt;li&gt;Be less specific in the choice of your search terms. Sometimes a more general term will lead you to similar products.&lt;/li&gt;&#13;
 &lt;/ul&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;p&gt;Recommencez la recherche en appliquant les conseils suivants :&lt;/p&gt;&#13;
 &lt;ul class="grayarrow"&gt;&#13;
@@ -10686,7 +10686,7 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
         <display-name xml:lang="it-IT">Apertura di un account</display-name>
         <display-name xml:lang="ja-JP">アカウントの作成</display-name>
         <display-name xml:lang="zh-CN">开立账户</display-name>
-        <description xml:lang="x-default">Opening an Account is easy. You may create an account at any time by clicking the My Account hyperlink in the header or when you place an order, you will be prompted to log in with your email address and password. An account offers you a safe, easy and fast way to order. It also serves as a way to track your order and receive emails about your order.</description>
+        <description xml:lang="x-default">Opening an account is easy. You may create an account at any time by clicking the "My Account" hyperlink in the header or when you place an order, you will be prompted to log in with your email address and password. An account offers you a safe, easy and fast way to order. It also serves as a way to track your order and receive emails about your order.</description>
         <description xml:lang="fr-FR">Ouvrir un compte est simple. Vous pouvez créer un compte à tout moment en cliquant sur le lien Mon compte dans l'en-tête ou au moment de passer commande. Vous serez alors invité à vous connecter à l'aide de votre adresse e-mail et de votre mot de passe. Avoir un compte vous permet de commander rapidement, simplement et en toute sécurité. Le compte vous permet également de suivre votre commande et de recevoir des e-mails à propos de votre commande.</description>
         <description xml:lang="it-IT">Aprire un account è molto semplice. È possibile creare un account in qualsiasi momento facendo clic sul link Il mio account nell'intestazione quando effettui un ordine. Ti verrà richiesto di accedere con il tuo indirizzo e-mail e la password. La creazione di un account rappresenta un metodo semplice, rapido e sicuro per ordinare. Ti permette inoltre di monitorare gli ordini e di ricevere informazioni via e-mail.</description>
         <description xml:lang="ja-JP">アカウントの作成は簡単です。アカウントは、ヘッダーの「マイアカウント」ハイパーリンクをクリックしていつでも作成できます。またはご注文の際に、Eメールアドレスとパスワードを使用してログインするようにとの指示が表示されます。アカウントを作成すると、安全かつ簡単に、そして素早くご注文いただけます。また、ご注文状況を確認し、ご注文についての Eメールをお受け取りいただけます。</description>
@@ -10697,10 +10697,10 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header"&gt;Opening an Account&lt;/h1&gt;&#13;
 &#13;
-&lt;p&gt;Opening an Account is easy. Simply click &lt;a href="$httpsURL('Account-Show')$"&gt;My Account&lt;/a&gt;, or when you place an order, you will be prompted to log in with your email address and password. An account offers you a safe, easy and fast way to order. It also serves as a way to track your order and receive emails about your order.&lt;/p&gt;&#13;
+&lt;p&gt;Opening an account is easy. Simply click &lt;a href="$httpsURL('Account-Show')$"&gt;My Account&lt;/a&gt;, or when you place an order, you will be prompted to log in with your email address and password. An account offers you a safe, easy and fast way to order. It also serves as a way to track your order and receive emails about your order.&lt;/p&gt;&#13;
 &#13;
 &lt;h2&gt;Account Benefits&lt;/h2&gt; &#13;
-&lt;p&gt;Set up My Account and customize your preferences. Improve you shopping experience by taking advantage of great benefits.&lt;/p&gt;&#13;
+&lt;p&gt;Set up an account and customize your preferences. Improve your shopping experience by taking advantage of great benefits.&lt;/p&gt;&#13;
         &#13;
 &lt;ul&gt;&#13;
     &lt;li&gt;&#13;
@@ -10717,7 +10717,7 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
     &lt;/li&gt;&#13;
     &lt;li&gt;&#13;
         &lt;h2&gt;Save My Cart&lt;/h2&gt; &#13;
-        &lt;p&gt;Save My Cart for checkout at a later date.&lt;/p&gt;&#13;
+        &lt;p&gt;Save your cart for checkout at a later time.&lt;/p&gt;&#13;
     &lt;/li&gt;&#13;
 &lt;/ul&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h1 class="content-header"&gt;Ouverture d'un compte&lt;/h1&gt;&#13;
@@ -10845,7 +10845,7 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header"&gt;Changing or Canceling Your Order&lt;/h1&gt;&#13;
 &#13;
-&lt;p&gt;For details on your 28 day right of return, please see the Returns Policy section of the website. This section details your statutory rights of cancellation. Please note that this is a shorter period than the 28 day period under the Returns Policy.&lt;/p&gt;&#13;
+&lt;p&gt;For details on your 28-day right of return, please see the Returns Policy section of the website. This section details your statutory rights of cancellation. Please note that this is a shorter period than the 28-day period under the Returns Policy.&lt;/p&gt;&#13;
 &#13;
 &lt;ol&gt;&#13;
     &lt;li&gt;&#13;
@@ -10855,10 +10855,10 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
         &lt;p&gt;To exercise this right of cancellation:&lt;/p&gt;&#13;
         &lt;ol&gt;&#13;
             &lt;li&gt;&#13;
-                &lt;p&gt;Contact us by email at &lt;a href="mailto:customerservice@demandware.com"&gt;customerservice@demandware.com&lt;/a&gt;,&amp;nbsp;&lt;/p&gt;&#13;
+                &lt;p&gt;Contact us by email at &lt;a href="mailto:customerservice@demandware.com"&gt;customerservice@demandware.com.&lt;/a&gt;,&amp;nbsp;&lt;/p&gt;&#13;
             &lt;/li&gt;&#13;
             &lt;li&gt;&#13;
-                &lt;p&gt;Follow the returns instructions as laid out in the &lt;a href="$url('Page-Show', 'cid', 'returns')$"&gt;Returns&lt;/a&gt; section of this site&lt;/p&gt;&#13;
+                &lt;p&gt;Follow the returns instructions as laid out in the &lt;a href="$url('Page-Show', 'cid', 'returns')$"&gt;Returns&lt;/a&gt; section of this site.&lt;/p&gt;&#13;
             &lt;/li&gt;&#13;
         &lt;/ol&gt;&#13;
     &lt;/li&gt;&#13;
@@ -10866,22 +10866,22 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
         &lt;p&gt;Please note that if you fail to take reasonable care of returned goods or fail to return the goods to us, we will be entitled to make a claim against you for any losses which we suffer.&lt;/p&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li&gt;&#13;
-        &lt;p&gt;If your goods are faulty or do not meet the description given on the site,.we will refund the value of your order for those goods. For more information on how to return goods to us please refer to the &lt;a href="$url('Page-Show', 'cid', 'returns')$"&gt;Return Policy&lt;/a&gt; section of the site&lt;/p&gt;&#13;
+        &lt;p&gt;If your goods are faulty or do not meet the description given on the site, we will refund the value of your order for those goods. For more information on how to return goods to us please refer to the &lt;a href="$url('Page-Show', 'cid', 'returns')$"&gt;Return Policy&lt;/a&gt; section of the site.&lt;/p&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li&gt;&#13;
         &lt;p&gt;We recommend that returned goods be sent via insured, traceable delivery for your protection.&lt;/p&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li&gt;&#13;
-        &lt;p&gt;Please note that you do not have a cancellation right with regards to customised products. Occasionally, orders or parts of an order are cancelled by our system for various reasons. Some reasons are:&lt;/p&gt;&#13;
+        &lt;p&gt;Please note that you do not have a cancellation right with regards to customized products. Occasionally, orders or parts of an order are cancelled by our system for various reasons. Some reasons are:&lt;/p&gt;&#13;
         &lt;ul&gt;&#13;
             &lt;li&gt;  &#13;
                 &lt;p&gt;Item(s) not available&lt;/p&gt;&#13;
             &lt;/li&gt;&#13;
             &lt;li&gt;  &#13;
-                &lt;p&gt;Difficulty in processing your payment information&lt;/p&gt;&#13;
+                &lt;p&gt;Problem processing your payment information&lt;/p&gt;&#13;
             &lt;/li&gt;&#13;
             &lt;li&gt;&#13;
-                &lt;p&gt;Cannot ship to address provided&lt;/p&gt;&#13;
+                &lt;p&gt;Shipping not possible to provided address&lt;/p&gt;&#13;
             &lt;/li&gt;&#13;
             &lt;li&gt;  &#13;
                 &lt;p&gt;Duplicate order was placed&lt;/p&gt;&#13;
@@ -10890,8 +10890,8 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
     &lt;/li&gt;&#13;
 &lt;/ol&gt;&#13;
 &#13;
-&lt;p&gt;If your order is cancelled by us, you will receive an email which will explain the reason for the cancellation. You will not be billed for any cancelled items. If you are interested in alternative products, please contact our Customer Service Team by email or by calling 800 555 1212&amp;nbsp;for a recommendation. &lt;/p&gt;&#13;
-&lt;p&gt;* Please note that calls to 800 555 1212 &amp;nbsp;that are not made from a US landline may be subject to a charge.&lt;/p&gt;</custom-attribute>
+&lt;p&gt;If your order is cancelled by us, you will receive an email which will explain the reason for the cancellation. You will not be billed for any cancelled items. If you are interested in alternative products, please contact our Customer Service Team by email or by calling 1 (800) 555 XXXX&amp;nbsp;for a recommendation. &lt;/p&gt;&#13;
+&lt;p&gt;* Please note that calls to 1 (800) 555 XXXX &amp;nbsp;that are not made from a US landline may be subject to a charge.&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h1 class="content-header"&gt;Modification ou annulation de votre commande&lt;/h1&gt;&#13;
 &#13;
 &lt;p&gt;Pour en savoir plus sur votre droit de retour pendant 28 jours, reportez-vous à la section du site Web consacrée à la politique de retour. Cette section détaille vos droits légaux d'annulation. Veuillez noter que le délai légal est inférieur au délai de 28 jours prévu par notre politique de retour.&lt;/p&gt;&#13;
@@ -11102,7 +11102,7 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
         <display-name xml:lang="it-IT">Metodi di pagamento validi</display-name>
         <display-name xml:lang="ja-JP">有効な支払方法</display-name>
         <display-name xml:lang="zh-CN">有效的付款方式</display-name>
-        <description xml:lang="x-default">Payment for all goods must be by credit or debit card. We accept payment with: VISA, MASTERCARD, AMERICAN EXPRESS and DISCOVER.</description>
+        <description xml:lang="x-default">Payment for all goods must be made by credit or debit card. We accept payment with: Visa, MasterCard, American Express and Discover.</description>
         <description xml:lang="fr-FR">Le règlement de tous les articles s'effectue par carte de crédit ou de débit. Nous acceptons les cartes de paiement suivantes : VISA, MASTERCARD, AMERICAN EXPRESS et DISCOVER.</description>
         <description xml:lang="it-IT">Tutti i pagamenti devono essere effettuati tramite carta di credito o di debito. Accettiamo pagamenti effettuati con: VISA, MASTERCARD, AMERICAN EXPRESS e DISCOVER.</description>
         <description xml:lang="ja-JP">すべての商品の支払いは、クレジットカードまたはデビットカードで行っていただく必要があります。お支払いには、VISA、MASTERCARD、AMERICAN EXPRESS、DISCOVER をご利用いただけます。</description>
@@ -11113,13 +11113,13 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header"&gt;Valid Payment Methods&lt;/h1&gt;&#13;
     &#13;
-&lt;p&gt;Payment for all goods must be by credit or debit card.&lt;/p&gt;&#13;
+&lt;p&gt;Payment for all goods must be made by credit or debit card.&lt;/p&gt;&#13;
 &lt;p&gt;We accept payment with:&lt;/p&gt;&#13;
 &lt;ul&gt;&#13;
-    &lt;li&gt;VISA&lt;/li&gt;&#13;
-    &lt;li&gt;MASTERCARD&lt;/li&gt;&#13;
-    &lt;li&gt;AMERICAN EXPRESS&lt;/li&gt;&#13;
-    &lt;li&gt;DISCOVER&lt;/li&gt;&#13;
+    &lt;li&gt;Visa&lt;/li&gt;&#13;
+    &lt;li&gt;MasterCard&lt;/li&gt;&#13;
+    &lt;li&gt;American Express&lt;/li&gt;&#13;
+    &lt;li&gt;Discover&lt;/li&gt;&#13;
 &lt;/ul&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h1 class="content-header"&gt;Modes de règlement acceptés&lt;/h1&gt;&#13;
     &#13;
@@ -11200,20 +11200,20 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
 &#13;
 &lt;h2&gt;Collection of Personal Information&lt;/h2&gt;&#13;
 &lt;p&gt;We will ask you when we need information that identifies you individually or allows us to contact you directly (personal information).&lt;/p&gt;&#13;
-&lt;p&gt;We may ask for personal information when you purchase a product, enter a contest, request a service, complete a survey, subscribe to a news, or engage in some other activity on our site. In connection with these activities, we may ask you for contact information such as your name, telephone number, and email address.&lt;/p&gt;&#13;
+&lt;p&gt;We may ask for personal information when you purchase a product, enter a contest, request a service, complete a survey, subscribe to news, or engage in some other activity on our site. In connection with these activities, we may ask you for contact information such as your name, telephone number, and email address.&lt;/p&gt;&#13;
 &lt;p&gt;When you visit our website, we collect standard information about your hardware and software such as your IP addresses, browser type, operating system, pages visited on our site, referring and exit pages, and the dates and times of the visits.&lt;/p&gt;&#13;
 &lt;p&gt;This site visitation data is used to administer the site and provide general statistics regarding the use of demandware.com. Site visitation data is never linked to your personal information, and we do not use it to identify you individually without your permission.&lt;/p&gt;&#13;
 &#13;
 &lt;h2&gt;Use of Personal Information&lt;/h2&gt;&#13;
 &lt;p&gt;We will keep any and all information collected from you at this site strictly confidential and we will not sell, rent, trade, or otherwise share your personal information with third parties for their promotional use without your permission.&lt;/p&gt;&#13;
 &lt;p&gt;We will use the personal information you give us to fulfill the services and provide the products you request from us. This may include sending information that you have requested, or contacting you about products and services that you have purchased. If you do not opt-out of communications from Demandware, we may send you marketing notices including promotions of our products and services. You can opt-out of communications from Demandware at any time (see &amp;quot;Control of Personal Information&amp;quot; below).&lt;/p&gt;&#13;
-&lt;p&gt;We sometimes contract with other companies to provide services such as packaging and mailing information, answering user questions, or processing credit card transactions. We will only provide these partners with the information they need to conduct their services, they will be prohibited from using the information we provide for any other purpose and we will require them to observe the intent of this Privacy Policy.&lt;/p&gt;&#13;
-&lt;p&gt;We may disclose your personal information when we reasonably believe that it is required by a law or legal process and to protect and defend our rights and interests and the rights and interests of our affiliates, suppliers, or users. We also reserve the right to report to law enforcement agencies any activities that we in good faith believe to be unlawful. We may release certain personal information when we believe that such release is reasonably necessary to enforce or apply these terms and conditions or to protect the rights, property, and safety of others and ourselves.&lt;/p&gt;&#13;
-&lt;p&gt;In the event we go through a business transition, such as a merger, an acquisition by another company, or a sale of all or a portion of our assets, users' personal information will, in most instances, be part of the assets transferred. Notifications of such a transition will be made using the mechanisms described in the &amp;quot;Changes to this Statement&amp;quot; section below.&lt;/p&gt;&#13;
+&lt;p&gt;We sometimes contract with other companies to provide services such as packaging and mailing information, answering user questions, or processing credit card transactions. We will only provide these partners with the information they need to conduct their services, they will be prohibited from using the information we provide for any other purposes and we will require them to observe the intent of this Privacy Policy.&lt;/p&gt;&#13;
+&lt;p&gt;We may disclose your personal information when we reasonably believe that it is required by a law or legal process and to protect and defend our rights and interests as well as the rights and interests of our affiliates, suppliers, or users. We also reserve the right to report to law enforcement agencies any activities that we in good faith believe to be unlawful. We may release certain personal information when we believe that such release is reasonably necessary to enforce or apply these terms and conditions or to protect the rights, property, and safety of others and ourselves.&lt;/p&gt;&#13;
+&lt;p&gt;In the event we go through a business transition, such as a merger, an acquisition by another company, or a sale of all or a portion of our assets, our users' personal information will, in most instances, be part of the assets transferred. Notifications of such a transition will be made using the mechanisms described in the &amp;quot;Changes to this Statement&amp;quot; section below.&lt;/p&gt;&#13;
 &#13;
 &lt;h2&gt;Control of Personal Information&lt;/h2&gt;&#13;
 &lt;p&gt;You can confirm, change, or update personal information you have provided to us by contacting us directly at privacy@demandware.com with your request.&lt;/p&gt;&#13;
-&lt;p&gt;If you want to opt-out of communications from the company, you can do so by emailing your request to privacy@demandware.com. If you change your mind, you can opt-in again, by emailing this same address. When you opt-out of promotional communications from us, you may still receive service messages (such as an order confirmation), legally mandated notices, and critical messages that relate to the ability to use services you have purchased from us.&lt;/p&gt;&#13;
+&lt;p&gt;If you want to opt-out of communications from the company, you can do so by emailing your request to privacy@demandware.com. If you change your mind, you can opt-in again by emailing this same address. When you opt-out of promotional communications from us, you may still receive service messages (such as an order confirmation), legally mandated notices, and critical messages that relate to the ability to use services you have purchased from us.&lt;/p&gt;&#13;
 &#13;
 &lt;h2&gt;Security of the Information We Collect&lt;/h2&gt;&#13;
 &lt;p&gt;We are committed to protecting the security of your personal information, and we use a range of technologies and procedures to protect your personal information. For example, we store personal information in a secure, limited access facility; sensitive information transmitted to us through our store (such as a credit card number) is encrypted for transmission using the Secure Socket Layer (SSL) protocol. The SSL encryption is designed to make the information unreadable by anyone but us.&lt;/p&gt;&#13;
@@ -11225,30 +11225,30 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
 &lt;p&gt;Information you post in online forums on the site is accessible to other people who can access the forums and could be used to send you unsolicited messages. We are not responsible for the personally identifiable information you choose to submit in these forums. Personal information stored in your forum profile will not be displayed in the forum.&lt;/p&gt;&#13;
 &#13;
 &lt;h2&gt;Privacy and Tell-a-Friend Forms&lt;/h2&gt;&#13;
-&lt;p&gt;When you use a tell-a-friend form on the site, we ask for the friend's name and email address. We will use this information to automatically send the specified email message to the friend. We will not use this information to contact the friend in the future. We will retain the information you provide for tracking purposes. If someone notified through tell a friend wishes to have their                                        information removed from our database they can contact us at privacy@demandware.com.&lt;/p&gt;&#13;
+&lt;p&gt;When you use a tell-a-friend form on the site, we ask for the friend's name and email address. We will use this information to automatically send the specified email message to the friend. We will not use this information to contact the friend in the future. We will retain the information you provide for tracking purposes. If someone notified through the tell-a-friend feature wishes to have their information removed from our database they can contact us at privacy@demandware.com.&lt;/p&gt;&#13;
 &#13;
-&lt;h2&gt;Use of Cookies and Clear gif Technology&lt;/h2&gt;&#13;
-&lt;p&gt;When you visit our site, a cookie may be saved on your computer (if your computer accepts cookies), and if you return to the site the cookie may be read. We use cookies to help us collect the site visitation data described above and in some cases to deliver specialized content. A cookie is a small data file that certain Web sites write to your hard drive when you visit them. A cookie file can contain information such as a user ID that the site uses to track the pages you've visited, but the only personal information a cookie can contain is information you supply yourself. A cookie can't read data off your                                           hard disk or read cookie files created by other sites. Some parts of our website use cookies to track user traffic patterns. We do this in order to determine the usefulness of our website information to our users and to see how effective our navigational structure is in helping users reach that information. We do not correlate this information with data about individual users, nor do we share this information or sell it to any third party.&lt;/p&gt;&#13;
+&lt;h2&gt;Use of Cookies and Clear GIF Technology&lt;/h2&gt;&#13;
+&lt;p&gt;When you visit our site, a cookie may be saved on your computer (if your computer accepts cookies), and if you return to the site the cookie may be read. We use cookies to help us collect the site visitation data described above and in some cases to deliver specialized content. A cookie is a small data file that certain websites write to your hard drive when you visit them. A cookie file can contain information such as a user ID that the site uses to track the pages you've visited, but the only personal information a cookie can contain is information you supply yourself. A cookie can't read data off your hard disk or read cookie files created by other sites. Some parts of our website use cookies to track user traffic patterns. We do this in order to determine the usefulness of our website information to our users and to see how effective our navigational structure is in helping users reach that information. We do not correlate this information with data about individual users, nor do we share this information or sell it to any third party.&lt;/p&gt;&#13;
 &lt;p&gt;If you prefer not to receive cookies on our website, you can set your browser to warn you before accepting cookies and refuse the cookie when your browser alerts you to its presence. You can also refuse all cookies by turning them off in your browser. You do not need to have cookies turned on to use any area of our website.&lt;/p&gt;&#13;
-&lt;p&gt;We may also use Web beacons, clear gif technology, or action tags as mechanisms to collect aggregate site visitation data by tracking how users navigate to and through our website. We may also use this technology to track the delivery of HTML email messages. This data is collected exclusively for use in our marketing and research.&lt;/p&gt;&#13;
+&lt;p&gt;We may also use Clear GIF technology, also known as web beacons, or action tags as mechanisms to collect aggregate site visitation data by tracking how users navigate to and through our website. We may also use this technology to track the delivery of HTML email messages. This data is collected exclusively for use in our marketing and research.&lt;/p&gt;&#13;
 &#13;
 &lt;h2&gt;Enforcement of this Statement&lt;/h2&gt;&#13;
 &lt;p&gt;If you have questions about the policies described in this statement, please email us directly at privacy@demandware.com.&lt;/p&gt;&#13;
 &#13;
 &lt;h2&gt;Links to Other Websites&lt;/h2&gt;&#13;
-&lt;p&gt;Our website may contain links to other websites. If you use these links, you will leave our website. When you access a non-demandware.com website, even one that may contain the Demandware logo, please be aware that we do not control the content and we are not responsible for the privacy practices of that site and we encourage you to review the privacy policies of each site you use. This Privacy Statement does not cover the information practices of those websites linked to our website. These other sites may send their own cookies to users, collect data, or solicit personal information.&lt;/p&gt;&#13;
+&lt;p&gt;Our website may contain links to other websites. If you use these links, you will leave our website. When you access a non-demandware.com website, even one that may contain the Demandware logo, please be aware that we do not control the content and we are not responsible for the privacy practices of that site. We encourage you to review the privacy policies of each site you use. This Privacy Policy does not cover the information practices of those websites linked to our website. These other sites may send their own cookies to users, collect data, or solicit personal information.&lt;/p&gt;&#13;
 &#13;
 &lt;h2&gt;Changes to this Statement&lt;/h2&gt;&#13;
-&lt;p&gt;We may from time to time update this privacy statement. When we make these updates, we will change the &amp;quot;last updated&amp;quot; date listed at the top of the statement. If we make a material change to this statement that affects our use of your personal information, we will update users by placing a more prominent notice on our home page.&lt;/p&gt;&#13;
+&lt;p&gt;We may from time to time update this Privacy Policy. When we make these updates, we will change the &amp;quot;last updated&amp;quot; date listed at the top of the statement. If we make a material change to this statement that affects our use of your personal information, we will update users by placing a more prominent notice on our home page.&lt;/p&gt;&#13;
 &#13;
 &lt;h2&gt;Contact Information&lt;/h2&gt;&#13;
-&lt;p&gt;We welcome your input on our privacy policy. If you have any questions or suggestions regarding our privacy policy, please contact us at privacy@demandware.com.&lt;/p&gt;&#13;
+&lt;p&gt;We welcome your input on our Privacy Policy. If you have any questions or suggestions regarding our privacy policy, please contact us at privacy@demandware.com.&lt;/p&gt;&#13;
 &#13;
 &lt;p&gt;Demandware, Inc.&lt;br /&gt;&#13;
 ATTN: Privacy&lt;br /&gt;&#13;
 5 Wall Street&lt;br /&gt;&#13;
 Burlington, MA 01803 USA&lt;br /&gt;&#13;
-+1 (888)&amp;nbsp;553 0216&amp;nbsp;(main)&lt;/p&gt;</custom-attribute>
++1 (800)&amp;nbsp;555 XXX&amp;nbsp;(main)&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h1 class="content-header privacy-policy"&gt;Politique de confidentialité&lt;/h1&gt;&#13;
 &lt;p&gt;Préserver la vie privée des clients et des visiteurs du site Web de Demandware est pour nous une priorité. La présente déclaration décrit les pratiques actuelles de notre site (www.demandware.com) en matière de collecte, de partage et de confidentialité des informations.&lt;/p&gt;&#13;
 &#13;
@@ -11479,7 +11479,7 @@ Burlington, MA 01803 USA&lt;br /&gt;&#13;
         <display-name xml:lang="it-IT">Informazioni sui resi</display-name>
         <display-name xml:lang="ja-JP">返品についての情報</display-name>
         <display-name xml:lang="zh-CN">关于退货的信息</display-name>
-        <description xml:lang="x-default">We want you to be happy with your purchase from us. If you are unhappy with the goods in any way please contact our Customer Service Team at customerservice@demandware.com or call 888 553 XXXX as soon as possible. Please note that calls to 888 553 XXXX that are not made from a US landline may be subject to a charge.  If for any reason you are unhappy with your goods, you have the right to return them and receive a full refund.</description>
+        <description xml:lang="x-default">We want you to be entirely happy with your purchase from us. If you are unhappy with the goods in any way please contact our Customer Service Team at customerservice@demandware.com or call 1 (800) 555 XXXX as soon as possible. Please note that calls to 1 (800) 555 XXXX that are not made from a US landline may be subject to a charge. If for any reason you are unhappy with your goods, you have the right to return them and receive a full refund.</description>
         <description xml:lang="fr-FR">Notre objectif est que les articles que vous nous achetez vous donnent entièrement satisfaction. Si vous n'êtes pas satisfait des articles achetés, quelle qu'en soit la raison, contactez notre équipe d'assistance client à l'adresse customerservice@demandware.com ou au 888 553 XXXX dès que possible. Veuillez noter que les appels au 888 553 XXXX qui ne proviennent pas d'une ligne fixe aux États-Unis peuvent faire l'objet d'une facturation.  Si vous n'êtes pas satisfaits de vos articles, quelle qu'en soit la raison, vous disposez d'un droit de retour et de remboursement total.</description>
         <description xml:lang="it-IT">Il nostro obiettivo è che i clienti siano sempre soddisfatti dei loro acquisti. Se i prodotti che hai ricevuto non sono di tuo gradimento, contatta il servizio clienti all'indirizzo customerservice@demandware.com o chiama il numero 888 553 XXXX quanto prima. Le chiamate al numero 888 553 XXXX non effettuate da una linea fissa negli Stati Uniti potrebbero essere soggette a costi.  Se per qualsiasi motivo i prodotti ricevuti non ti soddisfano, hai il diritto di renderli e di ricevere un rimborso completo.</description>
         <description xml:lang="ja-JP">お買い上げいただいた商品にご満足いただくことが、弊社の願いです。何らかの理由で商品にご満足いただけない場合は、できるだけ早くカスタマーサービスチームまで Eメール (customerservice@demandware.com) あるいはお電話 (888 553 XXXX) にてご連絡ください。* 米国の固定電話以外から 800 553 XXXX におかけになった場合、料金が発生することがあります。商品にご満足いただけない場合は、その理由にかかわらず、お客様は商品を返品して全額払い戻しを受けることができます。</description>
@@ -11490,13 +11490,13 @@ Burlington, MA 01803 USA&lt;br /&gt;&#13;
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header"&gt;Return Policy&lt;/h1&gt;&#13;
 &#13;
-&lt;p&gt;We want you to be happy with your purchase from us. If you are unhappy with the goods in any way please contact our Customer Service Team at customerservice@demandware.com or call 888 553 XXXX as soon as possible. Please note that calls to 888 553 XXXX that are not made from a US landline may be subject to a charge.  If for any reason you are unhappy with your goods, you have the right to return them and receive a full refund. This right of return is without prejudice to your statutory right of cancellation, details of which are in the Order Cancellation section of the website.  You may return goods and receive a refund provided:&lt;/p&gt;&#13;
+&lt;p&gt;We want you to be entirely happy with your purchase from us. If you are unhappy with the goods in any way please contact our Customer Service Team at customerservice@demandware.com or call 1 (800) 800 555 XXXX as soon as possible. Please note that calls to 1 (800) 888 555 XXXX that are not made from a US landline may be subject to a charge. If for any reason you are unhappy with your goods, you have the right to return them and receive a full refund. This right of return is without prejudice to your statutory right of cancellation, details of which are in the Order Cancellation section of the website. You may return goods and receive a refund provided:&lt;/p&gt;&#13;
 &lt;ul&gt;&#13;
-    &lt;li&gt;They are received back at our Returns Department located at XXXXXX normally within 28 days. These 28 days commence the day after your order has been shipped. Please see Return Instructions for details on the returns process.&lt;/li&gt;&#13;
-    &lt;li&gt;They have not been damaged, washed, altered or excessively worn and must include the original packaging, labelling and  Returns Form located at the bottom of the Packing List (enclosed with the delivered goods).  Please note that we are unable to accept returns for customised products.&lt;/li&gt;&#13;
+    &lt;li&gt;They are received back at our Returns Department located at XXXXXX normally within 28 days. This 28 day period commences the day after your order has been shipped. Please see Return Instructions for details on the returns process.&lt;/li&gt;&#13;
+    &lt;li&gt;They have not been damaged, washed, altered or worn and must include the original packaging, labelling and Returns Form located at the bottom of the Packing List (enclosed with the delivered goods). Please note that we are unable to accept returns for customized products.&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
-&lt;p&gt;We'll do everything we can to take care of your return quickly. It may take up to two billing cycles for the credit to appear on your credit card statement. Returns with complete documentation receive priority. Please note that if the Demandware returns process is not followed, Demandware is not responsible for returns lost in transit to us.  All sales involving customised products are final, and may not returned. Please also note that you do not have a statutory cancellation right for customised products.  If you purchased a customised product online and it is damaged during shipping, please contact our Customer Service Team at 888 553 XXXX within 10 days of receiving your purchase.&lt;/p&gt;&#13;
-&lt;p&gt;If you purchased a customised product at a retail location and receive a damaged or defective item, please contact the specific  store where the purchase was made. For a list of US stores, please refer to the Store Locator section of our website or call us at 888 553 XXXX.  Please note that calls to 888 553 XXXX that are not made from a US landline may be subject to a charge.&lt;/p&gt;</custom-attribute>
+&lt;p&gt;We'll do everything we can to take care of your return quickly. It may take up to two billing cycles for the credit to appear on your credit card statement. Returns with complete documentation receive priority. Please note that if the Demandware returns process is not followed, Demandware is not responsible for returns lost in transit to us. All sales involving customized products are final, and may not be returned. Please also note that you do not have a statutory cancellation right for customized products. If you purchased a customized product online and it is damaged during shipping, please contact our Customer Service Team at 1 (800) 555 XXXX within 10 days of receiving your purchase.&lt;/p&gt;&#13;
+&lt;p&gt;If you purchased a customized product at a retail location and receive a damaged or defective item, please contact the specific store where the purchase was made. For a list of US stores, please refer to the Store Locator section of our website or call us at 1 (800) 555 XXXX.  Please note that calls to 1 (800) 555 XXXX that are not made from a US landline may be subject to a charge.&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h1 class="content-header"&gt;Politique de retour&lt;/h1&gt;&#13;
 &#13;
 &lt;p&gt;Notre objectif est que les articles que vous nous achetez vous donnent entièrement satisfaction. Si vous n'êtes pas satisfait des articles achetés, quelle qu'en soit la raison, contactez notre équipe d'assistance client à l'adresse customerservice@demandware.com ou au 888 553 XXXX dès que possible. Veuillez noter que les appels au 888 553 XXXX qui ne proviennent pas d'une ligne fixe aux États-Unis peuvent faire l'objet d'une facturation.  Si vous n'êtes pas satisfaits de vos articles, quelle qu'en soit la raison, vous disposez d'un droit de retour et de remboursement intégral. Le droit de retour est sans préjudice de votre droit légal d'annulation, qui est détaillé dans la section du site Web consacrée à l'annulation d'une commande.  Vous pouvez retourner les articles et obtenir leur remboursement à condition :&lt;/p&gt;&#13;
@@ -11547,7 +11547,7 @@ Burlington, MA 01803 USA&lt;br /&gt;&#13;
         <display-name xml:lang="it-IT">Promozione ricerca - Messaggio 1</display-name>
         <display-name xml:lang="ja-JP">検索プロモーションメッセージ 1</display-name>
         <display-name xml:lang="zh-CN">搜索促销消息 1</display-name>
-        <description xml:lang="x-default">Promotional Message on search results page. This is the promotional message on the left.</description>
+        <description xml:lang="x-default">Promotional message on search results page. This is the promotional message on the left.</description>
         <description xml:lang="fr-FR">Message promotionnel affiché sur la page des résultats de la recherche. Il s'agit du message de promotion s'affichant à gauche.</description>
         <description xml:lang="it-IT">Messaggio promozionale nella pagina dei risultati della ricerca. Questo è il messaggio promozionale visualizzato a sinistra.</description>
         <description xml:lang="ja-JP">検索結果ページのプロモーションメッセージ。これは左のプロモーションメッセージです。</description>
@@ -11566,7 +11566,7 @@ Burlington, MA 01803 USA&lt;br /&gt;&#13;
         <display-name xml:lang="it-IT">Promozione ricerca - Messaggio 2</display-name>
         <display-name xml:lang="ja-JP">検索プロモーション 2</display-name>
         <display-name xml:lang="zh-CN">搜索促销 2</display-name>
-        <description xml:lang="x-default">Promotional Message on search results page. This is the promotional message in the middle.</description>
+        <description xml:lang="x-default">Promotional message in the middle of the search results page.</description>
         <description xml:lang="fr-FR">Message promotionnel affiché sur la page des résultats de la recherche. Il s'agit du message de promotion s'affichant au centre.</description>
         <description xml:lang="it-IT">Messaggio promozionale nella pagina dei risultati della ricerca. Questo è il messaggio promozionale visualizzato al centro.</description>
         <description xml:lang="ja-JP">検索結果ページのプロモーションメッセージ。これは中央のプロモーションメッセージです。</description>
@@ -11585,7 +11585,7 @@ Burlington, MA 01803 USA&lt;br /&gt;&#13;
         <display-name xml:lang="it-IT">Promozione ricerca - Messaggio 3</display-name>
         <display-name xml:lang="ja-JP">検索プロモーション 3</display-name>
         <display-name xml:lang="zh-CN">搜索促销 3</display-name>
-        <description xml:lang="x-default">Promotional Message on search results page. This is the promotional message on the right.</description>
+        <description xml:lang="x-default">Promotional message on the right of the search results page.</description>
         <description xml:lang="fr-FR">Message promotionnel affiché sur la page des résultats de la recherche. Il s'agit du message de promotion s'affichant à droite.</description>
         <description xml:lang="it-IT">Messaggio promozionale nella pagina dei risultati della ricerca. Questo è il messaggio promozionale visualizzato a destra.</description>
         <description xml:lang="ja-JP">検索結果ページのプロモーションメッセージ。これは右のプロモーションメッセージです。</description>
@@ -11795,7 +11795,7 @@ Burlington, MA 01803 USA&lt;br /&gt;&#13;
         <display-name xml:lang="it-IT">Informativa sulla sicurezza</display-name>
         <display-name xml:lang="ja-JP">セキュリティポリシー</display-name>
         <display-name xml:lang="zh-CN">安全政策</display-name>
-        <description xml:lang="x-default">At Demandware, we know that keeping your credit card information secure is important to you. That makes it very important to us. We use Secure Socket Layer (SSL) 128bit encryption technology to protect your online information.</description>
+        <description xml:lang="x-default">At Demandware, we know that keeping your credit card information secure is important to you. That makes it very important to us. We use Secure Socket Layer (SSL) 128-bit encryption technology to protect your online information.</description>
         <description xml:lang="fr-FR">Chez Demandware, nous savons l'importance que vous accordez à la sécurité de vos données de carte de crédit. Cette sécurité est donc pour nous une priorité. Pour protéger vos informations en ligne, nous faisons appel à la technologie de cryptage 128 bits SSL (Secure Socket Layer).</description>
         <description xml:lang="it-IT">In Demandware sappiamo che tenere al sicuro le informazioni delle tue carte di credito è importante. E lo è anche per noi. Utilizziamo una tecnologia di crittografia Secure Socket Layer (SSL) 128 bit per proteggere le tue informazioni online.</description>
         <description xml:lang="ja-JP">Demandware では、お客様のクレジットカード情報の安全性を保つことがお客様にとって重要であることを理解しています。このことは、弊社にとっても非常に重要です。弊社は、Secure Socket Layer (SSL) 128 ビット暗号化技術を使用して、お客様のオンライン情報を保護します。</description>
@@ -11806,30 +11806,30 @@ Burlington, MA 01803 USA&lt;br /&gt;&#13;
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header"&gt;Security Policy&lt;/h1&gt;&#13;
 &#13;
-&lt;p&gt;At Demandware, we know that keeping your credit card information secure is important to you. That makes it very important to us. We use Secure Socket Layer (SSL) 128bit encryption technology to protect your online information.&lt;/p&gt;&#13;
+&lt;p&gt;At Demandware, we know that keeping your credit card information secure is important to you. That makes it very important to us. We use Secure Socket Layer (SSL) 128-bit encryption technology to protect your online information.&lt;/p&gt;&#13;
 &#13;
 &lt;p&gt;&lt;strong&gt;How do we make sure information is secure? &lt;/strong&gt;&lt;br /&gt;&#13;
 We use the latest encryption technology (Secure Sockets Layer, or SSL) to secure your personal information. The information you provide when you place an order is encrypted (or coded) using a secure server for maximum security. This coding makes it extremely difficult for anyone to reach your information as it moves through our ordering system.&lt;/p&gt;&#13;
-&lt;p&gt;Certain browsers will not allow communication through secure servers. If this is the case, you won't be able to place an order online. If you have any problems placing an order online please print your shopping page and place your order by phone at 800 555 1212. Please note that calls to 800 555 1212 that are not made from a UK landline may be subject to a charge.&lt;/p&gt;&#13;
-&lt;p&gt;To check the security of your computer, look at the lower left-hand corner of your browser window if you are using Netscape, or the lower right-hand corner of your browser window if you are using Internet Explorer. If you see an unbroken key or a closed lock, then the encryption technology is active and the server is secure. You can also check by looking at the URL line of your browser; when you access a secure server, the initial characters of the site address will be &amp;quot;https.&amp;quot;&lt;/p&gt;&#13;
+&lt;p&gt;Certain browsers will not allow communication through secure servers. If this is the case, you won't be able to place an order online. If you have any problems placing an order online please print your shopping page and place your order by phone at 1 (800) 555 XXXX. Please note that calls to 1 (800) 555 XXXX that are not made from a UK landline may be subject to a charge.&lt;/p&gt;&#13;
+&lt;p&gt;To check the security of your computer, look at the lower right-hand corner of your browser window if you are using Internet Explorer. If you see an unbroken key or a closed lock, then the encryption technology is active and the server is secure. You can also check by looking at the URL line of your browser; when you access a secure server, the initial characters of the site address will be &amp;quot;https.&amp;quot;&lt;/p&gt;&#13;
 &#13;
 &lt;p&gt;&lt;strong&gt;What if you link to another site? &lt;/strong&gt;&lt;br /&gt;&#13;
-Our website may provide links to other websites that are not under our control. Neither we nor the third party service providers who manage our website are responsible for these linked websites, their content or for the actions of the providers of such sites. We recommend that you review the privacy and security policies and terms of use for any websites you use.&lt;/p&gt;&#13;
+Our website may provide links to other websites that are not under our control. Neither we nor the third party service providers who manage our website are responsible for these linked websites, their content or for the actions of the providers of such sites. We recommend that you review the Privacy and Security Policies and terms of use for any websites you use.&lt;/p&gt;&#13;
 &#13;
 &lt;p&gt;&lt;strong&gt;Do I have to turn the security feature on when I want to shop? &lt;/strong&gt;&lt;br /&gt;&#13;
 The security features are automatic, and always on. You don't have to do anything but shop. Clicking &amp;quot;Checkout&amp;quot; on any page is all it takes to get started in our secure checkout process.&lt;/p&gt;&#13;
 &#13;
 &lt;p&gt;&lt;strong&gt;How do I know if I'm connected when I start ordering? &lt;/strong&gt;&lt;br /&gt;&#13;
-Once you've clicked the &amp;quot;Continue Checkout&amp;quot; button, your browser looks for a digital certificate to confirm that it's communicating with our web-site. Once a positive ID is made, your order will continue securely.&lt;/p&gt;&#13;
+Once you've clicked the &amp;quot;Continue Checkout&amp;quot; button, your browser looks for a digital certificate to confirm that it's communicating with our website. Once a positive identification is made, your order will continue securely.&lt;/p&gt;&#13;
 &#13;
-&lt;p&gt;&lt;strong&gt;Are all the pages on your web-site secure? &lt;/strong&gt;&lt;br /&gt;&#13;
-Most of the pages on our website provide information about Demandware and our products. We make this information available freely and there's no reason for these pages to be &amp;quot;secure.&amp;quot; The pages that we make secure are the ones on which you actually make the purchase, such as when managing your account, checking your order status, or within the &amp;quot;Checkout&amp;quot; area. For example, the entire checkout process, from introduction to final confirmation, is completely secure.&lt;/p&gt;&#13;
+&lt;p&gt;&lt;strong&gt;Are all the pages on your website secure? &lt;/strong&gt;&lt;br /&gt;&#13;
+Most of the pages on our website provide information about Demandware and our products. We make this information available freely and there's no reason for these pages to be &amp;quot;secure.&amp;quot; The pages that we make secure are the ones on which you actually submit purchasing data such as when managing your account, checking your order status, or within the &amp;quot;Checkout&amp;quot; area. For example, the entire checkout process, from introduction to final confirmation, is completely secure.&lt;/p&gt;&#13;
 &#13;
 &lt;p&gt;&lt;strong&gt;Is my information secure when it's transmitted across the Internet? &lt;/strong&gt;&lt;br /&gt;&#13;
 All of your information is encrypted before it's transmitted across the Internet, then decoded only after it arrives at our secure servers.&lt;/p&gt;&#13;
 &#13;
 &lt;p&gt;&lt;strong&gt;Consent&lt;/strong&gt;&lt;br /&gt;&#13;
-We take the privacy rights of users of this Site very seriously and this Privacy Policy explains to You how certain information about You may be processed.&lt;/p&gt;</custom-attribute>
+We take the privacy rights of users of this site very seriously and our Privacy Policy explains to you how certain information about you may be processed.&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h1 class="content-header"&gt;Politique de sécurité&lt;/h1&gt;&#13;
 &#13;
 &lt;p&gt;Chez Demandware, nous savons l'importance que vous accordez à la sécurité de vos données de carte de crédit. Cette sécurité est donc pour nous une priorité. Pour protéger vos informations en ligne, nous faisons appel à la technologie de cryptage 128 bits SSL (Secure Socket Layer).&lt;/p&gt;&#13;
@@ -11959,7 +11959,7 @@ Consideriamo molto seriamente i diritti relativi alla privacy degli utenti di qu
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header"&gt;Shipping Policy&lt;/h1&gt;&#13;
 &#13;
-&lt;p&gt;Unless you specify an alternative delivery option the goods will be dispatched by UPS Standard.&lt;/p&gt;&#13;
+&lt;p&gt;Unless you specify an alternative delivery option the goods will be delivered by UPS Standard.&lt;/p&gt;&#13;
 &#13;
 &lt;p&gt;We shall endeavour to dispatch the goods to you as soon as possible after you place your order (subject to the order having been accepted by us as will be confirmed to you by email), normally within 2 working days or less if the goods are in stock, and in any event within 30 days beginning on the day after you place your order. If we are unable to dispatch the goods within that time we will email to let you know and give you an estimated delivery date and you will have the right to cancel your order and receive a full refund as set out in that email.&lt;/p&gt;&#13;
 &#13;
@@ -12012,7 +12012,7 @@ Consideriamo molto seriamente i diritti relativi alla privacy degli utenti di qu
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header"&gt;Shipping Methods&lt;/h1&gt;&#13;
 &#13;
-&lt;p&gt;&lt;em&gt;SiteGenesis does not ship to AK, HI, or P.O. Boxes.&lt;/em&gt;&lt;/p&gt;&#13;
+&lt;p&gt;&lt;em&gt;Demandware.com does not ship to AK, HI, or P.O. Boxes.&lt;/em&gt;&lt;/p&gt;&#13;
 &#13;
 &lt;table summary="Shipping Promotion Table"&gt;&#13;
     &lt;tbody&gt;&#13;
@@ -12035,7 +12035,7 @@ Consideriamo molto seriamente i diritti relativi alla privacy degli utenti di qu
             &lt;td&gt;$19.99&lt;/td&gt;&#13;
         &lt;/tr&gt;&#13;
         &lt;tr&gt;&#13;
-            &lt;td&gt;$200.00 - $499.9&lt;/td&gt;&#13;
+            &lt;td&gt;$200.00 - $499.99&lt;/td&gt;&#13;
             &lt;td&gt;$9.99&lt;/td&gt;&#13;
             &lt;td&gt;$15.99&lt;/td&gt;&#13;
             &lt;td&gt;$21.99&lt;/td&gt;&#13;
@@ -12048,7 +12048,7 @@ Consideriamo molto seriamente i diritti relativi alla privacy degli utenti di qu
         &lt;/tr&gt;&#13;
     &lt;/tbody&gt;&#13;
 &lt;/table&gt;&#13;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; All Televisions must ship using ground shipping, 2nd Day Air and Next Day Air are not available shipping options for televisions.&lt;/p&gt;</custom-attribute>
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; All televisions must ship using ground shipping, 2nd Day Air and Next Day Air are not available shipping options for televisions.&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h1 class="content-header"&gt;Modes de livraison&lt;/h1&gt;&#13;
 &#13;
 &lt;p&gt;&lt;em&gt;SiteGenesis n'effectue pas de livraisons en Arkansas, à Hawaï ni dans les boîtes postales.&lt;/em&gt;&lt;/p&gt;&#13;
@@ -12236,7 +12236,7 @@ Consideriamo molto seriamente i diritti relativi alla privacy degli utenti di qu
         <display-name xml:lang="it-IT">Spedizione ridotta</display-name>
         <display-name xml:lang="ja-JP">超おトク配送</display-name>
         <display-name xml:lang="zh-CN">Super Saver 送货</display-name>
-        <description xml:lang="x-default">Super Saver Shipping Savings on the shipment of Video Games.</description>
+        <description xml:lang="x-default">Super Saver Shipping for video games.</description>
         <description xml:lang="fr-FR">Livraison ultra-économique pour les envois de jeux vidéo.</description>
         <description xml:lang="it-IT">Spedizione ridotta sull'acquisto di video game.</description>
         <description xml:lang="ja-JP">ビデオゲームの超おトク配送で割安に。</description>
@@ -12247,9 +12247,9 @@ Consideriamo molto seriamente i diritti relativi alla privacy degli utenti di qu
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header"&gt;Super Saver Shipping&lt;/h1&gt;&#13;
 &#13;
-&lt;p&gt;Super Saver Shipping Savings on the shipment of Video Games&lt;/p&gt;&#13;
-&lt;p&gt;SiteGenesis is offering Super Saver Shipping on the shipment of video games only. A fixed shipping cost of $1.99 will be applied to all orders that contain video games only and have the Super Saver Shipping option selected. Any orders that contain products other than video games do not qualify for Super Saver Shipping. &lt;em&gt;Super Saver Shipping&lt;/em&gt;&amp;nbsp;&lt;em&gt;offer not valid for AK, HI, or P.O. Boxes.&amp;nbsp;&lt;/em&gt;&lt;/p&gt;&#13;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; All video games have a $1.00 shipping surcharge fee for super saver shipping.&lt;/p&gt;</custom-attribute>
+&lt;p&gt;Super Saver Shipping for Video Games&lt;/p&gt;&#13;
+&lt;p&gt;Demandware.com is offering Super Saver Shipping on the shipment of video games only. A fixed shipping cost of $1.99 will be applied to all orders that contain video games only and have the Super Saver Shipping option selected. Any orders that contain products other than video games do not qualify for Super Saver Shipping. &lt;em&gt;Super Saver Shipping&lt;/em&gt;&amp;nbsp;&lt;em&gt;offer not valid for AK, HI, or P.O. Boxes.&amp;nbsp;&lt;/em&gt;&lt;/p&gt;&#13;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; All video games have a $1.00 shipping surcharge fee for Super Saver Shipping.&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h1 class="content-header"&gt;Livraison ultra-économique&lt;/h1&gt;&#13;
 &#13;
 &lt;p&gt;Livraison ultra-économique pour les envois de jeux vidéo.&lt;/p&gt;&#13;
@@ -12302,17 +12302,17 @@ Consideriamo molto seriamente i diritti relativi alla privacy degli utenti di qu
 &lt;p&gt;All copyrights and other intellectual property rights in the Website, including without limitation all software and written and graphical content included in the Website, are owned by Demandware, Inc. (&amp;quot;Demandware&amp;quot;) and are hereby reserved.&lt;/p&gt;&#13;
 &#13;
 &lt;h2&gt;USE OF WEBSITE AND DOCUMENTS&lt;/h2&gt;&#13;
-&lt;p&gt;Demandware hereby authorizes you to make a single copy of the content displayed on the Website for your use in learning about, evaluating or acquiring Demandware services or products, provided (i) you mark such copy &amp;quot;&amp;copy; 2009 Demandware, Inc. All rights reserved.&amp;quot;; (ii) the use of such copy is for informational and non-commercial or personal use and will not be copied or posted on any network computer or broadcast in any media; and (iii) no modifications to such copy are made. No other permission is granted to you to print, copy, reproduce, distribute, transmit, upload, download, store, perform, display in public, alter, or modify the content contained on the Website. Accredited educational institutions, such as K-12, universities and colleges, may download and reproduce the content displayed on the Website for distribution in the classroom. Distribution outside the classroom requires express written permission. Use for any other purpose is expressly prohibited by law, and may result in severe civil and criminal penalties. Violators will be prosecuted to the maximum extent possible. The Website may contain email services, bulletin board services, forums, communities, and/or other message or communication facilities designed to enable you to communicate with others (collectively &amp;quot;Communication Services&amp;quot;). You agree to use the Communication Services only to post, send and receive messages and material that are proper. By way of example, and not as a limitation, you agree that when using the Communication Services or the Website, you will not (i) use them in connection with surveys, contests, pyramid schemes, chain letters, junk email, spamming or any duplicative or unsolicited messages; (ii) defame, abuse, harass, threaten or otherwise violate the legal rights of others; (iii) publish, post, upload, distribute or disseminate any inappropriate, profane, defamatory, obscene, pornographic, racist, lewd, lascivious, excessively violent, harassing, unlawful, or otherwise objectionable topic, name, material or information; (iv) upload, or otherwise make available, files that contain material protected by intellectual property laws unless you own or control the rights thereto or have received all necessary consent to do the same; (v) advertise or offer to sell or buy any goods or services for any business purpose, unless such Communication Services specifically allows such messages; (vi) restrict or inhibit any other user from using and enjoying the Communication Services or the Website; (vii) harvest or otherwise collect information about others, including email addresses; or (viii) violate any applicable laws or regulations. Demandware has no obligation to monitor the Website or Communication Services. However, Demandware reserves the right to review materials posted to the Website and the Communication Services and to remove and/or edit any materials in its sole discretion. Demandware reserves the right to terminate your access to the Website and the Communication Services at any time, without notice, for any reason whatsoever. Demandware reserves the right at all times to disclose any information as it deems necessary to satisfy any applicable law, regulation, legal process or governmental request, or to edit,                            refuse to post or to remove any information or materials, in whole or in part, in Demandware's sole discretion.&lt;/p&gt;&#13;
+&lt;p&gt;Demandware hereby authorizes you to make a single copy of the content displayed on the Website for your use in learning about, evaluating or acquiring Demandware services or products, provided (i) you mark such copy &amp;quot;&amp;copy; 2016 Demandware, Inc. All rights reserved.&amp;quot;; (ii) the use of such copy is for informational and non-commercial or personal use and will not be copied or posted on any network computer or broadcast in any media; and (iii) no modifications to such copy are made. No other permission is granted to you to print, copy, reproduce, distribute, transmit, upload, download, store, perform, display in public, alter, or modify the content contained on the Website. Accredited educational institutions, such as K-12, universities and colleges, may download and reproduce the content displayed on the Website for distribution in the classroom. Distribution outside the classroom requires express written permission. Use for any other purpose is expressly prohibited by law, and may result in severe civil and criminal penalties. Violators will be prosecuted to the maximum extent possible. The Website may contain email services, bulletin board services, forums, communities, and/or other message or communication facilities designed to enable you to communicate with others (collectively &amp;quot;Communication Services&amp;quot;). You agree to use the Communication Services only to post, send and receive messages and material that are proper. By way of example, and not as a limitation, you agree that when using the Communication Services or the Website, you will not (i) use them in connection with surveys, contests, pyramid schemes, chain letters, junk email, spamming or any duplicative or unsolicited messages; (ii) defame, abuse, harass, threaten or otherwise violate the legal rights of others; (iii) publish, post, upload, distribute or disseminate any inappropriate, profane, defamatory, obscene, pornographic, racist, lewd, lascivious, excessively violent, harassing, unlawful, or otherwise objectionable topic, name, material or information; (iv) upload, or otherwise make available, files that contain material protected by intellectual property laws unless you own or control the rights thereto or have received all necessary consent to do the same; (v) advertise or offer to sell or buy any goods or services for any business purpose, unless such Communication Services specifically allows such messages; (vi) restrict or inhibit any other user from using and enjoying the Communication Services or the Website; (vii) harvest or otherwise collect information about others, including email addresses; or (viii) violate any applicable laws or regulations. Demandware has no obligation to monitor the Website or Communication Services. However, Demandware reserves the right to review materials posted to the Website and the Communication Services and to remove and/or edit any materials in its sole discretion. Demandware reserves the right to terminate your access to the Website and the Communication Services at any time, without notice, for any reason whatsoever. Demandware reserves the right at all times to disclose any information as it deems necessary to satisfy any applicable law, regulation, legal process or governmental request, or to edit, refuse to post or to remove any information or materials, in whole or in part, in Demandware's sole discretion.&lt;/p&gt;&#13;
 &#13;
 &lt;h2&gt;TRADEMARKS/COPYRIGHTS&lt;/h2&gt;&#13;
 &lt;p&gt;Demandware &amp;reg;, Demandware eCommerce &lt;sup&gt;(SM)&lt;/sup&gt;, the Demandware logo, and any other marks used on the Website are trademarks of Demandware or their respective owners. Such marks may not be used without the prior written consent of Demandware. Any use of those marks, or any others displayed on the Website, will inure solely to the benefit of their respective owners.&lt;/p&gt;&#13;
-&lt;p&gt;Copyright Notice. Copyright &amp;copy; 2004-2009 Demandware, Inc. All rights reserved.&lt;/p&gt;&#13;
+&lt;p&gt;Copyright Notice. Copyright &amp;copy; 2004-2016 Demandware, Inc. All rights reserved.&lt;/p&gt;&#13;
 &#13;
 &lt;h2&gt;UNSOLICITED SUBMISSION POLICY&lt;/h2&gt;&#13;
 &lt;p&gt;Demandware does not accept or consider unsolicited ideas, suggestions, materials or other information (all of the foregoing being &amp;quot;Submissions&amp;quot;). The purpose for this policy is to avoid misunderstandings or disputes with respect to the origin of ideas, products, services and strategies of Demandware. Please do not send your unsolicited Submissions to Demandware or anyone at Demandware. In the event that you disregard this policy and post, upload, input, provide, submit or otherwise make a Submission to Demandware, (i) you will be granting Demandware and its affiliates permission to use your Submission in connection with the operation of its businesses (the &amp;quot;License&amp;quot;), including, without limitation, the right to copy, distribute, display, edit, reproduce, translate and reformat your Submission for both commercial and non-commercial purposes, (ii) you warrant and represent that you own or otherwise control all of the rights to your Submission, including, without limitation, the rights necessary to grant the License and (iii) any such Submissions will be considered non confidential and non proprietary communications. No compensation will be paid with respect to your Submission. Demandware will not be subject to any obligation of confidence with respect to your Submission.&lt;/p&gt;&#13;
 &#13;
 &lt;h2&gt;NO UNLAWFUL OR PROHIBITED USE&lt;/h2&gt;&#13;
-&lt;p&gt;You may not use the Website for any purpose that is unlawful or prohibited by the terms and conditions provided herein. You may not use the Website in any manner that could damage, disable, overburden or otherwise impair any Demandware server or the network(s) connected to any Demandware server, or interfere with any other person's use and enjoyment of the Website. You may not attempt to gain unauthorized access to the Website or the computer systems or networks connected to any Demandware server through any means. You may not obtain any materials or information through any means not intentionally made available to you through the Website.&lt;/p&gt;&#13;
+&lt;p&gt;You may not use the Website for any purpose that is unlawful or prohibited by the terms and conditions provided herein. You may not use the Website in any manner that could damage, disable, overburden or otherwise impair any Demandware server or the networks connected to any Demandware server, or interfere with any other person's use and enjoyment of the Website. You may not attempt to gain unauthorized access to the Website or the computer systems or networks connected to any Demandware server through any means. You may not obtain any materials or information through any means not intentionally made available to you through the Website.&lt;/p&gt;&#13;
 &#13;
 &lt;h2&gt;LINKS&lt;/h2&gt;&#13;
 &lt;p&gt;Any links to third party websites are provided for your convenience only, and Demandware makes no recommendation or endorsement as to such websites or the products or services offered thereon.&lt;/p&gt;&#13;
@@ -12333,7 +12333,7 @@ Consideriamo molto seriamente i diritti relativi alla privacy degli utenti di qu
 &#13;
 &lt;h2&gt;LIMITATION ON LIABILITY&lt;/h2&gt;&#13;
 &lt;p&gt;AS CONSIDERATION FOR YOUR USE OF AND ACCESS TO THE WEBSITE, AND TO THE MAXIMUM EXTENT PERMITTED BY LAW, YOU AGREE THAT: (i) IN NO EVENT WILL DEMANDWARE OR ANY OTHER PARTY INVOLVED IN CREATING, PRODUCING, OR DELIVERING THE WEBSITE OR ANY SITE LINKED TO THE WEBSITE, BE LIABLE TO YOU IN ANY MANNER WHATSOEVER FOR ANY DECISION MADE OR ACTION OR NON-ACTION TAKEN BY YOU IN RELIANCE UPON THE INFORMATION PROVIDED THROUGH THE WEBSITE; AND (ii) THE AGGREGATE LIABILITY OF DEMANDWARE OR ANY OF ITS DISTRIBUTORS OR DEALERS, ARISING FROM OR RELATING TO THIS AGREEMENT (REGARDLESS OF THE FORM OF ACTION OR CLAIM, e.g. CONTRACT, WARRANTY, TORT, STRICT LIABILITY, NEGLIGENCE, FRAUD, AND/OR OTHERWISE) IS LIMITED TO $100; AND (iii) DEMANDWARE SHALL NOT IN ANY CASE BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, EVEN IF DEMANDWARE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.&lt;/p&gt;&#13;
-&lt;p&gt;Some jurisdications do not allow the exclusion of implied warranties, so the above exclusion may not apply to you.&lt;/p&gt;&#13;
+&lt;p&gt;Some jurisdictions do not allow the exclusion of implied warranties, so the above exclusion may not apply to you.&lt;/p&gt;&#13;
 &#13;
 &#13;
 &lt;h2&gt;NOTICES OF COPYRIGHT INFRINGEMENT&lt;/h2&gt;&#13;

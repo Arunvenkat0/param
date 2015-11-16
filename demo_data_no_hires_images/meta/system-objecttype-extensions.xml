@@ -333,7 +333,7 @@
         <custom-attribute-definitions>
             <attribute-definition attribute-id="alternativeUrl">
                 <display-name xml:lang="x-default">Alternative URL</display-name>
-                <description xml:lang="x-default">Renders an alternative URL in main navigation. Uses demandware content url notation. For example: $url('Account-Show')$ or normal urls http://xchange.demandware.com</description>
+                <description xml:lang="x-default">Renders an alternative URL in main navigation. Uses Demandware content url notation. For example: $url('Account-Show')$ or normal URL http://xchange.demandware.com</description>
                 <type>html</type>
                 <localizable-flag>false</localizable-flag>
                 <mandatory-flag>false</mandatory-flag>
@@ -343,7 +343,7 @@
             </attribute-definition>
             <attribute-definition attribute-id="catBannerID">
                 <display-name xml:lang="x-default">Category Banner ID</display-name>
-                <description xml:lang="x-default">Used to define the content asset used to populate a grid page banner for a category.  This value is applied to all sub category navigation (cascading) if no specific catBannerID has been defined for  a sub category.</description>
+                <description xml:lang="x-default">Used to define the content asset used to populate a grid page banner for a category. This value is applied to all sub-category navigation (cascading) if no specific catBannerID has been defined for  a sub-category.</description>
                 <type>string</type>
                 <localizable-flag>false</localizable-flag>
                 <mandatory-flag>false</mandatory-flag>
@@ -360,7 +360,7 @@
             </attribute-definition>
             <attribute-definition attribute-id="enableCompare">
                 <display-name xml:lang="x-default">Enable Compare</display-name>
-                <description xml:lang="x-default">Used to define if/when the Compare feature is to be visualized in the storefront based on navigation.  If enableCompare = FALSE, no Compare checkboxes will be displayed in the grid view.  If enableCompare = TRUE, the category (and its children) will support the Compare feature.</description>
+                <description xml:lang="x-default">Used to define if/when the Compare feature is to be visualized in the storefront based on navigation. If enableCompare = FALSE, no Compare checkboxes will be displayed in the grid view. If enableCompare = TRUE, the category (and its children) will support the Compare feature.</description>
                 <type>boolean</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
@@ -392,14 +392,14 @@
             </attribute-definition>
             <attribute-definition attribute-id="showInMenu">
                 <display-name xml:lang="x-default">Show in Menu Navigation</display-name>
-                <description xml:lang="x-default">Used to indicate that a category (such as Mens -&gt; Footwear -&gt; Boots) will display in the roll over navigation. A sub-category only shows if also the parent category is marked as showInMenu. Up to three category levels are shown in roll over navigation.</description>
+                <description xml:lang="x-default">Used to indicate that a category (such as Mens -&gt; Footwear -&gt; Boots) will display in the roll-over navigation. A sub-category only shows if also the parent category is marked as showInMenu. Up to three category levels are shown in roll-over navigation.</description>
                 <type>boolean</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
             </attribute-definition>
             <attribute-definition attribute-id="sizeChartID">
                 <display-name xml:lang="x-default">Size Chart</display-name>
-                <description xml:lang="x-default">Used to define the content asset ID of the Size Chart that is appropriate for products whose PRIMARY category is the associated category (and its children).  Whenever a product detail page (or quick view) is rendered, the Size Chart link is populated based on the value of this attribute for the products primary categorization.  If not defined, NO size chart link is displayed.</description>
+                <description xml:lang="x-default">Used to define the content asset ID of the Size Chart that is appropriate for products whose PRIMARY category is the associated category (and its children). Whenever a product detail page (or quick view) is rendered, the Size Chart link is populated based on the value of this attribute for the products primary categorization. If not defined, NO size chart link is displayed.</description>
                 <type>string</type>
                 <localizable-flag>false</localizable-flag>
                 <mandatory-flag>false</mandatory-flag>
@@ -1981,8 +1981,8 @@
         </system-attribute-definitions>
         <custom-attribute-definitions>
             <attribute-definition attribute-id="availableForInStorePickup">
-                <display-name xml:lang="x-default">Available For In Store Pickup</display-name>
-                <description xml:lang="x-default">Signals if there are inventory lists for stores (brick and mortar) associated with this product.</description>
+                <display-name xml:lang="x-default">Available for In Store Pickup</display-name>
+                <description xml:lang="x-default">Signals if there are inventory lists for brick-and-mortar stores associated with this product.</description>
                 <type>boolean</type>
                 <site-specific-flag>false</site-specific-flag>
                 <mandatory-flag>false</mandatory-flag>
@@ -2215,7 +2215,7 @@
                         <value>0150</value>
                     </value-definition>
                     <value-definition>
-                        <display xml:lang="x-default">In Camera Redeye Reduction</display>
+                        <display xml:lang="x-default">In Camera Red Eye Reduction</display>
                         <value>0160</value>
                     </value-definition>
                     <value-definition>
@@ -2515,7 +2515,7 @@
                         <value>0180</value>
                     </value-definition>
                     <value-definition>
-                        <display xml:lang="x-default">Jeppesen Enanled</display>
+                        <display xml:lang="x-default">Jeppesen Enabled</display>
                         <value>0190</value>
                     </value-definition>
                     <value-definition>
@@ -2609,7 +2609,7 @@
             </attribute-definition>
             <attribute-definition attribute-id="isSale">
                 <display-name xml:lang="x-default">On sale?</display-name>
-                <description xml:lang="x-default">This is the help text. Is used for sorting rules.</description>
+                <description xml:lang="x-default">This is the help text. It is used for sorting rules.</description>
                 <type>boolean</type>
                 <site-specific-flag>false</site-specific-flag>
                 <mandatory-flag>false</mandatory-flag>
@@ -2820,7 +2820,7 @@
                         <value>0070</value>
                     </value-definition>
                     <value-definition>
-                        <display xml:lang="x-default">micro SD</display>
+                        <display xml:lang="x-default">Micro SD</display>
                         <value>0080</value>
                     </value-definition>
                     <value-definition>
@@ -3544,8 +3544,8 @@
         </system-attribute-definitions>
         <custom-attribute-definitions>
             <attribute-definition attribute-id="fromStoreId">
-                <display-name xml:lang="x-default">From Store Id</display-name>
-                <description xml:lang="x-default">Links the store to the productlineitem for grouping shipments in the checkout process.</description>
+                <display-name xml:lang="x-default">From Store ID</display-name>
+                <description xml:lang="x-default">Links the store to the product line item for grouping shipments in the checkout process.</description>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
@@ -4314,7 +4314,7 @@
             </attribute-definition>
             <attribute-definition attribute-id="buildNotificationEmailList">
                 <display-name xml:lang="x-default">Build Notification Email List</display-name>
-                <description xml:lang="x-default">Semi colon separated list</description>
+                <description xml:lang="x-default">Semicolon separated list</description>
                 <type>string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
@@ -4322,7 +4322,7 @@
             </attribute-definition>
             <attribute-definition attribute-id="countryCode">
                 <display-name xml:lang="x-default">Default Country Code</display-name>
-                <description xml:lang="x-default">Default Country Code for Store Searches</description>
+                <description xml:lang="x-default">Default country code for store searches</description>
                 <type>enum-of-string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
@@ -4371,7 +4371,7 @@
                 <default-value>true</default-value>
             </attribute-definition>
             <attribute-definition attribute-id="enableStorePickUp">
-                <display-name xml:lang="x-default">Enable In Store Pick Up</display-name>
+                <display-name xml:lang="x-default">Enable In Store Pickup</display-name>
                 <description xml:lang="x-default">This Boolean enables the storefront ability to perform tasks related to in store orders</description>
                 <type>boolean</type>
                 <mandatory-flag>false</mandatory-flag>
@@ -4548,7 +4548,7 @@ The Search Preferences&gt;Search Suggestion option is set to Disabled by default
             </attribute-definition>
             <attribute-definition attribute-id="storeLookupUnit">
                 <display-name xml:lang="x-default">Store Lookup Unit</display-name>
-                <description xml:lang="x-default">Used in finding the store near the zip code specified in the store front by the end user.</description>
+                <description xml:lang="x-default">Used in finding the store near the ZIP code specified in the storefront by the end user.</description>
                 <type>enum-of-string</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
@@ -4735,8 +4735,8 @@ The Search Preferences&gt;Search Suggestion option is set to Disabled by default
                 <min-length>0</min-length>
             </attribute-definition>
             <attribute-definition attribute-id="inventoryListId">
-                <display-name xml:lang="x-default">Store Inventory List Id</display-name>
-                <description xml:lang="x-default">Store Inventory List Id</description>
+                <display-name xml:lang="x-default">Store Inventory List ID</display-name>
+                <description xml:lang="x-default">Store Inventory List ID</description>
                 <type>string</type>
                 <localizable-flag>false</localizable-flag>
                 <mandatory-flag>false</mandatory-flag>

@@ -108,7 +108,7 @@
         <security-code-length>4</security-code-length>
     </payment-card>
 
-    <payment-card card-type="MasterCard">
+    <payment-card card-type="Master Card">
         <name xml:lang="x-default">MasterCard</name>
         <name xml:lang="fr-FR">MasterCard</name>
         <name xml:lang="it-IT">MasterCard</name>
