@@ -1,15 +1,16 @@
 'use strict';
 
 /**
- * This controller initializes the product list and creates a new list if none was found.
+ * Controller that initializes the product list and creates a new list if none is found.
  * It also determines a selected product list item based on the given ID.
  *
  * @module  controllers/ProductList
  * @TODO this should be a library, not a controller
+ * @FIXME Isn't this already done in the ProductListModel? Not called from anywhere that I can tell.
  */
 
  /**
- * TODO
+ * Initializes a product list and creates a new list if none is found.
  */
 function Init(args) {
     var productListId = args.productListId;
@@ -46,7 +47,12 @@ function Init(args) {
 
 
 /**
- * Ensure shipment locates a shipment associated with a product list. If it cannot find one, one is created.
+ * Locates a shipment associated with a product list. If it cannot find one, one is created.
+ *
+ * __Note:__ this function is called by the
+ * {@link module:controllers/GiftRegistryCustomer~PurchaseGiftCertificate|GiftRegistry controller PurchaseGiftCertificate function}.
+ * @param args {object} JSON object containing a basket.
+ * @param args.Basket {dw.order.Basket} A basket associated with the product list.
  */
 function EnsureShipment(args) {
     var ProductList = args.ProductList;
@@ -81,7 +87,8 @@ function EnsureShipment(args) {
 
 /**
  * Generates a shipment ID based on the type of product list passed in. Also assigns this name to the product list itself.
- * Note that if the product list does not have a shipping address, the default shipping address name is used.
+ * Note that if the product list does not have a shipping address, the default shipping address name is used. Calls the
+ * GenerateShipmentName.ds script.
  */
 function GenerateShipmentName(args) {
     var ProductList = args.ProductList;
@@ -120,6 +127,12 @@ function GenerateShipmentName(args) {
 /*
  * Local methods
  */
+/** Renders a list of bonus products for a bonus discount line item.
+ * @see module:controllers/ProductList~Init */
 exports.Init                    = Init;
+/** Ensure shipment locates a shipment associated with a product list.
+ * @see module:controllers/ProductList~EnsureShipment */
 exports.EnsureShipment          = EnsureShipment;
+/** Generates a shipment ID based on the type of product list passed in.
+ * @see module:controllers/ProductList~GenerateShipmentName */
 exports.GenerateShipmentName    = GenerateShipmentName;
