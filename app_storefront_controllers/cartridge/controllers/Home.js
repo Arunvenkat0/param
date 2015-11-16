@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Renders the home page.
+ * Controller that renders the home page.
  *
  * @module controllers/Home
  */
@@ -20,18 +20,18 @@ function show() {
 }
 
 /**
- * Remote include for the header
- * This is designed as a remote include to achieve optimal caching results for the header
+ * Remote include for the header.
+ * This is designed as a remote include to achieve optimal caching results for the header.
  */
 function includeHeader() {
     app.getView().render('components/header/header');
 }
 
 /**
- * Renders the category navigation and the menu to use as a remote include. It's
- * cached.
+ * Renders the category navigation and the menu to use as a remote include.
+ * It is cached.
  *
- * @deprecated Converted into a template include
+ * @deprecated Converted into a template include.
  */
 function includeHeaderMenu() {
     app.getView().render('components/header/headermenu');
@@ -48,7 +48,7 @@ function includeHeaderCustomerInfo() {
 }
 
 /**
- * TODO
+ * Sets a 410 HTTP response code for the response and renders an error page (error/notfound template).
  */
 function errorNotFound() {
     // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
@@ -58,6 +58,8 @@ function errorNotFound() {
 }
 
 /**
+ * Used in the setlayout.isml and htmlhead.isml templates to control device-aware display.
+ * Sets the session custom property 'device' to mobile. Renders the changelayout.isml template.
  * TODO As we want to have a responsive layout, do we really need the below?
  */
 function mobileSite() {
@@ -66,7 +68,8 @@ function mobileSite() {
 }
 
 /**
- * TODO remove - not responsive - maybe replace with a CSS class forcing the layout.
+ * Sets the session custom property 'device' to mobile.  Renders the setlayout.isml template.
+ * @FIXME remove - not responsive - maybe replace with a CSS class forcing the layout.
  */
 function fullSite() {
     session.custom.device = 'fullsite';
@@ -74,14 +77,16 @@ function fullSite() {
 }
 
 /**
- * TODO remove - not responsive
+ * Renders the setlayout.isml template.
+ * @FIXME remove - not responsive
  */
 function setLayout() {
     app.getView().render('components/setlayout');
 }
 
 /**
- * TODO remove - not responsive
+ * Renders the devicelayouts.isml template.
+ * @FIXME remove - not responsive
  */
 function deviceLayouts() {
     app.getView().render('util/devicelayouts');
@@ -90,21 +95,30 @@ function deviceLayouts() {
 /*
  * Export the publicly available controller methods
  */
-/** @see module:controllers/Home~show */
+/** Renders the home page.
+ * @see module:controllers/Home~show */
 exports.Show = guard.ensure(['get'], show);
-/** @see module:controllers/Home~includeHeader */
+/** Remote include for the header.
+ * @see module:controllers/Home~includeHeader */
 exports.IncludeHeader = guard.ensure(['include'], includeHeader);
-/** @see module:controllers/Home~includeHeaderMenu */
+/** Renders the category navigation and the menu to use as a remote include.
+ * @see module:controllers/Home~includeHeaderMenu */
 exports.IncludeHeaderMenu = guard.ensure(['include'],includeHeaderMenu);
-/** @see module:controllers/Home~includeHeaderCustomerInfo */
+/** This is designed as a remote include as it represents dynamic session information and must not be cached.
+ * @see module:controllers/Home~includeHeaderCustomerInfo */
 exports.IncludeHeaderCustomerInfo = guard.ensure(['include'], includeHeaderCustomerInfo);
-/** @see module:controllers/Home~errorNotFound */
+/** Sets a 410 HTTP response code for the response and renders an error page
+ * @see module:controllers/Home~errorNotFound */
 exports.ErrorNotFound = guard.ensure(['get'], errorNotFound);
-/** @see module:controllers/Home~mobileSite */
+/** Used to control device-aware display.
+ * @see module:controllers/Home~mobileSite */
 exports.MobileSite = guard.ensure(['get'], mobileSite);
-/** @see module:controllers/Home~fullSite */
+/** Sets the session custom property 'device' to mobile. Renders the setlayout.isml template.
+ * @see module:controllers/Home~fullSite */
 exports.FullSite = guard.ensure(['get'], fullSite);
-/** @see module:controllers/Home~setLayout */
+/** Renders the setlayout.isml template.
+ * @see module:controllers/Home~setLayout */
 exports.SetLayout = guard.ensure(['get'], setLayout);
-/** @see module:controllers/Home~deviceLayouts */
+/** Renders the devicelayouts.isml template.
+ * @see module:controllers/Home~deviceLayouts */
 exports.DeviceLayouts = guard.ensure(['get'], deviceLayouts);

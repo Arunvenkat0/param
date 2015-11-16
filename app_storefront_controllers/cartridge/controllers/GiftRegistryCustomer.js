@@ -1,6 +1,6 @@
 'use strict';
 /**
- * This controller renders a public gift registry, which can be accessed by people other than the owner.
+ * Controller that renders a public gift registry, which can be accessed by people other than the owner.
  *
  * @module controllers/GiftRegistryCustomer
  * @todo  Requires cleanup
@@ -13,7 +13,13 @@ var Pipelet = require('dw/system/Pipelet');
 /* Script Modules */
 var g = require('~/cartridges/scripts/guard');
 /**
- * TODO
+ * Updates the giftregistry form and renders the product list template.
+ *
+ * Clears the giftregistry form and gets the product list using the ProductListID from the httpParameterMap.
+ * If the product list is public, it copies item and event information to the gift registry form from the product list.
+ * If the product list is private, sets the system status to ERROR.
+
+ * @FIXME Why does this not use a view to render the template.
  */
 function Show() {
     var CurrentHttpParameterMap = request.httpParameterMap;
@@ -57,9 +63,14 @@ function Show() {
     });
 }
 /**
- * TODO
+ * Gift registry customer event handler. Handles the last triggered action based in the formId.
+ *
+ * If the formId is:
+ * - __purchaseGiftCertificate__ - calls the {@link module:controllers/GiftRegistryCustomer~PurchaseGiftCertificate|PurchaseGiftCertificates} function
+ * to add a new gift certificate to the basket.
+ * - __search__ - calls the {@link module:controllers/GiftRegistry~search|GiftRegistry controller search function} to render the gift registry search page.
  */
-// TODO fix form in template?
+// TODO fix form in template? Use gift cert functionality instead of this?
 function ShowInteraction() {
     var TriggeredAction = request.triggeredFormAction;
     if (TriggeredAction !== null) {

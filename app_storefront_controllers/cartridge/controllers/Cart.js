@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Controller that provides functions to add and remove products and coupons in the cart.
+ * Controller that adds and removes products and coupons in the cart.
  * Also provides functions for the continue shopping button and minicart.
  *
  * @module controllers/Cart
@@ -20,7 +20,9 @@ var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
 /**
- * Redirects the user to the last visited catalog URL.
+ * Redirects the user to the last visited catalog URL if known, otherwise redirects to
+ * a hostname-only URL if an alias is set, or to the Home-Show controller function in the default
+ * format using the HTTP protocol.
  */
 function continueShopping() {
 
@@ -34,7 +36,7 @@ function continueShopping() {
 }
 
 /**
- * Invalidates the login and shipment forms. Renders the basket content.
+ * Invalidates the login and shipment forms. Renders the checkout/cart/cart template.
  */
 function show() {
     var cartForm = app.getForm('cart');
@@ -50,7 +52,34 @@ function show() {
 }
 
 /**
- * Form handler for the cart form.
+ * Handles the form actions for the cart.
+ * - __addCoupon(formgroup)__ - adds a coupon to the basket in a transaction. Returns a JSON object with parameters for the template.
+ * - __calculateTotal__ - returns the cart object.
+ * - __checkoutCart__ - validates the cart for checkout. If valid, redirect to the COCustomer-Start controller function to start the checkout. If invalid returns the cart and the results of the validation.
+ * - __continueShopping__ - calls the {@link module:controllers/Cart~continueShopping|continueShopping} function and returns null.
+ * - __deleteCoupon(formgroup)__ - removes a coupon from the basket in a transaction. Returns a JSON object with parameters for the template
+ * - __deleteGiftCertificate(formgroup)__ - removes a gift certificate from the basket in a transaction. Returns a JSON object with parameters for the template.
+ * - __deleteProduct(formgroup)__ -  removes a product from the basket in a transaction. Returns a JSON object with parameters for the template.
+ * - __editLineItem(formgroup)__ - gets a ProductModel that wraps the pid (product ID) in the httpParameterMap and updates the options to select for the product. Updates the product in a transaction.
+ * Renders the checkout/cart/refreshcart template. Returns null.
+ * - __login__ - calls the Login controller and returns a JSON object with parameters for the template.
+ * - __logout__ - logs the customer out and returns a JSON object with parameters for the template.
+ * - __register__ - calls the Account controller StartRegister function. Updates the cart calculation in a transaction and returns null.
+ * - __unregistered__ - calls the COShipping controller Start function and returns null.
+ * - __updateCart__ - In a transaction, removes zero quantity line items, removes line items for in-store pickup, and copies data to system objects based on the form bindings.
+ * Returns a JSON object with parameters for the template.
+ * - __error__ - returns null.
+ *
+ * __Note:__ The CartView sets the ContinueURL to this function, so that any time URLUtils.continueURL() is used in the cart.isml, this function is called.
+ * Several actions have <b>formgroup</b> as an input parameter. The formgroup is supplied by the {@link module:models/FormModel~FormModel/handleAction|FormModel handleAction} function in the FormModel module.
+ * The formgroup is session.forms.cart object of the triggered action in the form definition. Any object returned by the function for an action is passed in the parameters to the cart template
+ * and is accessible using the $pdict.property syntax. For example, if a function returns {CouponStatus: status} is accessible via ${pdict.CouponStatus}
+ * Most member functions return a JSON object that contains {cart: cart}. The cart property is used by the CartView to determine the value of
+ * $pdict.Basket in the cart.isml template.
+ *
+ * For any member function that returns an object, the page metadata is updated, the function gets a ContentModel that wraps the cart content asset,
+ * and the checkout/cart/cart template is rendered.
+ *
  */
 function submitForm() {
     // There is no existing state, so resolve the basket again.
@@ -231,7 +260,20 @@ function submitForm() {
 }
 
 /**
- * Adds a product to the cart.
+ * Adds or replaces a product in the cart, gift registry, or wishlist.
+ * If the function is being called as a gift registry update, calls the
+ * {@link module:controllers/GiftRegistry~replaceProductListItem|GiftRegistry controller ReplaceProductListItem function}.
+ * The httpParameterMap source and cartAction parameters indicate how the function is called.
+ * If the function is being called as a wishlist update, calls the
+ * {@link module:controllers/Wishlist~replaceProductListItem|Wishlist controller ReplaceProductListItem function}.
+ * If the product line item for the product to add has a:
+ * - __uuid__ - gets a ProductModel that wraps the product and determines the product quantity and options.
+ * In a transaction, calls the {@link module:models/CartModel~CartModel/updateLineItem|CartModel updateLineItem} function to replace the current product in the line
+ * item with the new product.
+ * - __plid__ - gets the product list and adds a product list item.
+ * Otherwise, adds the product and checks if a new discount line item is triggered.
+ * Renders the checkout/cart/refreshcart template if the httpParameterMap format parameter is set to ajax,
+ * otherwise renders the checkout/cart/cart template.
  */
 function addProduct() {
     var cart = app.getModel('Cart').goc();
@@ -328,6 +370,11 @@ function miniCart() {
 
 /**
  * Adds the product with the given ID to the wish list.
+ *
+ * Gets a ProductModel that wraps the product in the httpParameterMap. Uses
+ * {@link module:models/ProductModel~ProductModel/updateOptionSelection|ProductModel updateOptionSelection}
+ * to get the product options selected for the product.
+ * Gets a ProductListModel and adds the product to the product list. Renders the checkout/cart/cart template.
  */
 function addToWishlist() {
     var productID, product, productOptionModel, productList, Product;
@@ -348,7 +395,18 @@ function addToWishlist() {
 }
 
 /**
- * Adds bonus product to cart.
+ * Adds a bonus product to the cart.
+ *
+ * Parses the httpParameterMap and adds the bonus products in it to an array.
+ *
+ * Gets the bonus discount line item. In a transaction, removes the bonus discount line item. For each bonus product in the array,
+ * gets the product based on the product ID and adds the product as a bonus product to the cart.
+ *
+ * If the product is a bundle, updates the product option selections for each child product, finds the line item,
+ * and replaces it with the current child product and selections.
+ *
+ * If the product and line item can be retrieved, recalculates the cart, commits the transaction, and renders a JSON object indicating success.
+ * If the transaction fails, rolls back the transaction and renders a JSON object indicating failure.
  */
 function addBonusProductJson() {
     var h, i, j, cart, data, productsJSON, bonusDiscountLineItem, product, lineItem, childPids, childProduct, ScriptResult, foundLineItem, Product;
@@ -421,7 +479,12 @@ function addBonusProductJson() {
 }
 
 /**
- * Adds a coupon to the cart using JSON. Called during checkout.
+ * Adds a coupon to the cart using JSON.
+ *
+ * Gets the CartModel. Gets the coupon code from the httpParameterMap couponCode parameter.
+ * In a transaction, adds the coupon to the cart and renders a JSON object that includes the coupon code
+ * and the status of the transaction.
+ *
  */
 function addCouponJson() {
     var couponCode, cart, couponStatus;
@@ -452,21 +515,29 @@ function addCouponJson() {
 /*
 * Exposed methods.
 */
-/** @see module:controllers/Cart~addProduct */
+/** Adds a product to the cart.
+ * @see {@link module:controllers/Cart~addProduct} */
 exports.AddProduct = guard.ensure(['post'], addProduct);
-/** @see module:controllers/Cart~show */
+/** Invalidates the login and shipment forms. Renders the basket content.
+ * @see {@link module:controllers/Cart~show} */
 exports.Show = guard.ensure(['https'], show);
-/** @see module:controllers/Cart~submitForm */
+/** Form handler for the cart form.
+ * @see {@link module:controllers/Cart~submitForm} */
 exports.SubmitForm = guard.ensure(['post', 'https'], submitForm);
-/** @see module:controllers/Cart~continueShopping */
+/** Redirects the user to the last visited catalog URL.
+ * @see {@link module:controllers/Cart~continueShopping} */
 exports.ContinueShopping = guard.ensure(['https'], continueShopping);
-/** @see module:controllers/Cart~addCouponJson */
+/** Adds a coupon to the cart using JSON. Called during checkout.
+ * @see {@link module:controllers/Cart~addCouponJson} */
 exports.AddCouponJson = guard.ensure(['get', 'https'], addCouponJson);
-/** @see module:controllers/Cart~miniCart */
+/** Displays the current items in the cart in the minicart panel.
+ * @see {@link module:controllers/Cart~miniCart} */
 exports.MiniCart = guard.ensure(['get'], miniCart);
-/** @see module:controllers/Cart~addToWishlist */
+/** Adds the product with the given ID to the wish list.
+ * @see {@link module:controllers/Cart~addToWishlist} */
 exports.AddToWishlist = guard.ensure(['get', 'https', 'loggedIn'], addToWishlist, {
     scope: 'wishlist'
 });
-/** @see module:controllers/Cart~addBonusProductJson */
+/** Adds bonus product to cart.
+ * @see {@link module:controllers/Cart~addBonusProductJson} */
 exports.AddBonusProduct = guard.ensure(['post'], addBonusProductJson);
