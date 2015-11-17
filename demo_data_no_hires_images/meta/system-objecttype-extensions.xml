@@ -4690,6 +4690,9 @@ The Search Preferences&gt;Search Suggestion option is set to Disabled by default
                 <min-length>0</min-length>
             </attribute-definition>
             <attribute-definition attribute-id="image"/>
+            <attribute-definition attribute-id="inventoryListID">
+                <mandatory-flag>false</mandatory-flag>
+            </attribute-definition>
             <attribute-definition attribute-id="lastModified"/>
             <attribute-definition attribute-id="latitude">
                 <scale>6</scale>
@@ -4749,6 +4752,7 @@ The Search Preferences&gt;Search Suggestion option is set to Disabled by default
                 <display-name xml:lang="x-default">Basic Attributes</display-name>
                 <attribute attribute-id="ID" system="true"/>
                 <attribute attribute-id="name" system="true"/>
+                <attribute system="true" attribute-id="inventoryListID"/>
             </attribute-group>
             <attribute-group group-id="Address">
                 <display-name xml:lang="x-default">Address</display-name>
