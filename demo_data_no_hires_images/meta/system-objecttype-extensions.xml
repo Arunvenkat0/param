@@ -4376,7 +4376,7 @@
                 <type>boolean</type>
                 <mandatory-flag>false</mandatory-flag>
                 <externally-managed-flag>false</externally-managed-flag>
-                <default-value>false</default-value>
+                <default-value>true</default-value>
             </attribute-definition>
             <attribute-definition attribute-id="enhancedSearchSuggestions">
                 <display-name xml:lang="x-default">Enhanced Search Suggestions</display-name>
