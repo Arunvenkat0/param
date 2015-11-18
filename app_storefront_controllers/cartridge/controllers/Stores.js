@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * This controller renders store finder and store detail pages.
+ * Controller that renders the store finder and store detail pages.
  *
  * @module controllers/Stores
  */
@@ -17,6 +17,9 @@ var guard = require('~/cartridge/scripts/guard');
 
 /**
  * Provides a form to locate stores by geographical information.
+ *
+ * Clears the storelocator form. Gets a ContentModel that wraps the store-locator content asset.
+ * Updates the page metadata and renders the store locator page (storelocator/storelocator template).
  */
 function find() {
     var storeLocatorForm = app.getForm('storelocator');
@@ -32,7 +35,16 @@ function find() {
 }
 
 /**
- * The storeLocator form handler. This form is submitted with GET.
+ * The storelocator form handler. This form is submitted with GET.
+ * Handles the following actions:
+ * - findbycountry
+ * - findbystate
+ * - findbyzip
+ * In all cases, gets the search criteria from the form (formgroup) passed in by
+ * the handleAction method and queries the platform for stores matching that criteria. Returns null if no stores are found,
+ * otherwise returns a JSON object store, search key, and search criteria information. If there are search results, renders
+ * the store results page (storelocator/storelocatorresults template), otherwise renders the store locator page
+ * (storelocator/storelocator template).
  */
 function findStores() {
     var Content = app.getModel('Content');
@@ -90,6 +102,9 @@ function findStores() {
 
 /**
  * Renders the details of a store.
+ *
+ * Gets the store ID from the httpParameterMap. Updates the page metadata.
+ * Renders the store details page (storelocator/storedetails template).
  */
 function details() {
 
@@ -107,9 +122,12 @@ function details() {
 /*
  * Exposed web methods
  */
-/** @see module:controllers/Stores~find */
+/** Renders form to locate stores by geographical information.
+ * @see module:controllers/Stores~find */
 exports.Find = guard.ensure(['get'], find);
-/** @see module:controllers/Stores~findStores */
+/** The storelocator form handler.
+ * @see module:controllers/Stores~findStores */
 exports.FindStores = guard.ensure(['post'], findStores);
-/** @see module:controllers/Stores~details */
+/** Renders the details of a store.
+ * @see module:controllers/Stores~details */
 exports.Details = guard.ensure(['get'], details);

@@ -1,7 +1,8 @@
 'use strict';
 
 /**
- * This controller handles in-store functionality that is mostly used on the Product Detail Page.
+ * Controller for in-store functionality that is mostly used on the Product Detail Page.
+ * __Note:__core functions are used when the UI cartridge is not in the cartridge path.
  *
  * @module controllers/StoreInventory
  * @TODO Simplify the logic, there is no need to return the stores as JSON to render them in the client
@@ -12,7 +13,7 @@ var app     = require('~/cartridge/scripts/app');
 var guard   = require('~/cartridge/scripts/guard');
 
 /**
- * Sets the store for a given line item (requires rich_UI cartrdige)
+ * Sets the store for a given line item.
  */
 function setStore() {
     var parameterMap = request.httpParameterMap;
@@ -45,8 +46,11 @@ function setStore() {
 }
 
 /**
- * These function are used when the UI cartridge is not in the cartridge path.
- * TODO - Is this outdated?
+ * Identifies the store selected for in-store pickup and renders selected store
+ * (storelocator/storepickup/coreshowselectedstore template). If the
+ * httpParameter map does not have a storeId parameter, calls the
+ * {@link module:controllers/StoreInventory~showSetStore|showSetStore} function.
+ * @TODO - Is this outdated?
  */
 function showSelectedStoreCore() {
     session.custom.storeId = request.httpParameterMap.storeId.value;
@@ -60,7 +64,10 @@ function showSelectedStoreCore() {
 }
 
 /**
- * TODO
+ * Renders the page that displays the set of stores where a product item is in stock
+ * (storelocator/storepickup/coresetstore template).
+ * If the httpParameter map does not have a storeId parameter, calls the
+ * {@link module:controllers/StoreInventory~showZipCode|showZipCode} function.
  */
 function showSetStore(stores, storeAvailabilityMap) {
     if (session.custom.zipcode !== null) {
@@ -76,14 +83,15 @@ function showSetStore(stores, storeAvailabilityMap) {
 }
 
 /**
- * TODO
+ * Renders the zip codes if the richUI cartridge is not in the path.
  */
 function showZipCode() {
     app.getView().render('storelocator/storepickup/corezipcode');
 }
 
 /**
- * TODO
+ * Creates a HashMap with store information for all stores where a
+ * product is available for in-store pickup.
  */
 function showAvailableStores() {
     session.custom.zipcode = request.httpParameterMap.zipCode.value;
@@ -103,7 +111,9 @@ function showAvailableStores() {
 }
 
 /**
- * TODO
+ * Calls the {@link module:controllers/StoreInventory~setZipCodeCore|setZipCodeCore} to set the
+ * zip code. If the session does not have a custom.zipcode property, calls the
+ * {@link module:controllers/StoreInventory~showAvailableStores|showAvailableStores} function.
  */
 function cartSetZipCodeCore() {
     if (session.custom.zipcode !== null) {
@@ -114,13 +124,17 @@ function cartSetZipCodeCore() {
 }
 
 /**
- * TODO
+ * Calls the {@link module:controllers/StoreInventory~showZipCode|showZipCode} function.
  */
 function setZipCodeCore() {
     showZipCode();
 }
 /**
- * TODO
+ * Uses the httpParameter map plid, storeid, and storepickup parameters to
+ * set the store and its inventory list for the product line item. If this results in
+ * an error, calls the {@link module:controllers/Cart~show|Cart Controller Show function}.
+ * If not, then it removes any empty shipments, adds the storeid to the session custom properties
+ * and calls the {@link module:controllers/Cart~show|Cart Controller Show function}.
  */
 function setStoreCore() {
     var CartController = app.getController('Cart');
@@ -149,8 +163,8 @@ function setStoreCore() {
 
 /**
  * Gets a list of stores with the given product, or product line item's
- * availibity to sell (requires rich_UI cartridge), if the storeID is not set it
- * will be set within the session object.
+ * availability to sell (requires rich_UI cartridge). If the storeID is not set it
+ * will be set within the session object. Renders a JSON object.
  *
  * Sample URL to call ....Stores-Inventory?pid=2239622&zipCode=01803
  */
@@ -287,13 +301,13 @@ function getProductLineItem(uuid) {
 }
 
 /**
- * Set the store and its inventory list at the given lineitem
+ * Sets the store and its inventory list for the given line item.
  *
- * @param {dw.order.Basket} basket      The current basket
- * @param {String} liUUID      The UUID of the line item
- * @param {String} storeId     The ID of the store
+ * @param {dw.order.Basket} basket      The current basket.
+ * @param {String} liUUID      The UUID of the line item.
+ * @param {String} storeId     The ID of the store.
  * @param {String} storepickup
- * @transactional
+ * @transaction
  */
 function setStoreInLineItem(basket, liUUID, storeId, storepickup) {
     var args = {};
@@ -354,12 +368,12 @@ function setStoreInLineItem(basket, liUUID, storeId, storepickup) {
 }
 
 /**
- * Get store availability for the given product
+ * Gets store availability for the given product.
  *
- * @param  {dw.util.Collection} stores          The stores
- * @param  {dw.catalog.Product} product         The product to get the availability for
- * @param  {dw.order.ProductLineItem} productLineItem The line item for the product
- * @return {dw.util.HashMap}                 The availability map
+ * @param  {dw.util.Collection} stores          The stores.
+ * @param  {dw.catalog.Product} product         The product to get the availability for.
+ * @param  {dw.order.ProductLineItem} productLineItem The line item for the product.
+ * @return {dw.util.HashMap}                 The availability map.
  */
 function getStoreAvailabilityMap(stores, product, productLineItem) {
     var storesItr = stores.iterator();
@@ -387,9 +401,9 @@ function getStoreAvailabilityMap(stores, product, productLineItem) {
 
 /**
  * Get the availability message for a given store and product.
- * @param  {dw.catalog.Store} store   The store
- * @param  {dw.catalog.Product} product The product
- * @return {String}         The localized message
+ * @param  {dw.catalog.Store} store - The store.
+ * @param  {dw.catalog.Product} product - The product.
+ * @return {String}         The localized message.
  */
 function getStoreAvailabilityMessage(store, product) {
     var storeInventoryListId = store.custom.inventoryListId;

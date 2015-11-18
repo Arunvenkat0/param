@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * This controller handles site map requests.
+ * Controller that handles site map requests.
  *
  * @module controllers/SiteMap
  */
@@ -11,7 +11,9 @@ var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
 /**
- * This pipeline is used to serve requests for Google XML site maps.
+ * Serves requests for search provider (Google, Yahoo) XML site maps. Reads a
+ * given site map and copies it into the request output stream. If this is successful,
+ * renders an http_200 template. If it fails, renders the http_404 template.
  * SiteMap Rule:
  * # process sitemaps
  * RewriteRule ^/(sitemap([^/]*))$ /on/demandware.store/%{HTTP_HOST}/-/SiteMap-Google?name=$1 [PT,L]
@@ -29,7 +31,7 @@ function google() {
 }
 
 /**
- * Renders the sitemap template.
+ * Renders the sitemap template (sitemap/sitemap template).
  */
 function start() {
 
@@ -47,5 +49,7 @@ function start() {
  */
 /** @see module:controllers/SiteMap~google */
 exports.Google = guard.ensure(['get'], google);
-/** @see module:controllers/SiteMap~start */
+/** Renders the sitemap template
+ *  Serves requests for search provider (Google, Yahoo) XML site maps.
+ *  @see module:controllers/SiteMap~start */
 exports.Start = guard.ensure(['get'], start);
