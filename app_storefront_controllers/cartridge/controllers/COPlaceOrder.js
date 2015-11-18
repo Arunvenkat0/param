@@ -113,10 +113,12 @@ function start() {
 
         var COBilling = app.getController('COBilling');
 
-        if (!COBilling.ValidatePayment(cart)) {
-            COBilling.Start();
-            return {};
-        }
+        Transaction.wrap(function () {
+            if (!COBilling.ValidatePayment(cart)) {
+                COBilling.Start();
+                return {};
+            }
+        });
 
         var validationResult = cart.validateForCheckout();
 
@@ -125,10 +127,12 @@ function start() {
 
         // Recalculate the payments. If there is only gift certificates, make sure it covers the order total, if not
         // back to billing page.
-        if (!cart.calculatePaymentTransactionTotal()) {
-            COBilling.Start();
-            return {};
-        }
+        Transaction.wrap(function () {
+            if (!cart.calculatePaymentTransactionTotal()) {
+                COBilling.Start();
+                return {};
+            }
+        });
 
         // Handle used addresses and credit cards.
         var saveCCResult = COBilling.SaveCreditCard();
