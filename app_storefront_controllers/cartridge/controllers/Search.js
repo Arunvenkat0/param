@@ -87,7 +87,7 @@ function show() {
             }
         } else {
             var targetProduct = productSearchModel.getProducts().next();
-            var productID;
+            var productID = targetProduct.getID();
 
             // If the target was not a master, simply use the product ID.
             if (targetProduct.isMaster()) {
@@ -98,13 +98,12 @@ function show() {
                 var iter = productSearchModel.getProductSearchHits();
                 if (iter.hasNext()) {
                     var productSearchHit = iter.next();
-                    if (productSearchHit.getRepresentedProducts().size() >= 1) {
+                    if (productSearchHit.getRepresentedProducts().size() === 1) {
                         productID = productSearchHit.getFirstRepresentedProductID();
                     }
                 }
-            } else {
-                productID = targetProduct.getID();
             }
+
             ISML.renderTemplate('util/redirect', {
                 Location: URLUtils.http('Product-Show', 'pid', productID)
             });
