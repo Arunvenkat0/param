@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Controller handling search, category and family pages.
+ * Controller handling search, category, and suggestion pages.
  *
  * @module controllers/Search
  */
@@ -16,8 +16,23 @@ var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
 /**
- * Renders a full featured product search result page.
- * If the http parameter "format" is set to "ajax" only the product grid is rendered instead of the full page.
+ * Renders a full-featured product search result page.
+ * If the httpParameterMao format parameter is set to "ajax" only the product grid is rendered instead of the full page.
+ *
+ * Checks for search redirects configured in Business Manager based on the query parameters in the
+ * httpParameterMap. If a search redirect is found, renders the redirect (util/redirect template).
+ * Constructs the search based on the HTTP params and sets the categoryID. Executes the product search and then the
+ * content asset search.
+ *
+ * If no search term, search parameter or refinement was specified for the search and redirects
+ * to the Home controller Show function. If there are any product search results
+ * for a simple category search, it dynamically renders the category page for the category searched.
+ *
+ * If the search query included category refinements, or is a keyword search it renders a product hits page for the category
+ * (rendering/category/categoryproducthits template).
+ * If only one product is found, renders the product detail page for that product.
+ * If there are no product results found, renders the nohits page (search/nohits template).
+ * @see {@link module:controllers/Search~showProductGrid|showProductGrid} function}.
  */
 function show() {
 
@@ -119,7 +134,18 @@ function show() {
 
 
 /**
- * Renders a full featured content search result page.
+ * Renders a full-featured content search result page.
+ *
+ * Constructs the search based on the httpParameterMap params and executes the product search and then the
+ * content asset search.
+ *
+ * If no search term, search parameter or refinement was specified for the search, it redirects
+ * to the Home controller Show function. If there are any content search results
+ * for a simple folder search, it dynamically renders the content asset page for the folder searched.
+ * If the search included folder refinements, it renders a folder hits page for the folder
+ * (rendering/folder/foldercontenthits template).
+ *
+ * If there are no product results found, renders the nohits page (search/nohits template).
  */
 function showContent() {
 
@@ -167,7 +193,8 @@ function showContent() {
 }
 
 /**
- * Determines search suggestions based on a given input and renders the JSON response for the list of suggestions.
+ * Determines search suggestions based on httpParameterMap query information and renders the JSON response for the list of suggestions.
+ * Renders the search suggestion page (search/suggestions template).
  */
 function getSuggestions() {
 
@@ -194,6 +221,15 @@ function getSuggestions() {
 
 /**
  * Renders the partial content of the product grid of a search result as rich HTML.
+ *
+ * Constructs the search based on the httpParameterMap parameters and executes the product search and then the
+ * content asset search. Constructs a paging model and determines whether the infinite scrolling feature is enabled.
+ *
+ * If there are any product search results for a simple category search, it dynamically renders the category page
+ * for the category searched.
+ *
+ * If the search query included category refinements or is a keyword search, it renders a product hits page for the category
+ * (rendering/category/categoryproducthits template).
  */
 function showProductGrid() {
 
@@ -246,9 +282,12 @@ function showProductGrid() {
 /*
  * Web exposed methods
  */
-/** @see module:controllers/Search~show */
+/** Renders a full featured product search result page.
+ * @see module:controllers/Search~show */
 exports.Show            = guard.ensure(['get'], show);
-/** @see module:controllers/Search~showContent */
+/** Renders a full featured content search result page.
+ * @see module:controllers/Search~showContent */
 exports.ShowContent     = guard.ensure(['get'], showContent);
-/** @see module:controllers/Search~getSuggestions */
+/** Determines search suggestions based on a given input and renders the JSON response for the list of suggestions.
+ * @see module:controllers/Search~getSuggestions */
 exports.GetSuggestions  = guard.ensure(['get'], getSuggestions);

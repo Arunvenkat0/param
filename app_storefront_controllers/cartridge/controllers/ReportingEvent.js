@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * This contoller is the module hook for reporting events. Typically no modifications are needed here.
+ * Controller that is the module hook for reporting events. Typically no modifications are needed here.
  * Demandware analytics is based on log file analysis. Log file entries are generated using remote includes in page templates.
  *
  * @module controllers/ReportingEvent
@@ -12,7 +12,7 @@ var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
 /**
- * This is main method to handle all reporting events
+ * This is main method to handle all reporting events.
  */
 function start() {
     app.getView().render('util/reporting/reporting');
@@ -21,5 +21,6 @@ function start() {
 /*
  * Web exposed methods
  */
-/** @see module:controllers/ReportingEvent~start */
+/** Handles all reporting events.
+ * @see module:controllers/ReportingEvent~start */
 exports.Start = guard.ensure(['get'], start);

@@ -1,6 +1,8 @@
 'use strict';
 
-/** @module controllers/SendToFriend */
+/**
+ * Controller for legacy send-to-a-friend feature.
+ * @module controllers/SendToFriend */
 
 /* API Includes */
 var ISML = require('dw/template/ISML');
@@ -9,9 +11,10 @@ var ISML = require('dw/template/ISML');
 var guard = require('~/cartridge/scripts/guard');
 
 /**
- * SendToFriend allows the use of dialog to gather email info to send to a
- * friend. A template that uses this dialog can set some of the values ahead of
- * time. Please look at wishlist.isml or registry.isml
+ * Renders a dialog to gather email info to send to a friend.
+ * A template that uses this dialog can set some of the values ahead of
+ * time. Please look at wishlist.isml or registry.isml for examples.
+ *
  */
 function Start() {
     // TODO when embedded in a product page without https, the feature does not work
@@ -58,7 +61,13 @@ function Start() {
 }
 
 /**
- * The form handler.
+ * The event handler for the send-to-a-friend feature.
+ * If the formId is:
+ * - __edit__ - sets the ContinueURL to SendToFriend-SendToFriendForm and renders the send-to-a-friend dialog (account/components/sendtofrienddialog).
+ * - __preview__ - validates whether the same email address was entered for 'friends email' and 'confirm friends email' fields and renders the
+ * send-to-a-friend dialog (account/components/sendtofrienddialog) in preview mode.
+ * - __send__ - calls the {@link module:controllers/SendToFriend~send|send} function.
+ * If no formId is present, behaves identically to the edit action.
  */
 function SendToFriendForm() {
     // TODO this should end in some redirect
@@ -116,7 +125,9 @@ function SendToFriendForm() {
         ContinueURL: dw.web.URLUtils.https('SendToFriend-SendToFriendForm')
     });
 }
-
+/**
+ * Sends the email from the customer to their friend containing product information.
+ */
 function send() {
     var CurrentHttpParameterMap = request.httpParameterMap;
     var pid = request.httpParameterMap.pid;
@@ -192,7 +203,7 @@ function send() {
 }
 
 /**
- * Get a product and any product options that have been selected.
+ * Gets a product and any selected product options.
  */
 function getProduct(pid) {
     var GetProductResult = new dw.system.Pipelet('GetProduct').execute({
@@ -217,8 +228,8 @@ function getProduct(pid) {
 }
 
 /**
- * This pipeline is used to ensure that storefront users using the send to a
- * friend feature are logged in
+ * Ensures that storefront users using the send-to-a-friend feature are logged in.
+ * @FIXME shouldn't this be controlled through a guard?
  */
 function Login() {
     var accountController = require('./Account');
@@ -235,9 +246,12 @@ function Login() {
 /*
  * Web exposed methods
  */
-/** @see module:controllers/SendToFriend~Start */
+/** Renders a dialog to gather email info to send to a friend.
+ * @see module:controllers/SendToFriend~Start */
 exports.Start = guard.ensure(['https', 'get'], Start);
-/** @see module:controllers/SendToFriend~SendToFriendForm */
+/** The event handler for the send-to-a-friend feature
+ * @see module:controllers/SendToFriend~SendToFriendForm */
 exports.SendToFriendForm = guard.ensure(['https'], SendToFriendForm);
-/** @see module:controllers/SendToFriend~Login */
+/** Ensures that storefront users using the send-to-a-friend feature are logged in.
+ * @see module:controllers/SendToFriend~Login */
 exports.Login = guard.ensure(['https'], Login);
