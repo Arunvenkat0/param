@@ -119,7 +119,7 @@ describe('Address', () => {
         addressPage.removeAddresses()
             .then(() => addressPage.getAddressCount())
             .then(() => client.getText(addressPage.TITLE_ADDRESS_SELECTOR))
-            .then(titlesLeft => assert.deepEqual(Array.sort(titlesLeft), ['Home', 'Work']))
+            .then(titlesLeft => assert.deepEqual(titlesLeft.sort(), ['Home', 'Work']))
     );
 
 });
