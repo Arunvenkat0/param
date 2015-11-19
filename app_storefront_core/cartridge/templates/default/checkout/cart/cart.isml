@@ -131,7 +131,7 @@
 						</td>
 	
 						<td colspan="4" class="bonus-item-actions">
-							<a class="select-bonus" href="${URLUtils.url('Product-GetBonusProducts','bonusDiscountLineItemUUID', bonusDiscountLineItem.UUID)}" title="${bonusButtonText}">
+							<a class="select-bonus" href="${URLUtils.url('Product-GetBonusProducts','bonusDiscountLineItemUUID', bonusDiscountLineItem.UUID, 'lazyLoad', false)}" title="${bonusButtonText}">
 								${bonusButtonText}
 							</a>
 						</td>
@@ -595,7 +595,7 @@
 								</td>
 
 								<td colspan="4" class="bonus-item-actions">
-									<a class="select-bonus" href="${URLUtils.url('Product-GetBonusProducts','bonusDiscountLineItemUUID', bonusDiscountLineItem.UUID)}" title="${bonusButtonText}">
+									<a class="select-bonus" href="${URLUtils.url('Product-GetBonusProducts','bonusDiscountLineItemUUID', bonusDiscountLineItem.UUID, 'lazyLoad', false, 'pageSize',10, 'pageStart', 0, 'bpTotal', -1)}" title="${bonusButtonText}">
 										${bonusButtonText}
 									</a>
 								</td>
