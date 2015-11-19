@@ -10,7 +10,7 @@ By documenting only what is essential to the design of the application, SSG free
 _**Disclaimer**: this is still a work in progress and is not complete. The example style guide provided here is meant as a proof of concept. Further development on top of is strongly encouranged._
 
 ## What it does
-This style guide imports the Sass styles in `app_storefront`. This way, any update to the application's style will be reflected in the style guide.
+This style guide imports the Sass styles in `app_storefront_core`. This way, any update to the application's style will be reflected in the style guide.
 
 The guide is broken down into 4 major sections: Foundation, Elements, Components and Pages.
 

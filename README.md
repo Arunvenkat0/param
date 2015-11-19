@@ -73,13 +73,13 @@ This task is also run automatically on any `.scss` file change by using the `gul
 The equivalent task for grunt, `grunt css`, is also available.
 
 ### JS
-Before authoring JS, make sure to checkout the README in `app_storefront_richUI/cartridge/js` directory.
+Before authoring JS, make sure to checkout the README in `app_storefront_core/cartridge/js` directory.
 
 The new modular JavaScript architecture relies on [browserify](https://github.com/substack/node-browserify) to compile JS code written in CommonJS standard.
 
 #### `gulp js`
 
-Compile JS modules in the `js` directory into `static/default/js` directory. The entry point for browserify is `app_storefront/cartridge/js/app.js`, and the bundled js is output to `app_storefront/cartridge/static/default/js/app.js`.
+Compile JS modules in the `js` directory into `static/default/js` directory. The entry point for browserify is `app_storefront_core/cartridge/js/app.js`, and the bundled js is output to `app_storefront_core/cartridge/static/default/js/app.js`.
 
 This task is also run automatically on any `.js` file change by using the `gulp watch` task.
 
