@@ -1,8 +1,7 @@
 'use strict';
 
 /**
- * This controller renders a content page or a content include.
- *
+ * Controller for rendering a content page or a content include.
  * @module controllers/Page
  */
 
@@ -15,6 +14,9 @@ var guard = require('~/cartridge/scripts/guard');
 
 /**
  * Renders a content page based on the rendering template configured for the page or a default rendering template.
+ *
+ *  It uses the content ID in the httpParameterMap to find the content asset, updates the page metadata, and renders it using the
+ *  content/content/contentpage template. If there is no content ID, it logs a warning and sets the response status to 410.
  */
 function show() {
 
@@ -46,6 +48,7 @@ function show() {
 
 /**
  * Renders a content asset in order to include it into other pages via remote include.
+ * If there is no content ID in the httpParameterMap, it logs a warning.
  */
 function include() {
 

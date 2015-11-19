@@ -3,15 +3,16 @@ var g = require('~/cartridges/scripts/guard');
 var ISML = require('dw/template/ISML');
 
 /**
- * Handles PowerReview Request (Product Reviews)
+ * Controller that handles PowerReview Request (Product Reviews)
  *
  * @module controllers/PowerReviews
  * @todo  Remove this controller including its referenced files
  */
 
 /**
- * Renders a product XML description based on the given ID. Input: pid
- * (required) - product ID
+ * Renders a product XML description based on the given ID. Uses the product ID
+ * from the httpParameterMap to get product information. If no product ID exists,
+ * renders an error page (error/notfound template).
  */
 function XmlProductDescription() {
     var GetProductResult = new dw.system.Pipelet('GetProduct').execute({
@@ -80,5 +81,9 @@ function WriteReview() {
 /*
  * Web exposed methods
  */
+/** Renders a product XML description based on the given ID.
+ * @see module:controllers/PowerReviews~XmlProductDescription */
 exports.XmlProductDescription   = g.get(XmlProductDescription);
+/** Renders a form to create a product review.
+ * @see module:controllers/PowerReviews~WriteReview */
 exports.WriteReview             = g.httpsGet(WriteReview);

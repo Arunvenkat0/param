@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * This controller displays credit card and other payment information and
+ * Controller that displays credit card and other payment information and
  * lets the user change it.
  *
  * @module controllers/PaymentInstruments
@@ -17,8 +17,12 @@ var guard = require('~/cartridge/scripts/guard');
 
 
 /**
+ * Displays a list of customer payment instruments.
+ *
+ * Gets customer payment instrument information. Clears the paymentinstruments form and adds the customer
+ * payment information to it. Updates the page metadata.
  * Renders a list of the saved credit card payment instruments of the current
- * customer.
+ * customer (account/payment/paymentinstrumentlist template).
  */
 function list() {
     var wallet = customer.getProfile().getWallet();
@@ -38,9 +42,10 @@ function list() {
 
 
 /**
- * Provides functionality to add a new credit card payment instrument to the
- * saved payment instruments of the current customer.
- *
+ * Adds a new credit card payment instrument to the saved payment instruments of the current customer.
+ * Sets the ContinueURL to PaymentInstruments-PaymentForm and renders the payment instrument details page
+ * (account/payment/paymentinstrumentdetails template).
+ * __Note:__this function is called by the {@link module:controllers/PaymentInstruments~handlePaymentForm|handlePaymentForm} function.
  * @param {boolean} clearForm true or missing clears the form before displaying the page, false skips it
  */
 function add(clearForm) {
@@ -58,7 +63,11 @@ function add(clearForm) {
 }
 
 /**
- * Handles the submitted form for creating payment instruments.
+ * Form handler for the paymentinstruments form. Handles the following actions:
+ * - __create__ - calls the {@link module:controllers/PaymentInstruments~create|create} function to create a payment instrument
+ * and redirects to {@link module:controllers/PaymentInstruments~list|list}. If the
+ * creation fails, calls the {@link module:controllers/PaymentInstruments~add|add} function with a clearform value of false.
+ * - __error__ - calls the {@link module:controllers/PaymentInstruments~add|add} function with a clearform value of false.
  */
 function handlePaymentForm() {
     var paymentForm = app.getForm('paymentinstruments');
@@ -76,7 +85,12 @@ function handlePaymentForm() {
         }
     });
 }
-
+/**
+ * Saves a  customer credit card payment instrument.
+ * @param {Object} params
+ * @param {dw.customer.CustomerPaymentInstrument} params.PaymentInstrument - credit card object.
+ * @param {dw.web.FormGroup} params.CreditCardFormFields - new credit card form.
+ */
 function save(params) {
     var saveCustomerCreditCard = require('app_storefront_core/cartridge/scripts/checkout/SaveCustomerCreditCard');
     var result = saveCustomerCreditCard.save(params);
@@ -86,8 +100,15 @@ function save(params) {
 }
 
 /**
- * Creates a new payment instrument
- * @return {boolean} True in case of success, false otherwise
+ * Creates a new payment instrument. Verifies the credit card and checks if it is a duplicate of
+ * a card already in the current customer's payment instruments. In a transaction, the function
+ * attempts to save the credit card to the customer's payment instruments. If a duplicate card was
+ * detected, the original card is removed after the new card is created. If the card cannot be created
+ * successfully, the transaction is rolled back. Whether successful or not, the paymentinstruments
+ * form is cleared.
+ *
+ * @transaction
+ * @return {boolean} true if the credit card can be verified, false otherwise
  */
 function create() {
     if (!verifyCreditCard()) {
@@ -138,9 +159,15 @@ function create() {
 
 
 /**
- * Deletes a saved credit card payment instrument.
+ * Form handler for the paymentinstruments form. Handles the following actions:
+ * - __remove__ - uses the form and action supplied by the FormModel to remove a customer payment instrument
+ * in a transaction.
+ * - __error__ - does nothing.
  *
+ * In either case, redirects to the {@link module:controllers/PaymentInstruments~list|List} function.
+ * @transaction
  * @TODO Should be moved into handlePaymentForm
+ * @FIXME Inner method should be lowercase.error action should do something
  */
 function Delete() {
     var paymentForm = app.getForm('paymentinstruments');
@@ -222,11 +249,15 @@ function verifyCreditCard() {
 /*
  * Web exposed methods
  */
-/** @see module:controllers/PaymentInstruments~list */
+/** Renders a list of the saved credit card payment instruments of the current customer.
+ * @see module:controllers/PaymentInstruments~list */
 exports.List = guard.ensure(['https', 'get', 'loggedIn'], list);
-/** @see module:controllers/PaymentInstruments~add */
+/** Adds a new credit card payment instrument to the saved payment instruments of the current customer.
+ * @see module:controllers/PaymentInstruments~add */
 exports.Add = guard.ensure(['https', 'get', 'loggedIn'], add);
-/** @see module:controllers/PaymentInstruments~handlePaymentForm */
+/** Handles the submitted form for creating payment instruments.
+ * @see module:controllers/PaymentInstruments~handlePaymentForm */
 exports.PaymentForm = guard.ensure(['https', 'post', 'loggedIn'], handlePaymentForm);
-/** @see module:controllers/PaymentInstruments~Delete */
+/** Deletes a saved credit card payment instrument.
+ * @see module:controllers/PaymentInstruments~Delete */
 exports.Delete = guard.ensure(['https', 'loggedIn'], Delete);
