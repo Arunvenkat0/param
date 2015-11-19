@@ -238,17 +238,14 @@
 					value-error="productlist.eventyearerror">
 				<options>
 					<option optionid="" label="" value=""/>
-					<option optionid="2008" label="year.2008" value="2008"/>
-					<option optionid="2009" label="year.2009" value="2009"/>
-					<option optionid="2010" label="year.2010" value="2010"/>
-					<option optionid="2011" label="year.2011" value="2011"/>
-					<option optionid="2012" label="year.2012" value="2012"/>
-					<option optionid="2013" label="year.2013" value="2013"/>
-					<option optionid="2014" label="year.2014" value="2014"/>
 					<option optionid="2015" label="year.2015" value="2015"/>
 					<option optionid="2016" label="year.2016" value="2016"/>
 					<option optionid="2017" label="year.2017" value="2017"/>
 					<option optionid="2018" label="year.2018" value="2018"/>
+					<option optionid="2019" label="year.2019" value="2019"/>
+					<option optionid="2020" label="year.2020" value="2020"/>
+					<option optionid="2021" label="year.2021" value="2021"/>
+					<option optionid="2022" label="year.2022" value="2022"/>
 				</options>
 			</field>
 
