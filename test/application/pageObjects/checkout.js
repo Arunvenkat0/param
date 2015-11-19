@@ -27,97 +27,102 @@ export const RADIO_BTN_PAYPAL = 'input[value="PayPal"]';
 export const CHECKOUT_PROGRESS = '.checkout-progress-indicator .active';
 export const USE_AS_BILLING_ADDR = '[name*="shippingAddress_useAsBillingAddress"]';
 export const SAVED_ADDRESSES_SELECT_MENU = '[name*=singleshipping_addressList]';
+export const DISCOVER_CARD = 'option[value*=Discover]';
 
 const basePath = '/checkout';
 
 export function navigateTo () {
-	return client.url(basePath);
+    return client.url(basePath);
 }
 
 export function pressBtnCheckoutAsGuest () {
-	return client.click('[name*="login_unregistered"]')
-		.waitForVisible(BREADCRUMB_SHIPPING);
+    return client.click('[name*="login_unregistered"]')
+        .waitForVisible(BREADCRUMB_SHIPPING);
 }
 
 export function fillOutShippingForm (shippingData) {
-	let fieldTypes = new Map();
-	let fieldsPromise = [];
+    let fieldTypes = new Map();
+    let fieldsPromise = [];
 
-	fieldTypes.set('firstName', 'input');
-	fieldTypes.set('lastName', 'input');
-	fieldTypes.set('address1', 'input');
-	fieldTypes.set('address2', 'input');
-	fieldTypes.set('country', 'selectByValue');
-	fieldTypes.set('states_state', 'selectByValue');
-	fieldTypes.set('city', 'input');
-	fieldTypes.set('postal', 'input');
-	fieldTypes.set('phone', 'input');
-	fieldTypes.set('addressList', 'selectByValue');
+    fieldTypes.set('firstName', 'input');
+    fieldTypes.set('lastName', 'input');
+    fieldTypes.set('address1', 'input');
+    fieldTypes.set('address2', 'input');
+    fieldTypes.set('country', 'selectByValue');
+    fieldTypes.set('states_state', 'selectByValue');
+    fieldTypes.set('city', 'input');
+    fieldTypes.set('postal', 'input');
+    fieldTypes.set('phone', 'input');
+    fieldTypes.set('addressList', 'selectByValue');
 
-	_.each(shippingData, (value, key) => {
-		let prefix = '[name*=';
+    _.each(shippingData, (value, key) => {
+        let prefix = '[name*=';
 
-		switch (key) {
-			case 'addressList':
-				prefix += 'singleshipping_';
-				break;
-			default:
-				prefix += 'shippingAddress_addressFields_';
-		}
+        switch (key) {
+            case 'addressList':
+                prefix += 'singleshipping_';
+                break;
+            default:
+                prefix += 'shippingAddress_addressFields_';
+        }
 
-		let selector = prefix + key + ']';
-		fieldsPromise.push(formHelpers.populateField(selector, value, fieldTypes.get(key)));
-	});
-	return Promise.all(fieldsPromise);
+        let selector = prefix + key + ']';
+        fieldsPromise.push(formHelpers.populateField(selector, value, fieldTypes.get(key)));
+    });
+    return Promise.all(fieldsPromise);
 }
 
 export function fillOutBillingForm (billingFields) {
-	let fieldTypes = new Map();
-	let fieldsPromise = [];
+    let fieldTypes = new Map();
+    let fieldsPromise = [];
 
-	fieldTypes.set('emailAddress', {
-		type: 'input',
-		fieldPrefix: 'billing_billingAddress_email_'
-	});
-	fieldTypes.set('creditCard_owner', {
-		type: 'input',
-		fieldPrefix: 'billing_paymentMethods_'
-	});
-	fieldTypes.set('creditCard_number', {
-		type: 'input',
-		fieldPrefix: 'billing_paymentMethods_'
-	});
-	fieldTypes.set('creditCard_expiration_year', {
-		type: 'selectByValue',
-		fieldPrefix: 'billing_paymentMethods_'
-	});
-	fieldTypes.set('creditCard_cvn', {
-		type: 'input',
-		fieldPrefix: 'billing_paymentMethods_'
-	});
+    fieldTypes.set('emailAddress', {
+        type: 'input',
+        fieldPrefix: 'billing_billingAddress_email_'
+    });
+    fieldTypes.set('creditCard_owner', {
+        type: 'input',
+        fieldPrefix: 'billing_paymentMethods_'
+    });
+    fieldTypes.set('creditCard_type', {
+        type: 'selectByValue',
+        fieldPrefix: 'billing_paymentMethods_'
+    });
+    fieldTypes.set('creditCard_number', {
+        type: 'input',
+        fieldPrefix: 'billing_paymentMethods_'
+    });
+    fieldTypes.set('creditCard_expiration_year', {
+        type: 'selectByValue',
+        fieldPrefix: 'billing_paymentMethods_'
+    });
+    fieldTypes.set('creditCard_cvn', {
+        type: 'input',
+        fieldPrefix: 'billing_paymentMethods_'
+    });
 
-	_.each(billingFields, (value, key) => {
-		let fieldType = fieldTypes.get(key).type;
-		let selector = '[name*=' + key + ']';
-		fieldsPromise.push(formHelpers.populateField(selector, value, fieldType));
-	});
+    _.each(billingFields, (value, key) => {
+        let fieldType = fieldTypes.get(key).type;
+        let selector = '[name*=' + key + ']';
+        fieldsPromise.push(formHelpers.populateField(selector, value, fieldType));
+    });
 
-	return Promise.all(fieldsPromise);
+    return Promise.all(fieldsPromise);
 }
 
 export function checkUseAsBillingAddress () {
-	return common.clickCheckbox(USE_AS_BILLING_ADDR);
+    return common.clickCheckbox(USE_AS_BILLING_ADDR);
 }
 
 export function getLabelOrderConfirmation () {
-	return client.getText(LABEL_ORDER_THANK_YOU);
+    return client.getText(LABEL_ORDER_THANK_YOU);
 }
 
 export function getActiveBreadCrumb () {
-	return client.waitForExist(CHECKOUT_PROGRESS)
-		.getText(CHECKOUT_PROGRESS);
+    return client.waitForExist(CHECKOUT_PROGRESS)
+        .getText(CHECKOUT_PROGRESS);
 }
 
 export function getOrderSubTotal () {
-	return client.getText(CSS_ORDER_SUBTOTAL);
+    return client.getText(CSS_ORDER_SUBTOTAL);
 }

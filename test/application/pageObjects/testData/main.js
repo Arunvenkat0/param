@@ -12,7 +12,14 @@ import * as pricingHelpers from '../helpers/pricing';
 
 export const defaultPassword = 'Test123!';
 export const creditCard1 = {
+    cardType: 'Visa',
     number: '4111111111111111',
+    yearIndex: _getCurrentYear() + 1,
+    cvn: 987
+};
+export const creditCard2 = {
+    cardType: 'Discover',
+    number: '6011111111111117',
     yearIndex: _getCurrentYear() + 1,
     cvn: 987
 };
