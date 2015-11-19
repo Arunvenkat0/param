@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Handles all customer login related storefront processes.
+ * Controller for all customer login storefront processes.
  *
  * @module controllers/Login
  */
@@ -67,8 +67,9 @@ function show() {
 }
 
 /**
- * Internal function which reads the URL that should be redirected to after successful login
+ * Internal function that reads the URL that should be redirected to after successful login
  * @return {dw.web.Url} The URL to redirect to in case of success
+ * or {@link module:controllers/Account~Show|Account controller Show function} in case of failure.
  */
 function getTargetUrl () {
     if (session.custom.TargetLocation) {
@@ -83,7 +84,16 @@ function getTargetUrl () {
 }
 
 /**
- * Handles the login form actions.
+ * Form handler for the login form. Handles the following actions:
+ * - __login__ - logs the customer in and renders the login page.
+ * If login fails, clears the login form and redirects to the original controller that triggered the login process.
+ * - __register__ - redirects to the {@link module:controllers/Account~startRegister|Account controller StartRegister function}
+ * - __findorder__ - if the ordertrack form does not contain order number, email, or postal code information, redirects to
+ * {@link module:controllers/Login~Show|Login controller Show function}. If the order information exists, searches for the order
+ * using that information. If the order cannot be found, renders the LoginView. Otherwise, renders the order details page
+ * (account/orderhistory/orderdetails template).
+ * - __search__ - calls the {@link module:controllers/GiftRegistry~searchGiftRegistry|GiftRegistry controller SearchGiftRegistry function}
+ * - __error__ - renders the LoginView.
  */
 function handleLoginForm () {
     var loginForm = app.getForm('login');
@@ -156,7 +166,12 @@ function handleLoginForm () {
 }
 
 /**
- * Handles the OAuth login form.
+ * Form handler for the oauthlogin form. Handles the following actions:
+ * - __login__ - Starts the process of authentication via an external OAuth2 provider.
+ * Uses the OAuthProvider property in the httpParameterMap to determine which provider to initiate authentication with.
+ * Redirects to the provider web page where the customer initiates the actual user authentication.
+ * If no provider page is available, renders the LoginView.
+ * - __error__ - renders the LoginView.
  */
 function handleOAuthLoginForm() {
     var oauthLoginForm = app.getForm('oauthlogin');
@@ -188,7 +203,11 @@ function handleOAuthLoginForm() {
     });
 }
 
-
+/**
+ * Determines whether the request has an OAuth provider set. If it does, calls the
+ * {@link module:controllers/Login~handleOAuthLoginForm|handleOAuthLoginForm} function,
+ * if not, calls the {@link module:controllers/Login~handleLoginForm|handleLoginForm} function.
+ */
 function processLoginForm () {
     if (request.httpParameterMap.OAuthProvider.stringValue) {
         handleOAuthLoginForm();
@@ -200,7 +219,7 @@ function processLoginForm () {
 
 /**
  * This is a central place to login a user from the login form.
- * @deprecated Only kept until all controllers are migrated, functionality has been moved to other methods
+ * @deprecated Only kept until all controllers are migrated, as functionality has been moved to other methods
  */
 function process() {
     // handle OAuth login
@@ -236,16 +255,31 @@ function process() {
         return success;
     }
 }
-
+/**
+ * Invalidates the oauthlogin form.
+ * Calls the {@link module:controllers/Login~finishOAuthLogin|finishOAuthLogin} function.
+*/
 function oAuthFailed() {
     app.getForm('oauthlogin').get('loginsucceeded').invalidate();
     finishOAuthLogin();
 }
+/**
+ * Clears the oauthlogin form.
+ * Calls the {@link module:controllers/Login~finishOAuthLogin|finishOAuthLogin} function.
+*/
 function oAuthSuccess() {
     app.getForm('oauthlogin').clear();
     finishOAuthLogin();
 }
-
+/**
+ * This function is called after authentication by an external oauth provider.
+ * If the user is successfully authenticated, the provider returns an authentication code,
+ * this function exchanges the code for a token and with that token requests  the user information specified by
+ *  the configured scope (id, first/last name, email, etc.) from the provider.
+ * If the token exchange succeeds, calls the {@link module:controllers/Login~oAuthSuccess|oAuthSuccess} function.
+ * If the token exchange fails, calls the {@link module:controllers/Login~oAuthFailed|oAuthFailed} function.
+ * The function also handles multiple error conditions and logs them.
+*/
 function handleOAuthReentry() {
     var FinalizeOAuthLoginResult = new Pipelet('FinalizeOAuthLogin').execute();
     if (FinalizeOAuthLoginResult.result === PIPELET_ERROR) {
@@ -380,10 +414,11 @@ function handleOAuthReentry() {
 }
 
 /**
- * Get Sina Weibo account into via addtional requests
- * @param  {String} accessToken The OAuth access token
- * @param  {String} userId      The OAuth user ID
- * @return {Object}             Account info
+ * Get Sina Weibo account via additional requests.
+ * Also handles multiple error conditions and logs them.
+ * @param  {String} accessToken The OAuth access token.
+ * @param  {String} userId      The OAuth user ID.
+ * @return {Object}             Account information.
  * @todo Migrate httpClient calls to dw.svc.*
  */
 function getSinaWeiboAccountInfo(accessToken, userId) {
@@ -445,7 +480,10 @@ function getSinaWeiboAccountInfo(accessToken, userId) {
 }
 
 /**
- * Internal helper to finish the OAuth login.
+ * Internal helper function to finish the OAuth login.
+ * Redirects user to the location set in either the
+ * {@link module:controllers/Login~handleOAuthLoginForm|handleOAuthLoginForm} function or
+ * {@link module:controllers/Login~process|process} function.
  */
 function finishOAuthLogin() {
     // To continue to the destination that is already preserved in the session.
@@ -453,7 +491,10 @@ function finishOAuthLogin() {
     delete session.custom.ContinuationURL;
     response.redirect(location);
 }
-
+/**
+ * Logs the customer out and clears the login and profile forms.
+ * Calls the {@link module:controllers/Account~Show|Account controller Show function}.
+ */
 function Logout() {
     Customer.logout();
 
@@ -470,34 +511,40 @@ function Logout() {
 /*
  * Web exposed methods
  */
-/** @see module:controllers/Login~show */
+/** Contains the login page preparation and display.
+ * @see module:controllers/Login~show */
 exports.Show                    = guard.ensure(['https'], show);
-/** @see module:controllers/Login~handleLoginForm */
+/** Determines whether the request has an OAuth provider set.
+ * @see module:controllers/Login~processLoginForm */
 exports.LoginForm               = guard.ensure(['https','post'], processLoginForm);
-/** @see module:controllers/Login~handleOAuthLoginForm */
+/** Form handler for the oauthlogin form.
+ * @see module:controllers/Login~handleOAuthLoginForm */
 exports.OAuthLoginForm          = guard.ensure(['https','post'], handleOAuthLoginForm);
-/** @see module:controllers/Login~handleOAuthReentry */
+/** Exchanges a user authentication code for a token and requests user information from an OAUTH provider.
+ * @see module:controllers/Login~handleOAuthReentry */
 exports.OAuthReentry            = guard.ensure(['https','get'], handleOAuthReentry);
-/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login.OAuthReentry} instead */
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login~handleOAuthReentry|handleOAuthReentry} instead */
 exports.OAuthReentryLinkedIn    = guard.ensure(['https','get'], handleOAuthReentry);
-/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login.OAuthReentry} instead */
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login~handleOAuthReentry|handleOAuthReentry} instead */
 exports.OAuthReentryGoogle      = guard.ensure(['https','get'], handleOAuthReentry);
-/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login.OAuthReentry} instead */
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login~handleOAuthReentry|handleOAuthReentry} instead */
 exports.OAuthReentryGooglePlus  = guard.ensure(['https','get'], handleOAuthReentry);
-/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login.OAuthReentry} instead */
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login~handleOAuthReentry|handleOAuthReentry} instead */
 exports.OAuthReentryMicrosoft   = guard.ensure(['https','get'], handleOAuthReentry);
-/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login.OAuthReentry} instead */
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login~handleOAuthReentry|handleOAuthReentry} instead */
 exports.OAuthReentryFacebook    = guard.ensure(['https','get'], handleOAuthReentry);
-/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login.OAuthReentry} instead */
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login~handleOAuthReentry|handleOAuthReentry} instead */
 exports.OAuthReentryGitHub      = guard.ensure(['https','get'], handleOAuthReentry);
-/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login.OAuthReentry} instead */
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login~handleOAuthReentry|handleOAuthReentry} instead */
 exports.OAuthReentrySinaWeibo   = guard.ensure(['https','get'], handleOAuthReentry);
-/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login.OAuthReentry} instead */
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login~handleOAuthReentry|handleOAuthReentry} instead */
 exports.OAuthReentryVKontakte   = guard.ensure(['https','get'], handleOAuthReentry);
-/** @see module:controllers/Login~show */
+/** Contains the login page preparation and display.
+ * @see module:controllers/Login~show */
 exports.Logout                  = guard.all(Logout);
 
 /*
  * Local methods
  */
+/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login~handleOAuthReentry|handleOAuthReentry} instead */
 exports.Process                 = process;
