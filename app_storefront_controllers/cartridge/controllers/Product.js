@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * This controller renders product detail pages and  snippets or includes used on product detail pages.
+ * Controller that renders product detail pages and snippets or includes used on product detail pages.
  * Also renders product tiles for product listings.
  *
  * @module controllers/Product
@@ -14,7 +14,11 @@ var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
 /**
- * Renders the product template.
+ * Renders the product page.
+ *
+ * If the product is online, gets a ProductView and updates the product data from the httpParameterMap.
+ * Renders the product page (product/product template). If the product is not online, sets the response status to 401,
+ * and renders an error page (error/notfound template).
  */
 function show() {
 
@@ -42,7 +46,11 @@ function show() {
 }
 
 /**
- * Renders the productdetail template.
+ * Renders the product detail page.
+ *
+ * If the product is online, gets a ProductView and updates the product data from the httpParameterMap.
+ * Renders the product detail page (product/productdetail template). If the product is not online, sets the response status to 401,
+ * and renders an error page (error/notfound template).
  */
 function detail() {
 
@@ -69,9 +77,11 @@ function detail() {
 }
 
 /**
- * Returns product availability data as a JSON object. Called via product.js
- * (reloadAvailability). Input: pid (required) - product ID quantity (required) -
- * the quantity to use for determining availability
+ * Returns product availability data as a JSON object.
+ *
+ * Gets a ProductModel and gets the product ID from the httpParameterMap. If the product is online,
+ * renders product availability data as a JSON object.
+ * If the product is not online, sets the response status to 401,and renders an error page (error/notfound template).
  */
 function getAvailability() {
 
@@ -92,7 +102,10 @@ function getAvailability() {
 }
 
 /**
- * Renders a product tile, used within family and search result pages.
+ * Renders a product tile. This is used within recommendation and search grid result pages.
+ *
+ * Gets a ProductModel and gets a product using the product ID in the httpParameterMap.
+ * If the product is online, renders a product tile (product/producttile template), used within family and search result pages.
  */
 function hitTile() {
 
@@ -116,8 +129,13 @@ function hitTile() {
 }
 
 /**
- * Renders a navigation include on product detail pages. Provides next/back links for customers to traverse a product
- * list, like search result list etc.
+ * Renders a navigation include on product detail pages.
+ *
+ * Gets a ProductModel and gets a product using the product ID in the httpParameterMap.
+ * If the product is online, constructs a search and paging model, executes the search,
+ * and renders a navigation include on product detail pages (search/productnav template).
+ * Also provides next/back links for customers to traverse a product
+ * list, such as a search result list.
  */
 function productNavigation() {
 
@@ -174,7 +192,13 @@ function productNavigation() {
 }
 
 /**
- * Renders variation selection controls for the given PID.
+ * Renders variation selection controls for a given product ID, taken from the httpParameterMap.
+ *
+ * If the product is online, updates variation information and gets the selected variant. If it is an ajax request, renders the
+ * product content page (product/productcontent template), otherwise renders the product page (product/product template).
+ * If it is a bonus product, gets information about the bonus discount line item and renders the bonus product include page
+ * (pageproduct/components/bonusproduct template). If the product is offline, sets the request status to 401 and renders an
+ * error page (error/notfound template).
  */
 function variation() {
 
@@ -231,7 +255,12 @@ function variation() {
 }
 
 /**
- * Renders variation selection controls for the product set item identified by the given PID.
+ * Renders variation selection controls for the product set item identified by a given product ID, taken from the httpParameterMap.
+ *
+ * If the product is online, updates variation information and gets the selected variant. If it is an ajax request, renders the
+ * product set page (product/components/productsetproduct template), otherwise renders the product page (product/product template).
+ *  If the product is offline, sets the request status to 401 and renders an error page (error/notfound template).
+ *
  */
 function variationPS() {
 
@@ -266,7 +295,7 @@ function variationPS() {
 }
 
 /**
- * Renders the last visited products based on the session information.
+ * Renders the last visited products based on the session information (product/lastvisited template).
  */
 function includeLastVisited() {
     app.getView({
@@ -275,7 +304,7 @@ function includeLastVisited() {
 }
 
 /**
- * Renders a list of bonus products for a bonus discount line item.
+ * Renders a list of bonus products for a bonus discount line item (product/bonusproductgrid template).
  */
 function getBonusProducts() {
     var Cart = app.getModel('Cart');
@@ -296,8 +325,10 @@ function getBonusProducts() {
 }
 
 /**
- * Renders a set item view for the given PID.
- */
+ * Renders a set item view for a given product ID, taken from the httpParameterMap pid parameter.
+ * If the product is online, get a ProductView and renders the product set page (product/components/productsetproduct template).
+*  If the product is offline, sets the request status to 401 and renders an error page (error/notfound template).
+*/
 function getSetItem() {
 
     var Product = app.getModel('Product');
@@ -319,7 +350,8 @@ function getSetItem() {
 
 /**
  * Renders the product detail page within the context of a category.
- * Note: this function is not obsolete and must remain as it is used by hardcoded platform rewrite rules.
+ * Calls the {@link module:controllers/Product~show|show} function.
+ * __Important:__ this function is not obsolete and must remain as it is used by hardcoded platform rewrite rules.
  */
 function showInCategory() {
     show();
@@ -328,25 +360,36 @@ function showInCategory() {
 /*
  * Web exposed methods
  */
-/** @see module:controllers/Product~show */
+/** Renders the product template.
+ * @see module:controllers/Product~show */
 exports.Show                = guard.ensure(['get'], show);
-/** @see module:controllers/Product~showInCategory */
+/** Renders the product detail page within the context of a category.
+ * @see module:controllers/Product~showInCategory */
 exports.ShowInCategory      = guard.ensure(['get'], showInCategory);
-/** @see module:controllers/Product~detail */
+/** Renders the productdetail template.
+ * @see module:controllers/Product~detail */
 exports.Detail              = guard.ensure(['get'], detail);
-/** @see module:controllers/Product~getAvailability */
+/** Returns product availability data as a JSON object.
+ * @see module:controllers/Product~getAvailability */
 exports.GetAvailability     = guard.ensure(['get'], getAvailability);
-/** @see module:controllers/Product~hitTile */
+/** Renders a product tile, used within family and search result pages.
+ * @see module:controllers/Product~hitTile */
 exports.HitTile             = guard.ensure(['get'], hitTile);
-/** @see module:controllers/Product~productNavigation */
+/** Renders a navigation include on product detail pages.
+ * @see module:controllers/Product~productNavigation */
 exports.Productnav          = guard.ensure(['get'], productNavigation);
-/** @see module:controllers/Product~variation */
+/** Renders variation selection controls for a given product ID.
+ * @see module:controllers/Product~variation */
 exports.Variation           = guard.ensure(['get'], variation);
-/** @see module:controllers/Product~variationPS */
+/** Renders variation selection controls for the product set item identified by the given product ID.
+ * @see module:controllers/Product~variationPS */
 exports.VariationPS         = guard.ensure(['get'], variationPS);
-/** @see module:controllers/Product~includeLastVisited */
+/** Renders the last visited products based on the session information.
+ * @see module:controllers/Product~includeLastVisited */
 exports.IncludeLastVisited  = guard.ensure(['get'], includeLastVisited);
-/** @see module:controllers/Product~getBonusProducts */
+/** Renders a list of bonus products for a bonus discount line item.
+ * @see module:controllers/Product~getBonusProducts */
 exports.GetBonusProducts    = guard.ensure(['get'], getBonusProducts);
-/** @see module:controllers/Product~getSetItem */
+/** Renders a set item view for the given product ID.
+ * @see module:controllers/Product~getSetItem */
 exports.GetSetItem          = guard.ensure(['get'], getSetItem);
