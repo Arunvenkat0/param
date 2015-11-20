@@ -212,7 +212,7 @@ function verifyCreditCard() {
         var status = VerifyPaymentCardResult.Status;
 
         // Verify existence of a status object and a valid credit card form.
-        if (!status || !newCreditCardForm.valid()) {
+        if (!status || !newCreditCardForm.isValid()) {
             return false;
         }
 
