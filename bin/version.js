@@ -28,7 +28,7 @@ var files = [
 	'pom.xml'
 ];
 
-var newVersion = require('@tridnguyen/version')();
+var newVersion = require('@tridnguyen/version').version('./');
 var currentVersion = fs.readFileSync('./old_version', 'utf8').replace(/\n$/, '');
 
 // use this for testing
@@ -42,10 +42,10 @@ if (!currentVersion || !newVersion) {
 }
 
 files.forEach(function (filepath) {
-	fs.readFile(path.join(__dirname, filepath), function (err, data) {
+	fs.readFile(path.join(__dirname, '../', filepath), function (err, data) {
 		if (err) {throw err;}
 		var content = data.toString().replace(new RegExp(currentVersion, 'g'), newVersion);
-		fs.writeFile(path.join(__dirname, filepath), content, function (err) {
+		fs.writeFile(path.join(__dirname, '../', filepath), content, function (err) {
 			if (err) {throw err;}
 			console.log('Updated version in file ' + filepath);
 		});
