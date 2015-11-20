@@ -22,7 +22,14 @@ var guard = require('~/cartridge/scripts/guard');
  */
 function show() {
 
-    var product = app.getModel('Product').get(params.pid.stringValue);
+    var Product = app.getModel('Product');
+    var product = Product.get(params.pid.stringValue);
+    var variationModel = product.updateVariationSelection(params);
+    var selectedVariant = variationModel.getSelectedVariant();
+
+    if (selectedVariant) {
+        product = Product.get(selectedVariant);
+    }
 
     if (product.isVisible()) {
         require('~/cartridge/scripts/meta').update(product);
