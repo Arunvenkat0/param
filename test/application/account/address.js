@@ -1,5 +1,8 @@
 'use strict';
 
+/**
+ * Requirement : Home and Work addresses for the test user should be available before test starts
+ */
 import {assert} from 'chai';
 import client from '../webdriver/client';
 import * as addressPage from '../pageObjects/addressBook';
