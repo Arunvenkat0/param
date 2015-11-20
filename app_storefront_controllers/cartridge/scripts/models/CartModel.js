@@ -397,16 +397,19 @@ var CartModel = AbstractModel.extend({
      * @returns {dw.order.BonusDiscountLineItem} The newly created bonus discount line item.
      */
     getNewBonusDiscountLineItem: function (previousBonusDiscountLineItems) {
-        if (previousBonusDiscountLineItems) {
-            var newBonusDiscountLineItems = this.getBonusDiscountLineItems();
+        var newBonusDiscountLineItems = this.getBonusDiscountLineItems();
+        var newBonusDiscountLineItem;
 
-            if (newBonusDiscountLineItems.size()) {
-                newBonusDiscountLineItems.removeAll(previousBonusDiscountLineItems);
-                return newBonusDiscountLineItems[0];
+        var iter = newBonusDiscountLineItems.iterator();
+        while (iter.hasNext()) {
+            var newItem = iter.next();
+            // if there is a new discount line item, return it right away
+            if (!previousBonusDiscountLineItems.contains(newBonusDiscountLineItems)) {
+                newBonusDiscountLineItem = newItem;
+                break;
             }
         }
-
-        return;
+       return newBonusDiscountLineItem;
     },
 
     /**
