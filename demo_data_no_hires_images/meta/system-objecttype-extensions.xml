@@ -4396,6 +4396,15 @@ The Search Preferences&gt;Search Suggestion option is set to Disabled by default
                 <min-length>0</min-length>
                 <default-value>usd-list-prices</default-value>
             </attribute-definition>
+	    <attribute-definition attribute-id="rateLimiterThreshold">
+		<display-name xml:lang="x-default">Rate Limiter Threshold</display-name>
+		<description xml:lang="x-default">This number indicates the number of times failures for Logins, GiftCert Balances, and Order Tracking requests will be allowed before displaying a CAPTCHA-style pop-up rate limiter</description>
+		<type>int</type>
+		<mandatory-flag>false</mandatory-flag>
+		<externally-managed-flag>false</externally-managed-flag>
+		<min-value>0.0</min-value>
+		<default-value>5</default-value>
+	    </attribute-definition>
             <attribute-definition attribute-id="slideshoweffect">
                 <display-name xml:lang="x-default">Slide Slow effect</display-name>
                 <description xml:lang="x-default">Please visit http://jquery.malsup.com/cycle/browser.html for complete visual effects</description>
@@ -4580,6 +4589,7 @@ The Search Preferences&gt;Search Suggestion option is set to Disabled by default
                 <attribute attribute-id="storeLookupMaxDistance"/>
                 <attribute attribute-id="customerServiceEmail"/>
                 <attribute attribute-id="enhancedSearchSuggestions"/>
+		<attribute attribute-id="rateLimiterThreshold"/>
             </attribute-group>
         </group-definitions>
     </type-extension>

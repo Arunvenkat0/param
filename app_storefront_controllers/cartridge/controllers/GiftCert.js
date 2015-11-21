@@ -14,6 +14,7 @@ var Pipelet = require('dw/system/Pipelet');
 var Resource = require('dw/web/Resource');
 var Transaction = require('dw/system/Transaction');
 var URLUtils = require('dw/web/URLUtils');
+var RateLimiter = require('app_storefront_core/cartridge/scripts/util/RateLimiter');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
@@ -138,6 +139,11 @@ function edit() {
 function checkBalance() {
     var params = request.httpParameterMap;
 
+    // Check to see if the number of attempts has exceeded the session threshold
+    if (RateLimiter.isOverThreshold('GCBalanceCounter')) {
+        RateLimiter.showCaptcha();
+    }
+
     var giftCertificate = null;
 
     var giftCertID = params.giftCertID.stringValue || params.dwfrm_giftcert_balance_giftCertID.stringValue;
@@ -149,11 +155,13 @@ function checkBalance() {
         app.getView({
             GiftCertificate: giftCertificate
         }).render('checkout/giftcert/giftcertpurchase');
+        RateLimiter.hideCaptcha();
     } else {
         app.getView({
             ErrorMsg: Resource.msg('giftcertpurchase.checkinvalid', 'checkout', null)
         }).render('checkout/giftcert/giftcertpurchase');
     }
+
 }
 
 
