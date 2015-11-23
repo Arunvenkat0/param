@@ -4320,6 +4320,14 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
+            <attribute-definition attribute-id="checkTLS">
+                <display-name xml:lang="x-default">Check TLS</display-name>
+                <description xml:lang="x-default">When true, this causes a TLS check to take place based on whether or not a cookie ('dw_TLSWarning') has been set on the browser</description>
+                <type>boolean</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <default-value>false</default-value>
+            </attribute-definition>
             <attribute-definition attribute-id="countryCode">
                 <display-name xml:lang="x-default">Default Country Code</display-name>
                 <description xml:lang="x-default">Default country code for store searches</description>
@@ -4589,7 +4597,8 @@ The Search Preferences&gt;Search Suggestion option is set to Disabled by default
                 <attribute attribute-id="storeLookupMaxDistance"/>
                 <attribute attribute-id="customerServiceEmail"/>
                 <attribute attribute-id="enhancedSearchSuggestions"/>
-		<attribute attribute-id="rateLimiterThreshold"/>
+		        <attribute attribute-id="rateLimiterThreshold"/>
+                <attribute attribute-id="checkTLS"/>
             </attribute-group>
         </group-definitions>
     </type-extension>
