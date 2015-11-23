@@ -404,7 +404,7 @@ var CartModel = AbstractModel.extend({
         while (iter.hasNext()) {
             var newItem = iter.next();
             // if there is a new discount line item, return it right away
-            if (!previousBonusDiscountLineItems.contains(newBonusDiscountLineItems)) {
+            if (!previousBonusDiscountLineItems.contains(newItem)) {
                 newBonusDiscountLineItem = newItem;
                 break;
             }
