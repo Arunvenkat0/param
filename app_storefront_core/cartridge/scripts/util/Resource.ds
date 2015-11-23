@@ -198,7 +198,6 @@ ResourceHelper.getUrls = function(pageContext) {
         rateLimiterReset            : URLUtils.url('RateLimiter-HideCaptcha').toString()
     };
     return urls;
-
 }
 /**
  * Get the client-side preferences of a given page
