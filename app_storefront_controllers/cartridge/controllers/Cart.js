@@ -255,7 +255,7 @@ function submitForm() {
         pageMeta = require('~/cartridge/scripts/meta');
         pageMeta.update(cartAsset);
 
-        app.getView('Cart', formResult).render('checkout/cart/cart');
+        response.redirect(URLUtils.https('Cart-Show'));
     }
 }
 
