@@ -116,21 +116,23 @@ var ProfileModel = AbstractModel.extend(
         addAddressToAddressBook: function (addressToAdd) {
             var addressBook = this.getAddressBook();
             // Gets a possible equivalent address from the address book
-            var address = null;
-            var that    = this;
+            var that = this;
 
             dw.system.Transaction.wrap(function () {
+                var address;
                 if (addressToAdd) {
+                    var usedAddress;
                     //Checks if the address already exists in the address book
                     for (var i = 0; i < addressBook.addresses.length; i++) {
-                        address = addressBook.addresses[i];
-                        if (address.isEquivalentAddress(addressToAdd)) {
+                        usedAddress = addressBook.addresses[i];
+                        if (usedAddress.isEquivalentAddress(addressToAdd)) {
+                            address = usedAddress;
                             break;
                         }
                     }
 
                     // Creates the new address and copies the address attributes.
-                    if (address === null) {
+                    if (!address) {
                         // Gets a unique address ID.
                         var addressID = that.determineUniqueAddressID(addressToAdd.city);
 
@@ -155,9 +157,8 @@ var ProfileModel = AbstractModel.extend(
                     // or in the newly created address.
                     address.setPhone(addressToAdd.phone);
                 }
+                return address;
             });
-
-            return address;
         },
 
         /**
