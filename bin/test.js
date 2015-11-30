@@ -21,29 +21,34 @@ if (!argv.type) {
 	process.exit(1);
 }
 
-var type = argv.type;
-var timeout = argv.timeout;
-
-switch (type) {
+switch (argv.type) {
 	case 'application':
-		if (!timeout) {
-			timeout = 60000;
+		if (!argv.timeout) {
+			argv.timeout = 60000;
 		}
 		break;
 }
 
 var args = [
-	'test/' + type + '/' + folder + '/**/*.js',
+	'test/' + argv.type + '/' + folder + '/**/*.js',
 	'--compilers',
 	'js:babel-core/register',
 	'--reporter',
 	'spec'
 ];
 
-if (timeout) {
-	args.push('--timeout');
-	args.push(timeout);
-}
+var opts = ['timeout', 'client', 'url', 'host', 'port'];
 
-spawn('mocha', args, {stdio: 'inherit'});
+opts.forEach(function (opt) {
+	if (argv[opt]) {
+		args.push('--' + opt);
+		args.push(argv[opt]);
+	}
+});
+
+var mocha = spawn('mocha', args, {stdio: 'inherit'});
+
+mocha.on('close', function (code) {
+	process.exit(code);
+});
 
