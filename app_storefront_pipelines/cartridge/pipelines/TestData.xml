@@ -6,7 +6,7 @@
     <segment>
       <node>
         <text-node>
-          <description>Purpose:  Pipeline to reset test data in preparation for a test run</description>
+          <description>Purpose:  Replenish test data inventory in preparation for a UI test run</description>
         </text-node>
         <node-display x="1" y="0"/>
       </node>
@@ -17,48 +17,6 @@
       <node>
         <start-node call-mode="private" name="Reset" secure="false"/>
         <node-display x="2" y="0"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <pipelet-node pipelet-name="ImportCatalog" pipelet-set-identifier="bc_api">
-          <key-binding alias="&quot;testdata/catalog/apparel.xml&quot;" key="ImportFile"/>
-          <key-binding alias="&quot;MERGE&quot;" key="ImportMode"/>
-          <key-binding alias="null" key="ErrorCode"/>
-          <key-binding alias="null" key="ErrorMsg"/>
-          <key-binding alias="null" key="LogFileName"/>
-          <key-binding alias="null" key="Status"/>
-          <key-binding alias="{replaceCustomAttributes:true}" key="ImportConfiguration"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="error">
-          <transition target-connector="in1" target-path="./+1">
-            <transition-display>
-              <bend-point relative-to="source" x="1" y="0"/>
-              <bend-point relative-to="target" x="1" y="0"/>
-            </transition-display>
-          </transition>
-        </branch>
-      </node>
-      <simple-transition/>
-      <node>
-        <pipelet-node pipelet-name="ImportCatalog" pipelet-set-identifier="bc_api">
-          <key-binding alias="&quot;testdata/catalog/electronics.xml&quot;" key="ImportFile"/>
-          <key-binding alias="&quot;MERGE&quot;" key="ImportMode"/>
-          <key-binding alias="null" key="ErrorCode"/>
-          <key-binding alias="null" key="ErrorMsg"/>
-          <key-binding alias="null" key="LogFileName"/>
-          <key-binding alias="null" key="Status"/>
-          <key-binding alias="{replaceCustomAttributes:true}" key="ImportConfiguration"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-        <branch basename="b3" source-connector="error">
-          <transition target-connector="in1" target-path="./+1">
-            <transition-display>
-              <bend-point relative-to="source" x="1" y="0"/>
-              <bend-point relative-to="target" x="1" y="0"/>
-            </transition-display>
-          </transition>
-        </branch>
       </node>
       <simple-transition>
         <transition-display>
@@ -75,27 +33,7 @@
           <key-binding alias="null" key="Status"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
-        <branch basename="b4" source-connector="error">
-          <transition target-connector="in1" target-path="./+1">
-            <transition-display>
-              <bend-point relative-to="source" x="1" y="0"/>
-              <bend-point relative-to="target" x="1" y="0"/>
-            </transition-display>
-          </transition>
-        </branch>
-      </node>
-      <simple-transition/>
-      <node>
-        <pipelet-node pipelet-name="ImportPriceBooks" pipelet-set-identifier="bc_api">
-          <key-binding alias="&quot;testdata/pricebook/pricebooks.xml&quot;" key="ImportFile"/>
-          <key-binding alias="&quot;MERGE&quot;" key="ImportMode"/>
-          <key-binding alias="null" key="ErrorCode"/>
-          <key-binding alias="null" key="ErrorMsg"/>
-          <key-binding alias="null" key="LogFileName"/>
-          <key-binding alias="null" key="Status"/>
-        </pipelet-node>
-        <node-display x="0" y="1"/>
-        <branch basename="b5" source-connector="error">
+        <branch basename="b2" source-connector="error">
           <transition target-connector="in1" target-path="./+1">
             <transition-display>
               <bend-point relative-to="source" x="1" y="0"/>
@@ -119,36 +57,6 @@
       <node>
         <end-node/>
         <node-display x="0" y="1"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_3">
-    <segment>
-      <node>
-        <text-node>
-          <description>Apparel</description>
-        </text-node>
-        <node-display x="1" y="1"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_4">
-    <segment>
-      <node>
-        <text-node>
-          <description>Electronics</description>
-        </text-node>
-        <node-display x="1" y="2"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_5">
-    <segment>
-      <node>
-        <text-node>
-          <description>Currently, the REPLACE importMode does not appear to be functional.  For the time-being, we need to perform a DELETE then MERGE until the bug is fixed.</description>
-        </text-node>
-        <node-display height="4" x="1" y="3"/>
       </node>
     </segment>
   </branch>

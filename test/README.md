@@ -62,16 +62,16 @@ The tests are contained in suites, which are represented as directories. For exa
 ```
 
 1. Use a WebDAV client (i.e. Cyberduck at https://cyberduck.io/) to upload the
-testdata directory from the app_storefront/cartridge to the "Impex/src"
-directory of your sandbox (https://&lt;sandbox_host&gt;/on/demandware.servlet/webdav/Sites/Impex/src).
+**demo_data_no_hires_images/inventory-lists/inventory/inventory.xml** file to the "**Impex/src/testdata/inventory-list/**"
+directory of your sandbox (https://&lt;sandbox_host&gt;/on/demandware.servlet/webdav/Sites/Impex/src/testdata/inventory-list/).
 You will need to login with a valid Business Manager account that has been
 assigned the role of Administrator.
 
-1. Add the `app_storefront` cartridge to the Business Manager Sites-Site
+1. Add the `app_storefront_pipelines` cartridge to the Effective Cartridge Path of the Business Manager Sites-Site
 Settings:
     1. Go to **Business Manager > Administration > Manage Sites**
     1. Click on the Manage the **Business Manager** Site link
-    1. Set the **Cartridges** field to **app_storefront:bm_custom_plugin**
+    1. Set the **Cartridges** field to **app_storefront_pipelines:bm_custom_plugin**
 
 1. Update site url config and desired browser client in `test/application/webdriver/config.json`. For example:
 
