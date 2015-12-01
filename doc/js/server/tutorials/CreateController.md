@@ -2,7 +2,7 @@ Let's start simple and let's create a Hello World controller which we want to be
 
 ### Create the controller file
 
-Let's assume we have a cartridge `app_my` but of course it will work with any cartridge. Go to `app_my/cartridge/scripts/controllers` (simply create the directory first in case it is missing) and now create a new file called `Hello.ds`.
+Let's assume we have a cartridge `app_my` but of course it will work with any cartridge. Go to `app_my/cartridge/scripts/controllers` (simply create the directory first in case it is missing) and now create a new file called `Hello.js`.
 
 ### Defining a public endpoint
 
@@ -20,7 +20,7 @@ exports.World = require('~/cartridge/scripts/guard').ensure(['get'], world);
 
 Done!
 
-Now we can already see a while page at `http://dev01-realm-customer.demandware.net/on/demandware.store/Sites-SiteGenesis-Site/default/Hello-World`. Why is it white? Well we did not write anything to the response.
+Now we can already see a white page at `http://dev01-realm-customer.demandware.net/on/demandware.store/Sites-SiteGenesis-Site/default/Hello-World`. Why is it white? Well we did not write anything to the response.
 
 ### Generating the output
 
@@ -55,16 +55,19 @@ Now let's create an ISML template called `helloworld.isml` (in `my_app/cartridge
 In order to render this template from the controller you can now simply do.
 
 ```
+var guard = require('~/cartridge/scripts/guard');
+
 /**
- * The function which will handle the request
+ * The function which will handle the request.
  */
 function world(){
-    response.renderTemplate('helloworld', {
+    var ISML = require('dw/template/ISML');
+    ISML.renderTemplate('helloworld', {
         Heading : 'Hello World!'
     });
 }
 
-exports.World = require('~/cartridge/scripts/guard').ensure(['get'], world);
+exports.World = guard.ensure(['get'], world);
 ```
 
 **That's how you create controllers!**
