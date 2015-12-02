@@ -7,6 +7,7 @@
 
 var AbstractModel = require('./AbstractModel');
 var app = require('~/cartridge/scripts/app');
+var ProductMgr = require('dw/catalog/ProductMgr');
 
 /**
  * Product helper providing enhanced product functionality
@@ -54,6 +55,10 @@ var ProductModel = AbstractModel.extend(
            // Gets all variation-related parameters for the prefix.
             var params = parameterMap.getParameterMap(formPrefix + this.object.ID.replace(/_/g,'__') + '_');
             var paramNames = params.getParameterNames();
+
+            if (this.isProductSet() || this.isBundle()) {
+                return;
+            }
 
             if (!paramNames.getLength() && this.object.variationModel) {
                 return this.object.variationModel;
@@ -384,7 +389,7 @@ var ProductModel = AbstractModel.extend(
 ProductModel.get = function (parameter) {
     var obj = null;
     if (typeof parameter === 'string') {
-        obj = dw.catalog.ProductMgr.getProduct(parameter);
+        obj = ProductMgr.getProduct(parameter);
     } else if (typeof parameter === 'object') {
         obj = parameter;
     }
