@@ -1099,12 +1099,15 @@ var CartModel = AbstractModel.extend({
         var defaultShippingSet = false;
         var productRelations;
 
+        var bdli = this.getBonusDiscountLineItems()[0];
+
         for (var i = 0; i < quantityLineItems.getChildCount(); i++) {
             var qli = quantityLineItems[i];
             var selectedAddress = qli.addressList.selectedOptionObject;
             var productId = qli.object.productID;
             var productOptionID = qli.object.optionID;
-            productId = productId + '.' + productOptionID;
+            var isBonusProduct = qli.object.bonusProductLineItem;
+            productId = productId + '.' + productOptionID + '.' + isBonusProduct;
 
             if (selectedAddress === null) {
                 return false;
@@ -1170,15 +1173,29 @@ var CartModel = AbstractModel.extend({
 
             var productId2 = '';
             var optionID = '';
+            var isProductBonus;
 
             for (var j = 0; j < products.length; j++) {
                 var product = products[j];
                 var splitarray = product.split('.');
                 productId2 = splitarray[0];
                 optionID = splitarray[1];
+                isProductBonus = splitarray[2];
 
-                pli = this.createProductLineItem(productId2, shipment);
-                pli.setQuantityValue(productRelations.get(product));
+                if (isProductBonus === 'true') {
+                    var productToAdd;
+                    for (var n = 0; n < bdli.bonusProducts.length; j++) {
+                        if (bdli.bonusProducts[n].ID === productId2) {
+                            productToAdd = bdli.bonusProducts[n];
+                            break;
+                        }
+                    }
+                    pli = this.createBonusProductLineItem(bdli, productToAdd, null, shipment);
+
+                } else {
+                    pli = this.createProductLineItem(productId2, shipment);
+                    pli.setQuantityValue(productRelations.get(product));
+                }
 
                 //Reassign the option product based on the optionID.
                 if (optionID !== 'na') {

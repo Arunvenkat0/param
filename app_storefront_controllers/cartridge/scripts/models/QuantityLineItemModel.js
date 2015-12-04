@@ -30,6 +30,8 @@ var QuantityLineItemModel = Class.extend(
         pliUUID: null,
         /** */
         optionID: null,
+        /** */
+        bonusProductLineItem: null,
 
         init: function (pli) {
 
@@ -37,6 +39,7 @@ var QuantityLineItemModel = Class.extend(
             this.lineItemText = pli.lineItemText;
             this.productID = pli.productID;
             this.pliUUID = pli.UUID;
+            this.bonusProductLineItem = pli.bonusProductLineItem;
 
             //Persists the optionID. If the product does not have an option, it is set to 'na'.
             if (pli.optionProductLineItems.size() > 0) {
