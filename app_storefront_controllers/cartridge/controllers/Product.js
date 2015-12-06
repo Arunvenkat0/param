@@ -24,12 +24,7 @@ function show() {
 
     var Product = app.getModel('Product');
     var product = Product.get(params.pid.stringValue);
-    var variationModel = product.updateVariationSelection(params);
-    var selectedVariant = variationModel.getSelectedVariant();
-
-    if (selectedVariant) {
-        product = Product.get(selectedVariant);
-    }
+    product = getSelectedProduct(product);
 
     if (product.isVisible()) {
         require('~/cartridge/scripts/meta').update(product);
@@ -209,19 +204,15 @@ function productNavigation() {
  */
 function variation() {
 
+    var currentVariationModel;
     var Product = app.getModel('Product');
     var product = Product.get(params.pid.stringValue);
     var resetAttributes = false;
 
+    product = getSelectedProduct(product);
+    currentVariationModel = product.updateVariationSelection(params);
+
     if (product.isVisible()) {
-
-        var currentVariationModel = product.updateVariationSelection(params);
-
-        var selectedVariant = currentVariationModel.getSelectedVariant();
-        if (selectedVariant) {
-            product = Product.get(selectedVariant);
-        }
-
         if (params.source.stringValue === 'bonus') {
             var Cart = app.getModel('Cart');
             var bonusDiscountLineItems = Cart.get().getBonusDiscountLineItems();
@@ -348,13 +339,16 @@ function getBonusProducts() {
 *  If the product is offline, sets the request status to 401 and renders an error page (error/notfound template).
 */
 function getSetItem() {
-
+    var currentVariationModel;
     var Product = app.getModel('Product');
     var product = Product.get(params.pid.stringValue);
+    product = getSelectedProduct(product);
+    currentVariationModel = product.updateVariationSelection(params);
 
     if (product.isVisible()) {
         app.getView('Product', {
             product: product,
+            CurrentVariationModel: currentVariationModel,
             isSet: true
         }).render('product/components/productsetproduct');
     } else {
@@ -364,6 +358,25 @@ function getSetItem() {
         app.getView().render('error/notfound');
     }
 
+}
+
+/**
+ * Checks whether a given product has all required attributes selected, and returns the selected variant if true
+ *
+ * @param {dw.catalog.Product} product
+ * @returns {dw.catalog.Product} - Either input product or selected product variant if all attributes selected
+ */
+function getSelectedProduct (product) {
+    var currentVariationModel = product.updateVariationSelection(params);
+
+    if (currentVariationModel) {
+        var selectedVariant = currentVariationModel.getSelectedVariant();
+        if (selectedVariant) {
+            product = app.getModel('Product').get(selectedVariant);
+        }
+    }
+
+    return product;
 }
 
 /**
