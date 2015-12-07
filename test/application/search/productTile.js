@@ -1,7 +1,6 @@
 'use strict';
 
 import {assert} from 'chai';
-import client from '../webdriver/client';
 import * as searchResultsPage from '../pageObjects/searchResults';
 import * as testData from '../pageObjects/testData/main';
 
@@ -19,13 +18,11 @@ describe('Search Results - Product Tile', () => {
 
     let displayPrice;
 
-    before(() => client.init()
-        .then(() => testData.load())
-        .then(() => client.url(categoryPath))
-        .waitForVisible(searchResultsPage.PRODUCTGRID_CONTAINER)
+    before(() => testData.load()
+        .then(() => browser.url(categoryPath)
+            .waitForVisible(searchResultsPage.PRODUCTGRID_CONTAINER)
+        )
     );
-
-    after(() => client.end());
 
     it('should display a single list price if a product has no sales prices and all variants prices are the same', () => {
         return searchResultsPage.getProductTilePricingByPid(productIdSinglePrice)
@@ -51,11 +48,11 @@ describe('Search Results - Product Tile', () => {
                 expectedListPrice = expectedPrice.list;
                 expectedSalePrice = expectedPrice.sale;
             })
-            .then(() => client.getText(productTile + ' ' + searchResultsPage.PRICE_LIST))
+        .then(() => browser.getText(productTile + ' ' + searchResultsPage.PRICE_LIST))
             .then(displayedListPrice => {
                 assert.equal(displayedListPrice, expectedListPrice);
             })
-            .then(() => client.getText(productTile + ' ' + searchResultsPage.PRICE_SALE))
+        .then(() => browser.getText(productTile + ' ' + searchResultsPage.PRICE_SALE))
             .then(displayedSalePrice => {
                 assert.equal(displayedSalePrice, expectedSalePrice);
             });

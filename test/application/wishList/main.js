@@ -1,8 +1,7 @@
 'use strict';
 
 import {assert} from 'chai';
-import client from '../webdriver/client';
-import config from '../webdriver/config';
+import {config} from '../webdriver/wdio.conf';
 import url from 'url';
 import * as cartPage from '../pageObjects/cart';
 import * as common from '../pageObjects/helpers/common';
@@ -14,11 +13,7 @@ import * as testData from '../pageObjects/testData/main';
 import * as wishListPage from '../pageObjects/wishList';
 
 describe('Wishlist', () => {
-	before(() => client.init()
-		.then(() => testData.load())
-	);
-
-	after(() => client.end());
+	before(() => testData.load());
 
 	describe('Send to Friend Links', () => {
 		let socialLinks = {
@@ -52,19 +47,19 @@ describe('Wishlist', () => {
 			},
 			shareLinkUrl: {
 				selector: '.share-link-content a',
-				baseUrl: config.url,
+				baseUrl: config.baseUrl,
 				regex: /.*\?.*WishListID=.+/
 			}
 		};
 
 		before(() => wishListPage.navigateTo()
-				.then(() => loginForm.loginAsDefaultCustomer())
+			.then(() => loginForm.loginAsDefaultCustomer())
 		);
 
 		after(() => navHeader.logout());
 
 		it('should display a Facebook icon and link', () =>
-			client.waitForExist(socialLinks.facebook.selector)
+			browser.waitForExist(socialLinks.facebook.selector)
 				.getAttribute(socialLinks.facebook.selector, 'href')
 				.then(href => {
 					assert.isTrue(href.startsWith(socialLinks.facebook.baseUrl));
@@ -73,7 +68,7 @@ describe('Wishlist', () => {
 		);
 
 		it('should display a Twitter icon and link', () =>
-			client.waitForExist(socialLinks.twitter.selector)
+			browser.waitForExist(socialLinks.twitter.selector)
 				.getAttribute(socialLinks.twitter.selector, 'href')
 				.then(href => {
 					assert.isTrue(href.startsWith(socialLinks.twitter.baseUrl));
@@ -82,7 +77,7 @@ describe('Wishlist', () => {
 		);
 
 		it('should display a Google Plus icon and link', () =>
-			client.waitForExist(socialLinks.googlePlus.selector)
+			browser.waitForExist(socialLinks.googlePlus.selector)
 				.getAttribute(socialLinks.googlePlus.selector, 'href')
 				.then(href => {
 					assert.isTrue(href.startsWith(socialLinks.googlePlus.baseUrl));
@@ -91,7 +86,7 @@ describe('Wishlist', () => {
 		);
 
 		it('should display a Pinterest icon and link', () =>
-			client.waitForExist(socialLinks.pinterest.selector)
+			browser.waitForExist(socialLinks.pinterest.selector)
 				.getAttribute(socialLinks.pinterest.selector, 'href')
 				.then(href => {
 					assert.isTrue(href.startsWith(socialLinks.pinterest.baseUrl));
@@ -100,7 +95,7 @@ describe('Wishlist', () => {
 		);
 
 		it('should display a Mail icon and link', () =>
-			client.waitForExist(socialLinks.emailLink.selector)
+			browser.waitForExist(socialLinks.emailLink.selector)
 				.getAttribute(socialLinks.emailLink.selector, 'href')
 				.then(href => {
 					assert.isTrue(href.startsWith(socialLinks.emailLink.baseUrl));
@@ -109,16 +104,16 @@ describe('Wishlist', () => {
 		);
 
 		it('should display a link icon', () =>
-			client.isExisting(socialLinks.shareLinkIcon.selector)
+			browser.isExisting(socialLinks.shareLinkIcon.selector)
 				.then(doesExist => assert.isTrue(doesExist))
 		);
 
 		it('should display a URL when chain icon clicked', () =>
-			client.click(wishListPage.CSS_SHARE_LINK)
+			browser.click(wishListPage.CSS_SHARE_LINK)
 				.waitForVisible(socialLinks.shareLinkUrl.selector)
 				.isVisible(socialLinks.shareLinkUrl.selector)
 				.then(visible => assert.isTrue(visible))
-				.then(() => client.getAttribute(socialLinks.shareLinkUrl.selector, 'href'))
+				.then(() => browser.getAttribute(socialLinks.shareLinkUrl.selector, 'href'))
 				.then(href => {
 					assert.isTrue(href.startsWith(socialLinks.shareLinkUrl.baseUrl));
 					assert.ok(href.match(socialLinks.shareLinkUrl.regex));
@@ -138,7 +133,7 @@ describe('Wishlist', () => {
 		};
 		before(() => wishListPage.navigateTo()
 			.then(() => loginForm.loginAsDefaultCustomer())
-			.then(() => client.waitForVisible(wishListPage.BTN_TOGGLE_PRIVACY))
+			.then(() => browser.waitForVisible(wishListPage.BTN_TOGGLE_PRIVACY))
 			.then(() => cartPage.emptyCart())
 			.then(() => wishListPage.navigateTo())
 			.then(() => wishListPage.emptyWishList())
@@ -150,9 +145,9 @@ describe('Wishlist', () => {
 
 		it('should redirect to the Gift Certificate Purchase page when adding one to the Cart', () => {
 			return wishListPage.clickAddGiftCertButton()
-				.then(() => client.click(btnGiftCertAddToCart))
-				.then(() => client.waitForVisible('.gift-certificate-purchase'))
-				.then(() => client.url())
+				.then(() => browser.click(btnGiftCertAddToCart))
+				.then(() => browser.waitForVisible('.gift-certificate-purchase'))
+				.then(() => browser.url())
 				.then(currentUrl => {
 					let parsedUrl = url.parse(currentUrl.value);
 					return assert.isTrue(parsedUrl.pathname.endsWith('giftcertpurchase'));
@@ -163,7 +158,7 @@ describe('Wishlist', () => {
 			let defaultCustomer;
 			return testData.getCustomerByLogin(loginForm.DEFAULT_RETURNING_CUSTOMER)
 				.then(customer => defaultCustomer = customer)
-				.then(() => client.getValue(giftCertPurchasePage.INPUT_FROM_FIELD))
+				.then(() => browser.getValue(giftCertPurchasePage.INPUT_FROM_FIELD))
 				.then(from => {
 					let expectedYourName = defaultCustomer.firstName + ' ' + defaultCustomer.lastName;
 					assert.equal(from, expectedYourName);
@@ -203,7 +198,7 @@ describe('Wishlist', () => {
 				.then(product => productDetailPage.addProductVariationToWishList(product))
 				// To ensure that the product has been added to the wishlist before proceeding,
 				// we need to wait for a selector in the resulting page to display
-				.then(() => client.waitForVisible('table.item-list'));
+				.then(() => browser.waitForVisible('table.item-list'));
 		}
 
 		describe('as a returning customer', () => {
@@ -211,19 +206,19 @@ describe('Wishlist', () => {
 					.then(() => common.getLocale())
 					.then(currentLang => lang = currentLang)
 					.then(() => loginForm.loginAsDefaultCustomer())
-					.then(() => client.waitForVisible(wishListPage.BTN_TOGGLE_PRIVACY))
+					.then(() => browser.waitForVisible(wishListPage.BTN_TOGGLE_PRIVACY))
 					.then(() => wishListPage.emptyWishList())
 					.then(() => addProductVariationMasterToWishList())
 			);
 
 			it('should directly navigate to the WishList Page', () =>
-					client.isExisting('label[for=editAddress]')
+					browser.isExisting('label[for=editAddress]')
 						.then(exists => assert.equal(exists, true))
 			);
 
 			it('should allow user to toggle privacy', () => {
 				let privacyButton = wishListPage.BTN_TOGGLE_PRIVACY;
-				return client.waitForVisible(privacyButton)
+				return browser.waitForVisible(privacyButton)
 					.isEnabled(privacyButton)
 					.then(enabled => assert.isTrue(enabled));
 			});

@@ -1,7 +1,5 @@
 'use strict';
 
-import client from '../webdriver/client';
-
 export const LOGOUT = '.account-logout';
 export const BTN_LOGIN = 'button[name*=login_login]';
 
@@ -17,5 +15,5 @@ export const VALID_PASSWORD_SELECTOR = '#dialog-container a';  // TODO: We need 
 const basePath = '/account';
 
 export function navigateTo (locale = 'en_US') {
-	return client.url(basePath + `?lang=${locale}`);
+	return browser.url(basePath + `?lang=${locale}`);
 }

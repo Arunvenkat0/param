@@ -1,25 +1,19 @@
 'use strict';
 
 import {assert} from 'chai';
-import client from '../webdriver/client';
 import * as common from '../pageObjects/helpers/common';
 import * as homePage from '../pageObjects/home';
 import * as pricingHelpers from '../pageObjects/helpers/pricing';
 import * as productDetailPage from '../pageObjects/productDetail';
 import * as testData from '../pageObjects/testData/main';
 
-describe('Product Detail Page', () => {
-
-    before(() => client.init()
-        .then(() => testData.load())
-    );
-
-    after(() => client.end());
+describe('Product Details Page', () => {
+    before(() => testData.load());
 
     // TODO:  Refactor these tests to use testData module instead of the search pattern.
     describe('Bundle', () => {
         before(() => homePage.navigateTo()
-            .then(() => client.waitForExist('form[role="search"]')
+        .then(() => browser.waitForExist('form[role="search"]')
                 .setValue('#q', 'bundle')
                 .submitForm('form[role="search"]')
                 .waitForExist('#search-result-items')
@@ -28,45 +22,45 @@ describe('Product Detail Page', () => {
         );
 
         it('should have the right name', () =>
-            client.getText('.product-detail > .product-name')
+            browser.getText('.product-detail > .product-name')
                 .then(title => assert.equal(title, 'Playstation 3 Bundle'))
         );
         it('should have product image', () =>
-            client.isExisting('.primary-image')
+            browser.isExisting('.primary-image')
                 .then(exists => assert.isTrue(exists))
         );
 
         it('should have all bundled products', () =>
-            client.isExisting('#item-sony-ps3-console')
+            browser.isExisting('#item-sony-ps3-console')
                 .then(exists => assert.isTrue(exists))
 
-                .then(() => client.isExisting('#item-easports-nascar-09-ps3'))
+        .then(() => browser.isExisting('#item-easports-nascar-09-ps3'))
                 .then(exists => assert.isTrue(exists))
 
-                .then(() => client.isExisting('#item-easports-monopoly-ps3'))
+        .then(() => browser.isExisting('#item-easports-monopoly-ps3'))
                 .then(exists => assert.isTrue(exists))
 
-                .then(() => client.isExisting('#item-namco-eternal-sonata-ps3'))
+        .then(() => browser.isExisting('#item-namco-eternal-sonata-ps3'))
                 .then(exists => assert.isTrue(exists))
 
-                .then(() => client.isExisting('#item-sony-warhawk-ps3'))
+        .then(() => browser.isExisting('#item-sony-warhawk-ps3'))
                 .then(exists => assert.isTrue(exists))
         );
 
         it('should have the right price', () =>
-            client.isExisting('span.price-sales')
+            browser.isExisting('span.price-sales')
                 .then(exists => assert.isTrue(exists))
-                .then(() => client.getText('.product-detail .product-add-to-cart .price-sales'))
+        .then(() => browser.getText('.product-detail .product-add-to-cart .price-sales'))
                 .then(price => assert.equal(price, '$449.00'))
         );
 
         it('should have warranty', () =>
-            client.isExisting('#dwopt_sony-ps3-bundle_consoleWarranty')
+            browser.isExisting('#dwopt_sony-ps3-bundle_consoleWarranty')
                 .then(exists => assert.isTrue(exists))
         );
 
         it('should have add to cart button enabled', () =>
-            client.isEnabled('#add-to-cart')
+            browser.isEnabled('#add-to-cart')
                 .then(enabled => assert.isTrue(enabled))
         );
     });
@@ -90,7 +84,7 @@ describe('Product Detail Page', () => {
                     return testData.getProductById(productId)
                         .then(product => productSetProducts.push(product));
                 }, Promise.resolve()))
-                .then(() => client.url(productSet.getUrlResourcePath()))
+        .then(() => browser.url(productSet.getUrlResourcePath()))
         );
 
         /**
@@ -105,20 +99,20 @@ describe('Product Detail Page', () => {
         }
 
         it('should display its product name', () =>
-            client.getText(productDetailPage.PRODUCT_NAME)
+            browser.getText(productDetailPage.PRODUCT_NAME)
                 .then(title => assert.equal(title, productSet.getDisplayName()))
         );
 
         it('should display a primary image', () =>
-            client.getAttribute(productDetailPage.PRIMARY_IMAGE, 'src')
+            browser.getAttribute(productDetailPage.PRIMARY_IMAGE, 'src')
                 .then(imgSrc => assert.isTrue(imgSrc.endsWith(productSet.getImage('large'))))
         );
 
         it('should display its associated products with their first variants selected', () =>
-            client.elements(productDetailPage.PRODUCT_SET_LIST)
+            browser.elements(productDetailPage.PRODUCT_SET_LIST)
                 .then(elements => elements.value.reduce((testValues, element, idx) => {
                     return testValues.then(() =>
-                        client.elementIdText(element.ELEMENT)
+                        browser.elementIdText(element.ELEMENT)
                             .then(itemNumberLabel =>
                                 assert.equal(getItemNumber(itemNumberLabel.value), productSetProducts[idx].getVariantProductIds()[0])
                             )
@@ -127,12 +121,12 @@ describe('Product Detail Page', () => {
         );
 
         it('should display the sum of its products as its price', () =>
-            client.getText(productDetailPage.PRODUCT_SET_TOTAL_PRICE)
+            browser.getText(productDetailPage.PRODUCT_SET_TOTAL_PRICE)
                 .then(price => assert.equal(price, expectedProductSetPrice))
         );
 
         it('should display the "Add to Cart" button as enabled', () =>
-            client.isEnabled(productDetailPage.BTN_ADD_ALL_TO_CART)
+            browser.isEnabled(productDetailPage.BTN_ADD_ALL_TO_CART)
                 .then(enabled => assert.ok(enabled))
         );
 
@@ -157,16 +151,16 @@ describe('Product Detail Page', () => {
             }
 
             it('should display its product ID', () =>
-                client.getText(`#item-${firstVariant.id} .product-number`)
+                browser.getText(`#item-${firstVariant.id} .product-number`)
                     .then(itemNumber => assert.isTrue(itemNumber.indexOf(firstVariant.id) > -1))
             );
 
             it('should display its attribute choices', () =>
                 productItem.getAttrTypes().reduce((getAttr, attrType) => {
                     // Get the attribute element wrapper
-                    return client.element(`${productDetailPage.PRODUCT_SET_ITEM_VARIATIONS} ul.swatches.${attrType.toLowerCase()}`)
+                    return browser.element(`${productDetailPage.PRODUCT_SET_ITEM_VARIATIONS} ul.swatches.${attrType.toLowerCase()}`)
                         // Find all <a> tags for this element.  Number of tags should equal number of attribute values.
-                        .then(attrSwatch => client.elementIdElements(attrSwatch.value.ELEMENT, 'a'))
+                        .then(attrSwatch => browser.elementIdElements(attrSwatch.value.ELEMENT, 'a'))
                         .then(anchorTags => assert.equal(anchorTags.value.length, productItem.variationAttributes[attrType].values.length));
                 }, Promise.resolve())
             );
@@ -177,15 +171,15 @@ describe('Product Detail Page', () => {
                     let variantAttrValue = firstVariant.customAttributes[attrType];
                     let expectedSelectedIndex = attrValues.indexOf(variantAttrValue);
 
-                    return client.elements(generateAttrSelector(firstVariant.id, attrType))
-                        .then(attrChoices => client.elementIdAttribute(attrChoices.value[expectedSelectedIndex].ELEMENT, 'class'))
+                    return browser.elements(generateAttrSelector(firstVariant.id, attrType))
+                        .then(attrChoices => browser.elementIdAttribute(attrChoices.value[expectedSelectedIndex].ELEMENT, 'class'))
                         .then(expectedSelected => assert.isTrue(expectedSelected.value.indexOf('selected') > -1));
                 }, Promise.resolve())
             );
 
             it('should display the first variant\'s selected attribute value labels', () =>
                 productItem.getAttrTypes().reduce((getAttr, attrType) => {
-                    return client.getText(generateAttrSelector(firstVariant.id, attrType) + '.selected-value')
+                    return browser.getText(generateAttrSelector(firstVariant.id, attrType) + '.selected-value')
                         .then(selectedValue => {
                             let expectedValue = productItem.getAttrDisplayValue(attrType, firstVariant.customAttributes[attrType]).toUpperCase();
                             return assert.equal(selectedValue, expectedValue);
@@ -213,24 +207,24 @@ describe('Product Detail Page', () => {
                     return testData.getProductById(variationMaster.getVariantProductIds()[0]);
                 })
                 .then(product => defaultVariant = product)
-                .then(() => client.url(variationMaster.getUrlResourcePath()))
+                .then(() => browser.url(variationMaster.getUrlResourcePath()))
                 .then(() => common.getLocale())
                 .then(code => locale = code);
         });
 
         it('should display a product name', () =>
-            client.getText(productDetailPage.PRODUCT_NAME)
+            browser.getText(productDetailPage.PRODUCT_NAME)
                 .then(name => assert.equal(name, variationMaster.pageAttributes.pageTitle[locale]))
         );
 
         it('should display a product image', () =>
-            client.isExisting('.primary-image')
+            browser.isExisting('.primary-image')
                 .then(exists => assert.isTrue(exists))
         );
 
         it('should display the default Variant primary image', () => {
-            return client.element(productDetailPage.PRIMARY_IMAGE)
-                .then(el => client.elementIdAttribute(el.value.ELEMENT, 'src'))
+            return browser.element(productDetailPage.PRIMARY_IMAGE)
+                .then(el => browser.elementIdAttribute(el.value.ELEMENT, 'src'))
                 .then(src => {
                     let primaryImagePath = variationMaster.getImage('large', defaultVariant.customAttributes[firstAttributeID]);
                     assert.isTrue(src.value.endsWith(primaryImagePath));
@@ -240,7 +234,7 @@ describe('Product Detail Page', () => {
         it('should display the default Variant thumbnail images', () => {
             let displayedThumbnailPaths;
             let defaultThumbnailPaths = variationMaster.getImages('small', defaultVariant.customAttributes[firstAttributeID]);
-            return client.waitUntil(
+            return browser.waitUntil(
                     () => productDetailPage.getDisplayedThumbnailPaths()
                         .then(paths => paths.length === defaultThumbnailPaths.length)
                 )
@@ -258,10 +252,10 @@ describe('Product Detail Page', () => {
             let expectedPrimaryImage = variationMaster.getImage('large', firstAttributeValues[0]);
 
             // Click first color swatch and test displayed images against what is expected
-            return client.element(productDetailPage.SWATCH_COLOR_ANCHORS)
-                .then(el => client.elementIdClick(el.value.ELEMENT))
+            return browser.element(productDetailPage.SWATCH_COLOR_ANCHORS)
+                .then(el => browser.elementIdClick(el.value.ELEMENT))
                 .element(productDetailPage.PRIMARY_IMAGE)
-                .then(el => client.elementIdAttribute(el.value.ELEMENT, 'src'))
+                .then(el => browser.elementIdAttribute(el.value.ELEMENT, 'src'))
                 .then(displayedImgSrc =>
                     assert.equal(productDetailPage.getImagePath(displayedImgSrc.value), expectedPrimaryImage)
                 );
@@ -272,9 +266,9 @@ describe('Product Detail Page', () => {
             let displayedThumbnailPaths;
             // This waitUntil is necessary to ensure that the thumbnail images have been replaced with the images that
             // match the newly selected value before assertions are made.  This only checks the first thumbnail.
-            return client.waitUntil(() =>
-                client.element(productDetailPage.PRODUCT_THUMBNAILS_IMAGES)
-                    .then(el => client.elementIdAttribute(el.value.ELEMENT, 'src'))
+            return browser.waitUntil(() =>
+            browser.element(productDetailPage.PRODUCT_THUMBNAILS_IMAGES)
+                .then(el => browser.elementIdAttribute(el.value.ELEMENT, 'src'))
                     .then(src => src.value.indexOf(attrValue) > -1)
                 )
                 .then(() => productDetailPage.getDisplayedThumbnailPaths())
@@ -296,18 +290,18 @@ describe('Product Detail Page', () => {
                 .then(prices => {
                     expectedListPrice = pricingHelpers.getFormattedPrice(prices.list);
                     expectedSalePrice = pricingHelpers.getFormattedPrice(prices.sale);
-                    return client.getText(productDetailPage.PRICE_SALE);
+                    return browser.getText(productDetailPage.PRICE_SALE);
                 })
                 .then(price => assert.equal(price, expectedSalePrice))
         );
 
         it('should display a sale price when applicable', () =>
-            client.getText(productDetailPage.PRICE_LIST)
+            browser.getText(productDetailPage.PRICE_LIST)
                 .then(price => assert.equal(price, expectedListPrice))
         );
 
         it('should not enable the "Add to Cart" button if required attributes are not selected', () =>
-            client.isEnabled('#add-to-cart')
+            browser.isEnabled('#add-to-cart')
                 .then(enabled => assert.isFalse(enabled))
         );
 
@@ -330,14 +324,14 @@ describe('Product Detail Page', () => {
                     variant = product;
                     firstAttrValue = variant.customAttributes[firstAttrType];
                 })
-                .then(() => client.url(master.getUrlResourcePath() + `?dwvar_${masterWithOneVariant}_${firstAttrType}=${firstAttrValue}`))
-                .then(() => client.getValue(productDetailPage.PID))
+                .then(() => browser.url(master.getUrlResourcePath() + `?dwvar_${masterWithOneVariant}_${firstAttrType}=${firstAttrValue}`))
+                .then(() => browser.getValue(productDetailPage.PID))
                 .then(pid => assert.equal(pid, variantID));
         });
 
         it('should enable the Add to Cart button when all required attributes are selected', () =>
-            client.element(productDetailPage.BTN_ADD_TO_CART)
-                .then(button => client.elementIdEnabled(button.value.ELEMENT))
+            browser.element(productDetailPage.BTN_ADD_TO_CART)
+                .then(button => browser.elementIdEnabled(button.value.ELEMENT))
                 .then(enabled => assert.isTrue(enabled.value))
         );
     });

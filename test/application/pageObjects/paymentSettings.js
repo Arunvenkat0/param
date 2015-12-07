@@ -1,7 +1,6 @@
 'use strict';
 
 import _ from 'lodash';
-import client from '../webdriver/client';
 import * as formHelpers from './helpers/forms/common';
 
 export const AMEX_CREDIT_CARD = '[class*=Amex]';
@@ -15,7 +14,7 @@ export const LINK_ADD_CREDIT_CARD = '[class*=add-card]';
 const basePath = '/wallet';
 
 export function navigateTo () {
-	return client.url(basePath);
+	return browser.url(basePath);
 }
 
 export function fillOutCreditCardForm (creditCardData) {
@@ -36,18 +35,18 @@ export function fillOutCreditCardForm (creditCardData) {
 }
 
 export function deleteAllCreditCards () {
-	return client.elements(BTN_DELETE_CREDIT_CARD)
+	return browser.elements(BTN_DELETE_CREDIT_CARD)
 		.then(removeLinks => {
 			return removeLinks.value.reduce(removeCreditCard => {
-				return removeCreditCard.then(() => client.click(BTN_DELETE_CREDIT_CARD)
-					.then(() => client.waitUntil(() =>
-						client.alertText()
+				return removeCreditCard.then(() => browser.click(BTN_DELETE_CREDIT_CARD)
+					.then(() => browser.waitUntil(() =>
+						browser.alertText()
 							.then(
 								text => text === 'Do you want to remove this credit card?',
 								err => err.message !== 'no alert open'
 							)
 					))
-					.then(() => client.alertAccept())
+					.then(() => browser.alertAccept())
 				);
 			}, Promise.resolve());
 		});

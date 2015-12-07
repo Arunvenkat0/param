@@ -3,7 +3,6 @@
 import _ from 'lodash';
 import {assert} from 'chai';
 
-import client from '../webdriver/client';
 import * as checkoutPage from '../pageObjects/checkout';
 import * as orderConfPage from '../pageObjects/orderConfirmation';
 import * as productDetailPage from '../pageObjects/productDetail';
@@ -16,8 +15,7 @@ describe('Checkout with Discover Card', () => {
     let successfulCheckoutTitle = 'Thank you for your order.';
 
     before(() =>
-        client.init()
-            .then(() => testData.load())
+        testData.load()
             .then(() => testData.getCustomerByLogin(login))
             .then(customer => {
                 let address = customer.getPreferredAddress();
@@ -45,8 +43,6 @@ describe('Checkout with Discover Card', () => {
             })
             .then(() => Promise.resolve())
     );
-
-    after(() => client.end());
 
     function addProductVariationMasterToCart () {
         return testData.getProductVariationMaster()
@@ -77,18 +73,18 @@ describe('Checkout with Discover Card', () => {
         checkoutPage.pressBtnCheckoutAsGuest()
             .then(() => checkoutPage.fillOutShippingForm(shippingFormData))
             .then(() => checkoutPage.checkUseAsBillingAddress())
-            .then(() => client.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
-            .then(() => client.isExisting(checkoutPage.DISCOVER_CARD))
+        .then(() => browser.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
+        .then(() => browser.isExisting(checkoutPage.DISCOVER_CARD))
             .then(doesExist => assert.isTrue(doesExist))
     );
 
     // Fill in Billing Form
     it('should allow checking out with the Discover card', () =>
         checkoutPage.fillOutBillingForm(billingFormData)
-            .then(() => client.waitForExist(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
-            .then(() => client.waitForEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
-            .then(() => client.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
-            .then(() => client.click(checkoutPage.BTN_PLACE_ORDER)
+        .then(() => browser.waitForExist(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+        .then(() => browser.waitForEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+        .then(() => browser.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+        .then(() => browser.click(checkoutPage.BTN_PLACE_ORDER)
                 .waitForVisible(orderConfPage.ORDER_CONF_DETAILS)
                 .then(() => checkoutPage.getLabelOrderConfirmation())
                 .then(title => assert.equal(title, successfulCheckoutTitle)))

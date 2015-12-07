@@ -1,7 +1,5 @@
 'use strict';
 
-import client from '../../../webdriver/client';
-
 /**
  * Fills in a form field
  *
@@ -12,14 +10,14 @@ import client from '../../../webdriver/client';
 export function populateField (selector, value, fieldType = 'input') {
 	switch (fieldType) {
 		case 'input':
-			return client.setValue(selector, value);
+			return browser.setValue(selector, value);
 		case 'selectByValue':
-			return client.selectByValue(selector, value);
+			return browser.selectByValue(selector, value);
 		case 'selectByIndex':
-			return client.selectByIndex(selector, value);
+			return browser.selectByIndex(selector, value);
 		// Sets HTML5 input date field
 		case 'date':
-			return client.element(selector)
-				.then(el => client.elementIdValue(el.value.ELEMENT, value));
+			return browser.element(selector)
+				.then(el => browser.elementIdValue(el.value.ELEMENT, value));
 	}
 }

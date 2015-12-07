@@ -1,17 +1,22 @@
 'use strict';
 
+var _ = require('lodash');
+
 module.exports = function (grunt) {
 	require('load-grunt-tasks')(grunt);
 	require('babel-core/register');
 
 	// command line arguments
 	var config = {};
-	// mocha ui tests
+	// tests args
 	config.suite = grunt.option('suite') || '*';
 	if (config.suite === 'all') { config.suite = '*'; }
 	config.reporter = grunt.option('reporter') || 'spec';
 	config.timeout = grunt.option('timeout') || 60000;
-	config.port = grunt.option('port') || 7000;
+	config.url = grunt.option('url');
+	config.client = grunt.option('client');
+
+	config.port = grunt.option('port');
 	config.sourcemaps = !!grunt.option('sourcemaps');
 
 	var paths = require('./package.json').paths;
@@ -115,7 +120,7 @@ module.exports = function (grunt) {
 		connect: {
 			doc: {
 				options: {
-					port: grunt.option('port') || 5000,
+					port: config.port || 5000,
 					base: 'doc/dist'
 				}
 			}
@@ -134,13 +139,6 @@ module.exports = function (grunt) {
 			target: ['**/*.js']
 		},
 		mochaTest: {
-			application: {
-				options: {
-					reporter: config.reporter,
-					timeout: config.timeout
-				},
-				src: ['test/application/' + config.suite + '/**/*.js', '!test/application/webdriver/*', '!test/application/pageObjects/*']
-			},
 			unit: {
 				options: {
 					reporter: config.reporter,
@@ -148,6 +146,11 @@ module.exports = function (grunt) {
 				},
 				src: ['test/unit/' + config.suite + '/**/*.js']
 			}
+		},
+		webdriver: {
+			application: _.assign({
+				configFile: 'test/application/webdriver/wdio.conf.js'
+			}, config)
 		},
 		'gh-pages': {
 			doc: {
@@ -197,7 +200,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('css:styleguide', ['sass:styleguide', 'autoprefixer:styleguide']);
 	grunt.registerTask('default', ['css', 'browserify:watchDev', 'watch:dev']);
 	grunt.registerTask('js', ['browserify:dev', 'sourcemap']);
-	grunt.registerTask('test:application', ['mochaTest:application']);
+	grunt.registerTask('test:application', ['webdriver:application']);
 	grunt.registerTask('test:unit', ['mochaTest:unit']);
 	grunt.registerTask('build', ['js', 'css']);
 	grunt.registerTask('lint', ['jshint', 'jscs']);

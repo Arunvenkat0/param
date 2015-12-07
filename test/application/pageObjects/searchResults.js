@@ -1,7 +1,5 @@
 'use strict';
 
-import client from '../webdriver/client';
-
 export const BREADCRUMB_RESULT_TEXT = '.breadcrumb-element.breadcrumb-result-text';
 export const CATEGORY_BANNER = '.content-slot.slot-grid-header';
 export const NO_HITS = '.no-hits-banner';
@@ -14,6 +12,6 @@ export const PRODUCTGRID_CONTAINER = '#search-result-items';
 export const SEARCH_FORM = 'form[role*=search]';
 
 export function getProductTilePricingByPid (pid) {
-    return client.getText('[data-itemid="' + pid + '"] .product-pricing')
+    return browser.getText('[data-itemid="' + pid + '"] .product-pricing')
         .then(pricing => pricing.trim());
 }

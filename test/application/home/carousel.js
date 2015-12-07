@@ -1,7 +1,6 @@
 'use strict';
 
 import {assert} from 'chai';
-import client from '../webdriver/client';
 
 import * as homePage from '../pageObjects/home';
 import * as common from '../pageObjects/helpers/common';
@@ -9,10 +8,7 @@ import * as searchResultsPage from '../pageObjects/searchResults';
 import * as testData from '../pageObjects/testData/main';
 
 describe('Homepage General #C84584', () => {
-    before(() => client.init()
-        .then(() => testData.load()));
-
-    after(() => client.end());
+    before(() => testData.load());
 
     describe('Main carousel links', () => {
         let categoryBanner = searchResultsPage.CATEGORY_BANNER;
@@ -20,46 +16,46 @@ describe('Homepage General #C84584', () => {
         beforeEach(() => homePage.navigateTo());
 
         it('#1 should go to Mens Suits', () =>
-            client.waitForVisible(homePage.MAIN_CAROUSEL)
+            browser.waitForVisible(homePage.MAIN_CAROUSEL)
                 .then(() => homePage.mainCarouselSlide(1))
-                .then(() => client.click(homePage.MAIN_CAROUSEL))
-                .then(() => client.waitForVisible(categoryBanner))
+                .then(() => browser.click(homePage.MAIN_CAROUSEL))
+                .then(() => browser.waitForVisible(categoryBanner))
                 .then(() => common.getPageTitle())
                 .then(title => assert.equal(title, 'Mens Suits for Business and Casual'))
         );
 
         it('#2 should go to Women\'s Accessories', () =>
-                client.waitForVisible(homePage.MAIN_CAROUSEL)
+                browser.waitForVisible(homePage.MAIN_CAROUSEL)
                     .then(() => homePage.mainCarouselSlide(2))
-                .then(() => client.click(homePage.MAIN_CAROUSEL))
-                .then(() => client.waitForVisible(categoryBanner))
+                .then(() => browser.click(homePage.MAIN_CAROUSEL))
+                .then(() => browser.waitForVisible(categoryBanner))
                 .then(() => common.getPageTitle())
                 .then(title => assert.equal(title, 'Women\'s Accessories Belts, Wallets. Gloves, Hats, Watches, Luggage & More'))
         );
 
         it('#3 should go to Women\'s Shoes', () =>
-            client.waitForVisible(homePage.MAIN_CAROUSEL)
+            browser.waitForVisible(homePage.MAIN_CAROUSEL)
                 .then(() => homePage.mainCarouselSlide(3))
-                .then(() => client.click(homePage.MAIN_CAROUSEL))
-                .then(() => client.waitForVisible(categoryBanner))
+                .then(() => browser.click(homePage.MAIN_CAROUSEL))
+                .then(() => browser.waitForVisible(categoryBanner))
                 .then(() => common.getPageTitle())
                 .then(title => assert.equal(title, 'Womens Shoes Including Casual, Flat, Mid Heels & High Heels'))
         );
 
         it('#4 should go to Women\'s Dresses', () =>
-            client.waitForVisible(homePage.MAIN_CAROUSEL)
+            browser.waitForVisible(homePage.MAIN_CAROUSEL)
                 .then(() => homePage.mainCarouselSlide(4))
-                .then(() => client.click(homePage.MAIN_CAROUSEL))
-                .then(() => client.waitForVisible(categoryBanner))
+                .then(() => browser.click(homePage.MAIN_CAROUSEL))
+                .then(() => browser.waitForVisible(categoryBanner))
                 .then(() => common.getPageTitle())
                 .then(title => assert.equal(title, 'Women\'s Dresses for all Occasions'))
         );
 
         it('#5 should go to New Arrivals for Womens', () =>
-            client.waitForVisible(homePage.MAIN_CAROUSEL)
+            browser.waitForVisible(homePage.MAIN_CAROUSEL)
                 .then(() => homePage.mainCarouselSlide(5))
-                .then(() => client.click(homePage.MAIN_CAROUSEL))
-                .then(() => client.waitForVisible(categoryBanner))
+                .then(() => browser.click(homePage.MAIN_CAROUSEL))
+                .then(() => browser.waitForVisible(categoryBanner))
                 .then(() => common.getPageTitle())
                 .then(title => assert.equal(title, 'New Arrivals in Women\'s Footwear, Outerwear, Clothing & Accessories'))
         );
@@ -112,11 +108,11 @@ describe('Homepage General #C84584', () => {
                 .then(productPrices => prices = productPrices)
 
                 // Test Standard Price
-                .then(() => client.getText(displayedStandardPrice))
+                .then(() => browser.getText(displayedStandardPrice))
                 .then(standardPrice => assert.equal(standardPrice, prices.list))
 
                 // Test Sale Price
-                .then(() => client.getText(displayedSalePrice))
+                .then(() => browser.getText(displayedSalePrice))
                 .then(salePrice => assert.equal(salePrice, prices.sale));
         });
     });

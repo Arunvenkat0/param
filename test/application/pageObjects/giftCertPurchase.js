@@ -1,6 +1,5 @@
 'use strict';
 
-import client from '../webdriver/client';
 import * as formHelpers from './helpers/forms/common';
 import _ from 'lodash';
 
@@ -10,11 +9,11 @@ export const INPUT_FROM_FIELD = 'input[id$="giftcert_purchase_from"]';
 const basePath = '/giftcertpurchase';
 
 export function navigateTo () {
-	return client.url(basePath);
+	return browser.url(basePath);
 }
 
 export function pressBtnAddToCart () {
-	return client.click(BTN_ADD_TO_CART);
+	return browser.click(BTN_ADD_TO_CART);
 }
 
 export function fillOutGiftCertPurchaseForm (giftCertPurchaseFields) {

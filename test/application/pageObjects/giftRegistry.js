@@ -1,6 +1,5 @@
 'use strict';
 
-import client from '../webdriver/client';
 import * as formHelpers from './helpers/forms/common';
 
 export const SHARE_LINK = '.share-link';
@@ -29,7 +28,7 @@ export const eventName = 'WEDDING OF THE CENTURY - 3/28/08';
 const basePath = '/giftregistry';
 
 export function navigateTo () {
-	return client.url(basePath);
+	return browser.url(basePath);
 }
 
 export function fillOutEventForm (eventData) {
@@ -84,20 +83,20 @@ export function fillOutEventShippingForm (eventShippingData) {
  */
 export function emptyAllGiftRegistries() {
 	return navigateTo()
-		.then(() => client.waitForVisible(BTN_CREATE_REGISTRY))
-		.then(() => client.elements(LINK_REMOVE))
+		.then(() => browser.waitForVisible(BTN_CREATE_REGISTRY))
+		.then(() => browser.elements(LINK_REMOVE))
 		.then(removeLinks => {
 			// click on all the remove links, one by one, sequentially
 			return removeLinks.value.reduce(removeRegistry => {
-				return removeRegistry.then(() => client.click(LINK_REMOVE)
-					.then(() => client.waitUntil(() =>
-							client.alertText()
+				return removeRegistry.then(() => browser.click(LINK_REMOVE)
+					.then(() => browser.waitUntil(() =>
+							browser.alertText()
 								.then(
 									text =>  text === 'Do you want to remove this gift registry?',
 									err => err.message !== 'no alert open'
 							)
 					))
-					.then(() => client.alertAccept()));
+					.then(() => browser.alertAccept()));
 			}, Promise.resolve());
 		});
 }
@@ -105,19 +104,19 @@ export function emptyAllGiftRegistries() {
  *
  */
 export function openGiftRegistry () {
-	client.click(LINK_VIEW_GIFTREGISTRY);
+	browser.click(LINK_VIEW_GIFTREGISTRY);
 }
 
 export function searchGiftRegistry(lastName, firstName, eventType) {
 	//caller should be responsible navigate to the Gift Registry page before calling this function
-	return client.waitForVisible(SEARCH_GIFTREGISTRY)
-		.then(() => client.setValue(INPUT_LASTTNAME, lastName))
-		.then(() => client.setValue(INPUT_FIRSTNAME, firstName))
-		.then(() => client.selectByValue(INPUT_EVENTTYPE, eventType))
-		.then(() => client.click(BUTTON_FIND));
+	return browser.waitForVisible(SEARCH_GIFTREGISTRY)
+		.then(() => browser.setValue(INPUT_LASTTNAME, lastName))
+		.then(() => browser.setValue(INPUT_FIRSTNAME, firstName))
+		.then(() => browser.selectByValue(INPUT_EVENTTYPE, eventType))
+		.then(() => browser.click(BUTTON_FIND));
 }
 
 export function getGiftRegistryCount () {
-	return client.elements(TABLE_GR_ITEMS)
+	return browser.elements(TABLE_GR_ITEMS)
 		.then(eventRows => eventRows.value.length - 1);
 }

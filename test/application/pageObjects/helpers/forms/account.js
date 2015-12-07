@@ -1,7 +1,5 @@
 'use strict';
 
-import client from '../../../webdriver/client';
-
 export const ACCOUNT_HEADER = '.primary-content > h1';
 export const BTN_APPLY = '[name*=dwfrm_profile_confirm]';
 export const PREFIX_CUSTOMER_FIELDS = '[id=dwfrm_profile_customer';
@@ -29,9 +27,9 @@ export const ERROR_EMAIL_ALREADY_TAKEN = '#RegistrationForm div.form-caption.err
  */
 export function editAccount (profileFields) {
     return Object.keys(profileFields).reduce((setField, field) => {
-            return setField.then(() => client.setValue(field, profileFields[field]));
+        return setField.then(() => browser.setValue(field, profileFields[field]));
         }, Promise.resolve())
-        .then(() => client.getValue(FIELD_EMAIL))
-        .then(email => client.setValue(FIELD_EMAIL_CONFIRM, email))
-        .then(() => client.click(BTN_APPLY));
+    .then(() => browser.getValue(FIELD_EMAIL))
+    .then(email => browser.setValue(FIELD_EMAIL_CONFIRM, email))
+    .then(() => browser.click(BTN_APPLY));
 }

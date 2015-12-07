@@ -1,7 +1,6 @@
 'use strict';
 
 import _ from 'lodash';
-import client from '../../webdriver/client';
 // using Q to be compliant with webdriver.
 // should switch to native Promise if it is used in webdriver v3
 // https://github.com/webdriverio/webdriverio/issues/498
@@ -26,20 +25,20 @@ export const PRIMARY_CONTENT = '.primary-content';
 
 export function getPageTitle() {
     return Q.Promise(resolve => {
-        client.getTitle()
+	browser.getTitle()
             .then(title => resolve(title.split('|')[0].trim()));
     });
 }
 
 export function checkElementEquals (selector, value) {
-    return client.getText(selector)
+    return browser.getText(selector)
         .then(text => text === value);
 }
 
 export function removeItems (removeLink) {
     let promises = [];
 
-    return client.elements(removeLink)
+    return browser.elements(removeLink)
         .then(removeLinks => {
             // Because each Remove link results in a page reload,
             // it is necessary to wait for one remove operation
@@ -54,11 +53,11 @@ export function removeItems (removeLink) {
 }
 
 export function clickCheckbox(selector) {
-    return client.click(selector)
+    return browser.click(selector)
         .isSelected(selector)
         .then(selected => {
             if (!selected) {
-                return client.click(selector);
+		return browser.click(selector);
             }
             return Promise.resolve();
         });
@@ -66,17 +65,17 @@ export function clickCheckbox(selector) {
 
 export function selectAttributeByIndex (attributeName, index, deselect) {
     let selector = '.swatches.' + attributeName + ' li:nth-child(' + index + ')';
-    return client.waitForVisible(selector)
+    return browser.waitForVisible(selector)
         // Before clicking on an attribute value, we must check whether it has already been selected.
         // Clicking on an already selected value will deselect it.
         .then(() => _isAttributeSelected(selector))
         .then(isAlreadySelected => {
             if (deselect && isAlreadySelected) {
-                return client.waitForVisible('.loader', 500, true)
+		return browser.waitForVisible('.loader', 500, true)
                     .click(selector + ' a')
                     .waitForText('.swatches.' + attributeName + ' .selected-value', 500, true);
             } else if (!isAlreadySelected) {
-                return client.waitForVisible('.loader', 500, true)
+		return browser.waitForVisible('.loader', 500, true)
                     .click(selector + ' a')
                     .waitForText('.swatches.' + attributeName + ' .selected-value');
             }
@@ -85,7 +84,7 @@ export function selectAttributeByIndex (attributeName, index, deselect) {
 }
 
 function _isAttributeSelected (selector) {
-    return client.getAttribute(selector, 'class')
+    return browser.getAttribute(selector, 'class')
         .then(classes => Promise.resolve(classes.indexOf('selectable') > -1 && classes.indexOf('selected') > -1));
 }
 
@@ -101,7 +100,7 @@ function _isAttributeSelected (selector) {
  * @param {String} btnAdd - selector for Add to { Cart | Wishlist | Registry } button
  */
 export function addProductVariationToBasket (product, btnAdd) {
-    return client.url(product.get('resourcePath'))
+    return browser.url(product.get('resourcePath'))
         .then(() => {
             if (product.has('colorIndex')) {
                 return selectAttributeByIndex('color', product.get('colorIndex'));
@@ -120,7 +119,7 @@ export function addProductVariationToBasket (product, btnAdd) {
             }
             return Promise.resolve();
         })
-        .then(() => client.waitForVisible('.loader-bg', 500, true)
+	.then(() => browser.waitForVisible('.loader-bg', 500, true)
             .waitForEnabled(btnAdd)
             .click(btnAdd)
         )
@@ -132,10 +131,10 @@ export function addProductVariationToBasket (product, btnAdd) {
  *
  */
 function _clickFirstRemoveLink (removeLink) {
-    return client.elements(removeLink)
+    return browser.elements(removeLink)
         .then(removeLinks => {
             if (removeLinks.value.length) {
-                return client.elementIdClick(removeLinks.value[0].ELEMENT);
+		return browser.elementIdClick(removeLinks.value[0].ELEMENT);
             }
             return Promise.resolve();
         });
@@ -148,12 +147,12 @@ function _clickFirstRemoveLink (removeLink) {
  * @returns {*|Promise.<T>}
  */
 export function clickAndWait(selectorToClick, selectorToWait) {
-    return client.click(selectorToClick)
+    return browser.click(selectorToClick)
         .waitForVisible(selectorToWait);
 }
 
 export function getSearchParams () {
-    return client.url()
+    return browser.url()
         .then(url => {
             let parsedUrl = nodeUrl.parse(url.value);
             let search = parsedUrl.search ? parsedUrl.search.replace('?', '') : '';

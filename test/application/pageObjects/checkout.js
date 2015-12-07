@@ -1,7 +1,6 @@
 'use strict';
 
 import _ from 'lodash';
-import client from '../webdriver/client';
 import * as common from './helpers/common';
 import * as formHelpers from './helpers/forms/common';
 
@@ -32,11 +31,11 @@ export const DISCOVER_CARD = 'option[value*=Discover]';
 const basePath = '/checkout';
 
 export function navigateTo () {
-    return client.url(basePath);
+    return browser.url(basePath);
 }
 
 export function pressBtnCheckoutAsGuest () {
-    return client.click('[name*="login_unregistered"]')
+    return browser.click('[name*="login_unregistered"]')
         .waitForVisible(BREADCRUMB_SHIPPING);
 }
 
@@ -80,6 +79,10 @@ export function fillOutBillingForm (billingFields) {
         type: 'input',
         fieldPrefix: 'billing_billingAddress_email_'
     });
+    fieldTypes.set('creditCard_type', {
+        type: 'selectByValue',
+        fieldPrefix: 'billing_paymentMethods_'
+    });
     fieldTypes.set('creditCard_owner', {
         type: 'input',
         fieldPrefix: 'billing_paymentMethods_'
@@ -115,14 +118,14 @@ export function checkUseAsBillingAddress () {
 }
 
 export function getLabelOrderConfirmation () {
-    return client.getText(LABEL_ORDER_THANK_YOU);
+    return browser.getText(LABEL_ORDER_THANK_YOU);
 }
 
 export function getActiveBreadCrumb () {
-    return client.waitForExist(CHECKOUT_PROGRESS)
+    return browser.waitForExist(CHECKOUT_PROGRESS)
         .getText(CHECKOUT_PROGRESS);
 }
 
 export function getOrderSubTotal () {
-    return client.getText(CSS_ORDER_SUBTOTAL);
+    return browser.getText(CSS_ORDER_SUBTOTAL);
 }

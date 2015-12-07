@@ -1,8 +1,7 @@
 'use strict';
 
 import {assert} from 'chai';
-import config from '../webdriver/config';
-import client from '../webdriver/client';
+import {config} from '../webdriver/wdio.conf';
 import * as giftRegistryPage from '../pageObjects/giftRegistry';
 import * as testData from '../pageObjects/testData/main';
 import * as loginForm from '../pageObjects/helpers/forms/login';
@@ -46,13 +45,12 @@ describe('Gift Registry', () => {
 		},
 		shareLinkUrl: {
 			selector: '.share-link-content a',
-			baseUrl: config.url,
+			baseUrl: config.baseUrl,
 			regex: /.*\?.*ID=.+/
 		}
 	};
 
-	before(() => client.init()
-		.then(() => testData.load())
+    before(() => testData.load()
 		.then(() => testData.getCustomerByLogin(login))
 		.then(customer => {
 			let address = customer.getPreferredAddress();
@@ -72,55 +70,55 @@ describe('Gift Registry', () => {
 		})
 		.then(() => giftRegistryPage.navigateTo())
 		.then(() => loginForm.loginAsDefaultCustomer())
-		.then(() => client.waitForVisible(giftRegistryPage.BTN_CREATE_REGISTRY))
+		.then(() => browser.waitForVisible(giftRegistryPage.BTN_CREATE_REGISTRY))
 		.then(() => giftRegistryPage.emptyAllGiftRegistries())
-		.then(() => client.click(giftRegistryPage.BTN_CREATE_REGISTRY))
-		.then(() => client.waitForVisible(giftRegistryPage.FORM_REGISTRY))
+		.then(() => browser.click(giftRegistryPage.BTN_CREATE_REGISTRY))
+		.then(() => browser.waitForVisible(giftRegistryPage.FORM_REGISTRY))
 	);
 
-	after(() => client.end());
+    after(() => navHeader.logout());
 
 	it('should fill out the event form', () =>
 		giftRegistryPage.fillOutEventForm(eventFormData)
 			// FIXME: This button is always enabled, even if form is not filled
 			// out.  Would be better to check on some other attribute
-			.then(() => client.isEnabled(giftRegistryPage.BTN_EVENT_CONTINUE))
+			.then(() => browser.isEnabled(giftRegistryPage.BTN_EVENT_CONTINUE))
 			.then(enabled => assert.ok(enabled))
 	);
 
 	it('should fill out the event shipping form', () =>
-		client.click(giftRegistryPage.BTN_EVENT_CONTINUE)
+		browser.click(giftRegistryPage.BTN_EVENT_CONTINUE)
 			.waitForVisible(giftRegistryPage.USE_PRE_EVENT)
 			.then(() => giftRegistryPage.fillOutEventShippingForm(eventFormShippingData))
 			// This wait is necessary, since without it, the .click() will fire
 			// even if the required fields have not been filled in
-			.then(() => client.waitForValue('[name*=addressBeforeEvent_phone]'))
-			.then(() => client.click(giftRegistryPage.USE_PRE_EVENT))
-			.then(() => client.waitForVisible(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE))
-			.then(() => client.isEnabled(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE))
+			.then(() => browser.waitForValue('[name*=addressBeforeEvent_phone]'))
+			.then(() => browser.click(giftRegistryPage.USE_PRE_EVENT))
+			.then(() => browser.waitForVisible(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE))
+			.then(() => browser.isEnabled(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE))
 			.then(enabled => assert.ok(enabled))
 	);
 
 	it('should submit the event', () =>
-		client.click(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE)
-			.then(() => client.waitForVisible(giftRegistryPage.BTN_EVENT_CONTINUE))
-			.then(() => client.click(giftRegistryPage.BTN_EVENT_CONTINUE))
-			.then(() => client.waitForVisible(giftRegistryPage.REGISTRY_HEADING))
-			.then(() => client.getText(giftRegistryPage.REGISTRY_HEADING))
+		browser.click(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE)
+			.then(() => browser.waitForVisible(giftRegistryPage.BTN_EVENT_CONTINUE))
+			.then(() => browser.click(giftRegistryPage.BTN_EVENT_CONTINUE))
+			.then(() => browser.waitForVisible(giftRegistryPage.REGISTRY_HEADING))
+			.then(() => browser.getText(giftRegistryPage.REGISTRY_HEADING))
 			.then(eventTitle => assert.equal(eventTitle, 'WEDDING OF THE CENTURY - 3/28/08'))
 	);
 
 	it('should make the gift registry public', () =>
-		client.click(giftRegistryPage.BTN_SET_PUBLIC)
+		browser.click(giftRegistryPage.BTN_SET_PUBLIC)
 			.waitForVisible(giftRegistryPage.SHARE_OPTIONS)
-			.then(() => client.isVisible(giftRegistryPage.SHARE_OPTIONS))
+			.then(() => browser.isVisible(giftRegistryPage.SHARE_OPTIONS))
 			.then(visible => assert.isTrue(visible))
 	);
 
 	it('should display a Facebook icon and link', () =>
-		client.isExisting(socialLinks.facebook.selector)
+		browser.isExisting(socialLinks.facebook.selector)
 			.then(doesExist => assert.isTrue(doesExist))
-			.then(() => client.getAttribute(socialLinks.facebook.selector, 'href'))
+			.then(() => browser.getAttribute(socialLinks.facebook.selector, 'href'))
 			.then(href => {
 				assert.isTrue(href.startsWith(socialLinks.facebook.baseUrl));
 				assert.ok(href.match(socialLinks.facebook.regex));
@@ -128,9 +126,9 @@ describe('Gift Registry', () => {
 	);
 
 	it('should display a Twitter icon and link', () =>
-		client.isExisting(socialLinks.twitter.selector)
+		browser.isExisting(socialLinks.twitter.selector)
 			.then(doesExist => assert.isTrue(doesExist))
-			.then(() => client.getAttribute(socialLinks.twitter.selector, 'href'))
+			.then(() => browser.getAttribute(socialLinks.twitter.selector, 'href'))
 			.then(href => {
 				assert.isTrue(href.startsWith(socialLinks.twitter.baseUrl));
 				assert.ok(href.match(socialLinks.twitter.regex));
@@ -138,9 +136,9 @@ describe('Gift Registry', () => {
 	);
 
 	it('should display a Google Plus icon and link', () =>
-		client.isExisting(socialLinks.googlePlus.selector)
+		browser.isExisting(socialLinks.googlePlus.selector)
 			.then(doesExist => assert.isTrue(doesExist))
-			.then(() => client.getAttribute(socialLinks.googlePlus.selector, 'href'))
+			.then(() => browser.getAttribute(socialLinks.googlePlus.selector, 'href'))
 			.then(href => {
 				assert.isTrue(href.startsWith(socialLinks.googlePlus.baseUrl));
 				assert.ok(href.match(socialLinks.googlePlus.regex));
@@ -148,9 +146,9 @@ describe('Gift Registry', () => {
 	);
 
 	it('should display a Pinterest icon and link', () =>
-		client.isExisting(socialLinks.pinterest.selector)
+		browser.isExisting(socialLinks.pinterest.selector)
 			.then(doesExist => assert.isTrue(doesExist))
-			.then(() => client.getAttribute(socialLinks.pinterest.selector, 'href'))
+			.then(() => browser.getAttribute(socialLinks.pinterest.selector, 'href'))
 			.then(href => {
 				assert.isTrue(href.startsWith(socialLinks.pinterest.baseUrl));
 				assert.ok(href.match(socialLinks.pinterest.regex));
@@ -158,9 +156,9 @@ describe('Gift Registry', () => {
 	);
 
 	it('should display a Mail icon and link', () =>
-		client.isExisting(socialLinks.emailLink.selector)
+		browser.isExisting(socialLinks.emailLink.selector)
 			.then(doesExist => assert.isTrue(doesExist))
-			.then(() => client.getAttribute(socialLinks.emailLink.selector, 'href'))
+			.then(() => browser.getAttribute(socialLinks.emailLink.selector, 'href'))
 			.then(href => {
 				assert.isTrue(href.startsWith(socialLinks.emailLink.baseUrl));
 				assert.ok(href.match(socialLinks.emailLink.regex));
@@ -168,16 +166,16 @@ describe('Gift Registry', () => {
 	);
 
 	it('should display a link icon', () =>
-		client.isExisting(socialLinks.shareLinkIcon.selector)
+		browser.isExisting(socialLinks.shareLinkIcon.selector)
 			.then(doesExist => assert.isTrue(doesExist))
 	);
 
 	it('should display a URL when chain icon clicked', () =>
-		client.click(giftRegistryPage.SHARE_LINK)
-			.then(() => client.waitForVisible(socialLinks.shareLinkUrl.selector))
-			.then(() => client.isVisible(socialLinks.shareLinkUrl.selector))
+		browser.click(giftRegistryPage.SHARE_LINK)
+			.then(() => browser.waitForVisible(socialLinks.shareLinkUrl.selector))
+			.then(() => browser.isVisible(socialLinks.shareLinkUrl.selector))
 			.then(visible => assert.isTrue(visible))
-			.then(() => client.getAttribute(socialLinks.shareLinkUrl.selector, 'href'))
+			.then(() => browser.getAttribute(socialLinks.shareLinkUrl.selector, 'href'))
 			.then(href => {
 				assert.isTrue(href.startsWith(socialLinks.shareLinkUrl.baseUrl));
 				assert.ok(href.match(socialLinks.shareLinkUrl.regex));
@@ -186,8 +184,8 @@ describe('Gift Registry', () => {
 
 	it('should return the event at Gift Registry search', () => {
 		return navHeader.logout()
-			.then(() => client.click(footerPage.GIFT_REGISTRY))
-			.then(() => client.waitForVisible(footerPage.GIFT_REGISTRY))
+			.then(() => browser.click(footerPage.GIFT_REGISTRY))
+			.then(() => browser.waitForVisible(footerPage.GIFT_REGISTRY))
 			.then(() => giftRegistryPage.searchGiftRegistry(
 				giftRegistryPage.lastName,
 				giftRegistryPage.firstName,
@@ -195,17 +193,17 @@ describe('Gift Registry', () => {
 			.then(() => giftRegistryPage.getGiftRegistryCount())
 			.then(rows => assert.equal(1, rows))
 			.then(() => giftRegistryPage.openGiftRegistry())
-			.then(() => client.waitForVisible(giftRegistryPage.BUTTON_FIND))
-			.then(() => client.getText(giftRegistryPage.eventTitle))
+			.then(() => browser.waitForVisible(giftRegistryPage.BUTTON_FIND))
+			.then(() => browser.getText(giftRegistryPage.eventTitle))
 			.then(str => assert.equal(str, giftRegistryPage.eventName));
 	});
 
 	it('should delete all the gift registry events', () => {
 		return giftRegistryPage.navigateTo()
 			.then(() => loginForm.loginAsDefaultCustomer())
-			.then(() => client.waitForVisible(giftRegistryPage.BTN_CREATE_REGISTRY))
+			.then(() => browser.waitForVisible(giftRegistryPage.BTN_CREATE_REGISTRY))
 			.then(() => giftRegistryPage.emptyAllGiftRegistries())
-			.then(() => client.isExisting(giftRegistryPage.LINK_REMOVE))
+			.then(() => browser.isExisting(giftRegistryPage.LINK_REMOVE))
 			.then(doesExist => assert.isFalse(doesExist));
 	});
 
