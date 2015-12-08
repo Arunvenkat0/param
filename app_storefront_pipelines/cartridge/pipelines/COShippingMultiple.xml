@@ -950,7 +950,7 @@ This pipeline implements the logic for the multiple shipping scenario. It is res
         <pipelet-node custom-name="Merges quantity line items with same product ID and shipping address to new product line items." pipelet-name="Script" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
-          <config-property key="ScriptFile" value="app_storefront_core:checkout/multishipping/MergeQuantities.ds"/>
+          <config-property key="ScriptFile" value="app_storefront_core:checkout/multishipping/MergeQuantities.js"/>
           <key-binding alias="CurrentForms.multishipping.addressSelection.quantityLineItems" key="QuantityLineItems"/>
           <key-binding alias="Basket" key="CBasket"/>
         </pipelet-node>

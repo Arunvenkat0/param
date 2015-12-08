@@ -20,17 +20,11 @@ var Quantity = require('dw/value/Quantity');
 var QuantityLineItemModel = Class.extend(
     /** @lends module:models/QuantityLineItemModel~QuantityLineItemModel.prototype */
     {
-        /** */
         productID: null,
-        /** */
         lineItemText: null,
-        /** */
         quantity: null,
-        /** */
         pliUUID: null,
-        /** */
         optionID: null,
-        /** */
         bonusProductLineItem: null,
 
         init: function (pli) {

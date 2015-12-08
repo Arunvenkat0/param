@@ -1184,7 +1184,7 @@ var CartModel = AbstractModel.extend({
 
                 if (isProductBonus === 'true') {
                     var productToAdd;
-                    for (var n = 0; n < bdli.bonusProducts.length; j++) {
+                    for (var n = 0; n < bdli.bonusProducts.length; n++) {
                         if (bdli.bonusProducts[n].ID === productId2) {
                             productToAdd = bdli.bonusProducts[n];
                             break;
