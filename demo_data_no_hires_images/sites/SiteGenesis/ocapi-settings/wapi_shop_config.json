@@ -1,7 +1,7 @@
 {
   "_v":"16.1",
   "clients":
-  [ 
+  [
     {
       "client_id":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
       "allowed_origins":[],
@@ -86,18 +86,6 @@
           "write_attributes":"(**)"
         },
         {
-          "resource_id":"/baskets/*/price_adjustments",
-          "methods":["post"],
-          "read_attributes":"(**)",
-          "write_attributes":"(**)"
-        },
-        {
-          "resource_id":"/baskets/*/price_adjustments/*",
-          "methods":["delete"],
-          "read_attributes":"(**)",
-          "write_attributes":"(**)"
-        },
-        {
           "resource_id":"/baskets/*/shipments",
           "methods":["post"],
           "read_attributes":"(**)",
@@ -177,7 +165,7 @@
           "methods":["get","patch"],
           "read_attributes":"(**)",
           "write_attributes":"(**)"
-        },         
+        },
         {
           "resource_id":"/customers/*/addresses",
           "methods":["get","post"],
@@ -205,12 +193,6 @@
         {
           "resource_id":"/customers/*/password",
           "methods":["put"],
-          "read_attributes":"(**)",
-          "write_attributes":"(**)"
-        },
-        {
-          "resource_id":"/customers/*/password_reset",
-          "methods":["post"],
           "read_attributes":"(**)",
           "write_attributes":"(**)"
         },
