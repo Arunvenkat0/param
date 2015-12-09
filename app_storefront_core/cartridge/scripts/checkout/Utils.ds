@@ -421,4 +421,4 @@ function QuantityLineItem(){
 	var optionID : String = null;
 }
 
-module.exports = ShippingAddress; 
+module.exports = ShippingAddress;

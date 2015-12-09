@@ -1,100 +1,85 @@
 'use strict';
 /**
-*	This script creates new ProductLineItems and Shipments from the
-*	FormList of the address selections with help of a data structure
-*	(address and product relations through HashMaps).
+*   This script creates new ProductLineItems and Shipments from the
+*   FormList of the address selections with help of a data structure
+*   (address and product relations through HashMaps).
 *
 *   @input CBasket : dw.order.Basket The current basket object.
-*	@input QuantityLineItems : dw.web.FormList Quantity Line Items from address selection.
+*   @input QuantityLineItems : dw.web.FormList Quantity Line Items from address selection.
 *
 */
 
-var HashMap = require('dw/util/HashMap');
-var ShippingAddress = require('app_storefront_core/cartridge/scripts/checkout/Utils.ds');
+var checkoutUtils = require('app_storefront_core/cartridge/scripts/checkout/Utils.ds');
 var ArrayList = require('dw/util/ArrayList');
 var UUIDUtils = require('dw/util/UUIDUtils');
 
 function execute(pdict) {
     var basket = pdict.CBasket;
-    var qunatityLineItemList = pdict.QuantityLineItems;
-
+    var quantityLineItemList = pdict.QuantityLineItems;
     var bonusDiscountLineItem = basket.getBonusDiscountLineItems()[0];
-
-    var addressProductRelations = createAddressProductRelations(qunatityLineItemList);
-
-    destoryProductLineItems(basket);
+    var addressProductRelations = createAddressProductRelations(quantityLineItemList);
+    destroyProductLineItems(basket);
     removeNonDefaultShipments(basket);
-    creatNewShipmentsandProoductLineItems(addressProductRelations, bonusDiscountLineItem, basket);
+    createNewShipmentsAndProductLineItems(addressProductRelations, bonusDiscountLineItem, basket);
 
     return PIPELET_NEXT;
 }
-    /**
-     *   Build new data structure through HashMaps from address-products-relations (stored in FormList)
-     *   to build the new ProductLineItems in dependency to their addresses and quantities
-     *
-     *   address relation:   +===============+=================+
-     *                       |   Key         |   Value         |
-     *                       +===============+=================+
-     *                       |   address1    |   products1   --|-------> product relation 1: +===============+===============+
-     *                       +---------------+-----------------+                             |   Key         |   Value       |
-     *                       |   address2    |   products2   --|---> product relation 2      +===============+===============+
-     *                       +---------------+-----------------+                             |   productID1  |   quantity1   |
-     *                       |   ...         |   ...           |                             +---------------+---------------+
-     *                                                                                       |   productID2  |   quantity2   |
-     *                                                                                       +---------------+---------------+
-     *                                                                                       |   ...         |   ...         |
-     */
 
-function createAddressProductRelations(qliList) {
-    var addressRelations = new HashMap();
+function createAddressProductRelations(quantityLineItemList) {
+    var addressRelations = {};
     var productRelations;
-    for (var i = 0; i < qliList.getChildCount(); i++) {
-        var qli = qliList[i];
-        // type: String
-        var selectedAddress = qli.addressList.selectedOptionObject;
-        // type: String
-        var productID = qli.object.productID;
-        // type: String
-        var productOptionID = qli.object.optionID;
-        // type: String
-        var isBonusProduct = qli.object.bonusProductLineItem;
-        
-        productID = productID + '.' + productOptionID + '.' + isBonusProduct;
+    for (var i = 0; i < quantityLineItemList.getChildCount(); i++) {
+
+        var quantityLineItem = quantityLineItemList[i];
+        var selectedAddress = quantityLineItem.addressList.selectedOptionObject;
+        var addressId = selectedAddress.ID;
+        var productID = quantityLineItem.object.productID;
+        var productOptionID = quantityLineItem.object.optionID;
+        var isBonusProduct = quantityLineItem.object.bonusProductLineItem;
+
+        var uniqueId = 'uniqueProductIdentifier' + productID + productOptionID;
+
+        var product = {
+            productID: productID,
+            productOptionID: productOptionID,
+            isBonusProduct: isBonusProduct,
+            quantity: 1
+        };
 
         if (selectedAddress === null) {
             return PIPELET_ERROR;
         }
 
-        if (addressRelations.containsKey(selectedAddress)) {
-            // type: HashMap
-            productRelations = addressRelations.get(selectedAddress);
-            if (productRelations.containsKey(productID)) {
-                var quantity = productRelations.get(productID);
-                productRelations.put(productID, quantity + 1);
+        var addressGroup = addressRelations[addressId];
+        if (addressGroup) {
+            productRelations = addressGroup.lineItems;
+            if (productRelations[uniqueId]) {
+                productRelations[uniqueId].quantity += 1;
             } else {
-                productRelations.put(productID, 1);
+                productRelations[uniqueId] = product;
             }
         } else {
-            productRelations = new HashMap();
-            productRelations.put(productID, 1);
-            addressRelations.put(selectedAddress, productRelations);
+            addressRelations[addressId] = {};
+            addressRelations[addressId].address = selectedAddress;
+            addressRelations[addressId].lineItems = {};
+            addressRelations[addressId].lineItems[uniqueId] = product;
         }
     }
 
-    return addressRelations; // the new data structure
+    return addressRelations;
 }
 
-function destoryProductLineItems(basket) {
-    var plis = basket.getProductLineItems();
-    var pli;
-    for (var m = 0; m < plis.length; m++) {
-        pli = plis[m];
-        if (empty(pli.custom.fromStoreId)) {
-            basket.removeProductLineItem(pli);
+function destroyProductLineItems(basket) {
+    var productLineItems = basket.getProductLineItems();
+    var productLineItem;
+    for (var m = 0; m < productLineItems.length; m++) {
+        productLineItem = productLineItems[m];
+        if (!productLineItem.custom.fromStoreId) {
+            basket.removeProductLineItem(productLineItem);
         }
     }
-    return;
 }
+
 function removeNonDefaultShipments(basket) {
     var shipments = basket.getShipments();
     var shipment;
@@ -105,71 +90,64 @@ function removeNonDefaultShipments(basket) {
             basket.removeShipment(shipment);
         }
     }
-    return;
 }
 
-function creatNewShipmentsandProoductLineItems(addressRelations, bonusDiscountLineItem, basket) {
+function createNewShipmentsAndProductLineItems(addressRelations, bonusDiscountLineItem, basket) {
     // Build new ProductLineItems and Shipments with the new created data structure
-    // type: Set
-    var addresses = addressRelations.keySet();
+    var addressIds = Object.keys(addressRelations);
     var shipment;
-    var defaultShippingSet = false;
-    var pli;
+    var isDefaultShippingSet = false;
+    var productLineItem;
 
-    // adddress : Object
-    for (var x = 0; x < addresses.length; x++) {
-        var address = addresses[x];
-        // type: OrderAddress
+    for (var x = 0; x < addressIds.length; x++) {
+        var addressID = addressIds[x];
+        var address = addressRelations[addressID].address;
         var orderAddress;
-        if (!defaultShippingSet){
+        if (!isDefaultShippingSet) {
             shipment = basket.getDefaultShipment();
-            defaultShippingSet = true;
+            isDefaultShippingSet = true;
         } else {
             shipment = basket.createShipment(address.UUID);
         }
         orderAddress = shipment.createShippingAddress();
         // type: Object
-        var shippingAddress = new ShippingAddress();
+        var shippingAddress = new checkoutUtils();
         shippingAddress.UUID = UUIDUtils.createUUID();
         shippingAddress.copyFrom(address);
         shippingAddress.copyTo(orderAddress);
 
-        // type: HashMap
-        var productRelations = addressRelations.get(address);
-        // type: Set
-        var products = productRelations.keySet();
+        var productRelations = addressRelations[addressID].lineItems;
+        var products = Object.keys(productRelations);
 
-        var product_ID = '';
+        var productId = '';
         var optionID = '';
         var isProductBonus;
 
-        for (var n = 0; n < products.length; n++){
+        for (var n = 0; n < products.length; n++) {
             var product = products[n];
-            var splitarray = product.split('.');
-            product_ID = splitarray[0];
-            optionID = splitarray[1];
-            isProductBonus = splitarray[2];
+            productId = productRelations[product].productID;
+            optionID = productRelations[product].productOptionID;
+            isProductBonus = productRelations[product].isBonusProduct;
 
             if (isProductBonus === true) {
                 var productToAdd;
                 for (var j = 0; j < bonusDiscountLineItem.bonusProducts.length; j++) {
-                    if (bonusDiscountLineItem.bonusProducts[j].ID === product_ID) {
+                    if (bonusDiscountLineItem.bonusProducts[j].ID === productId) {
                         productToAdd = bonusDiscountLineItem.bonusProducts[j];
                         break;
                     }
                 }
-                pli = basket.createBonusProductLineItem(bonusDiscountLineItem, productToAdd, null, shipment);
+                productLineItem = basket.createBonusProductLineItem(bonusDiscountLineItem, productToAdd, null, shipment);
 
             } else {
-                // type: ProductLineItem
-                pli = basket.createProductLineItem(product_ID, shipment);
-                pli.setQuantityValue(productRelations.get(product));
+                productLineItem = basket.createProductLineItem(productId, shipment);
+                productLineItem.setQuantityValue(productRelations[product].quantity);
             }
 
             //re-assign the option product based on the optionID
-            if(optionID !== 'na'){
+            if (optionID !== 'na') {
                 // type: dw.catalog.ProductOptionModel
-                var productOptionModel = pli.product.getOptionModel();
+                var productOptionModel = productLineItem.product.getOptionModel();
                 // type: dw.catalog.ProductOption
                 var productOptions = productOptionModel.getOptions();
                 var pliOptionArrayList = new ArrayList(productOptions);
@@ -177,17 +155,16 @@ function creatNewShipmentsandProoductLineItems(addressRelations, bonusDiscountLi
 
                 // type: Iterator
                 var options = productOptionModel.getOptionValues(productOption).iterator();
-                while(options.hasNext()){
+                while (options.hasNext()) {
 
                     var optionValue = options.next();
 
                     // if the option id equals the selection option id, set the selected option
-                    if (optionValue.getID() === optionID)
-                    {
-                        var pliOptionProdcuts = new ArrayList(pli.optionProductLineItems);
+                    if (optionValue.getID() === optionID) {
+                        var pliOptionProducts = new ArrayList(productLineItem.optionProductLineItems);
 
-                        for (var k = 0; k < pliOptionProdcuts.length; k++) {
-                            pliOptionProdcuts[k].updateOptionValue(optionValue);
+                        for (var k = 0; k < pliOptionProducts.length; k++) {
+                            pliOptionProducts[k].updateOptionValue(optionValue);
                         }
                     }
                 }
