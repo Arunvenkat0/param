@@ -37,8 +37,9 @@ function show() {
  * meta data. Renders the account/user/registration template using an anonymous view.
  */
 function editProfile() {
-    var Content, pageMeta, accountPersonalDataAsset;
-    Content = app.getModel('Content');
+    var pageMeta;
+    var accountPersonalDataAsset;
+    var Content = app.getModel('Content');
 
     if (!request.httpParameterMap.invalid.submitted) {
         app.getForm('profile').clear();
@@ -72,8 +73,9 @@ function editForm() {
             response.redirect(URLUtils.https('Account-Show'));
         },
         confirm: function () {
-            var Customer, profileUpdateValidation;
-            Customer = app.getModel('Customer');
+            var Customer = app.getModel('Customer');
+            var profileUpdateValidation = true;
+
             if (!Customer.checkUserName()) {
                 app.getForm('profile.customer.email').invalidate();
                 profileUpdateValidation = false;
@@ -91,9 +93,6 @@ function editForm() {
 
             if (profileUpdateValidation) {
                 profileUpdateValidation = Customer.editAccount(app.getForm('profile.customer.email').value(), app.getForm('profile.login.password').value(), app.getForm('profile'));
-            }
-
-            if (profileUpdateValidation) {
                 response.redirect(URLUtils.https('Account-Show'));
             } else {
                 response.redirect(URLUtils.https('Account-EditProfile', 'invalid', 'true'));
