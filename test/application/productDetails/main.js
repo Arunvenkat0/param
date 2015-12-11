@@ -8,10 +8,7 @@ import * as pricingHelpers from '../pageObjects/helpers/pricing';
 import * as productDetailPage from '../pageObjects/productDetail';
 import * as testData from '../pageObjects/testData/main';
 
-// TODO:  Refactor these tests to use testData module instead of this search
-// pattern.
-
-describe('Product Details Page', () => {
+describe('Product Detail Page', () => {
 
     before(() => client.init()
         .then(() => testData.load())
@@ -19,6 +16,7 @@ describe('Product Details Page', () => {
 
     after(() => client.end());
 
+    // TODO:  Refactor these tests to use testData module instead of the search pattern.
     describe('Bundle', () => {
         before(() => homePage.navigateTo()
             .then(() => client.waitForExist('form[role="search"]')
@@ -74,45 +72,127 @@ describe('Product Details Page', () => {
     });
 
     describe('Set', () => {
-        before(() => homePage.navigateTo()
-            .then(() => client.waitForExist('form[role="search"]')
-                .setValue('#q', 'look')
-                .submitForm('form[role="search"]')
-                .waitForExist('#search-result-items')
-                .click('[title*="Fall Look"]')
-                .waitForVisible(productDetailPage.PDP_MAIN))
+        let expectedProductSetPrice;
+        let productSet;
+        let productSetProducts = [];
+        let productSetId = 'spring-look';
+
+        before(() =>
+            testData.getPricesByProductId(productSetId)
+                .then(price => expectedProductSetPrice = price)
+                .then(() => testData.getProductById(productSetId))
+                .then(set => {
+                    productSet = set;
+                    return productSet.getProductIds();
+                })
+                // Get Product Set Products
+                .then(productIds => productIds.reduce((getProduct, productId) => {
+                    return testData.getProductById(productId)
+                        .then(product => productSetProducts.push(product));
+                }, Promise.resolve()))
+                .then(() => client.url(productSet.getUrlResourcePath()))
         );
 
-        it('should have the right name', () =>
-            client.getText('.product-detail > .product-name')
-                .then(title => assert.equal(title, 'Fall Look'))
+        /**
+         * Extracts the product item number (the last text token) from the provided string
+         *
+         * @param {String} label - Localized string of the displayed item number, i.e. "Item No. 12345"
+         * @returns {String} - Last string token, i.e. 12345
+         */
+        function getItemNumber(label) {
+            let tokens = label.split(' ');
+            return tokens[tokens.length - 1];
+        }
+
+        it('should display its product name', () =>
+            client.getText(productDetailPage.PRODUCT_NAME)
+                .then(title => assert.equal(title, productSet.getDisplayName()))
         );
 
-        it('should have product image', () =>
-            client.isExisting('.primary-image')
-                .then(exists => assert.isTrue(exists))
+        it('should display a primary image', () =>
+            client.getAttribute(productDetailPage.PRIMARY_IMAGE, 'src')
+                .then(imgSrc => assert.isTrue(imgSrc.endsWith(productSet.getImage('large'))))
         );
 
-        it('should have all products in the set', () =>
-            client.getText('#item-013742003314 .item-name')
-                .then(title => assert.equal(title, 'Pink and Gold Necklace'))
-
-                .then(() => client.getText('#item-701644033668 .item-name'))
-                .then(title => assert.equal(title, 'Floral Tunic'))
-
-                .then(() => client.getText('#item-701644607197 .item-name'))
-                .then(title => assert.equal(title, 'Straight Leg Pant.'))
+        it('should display its associated products with their first variants selected', () =>
+            client.elements(productDetailPage.PRODUCT_SET_LIST)
+                .then(elements => elements.value.reduce((testValues, element, idx) => {
+                    return testValues.then(() =>
+                        client.elementIdText(element.ELEMENT)
+                            .then(itemNumberLabel =>
+                                assert.equal(getItemNumber(itemNumberLabel.value), productSetProducts[idx].getVariantProductIds()[0])
+                            )
+                    );
+                }, Promise.resolve()))
         );
 
-        it('should have the right price', () =>
-            client.getText('.product-detail .product-add-to-cart .salesprice')
-                .then(price => assert.equal(price, '$204.00'))
+        it('should display the sum of its products as its price', () =>
+            client.getText(productDetailPage.PRODUCT_SET_TOTAL_PRICE)
+                .then(price => assert.equal(price, expectedProductSetPrice))
         );
 
-        it('should have add to cart button enabled', () =>
-            client.isEnabled('.add-all-to-cart')
-                .then(enabled => assert.ok(enabled, 'Add All to Cart button is enabled'))
+        it('should display the "Add to Cart" button as enabled', () =>
+            client.isEnabled(productDetailPage.BTN_ADD_ALL_TO_CART)
+                .then(enabled => assert.ok(enabled))
         );
+
+        describe('Product Item', () => {
+            let productItem;
+            let firstVariant;
+
+            before(() => {
+                productItem = productSetProducts[0];
+                firstVariant = productItem.getVariants()[0];
+            });
+
+            /**
+             * Generate attribute selector string for an attribute type (color, size) for a specific product
+             *
+             * @param {String} pid - product ID
+             * @param {String} attrType - attribute type, such as color, size, or width
+             * @returns {String} - CSS selector to retrieve attribute choices
+             */
+            function generateAttrSelector (pid, attrType) {
+                return `#item-${pid} .swatches.${attrType.toLowerCase()} li`;
+            }
+
+            it('should display its product ID', () =>
+                client.getText(`#item-${firstVariant.id} .product-number`)
+                    .then(itemNumber => assert.isTrue(itemNumber.indexOf(firstVariant.id) > -1))
+            );
+
+            it('should display its attribute choices', () =>
+                productItem.getAttrTypes().reduce((getAttr, attrType) => {
+                    // Get the attribute element wrapper
+                    return client.element(`${productDetailPage.PRODUCT_SET_ITEM_VARIATIONS} ul.swatches.${attrType.toLowerCase()}`)
+                        // Find all <a> tags for this element.  Number of tags should equal number of attribute values.
+                        .then(attrSwatch => client.elementIdElements(attrSwatch.value.ELEMENT, 'a'))
+                        .then(anchorTags => assert.equal(anchorTags.value.length, productItem.variationAttributes[attrType].values.length));
+                }, Promise.resolve())
+            );
+
+            it('should display the first variant\'s selected attribute values as selected', () =>
+                productItem.getAttrTypes().reduce((getAttr, attrType) => {
+                    let attrValues = productItem.getAttrValuesByType(attrType);
+                    let variantAttrValue = firstVariant.customAttributes[attrType];
+                    let expectedSelectedIndex = attrValues.indexOf(variantAttrValue);
+
+                    return client.elements(generateAttrSelector(firstVariant.id, attrType))
+                        .then(attrChoices => client.elementIdAttribute(attrChoices.value[expectedSelectedIndex].ELEMENT, 'class'))
+                        .then(expectedSelected => assert.isTrue(expectedSelected.value.indexOf('selected') > -1));
+                }, Promise.resolve())
+            );
+
+            it('should display the first variant\'s selected attribute value labels', () =>
+                productItem.getAttrTypes().reduce((getAttr, attrType) => {
+                    return client.getText(generateAttrSelector(firstVariant.id, attrType) + '.selected-value')
+                        .then(selectedValue => {
+                            let expectedValue = productItem.getAttrDisplayValue(attrType, firstVariant.customAttributes[attrType]).toUpperCase();
+                            return assert.equal(selectedValue, expectedValue);
+                        });
+                }, Promise.resolve())
+            );
+        });
     });
 
     describe('Variation Master', () => {
@@ -128,9 +208,9 @@ describe('Product Details Page', () => {
             return testData.getProductVariationMaster()
                 .then(master => {
                     variationMaster = master;
-                    firstAttributeID = Object.keys(variationMaster.variationAttributes)[0];
+                    firstAttributeID = variationMaster.getAttrTypes()[0];
                     firstAttributeValues = variationMaster.getAttrValuesByType(firstAttributeID);
-                    return testData.getProductById(variationMaster.variants[0]);
+                    return testData.getProductById(variationMaster.getVariantProductIds()[0]);
                 })
                 .then(product => defaultVariant = product)
                 .then(() => client.url(variationMaster.getUrlResourcePath()))
@@ -233,5 +313,4 @@ describe('Product Details Page', () => {
 
         // TODO: Write tests to select all required attributes and check for Add to Cart button enablement
     });
-
 });

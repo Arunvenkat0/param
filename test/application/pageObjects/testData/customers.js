@@ -23,8 +23,8 @@ export function getCustomer (customers, login) {
  * @param {Object} rawCustomers - Parsed data from XML files
  * @returns {Array} - Customer objects
  */
-export function parseCustomers (rawCustomers) {
-	let parsedCustomers = {};
+export function parseCustomers (rawCustomers, currentCustomers) {
+	let parsedCustomers = currentCustomers || {};
 
 	for (let customer of rawCustomers.customers.customer) {
 		let instance = new Customer(customer);

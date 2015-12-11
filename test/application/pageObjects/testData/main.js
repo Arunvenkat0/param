@@ -1,6 +1,5 @@
 'use strict';
 
-import _ from 'lodash';
 import fs from 'fs';
 import moment from 'moment-timezone';
 import xml2js from 'xml2js';
@@ -33,7 +32,9 @@ let subjectMeta = {
     catalog: {
         files: [
             demoDataDir + '/catalogs/electronics-catalog/catalog.xml',
-            demoDataDir + '/catalogs/apparel-catalog/catalog.xml'
+            demoDataDir + '/catalogs/apparel-catalog/catalog.xml',
+            demoDataDir + '/catalogs/storefront-catalog-en/catalog.xml',
+            demoDataDir + '/catalogs/storefront-catalog-non-en/catalog.xml'
         ],
         processor: products.parseCatalog
     },
@@ -61,7 +62,7 @@ const bundleProductId = 'microsoft-xbox360-bundle';
 
 // Used to determine whether parsedData should be regenerated.  Please modify this any time a change to the structure of
 // parsedData is made.  In an OS X Terminal, please use 'date -u' to generate this value.
-const version = 'Sun Nov 15 04:06:13 UTC 2015';
+const version = 'Thu Dec 10 04:07:59 UTC 2015';
 
 export let parsedData = {};
 export let parsedDataFile = './test/application/pageObjects/testData/parsedData.txt';
@@ -110,15 +111,15 @@ function _loadAndJsonifyXmlData (subject) {
         let localPromises = [];
         parsedData[subject] = parsedData.hasOwnProperty(subject) ? parsedData[subject] : {};
         subjectMeta[subject].files.forEach(file => {
-            localPromises.push(new Promise((resolve) => {
+            localPromises.push(new Promise(resolve =>
                 fs.readFile(file, (err, data) => {
                     let parser = xml2js.Parser();
                     parser.parseString(data, (err, result) => {
-                        let parsed = _.extend(parsedData[subject], subjectMeta[subject].processor(result));
-                        resolve(parsed);
+                        parsedData[subject] = subjectMeta[subject].processor(result, parsedData[subject]);
+                        resolve(parsedData[subject]);
                     });
-                });
-            }));
+                })
+            ));
         });
         resolve(Promise.all(localPromises));
     });
@@ -134,8 +135,8 @@ function _loadAndJsonifyXmlData (subject) {
  */
 export function getProductById (productId) {
     let catalog = parsedData.catalog;
-    catalog[productId] = products.getProduct(catalog, productId);
-    return Promise.resolve(catalog[productId]);
+    let product = products.getProduct(catalog, productId);
+    return Promise.resolve(product);
 }
 
 /**
@@ -216,7 +217,7 @@ export function getPricesByProductId (productId, locale = 'x_default') {
 }
 
 export function getVariationMasterInstances () {
-    return products.getVariationMasters(parsedData.catalog);
+    return products.getVariationMasters(parsedData.catalog.products);
 }
 
 function _getCurrentYear() {

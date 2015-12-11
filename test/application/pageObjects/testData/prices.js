@@ -29,8 +29,8 @@ export function getPricesForProduct (priceBooks, productId, currencyCode = 'usd'
  * @param {Object} priceBooks - Parsed data from XML files
  * @returns {Object} - Map of Price Books grouped by Price Book IDs
  */
-export function parsePriceBooks (priceBooks) {
-    let priceBookList = {};
+export function parsePriceBooks (priceBooks, currentPricebooks) {
+    let priceBookList = currentPricebooks || {};
 
     priceBooks.pricebooks.pricebook.forEach(element => {
         let header = element.header[0];

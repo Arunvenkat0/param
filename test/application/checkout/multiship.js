@@ -6,7 +6,7 @@ import client from '../webdriver/client';
 import * as formLogin from '../pageObjects/helpers/forms/login';
 import * as multiShipPage from '../pageObjects/multiship';
 import * as testData from '../pageObjects/testData/main';
-import Resource from '../../mocks/dw/web/Resource';
+import * as Resource from '../../mocks/dw/web/Resource';
 
 describe('Multi Shipping', () => {
 	let login = 'testuser1@demandware.com';
