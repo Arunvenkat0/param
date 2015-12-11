@@ -73,26 +73,30 @@ function editForm() {
             response.redirect(URLUtils.https('Account-Show'));
         },
         confirm: function () {
+            var isProfileUpdateValid = true;
+            var hasEditSucceeded = false;
             var Customer = app.getModel('Customer');
-            var profileUpdateValidation = true;
 
             if (!Customer.checkUserName()) {
                 app.getForm('profile.customer.email').invalidate();
-                profileUpdateValidation = false;
+                isProfileUpdateValid = false;
             }
 
             if (app.getForm('profile.customer.email').value() !== app.getForm('profile.customer.emailconfirm').value()) {
                 app.getForm('profile.customer.emailconfirm').invalidate();
-                profileUpdateValidation = false;
+                isProfileUpdateValid = false;
             }
 
             if (app.getForm('profile.login.password').value() !== app.getForm('profile.login.passwordconfirm').value()) {
                 app.getForm('profile.login.passwordconfirm').invalidate();
-                profileUpdateValidation = false;
+                isProfileUpdateValid = false;
             }
 
-            profileUpdateValidation = Customer.editAccount(app.getForm('profile.customer.email').value(), app.getForm('profile.login.password').value(), app.getForm('profile'));
-            if (profileUpdateValidation) {
+            if (isProfileUpdateValid) {
+                hasEditSucceeded = Customer.editAccount(app.getForm('profile.customer.email').value(), app.getForm('profile.login.password').value(), app.getForm('profile'));
+            }
+
+            if (isProfileUpdateValid && hasEditSucceeded) {
                 response.redirect(URLUtils.https('Account-Show'));
             } else {
                 response.redirect(URLUtils.https('Account-EditProfile', 'invalid', 'true'));
