@@ -91,8 +91,8 @@ function editForm() {
                 profileUpdateValidation = false;
             }
 
+            profileUpdateValidation = Customer.editAccount(app.getForm('profile.customer.email').value(), app.getForm('profile.login.password').value(), app.getForm('profile'));
             if (profileUpdateValidation) {
-                profileUpdateValidation = Customer.editAccount(app.getForm('profile.customer.email').value(), app.getForm('profile.login.password').value(), app.getForm('profile'));
                 response.redirect(URLUtils.https('Account-Show'));
             } else {
                 response.redirect(URLUtils.https('Account-EditProfile', 'invalid', 'true'));
