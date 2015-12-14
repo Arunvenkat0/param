@@ -20,27 +20,24 @@ var Quantity = require('dw/value/Quantity');
 var QuantityLineItemModel = Class.extend(
     /** @lends module:models/QuantityLineItemModel~QuantityLineItemModel.prototype */
     {
-        /** */
         productID: null,
-        /** */
         lineItemText: null,
-        /** */
         quantity: null,
-        /** */
         pliUUID: null,
-        /** */
         optionID: null,
+        bonusProductLineItem: null,
 
-        init: function (pli) {
+        init: function (productLineItem) {
 
-            this.quantity = new Quantity(1, pli.quantity.getUnit());
-            this.lineItemText = pli.lineItemText;
-            this.productID = pli.productID;
-            this.pliUUID = pli.UUID;
+            this.quantity = new Quantity(1, productLineItem.quantity.getUnit());
+            this.lineItemText = productLineItem.lineItemText;
+            this.productID = productLineItem.productID;
+            this.pliUUID = productLineItem.UUID;
+            this.bonusProductLineItem = productLineItem.bonusProductLineItem;
 
             //Persists the optionID. If the product does not have an option, it is set to 'na'.
-            if (pli.optionProductLineItems.size() > 0) {
-                for (var iter = pli.optionProductLineItems.iterator(); iter.hasNext();) {
+            if (productLineItem.optionProductLineItems.size() > 0) {
+                for (var iter = productLineItem.optionProductLineItems.iterator(); iter.hasNext();) {
                     var item = iter.next();
                     this.optionID = item.optionValueID;
                 }

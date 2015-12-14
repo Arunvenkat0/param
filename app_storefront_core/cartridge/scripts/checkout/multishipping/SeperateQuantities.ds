@@ -37,6 +37,7 @@ function execute( args : PipelineDictionary ) : Number
 		qli.lineItemText = pli.lineItemText;
 		qli.productID = pli.productID;
 		qli.pliUUID = pli.UUID;
+		qli.bonusProductLineItem = pli.bonusProductLineItem;
 	
 		//persisting the optionID, if the product does not have an option is set to 'na'
 		if(pli.optionProductLineItems.size() > 0){

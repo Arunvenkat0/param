@@ -420,3 +420,5 @@ function QuantityLineItem(){
 	var pliUUID : String = null;
 	var optionID : String = null;
 }
+
+module.exports = ShippingAddress;

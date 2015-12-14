@@ -72,7 +72,12 @@ function multiShippingAddresses() {
             var cart = Cart.get();
 
             var result = Transaction.wrap(function () {
-                return cart.mergeQuantities(session.forms.multishipping.addressSelection.quantityLineItems);
+                var MergeQuantities = require('app_storefront_core/cartridge/scripts/checkout/multishipping/MergeQuantities');
+                var ScriptResult = MergeQuantities.execute({
+                    CBasket:  cart.object,
+                    QuantityLineItems: session.forms.multishipping.addressSelection.quantityLineItems
+                });
+                return ScriptResult;
             });
 
             if (result) {
