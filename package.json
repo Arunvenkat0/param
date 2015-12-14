@@ -1,6 +1,6 @@
 {
   "name": "sitegenesis",
-  "version": "101.0.2",
+  "version": "101.0.3",
   "description": "Because of file size constraints, the demo store data distribution is broken into 2 distinct parts:\r - everything, without high resolution images, including a catalog with hi resolution references removed\r - a delta distibution, with only high resolution images, plus a catalog specifically referencing those images",
   "main": "gulpfile.js",
   "directories": {
