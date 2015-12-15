@@ -27,7 +27,6 @@
 	<span class="visually-hidden" itemprop="url">${URLUtils.http('Product-Show','pid', pdict.Product.ID)}</span>
 
 	<div class="product-number">
-		<iscomment>Put master ID on a data-attribute to be used by CQuotient</iscomment>
 		${Resource.msg('product.item','product',null)} <span itemprop="productID" data-masterid="${masterId}"><isprint value="${ pdict.available ? pdict.Product.ID : masterId }"/></span>
 	</div>
 

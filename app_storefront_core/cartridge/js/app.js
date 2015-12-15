@@ -8,7 +8,6 @@
 'use strict';
 
 var countries = require('./countries'),
-	cq = require('./cq'),
 	dialog = require('./dialog'),
 	minicart = require('./minicart'),
 	page = require('./page'),
@@ -172,7 +171,6 @@ var app = {
 		validator.init();
 		rating.init();
 		searchplaceholder.init();
-		cq.init();
 		// execute page specific initializations
 		$.extend(page, window.pageContext);
 		var ns = page.ns;
