@@ -16,7 +16,11 @@ var UUIDUtils = require('dw/util/UUIDUtils');
 function execute(pdict) {
     var basket = pdict.CBasket;
     var quantityLineItemList = pdict.QuantityLineItems;
-    var bonusDiscountLineItem = basket.getBonusDiscountLineItems()[0];
+    var bonusDiscountLineItems = basket.getBonusDiscountLineItems();
+    var bonusDiscountLineItem;
+    if (bonusDiscountLineItems.length) {
+        bonusDiscountLineItem = bonusDiscountLineItems[0];
+    }
     var addressProductRelations = createAddressProductRelations(quantityLineItemList);
     destroyProductLineItems(basket);
     removeNonDefaultShipments(basket);
