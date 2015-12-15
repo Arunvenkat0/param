@@ -62,7 +62,7 @@ The tests are contained in suites, which are represented as directories. For exa
 ```
 
 1. Use a WebDAV client (i.e. Cyberduck at https://cyberduck.io/) to upload the
-**demo_data_no_hires_images/inventory-lists/inventory/inventory.xml** file to the "**Impex/src/testdata/inventory-list/**"
+**demo_data_no_hires_images/inventory-lists/inventory/inventory*.xml** files to the "**Impex/src/testdata/inventory-list/**"
 directory of your sandbox (https://&lt;sandbox_host&gt;/on/demandware.servlet/webdav/Sites/Impex/src/testdata/inventory-list/).
 You will need to login with a valid Business Manager account that has been
 assigned the role of Administrator.
