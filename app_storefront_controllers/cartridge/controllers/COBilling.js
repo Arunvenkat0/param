@@ -685,8 +685,10 @@ function getGiftCertificateBalance() {
 
     if (giftCertificate && giftCertificate.isEnabled()) {
         responseUtils.renderJSON({
-            ID: giftCertificate.getGiftCertificateCode(),
-            balance: StringUtils.formatMoney(giftCertificate.getBalance())
+            giftCertificate: {
+                ID: giftCertificate.getGiftCertificateCode(),
+                balance: StringUtils.formatMoney(giftCertificate.getBalance())
+            }
         });
     } else {
         responseUtils.renderJSON({
