@@ -48,9 +48,10 @@ var ProductVariationModel = AbstractModel.extend({
      * @return {dw.catalog.Variant} the selected variant.
      */
     getSelectedVariant: function () {
-        var filteredList = this.object.getVariants(this.selectionMap);
-        if (this.selectionMap.size() === this.productVariationAttributes.size() && filteredList.size() === 1) {
-            return filteredList[0];
+        var matchingVariants = this.object.getVariants(this.selectionMap);
+
+        if (matchingVariants.size() === 1) {
+            return matchingVariants[0];
         }
         return null;
     },
