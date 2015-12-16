@@ -195,7 +195,7 @@ describe('Gift Registry', () => {
 			.then(() => giftRegistryPage.getGiftRegistryCount())
 			.then(rows => assert.equal(1, rows))
 			.then(() => giftRegistryPage.openGiftRegistry())
-			.then(() => client.waitForVisible(giftRegistryPage.buttonPrint))
+			.then(() => client.waitForVisible(giftRegistryPage.BUTTON_FIND))
 			.then(() => client.getText(giftRegistryPage.eventTitle))
 			.then(str => assert.equal(str, giftRegistryPage.eventName));
 	});

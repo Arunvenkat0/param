@@ -25,7 +25,6 @@ export const lastName = 'User1';
 export const eventType = 'wedding';
 export const eventTitle = '.list-title';
 export const eventName = 'WEDDING OF THE CENTURY - 3/28/08';
-export const buttonPrint = 'button[class=print-page]';
 
 const basePath = '/giftregistry';
 

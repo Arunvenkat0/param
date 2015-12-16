@@ -15,7 +15,6 @@
 
 	<div class="list-share">
 		<h2 class="list-title"><isprint value="${pdict.ProductList.name}"/> - <isprint value="${pdict.ProductList.eventDate}"/></h2>
-		<button class="print-page">${Resource.msg('global.print','locale',null)}</button>
 	</div>
 	<div class="event-info">
 		<h3>${Resource.msg('account.giftregistry.userinformation','account',null)}</h3>

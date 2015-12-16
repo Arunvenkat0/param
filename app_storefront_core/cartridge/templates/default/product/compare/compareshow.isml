@@ -6,10 +6,6 @@
 		${Resource.msg('product.compareshow.back', 'product', null)}
 	</a>
 
-	<button class="print-page" value="${Resource.msg('global.print', 'locale', null)}">
-		${Resource.msg('global.print', 'locale', null)}
-	</button>
-
 	<h1>${Resource.msg('product.compareshow.header', 'product', null)}</h1>
 	<isif condition="${pdict.CurrentForms.compare.categories.options.optionsCount > 1}">
 		<form class="category-switch" action="${URLUtils.url('Compare-Show')}" method="post">
