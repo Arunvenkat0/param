@@ -140,6 +140,15 @@ function createNewShipmentsAndProductLineItems(addressRelations, bonusDiscountLi
                         productToAdd = bonusDiscountLineItem.bonusProducts[j];
                         break;
                     }
+                    if (bonusDiscountLineItem.bonusProducts[j].master) {
+                        for (var w = 0; w < bonusDiscountLineItem.bonusProducts[j].variants.length; w++) {
+                            if (bonusDiscountLineItem.bonusProducts[j].variants[w].ID === productId) {
+                                productToAdd = bonusDiscountLineItem.bonusProducts[j].variants[w];
+                                break;
+                            }
+                        }
+                        break;
+                    }
                 }
                 productLineItem = basket.createBonusProductLineItem(bonusDiscountLineItem, productToAdd, null, shipment);
 
