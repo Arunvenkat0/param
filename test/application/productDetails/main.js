@@ -311,6 +311,34 @@ describe('Product Detail Page', () => {
                 .then(enabled => assert.isFalse(enabled))
         );
 
-        // TODO: Write tests to select all required attributes and check for Add to Cart button enablement
+        it('should redirect to a Variant PDP when it only has one variant with two attributes each with one value and first attribute is selected', () => {
+            let masterWithOneVariant = '25795715';
+            let master;
+            let variantID;
+            let variant;
+            let firstAttrType;
+            let firstAttrValue;
+
+            return testData.getProductById(masterWithOneVariant)
+                .then(product => {
+                    master = product;
+                    firstAttrType = master.getAttrTypes()[0];
+                    variantID = master.getVariantProductIds()[0];
+                    return testData.getProductById(variantID);
+                })
+                .then(product => {
+                    variant = product;
+                    firstAttrValue = variant.customAttributes[firstAttrType];
+                })
+                .then(() => client.url(master.getUrlResourcePath() + `?dwvar_${masterWithOneVariant}_${firstAttrType}=${firstAttrValue}`))
+                .then(() => client.getValue(productDetailPage.PID))
+                .then(pid => assert.equal(pid, variantID));
+        });
+
+        it('should enable the Add to Cart button when all required attributes are selected', () =>
+            client.element(productDetailPage.BTN_ADD_TO_CART)
+                .then(button => client.elementIdEnabled(button.value.ELEMENT))
+                .then(enabled => assert.isTrue(enabled.value))
+        );
     });
 });

@@ -4,8 +4,10 @@ import client from '../webdriver/client';
 import * as common from './helpers/common';
 import * as wishListPage from './wishList';
 
+export const BTN_ADD_TO_CART = '#add-to-cart';
 export const BTN_ADD_ALL_TO_CART = '#add-all-to-cart';
 export const BTN_ADD_TO_WISHLIST = 'a[data-action="wishlist"]';
+export const PID = '#pid';
 export const PDP_MAIN = '.pdp-main';
 export const PRICE_LIST = '#product-content .product-price .price-standard';
 export const PRICE_SALE = '#product-content .product-price .price-sales';
@@ -14,9 +16,9 @@ export const PRODUCT_SET_TOTAL_PRICE = '.product-detail .product-add-to-cart .sa
 export const PRODUCT_SET_ITEM_VARIATIONS = '.product-set-item .product-variations';
 export const PRIMARY_IMAGE = '.primary-image';
 export const PRODUCT_NAME = '.product-detail > .product-name';
+export const PRODUCT_NUMBER_LABEL = '#product-content .product-number';
 export const PRODUCT_THUMBNAILS_IMAGES = '.product-thumbnails img';
 export const SWATCH_COLOR_ANCHORS = '.swatches.color .swatchanchor';
-const BTN_ADD_TO_CART = '#add-to-cart';
 const MINI_CART = '.mini-cart-content';
 
 export function navigateTo (path = '/') {
