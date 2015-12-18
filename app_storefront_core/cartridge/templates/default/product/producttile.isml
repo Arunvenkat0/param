@@ -186,7 +186,9 @@
 					prices.push(price);
 					if (extraPrice) {prices.push(extraPrice);}
 				</isscript>
-				<isinclude template="product/components/pricing"/>
+				<isloop items="${prices}" var="productPrice">
+					<span class="${productPrice.class}" title="${productPrice.title}"><isprint value="${productPrice.value}"/></span>
+				</isloop>
 			</div>
 		</isif>
 
