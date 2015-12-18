@@ -117,7 +117,7 @@
         }
         .order-number {
             font-size: 1.75rem;
-        }   
+        }
     }
     .payment-amount {
         .label {
@@ -144,9 +144,6 @@
 .confirmation-message {
     border-bottom: 3px solid $citrus;
     padding: 1rem 1%;
-    .print-page {
-        float: right;
-    }
 }
 .confirmation {
     &.create-account {
