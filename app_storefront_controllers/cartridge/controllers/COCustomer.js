@@ -82,7 +82,7 @@ function showLoginForm() {
             }
         },
         register: function () {
-            // TODO - redirect to COShipping-Start after registration was successful
+            session.custom.TargetLocation = URLUtils.https('COShipping-Start');
             response.redirect(URLUtils.https('Account-StartRegister'));
 
             return;
