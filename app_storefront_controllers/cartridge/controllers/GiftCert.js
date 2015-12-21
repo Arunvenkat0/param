@@ -12,7 +12,6 @@ var HashMap = require('dw/util/HashMap');
 var Money = require('dw/value/Money');
 var Pipelet = require('dw/system/Pipelet');
 var Resource = require('dw/web/Resource');
-var StringUtils = require('dw/util/StringUtils');
 var Transaction = require('dw/system/Transaction');
 var URLUtils = require('dw/web/URLUtils');
 
@@ -139,7 +138,6 @@ function edit() {
 function checkBalance() {
     var params = request.httpParameterMap;
 
-
     var giftCertificate = null;
 
     var giftCertID = params.giftCertID.stringValue || params.dwfrm_giftcert_balance_giftCertID.stringValue;
@@ -147,19 +145,14 @@ function checkBalance() {
         giftCertificate = GiftCertificateMgr.getGiftCertificateByCode(giftCertID);
     }
 
-    let r = require('~/cartridge/scripts/util/Response');
-
     if (!empty(giftCertificate) && giftCertificate.enabled) {
-        r.renderJSON({
-            giftCertificate: {
-                ID: giftCertID,
-                balance: StringUtils.formatMoney(giftCertificate.balance)
-            }
-        });
+        app.getView({
+            GiftCertificate: giftCertificate
+        }).render('checkout/giftcert/giftcertpurchase');
     } else {
-        r.renderJSON({
-            error: Resource.msg('billing.giftcertinvalid', 'checkout', null)
-        });
+        app.getView({
+            ErrorMsg: Resource.msg('giftcertpurchase.checkinvalid', 'checkout', null)
+        }).render('checkout/giftcert/giftcertpurchase');
     }
 }
 
