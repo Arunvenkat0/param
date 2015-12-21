@@ -411,7 +411,6 @@ quantity (required) - the quantity to use for determining avalability</descripti
           <key-binding alias="showrating" key="To_4"/>
           <key-binding alias="CurrentHttpParameterMap.showcompare.value" key="From_5"/>
           <key-binding alias="showcompare" key="To_5"/>
-          <key-binding alias="CurrentHttpParameterMap.recommendername.value" key="From_6"/>
           <key-binding alias="recommendername" key="To_6"/>
           <key-binding alias="null" key="From_7"/>
           <key-binding alias="null" key="To_7"/>

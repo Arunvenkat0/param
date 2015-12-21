@@ -14,8 +14,7 @@
 						'showswatches', 'true',
 						'showpricing', 'true',
 						'showpromotion', 'true',
-						'showrating', 'true',
-						'recommendername', slotcontent.custom['__RecommenderName'])}"/>
+						'showrating', 'true')}"/>
 				</li>
 			</isobject>
 		</isloop>
