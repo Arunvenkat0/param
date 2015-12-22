@@ -8,7 +8,8 @@
 
 /* API Includes */
 var Pipelet = require('dw/system/Pipelet');
-var ProductList = require('dw/customer/ProductList');
+//var ProductList = require('dw/customer/ProductList');
+var giftRegistryType = require('dw/customer/ProductList').TYPE_GIFT_REGISTRY;
 var Transaction = require('dw/system/Transaction');
 
 /* Script Modules */
@@ -126,7 +127,7 @@ function addProduct() {
 
     var GetProductListsResult = new Pipelet('GetProductLists').execute({
         Customer: customer,
-        Type: ProductList.TYPE_GIFT_REGISTRY
+        Type: giftRegistryType
     });
     var ProductLists = GetProductListsResult.ProductLists;
     //TODO : 'ProductList' is already defined.
@@ -369,7 +370,7 @@ function confirmation() {
             }
 
             var CreateProductListResult = new Pipelet('CreateProductList').execute({
-                Type: ProductList.TYPE_GIFT_REGISTRY,
+                Type: giftRegistryType,
                 Customer: customer
             });
             var CreatedProductList = CreateProductListResult.ProductList;
@@ -795,23 +796,23 @@ function showRegistryInteraction() {
  * Searches a gift registry by various parameters.
  */
 function search() {
-    var currentForms = session.forms;
-
-
+    var advancedSearchForm = session.forms.giftregistry.search.advanced;
+    var simpleSearchForm = session.forms.giftregistry.search.simple;
     var SearchProductListsResult = new Pipelet('SearchProductLists', {
         PublicOnly: true
     }).execute({
-        EventType: currentForms.giftregistry.search.simple.eventType.value,
-        EventCity: currentForms.giftregistry.search.advanced.eventCity.value,
-        EventState: currentForms.giftregistry.search.advanced.eventAddress.states.state.value,
-        EventCountry: currentForms.giftregistry.search.advanced.eventAddress.country.value,
-        RegistrantFirstName: currentForms.giftregistry.search.simple.registrantFirstName.value,
-        RegistrantLastName: currentForms.giftregistry.search.simple.registrantLastName.value,
-        Type: ProductList.TYPE_GIFT_REGISTRY,
-        EventMonth: currentForms.giftregistry.search.advanced.eventMonth.value,
-        EventYear: currentForms.giftregistry.search.advanced.eventYear.value,
-        EventName: currentForms.giftregistry.search.advanced.eventName.value
+        EventType: simpleSearchForm.eventType.value,
+        EventCity: advancedSearchForm.eventCity.value,
+        EventState: advancedSearchForm.eventAddress.states.state.value,
+        EventCountry: advancedSearchForm.eventAddress.country.value,
+        RegistrantFirstName: simpleSearchForm.registrantFirstName.value,
+        RegistrantLastName: simpleSearchForm.registrantLastName.value,
+        Type: giftRegistryType,
+        EventMonth: advancedSearchForm.eventMonth.value,
+        EventYear: advancedSearchForm.eventYear.value,
+        EventName: advancedSearchForm.eventName.value
     });
+
     var ProductLists = SearchProductListsResult.ProductLists;
 /**
  * TODO
