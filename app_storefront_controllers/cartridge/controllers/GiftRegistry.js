@@ -53,7 +53,7 @@ function start() {
 
     var GetProductListsResult = new Pipelet('GetProductLists').execute({
         Customer: customer,
-        Type: ProductList.TYPE_GIFT_REGISTRY
+        Type: giftRegistryType
     });
     var ProductLists = GetProductListsResult.ProductLists;
 
