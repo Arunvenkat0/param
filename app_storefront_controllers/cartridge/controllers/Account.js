@@ -148,18 +148,14 @@ function passwordResetFormHandler(templateName, continueURL) {
                 passwordemail.send({
                     ResetPasswordToken: resetPasswordToken
                 });
-
-                app.getView({
-                    ErrorCode: null,
-                    ShowContinue: true,
-                    ContinueURL: continueURL
-                }).render('account/password/requestpasswordreset_confirm');
-            } else {
-                app.getView({
-                    ErrorCode: 'formnotvalid',
-                    ContinueURL: continueURL
-                }).render(templateName);
             }
+
+            //for security reasons the same message will be shown for a valid reset password request as for a invalid one
+            app.getView({
+                ErrorCode: null,
+                ShowContinue: true,
+                ContinueURL: continueURL
+            }).render('account/password/requestpasswordreset_confirm');
         },
         error: function () {
             app.getView({
