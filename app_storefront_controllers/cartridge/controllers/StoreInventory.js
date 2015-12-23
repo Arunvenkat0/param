@@ -206,7 +206,7 @@ function inventory() {
         stores.push({
             storeId: store.ID,
             status: storeAvailabilityMap.get(store.ID),
-            statusclass: storeAvailabilityMap.get(store.ID) === dw.web.Resource.msg('cart.store.availableinstore', 'storepickup', null) ? 'store-in-stock' : 'store-error',
+            statusclass: storeAvailabilityMap.get(store.ID) === dw.web.Resource.msg('cart.store.availableinstore', 'checkout', null) ? 'store-in-stock' : 'store-error',
             quantity: inventoryRec ? inventoryRec.ATS.value : 0,
             address1: store.address1,
             city: store.city,
@@ -409,7 +409,7 @@ function getStoreAvailabilityMessage(store, product) {
     var storeInventoryListId = store.custom.inventoryListId;
     var productInventoryList = null;
     var productInventoryrecord = null;
-    var availabilityMessage = dw.web.Resource.msg('cart.store.availableinstore','storepickup',null); //"In stock"
+    var availabilityMessage = dw.web.Resource.msg('cart.store.availableinstore','checkout',null); //"In stock"
 
     // check for Inventory Availability
     if (storeInventoryListId !== null) {
@@ -419,14 +419,14 @@ function getStoreAvailabilityMessage(store, product) {
             if (productInventoryrecord !== null) {
                 if (productInventoryrecord.ATS.value >= 1) {
                     //Instock
-                    availabilityMessage = dw.web.Resource.msg('cart.store.availableinstore','storepickup',null); //"In stock"
+                    availabilityMessage = dw.web.Resource.msg('cart.store.availableinstore','checkout',null); //"In stock"
                 } else {
                     // not available as ATS is less than 1
-                    availabilityMessage = dw.web.Resource.msg('cart.store.notavailable','storepickup',null); //"Not Available"
+                    availabilityMessage = dw.web.Resource.msg('cart.store.notavailable','checkout',null); //"Not Available"
                 }
             } else {
                 // not available as Inventory Record doesn't exist
-                availabilityMessage = dw.web.Resource.msg('cart.store.notavailable','storepickup',null); //"Not Available"
+                availabilityMessage = dw.web.Resource.msg('cart.store.notavailable','checkout',null); //"Not Available"
             }
         } else {
             // not available as Inventory List doesn't exist
