@@ -84,6 +84,7 @@
 
 		<!-- Define the action here so that only this form group and child form groups are validated -->
 		<action formid="confirm" valid-form="true"/>
+		<action formid="setParticipants" valid-form="true"/>
 
 	</group>
 
@@ -128,7 +129,7 @@
 		</field>
 
 		<!-- Define the action here so that only the parent form group is validated -->
-		<action formid="confirm" valid-form="true"/>
+		<action formid="setBeforeAfterAddresses" valid-form="true"/>
 		<action formid="displayBeforeAddress" valid-form="false"/>
 		<action formid="displayAfterAddress" valid-form="false"/>
 		<action formid="back" valid-form="false"/>

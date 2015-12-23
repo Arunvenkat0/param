@@ -7,11 +7,13 @@
  */
 
 /* API Includes */
-var ISML = require('dw/template/ISML');
 var Pipelet = require('dw/system/Pipelet');
+var URLUtils = require('dw/web/URLUtils');
 
 /* Script Modules */
-var g = require('~/cartridges/scripts/guard');
+var app = require('~/cartridge/scripts/app');
+var guard = require('~/cartridge/scripts/guard');
+
 /**
  * Updates the giftregistry form and renders the product list template.
  *
@@ -22,16 +24,13 @@ var g = require('~/cartridges/scripts/guard');
  * @FIXME Why does this not use a view to render the template.
  */
 function Show() {
+    var Status = require('dw/system/Status');
     var CurrentHttpParameterMap = request.httpParameterMap;
     var CurrentForms = session.forms;
+    var ProductListID = CurrentHttpParameterMap.ID.stringValue;
+    var ProductList = null;
 
     CurrentForms.giftregistry.clearFormElement();
-
-
-    var ProductListID = CurrentHttpParameterMap.ID.stringValue;
-
-    var ProductList = null;
-    var Status = null;
 
     if (typeof(ProductListID) !== 'undefined' && ProductListID !== null) {
         var GetProductListResult = new Pipelet('GetProductList', {
@@ -53,14 +52,15 @@ function Show() {
             }
         }
     } else {
-        Status = new dw.system.Status(dw.system.Status.ERROR, 'notfound');
+        Status = new Status(Status.ERROR, 'notfound');
     }
 
-
-    ISML.renderTemplate('', {
+    app.getView({
+        Status: Status,
         ProductList: ProductList,
-        Status: Status
-    });
+        ContinueURL: URLUtils.https('GiftRegistry-SubmitForm')
+    }).render('account/giftregistry/registrycustomer');
+
 }
 /**
  * Gift registry customer event handler. Handles the last triggered action based in the formId.
@@ -121,10 +121,10 @@ function PurchaseGiftCertificate() {
 /*
  * Web exposed methods
  */
-exports.Show                    = g.httpsGet(Show);
-exports.ShowInteraction         = g.httpsPost(ShowInteraction);
+exports.Show = guard.ensure(['get', 'https'], Show);
+exports.ShowInteraction = guard.ensure(['post', 'https'], ShowInteraction);
 
 /*
  * Local methods
  */
-exports.PurchaseGiftCertificate = PurchaseGiftCertificate;
+exports.PurchaseGiftCertificate = guard.ensure(['post', 'https'], PurchaseGiftCertificate);

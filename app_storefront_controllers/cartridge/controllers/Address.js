@@ -155,10 +155,8 @@ function setDefault() {
  * addressjson template. Required to fill address form with selected address from address book.
  */
 function getAddressDetails() {
-    var addressBook, address;
-
-    addressBook = customer.profile.addressBook;
-    address = addressBook.getAddress(request.httpParameterMap.AddressID.value);
+    var addressBook = customer.profile.addressBook;
+    var address = addressBook.getAddress(request.httpParameterMap.addressID.value);
 
     app.getView({
         Address: address

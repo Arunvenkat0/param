@@ -171,16 +171,18 @@ function handleLoginForm () {
                 Order: foundOrder
             }).render('account/orderhistory/orderdetails');
         },
-        search: function () {
-            app.getController('GiftRegistry').SearchGiftRegistry();
-            return;
+        search: function (form, action) {
+            var giftRegistryType = require('dw/customer/ProductList').TYPE_GIFT_REGISTRY;
+            var ProductList = app.getModel('ProductList');
+            var productLists = ProductList.search(action.parent.simple, giftRegistryType);
+
+            app.getView({ProductLists: productLists}).render('account/giftregistry/giftregistryresults');
         },
         error: function () {
             app.getView('Login').render();
             return;
         }
     });
-
 }
 
 /**

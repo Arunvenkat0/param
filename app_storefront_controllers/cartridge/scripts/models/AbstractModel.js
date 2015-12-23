@@ -9,7 +9,6 @@
 var Class = require('~/cartridge/scripts/util/Class').Class;
 var Logger = require('dw/system/Logger');
 
-
 var AbstractModel = Class.extend({
     /**
      * Property holding the wrapped object that is initialized in the child classes. Usually,
