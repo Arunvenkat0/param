@@ -144,9 +144,10 @@ function passwordResetFormHandler(templateName, continueURL) {
                 resetPasswordToken = resettingCustomer.generatePasswordResetToken();
 
                 passwordemail = Email.get('mail/resetpasswordemail', resettingCustomer.object.profile.email);
-                passwordemail.setSubject(Resource.msg('email.passwordassistance', 'email', null));
+                passwordemail.setSubject(Resource.msg('resource.passwordassistance', 'email', null));
                 passwordemail.send({
-                    ResetPasswordToken: resetPasswordToken
+                    ResetPasswordToken: resetPasswordToken,
+                    Customer: resettingCustomer.object.profile.customer
                 });
             }
 
@@ -256,7 +257,7 @@ function setNewPasswordForm() {
                         }).render('account/password/setnewpassword');
                     } else {
                         passwordchangedmail = Email.get('mail/passwordchangedemail', resettingCustomer.object.profile.email);
-                        passwordchangedmail.setSubject(Resource.msg('email.passwordassistance', 'email', null));
+                        passwordchangedmail.setSubject(Resource.msg('resource.passwordassistance', 'email', null));
                         passwordchangedmail.send({});
 
                         app.getView().render('account/password/setnewpassword_confirm');
