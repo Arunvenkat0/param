@@ -56,7 +56,7 @@ function findStores() {
     var storeLocatorForm = app.getForm('storelocator');
     var searchResult = storeLocatorForm.handleAction({
         findbycountry: function (formgroup) {
-            var searchKey = formgroup.address.country.value;
+            var searchKey = formgroup.country.htmlValue;
             var stores = SystemObjectMgr.querySystemObjects('Store', 'countryCode = {0}', 'countryCode desc', searchKey);
             if (empty(stores)) {
                 return null;
@@ -65,7 +65,7 @@ function findStores() {
             }
         },
         findbystate: function (formgroup) {
-            var searchKey = formgroup.address.states.stateUSCA.htmlValue;
+            var searchKey = formgroup.state.htmlValue;
             var stores = null;
 
             if (!empty(searchKey)) {
