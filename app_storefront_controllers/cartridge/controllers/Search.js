@@ -96,12 +96,17 @@ function show() {
                 }).render(productSearchModel.category.template);
             } else {
 
-                //SearchPromo - for displaying search driven banners above the product grid
+                //SearchPromo - for displaying search driven banners above the product grid, provided there is a q parameter in the httpParameterMap
+                var searchPromo;
+                if (params.q.value) {
+                    searchPromo = ContentMgr.getContent('keyword_' + params.q.value.toLowerCase());
+                }
+
                 app.getView({
                     ProductSearchResult: productSearchModel,
                     ContentSearchResult: contentSearchModel,
                     ProductPagingModel: productPagingModel,
-                    SearchPromo: ContentMgr.getContent('keyword_' + params.q.value.toLowerCase())
+                    SearchPromo: searchPromo
                 }).render('rendering/category/categoryproducthits');
             }
         } else {
