@@ -39,6 +39,9 @@
         ${Resource.msg('product.item','product',null)} <span itemprop="productID"><isprint value="${pdict.Product.ID}"/></span>
     </div>
 
+    <span class="label">${Resource.msg('global.price','locale',null)}:</span>
+    <isprint value="${pdict.BonusDiscountLineItem.getBonusProductPrice(pdict.Product)}" />
+
     <isif condition="${pdict.Product.bundle && pdict.Product.getBundledProducts().size() > 0}">
         <iscomment>Display bundle Individual Products</iscomment>
         <iscomment>Preserve the current product instance</iscomment>

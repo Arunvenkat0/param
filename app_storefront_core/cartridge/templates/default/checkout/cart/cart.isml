@@ -66,7 +66,7 @@
 				</isif>
 			</div>
 		</isif>
-		
+
 		<isif condition="${!enableCheckout}">
 			<div class="error-form">
 				<i class="fa fa-exclamation-triangle fa-2x pull-left"></i>
@@ -129,13 +129,13 @@
 								</div>
 							</a>
 						</td>
-	
+
 						<td colspan="4" class="bonus-item-actions">
 							<a class="select-bonus" href="${URLUtils.url('Product-GetBonusProducts','bonusDiscountLineItemUUID', bonusDiscountLineItem.UUID, 'lazyLoad', false)}" title="${bonusButtonText}">
 								${bonusButtonText}
 							</a>
 						</td>
-	
+
 					</tr>
 				</div>
 			</isif>
@@ -693,11 +693,20 @@
 												</div>
 											</td>
 
-											<td class="item-price">${new dw.value.Money(0.0, session.getCurrency().symbol)}</td>
+											<isset name="PriceModel" value="${lineItem.product.getPriceModel()}" scope="page"/>
+											<isinclude template="product/components/standardprice" />
+											<isset name="bonusProductPrice" value="${lineItem.getAdjustedPrice()}" scope="page"/>
+											<td class="item-price">
+												<div class="price-promotion">
+													<span class="price-standard"><isprint value="${StandardPrice}" /></span>
+													<span class="price-sales"><isprint value="${bonusProductPrice}"/></span>
+												</div>
+											</td>
 
 											<td class="item-total">
 												<span class="bonus-item">
-													${Resource.msg('global.bonus','locale',null)}
+													<isinclude template="checkout/components/displaybonusproductprice" />
+													<isprint value="${bonusProductPriceValue}" />
 												</span>
 											</td>
 
