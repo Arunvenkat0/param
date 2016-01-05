@@ -2,6 +2,7 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var minimist = require('minimist');
+var _ = require('lodash');
 var sourcemaps = require('gulp-sourcemaps');
 
 var pkg = require('./package.json');
@@ -92,25 +93,13 @@ gulp.task('jshint', function () {
 		.pipe(jshint.reporter(stylish));
 });
 
-var mocha = require('gulp-mocha');
-
+var webdriver = require('gulp-webdriver');
 gulp.task('test:application', function () {
-	// default option to all
-	var suite = opts.suite || '*';
-	if (suite === 'all') {
-		suite = '*';
-	}
-	// default reporter to spec
-	var reporter = opts.reporter || 'spec';
-	// default timeout to 60s
-	var timeout = opts.timeout || 60000;
-	return gulp.src(['test/application/' + suite + '/**/*.js', '!test/application/webdriver/*', '!test/application/pageObjects/*'], {read: false})
-		.pipe(mocha({
-			reporter: reporter,
-			timeout: timeout
-		}));
+	return gulp.src('test/application/webdriver/wdio.conf.js')
+		.pipe(webdriver(_.omit(opts, '_')));
 });
 
+var mocha = require('gulp-mocha');
 gulp.task('test:unit', function () {
 	var reporter = opts.reporter || 'spec';
 	var timeout = opts.timeout || 10000;

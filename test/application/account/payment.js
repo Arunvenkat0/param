@@ -1,10 +1,10 @@
 'use strict';
 
 import {assert} from 'chai';
-import client from '../webdriver/client';
 import * as paymentSettingsPage from '../pageObjects/paymentSettings';
 import * as testData from '../pageObjects/testData/main';
 import * as loginForm from '../pageObjects/helpers/forms/login';
+import * as navHeader from '../pageObjects/navHeader';
 import Resource from '../../mocks/dw/web/Resource';
 
 
@@ -13,8 +13,7 @@ describe('Payment Settings', () => {
 	let amexCardData = {};
 	let customer;
 
-	before(() => client.init()
-		.then(() => testData.load())
+    before(() => testData.load()
 		.then(() => testData.getCustomerByLogin(login))
 		.then(cust => {
 			customer = cust;
@@ -28,34 +27,34 @@ describe('Payment Settings', () => {
 		})
 		.then(() => paymentSettingsPage.navigateTo())
 		.then(() => loginForm.loginAsDefaultCustomer())
-		.then(() => client.waitForVisible(paymentSettingsPage.LINK_ADD_CREDIT_CARD))
-	);
+		.then(() => browser.waitForVisible(paymentSettingsPage.LINK_ADD_CREDIT_CARD))
+    );
 
-	after(() => client.end());
+    after(() => navHeader.logout());
 
 	it('should bring up the new credit card form', () =>
-		client.click(paymentSettingsPage.LINK_ADD_CREDIT_CARD)
-			.then(() => client.waitForVisible(paymentSettingsPage.FORM_CREDIT_CARD))
-			.then(() => client.isVisible(paymentSettingsPage.FORM_CREDIT_CARD))
+		browser.click(paymentSettingsPage.LINK_ADD_CREDIT_CARD)
+			.then(() => browser.waitForVisible(paymentSettingsPage.FORM_CREDIT_CARD))
+			.then(() => browser.isVisible(paymentSettingsPage.FORM_CREDIT_CARD))
 			.then(visible => assert.isTrue(visible))
 	);
 
 	it('should fill out form to add an Amex Card', () => {
 		let deleteCard = Resource.msg('account.paymentinstrumentlist.deletecard', 'account', null);
 		return paymentSettingsPage.fillOutCreditCardForm(amexCardData)
-			.then(() => client.click(paymentSettingsPage.BTN_CREATE_CARD))
-			.then(() => client.waitForVisible(paymentSettingsPage.AMEX_CREDIT_CARD))
-			.then(() => client.getText(paymentSettingsPage.AMEX_CREDIT_CARD))
-			.then(displayText => assert.equal(displayText, `${customer.firstName} ${customer.lastName}\nAmex\n***********8431\nExp. 01.2016\n` + deleteCard));
+			.then(() => browser.click(paymentSettingsPage.BTN_CREATE_CARD))
+			.then(() => browser.waitForVisible(paymentSettingsPage.AMEX_CREDIT_CARD))
+			.then(() => browser.getText(paymentSettingsPage.AMEX_CREDIT_CARD))
+			.then(displayText => assert.equal(displayText, `${customer.firstName} ${customer.lastName}\nAmex\n***********8431\nExp. 01.2017\n` + deleteCard));
 	});
 
 	it('should delete all of the credit Cards', () =>
 		paymentSettingsPage.deleteAllCreditCards()
-			.then(() => client.waitUntil(() =>
-				client.isExisting(paymentSettingsPage.CREDIT_CARD_SELECTOR)
+			.then(() => browser.waitUntil(() =>
+				browser.isExisting(paymentSettingsPage.CREDIT_CARD_SELECTOR)
 					.then(doesExist => doesExist === false)
 			))
-			.then(() => client.isExisting(paymentSettingsPage.CREDIT_CARD_SELECTOR))
+			.then(() => browser.isExisting(paymentSettingsPage.CREDIT_CARD_SELECTOR))
 			.then(doesExist => assert.isFalse(doesExist))
 	);
 });

@@ -1,7 +1,6 @@
 'use strict';
 
 import _ from 'lodash';
-import client from '../webdriver/client';
 
 import * as formHelpers from './helpers/forms/common';
 import * as testData from './testData/main';
@@ -32,7 +31,7 @@ const basePath = '/checkout';
 testData.load();
 
 export function navigateTo () {
-	return client.url(basePath);
+	return browser.url(basePath);
 }
 
 export function addProductVariationMasterToCart (num1, num2, num3) {
@@ -52,6 +51,7 @@ export function fillBillingForm (billingFields) {
 	let fieldsPromise = [];
 
 	let fieldTypes = {
+        creditCard_type: 'selectByValue',
 		creditCard_owner: 'input',
 		creditCard_number: 'input',
 		creditCard_expiration_year: 'selectByValue',

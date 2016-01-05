@@ -1,6 +1,5 @@
 'use strict';
 
-import client from '../webdriver/client';
 import * as accountPage from './account';
 import * as formLogin from './helpers/forms/login';
 
@@ -11,16 +10,16 @@ export const REFINEMENT = '.breadcrumb-refinement';
 const userPanel = '.user-panel';
 
 export function login () {
-	return client.waitForVisible(USER_INFO_ICON)
+	return browser.waitForVisible(USER_INFO_ICON)
 		.click(USER_INFO_ICON)
 		.waitForVisible(LINK_LOGIN)
 		.click(LINK_LOGIN)
 		.then(() => formLogin.loginAsDefaultCustomer())
-		.then(() => client.waitForVisible(accountPage.LOGOUT));
+		.then(() => browser.waitForVisible(accountPage.LOGOUT));
 }
 
 export function logout () {
-	return client.click(USER_INFO_ICON)
+	return browser.click(USER_INFO_ICON)
 		.waitForVisible(userPanel)
 		.click(BTN_LOGOUT)
 		.waitForVisible(accountPage.BTN_LOGIN);

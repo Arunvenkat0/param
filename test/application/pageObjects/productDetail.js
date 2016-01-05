@@ -1,6 +1,5 @@
 'use strict';
 
-import client from '../webdriver/client';
 import * as common from './helpers/common';
 import * as wishListPage from './wishList';
 
@@ -22,7 +21,7 @@ export const SWATCH_COLOR_ANCHORS = '.swatches.color .swatchanchor';
 const MINI_CART = '.mini-cart-content';
 
 export function navigateTo (path = '/') {
-    return client.url(path);
+    return browser.url(path);
 }
 
 function _addProduct (product, btnAdd) {
@@ -33,14 +32,14 @@ export function addProductVariationToCart (product) {
     return _addProduct(product, BTN_ADD_TO_CART, MINI_CART)
         // To ensure that the product has been added to the cart before proceeding,
         // we need to wait for the Mini-cart to display
-        .then(() => client.waitForVisible(MINI_CART));
+    .then(() => browser.waitForVisible(MINI_CART));
 }
 
 export function addProductVariationToWishList (product) {
     return common.addProductVariationToBasket(product, BTN_ADD_TO_WISHLIST)
         // To ensure that the product has been added to the wishlist before proceeding,
         // we need to wait for a selector in the resulting page to display
-        .then(() => client.waitForVisible(wishListPage.BTN_TOGGLE_PRIVACY));
+    .then(() => browser.waitForVisible(wishListPage.BTN_TOGGLE_PRIVACY));
 }
 
 /**
@@ -49,12 +48,12 @@ export function addProductVariationToWishList (product) {
  * @returns {Array.<String>}
  */
 export function getDisplayedThumbnailPaths () {
-    return client.elements(PRODUCT_THUMBNAILS_IMAGES)
+    return browser.elements(PRODUCT_THUMBNAILS_IMAGES)
         .then(elements => {
             let thumbnailPaths = [];
             return elements.value.reduce(
                 (getPathTask, value) => getPathTask.then(() =>
-                    client.elementIdAttribute(value.ELEMENT, 'src').then(src => {
+            browser.elementIdAttribute(value.ELEMENT, 'src').then(src => {
                         thumbnailPaths.push(getImagePath(src.value));
                         return thumbnailPaths;
                     })

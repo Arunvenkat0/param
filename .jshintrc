@@ -11,6 +11,7 @@
 	"mocha": true,
 	"multistr": true,
 	"globals": {
+		"browser": true,
 		"SitePreferences": true,
 		"Urls": true,
 		"Resources": true,

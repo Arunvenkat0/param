@@ -1,7 +1,5 @@
 'use strict';
 
-import client from '../webdriver/client';
-
 export const BTN_COUNTRY = 'button[name$="_findbycountry"]';
 export const BTN_STATE = 'button[name$="_findbystate"]';
 export const BTN_ZIP = 'button[name$="_findbyzip"]';
@@ -19,15 +17,15 @@ export const RESULTS_TITLE = TBL_RESULTS_DETAILS_MODEL + ' h1';
 const basePath = '/stores';
 
 export function navigateTo() {
-	return client.url(basePath);
+	return browser.url(basePath);
 }
 
 export function getResults () {
-	return client
+	return browser
 		.elements(TBL_RESULTS_ROWS);
 }
 
 export function getStoreInfo() {
 	var storeInfoSelector =  RESULTS_TITLE;
-	return client.getText(storeInfoSelector);
+	return browser.getText(storeInfoSelector);
 }

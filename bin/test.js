@@ -4,51 +4,33 @@
 
 /* jshint mocha:false */
 
+var fs = require('fs');
 var spawn = require('child_process').spawn;
 var minimist = require('minimist');
 var argv = minimist(process.argv.slice(2));
-var folder = '*';
-
-if (argv.suite) {
-	folder = argv.suite;
-	if (folder === 'all') {
-		folder = '*';
-	}
-}
-
-if (!argv.type) {
-	console.error('Please specify a test type (either \'unit\' or \'application\')');
-	process.exit(1);
-}
-
-switch (argv.type) {
-	case 'application':
-		if (!argv.timeout) {
-			argv.timeout = 60000;
-		}
-		break;
-}
-
+var reporter = argv.reporter || 'spec';
 var args = [
-	'test/' + argv.type + '/' + folder + '/**/*.js',
+	'test/unit/**/*.js',
 	'--compilers',
 	'js:babel-core/register',
 	'--reporter',
-	'spec'
+	reporter
 ];
 
-var opts = ['timeout', 'client', 'url', 'host', 'port'];
+if (argv.timeout) {
+	args.push('--timeout');
+	args.push(argv.timeout);
+}
 
-opts.forEach(function (opt) {
-	if (argv[opt]) {
-		args.push('--' + opt);
-		args.push(argv[opt]);
-	}
-});
+var stdio = reporter === 'xunit' ? [process.stdin, 'pipe', process.stderr] : 'inherit';
 
-var mocha = spawn('mocha', args, {stdio: 'inherit'});
+var mocha = spawn('mocha', args, {stdio: stdio});
 
 mocha.on('close', function (code) {
 	process.exit(code);
 });
 
+// write to reports
+if (reporter === 'xunit') {
+	mocha.stdout.pipe(fs.createWriteStream('test/reports/UNIT.xunit.' + new Date().getTime() + '.xml'));
+}

@@ -31,7 +31,7 @@ test
 │   ├── productDetails
 │   │   └── index.js
 │   └── webdriver
-│       ├── client.js
+│       ├── wdio.conf.js
 │       ├── config.json
 │       └── config.sample.json
 └── unit

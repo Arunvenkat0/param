@@ -1,7 +1,5 @@
 'use strict';
 
-import client from '../webdriver/client';
-
 const basePath = '/home';
 
 export const MAIN_CAROUSEL = '#homepage-slider';
@@ -12,7 +10,7 @@ export const MENS = '.menu-category li:nth-child(3) .has-sub-menu';
 export const ELECTRONICS = '.menu-category li:nth-child(4) .has-sub-menu';
 export const TOP_SELLERS = '.menu-category a[href*="top-seller"]';
 export function navigateTo() {
-	return client.url(basePath);
+	return browser.url(basePath);
 }
 
 /**
@@ -21,9 +19,9 @@ export function navigateTo() {
  */
 export function mainCarouselSlide(position) {
 	var carouselControlSelector = MAIN_CAROUSEL + ' .jcarousel-control a:nth-child(' + position + ')';
-	return client.waitForExist(carouselControlSelector)
+	return browser.waitForExist(carouselControlSelector)
 		// wait 500ms after carousel transition
-		.then(() => client.click(carouselControlSelector)).pause(500);
+		.then(() => browser.click(carouselControlSelector)).pause(500);
 }
 
 /**
@@ -32,10 +30,10 @@ export function mainCarouselSlide(position) {
  */
 export function verticalCarouselSlide(position) {
 	var carouselNextSelector = VERTICAL_CAROUSEL + ' .jcarousel-next';
-	return client.waitForExist(carouselNextSelector)
+	return browser.waitForExist(carouselNextSelector)
 		.then(() => {
 			if (position !== 1) {
-				return client.click(carouselNextSelector)
+				return browser.click(carouselNextSelector)
 					// wait for carousel transition
 					.pause(500);
 			}
@@ -48,7 +46,7 @@ export function verticalCarouselSlide(position) {
  */
 export function isVerticalCarouselSlideVisible(position) {
 	var slideSelector = VERTICAL_CAROUSEL + ' ul li:nth-child(' + position + ') .product-tile';
-	return client.isVisible(slideSelector);
+	return browser.isVisible(slideSelector);
 }
 
 /**
@@ -57,5 +55,5 @@ export function isVerticalCarouselSlideVisible(position) {
  */
 export function getVerticalCarouselProductName(position) {
 	var slideProductNameSelector = VERTICAL_CAROUSEL + ' ul li:nth-child(' + position + ') .product-name a';
-	return client.getText(slideProductNameSelector);
+	return browser.getText(slideProductNameSelector);
 }

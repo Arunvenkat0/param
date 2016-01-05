@@ -1,6 +1,5 @@
 'use strict';
 
-import client from '../../../webdriver/client';
 import * as testData from '../../testData/main';
 
 export const BTN_LOGIN = 'button[name*="_login_login"]';
@@ -15,7 +14,7 @@ export const DEFAULT_RETURNING_CUSTOMER = 'testuser1@demandware.com';
 export function loginAs (login, password) {
 	// After several trials, 30000 yields the fewest number of test failures
 	// involving this waitForVisible
-	return client.waitForVisible(INPUT_EMAIL, 30000)
+	return browser.waitForVisible(INPUT_EMAIL, 30000)
 		.setValue(INPUT_EMAIL, login)
 		.setValue(INPUT_PASSWORD, password)
 		.click(BTN_LOGIN);

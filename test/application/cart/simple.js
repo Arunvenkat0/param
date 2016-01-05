@@ -1,7 +1,6 @@
 'use strict';
 
 import {assert} from 'chai';
-import client from '../webdriver/client';
 import * as cartPage from '../pageObjects/cart';
 import * as common from '../pageObjects/helpers/common';
 import * as productDetailPage from '../pageObjects/productDetail';
@@ -47,8 +46,7 @@ describe('Cart - Simple', () => {
     };
 
     before(() => {
-        return client.init()
-            .then(() => testData.load())
+        return testData.load()
             .then(() => catalog = testData.parsedData.catalog)
             .then(() => testData.getProductVariationMaster())
             .then(variationMaster => {
@@ -80,8 +78,6 @@ describe('Cart - Simple', () => {
             })
             .then(() => cartPage.navigateTo());
     });
-
-    after(() => client.end());
 
     it('should display the correct number of rows', () =>
         cartPage
@@ -129,11 +125,11 @@ describe('Cart - Simple', () => {
 
         return cartPage
             .updateAttributesByRow(itemRow, variant2Selection)
-            .then(() => client.getText('tr.cart-row:nth-child(1) .attribute[data-attribute=color] .value'))
+            .then(() => browser.getText('tr.cart-row:nth-child(1) .attribute[data-attribute=color] .value'))
             .then(color => assert.equal(color, variant2.color.displayValue))
-            .then(() => client.getText('tr.cart-row:nth-child(1) .attribute[data-attribute=size] .value'))
+            .then(() => browser.getText('tr.cart-row:nth-child(1) .attribute[data-attribute=size] .value'))
             .then(size => assert.equal(size, variant2.size.displayValue))
-            .then(() => client.getText('tr.cart-row:nth-child(1) .attribute[data-attribute=width] .value'))
+            .then(() => browser.getText('tr.cart-row:nth-child(1) .attribute[data-attribute=width] .value'))
             .then(width => assert.equal(width, variant2.width.displayValue));
     });
 
@@ -143,7 +139,7 @@ describe('Cart - Simple', () => {
         var editDetailsLink = cartPage.getItemEditLinkByRow(1);
         var variationMaster;
 
-        return client.waitForVisible(editDetailsLink)
+        return browser.waitForVisible(editDetailsLink)
             .click(editDetailsLink)
             .waitForVisible(productQuickViewPage.VARIATION_CONTAINER)
 
@@ -153,7 +149,7 @@ describe('Cart - Simple', () => {
             .then(master => variationMaster = master)
 
             // Collect index values for attributes already selected
-            .then(() => client.getAttribute(productQuickViewPage.VARIATION_CONTAINER, 'data-attributes'))
+            .then(() => browser.getAttribute(productQuickViewPage.VARIATION_CONTAINER, 'data-attributes'))
             .then(attrs => {
                 attrs = JSON.parse(attrs);
                 Object.keys(attrs).forEach(attr => {
@@ -175,7 +171,7 @@ describe('Cart - Simple', () => {
             .then(isSelected => assert.isFalse(isSelected))
 
             // Tear down - Close the dialog box
-            .then(() => client.click(productQuickViewPage.BTN_CLOSE))
+            .then(() => browser.click(productQuickViewPage.BTN_CLOSE))
             .waitForVisible(productQuickViewPage.CONTAINER, 500, true);
     });
 
@@ -185,13 +181,13 @@ describe('Cart - Simple', () => {
         var editDetailsLink = cartPage.getItemEditLinkByRow(1);
         var variationMaster;
 
-        return client.waitForVisible(editDetailsLink)
+    return browser.waitForVisible(editDetailsLink)
             .click(cartPage.getItemEditLinkByRow(1))
             .waitForVisible(productQuickViewPage.VARIATION_CONTAINER)
             .then(() => productQuickViewPage.getMasterId())
             .then(masterId => testData.getProductById(masterId))
             .then(master => variationMaster = master)
-            .then(() => client.getAttribute(productQuickViewPage.VARIATION_CONTAINER, 'data-attributes'))
+            .then(() => browser.getAttribute(productQuickViewPage.VARIATION_CONTAINER, 'data-attributes'))
             .then(attrs => {
                 attrs = JSON.parse(attrs);
                 Object.keys(attrs).forEach(attr => {
@@ -201,11 +197,11 @@ describe('Cart - Simple', () => {
             .then(() => common.selectAttributeByIndex(attrToDeselect, selectedAttrIndexes.size, true))
 
             // Verify Add to Cart button is disabled
-            .then(() => client.getAttribute(common.BTN_ADD_TO_CART, 'disabled'))
+            .then(() => browser.getAttribute(common.BTN_ADD_TO_CART, 'disabled'))
             .then(isDisabled => assert.equal(isDisabled, 'true'))
 
             // Tear down - Close the dialog box
-            .then(() => client.click(productQuickViewPage.BTN_CLOSE))
+            .then(() => browser.click(productQuickViewPage.BTN_CLOSE))
             .waitForVisible(productQuickViewPage.CONTAINER, 500, true);
     });
 
