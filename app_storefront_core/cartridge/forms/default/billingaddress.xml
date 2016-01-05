@@ -22,7 +22,7 @@
 	<include formid="states" name="states"/>
 
 	<!-- phone is optional for billing addresses -->
-	<field formid="phone" label="profile.phone" description="address.phone.example" type="string" mandatory="false" binding="phone" max-length="20" missing-error="address.phone.missing" range-error="address.field.invalid" />
+	<field formid="phone" label="profile.phone" description="address.phone.example" type="string" mandatory="true" binding="phone" max-length="20" missing-error="address.phone.missing" range-error="address.field.invalid" />
 
 	<!-- actions provided by the edit billing address dialog -->
 	<action formid="apply" valid-form="true"/>
