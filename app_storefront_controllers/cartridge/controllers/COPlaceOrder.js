@@ -245,7 +245,7 @@ function createGiftCertificates(order) {
 
             // Send order confirmation and clear used forms within the checkout process.
             Email.get('mail/giftcert', giftCertificate.recipientEmail)
-                .setSubject(Resource.msg('email.ordergcemsg', 'email', null) + ' ' + giftCertificate.senderName)
+                .setSubject(Resource.msg('resource.ordergcemsg', 'email', null) + ' ' + giftCertificate.senderName)
                 .send({
                     GiftCertificate: giftCertificate
                 });
