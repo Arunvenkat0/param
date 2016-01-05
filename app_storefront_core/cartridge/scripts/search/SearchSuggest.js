@@ -26,7 +26,7 @@ function getBrandSuggestions(suggestModel) {
 		};
 	}
 	return {
-		available: suggestions.hasSuggestions(),
+		available: suggestions.hasSuggestedPhrases(),
 		phrases: suggestions.getSuggestedPhrases()
 	};
 }
@@ -65,42 +65,33 @@ function getCustomSuggestions(suggestModel) {
 			available: false
 		};
 	}
+
+	// filter custom phrase that matches exactly the suggested search phrase for products
+	var customPhrasesUnfiltered = suggestions.getSuggestedPhrases();
+	var customPhrasesFiltered;
+
+	var productSuggestions = suggestModel.getProductSuggestions();
+    if (productSuggestions && productSuggestions.hasSuggestedPhrases()) {
+        var productPhrase = productSuggestions.getSuggestedPhrases().next().getPhrase();
+        var filtered = new ArrayList();
+        while (customPhrasesUnfiltered.hasNext()) {
+            var customPhrase = customPhrasesUnfiltered.next();
+            if (!productPhrase.toUpperCase().equals(customPhrase.getPhrase().toUpperCase())) {
+                filtered.push(customPhrase);
+            }
+        }
+        customPhrasesFiltered = filtered.iterator();
+    } else {
+        // no product suggestions, just pass the custom phrase unfiltered
+        customPhrasesFiltered = customPhrasesUnfiltered;
+    }
+
 	return {
-		available: suggestions.hasSuggestedPhrases(),
-		phrases: suggestions.getSuggestedPhrases()
+		available: customPhrasesFiltered.hasNext(),
+		phrases: customPhrasesFiltered
 	};
 }
 
-function getPhraseSuggestions(product, brand, category, content, custom) {
-	var phrases = new ArrayList();
-	var available = brand.available || category.available || content.available || custom.available;
-	if (custom.available || category.available) {
-		while (custom.phrases.hasNext()) {
-			phrases.push(custom.phrases.next().getPhrase());
-		}
-		while (category.phrases.hasNext()) {
-			phrases.push(category.phrases.next().getPhrase());
-		}
-	}
-	if (phrases.length === 1 && !brand.available && !content.available && !category.available) {
-		var firstPhrase = phrases.get(0).toString().toUppercase();
-		var suggestedTerms, firstTerm;
-		while (product.terms.hasNext()) {
-			suggestedTerms = product.terms.next();
-			if (suggestedTerms.isEmpty()) {
-				continue;
-			}
-			firstTerm = suggestedTerms.getFirstTerm.getValue().toString().toUpperCase();
-			if (firstTerm !== firstPhrase) {
-				available = false;
-			}
-		}
-	}
-	return {
-		available: available,
-		phrases: phrases
-	};
-}
 
 module.exports = function (searchPhrase, maxSuggestions) {
 	var suggestModel = new SuggestModel();
@@ -115,14 +106,12 @@ module.exports = function (searchPhrase, maxSuggestions) {
 	var category = getCategorySuggestions(suggestModel);
 	var content = getContentSuggestions(suggestModel);
 	var custom = getCustomSuggestions(suggestModel);
-	var phrase = getPhraseSuggestions(product, brand, category, content, custom);
 
 	return {
 		product: product,
 		brand: brand,
 		category: category,
 		content: content,
-		custom: custom,
-		phrase: phrase
+		custom: custom
 	};
 };
