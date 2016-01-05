@@ -418,6 +418,7 @@ function addBonusProductJson() {
     productsJSON = new ArrayList();
 
     for (h = 0; h < data.bonusproducts.length; h += 1) {
+        // add bonus product at index zero (front of the array) each time
         productsJSON.addAt(0, data.bonusproducts[h].product);
     }
 
