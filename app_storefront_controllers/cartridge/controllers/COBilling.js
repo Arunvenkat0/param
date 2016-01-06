@@ -347,29 +347,32 @@ function resetPaymentForms() {
 
     var cart = app.getModel('Cart').get();
 
-    if (app.getForm('billing').object.paymentMethods.selectedPaymentMethodID.value.equals('PayPal')) {
-        app.getForm('billing').object.paymentMethods.creditCard.clearFormElement();
-        app.getForm('billing').object.paymentMethods.bml.clearFormElement();
+    var status = Transaction.wrap(function () {
+        if (app.getForm('billing').object.paymentMethods.selectedPaymentMethodID.value.equals('PayPal')) {
+            app.getForm('billing').object.paymentMethods.creditCard.clearFormElement();
+            app.getForm('billing').object.paymentMethods.bml.clearFormElement();
 
-        cart.removePaymentInstruments(cart.getPaymentInstruments(PaymentInstrument.METHOD_CREDIT_CARD));
-        cart.removePaymentInstruments(cart.getPaymentInstruments(PaymentInstrument.METHOD_BML));
-    } else if (app.getForm('billing').object.paymentMethods.selectedPaymentMethodID.value.equals(PaymentInstrument.METHOD_CREDIT_CARD)) {
-        app.getForm('billing').object.paymentMethods.bml.clearFormElement();
+            cart.removePaymentInstruments(cart.getPaymentInstruments(PaymentInstrument.METHOD_CREDIT_CARD));
+            cart.removePaymentInstruments(cart.getPaymentInstruments(PaymentInstrument.METHOD_BML));
+        } else if (app.getForm('billing').object.paymentMethods.selectedPaymentMethodID.value.equals(PaymentInstrument.METHOD_CREDIT_CARD)) {
+            app.getForm('billing').object.paymentMethods.bml.clearFormElement();
 
-        cart.removePaymentInstruments(cart.getPaymentInstruments(PaymentInstrument.METHOD_BML));
-        cart.removePaymentInstruments(cart.getPaymentInstruments('PayPal'));
-    } else if (app.getForm('billing').object.paymentMethods.selectedPaymentMethodID.value.equals(PaymentInstrument.METHOD_BML)) {
-        app.getForm('billing').object.paymentMethods.creditCard.clearFormElement();
+            cart.removePaymentInstruments(cart.getPaymentInstruments(PaymentInstrument.METHOD_BML));
+            cart.removePaymentInstruments(cart.getPaymentInstruments('PayPal'));
+        } else if (app.getForm('billing').object.paymentMethods.selectedPaymentMethodID.value.equals(PaymentInstrument.METHOD_BML)) {
+            app.getForm('billing').object.paymentMethods.creditCard.clearFormElement();
 
-        if (!app.getForm('billing').object.paymentMethods.bml.ssn.valid) {
-            return false;
+            if (!app.getForm('billing').object.paymentMethods.bml.ssn.valid) {
+                return false;
+            }
+
+            cart.removePaymentInstruments(cart.getPaymentInstruments(PaymentInstrument.METHOD_CREDIT_CARD));
+            cart.removePaymentInstruments(cart.getPaymentInstruments('PayPal'));
         }
+        return true;
+    });
 
-        cart.removePaymentInstruments(cart.getPaymentInstruments(PaymentInstrument.METHOD_CREDIT_CARD));
-        cart.removePaymentInstruments(cart.getPaymentInstruments('PayPal'));
-    }
-
-    return true;
+    return status;
 }
 
 /**
