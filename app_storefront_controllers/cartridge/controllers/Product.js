@@ -29,14 +29,14 @@ function show() {
     if (product.isVisible()) {
         require('~/cartridge/scripts/meta').update(product);
         var defaultVariant = product.getDefaultVariant();  // REMOVEME
+        var updatedProduct = product.updateVariationSelection(params); // REMOVEME
 
         var productView = app.getView('Product', {
             product: product,
-            DefaultVariant: product.getDefaultVariant()
+            DefaultVariant: product.getDefaultVariant(),
+        	CurrentOptionModel: product.updateOptionSelection(params),
+        	CurrentVariationModel: updatedProduct.object
         });
-
-        productView.CurrentOptionModel = product.updateOptionSelection(params);
-        productView.CurrentVariationModel = product.updateVariationSelection(params);
 
         var template = product.getTemplate();  // REMOVEME
 
@@ -63,13 +63,13 @@ function detail() {
     var product = Product.get(params.pid.stringValue);
 
     if (product.isVisible()) {
+        var updatedProduct = product.updateVariationSelection(params); // REMOVEME
         var productView = app.getView('Product', {
             product: product,
-            DefaultVariant: product.getDefaultVariant()
+            DefaultVariant: product.getDefaultVariant(),
+	        CurrentOptionModel: product.updateOptionSelection(params),
+    	    CurrentVariationModel: updatedProduct.object
         });
-
-        productView.CurrentOptionModel = product.updateOptionSelection(params);
-        productView.CurrentVariationModel = product.updateVariationSelection(params);
 
         productView.render(product.getTemplate() || 'product/productdetail');
     } else {
