@@ -38,7 +38,7 @@ var ProductVariationModel = AbstractModel.extend({
     // If cannot remove this override, should be able to replace the function body with:
     // this.object.setSelectedVariationValue(variationAttribute.ID, variationAttributeValue.ID);
     setSelectedVariationValue: function (variationAttribute, variationAttributeValue) {
-        //this.selectionMap.put(variationAttribute.ID, variationAttributeValue.ID);
+        this.selectionMap.put(variationAttribute.ID, variationAttributeValue.ID);
         //this.object.setSelectedVariationValue(variationAttribute.ID, variationAttributeValue.ID);
         this.object.setSelectedAttributeValue(variationAttribute.ID, variationAttributeValue.ID);
     },
@@ -49,14 +49,14 @@ var ProductVariationModel = AbstractModel.extend({
      * @alias module:models/ProductVariationModel~ProductVariationModel/getSelectedVariant
      * @return {dw.catalog.Variant} the selected variant.
      */
-    //getSelectedVariant: function () {
-    //    var matchingVariants = this.object.getVariants(this.selectionMap);
-    //
-    //    if (matchingVariants.size() === 1) {
-    //        return matchingVariants[0];
-    //    }
-    //    return null;
-    //},
+    getSelectedVariant: function () {
+        var matchingVariants = this.object.getVariants(this.selectionMap);
+
+        if (matchingVariants.size() === 1) {
+            return matchingVariants[0];
+        }
+        return null;
+    },
 
     /**
      * Checks if the given attribute/value combination is currently selected.
@@ -104,18 +104,18 @@ var ProductVariationModel = AbstractModel.extend({
 
     // TODO: This function might be removable once 16.1 has been deployed to sandboxes.
     // Please see https://intranet.demandware.com/jira/browse/RAP-4424
-    //urlSelectVariationValue: function (action, variationAttribute, variationAttributeValue) {
-    //    var url = this.object.urlSelectVariationValue(action, variationAttribute, variationAttributeValue);
-    //    return _generateUrl(url, this);
-    //},
+    urlSelectVariationValue: function (action, variationAttribute, variationAttributeValue) {
+        var url = this.object.urlSelectVariationValue(action, variationAttribute, variationAttributeValue);
+        return _generateUrl(url, this);
+    },
 
     // TODO: This function might be removable once 16.1 has been deployed to sandboxes.
     // Please see https://intranet.demandware.com/jira/browse/RAP-4424
-    ////urlUnselectVariationValue: function (action, variationAttribute) {
-    ////    var url = this.object.urlUnselectVariationValue(action, variationAttribute);
-    ////    return _generateUrl(url, this, variationAttribute.attributeID);
-    ////
-    ////},
+    //urlUnselectVariationValue: function (action, variationAttribute) {
+    //    var url = this.object.urlUnselectVariationValue(action, variationAttribute);
+    //    return _generateUrl(url, this, variationAttribute.attributeID);
+    //
+    //},
     //
     //// TODO: This function might be removable once 16.1 has been deployed to sandboxes.
     //// Please see https://intranet.demandware.com/jira/browse/RAP-4424
@@ -129,21 +129,21 @@ var ProductVariationModel = AbstractModel.extend({
     // * @param {dw.catalog.ProductVariationAttribute} attr - attribute type
     // * @param {dw.catalog.ProductVariationAttributeValue} value - attribute value
     // */
-    //hasOrderableVariants: function (attr, value) {
-    //    var lookupMap = this.selectionMap.clone();
-    //    var variant;
-    //    var variantsIter;
-    //    var variationModel;
-    //
-    //    lookupMap.put(attr.attributeID, value.value);
-    //    variantsIter = this.object.getVariants(lookupMap).iterator();
-    //
-    //    if (variantsIter.hasNext()) {
-    //        variant = variantsIter.next();
-    //        variationModel = variant.masterProduct.variationModel;
-    //        return variationModel.hasOrderableVariants(attr, value);
-    //    }
-    //},
+    hasOrderableVariants: function (attr, value) {
+        var lookupMap = this.selectionMap.clone();
+        var variant;
+        var variantsIter;
+        var variationModel;
+
+        lookupMap.put(attr.attributeID, value.value);
+        variantsIter = this.object.getVariants(lookupMap).iterator();
+
+        if (variantsIter.hasNext()) {
+            variant = variantsIter.next();
+            variationModel = variant.masterProduct.variationModel;
+            return variationModel.hasOrderableVariants(attr, value);
+        }
+    },
 
     /**
      * Overrides the ProductVariationModel.getImage() function which accepts 1-3 arguments.  Please refer to

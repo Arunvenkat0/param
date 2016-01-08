@@ -77,13 +77,13 @@ var ProductModel = AbstractModel.extend(
                     if (variationAttribute && valueID) {
 
                         // @TODO API does not exist
-                        //var variationAttributeValue = variationModel.getVariationAttributeValue(variationAttribute, valueID);
+                        var variationAttributeValue = variationModel.getVariationAttributeValue(variationAttribute, valueID);
                         var prod = this.object;
-                        var variationAttributeValue = variationModel.getVariationValue(variationModel.getDefaultVariant(), variationAttribute);
+                        //var variationAttributeValue = variationModel.getVariationValue(variationModel.getDefaultVariant(), variationAttribute);
                         if (variationAttributeValue) {
                             // @TODO API does not exist
-                            //variationModel.setSelectedVariationValue(variationAttribute, variationAttributeValue);
-                            variationModel.setSelectedAttributeValue(variationAttribute, variationAttributeValue);
+                            variationModel.setSelectedVariationValue(variationAttribute, variationAttributeValue);
+                            //variationModel.setSelectedAttributeValue(variationAttribute, variationAttributeValue);
                         }
                     }
                 }
