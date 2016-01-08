@@ -153,6 +153,7 @@ var AbstractModel = Class.extend(
      * @throws {TypeError}
      */
     __noSuchMethod__: function (methodName, methodArgs) {
+    	var myObject = this.object; // REMOVEME
         if (methodName in this.object && 'function' === typeof this.object[methodName]) {
             return this.object[methodName].apply(this.object, methodArgs);
         }

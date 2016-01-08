@@ -28,6 +28,7 @@ function show() {
 
     if (product.isVisible()) {
         require('~/cartridge/scripts/meta').update(product);
+        var defaultVariant = product.getDefaultVariant();  // REMOVEME
 
         var productView = app.getView('Product', {
             product: product,
@@ -36,6 +37,8 @@ function show() {
 
         productView.CurrentOptionModel = product.updateOptionSelection(params);
         productView.CurrentVariationModel = product.updateVariationSelection(params);
+
+        var template = product.getTemplate();  // REMOVEME
 
         productView.render(product.getTemplate() || 'product/product');
     } else {
