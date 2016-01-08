@@ -9,6 +9,7 @@ var ArrayList = require('dw/util/ArrayList');
 var List = require('dw/util/List');
 var PaymentInstrument = require('dw/order/PaymentInstrument');
 var PaymentMgr = require('dw/order/PaymentMgr');
+var Transaction = require('dw/system/Transaction');
 
 /**
  * Profile helper providing enhanced profile functionality
@@ -118,7 +119,7 @@ var ProfileModel = AbstractModel.extend(
             // Gets a possible equivalent address from the address book
             var that = this;
 
-            dw.system.Transaction.wrap(function () {
+            return Transaction.wrap(function () {
                 var address;
                 if (addressToAdd) {
                     var usedAddress;
