@@ -213,7 +213,8 @@ function variation() {
     var resetAttributes = false;
 
     product = getSelectedProduct(product);
-    currentVariationModel = product.updateVariationSelection(params);
+    var myParams = params; // REMOVEME
+    currentVariationModel = product.updateVariationSelection(params).object;
 
     if (product.isVisible()) {
         if (params.source.stringValue === 'bonus') {

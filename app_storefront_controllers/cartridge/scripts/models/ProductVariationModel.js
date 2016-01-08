@@ -111,11 +111,11 @@ var ProductVariationModel = AbstractModel.extend({
 
     // TODO: This function might be removable once 16.1 has been deployed to sandboxes.
     // Please see https://intranet.demandware.com/jira/browse/RAP-4424
-    //urlUnselectVariationValue: function (action, variationAttribute) {
-    //    var url = this.object.urlUnselectVariationValue(action, variationAttribute);
-    //    return _generateUrl(url, this, variationAttribute.attributeID);
-    //
-    //},
+    urlUnselectVariationValue: function (action, variationAttribute) {
+        var url = this.object.urlUnselectVariationValue(action, variationAttribute);
+        return _generateUrl(url, this, variationAttribute.attributeID);
+
+        },
     //
     //// TODO: This function might be removable once 16.1 has been deployed to sandboxes.
     //// Please see https://intranet.demandware.com/jira/browse/RAP-4424
