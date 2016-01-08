@@ -10,6 +10,7 @@
 var ISML = require('dw/template/ISML');
 var PagingModel = require('dw/web/PagingModel');
 var URLUtils = require('dw/web/URLUtils');
+var ContentMgr = require('dw/content/ContentMgr');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
@@ -94,10 +95,13 @@ function show() {
                     ProductPagingModel: productPagingModel
                 }).render(productSearchModel.category.template);
             } else {
+
+                //SearchPromo - for displaying search driven banners above the product grid
                 app.getView({
                     ProductSearchResult: productSearchModel,
                     ContentSearchResult: contentSearchModel,
-                    ProductPagingModel: productPagingModel
+                    ProductPagingModel: productPagingModel,
+                    SearchPromo: ContentMgr.getContent('keyword_' + params.q.value.toLowerCase())
                 }).render('rendering/category/categoryproducthits');
             }
         } else {
