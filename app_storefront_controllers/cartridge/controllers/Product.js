@@ -35,7 +35,7 @@ function show() {
             product: product,
             DefaultVariant: product.getDefaultVariant(),
         	CurrentOptionModel: product.updateOptionSelection(params),
-        	CurrentVariationModel: updatedProduct.object
+        	CurrentVariationModel: updatedProduct
         });
 
         var template = product.getTemplate();  // REMOVEME
@@ -63,12 +63,14 @@ function detail() {
     var product = Product.get(params.pid.stringValue);
 
     if (product.isVisible()) {
-        var updatedProduct = product.updateVariationSelection(params); // REMOVEME
+        var currentVariationModel = product.updateVariationSelection(params);
+        currentVariationModel = !product.isMaster() ? currentVariationModel : currentVariationModel.object;
+
         var productView = app.getView('Product', {
             product: product,
             DefaultVariant: product.getDefaultVariant(),
 	        CurrentOptionModel: product.updateOptionSelection(params),
-    	    CurrentVariationModel: updatedProduct.object
+    	    CurrentVariationModel: currentVariationModel
         });
 
         productView.render(product.getTemplate() || 'product/productdetail');
@@ -214,7 +216,9 @@ function variation() {
 
     product = getSelectedProduct(product);
     var myParams = params; // REMOVEME
-    currentVariationModel = product.updateVariationSelection(params).object;
+    //currentVariationModel = product.updateVariationSelection(params).object;
+    currentVariationModel = product.updateVariationSelection(params);
+    currentVariationModel = product.isVariant() ? currentVariationModel : currentVariationModel.object;
 
     if (product.isVisible()) {
         if (params.source.stringValue === 'bonus') {
