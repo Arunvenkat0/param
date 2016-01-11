@@ -326,6 +326,38 @@
           <transition target-connector="in"/>
           <segment>
             <node>
+	      <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+		<config-property key="Transactional" value="false"/>
+		<key-binding alias="&quot;TrackOrderCounter&quot;" key="From_0"/>
+		<key-binding alias="CounterLabel" key="To_0"/>
+		<key-binding alias="null" key="From_1"/>
+		<key-binding alias="null" key="To_1"/>
+		<key-binding alias="null" key="From_2"/>
+		<key-binding alias="null" key="To_2"/>
+		<key-binding alias="null" key="From_3"/>
+		<key-binding alias="null" key="To_3"/>
+		<key-binding alias="null" key="From_4"/>
+		<key-binding alias="null" key="To_4"/>
+		<key-binding alias="null" key="From_5"/>
+		<key-binding alias="null" key="To_5"/>
+		<key-binding alias="null" key="From_6"/>
+		<key-binding alias="null" key="To_6"/>
+		<key-binding alias="null" key="From_7"/>
+		<key-binding alias="null" key="To_7"/>
+		<key-binding alias="null" key="From_8"/>
+		<key-binding alias="null" key="To_8"/>
+		<key-binding alias="null" key="From_9"/>
+		<key-binding alias="null" key="To_9"/>
+	      </pipelet-node>
+	      <node-display x="0" y="1"/>
+	    </node>
+	    <simple-transition/>
+	    <node>
+	      <call-node start-name-ref="RateLimiter-Check"/>
+	      <node-display x="0" y="1"/>
+	    </node>
+	    <simple-transition/>
+	    <node>
               <pipelet-node custom-name="Determine single order by its order number" pipelet-name="SearchSystemObject" pipelet-set-identifier="bc_api">
                 <config-property key="ObjectType" value="Order"/>
                 <config-property key="SearchExpression" value="orderNo={1} AND status!={2}"/>
@@ -420,6 +452,11 @@
                             <transition target-connector="in"/>
                             <segment>
                               <node>
+				<call-node start-name-ref="RateLimiter-HideCaptcha"/>
+				<node-display x="0" y="1"/>
+			      </node>
+			      <simple-transition/>
+			      <node>
                                 <end-node name="ok"/>
                                 <node-display x="0" y="1"/>
                               </node>
@@ -447,7 +484,7 @@
     <segment>
       <node>
         <join-node/>
-        <node-display x="1" y="2"/>
+	<node-display x="1" y="4"/>
       </node>
       <transition target-connector="in1" target-path="./+1"/>
     </segment>
@@ -466,7 +503,7 @@
       <simple-transition/>
       <node>
         <end-node name="error"/>
-        <node-display x="0" y="1"/>
+	<node-display x="0" y="2"/>
       </node>
     </segment>
   </branch>

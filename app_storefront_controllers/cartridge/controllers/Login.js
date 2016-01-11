@@ -11,6 +11,7 @@ var OrderMgr = require('dw/order/OrderMgr');
 var Transaction = require('dw/system/Transaction');
 var URLUtils = require('dw/web/URLUtils');
 var Pipelet = require('dw/system/Pipelet');
+var RateLimiter    = require('app_storefront_core/cartridge/scripts/util/RateLimiter');
 
 /* Script Modules */
 var app            = require('~/cartridge/scripts/app');
@@ -19,6 +20,7 @@ var guard          = require('~/cartridge/scripts/guard');
 var Customer       = app.getModel('Customer');
 
 var LOGGER         = dw.system.Logger.getLogger('login');
+
 
 /**
  * Contains the login page preparation and display, it is called from various
@@ -97,8 +99,14 @@ function getTargetUrl () {
  */
 function handleLoginForm () {
     var loginForm = app.getForm('login');
+
     loginForm.handleAction({
         login: function () {
+            // Check to see if the number of attempts has exceeded the session threshold
+            if (RateLimiter.isOverThreshold('FailedLoginCounter')) {
+                RateLimiter.showCaptcha();
+            }
+
             var success = Customer.login(loginForm.getValue('username'), loginForm.getValue('password'), loginForm.getValue('rememberme'));
 
             if (!success) {
@@ -108,6 +116,8 @@ function handleLoginForm () {
             } else {
                 loginForm.clear();
             }
+
+            RateLimiter.hideCaptcha();
 
             // In case of successful login
             // Redirects to the original controller that triggered the login process.
@@ -130,6 +140,11 @@ function handleLoginForm () {
                 return;
             }
 
+            // Check to see if the number of attempts has exceeded the session threshold
+            if (RateLimiter.isOverThreshold('FailedOrderTrackerCounter')) {
+                RateLimiter.showCaptcha();
+            }
+
             var orders = OrderMgr.searchOrders('orderNo={0} AND status!={1}', 'creationDate desc', orderNumber,
                 dw.order.Order.ORDER_STATUS_REPLACED);
 
@@ -148,6 +163,9 @@ function handleLoginForm () {
                 }).render();
                 return;
             }
+
+            // Reset the error condition on exceeded attempts
+            RateLimiter.hideCaptcha();
 
             app.getView({
                 Order: foundOrder
@@ -242,8 +260,13 @@ function process() {
 
         return false;
     } else {
-         // handle 'normal' login
+        // handle 'normal' login
         var loginForm = app.getForm('login');
+
+        // Check to see if the number of attempts has exceeded the session threshold
+        if (RateLimiter.isOverThreshold('FailedLoginCounter')) {
+            RateLimiter.showCaptcha();
+        }
 
         var success = Customer.login(loginForm.getValue('username'), loginForm.getValue('password'), loginForm.getValue('rememberme'));
 
@@ -252,6 +275,8 @@ function process() {
         } else {
             loginForm.clear();
         }
+
+        RateLimiter.hideCaptcha();
         return success;
     }
 }

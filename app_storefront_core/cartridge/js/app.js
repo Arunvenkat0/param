@@ -29,6 +29,7 @@ if (!window.jQuery) {
 
 require('./jquery-ext')();
 require('./cookieprivacy')();
+require('./captcha')();
 
 function initializeEvents() {
 	var controlKeys = ['8', '13', '46', '45', '36', '35', '38', '37', '40', '39'];
