@@ -30,18 +30,9 @@ var ProductModel = AbstractModel.extend(
          *
          * Example: <pre>dwvar_PN00050_color=red</pre>
          *
-         * For each product specified as {pid}, a ProductVariationModel instance is created and returned as an element of the
-         * "ProductVariationModels" HashMap return parameter. The function processes variation attributes in their defined order
-         * and ignores attributes or values not defined for a variation. The function returns a map of ProductVariationModels
-         * with the product instance as the key and the ProductVariationModel as the value. For backwards compatibility reasons,
-         * the function accepts an optional Product instance as an input parameter. The product may either be a master or a variant.
-         *
-         * If specified, the function returns the ProductVariationModel for this product as "ProductVariationModel" and also as
-         * an element of the "ProductVariationModels" HashMap parameter. Also, the system tries to find a variant that matches
-         * the attributes selected in the HttpParameterMap as closely as possible. The matching product is returned under the
-         * key "SelectedProduct". If the passed product is neither a master or a variant, then the product itself is simply
-         * returned under the key "SelectedProduct". No value is returned under the "SelectedProduct" key unless a Product
-         * instance was passed to the function.
+         * The function processes variation attributes in their defined order and ignores attributes or values not
+         * defined for a variation. The function returns a map of ProductVariationModels with the product instance as
+         * the key and the ProductVariationModel as the value. The product may either be a master or a variant.
          *
          * @alias module:models/ProductModel~ProductModel/updateVariationSelection
          * @param parameterMap {dw.web.HttpParameterMap} Variation value selections as HTTP parameters.
@@ -52,16 +43,22 @@ var ProductModel = AbstractModel.extend(
         updateVariationSelection: function (parameterMap, optionalCustomPrefix) {
             var formPrefix = optionalCustomPrefix || 'dwvar_';
 
-           // Gets all variation-related parameters for the prefix.
+            // Gets all variation-related parameters for the prefix.
             var params = parameterMap.getParameterMap(formPrefix + this.object.ID.replace(/_/g,'__') + '_');
             var paramNames = params.getParameterNames();
+
+            // Return the ProductVariationModel of a sole variant of a Product Master
+            var variants = this.getVariants();
+            if (variants.length === 1) {
+                return variants[0].getVariationModel();
+            }
 
             if (this.isProductSet() || this.isBundle()) {
                 return;
             }
 
-            if (!paramNames.getLength() && this.object.variationModel) {
-                return this.object.variationModel;
+            if (!paramNames.getLength() && this.getVariationModel()) {
+                return this.getVariationModel();
             }
 
             var ProductVariationModel = app.getModel('ProductVariation');
@@ -75,13 +72,9 @@ var ProductModel = AbstractModel.extend(
                     var variationAttribute = variationModel.getProductVariationAttribute(attributeID);
 
                     if (variationAttribute && valueID) {
-
-                        // @TODO API does not exist
                         var variationAttributeValue = variationModel.getVariationAttributeValue(variationAttribute, valueID);
                         if (variationAttributeValue) {
-                            // @TODO API does not exist
-                            // TODO: Investigate continued necessity for selectionMap
-                            variationModel.setSelectedVariationValue(variationAttribute, variationAttributeValue);
+                            variationModel.setSelectedAttributeValue(variationAttribute.ID, variationAttributeValue.ID);
                         }
                     }
                 }
@@ -194,31 +187,6 @@ var ProductModel = AbstractModel.extend(
             }
 
             return true;
-        },
-
-        /**
-         * Checks if the given String or EnumValue is equal to or has the given value.
-         *
-         * @alias module:models/ProductModel~ProductModel/hasValue
-         * @param {Object} object - The object can be a string or a dw.value.EnumValue.
-         * @param {String} value - The value to check.
-         *
-         * @returns {Boolean}
-         */
-        hasValue: function (object, value) {
-            if (!value) {
-                return true;
-            } else if (object === value) {
-                return true;
-            } else if (object[0] instanceof dw.value.EnumValue) {
-                // enumerate through the multiple values of the custom attribute
-                for (var prop in object) {
-                    if (object[prop] === value) {
-                        return true;
-                    }
-                }
-            }
-            return false;
         },
 
         /**
