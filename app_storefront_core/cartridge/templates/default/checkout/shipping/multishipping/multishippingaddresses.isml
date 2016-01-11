@@ -67,9 +67,16 @@
                             </isif>
 
                             <div class="attribute">
-                                <span class="label">${Resource.msg('global.price','locale',null)}:</span>
-                                <isset name="Product" value="${quantityLIproduct}" scope="pdict"/>
-                                <isinclude template="product/components/pricing"/>
+                                <isif condition="${quantityLI.bonusProductLineItem}">
+                                    <isset name="bonusProductPrice" value="${pdict.Basket.allProductLineItems[loopstate.count - 1].adjustedPrice}" scope="page"/>
+                                    <isinclude template="checkout/components/displaybonusproductprice" />
+                                    <span class="label">${Resource.msg('global.price','locale',null)}:</span>
+                                    <div class="bonus-item"> <isprint value="${bonusProductPriceValue}" /> </div>
+                                <iselse/>
+                                    <span class="label">${Resource.msg('global.price','locale',null)}:</span>
+                                    <isset name="Product" value="${quantityLIproduct}" scope="pdict"/>
+                                    <isinclude template="product/components/pricing"/>
+                                </isif>
                             </div>
 
                             <iscomment>variations</iscomment>

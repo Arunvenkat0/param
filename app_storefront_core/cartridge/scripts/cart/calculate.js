@@ -144,6 +144,7 @@ function calculateProductPrices (basket) {
         // we have to update the product price as well as the bonus adjustment
         } else if (productLineItem.bonusProductLineItem && product !== null) {
             var price = product.priceModel.price;
+            var adjustedPrice = productLineItem.adjustedPrice;
             productLineItem.setPriceValue(price.valueOrNull);
             // get the product quantity
             var quantity2 = productLineItem.quantity;
@@ -151,7 +152,7 @@ function calculateProductPrices (basket) {
             var adjustments = productLineItem.priceAdjustments;
             if (!adjustments.isEmpty()) {
                 var adjustment = adjustments.iterator().next();
-                var adjustmentPrice = price.multiply(quantity2.value).multiply(-1.0);
+                var adjustmentPrice = price.multiply(quantity2.value).multiply(-1.0).add(adjustedPrice);
                 adjustment.setPriceValue(adjustmentPrice.valueOrNull);
             }
 

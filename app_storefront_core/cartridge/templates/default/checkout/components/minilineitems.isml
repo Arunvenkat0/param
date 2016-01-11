@@ -1,12 +1,12 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
 <iscomment>
-    Renders mini lineitems for order summary and mini cart.
+	Renders mini lineitems for order summary and mini cart.
 
-    Parameters:
-    p_showreverse     	: boolean to render the line items in reverse order
-    p_lineitemctnr     	: the line item container to render (this could be either an order or a basket as they are both line item containers)
-    p_productlineitem	: in case of mini cart this is the product lineitem just got added/changed so it should be expanded and at the top of the list
-    p_giftcertlineitem	: in case of mini cart this is the gift certificate line item just got added/changed so it should be expanded and at the top of the list
+	Parameters:
+	p_showreverse     	: boolean to render the line items in reverse order
+	p_lineitemctnr     	: the line item container to render (this could be either an order or a basket as they are both line item containers)
+	p_productlineitem	: in case of mini cart this is the product lineitem just got added/changed so it should be expanded and at the top of the list
+	p_giftcertlineitem	: in case of mini cart this is the gift certificate line item just got added/changed so it should be expanded and at the top of the list
 
 </iscomment>
 
@@ -101,7 +101,9 @@
 					<span class="value"><isprint value="${productLineItem.quantity}"/></span>
 
 					<isif condition="${productLineItem.bonusProductLineItem}">
-						${Resource.msg('global.bonus','locale',null)}
+						<isset name="bonusProductPrice" value="${productLineItem.getAdjustedPrice()}" scope="page"/>
+						<isinclude template="checkout/components/displaybonusproductprice" />
+						<isprint value="${bonusProductPriceValue}" />
 					<iselse/>
 						<isset name="productTotal" value="${productLineItem.adjustedPrice}" scope="page"/>
 						<isif condition="${productLineItem.optionProductLineItems.size() > 0}">

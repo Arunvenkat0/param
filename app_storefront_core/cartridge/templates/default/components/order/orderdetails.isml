@@ -11,27 +11,27 @@
 
 	order		: the order whose details to render
 	orderstatus	: if set to true, the order status will be rendered
-	              if set to false or not existing, the order status will not be rendered
+				  if set to false or not existing, the order status will not be rendered
 </iscomment>
 
 <isset name="Order" value="${pdict.order}" scope="page"/>
 
 <div class="orderdetails">
-	<div class="order-information">		
+	<div class="order-information">
 		<h1 class="order-number">
 			<span class="label"><i class="fa fa-cube"></i>${Resource.msg('order.orderdetails.ordernumber','order',null)}</span>
 			<span class="value"><isprint value="${Order.orderNo}"/></span>
-		</h1>	
+		</h1>
 		<iscomment>Order Status</iscomment>
 		<isif condition="${!empty(pdict.orderstatus) && pdict.orderstatus == 'true'}">
 			<isinclude template="account/orderhistory/orderstatusinclude"/>
-		</isif>			
+		</isif>
 		<div class="order-date">
 			<span class="label">${Resource.msg('order.orderdetails.orderplaced','order',null)}</span>
 			<span class="value"><isprint value="${Order.creationDate}" style="DATE_LONG"/></span>
-		</div>	
+		</div>
 	</div>
-	<div class="order-payment-summary">	
+	<div class="order-payment-summary">
 		<div class="label">${Resource.msg('order.orderdetails.paymenttotal','order',null)}</div>
 		<div class="order-detail-summary">
 			<isif condition="${Order.shipments.length > 1}">
@@ -39,9 +39,9 @@
 			<iselse/>
 				<isordertotals p_lineitemctnr="${Order}" p_showshipmentinfo="${false}" p_shipmenteditable="${false}" p_totallabel="${Resource.msg('global.ordertotal','locale',null)}"/>
 			</isif>
-		</div>	
+		</div>
 	</div>
-	<div class="order-payment-instruments">	
+	<div class="order-payment-instruments">
 		<div class="label">
 			<isif condition="${Order.paymentInstruments.length == 1}">
 				${Resource.msg('order.orderdetails.paymentmethod','order',null)}
@@ -67,18 +67,18 @@
 					<span class="value"><isprint value="${paymentInstr.paymentTransaction.amount}"/></span>
 				</div><!-- END: payment-amount -->
 			</isif>
-		</isloop>		
+		</isloop>
 	</div>
-	<div class="order-billing">	
+	<div class="order-billing">
 		<div class="label">${Resource.msg('order.orderdetails.billingaddress','order',null)}</div>
 		<isminiaddress p_address="${Order.billingAddress}"/>
 	</div>
-	
+
 	<iscomment>render a box for each shipment</iscomment>
 	<div class="order-shipments">
 		<isloop items="${Order.shipments}" var="shipment" status="shipmentloopstate">
 			<h2>${Resource.msgf('multishippingshipments.shipment','checkout',null, shipmentloopstate.count)}</h2>
-			
+
 			<isif condition="${shipment.productLineItems.size() > 0}">
 				<iscomment>Shipment Items</iscomment>
 				<div class="order-shipment-table">
@@ -128,7 +128,7 @@
 						</isif>
 					</div>
 					<div class="line-items">
-						<isloop items="${shipment.productLineItems}" var="productLineItem" status="pliloopstate">			
+						<isloop items="${shipment.productLineItems}" var="productLineItem" status="pliloopstate">
 							<div class="line-item">
 								<div class="line-item-details">
 									<isif condition="${pliloopstate.first}">
@@ -149,7 +149,11 @@
 									</isif>
 									<iscomment>Render quantity. If it is a bonus product render word 'Bonus'</iscomment>
 									<isif condition="${productLineItem.bonusProductLineItem}">
-										<span class="bonus-item">${Resource.msg('global.bonus','locale',null)}</span>
+										<div class="bonus-item">
+											<isset name="bonusProductPrice" value="${productLineItem.getAdjustedPrice()}" scope="page"/>
+											<isinclude template="checkout/components/displaybonusproductprice" />
+											<isprint value="${bonusProductPriceValue}" />
+										</div>
 									<iselse/>
 										<isprint value="${productLineItem.adjustedPrice}"/>
 										<isif condition="${productLineItem.optionProductLineItems.size() > 0}">
@@ -161,10 +165,10 @@
 								</div>
 							</div>
 						</isloop>
-					</div>			
+					</div>
 				</div>
 			</isif>
-	
+
 			<isif condition="${shipment.giftCertificateLineItems.size() > 0}">
 				<div class="order-shipment-table">
 					<div class="order-shipment-details">
@@ -192,7 +196,7 @@
 								<div class="value"><isprint value="${giftCertificateLineItem.recipientEmail}"/></div>
 							</div>
 						</isloop>
-					
+
 						<iscomment>if shipment is marked as gift</iscomment>
 						<isif condition="${shipment.gift}">
 							<div class="order-shipment-gift-message">

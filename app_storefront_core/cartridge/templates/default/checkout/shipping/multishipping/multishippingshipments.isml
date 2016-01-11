@@ -118,7 +118,11 @@
                                     <img src="${URLUtils.staticURL('/images/noimagesmall.png')}" alt="${productLineItem.productName}" title="${productLineItem.productName}"/>
                                 </isif>
                                 <isif condition="${productLineItem.bonusProductLineItem}">
-                                    <div class="bonus-item">${Resource.msg('global.bonus','locale',null)}</div>
+                                    <div class="bonus-item">
+                                        <isset name="bonusProductPrice" value="${productLineItem.getAdjustedPrice()}" scope="page"/>
+                                        <isinclude template="checkout/components/displaybonusproductprice" />
+                                        <isprint value="${bonusProductPriceValue}" />
+                                    </div>
                                 </isif>
                             </td>
 
