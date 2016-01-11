@@ -64,7 +64,7 @@ function detail() {
 
     if (product.isVisible()) {
         var currentVariationModel = product.updateVariationSelection(params);
-        currentVariationModel = !product.isMaster() ? currentVariationModel : currentVariationModel.object;
+        currentVariationModel = !product.isMaster() && !product.isVariant() ? currentVariationModel : currentVariationModel.object;
 
         var productView = app.getView('Product', {
             product: product,
