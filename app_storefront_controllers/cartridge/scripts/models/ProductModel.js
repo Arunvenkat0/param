@@ -78,12 +78,10 @@ var ProductModel = AbstractModel.extend(
 
                         // @TODO API does not exist
                         var variationAttributeValue = variationModel.getVariationAttributeValue(variationAttribute, valueID);
-                        var prod = this.object;
-                        //var variationAttributeValue = variationModel.getVariationValue(variationModel.getDefaultVariant(), variationAttribute);
                         if (variationAttributeValue) {
                             // @TODO API does not exist
+                            // TODO: Investigate continued necessity for selectionMap
                             variationModel.setSelectedVariationValue(variationAttribute, variationAttributeValue);
-                            //variationModel.setSelectedAttributeValue(variationAttribute, variationAttributeValue);
                         }
                     }
                 }
@@ -155,24 +153,8 @@ var ProductModel = AbstractModel.extend(
          * @return {dw.catalog.Product} the default variant or the first variant if none is defined.
          */
         getDefaultVariant: function (onlyAvailable) {
-            var product = this.object;
-            var variationModel = product.getVariationModel();
-            //var firstProduct = !variationModel.variants.size() ? product :
-            //    (product.getVariationModel().getDefaultVariant() || this.getDefaultVariant());
-            //
-            //onlyAvailable = typeof onlyAvailable === 'undefined' ? true : onlyAvailable;
-            //if (!firstProduct || !firstProduct.onlineFlag || (onlyAvailable && firstProduct.getAvailabilityModel().availability === 0)) {
-            //    var variantsIterator = product.getVariants().iterator();
-            //    while (variantsIterator.hasNext()) {
-            //        var variant = variantsIterator.next();
-            //        if (variant.onlineFlag && variant.getAvailabilityModel().availability > 0) {
-            //            firstProduct = variant;
-            //            break;
-            //        }
-            //    }
-            //}
-            //return firstProduct;
-            return variationModel.getDefaultVariant();
+            // TODO: Add logic to support onlyAvailable -- does it return one if not available?
+            return this.object.getVariationModel().getDefaultVariant();
         },
 
         /**

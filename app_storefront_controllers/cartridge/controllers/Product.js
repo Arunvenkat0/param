@@ -28,17 +28,13 @@ function show() {
 
     if (product.isVisible()) {
         require('~/cartridge/scripts/meta').update(product);
-        var defaultVariant = product.getDefaultVariant();  // REMOVEME
-        var updatedProduct = product.updateVariationSelection(params); // REMOVEME
 
         var productView = app.getView('Product', {
             product: product,
             DefaultVariant: product.getDefaultVariant(),
-        	CurrentOptionModel: product.updateOptionSelection(params),
-        	CurrentVariationModel: updatedProduct
+            CurrentOptionModel: product.updateOptionSelection(params),
+            CurrentVariationModel: product.updateVariationSelection(params)
         });
-
-        var template = product.getTemplate();  // REMOVEME
 
         productView.render(product.getTemplate() || 'product/product');
     } else {
@@ -64,13 +60,14 @@ function detail() {
 
     if (product.isVisible()) {
         var currentVariationModel = product.updateVariationSelection(params);
+        // TODO: Investigate .object
         currentVariationModel = !product.isMaster() && !product.isVariant() ? currentVariationModel : currentVariationModel.hasOwnProperty('object') ? currentVariationModel.object : currentVariationModel;
 
         var productView = app.getView('Product', {
             product: product,
             DefaultVariant: product.getDefaultVariant(),
-	        CurrentOptionModel: product.updateOptionSelection(params),
-    	    CurrentVariationModel: currentVariationModel
+            CurrentOptionModel: product.updateOptionSelection(params),
+            CurrentVariationModel: currentVariationModel
         });
 
         productView.render(product.getTemplate() || 'product/productdetail');
@@ -215,9 +212,8 @@ function variation() {
     var resetAttributes = false;
 
     product = getSelectedProduct(product);
-    var myParams = params; // REMOVEME
-    //currentVariationModel = product.updateVariationSelection(params).object;
     currentVariationModel = product.updateVariationSelection(params);
+    // TODO: Investigate .object
     currentVariationModel = product.isVariant() ? currentVariationModel : currentVariationModel.object;
 
     if (product.isVisible()) {
