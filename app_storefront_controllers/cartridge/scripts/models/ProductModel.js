@@ -145,17 +145,6 @@ var ProductModel = AbstractModel.extend(
 
             return optionModel;
         },
-        /**
-         * Returns the default variant or the first variant if none is defined.
-         *
-         * @alias module:models/ProductModel~ProductModel/getDefaultVariant
-         * @param  {boolean} onlyAvailable if set to true, only available products are returned.
-         * @return {dw.catalog.Product} the default variant or the first variant if none is defined.
-         */
-        getDefaultVariant: function (onlyAvailable) {
-            // TODO: Add logic to support onlyAvailable -- does it return one if not available?
-            return this.object.getVariationModel().getDefaultVariant();
-        },
 
         /**
          * Returns a collection of all online products that are assigned to this product and
@@ -208,74 +197,6 @@ var ProductModel = AbstractModel.extend(
         },
 
         /**
-         * Gets a selected ProductVariationAttributeValue.
-         *
-         * @alias module:models/ProductModel~ProductModel/getSelectedAttributeValue
-         * @param {String} variationAttribute name of the attribute value to get
-         * @returns {dw.catalog.ProductVariationAttributeValue}
-         */
-        getSelectedAttributeValue: function (variationAttribute) {
-            var pvm = this.isVariant() ? this.getMasterProduct().getVariationModel() : this.getVariationModel();
-            var pva = pvm.getProductVariationAttribute(variationAttribute);
-            var selectedAttributeValue;
-
-            if (pva) {
-                selectedAttributeValue = pvm.getSelectedValue(pva);
-                if (!selectedAttributeValue) {
-                    var variant;
-                    if (this.isVariant()) {
-                        variant = this.object;
-                    } else {
-                        if (pvm.defaultVariant) {
-                            variant = pvm.defaultVariant;
-                        } else if (pvm.variants.length > 0) {
-                            variant = pvm.variants[0];
-                        }
-                    }
-                    if (variant) {
-                        selectedAttributeValue = pvm.getVariationValue(variant, pva);
-                    }
-                }
-            }
-            return selectedAttributeValue;
-        },
-
-        /**
-         * Gets the product variant for the given custom attribute name and value.
-         *
-         * @alias module:models/ProductModel~ProductModel/getVariantForVariationAttributeValue
-         * @param {String} attrValue - The custom attribute value.
-         * @param {String} attrName - The custom attribute name.
-         *
-         * @returns {dw.catalog.Product}
-         */
-        getVariantForVariationAttributeValue: function (attrValue, attrName) {
-            var variants;
-            var newProduct = this.object;
-
-            if ('isVariant' in newProduct && newProduct.isVariant()) {
-                variants = newProduct.getVariationModel().getVariants();
-            } else {
-                variants = newProduct.getVariants();
-            }
-
-            if (!variants) {
-                return newProduct;
-            }
-
-            for (var i = 0, len = variants.length; i < len; i++) {
-                if (variants[i].onlineFlag) {
-                    newProduct = variants[i];
-                    if (this.hasValue(variants[i].custom[attrName], attrValue)) {
-                        break;
-                    }
-                }
-            }
-
-            return newProduct;
-        },
-
-        /**
          * Checks if the given String or EnumValue is equal to or has the given value.
          *
          * @alias module:models/ProductModel~ProductModel/hasValue
@@ -298,28 +219,6 @@ var ProductModel = AbstractModel.extend(
                 }
             }
             return false;
-        },
-
-        /**
-         * Returns a string that represents the category paths of that category up to the root category,
-         * also known as the 'breadcrumbs' in web pages
-         *
-         * @alias module:models/ProductModel~ProductModel/getBreadcrumbs
-         * @param {dw.catalog.Category} category - The category to get the breadcrumb path for.
-         * @return {String} The breadcrumb for the passed category.
-         */
-        getBreadcrumbs: function (category) {
-            if (!category) {
-                return null;
-            }
-
-            var categoryBreadcrambs = [];
-            while (category.ID !== 'root') {
-                categoryBreadcrambs.unshift(category.displayName);
-                category = category.parent;
-            }
-
-            return categoryBreadcrambs.join(':').replace('&', '&amp;');
         },
 
         /**
