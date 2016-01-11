@@ -98,7 +98,7 @@
         <description xml:lang="fr-FR">Commande reçue en 2 jours ouvrés</description>
         <description xml:lang="it">Ricezione ordine entro 2 giorni lavorativi</description>
         <description xml:lang="it-IT">Ricezione ordine entro 2 giorni lavorativi</description>
-        <description xml:lang="ja-JP">ご注文の商品を 2 営業日でお届け</description>
+        <description xml:lang="ja-JP">ご注文の商品を 2 営業日以内にお届け</description>
         <description xml:lang="zh-CN">在 2 个工作日内收到订单</description>
         <online-flag>true</online-flag>
         <tax-class-id>standard</tax-class-id>
@@ -321,7 +321,7 @@
         <display-name xml:lang="ja-JP">店舗にて受け取り</display-name>
         <display-name xml:lang="zh-CN">到店提货</display-name>
         <description xml:lang="x-default">Pickup in store</description>
-        <description xml:lang="fr-FR">Livraison en magasin</description>
+        <description xml:lang="fr-FR">Retrait en magasin</description>
         <description xml:lang="it">Ritiro in negozio</description>
         <description xml:lang="it-IT">Ritiro in negozio</description>
         <description xml:lang="ja-JP">店舗にて受け取り</description>
@@ -631,7 +631,7 @@
         <display-name xml:lang="ja-JP">EUR 店舗にて受け取り</display-name>
         <display-name xml:lang="zh-CN">欧元到店提货</display-name>
         <description xml:lang="x-default">EUR Pickup in store</description>
-        <description xml:lang="fr-FR">EUR Livraison en magasin</description>
+        <description xml:lang="fr-FR">EUR retrait en magasin </description>
         <description xml:lang="it">EUR Ritiro in negozio</description>
         <description xml:lang="it-IT">EUR Ritiro in negozio</description>
         <description xml:lang="ja-JP">EUR 店舗にて受け取り</description>
@@ -744,7 +744,7 @@
         <description xml:lang="fr-FR">Commande reçue en 2 jours ouvrés</description>
         <description xml:lang="it">Ricezione ordine entro 2 giorni lavorativi</description>
         <description xml:lang="it-IT">Ricezione ordine entro 2 giorni lavorativi</description>
-        <description xml:lang="ja-JP">ご注文の商品を 2 営業日でお届け</description>
+        <description xml:lang="ja-JP">ご注文の商品を 2 営業日以内にお届け</description>
         <description xml:lang="zh-CN">在 2 个工作日内收到订单</description>
         <online-flag>true</online-flag>
         <tax-class-id>standard</tax-class-id>
@@ -967,7 +967,7 @@
         <display-name xml:lang="ja-JP">店舗にて受け取り</display-name>
         <display-name xml:lang="zh-CN">到店提货</display-name>
         <description xml:lang="x-default">Pickup in store</description>
-        <description xml:lang="fr-FR">Livraison en magasin</description>
+        <description xml:lang="fr-FR">Retrait en magasin</description>
         <description xml:lang="it">Ritiro in negozio</description>
         <description xml:lang="it-IT">Ritiro in negozio</description>
         <description xml:lang="ja-JP">店舗にて受け取り</description>
@@ -1048,7 +1048,7 @@
         <description xml:lang="fr-FR">Commande reçue en 2 jours ouvrés</description>
         <description xml:lang="it">Ricezione ordine entro 2 giorni lavorativi</description>
         <description xml:lang="it-IT">Ricezione ordine entro 2 giorni lavorativi</description>
-        <description xml:lang="ja-JP">ご注文の商品を 2 営業日でお届け</description>
+        <description xml:lang="ja-JP">ご注文の商品を 2 営業日以内にお届け</description>
         <description xml:lang="zh-CN">在 2 个工作日内收到订单</description>
         <online-flag>true</online-flag>
         <tax-class-id>standard</tax-class-id>
@@ -1143,13 +1143,13 @@
 
     <shipping-method method-id="GBP005" default="false">
         <display-name xml:lang="x-default">Store Pickup</display-name>
-        <display-name xml:lang="fr-FR">Livraison en magasin</display-name>
+        <display-name xml:lang="fr-FR">Retrait en magasin</display-name>
         <display-name xml:lang="it">Ritiro in negozio</display-name>
         <display-name xml:lang="it-IT">Ritiro in negozio</display-name>
         <display-name xml:lang="ja-JP">店舗にて受け取り</display-name>
         <display-name xml:lang="zh-CN">欧元到店提货</display-name>
         <description xml:lang="x-default">Pickup in store</description>
-        <description xml:lang="fr-FR">Livraison en magasin</description>
+        <description xml:lang="fr-FR">Retrait en magasin</description>
         <description xml:lang="it">Ritiro in negozio</description>
         <description xml:lang="it-IT">Ritiro in negozio</description>
         <description xml:lang="ja-JP">店舗にて受け取り</description>

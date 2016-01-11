@@ -200,8 +200,8 @@
             <rule-id>price-high-to-low</rule-id>
             <display-name xml:lang="x-default">Price High to Low</display-name>
             <display-name xml:lang="fr-FR">Prix : décroissant</display-name>
-            <display-name xml:lang="it-IT">Prezzo dal più alto al più basso</display-name>
-            <display-name xml:lang="ja-JP">価格が高い順</display-name>
+            <display-name xml:lang="it-IT">Prezzo (dal più alto al più basso)</display-name>
+            <display-name xml:lang="ja-JP">Price High to Low (価格 高額から低額)</display-name>
             <display-name xml:lang="zh-CN">价格从高到低</display-name>
         </sorting-option>
         <sorting-option option-id="product-name-ascending">
