@@ -62,7 +62,7 @@ var ProductModel = AbstractModel.extend(
             }
 
             var ProductVariationModel = app.getModel('ProductVariation');
-            var variationModel = new ProductVariationModel(this.object.getVariationModel());
+            var variationModel = new ProductVariationModel(this.getVariationModel());
 
             for (var k = 0; k < paramNames.length; k++) {
                 var attributeID = paramNames[k];
@@ -79,7 +79,7 @@ var ProductModel = AbstractModel.extend(
                     }
                 }
             }
-            return variationModel;
+            return variationModel.object;
         },
         /**
          * Processes option value selections and calculates and returns the ProductOptionModels

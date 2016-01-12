@@ -60,9 +60,6 @@ function detail() {
 
     if (product.isVisible()) {
         var currentVariationModel = product.updateVariationSelection(params);
-        // TODO: Investigate .object
-        currentVariationModel = !product.isMaster() && !product.isVariant() ? currentVariationModel : currentVariationModel.hasOwnProperty('object') ? currentVariationModel.object : currentVariationModel;
-
         var productView = app.getView('Product', {
             product: product,
             DefaultVariant: product.getVariationModel().getDefaultVariant(),
@@ -213,8 +210,6 @@ function variation() {
 
     product = getSelectedProduct(product);
     currentVariationModel = product.updateVariationSelection(params);
-    // TODO: Investigate .object
-    currentVariationModel = product.isVariant() ? currentVariationModel : currentVariationModel.object;
 
     if (product.isVisible()) {
         if (params.source.stringValue === 'bonus') {
