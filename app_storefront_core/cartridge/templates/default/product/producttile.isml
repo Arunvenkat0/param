@@ -165,8 +165,7 @@
 						ShowStandardPrice = StandardPrice.available && SalesPrice.available && StandardPrice.compareTo(SalesPrice) == 1;
 						if (ShowStandardPrice) {
 							price.class = 'product-standard-price';
-							// TODO : get this from a resource file.
-							price.title = 'Regular Price';
+							price.title = Resource.msg('product.standardprice', 'product', null);
 							price.value = StandardPrice;
 							extraPrice = {};
 							extraPrice.class = 'product-sales-price';
