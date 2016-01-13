@@ -8,6 +8,9 @@
  */
 
 /* API includes */
+var PaymentMgr = require('dw/order/PaymentMgr');
+var PaymentStatusCodes = require('dw/order/PaymentStatusCodes');
+var Status = require('dw/system/Status');
 var Transaction = require('dw/system/Transaction');
 var URLUtils = require('dw/web/URLUtils');
 
@@ -199,45 +202,30 @@ function Delete() {
  */
 function verifyCreditCard() {
     var newCreditCardForm = app.getForm('paymentinstruments.creditcards.newcreditcard');
-    var VerifyPaymentCardResult = new dw.system.Pipelet('VerifyPaymentCard', {
-        VerifySecurityCode: false
-    }).execute({
-        PaymentCard: dw.order.PaymentMgr.getPaymentCard(newCreditCardForm.get('type').value()),
-        CardNumber: newCreditCardForm.get('number').value(),
-        ExpirationMonth: newCreditCardForm.get('expiration.month').value(),
-        ExpirationYear: newCreditCardForm.get('expiration.year').value(),
-        CardSecurityCode: newCreditCardForm.get('cvn').value()
-    });
-    if (VerifyPaymentCardResult.result === PIPELET_ERROR) {
-        var status = VerifyPaymentCardResult.Status;
 
-        // Verify existence of a status object and a valid credit card form.
-        if (!status || !newCreditCardForm.isValid()) {
+    var expirationMonth = newCreditCardForm.get('expiration.month').value();
+    var expirationYear = newCreditCardForm.get('expiration.year').value();
+    var cardNumber = newCreditCardForm.get('number').value();
+    var paymentCard = PaymentMgr.getPaymentCard(newCreditCardForm.get('type').value());
+    var verifyPaymentCardResult = paymentCard.verify(expirationMonth, expirationYear, cardNumber);
+
+    if (verifyPaymentCardResult.error === true) {
+
+        if (!newCreditCardForm.isValid()) {
             return false;
         }
 
-        //If status is OK, return true.
-        if (status.status === dw.system.Status.OK) {
+        if (verifyPaymentCardResult.code === Status.OK) {
             return true;
         }
 
         // Invalidate the payment card form elements.
-        var items = status.items.iterator();
-        while (items.hasNext()) {
-            var item = items.next();
-
-            switch (item.code) {
-                case dw.order.PaymentStatusCodes.CREDITCARD_INVALID_CARD_NUMBER:
-                    newCreditCardForm.get('number').invalidate();
-                    continue;
-
-                case dw.order.PaymentStatusCodes.CREDITCARD_INVALID_EXPIRATION_DATE:
-                    newCreditCardForm.get('expiration.month').invalidate();
-                    newCreditCardForm.get('expiration.year').invalidate();
-                    continue;
-
-                case dw.order.PaymentStatusCodes.CREDITCARD_INVALID_SECURITY_CODE:
-                    newCreditCardForm.get('cvn').invalidate();
+        for (var i = 0; i < verifyPaymentCardResult.items.length; i++) {
+            if (verifyPaymentCardResult.items[i].code === PaymentStatusCodes.CREDITCARD_INVALID_CARD_NUMBER) {
+                newCreditCardForm.get('number').invalidate();
+            } else if (verifyPaymentCardResult.items[i].code === PaymentStatusCodes.CREDITCARD_INVALID_EXPIRATION_DATE) {
+                newCreditCardForm.get('expiration.month').invalidate();
+                newCreditCardForm.get('expiration.year').invalidate();
             }
         }
         return false;
