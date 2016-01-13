@@ -146,7 +146,9 @@
         </transition-display>
       </simple-transition>
       <node>
-        <end-node/>
+        <interaction-node transaction-required="false">
+          <template buffered="true" dynamic="false" name="util/pt_empty"/>
+        </interaction-node>
         <node-display x="0" y="2"/>
       </node>
     </segment>
