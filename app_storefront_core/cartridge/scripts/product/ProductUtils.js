@@ -308,7 +308,7 @@ ProductUtils.getPricing = function (item) {
     var isPromoPrice = false;
 
     var promos = PromotionMgr.activeCustomerPromotions.getProductPromotions(item);
-    if (promos) {
+    if (promos && promos.length) {
         var promo = promos[0];
         var promoClass = promo.getPromotionClass();
         if (promoClass && promoClass.equals(Promotion.PROMOTION_CLASS_PRODUCT)) {
