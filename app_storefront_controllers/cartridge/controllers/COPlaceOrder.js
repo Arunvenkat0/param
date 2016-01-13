@@ -156,12 +156,24 @@ function start() {
             return {};
         } else {
             var handlePaymentsResult = handlePayments(order);
+
             if (handlePaymentsResult.error) {
-                OrderMgr.failOrder(order);
-                return {error: true};
+                return Transaction.wrap(function () {
+                    OrderMgr.failOrder(order);
+                    return {
+                        error: true,
+                        PlaceOrderError: new Status(Status.ERROR, 'confirm.error.technical')
+                    };
+                });
+
             } else if (handlePaymentsResult.missingPaymentInfo) {
-                OrderMgr.failOrder(order);
-                return {error: true};
+                return Transaction.wrap(function () {
+                    OrderMgr.failOrder(order);
+                    return {
+                        error: true,
+                        PlaceOrderError: new Status(Status.ERROR, 'confirm.error.technical')
+                    };
+                });
             }
 
             return submitImpl(order);

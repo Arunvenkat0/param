@@ -57,8 +57,23 @@ function submit() {
     // If the order creation failed, it returns a JSON object with an error key and a boolean value.
     var placeOrderResult = app.getController('COPlaceOrder').Start();
     if (placeOrderResult.error) {
-        start();
-        return;
+        var cart = Cart.get();
+        var COBilling = app.getController('COBilling');
+
+        if (!COBilling.ValidatePayment(cart)) {
+            COBilling.Start();
+            return;
+        } else {
+
+            Transaction.wrap(function () {
+                cart.calculate();
+            });
+
+            app.getView({
+                Basket: cart.object,
+                PlaceOrderError: placeOrderResult.PlaceOrderError
+            }).render('checkout/summary/summary');
+        }
     } else if (placeOrderResult.order_created) {
         showConfirmation(placeOrderResult.Order);
     }
