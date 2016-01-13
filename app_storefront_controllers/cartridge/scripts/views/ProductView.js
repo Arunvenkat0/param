@@ -9,7 +9,7 @@ var View = require('./View');
  * @class module:views/ProductView~ProductView
  * @extends module:views/View
  * @lends module:views/ProductView~ProductView.prototype
-*/
+ */
 var ProductView = View.extend(
     {
         /**

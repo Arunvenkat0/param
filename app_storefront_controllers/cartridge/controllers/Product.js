@@ -31,11 +31,10 @@ function show() {
 
         var productView = app.getView('Product', {
             product: product,
-            DefaultVariant: product.getDefaultVariant()
+            DefaultVariant: product.getVariationModel().getDefaultVariant(),
+            CurrentOptionModel: product.updateOptionSelection(params),
+            CurrentVariationModel: product.updateVariationSelection(params)
         });
-
-        productView.CurrentOptionModel = product.updateOptionSelection(params);
-        productView.CurrentVariationModel = product.updateVariationSelection(params);
 
         productView.render(product.getTemplate() || 'product/product');
     } else {
@@ -60,13 +59,13 @@ function detail() {
     var product = Product.get(params.pid.stringValue);
 
     if (product.isVisible()) {
+        var currentVariationModel = product.updateVariationSelection(params);
         var productView = app.getView('Product', {
             product: product,
-            DefaultVariant: product.getDefaultVariant()
+            DefaultVariant: product.getVariationModel().getDefaultVariant(),
+            CurrentOptionModel: product.updateOptionSelection(params),
+            CurrentVariationModel: currentVariationModel
         });
-
-        productView.CurrentOptionModel = product.updateOptionSelection(params);
-        productView.CurrentVariationModel = product.updateVariationSelection(params);
 
         productView.render(product.getTemplate() || 'product/productdetail');
     } else {
@@ -275,7 +274,7 @@ function variationPS() {
         product = Product.get(productVariationSelections.SelectedProduct);
 
         if (product.isMaster()) {
-            product = Product.get(product.getDefaultVariant());
+            product = Product.get(product.getVariationModel().getDefaultVariant());
         }
 
         if (params.format.stringValue) {
@@ -391,36 +390,68 @@ function showInCategory() {
 /*
  * Web exposed methods
  */
-/** Renders the product template.
- * @see module:controllers/Product~show */
-exports.Show                = guard.ensure(['get'], show);
-/** Renders the product detail page within the context of a category.
- * @see module:controllers/Product~showInCategory */
-exports.ShowInCategory      = guard.ensure(['get'], showInCategory);
-/** Renders the productdetail template.
- * @see module:controllers/Product~detail */
-exports.Detail              = guard.ensure(['get'], detail);
-/** Returns product availability data as a JSON object.
- * @see module:controllers/Product~getAvailability */
-exports.GetAvailability     = guard.ensure(['get'], getAvailability);
-/** Renders a product tile, used within family and search result pages.
- * @see module:controllers/Product~hitTile */
-exports.HitTile             = guard.ensure(['get'], hitTile);
-/** Renders a navigation include on product detail pages.
- * @see module:controllers/Product~productNavigation */
-exports.Productnav          = guard.ensure(['get'], productNavigation);
-/** Renders variation selection controls for a given product ID.
- * @see module:controllers/Product~variation */
-exports.Variation           = guard.ensure(['get'], variation);
-/** Renders variation selection controls for the product set item identified by the given product ID.
- * @see module:controllers/Product~variationPS */
-exports.VariationPS         = guard.ensure(['get'], variationPS);
-/** Renders the last visited products based on the session information.
- * @see module:controllers/Product~includeLastVisited */
-exports.IncludeLastVisited  = guard.ensure(['get'], includeLastVisited);
-/** Renders a list of bonus products for a bonus discount line item.
- * @see module:controllers/Product~getBonusProducts */
-exports.GetBonusProducts    = guard.ensure(['get'], getBonusProducts);
-/** Renders a set item view for the given product ID.
- * @see module:controllers/Product~getSetItem */
-exports.GetSetItem          = guard.ensure(['get'], getSetItem);
+/**
+ * Renders the product template.
+ * @see module:controllers/Product~show
+ */
+exports.Show = guard.ensure(['get'], show);
+
+/**
+ * Renders the product detail page within the context of a category.
+ * @see module:controllers/Product~showInCategory
+ */
+exports.ShowInCategory = guard.ensure(['get'], showInCategory);
+
+/**
+ * Renders the productdetail template.
+ * @see module:controllers/Product~detail
+ */
+exports.Detail = guard.ensure(['get'], detail);
+
+/**
+ * Returns product availability data as a JSON object.
+ * @see module:controllers/Product~getAvailability
+ */
+exports.GetAvailability = guard.ensure(['get'], getAvailability);
+
+/**
+ * Renders a product tile, used within family and search result pages.
+ * @see module:controllers/Product~hitTile
+ */
+exports.HitTile = guard.ensure(['get'], hitTile);
+
+/**
+ * Renders a navigation include on product detail pages.
+ * @see module:controllers/Product~productNavigation
+ */
+exports.Productnav = guard.ensure(['get'], productNavigation);
+
+/**
+ * Renders variation selection controls for a given product ID.
+ * @see module:controllers/Product~variation
+ */
+exports.Variation = guard.ensure(['get'], variation);
+
+/**
+ * Renders variation selection controls for the product set item identified by the given product ID.
+ * @see module:controllers/Product~variationPS
+ */
+exports.VariationPS = guard.ensure(['get'], variationPS);
+
+/**
+ * Renders the last visited products based on the session information.
+ * @see module:controllers/Product~includeLastVisited
+ */
+exports.IncludeLastVisited = guard.ensure(['get'], includeLastVisited);
+
+/**
+ * Renders a list of bonus products for a bonus discount line item.
+ * @see module:controllers/Product~getBonusProducts
+ */
+exports.GetBonusProducts = guard.ensure(['get'], getBonusProducts);
+
+/**
+ * Renders a set item view for the given product ID.
+ * @see module:controllers/Product~getSetItem
+ */
+exports.GetSetItem = guard.ensure(['get'], getSetItem);
