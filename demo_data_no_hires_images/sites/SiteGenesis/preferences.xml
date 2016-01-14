@@ -27,7 +27,6 @@
             <preference preference-id="SiteLocales">default:en_US</preference>
             <preference preference-id="SitePriceBooks">cny-list-prices:cny-sale-prices:eur-list-prices:eur-sale-prices:jpy-list-prices:jpy-sale-prices:usd-list-prices:usd-sale-prices</preference>
             <preference preference-id="StorefrontURLsEnabled">true</preference>
-	    <preference preference-id="rateLimiterThreshold">5</preference>
         </all-instances>
         <development>
             <preference preference-id="AvailabilityFiltering">Disabled</preference>
