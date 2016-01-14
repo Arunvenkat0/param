@@ -99,13 +99,13 @@ gulp.task('test:application', function () {
 		.pipe(webdriver(_.omit(opts, '_')));
 });
 
-var mocha = require('gulp-mocha');
+var gulpMocha = require('gulp-mocha');
 gulp.task('test:unit', function () {
 	var reporter = opts.reporter || 'spec';
 	var timeout = opts.timeout || 10000;
 	var suite = opts.suite || '*';
 	return gulp.src(['test/unit/' + suite + '/**/*.js'], {read: false})
-		.pipe(mocha({
+		.pipe(gulpMocha({
 			reporter: reporter,
 			timeout: timeout
 		}));

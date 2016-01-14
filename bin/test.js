@@ -2,8 +2,6 @@
 
 'use strict';
 
-/* jshint mocha:false */
-
 var fs = require('fs');
 var spawn = require('child_process').spawn;
 var minimist = require('minimist');
@@ -24,13 +22,13 @@ if (argv.timeout) {
 
 var stdio = reporter === 'xunit' ? [process.stdin, 'pipe', process.stderr] : 'inherit';
 
-var mocha = spawn('mocha', args, {stdio: stdio});
+var mochaProcess = spawn('mocha', args, {stdio: stdio});
 
-mocha.on('close', function (code) {
+mochaProcess.on('close', function (code) {
 	process.exit(code);
 });
 
 // write to reports
 if (reporter === 'xunit') {
-	mocha.stdout.pipe(fs.createWriteStream('test/reports/UNIT.xunit.' + new Date().getTime() + '.xml'));
+	mochaProcess.stdout.pipe(fs.createWriteStream('test/reports/UNIT.xunit.' + new Date().getTime() + '.xml'));
 }

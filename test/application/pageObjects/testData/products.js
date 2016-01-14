@@ -255,12 +255,14 @@ export class ProductSet extends AbstractProductBase {
 
         let category = new Category(categoryJSON);
         let categoryParent = category.parent;
+        var self = this;
+        function addUrlResourcePath (locale) {
+            if (locale === 'en_GB') { locale = defaultLocale; }
+            let currentPath = self.urlResourcePaths[locale] || '';
+            self.urlResourcePaths[locale] = `/${category.getDisplayName(locale).toLowerCase()}${currentPath}`;
+        }
         do {
-            common.supportedLocales.forEach(locale => {
-                if (locale === 'en_GB') { locale = defaultLocale; }
-                let currentPath = this.urlResourcePaths[locale] || '';
-                this.urlResourcePaths[locale] = `/${category.getDisplayName(locale).toLowerCase()}${currentPath}`;
-            });
+            common.supportedLocales.forEach(addUrlResourcePath);
             category = new Category(catalog.categories[categoryParent]);
             categoryParent = category.parent;
         } while (categoryParent);
