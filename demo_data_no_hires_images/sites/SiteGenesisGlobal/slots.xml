@@ -349,9 +349,9 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <callout-msg xml:lang="zh-CN">产品推荐</callout-msg>
         <content>
             <products>
-                <product product-id="25772792"/>
-                <product product-id="013742002607"/>
-                <product product-id="82936941"/>
+                <product product-id="008885535488"/>
+                <product product-id="013742003048"/>
+                <product product-id="095068990509"/>
             </products>
         </content>
     </slot-configuration>
@@ -463,10 +463,11 @@ In questa sezione troverai tante risposte alle tue domande sullo shopping online
         <callout-msg xml:lang="zh-CN">&lt;h2&gt;本周&lt;/h2&gt;&lt;h3&gt;热卖&lt;/h3&gt;</callout-msg>
         <content>
             <products>
-                <product product-id="25591494"/>
-                <product product-id="701644111922"/>
-                <product product-id="25642173"/>
-                <product product-id="25564566"/>
+                <product product-id="25591535"/>
+                <product product-id="25686395"/>
+                <product product-id="54736828"/>
+                <product product-id="25590891"/>
+                <product product-id="793775370033"/>
             </products>
         </content>
     </slot-configuration>
