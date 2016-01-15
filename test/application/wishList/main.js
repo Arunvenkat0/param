@@ -181,7 +181,7 @@ describe('Wishlist', () => {
 
     describe('Adding Items', () => {
         let productVariationMaster;
-        let lang;
+        let locale = config.locale;
 
         function addProductVariationMasterToWishList () {
             return testData.getProductVariationMaster()
@@ -203,17 +203,15 @@ describe('Wishlist', () => {
 
         describe('as a returning customer', () => {
             before(() => wishListPage.navigateTo()
-                    .then(() => common.getLocale())
-                    .then(currentLang => lang = currentLang)
-                    .then(() => loginForm.loginAsDefaultCustomer())
-                    .then(() => browser.waitForVisible(wishListPage.BTN_TOGGLE_PRIVACY))
-                    .then(() => wishListPage.emptyWishList())
-                    .then(() => addProductVariationMasterToWishList())
+                .then(() => loginForm.loginAsDefaultCustomer())
+                .then(() => browser.waitForVisible(wishListPage.BTN_TOGGLE_PRIVACY))
+                .then(() => wishListPage.emptyWishList())
+                .then(() => addProductVariationMasterToWishList())
             );
 
             it('should directly navigate to the WishList Page', () =>
-                    browser.isExisting('label[for=editAddress]')
-                        .then(exists => assert.equal(exists, true))
+                browser.isExisting('label[for=editAddress]')
+                .then(exists => assert.equal(exists, true))
             );
 
             it('should allow user to toggle privacy', () => {
@@ -225,7 +223,7 @@ describe('Wishlist', () => {
 
             it('should display the product name in the Wish List page after add items', () => {
                 wishListPage.getItemNameByRow(2)
-                    .then(name => assert.equal(productVariationMaster.displayName[lang], name));
+                .then(name => assert.equal(productVariationMaster.displayName[locale], name));
             });
         });
 
