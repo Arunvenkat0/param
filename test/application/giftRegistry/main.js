@@ -114,7 +114,7 @@ describe('Gift Registry', () => {
     it('should fill out the event form', () =>
         giftRegistryPage.fillOutEventForm(eventFormData, locale)
             // FIXME: This button is always enabled, even if form is not filled
-            // out.  Would be better to check on some other attribute
+            // out.  Would be better to check on some other attribute RAP-4690
             .then(() => browser.isEnabled(giftRegistryPage.BTN_EVENT_CONTINUE))
             .then(enabled => assert.ok(enabled))
     );

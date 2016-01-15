@@ -14,21 +14,21 @@ describe('Multi Shipping', () => {
     let login = 'testuser1@demandware.com';
     let billingFormData = {};
     let locale = config.locale;
-    let shipmentText1 = Resource.msgf('multishippingshipments.shipment','checkout',null, 1);
-    let shipmentText2 = Resource.msgf('multishippingshipments.shipment','checkout',null, 2);
+    let shipmentText1 = Resource.msgf('multishippingshipments.shipment','checkout', null, 1);
+    let shipmentText2 = Resource.msgf('multishippingshipments.shipment','checkout', null, 2);
 
     before(() => testData.load()
         .then(() => testData.getCustomerByLogin(login))
         .then(customer => {
-                billingFormData = {
-                    postal: customers.globalPostalCode[locale],
-                    phone: customers.globalPhone[locale],
-                    emailAddress: customer.email,
-                    creditCard_type: testData.creditCard1.cardType,
-                    creditCard_owner: customer.firstName + ' ' + customer.lastName,
-                    creditCard_number: testData.creditCard1.number,
-                    creditCard_expiration_year: testData.creditCard1.yearIndex,
-                    creditCard_cvn: testData.creditCard1.cvn
+            billingFormData = {
+                postal: customers.globalPostalCode[locale],
+                phone: customers.globalPhone[locale],
+                emailAddress: customer.email,
+                creditCard_type: testData.creditCard1.cardType,
+                creditCard_owner: customer.firstName + ' ' + customer.lastName,
+                creditCard_number: testData.creditCard1.number,
+                creditCard_expiration_year: testData.creditCard1.yearIndex,
+                creditCard_cvn: testData.creditCard1.cvn
             };
 
         })

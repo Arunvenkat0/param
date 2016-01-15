@@ -182,7 +182,7 @@ describe('Checkout', () => {
             .then(() => {
                 shippingFormData = _.cloneDeep(shippingData);
                 delete shippingFormData.addressList;
-                })
+            })
             .then(() => checkoutPage.navigateTo())
         );
 
@@ -210,7 +210,7 @@ describe('Checkout', () => {
             .then(() => {
                 shippingFormData = _.cloneDeep(shippingData);
                 delete shippingFormData.addressList;
-                })
+            })
             .then(() => checkoutPage.navigateTo())
             .then(() => checkoutPage.fillOutShippingForm(shippingFormData,locale))
             .then(() => browser.waitForValue(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
