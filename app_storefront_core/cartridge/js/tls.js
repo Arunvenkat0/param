@@ -13,7 +13,7 @@ function getUserAgent() {
     var cookieValue = getCookie(cookieName);
 
     // Test to see if this browser has already been flagged by looking at its cookies
-    if (cookieValue === '') {
+    if (!cookieValue) {
         getTLS(url, function (message) {
            if (message.length > 0) {
                showWarning(message[0]);

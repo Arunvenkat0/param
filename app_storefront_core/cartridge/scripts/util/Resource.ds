@@ -212,7 +212,7 @@ ResourceHelper.getPreferences = function(pageContext) {
         LISTING_SEARCHSUGGEST_LEGACY: (Site.getCurrent().getCustomPreferenceValue('enhancedSearchSuggestions') ? false : true),
         STORE_PICKUP: Site.getCurrent().getCustomPreferenceValue('enableStorePickUp'),
         COOKIE_HINT: (cookieHintAsset && cookieHintAsset.online) || false,
-        CHECK_TLS: dw.system.Site.getCurrent().getCustomPreferenceValue('checkTLS')
+        CHECK_TLS: Site.getCurrent().getCustomPreferenceValue('checkTLS')
     };
 }
 /**
