@@ -29,39 +29,6 @@ export const globalPhone = {
 	zh_CN: '333-333-3333'
 };
 
-/**
- * Extracts specific customer from customers array by login value
- *
- * @param {String} login - Customer's login value
- * @returns {Customer} - customer
- */
-export function getCustomer (customers, login) {
-	let customer = customers[login];
-	if (customer instanceof Customer) {
-		return customer;
-	}
-
-	return new Customer(customer);
-}
-
-/**
- * Processes parsed JSONified file data and sends back a map of Price Books
- *
- * @param {Object} rawCustomers - Parsed data from XML files
- * @returns {Array} - Customer objects
- */
-export function parseCustomers (rawCustomers, currentCustomers) {
-	let parsedCustomers = currentCustomers || {};
-
-	for (let customer of rawCustomers.customers.customer) {
-		let instance = new Customer(customer);
-		let login = instance.login;
-		parsedCustomers[login] = instance;
-	}
-
-	return parsedCustomers;
-}
-
 export class Customer {
 	constructor (customer) {
 		if (customer.hasOwnProperty('login')) {
