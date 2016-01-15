@@ -479,11 +479,12 @@ ProductUtils.getVariantForColor = function (prod, colorId) {
         return newProduct;
     }
 
-    variants.forEach(function (p) {
+    for (var i = 0, il = variants.length; i < il; i++) {
+        var p = variants[i];
         if (p.onlineFlag && (!colorId || p.custom.color === colorId)) {
             newProduct = p;
         }
-    });
+    }
 
     return newProduct;
 };
