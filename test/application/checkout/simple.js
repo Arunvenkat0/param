@@ -15,7 +15,7 @@ import * as helpers from '../pageObjects/helpers/common';
 import * as navHeader from '../pageObjects/navHeader';
 import * as giftCertPage from '../pageObjects/giftCertPurchase';
 import {config} from '../webdriver/wdio.conf';
-import * as gCustomer from '../pageObjects/testData/customers';
+import * as customers from '../pageObjects/testData/customers';
 
 
 describe('Checkout', () => {
@@ -29,9 +29,9 @@ describe('Checkout', () => {
         testData.load()
             .then(() => testData.getCustomerByLogin(login))
             .then(customer => {
-                customer.addresses[0].postalCode = gCustomer.globalPostalCode[locale];
-                customer.addresses[0].countryCode = gCustomer.globalCountryCode[locale];
-                customer.addresses[0].phone = gCustomer.globalPhone[locale];
+                customer.addresses[0].postalCode = customers.globalPostalCode[locale];
+                customer.addresses[0].countryCode = customers.globalCountryCode[locale];
+                customer.addresses[0].phone = customers.globalPhone[locale];
 
                 let address = customer.getPreferredAddress();
 
@@ -95,7 +95,7 @@ describe('Checkout', () => {
 
         // Fill in Shipping Form
         it('should allow saving of Shipping form when required fields filled', () =>
-            checkoutPage.fillOutShippingForm(shippingFormData,locale)
+            checkoutPage.fillOutShippingForm(shippingFormData, locale)
                 .then(() => checkoutPage.checkUseAsBillingAddress())
                 .then(() => browser.isEnabled(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
                 .then(savable => assert.ok(savable))

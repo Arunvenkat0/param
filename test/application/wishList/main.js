@@ -4,7 +4,6 @@ import {assert} from 'chai';
 import {config} from '../webdriver/wdio.conf';
 import url from 'url';
 import * as cartPage from '../pageObjects/cart';
-import * as common from '../pageObjects/helpers/common';
 import * as giftCertPurchasePage from '../pageObjects/giftCertPurchase';
 import * as loginForm from '../pageObjects/helpers/forms/login';
 import * as navHeader from '../pageObjects/navHeader';

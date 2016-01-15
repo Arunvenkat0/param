@@ -7,7 +7,7 @@ import * as testData from '../pageObjects/testData/main';
 import * as Resource from '../../mocks/dw/web/Resource';
 import * as navHeader from '../pageObjects/navHeader';
 import {config} from '../webdriver/wdio.conf';
-import * as gCustomer from '../pageObjects/testData/customers';
+import * as customers from '../pageObjects/testData/customers';
 import * as checkoutPage from '../pageObjects/checkout';
 
 describe('Multi Shipping', () => {
@@ -21,8 +21,8 @@ describe('Multi Shipping', () => {
         .then(() => testData.getCustomerByLogin(login))
         .then(customer => {
                 billingFormData = {
-                    postal: gCustomer.globalPostalCode[locale],
-                    phone: gCustomer.globalPhone[locale],
+                    postal: customers.globalPostalCode[locale],
+                    phone: customers.globalPhone[locale],
                     emailAddress: customer.email,
                     creditCard_type: testData.creditCard1.cardType,
                     creditCard_owner: customer.firstName + ' ' + customer.lastName,

@@ -7,7 +7,7 @@ import * as testData from '../pageObjects/testData/main';
 import * as loginForm from '../pageObjects/helpers/forms/login';
 import * as navHeader from '../pageObjects/navHeader';
 import * as footerPage from '../pageObjects/footer';
-import * as gCustomer from '../pageObjects/testData/customers';
+import * as customers from '../pageObjects/testData/customers';
 
 let locale = config.locale;
 
@@ -67,9 +67,9 @@ describe('Gift Registry', () => {
     before(() => testData.load()
         .then(() => testData.getCustomerByLogin(login))
         .then(customer => {
-            customer.addresses[0].postalCode = gCustomer.globalPostalCode[locale];
-            customer.addresses[0].countryCode = gCustomer.globalCountryCode[locale];
-            customer.addresses[0].phone = gCustomer.globalPhone[locale];
+            customer.addresses[0].postalCode = customers.globalPostalCode[locale];
+            customer.addresses[0].countryCode = customers.globalCountryCode[locale];
+            customer.addresses[0].phone = customers.globalPhone[locale];
 
             let address = customer.getPreferredAddress();
 
