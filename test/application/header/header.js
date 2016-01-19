@@ -15,7 +15,7 @@ describe('Header #C147202', () => {
     before(() => homePage.navigateTo());
 
     it('#1 Navigate to NewArrivals', () =>
-       browser.waitForVisible(footer.FOOTER_CONTAINER)
+        browser.waitForVisible(footer.FOOTER_CONTAINER)
             .click(homePage.NEW_ARRIVALS)
             .waitForVisible(common.PRIMARY_CONTENT)
             .url()
@@ -26,22 +26,22 @@ describe('Header #C147202', () => {
     );
 
     it('#2 Navigate to Womens', () =>
-       browser.waitForVisible(footer.FOOTER_CONTAINER)
-          .click(homePage.WOMENS)
-          .waitForVisible(common.PRIMARY_CONTENT)
-          .url()
-          .then(currentURL => {
-              let parseUrl = url.parse(currentURL.value);
-              return assert.isTrue(parseUrl.pathname.endsWith('womens/'));
-           })
+        browser.waitForVisible(footer.FOOTER_CONTAINER)
+            .click(homePage.WOMENS)
+            .waitForVisible(common.PRIMARY_CONTENT)
+            .url()
+            .then(currentURL => {
+                let parseUrl = url.parse(currentURL.value);
+                return assert.isTrue(parseUrl.pathname.endsWith('womens/'));
+            })
     );
 
     it('#3 Navigate to Mens', () =>
        browser.waitForVisible(footer.FOOTER_CONTAINER)
-          .click(homePage.MENS)
-          .waitForVisible(common.PRIMARY_CONTENT)
-          .url()
-          .then(currentURL => {
+           .click(homePage.MENS)
+           .waitForVisible(common.PRIMARY_CONTENT)
+           .url()
+           .then(currentURL => {
               let parseUrl = url.parse(currentURL.value);
               return assert.isTrue(parseUrl.pathname.endsWith('mens/'));
            })
@@ -65,12 +65,12 @@ describe('Header #C147202', () => {
     });
 
     it('#5 Navigate to Top Sellers', () =>
-       browser.waitForVisible(footer.FOOTER_CONTAINER)
-          .click(homePage.TOP_SELLERS)
-          .waitForVisible(common.PRIMARY_CONTENT)
-           .then(() => common.getSearchParams())
-           .then(params => sparams = params)
-           .then(() => assert.equal(sparams.srule, 'top-sellers'))
+        browser.waitForVisible(footer.FOOTER_CONTAINER)
+            .click(homePage.TOP_SELLERS)
+            .waitForVisible(common.PRIMARY_CONTENT)
+            .then(() => common.getSearchParams())
+            .then(params => sparams = params)
+            .then(() => assert.equal(sparams.srule, 'top-sellers'))
 
     );
 });

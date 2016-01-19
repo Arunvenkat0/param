@@ -41,9 +41,9 @@ describe('Address', () => {
                 country: address.countryCode,
                 phone: address.phone
             };
-             if (locale && locale === 'x_default') {
-                 addressFormData.states_state = address.stateCode;
-              }
+            if (locale && locale === 'x_default') {
+                addressFormData.states_state = address.stateCode;
+            }
 
             editAddressFormData = {
                 addressid: 'Test Address Edited',
@@ -54,7 +54,7 @@ describe('Address', () => {
                 postal: address.postalCode,
                 country: address.countryCode,
                 phone: address.phone
-             };
+            };
             if (locale && locale === 'x_default') {
                 editAddressFormData.states_state = address.stateCode;
             }

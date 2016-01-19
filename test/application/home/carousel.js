@@ -26,8 +26,8 @@ describe('Homepage General #C84584', () => {
         );
 
         it('#2 should go to Women\'s Accessories', () =>
-                browser.waitForVisible(homePage.MAIN_CAROUSEL)
-                    .then(() => homePage.mainCarouselSlide(2))
+            browser.waitForVisible(homePage.MAIN_CAROUSEL)
+                .then(() => homePage.mainCarouselSlide(2))
                 .then(() => browser.click(homePage.MAIN_CAROUSEL))
                 .then(() => browser.waitForVisible(categoryBanner))
                 .then(() => common.getPageTitle())
@@ -132,7 +132,7 @@ describe('Homepage General #C84584', () => {
         );
 
         it('should display prices in the product tile', () => {
-            if (locale !== 'x_default') {
+            if (locale && locale !== 'x_default') {
                 return;
             }
             // Button Front Skirt (4th vertical carousel tile)

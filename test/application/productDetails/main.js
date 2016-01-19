@@ -14,23 +14,24 @@ describe('Product Details Page', () => {
 
     // TODO:  Refactor these tests to use testData module instead of the search pattern.
     describe('Bundle', () => {
-        // Global sites do not have electronic category
+        // Global sites does not have electronic category
         if (locale && locale !== 'x_default') {
             return;
         }
         before(() => homePage.navigateTo()
         .then(() => browser.waitForExist('form[role="search"]')
-                .setValue('#q', 'bundle')
-                .submitForm('form[role="search"]')
-                .waitForExist('#search-result-items')
-                .click('[title*="Playstation 3 Bundle"]')
-                .waitForVisible(productDetailPage.PDP_MAIN))
+            .setValue('#q', 'bundle')
+            .submitForm('form[role="search"]')
+            .waitForExist('#search-result-items')
+            .click('[title*="Playstation 3 Bundle"]')
+            .waitForVisible(productDetailPage.PDP_MAIN))
         );
 
         it('should have the right name', () =>
             browser.getText('.product-detail > .product-name')
                 .then(title => assert.equal(title, 'Playstation 3 Bundle'))
         );
+
         it('should have product image', () =>
             browser.isExisting('.primary-image')
                 .then(exists => assert.isTrue(exists))

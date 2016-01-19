@@ -61,7 +61,7 @@ describe('Checkout', () => {
             .then(() => Promise.resolve())
     );
 
-    function addProductVariationMasterToCart () {
+	function addProductVariationMasterToCart () {
         return testData.getProductVariationMaster()
             .then(productVariationMaster => {
                 let product = new Map();
