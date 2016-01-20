@@ -39,6 +39,12 @@ function start() {
             cart.calculate();
         });
 
+        Transaction.wrap(function () {
+            if (!cart.calculatePaymentTransactionTotal()) {
+                COBilling.Start();
+            }
+        });
+
         var pageMeta = require('~/cartridge/scripts/meta');
         pageMeta.update({pageTitle: Resource.msg('summary.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')});
         app.getView({
