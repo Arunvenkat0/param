@@ -209,6 +209,30 @@ along with their differences for testing different scenarios:
 | Product          | rockstar-games-grand-theft-auto-iv-xbox360 | Grand Theft Auto 4 (for X-Box 360)                     |                         |      |         |                 |
 | Product          | sierra-the-bourne-conspiracy-xbox360       | Robert Ludlum's: The Bourne Conspiracy (for X-Box 360) |                         |      |         |                 |
 
+# Test Promotions/Products
+These are promotions that have been turned on with a default installation  of SG for testing purposes.
+<table class="test-users">
+<thead>
+<tr>
+	<th>PromotionID</th>
+	<th>Type</th>
+	<th>Rules</th>
+	<th>Products</th>
+	<th>Pages</th>
+	<th>Note</th>
+</tr>
+</thead>
+<tr>
+	<td>PromotionTest_WithoutQualifying</td>
+	<td>Product</td>
+	<td>Order a specific product and get 20% of that product.</td>
+	<td>Mens tie<br>(793775370033)<br>Mens suit<br>(640188017003)</td>
+	<td>home page(carousel tiles), search grid, compare page, cart page and product page. </td>
+	<td>MA</td>
+</tr>
+
+</table>
+
 # Troubleshooting
 
 1. **Couldn't connect to selenium server error**

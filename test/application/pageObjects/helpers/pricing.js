@@ -126,3 +126,18 @@ export function localizeNumber(price, locale = 'en-US') {
 
     return localizedNumber;
 }
+
+/**
+ * return the price with the discount applied to it for a given promotion, this is for when using a percent off discount
+ * @param argsObject - contains an object with 4 properties, pricingHelpers, promotionInfo, expectedSalePrice & locale
+ * @param expectedSalePrice - the expected price
+ * @param locale - the current local
+ * @param promotionInfo.discountAmount - the percent to mark down the expectedSalePrice with
+ * @returns {Number} - the expectedSalePrice with the promotionInfo.discountAmount applied to it
+ */
+export function getPercentageDiscountedPrice (expectedSalePrice, locale, discountAmount) {
+    const price = getCurrencyValue(expectedSalePrice, locale);
+    const discount = parseInt(discountAmount) / 100;
+
+    return price - (price * discount);
+}
