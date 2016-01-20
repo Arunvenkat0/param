@@ -8,13 +8,11 @@
  */
 
 /* API Includes */
-var ArrayList = require('dw/util/ArrayList');
 var GiftCertificate = require('dw/order/GiftCertificate');
 var GiftCertificateMgr = require('dw/order/GiftCertificateMgr');
 var GiftCertificateStatusCodes = require('dw/order/GiftCertificateStatusCodes');
 var PaymentInstrument = require('dw/order/PaymentInstrument');
 var PaymentMgr = require('dw/order/PaymentMgr');
-var Pipelet = require('dw/system/Pipelet');
 var ProductListMgr = require('dw/customer/ProductListMgr');
 var Resource = require('dw/web/Resource');
 var Status = require('dw/system/Status');
@@ -774,26 +772,15 @@ function validatePayment(cart) {
  * @return {Boolean} true if credit card is successfully saved.
  */
 function saveCreditCard() {
-    var i, creditCards, GetCustomerPaymentInstrumentsResult, newCreditCard;
+    var i, creditCards, newCreditCard;
 
     if (customer.authenticated && app.getForm('billing').object.paymentMethods.creditCard.saveCard.value) {
-        // TODO - remove pipelet code once APP-30656 is fixed
-        // var creditCards = customer.getProfile().getWallet().getPaymentInstruments(PaymentInstrument.METHOD_CREDIT_CARD);
-        creditCards = new ArrayList();
-
-        GetCustomerPaymentInstrumentsResult = new Pipelet('GetCustomerPaymentInstruments').execute({
-            Customer: customer,
-            PaymentMethod: PaymentInstrument.METHOD_CREDIT_CARD
-        });
-
-        if (GetCustomerPaymentInstrumentsResult.result !== PIPELET_ERROR) {
-            creditCards = GetCustomerPaymentInstrumentsResult.PaymentInstruments;
-        }
+        creditCards = customer.getProfile().getWallet().getPaymentInstruments(PaymentInstrument.METHOD_CREDIT_CARD);
 
         Transaction.wrap(function () {
             newCreditCard = customer.getProfile().getWallet().createPaymentInstrument(PaymentInstrument.METHOD_CREDIT_CARD);
 
-            // coy the credit card details to the payment instrument
+            // copy the credit card details to the payment instrument
             newCreditCard.setCreditCardHolder(app.getForm('billing').object.paymentMethods.creditCard.owner.value);
             newCreditCard.setCreditCardNumber(app.getForm('billing').object.paymentMethods.creditCard.number.value);
             newCreditCard.setCreditCardExpirationMonth(app.getForm('billing').object.paymentMethods.creditCard.expiration.month.value);
