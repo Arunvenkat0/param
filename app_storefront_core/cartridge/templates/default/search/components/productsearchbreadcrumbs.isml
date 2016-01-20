@@ -4,7 +4,7 @@
 <iscomment>get the current paging model for convenient reuse</iscomment>
 
 <isscript>
-	var StringUtils = require('~/cartridge/scripts/util/StringUtils');
+	var StringHelpers = require('~/cartridge/scripts/util/StringHelpers');
 	var URLUtils = require('dw/web/URLUtils');
 	var Resource = require('dw/web/Resource');
 	var ArrayList = require('dw/util/ArrayList');
@@ -112,7 +112,7 @@
 					<iselse/>
 						<isset name="breadcrumbHref" value="${pagingModel.appendPaging(psr.urlRelaxPrice('Search-Show'), 0)}" scope="page" />
 					</isif>
-					<a class="breadcrumb-relax" href="${StringUtils.unsanitizeOR(breadcrumbHref)}" title="${Resource.msg('global.remove', 'locale', null)}">x</a>
+					<a class="breadcrumb-relax" href="${StringHelpers.unsanitizeOR(breadcrumbHref)}" title="${Resource.msg('global.remove', 'locale', null)}">x</a>
 				</span>
 			</span>
 
@@ -136,7 +136,7 @@
 								<iselse/>
 									<isset name="breadcrumbHref" value="${pagingModel.appendPaging(psr.urlRelaxAttributeValue('Search-Show', definition.attributeID, value.value), 0)}" scope="page" />
 								</isif>
-								<a class="breadcrumb-relax" href="${StringUtils.unsanitizeOR(breadcrumbHref)}" title="${Resource.msg('global.remove', 'locale', null)}">x</a>
+								<a class="breadcrumb-relax" href="${StringHelpers.unsanitizeOR(breadcrumbHref)}" title="${Resource.msg('global.remove', 'locale', null)}">x</a>
 							</span>
 						</isif>
 					</isloop>
