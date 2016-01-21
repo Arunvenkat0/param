@@ -180,6 +180,10 @@ var ProductModel = AbstractModel.extend(
 
             if (!this.isOnline()) {
                 return false;
+            }}
+
+            if (!this.isAssignedToSiteCatalog()) {
+                return false;
             }
 
             if (this.isProductSet() && this.getOnlineProductSetProducts().isEmpty()) {
