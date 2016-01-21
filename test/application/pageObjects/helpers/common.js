@@ -169,15 +169,3 @@ export function getLocale () {
             Promise.resolve(params && params.lang && supportedLocales.indexOf(params.lang) > -1 ? params.lang : defaultLocale)
         );
 }
-
-/**
- * If get localized product exists then return localized product
- * else return default product
- * @param {product} product
- * @param {String} locale
- * @returns {product}
- */
-export function getProductProperties(product, locale) {
-    return product[locale] ? product[locale] : product[defaultLocale];
-}
-

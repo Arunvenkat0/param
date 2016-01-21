@@ -61,80 +61,71 @@ describe('Homepage General #C84584', () => {
                 .then(title => assert.equal(title, 'New Arrivals in Women\'s Footwear, Outerwear, Clothing & Accessories'))
         );
     });
-//TODO : investigate why do we use different products on the same carousel across different sites
-    describe('Vertical carousel', () => {
-        before(() => homePage.navigateTo());
-        let locale = config.locale;
-        let verticalCarouselSlide1ProductName = {
-            x_default: 'Sleeveless Cowl Neck Top',
-            en_GB: 'Sleeveless Blouse',
-            fr_FR: 'Chemisier sans manches',
-            it_IT: 'Camicetta senza maniche',
-            ja_JP: 'ノースリーブブラウス',
-            zh_CN: '无袖衬衫'
 
-        };
-        let verticalCarouselSlide2ProductName = {
-            x_default: 'Charcoal Flat Front Athletic Fit Shadow Striped Wool Suit',
-            en_GB: 'Floral Jersey Dress (Petite)',
-            fr_FR: 'Robe fleurie en jersey (Petite)',
-            it_IT: 'Abito floreale in jersey di cotone (Petite - taglie corte)',
-            ja_JP: 'フラワージャージードレス (プチ)',
-            zh_CN: '花卉图案紧身连衣裙（小号）'
-        };
-        let verticalCarouselSlide3ProductName = {
-            x_default: 'Straight Fit Shorts',
-            en_GB: '2 Button Pocket Jacket',
-            fr_FR: 'Veste à poche et deux boutons',
-            it_IT: 'Abito floreale in jersey di cotone (Petite - taglie corte)',
-            ja_JP: '2 ボタンポケットジャケット',
-            zh_CN: '双扣西服'
-        };
-        let verticalCarouselSlide4ProductName = {
-            x_default: 'Button Front Skirt',
-            en_GB: 'Striped Sleeve V-Neck Roll Cuff Tee',
-            fr_FR: 'Veste à poche et deux boutons',
-            it_IT: 'T-shirt rayé à col V et manches roulottées',
-            ja_JP: 'ストライプ袖 V ネックロールカフ T シャツ',
-            zh_CN: '条纹袖 V 领卷袖 T 恤'
-        };
+    describe('Vertical carousel', () => {
+
+        before(() => homePage.navigateTo());
+
+        let locale = config.locale;
+        let verticalCarouselSlide1ProductName;
+        let verticalCarouselSlide2ProductName;
+        let verticalCarouselSlide3ProductName;
+        let verticalCarouselSlide4ProductName;
+        let productMaster;
 
         it('#1 should be Sleeveless Cowl Neck Top', () =>
-            homePage.verticalCarouselSlide(1)
-                .then(() => homePage.isVerticalCarouselSlideVisible(1))
-                .then(visible => assert.ok(visible))
-                .then(() => homePage.getVerticalCarouselProductName(1))
-                .then(name => assert.equal(name, verticalCarouselSlide1ProductName[locale]))
+            testData.getProductById('25591535')
+            .then(variationMaster => {
+                productMaster = variationMaster;
+                verticalCarouselSlide1ProductName = productMaster.getLocalizedProperty('displayName', locale);
+            })
+            .then(() => homePage.verticalCarouselSlide(1))
+            .then(() => homePage.isVerticalCarouselSlideVisible(1))
+            .then(visible => assert.ok(visible))
+            .then(() => homePage.getVerticalCarouselProductName(1))
+            .then(name => assert.equal(name, verticalCarouselSlide1ProductName))
         );
 
         it('#2 should be Charcoal Flat Front Athletic Fit Shadow Striped Wool Suit', () =>
-            homePage.verticalCarouselSlide(2)
+            testData.getProductById('25686395')
+                .then(variationMaster => {
+                    productMaster = variationMaster;
+                    verticalCarouselSlide2ProductName = productMaster.getLocalizedProperty('displayName', locale);
+                })
+                .then(() => homePage.verticalCarouselSlide(2))
                 .then(() => homePage.isVerticalCarouselSlideVisible(2))
                 .then(visible => assert.ok(visible))
                 .then(() => homePage.getVerticalCarouselProductName(2))
-                .then(name => assert.equal(name, verticalCarouselSlide2ProductName[locale]))
+                .then(name => assert.equal(name, verticalCarouselSlide2ProductName))
         );
 
         it('#3 should be Straight Fit Shorts', () =>
-            homePage.verticalCarouselSlide(3)
+            testData.getProductById('54736828')
+                .then(variationMaster => {
+                    productMaster = variationMaster;
+                    verticalCarouselSlide3ProductName = productMaster.getLocalizedProperty('displayName', locale);
+                })
+                .then(() => homePage.verticalCarouselSlide(3))
                 .then(() => homePage.isVerticalCarouselSlideVisible(3))
                 .then(visible => assert.ok(visible))
                 .then(() => homePage.getVerticalCarouselProductName(3))
-                .then(name => assert.equal(name, verticalCarouselSlide3ProductName[locale]))
+                .then(name => assert.equal(name, verticalCarouselSlide3ProductName))
         );
 
         it('#4 should be Button Front Skirt', () =>
-            homePage.verticalCarouselSlide(4)
+            testData.getProductById('25590891')
+                .then(variationMaster => {
+                    productMaster = variationMaster;
+                    verticalCarouselSlide4ProductName = productMaster.getLocalizedProperty('displayName', locale);
+                })
+                .then(() => homePage.verticalCarouselSlide(4))
                 .then(() => homePage.isVerticalCarouselSlideVisible(4))
                 .then(visible => assert.ok(visible))
                 .then(() => homePage.getVerticalCarouselProductName(4))
-                .then(name => assert.equal(name, verticalCarouselSlide4ProductName[locale]))
+                .then(name => assert.equal(name, verticalCarouselSlide4ProductName))
         );
 
         it('should display prices in the product tile', () => {
-            if (locale && locale !== 'x_default') {
-                return;
-            }
             // Button Front Skirt (4th vertical carousel tile)
             var productId = '25590891';
             var priceLabelPrefix = `.product-tile[data-itemid="${productId}"] .product-pricing `;
@@ -142,7 +133,7 @@ describe('Homepage General #C84584', () => {
             var displayedSalePrice = `${priceLabelPrefix} .product-sales-price`;
             var prices;
 
-            return testData.getPricesByProductId(productId)
+            return testData.getPricesByProductId(productId, locale)
                 .then(productPrices => prices = productPrices)
 
                 // Test Standard Price

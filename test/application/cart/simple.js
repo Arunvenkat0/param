@@ -95,25 +95,25 @@ describe('Cart - Simple', () => {
     it('should display the correct name', () =>
         cartPage
             .getItemNameByRow(1)
-            .then(name => assert.equal(common.getProductProperties(productVariationMaster.displayName, locale), name))
+            .then(name => assert.equal(name, productVariationMaster.getLocalizedProperty('displayName', locale)))
     );
 
     it('should display the correct color', () => {
-        let expectedColor = common.getProductProperties(productVariationMaster.variationAttributes.color.values[variant1.color.index - 1].displayValues, locale);
+        let expectedColor = productVariationMaster.getLocalizedProperty(`variationAttributes.color.values.${variant1.color.index - 1}.displayValues`, locale);
         return cartPage
             .getItemAttrByRow(1, 'color')
             .then(color => assert.equal(color, expectedColor));
     });
 
     it('should display the correct size', () => {
-        let expectedSize = common.getProductProperties(productVariationMaster.variationAttributes.size.values[variant1.size.index - 1].displayValues,locale);
+        let expectedSize = productVariationMaster.getLocalizedProperty(`variationAttributes.size.values.${variant1.size.index - 1}.displayValues`,locale);
         return cartPage
             .getItemAttrByRow(1, 'size')
             .then(size => assert.equal(size, expectedSize));
     });
 
     it('should display the correct width', () => {
-        let expectedWidth = common.getProductProperties(productVariationMaster.variationAttributes.width.values[variant1.width.index - 1].displayValues,locale);
+        let expectedWidth = productVariationMaster.getLocalizedProperty(`variationAttributes.width.values.${variant1.width.index - 1}.displayValues`,locale);
         return cartPage
             .getItemAttrByRow(1, 'width')
             .then(size => assert.equal(size, expectedWidth));
@@ -130,9 +130,9 @@ describe('Cart - Simple', () => {
         variant2Selection.set('sizeIndex', variant2.size.index);
         variant2Selection.set('widthIndex', variant2.width.index);
 
-        let expectedColor = common.getProductProperties(productVariationMaster.variationAttributes.color.values[variant2.color.index - 1].displayValues, locale);
-        let expectedSize = common.getProductProperties(productVariationMaster.variationAttributes.size.values[variant2.size.index - 1].displayValues, locale);
-        let expectedWidth = common.getProductProperties(productVariationMaster.variationAttributes.width.values[variant2.width.index - 1].displayValues, locale);
+        let expectedColor = productVariationMaster.getLocalizedProperty(`variationAttributes.color.values.${variant2.color.index - 1}.displayValues`, locale);
+        let expectedSize = productVariationMaster.getLocalizedProperty(`variationAttributes.size.values.${variant2.size.index - 1}.displayValues`, locale);
+        let expectedWidth = productVariationMaster.getLocalizedProperty(`variationAttributes.width.values.${variant2.width.index - 1}.displayValues`, locale);
         return cartPage
             .updateAttributesByRow(itemRow, variant2Selection)
             .then(() => browser.getText('tr.cart-row:nth-child(1) .attribute[data-attribute=color] .value'))

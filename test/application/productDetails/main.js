@@ -1,7 +1,6 @@
 'use strict';
 
 import {assert} from 'chai';
-import * as common from '../pageObjects/helpers/common';
 import * as homePage from '../pageObjects/home';
 import * as productDetailPage from '../pageObjects/productDetail';
 import * as testData from '../pageObjects/testData/main';
@@ -218,7 +217,7 @@ describe('Product Details Page', () => {
 
         it('should display a product name', () =>
             browser.getText(productDetailPage.PRODUCT_NAME)
-                .then(name => assert.equal(name, common.getProductProperties(variationMaster.pageAttributes.pageTitle, locale)))
+                .then(name => assert.equal(name, variationMaster.getLocalizedProperty('pageAttributes.pageTitle', locale)))
         );
 
         it('should display a product image', () =>
