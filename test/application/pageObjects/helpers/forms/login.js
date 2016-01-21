@@ -24,5 +24,6 @@ export function loginAs (login, password) {
  * Fill in login form as default customer
  */
 export function loginAsDefaultCustomer () {
-	return loginAs(DEFAULT_RETURNING_CUSTOMER, testData.defaultPassword);
+    return loginAs(DEFAULT_RETURNING_CUSTOMER, testData.defaultPassword);
+
 }

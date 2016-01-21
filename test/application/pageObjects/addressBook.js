@@ -18,66 +18,66 @@ export const ADDRESS_SELECTOR = '.address-list li';
 const basePath = '/addressbook';
 
 export function navigateTo () {
-	return browser.url(basePath);
+    return browser.url(basePath);
 }
 
 export function fillAddressForm (addressFormData) {
-	let fieldsPromise = [];
+    let fieldsPromise = [];
 
-	let fieldTypes = {
-		addressid: 'input',
-		firstname: 'input',
-		lastname: 'input',
-		address1: 'input',
-		city: 'input',
-		states_state: 'selectByValue',
-		postal: 'input',
-		country: 'selectByValue',
-		phone: 'input'
-	};
+    let fieldTypes = {
+        addressid: 'input',
+        firstname: 'input',
+        lastname: 'input',
+        address1: 'input',
+        city: 'input',
+        postal: 'input',
+        states_state: 'selectByValue',
+        country: 'selectByValue',
+        phone: 'input'
+    };
 
-	_.each(addressFormData, (value, key) => {
-		let selector = '[name*=profile_address_' + key + ']';
-		fieldsPromise.push(formHelpers.populateField(selector, value, fieldTypes[key]));
-	});
+    _.each(addressFormData, (value, key) => {
+        let selector = '[name*=profile_address_' + key + ']';
+        fieldsPromise.push(formHelpers.populateField(selector, value, fieldTypes[key]));
+    });
 
-	return Promise.all(fieldsPromise);
+    return Promise.all(fieldsPromise);
 }
 
 export function getAddressTitles () {
-	// This assumes that the client is already on the My Account > Addresses page
-	return browser.getText(TITLE_ADDRESS_SELECTOR);
+    // This assumes that the client is already on the My Account > Addresses page
+    return browser.getText(TITLE_ADDRESS_SELECTOR);
 }
 
 export function removeAddresses () {
-	let defaultAddresses = ['Home', 'Work'];
+    let defaultAddresses = ['Home', 'Work'];
 
-	// get all address titles
-	return browser.getText('.address-list li .mini-address-title')
-		.then(addressTexts => {
-			// filter out Home and Work addresses
-			return addressTexts.filter(function (addressText) {
-				return defaultAddresses.indexOf(addressText) === -1;
-			});
-		})
-		// remove addresses sequentially
-		.then(addressTextsToRemove => {
-			return addressTextsToRemove.reduce(function (removeTask, addressText) {
-				return removeTask.then(() => {
-					return browser.element('li*=' + addressText)
-						.click('.delete')
-						.alertAccept();
-				});
-			}, Promise.resolve());
-		})
-		.then(() => browser.waitUntil(() =>
-			getAddressCount().then(count => count === defaultAddresses.length)
-		));
+    // get all address titles
+    return browser.getText('.address-list li .mini-address-title')
+        .then(addressTexts => {
+            // filter out Home and Work addresses
+            return addressTexts.filter(function (addressText) {
+                return defaultAddresses.indexOf(addressText) === -1;
+            });
+        })
+        // remove addresses sequentially
+        .then(addressTextsToRemove => {
+            return addressTextsToRemove.reduce(function (removeTask, addressText) {
+                return removeTask.then(() => {
+                    return browser.element('li*=' + addressText)
+                        .click('.delete')
+                        .alertAccept();
+                });
+            }, Promise.resolve());
+        })
+        .then(() => browser.waitUntil(() =>
+            getAddressCount().then(count => count === defaultAddresses.length)
+        ));
 }
 
 export function getAddressCount () {
-	return browser.elements(ADDRESS_SELECTOR)
-		.then(rows => rows.value.length);
+    return browser.elements(ADDRESS_SELECTOR)
+        .then(rows => rows.value.length);
 }
 
 /**
@@ -87,18 +87,18 @@ export function getAddressCount () {
  * @returns {Promise.}
  */
 export function editAddress(originalAddress, editAddressFormData) {
-	// get all address titles
-	return browser.getText(TITLE_ADDRESS_SELECTOR)
-		.then(addressTexts => {
-			// filter out Home and Work addresses
-			return addressTexts.filter(function (addressText) {
-				return addressText === originalAddress;
-			});
-		})
-		.then((addressToEdit) => browser.element('li*=' + addressToEdit))
-			.click('.address-edit')
-		.then(() => browser.waitForVisible(FORM_ADDRESS))
-		.then(() => fillAddressForm(editAddressFormData))
-		.then(() => browser.click(BTN_EDIT_ADDRESS))
-		.waitForVisible(FORM_ADDRESS, 500, true);
+    // get all address titles
+    return browser.getText(TITLE_ADDRESS_SELECTOR)
+        .then(addressTexts => {
+            // filter out Home and Work addresses
+            return addressTexts.filter(function (addressText) {
+                return addressText === originalAddress;
+            });
+        })
+        .then((addressToEdit) => browser.element('li*=' + addressToEdit))
+        .click('.address-edit')
+        .then(() => browser.waitForVisible(FORM_ADDRESS))
+        .then(() => fillAddressForm(editAddressFormData))
+        .then(() => browser.click(BTN_EDIT_ADDRESS))
+        .waitForVisible(FORM_ADDRESS, 500, true);
 }

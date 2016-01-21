@@ -24,57 +24,60 @@ export const lastName = 'User1';
 export const eventType = 'wedding';
 export const eventTitle = '.list-title';
 export const eventName = 'WEDDING OF THE CENTURY - 3/28/08';
+export const buttonPrint = 'button[class=print-page]';
+
 
 const basePath = '/giftregistry';
 
 export function navigateTo () {
-	return browser.url(basePath);
+    return browser.url(basePath);
 }
 
 export function fillOutEventForm (eventData) {
-	let fieldTypes = new Map();
-	let fieldsPromise = [];
+    let fieldTypes = new Map();
+    let fieldsPromise = [];
 
-	fieldTypes.set('type', 'selectByValue');
-	fieldTypes.set('name', 'input');
-	fieldTypes.set('date', 'date');
-	fieldTypes.set('eventaddress_country', 'selectByValue');
-	fieldTypes.set('eventaddress_states_state', 'selectByValue');
-	fieldTypes.set('town', 'input');
-	fieldTypes.set('participant_role', 'selectByValue');
-	fieldTypes.set('participant_firstName', 'input');
-	fieldTypes.set('participant_lastName', 'input');
-	fieldTypes.set('participant_email', 'input');
+    fieldTypes.set('type', 'selectByValue');
+    fieldTypes.set('name', 'input');
+    fieldTypes.set('date', 'date');
+    fieldTypes.set('eventaddress_country', 'selectByValue');
+    fieldTypes.set('eventaddress_states_state', 'selectByValue');
+    fieldTypes.set('town', 'input');
+    fieldTypes.set('participant_role', 'selectByValue');
+    fieldTypes.set('participant_firstName', 'input');
+    fieldTypes.set('participant_lastName', 'input');
+    fieldTypes.set('participant_email', 'input');
 
-	for (let [key, value] of eventData) {
-		let selector = '[name*="event_' + key + '"]';
-		fieldsPromise.push(formHelpers.populateField(selector, value, fieldTypes.get(key)));
-	}
+    for (let [key, value] of eventData) {
+        let selector = '[name*="event_' + key + '"]';
+        fieldsPromise.push(formHelpers.populateField(selector, value, fieldTypes.get(key)));
+    }
 
-	return Promise.all(fieldsPromise);
+    return Promise.all(fieldsPromise);
 }
 
-export function fillOutEventShippingForm (eventShippingData) {
-	let fieldTypes = new Map();
-	let fieldsPromise = [];
+export function fillOutEventShippingForm (eventShippingData, locale) {
+    let fieldTypes = new Map();
+    let fieldsPromise = [];
 
-	fieldTypes.set('addressBeforeList', 'selectByValue');
-	fieldTypes.set('addressBeforeEvent_addressid', 'input');
-	fieldTypes.set('addressBeforeEvent_firstname', 'input');
-	fieldTypes.set('addressBeforeEvent_lastname', 'input');
-	fieldTypes.set('addressBeforeEvent_address1', 'input');
-	fieldTypes.set('addressBeforeEvent_city', 'input');
-	fieldTypes.set('addressBeforeEvent_states_state', 'selectByValue');
-	fieldTypes.set('addressBeforeEvent_postal', 'input');
-	fieldTypes.set('addressBeforeEvent_country', 'selectByValue');
-	fieldTypes.set('addressBeforeEvent_phone', 'input');
+    fieldTypes.set('addressid', 'input');
+    fieldTypes.set('firstname', 'input');
+    fieldTypes.set('lastname', 'input');
+    fieldTypes.set('address1', 'input');
+    fieldTypes.set('city', 'input');
+    if (locale && locale === 'x_default') {
+        fieldTypes.set('states_state', 'selectByValue');
+    }
+    fieldTypes.set('postal', 'input');
+    fieldTypes.set('country', 'selectByValue');
+    fieldTypes.set('phone', 'input');
 
-	for (let [key, value] of eventShippingData) {
-		let selector = '[name*=eventaddress_' + key + ']';
-		fieldsPromise.push(formHelpers.populateField(selector, value, fieldTypes.get(key)));
-	}
+    for (let [key, value] of eventShippingData) {
+        let selector = '[name*=eventaddress_addressBeforeEvent_' + key + ']';
+        fieldsPromise.push(formHelpers.populateField(selector, value, fieldTypes.get(key)));
+    }
 
-	return Promise.all(fieldsPromise);
+    return Promise.all(fieldsPromise);
 }
 
 /**
@@ -82,41 +85,41 @@ export function fillOutEventShippingForm (eventShippingData) {
  * delete all the Gift Registry events.
  */
 export function emptyAllGiftRegistries() {
-	return navigateTo()
-		.then(() => browser.waitForVisible(BTN_CREATE_REGISTRY))
-		.then(() => browser.elements(LINK_REMOVE))
-		.then(removeLinks => {
-			// click on all the remove links, one by one, sequentially
-			return removeLinks.value.reduce(removeRegistry => {
-				return removeRegistry.then(() => browser.click(LINK_REMOVE)
-					.then(() => browser.waitUntil(() =>
-							browser.alertText()
-								.then(
-									text =>  text === 'Do you want to remove this gift registry?',
-									err => err.message !== 'no alert open'
-							)
-					))
-					.then(() => browser.alertAccept()));
-			}, Promise.resolve());
-		});
+    return navigateTo()
+        .then(() => browser.waitForVisible(BTN_CREATE_REGISTRY))
+        .then(() => browser.elements(LINK_REMOVE))
+        .then(removeLinks => {
+            // click on all the remove links, one by one, sequentially
+            return removeLinks.value.reduce(removeRegistry => {
+                return removeRegistry.then(() => browser.click(LINK_REMOVE)
+                    .then(() => browser.waitUntil(() =>
+                            browser.alertText()
+                                .then(
+                                    text =>  text === 'Do you want to remove this gift registry?',
+                                    err => err.message !== 'no alert open'
+                            )
+                    ))
+                    .then(() => browser.alertAccept()));
+            }, Promise.resolve());
+        });
 }
  /* open the first giftRegistry
  *
  */
 export function openGiftRegistry () {
-	browser.click(LINK_VIEW_GIFTREGISTRY);
+    browser.click(LINK_VIEW_GIFTREGISTRY);
 }
 
 export function searchGiftRegistry(lastName, firstName, eventType) {
-	//caller should be responsible navigate to the Gift Registry page before calling this function
-	return browser.waitForVisible(SEARCH_GIFTREGISTRY)
-		.then(() => browser.setValue(INPUT_LASTTNAME, lastName))
-		.then(() => browser.setValue(INPUT_FIRSTNAME, firstName))
-		.then(() => browser.selectByValue(INPUT_EVENTTYPE, eventType))
-		.then(() => browser.click(BUTTON_FIND));
+    //caller should be responsible navigate to the Gift Registry page before calling this function
+    return browser.waitForVisible(SEARCH_GIFTREGISTRY)
+        .setValue(INPUT_LASTTNAME, lastName)
+        .setValue(INPUT_FIRSTNAME, firstName)
+        .selectByValue(INPUT_EVENTTYPE, eventType)
+        .click(BUTTON_FIND);
 }
 
 export function getGiftRegistryCount () {
-	return browser.elements(TABLE_GR_ITEMS)
-		.then(eventRows => eventRows.value.length - 1);
+    return browser.elements(TABLE_GR_ITEMS)
+        .then(eventRows => eventRows.value.length - 1);
 }

@@ -1,30 +1,36 @@
 'use strict';
 
 import {assert} from 'chai';
-import * as common from '../pageObjects/helpers/common';
 import * as homePage from '../pageObjects/home';
-import * as pricingHelpers from '../pageObjects/helpers/pricing';
 import * as productDetailPage from '../pageObjects/productDetail';
 import * as testData from '../pageObjects/testData/main';
+import {config} from '../webdriver/wdio.conf';
+
+let locale = config.locale;
 
 describe('Product Details Page', () => {
     before(() => testData.load());
 
     // TODO:  Refactor these tests to use testData module instead of the search pattern.
     describe('Bundle', () => {
+        // Global sites does not have electronic category
+        if (locale && locale !== 'x_default') {
+            return;
+        }
         before(() => homePage.navigateTo()
         .then(() => browser.waitForExist('form[role="search"]')
-                .setValue('#q', 'bundle')
-                .submitForm('form[role="search"]')
-                .waitForExist('#search-result-items')
-                .click('[title*="Playstation 3 Bundle"]')
-                .waitForVisible(productDetailPage.PDP_MAIN))
+            .setValue('#q', 'bundle')
+            .submitForm('form[role="search"]')
+            .waitForExist('#search-result-items')
+            .click('[title*="Playstation 3 Bundle"]')
+            .waitForVisible(productDetailPage.PDP_MAIN))
         );
 
         it('should have the right name', () =>
             browser.getText('.product-detail > .product-name')
                 .then(title => assert.equal(title, 'Playstation 3 Bundle'))
         );
+
         it('should have product image', () =>
             browser.isExisting('.primary-image')
                 .then(exists => assert.isTrue(exists))
@@ -50,7 +56,7 @@ describe('Product Details Page', () => {
         it('should have the right price', () =>
             browser.isExisting('span.price-sales')
                 .then(exists => assert.isTrue(exists))
-        .then(() => browser.getText('.product-detail .product-add-to-cart .price-sales'))
+                .then(() => browser.getText('.product-detail .product-add-to-cart .price-sales'))
                 .then(price => assert.equal(price, '$449.00'))
         );
 
@@ -72,7 +78,7 @@ describe('Product Details Page', () => {
         let productSetId = 'spring-look';
 
         before(() =>
-            testData.getPricesByProductId(productSetId)
+            testData.getPricesByProductId(productSetId, locale)
                 .then(price => expectedProductSetPrice = price)
                 .then(() => testData.getProductById(productSetId))
                 .then(set => {
@@ -195,7 +201,6 @@ describe('Product Details Page', () => {
         let expectedSalePrice;
         let firstAttributeID;
         let firstAttributeValues;
-        let locale;
         let variationMaster;
 
         before(() => {
@@ -207,14 +212,12 @@ describe('Product Details Page', () => {
                     return testData.getProductById(variationMaster.getVariantProductIds()[0]);
                 })
                 .then(product => defaultVariant = product)
-                .then(() => browser.url(variationMaster.getUrlResourcePath()))
-                .then(() => common.getLocale())
-                .then(code => locale = code);
+                .then(() => browser.url(variationMaster.getUrlResourcePath()));
         });
 
         it('should display a product name', () =>
             browser.getText(productDetailPage.PRODUCT_NAME)
-                .then(name => assert.equal(name, variationMaster.pageAttributes.pageTitle[locale]))
+                .then(name => assert.equal(name, variationMaster.getLocalizedProperty('pageAttributes.pageTitle', locale)))
         );
 
         it('should display a product image', () =>
@@ -269,7 +272,7 @@ describe('Product Details Page', () => {
             return browser.waitUntil(() =>
             browser.element(productDetailPage.PRODUCT_THUMBNAILS_IMAGES)
                 .then(el => browser.elementIdAttribute(el.value.ELEMENT, 'src'))
-                    .then(src => src.value.indexOf(attrValue) > -1)
+                .then(src => src.value.indexOf(attrValue) > -1)
                 )
                 .then(() => productDetailPage.getDisplayedThumbnailPaths())
                 .then(paths => displayedThumbnailPaths = paths)
@@ -286,10 +289,10 @@ describe('Product Details Page', () => {
         });
 
         it('should display a struck out list price when applicable', () =>
-            testData.getPricesByProductId(variationMaster.id)
+            testData.getPricesByProductId(variationMaster.id, locale)
                 .then(prices => {
-                    expectedListPrice = pricingHelpers.getFormattedPrice(prices.list);
-                    expectedSalePrice = pricingHelpers.getFormattedPrice(prices.sale);
+                    expectedListPrice = prices.list;
+                    expectedSalePrice = prices.sale;
                     return browser.getText(productDetailPage.PRICE_SALE);
                 })
                 .then(price => assert.equal(price, expectedSalePrice))

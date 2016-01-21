@@ -9,12 +9,12 @@ export const BTN_LOGOUT = 'a.user-logout';
 export const REFINEMENT = '.breadcrumb-refinement';
 const userPanel = '.user-panel';
 
-export function login () {
+export function login (locale) {
 	return browser.waitForVisible(USER_INFO_ICON)
 		.click(USER_INFO_ICON)
 		.waitForVisible(LINK_LOGIN)
 		.click(LINK_LOGIN)
-		.then(() => formLogin.loginAsDefaultCustomer())
+		.then(() => formLogin.loginAsDefaultCustomer(locale))
 		.then(() => browser.waitForVisible(accountPage.LOGOUT));
 }
 

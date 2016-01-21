@@ -2,6 +2,33 @@
 
 import _ from 'lodash';
 
+export const globalPostalCode = {
+	x_default: '01802',
+	en_GB: 'SW42 4RG',
+	fr_FR: '12345',
+	it_IT: '12345',
+	ja_JP: '123-1234',
+	zh_CN: '123456'
+};
+
+export const globalCountryCode = {
+	x_default: 'us',
+	en_GB: 'gb',
+	fr_FR: 'fr',
+	it_IT: 'it',
+	ja_JP: 'jp',
+	zh_CN: 'cn'
+};
+
+export const globalPhone = {
+	x_default: '333-333-3333',
+	en_GB: '01222 555 555',
+	fr_FR: '01 23 45 67 89',
+	it_IT: '02 12345678',
+	ja_JP: '01-1234-1234',
+	zh_CN: '333-333-3333'
+};
+
 export class Customer {
 	constructor (customer) {
 		if (customer.hasOwnProperty('login')) {

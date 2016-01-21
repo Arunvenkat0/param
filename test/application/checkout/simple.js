@@ -14,16 +14,25 @@ import * as formHelpers from '../pageObjects/helpers/forms/common';
 import * as helpers from '../pageObjects/helpers/common';
 import * as navHeader from '../pageObjects/navHeader';
 import * as giftCertPage from '../pageObjects/giftCertPurchase';
+import {config} from '../webdriver/wdio.conf';
+import * as customers from '../pageObjects/testData/customers';
+
 
 describe('Checkout', () => {
     let login = 'testuser1@demandware.com';
     let shippingData = {};
     let billingFormData = {};
     let successfulCheckoutTitle = 'Thank you for your order.';
+    let locale = config.locale;
 
     before(() =>
-        testData.getCustomerByLogin(login)
+        testData.load()
+            .then(() => testData.getCustomerByLogin(login))
             .then(customer => {
+                customer.addresses[0].postalCode = customers.globalPostalCode[locale];
+                customer.addresses[0].countryCode = customers.globalCountryCode[locale];
+                customer.addresses[0].phone = customers.globalPhone[locale];
+
                 let address = customer.getPreferredAddress();
 
                 shippingData = {
@@ -31,16 +40,18 @@ describe('Checkout', () => {
                     lastName: customer.lastName,
                     address1: address.address1,
                     country: address.countryCode,
-                    states_state: address.stateCode,
                     city: address.city,
                     postal: address.postalCode,
                     phone: address.phone,
                     addressList: address.addressId
                 };
-
+                if (locale && locale === 'x_default') {
+                    shippingData.states_state = address.stateCode;
+                }
                 billingFormData = {
+                    postal: address.postalCode,
+                    phone: address.phone,
                     emailAddress: customer.email,
-                    creditCard_type: testData.creditCard1.cardType,
                     creditCard_owner: customer.firstName + ' ' + customer.lastName,
                     creditCard_number: testData.creditCard1.number,
                     creditCard_expiration_year: testData.creditCard1.yearIndex,
@@ -50,7 +61,7 @@ describe('Checkout', () => {
             .then(() => Promise.resolve())
     );
 
-    function addProductVariationMasterToCart () {
+	function addProductVariationMasterToCart () {
         return testData.getProductVariationMaster()
             .then(productVariationMaster => {
                 let product = new Map();
@@ -84,7 +95,7 @@ describe('Checkout', () => {
 
         // Fill in Shipping Form
         it('should allow saving of Shipping form when required fields filled', () =>
-            checkoutPage.fillOutShippingForm(shippingFormData)
+            checkoutPage.fillOutShippingForm(shippingFormData, locale)
                 .then(() => checkoutPage.checkUseAsBillingAddress())
                 .then(() => browser.isEnabled(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
                 .then(savable => assert.ok(savable))
@@ -126,7 +137,12 @@ describe('Checkout', () => {
 
     describe('Checkout as Returning Customer', () => {
 
+        let shippingFormData;
         before(() => addProductVariationMasterToCart()
+            .then(() => {
+                shippingFormData = _.cloneDeep(shippingData);
+                delete shippingFormData.addressList;
+            })
             .then(() => checkoutPage.navigateTo())
             .then(() => formLogin.loginAsDefaultCustomer())
         );
@@ -134,9 +150,8 @@ describe('Checkout', () => {
         after(() => navHeader.logout());
 
         it('should allow check out as a returning customer', () => {
-            let shippingFormData = {addressList: shippingData.addressList};
             return browser.waitForVisible(checkoutPage.BREADCRUMB_SHIPPING)
-                .then(() => checkoutPage.fillOutShippingForm(shippingFormData))
+                .then(() => checkoutPage.fillOutShippingForm(shippingFormData, locale))
                 .then(() => checkoutPage.checkUseAsBillingAddress())
                 .then(() => browser.waitForEnabled(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
                 .then(() => helpers.clickAndWait(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE, checkoutPage.BREADCRUMB_BILLING))
@@ -150,6 +165,7 @@ describe('Checkout', () => {
     });
 
     describe('Checkout Gift Certificate as Returning Customer', () => {
+        let shippingFormData;
         let giftCertFieldMap = {
             recipient: 'Joe Smith',
             recipientEmail: 'jsmith@someBogusEmailDomain.tv',
@@ -163,6 +179,10 @@ describe('Checkout', () => {
             .then(() => giftCertPage.navigateTo())
             .then(() => giftCertPage.fillOutGiftCertPurchaseForm(giftCertFieldMap))
             .then(() => giftCertPage.pressBtnAddToCart())
+            .then(() => {
+                shippingFormData = _.cloneDeep(shippingData);
+                delete shippingFormData.addressList;
+            })
             .then(() => checkoutPage.navigateTo())
         );
 
@@ -181,16 +201,19 @@ describe('Checkout', () => {
     });
 
     describe('Form Editing', () => {
+        let shippingFormData;
+
         before(() => homePage.navigateTo()
             .then(() => navHeader.login())
             .then(() => cartPage.emptyCart())
             .then(() => addProductVariationMasterToCart())
-            .then(() => checkoutPage.navigateTo())
             .then(() => {
-                return {addressList: shippingData.addressList};
+                shippingFormData = _.cloneDeep(shippingData);
+                delete shippingFormData.addressList;
             })
-            .then(shippingFormData => checkoutPage.fillOutShippingForm(shippingFormData))
-            .then(() => browser.waitForValue(checkoutPage.SAVED_ADDRESSES_SELECT_MENU))
+            .then(() => checkoutPage.navigateTo())
+            .then(() => checkoutPage.fillOutShippingForm(shippingFormData,locale))
+            .then(() => browser.waitForValue(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
             .then(() => checkoutPage.checkUseAsBillingAddress())
             .then(() => browser.waitForEnabled(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
             .then(() => helpers.clickAndWait(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE, checkoutPage.BREADCRUMB_BILLING))

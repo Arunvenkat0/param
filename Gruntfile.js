@@ -3,208 +3,208 @@
 var _ = require('lodash');
 
 module.exports = function (grunt) {
-	require('load-grunt-tasks')(grunt);
-	require('babel-core/register');
+    require('load-grunt-tasks')(grunt);
+    require('babel-core/register');
 
-	// command line arguments
-	var config = {};
-	// tests args
-	config.suite = grunt.option('suite') || '*';
-	if (config.suite === 'all') { config.suite = '*'; }
-	config.reporter = grunt.option('reporter') || 'spec';
-	config.timeout = grunt.option('timeout') || 60000;
-	config.url = grunt.option('url');
-	config.client = grunt.option('client');
+    // command line arguments
+    var config = {};
+    // tests args
+    config.suite = grunt.option('suite') || '*';
+    if (config.suite === 'all') { config.suite = '*'; }
+    config.reporter = grunt.option('reporter') || 'spec';
+    config.timeout = grunt.option('timeout') || 60000;
+    config.url = grunt.option('url');
+    config.client = grunt.option('client');
+    config.locale = grunt.option('locale');
+    config.port = grunt.option('port');
+    config.sourcemaps = !!grunt.option('sourcemaps');
 
-	config.port = grunt.option('port');
-	config.sourcemaps = !!grunt.option('sourcemaps');
+    var paths = require('./package.json').paths;
 
-	var paths = require('./package.json').paths;
+    grunt.initConfig({
+        watch: {
+            dev: {
+                files: paths.css.map(function (path) {
+                    return path.src + '*.scss';
+                }),
+                tasks: ['css']
+            },
+            styleguide: {
+                files: paths.css.map(function (path) {
+                    return path.src + '*.scss';
+                }).push('doc/styleguide/scss/*.scss'),
+                tasks: ['css:styleguide']
+            },
+            doc: {
+                files: ['doc/js/**/*', '!doc/dist/', '!doc/.tmp', 'app_storefront_core/**/*.{js,ds}', 'app_storefront_controllers/**/*.{js,ds}'],
+                tasks: ['jsdoc']
+            }
+        },
+        sass: {
+            dev: {
+                options: {
+                    style: 'expanded',
+                    sourceMap: (config.sourcemaps)
+                },
+                files: paths.css.map(function (path) {
+                    return {src: path.src + 'style.scss', dest: path.dest + 'style.css'};
+                })
+            },
+            styleguide: {
+                files: [{
+                    'doc/dist/styleguide/main.css': 'doc/styleguide/scss/main.scss'
+                }]
+            }
+        },
+        autoprefixer: {
+            dev: {
+                files: paths.css.map(function (path) {
+                    return {src: path.dest + 'style.css', dest: path.dest + 'style.css'};
+                })
+            },
+            styleguide: {
+                files: [{
+                    'doc/dist/styleguide/main.css': 'doc/dist/styleguide/main.css'
+                }]
+            }
+        },
+        browserify: {
+            dev: {
+                files: [{
+                    src: paths.js.src + 'app.js',
+                    dest: paths.js.dest + 'app.js'
+                }],
+                options: {
+                    browserifyOptions: {
+                        debug: (config.sourcemaps)
+                    }
+                }
+            },
+            watchDev: {
+                files: [{
+                    src: paths.js.src + 'app.js',
+                    dest: paths.js.dest + 'app.js'
+                }],
+                options: {
+                    watch: true
+                }
+            },
+            styleguide: {
+                files: [{
+                    src: 'doc/styleguide/js/main.js',
+                    dest: 'doc/dist/styleguide/main.js'
+                }],
+                options: {
+                    transform: ['hbsfy']
+                }
+            },
+            watchStyleguide: {
+                files: [{
+                    src: 'doc/styleguide/js/main.js',
+                    dest: 'doc/dist/styleguide/main.js'
+                }],
+                options: {
+                    transform: ['hbsfy'],
+                    watch: true
+                }
+            }
+        },
+        external_sourcemap: {
+            browserify: {
+                files: [{
+                    dest: paths.js.dest,
+                    src: paths.js.dest + 'app.js'
+                }]
+            }
+        },
+        connect: {
+            doc: {
+                options: {
+                    port: config.port || 5000,
+                    base: 'doc/dist'
+                }
+            }
+        },
+        jscs: {
+            src: '**/*.js',
+            options: {
+                config: './.jscsrc'
+            }
+        },
+        jshint: {
+            options: {
+                reporter: require('jshint-stylish'),
+                jshintrc: true
+            },
+            target: ['**/*.js']
+        },
+        mochaTest: {
+            unit: {
+                options: {
+                    reporter: config.reporter,
+                    timeout: config.timeout
+                },
+                src: ['test/unit/' + config.suite + '/**/*.js']
+            }
+        },
+        webdriver: {
+            application: _.assign({
+                configFile: 'test/application/webdriver/wdio.conf.js'
+            }, config)
+        },
+        'gh-pages': {
+            doc: {
+                src: '**/*',
+                options: {
+                    base: 'doc/dist',
+                    clone: 'doc/.tmp',
+                    message: 'Update ' + new Date().toISOString(),
+                    repo: require('./doc/deploy.json').options.remoteUrl
+                }
+            }
+        },
+        jsdoc: {
+            server: {
+                src: ['app_storefront_controllers/README.md', '.'],
+                options: {
+                    destination: 'doc/dist/js/server',
+                    configure: 'doc/js/server/conf.json'
+                }
+            },
+            client: {
+                src: ['app_storefront_core/cartridge/js/README.md', '.'],
+                options: {
+                    destination: 'doc/dist/js/client',
+                    configure: 'doc/js/client/conf.json'
+                }
+            }
+        },
+        copy: {
+            doc: {
+                files: [
+                    {'doc/dist/index.html': 'doc/index.html'},
+                    {'doc/dist/styleguide/index.html': 'doc/styleguide/index.html'},
+                    {expand: true, cwd: 'doc/styleguide', src: ['lib/**/*'], dest: 'doc/dist/styleguide'},
+                    {expand: true, cwd: 'doc/styleguide', src: ['templates/**/*'], dest: 'doc/dist/styleguide'}
+                ]
+            }
+        }
+    });
 
-	grunt.initConfig({
-		watch: {
-			dev: {
-				files: paths.css.map(function (path) {
-					return path.src + '*.scss';
-				}),
-				tasks: ['css']
-			},
-			styleguide: {
-				files: paths.css.map(function (path) {
-					return path.src + '*.scss';
-				}).push('doc/styleguide/scss/*.scss'),
-				tasks: ['css:styleguide']
-			},
-			doc: {
-				files: ['doc/js/**/*', '!doc/dist/', '!doc/.tmp', 'app_storefront_core/**/*.{js,ds}', 'app_storefront_controllers/**/*.{js,ds}'],
-				tasks: ['jsdoc']
-			}
-		},
-		sass: {
-			dev: {
-				options: {
-					style: 'expanded',
-					sourceMap: (config.sourcemaps)
-				},
-				files: paths.css.map(function (path) {
-					return {src: path.src + 'style.scss', dest: path.dest + 'style.css'};
-				})
-			},
-			styleguide: {
-				files: [{
-					'doc/dist/styleguide/main.css': 'doc/styleguide/scss/main.scss'
-				}]
-			}
-		},
-		autoprefixer: {
-			dev: {
-				files: paths.css.map(function (path) {
-					return {src: path.dest + 'style.css', dest: path.dest + 'style.css'};
-				})
-			},
-			styleguide: {
-				files: [{
-					'doc/dist/styleguide/main.css': 'doc/dist/styleguide/main.css'
-				}]
-			}
-		},
-		browserify: {
-			dev: {
-				files: [{
-					src: paths.js.src + 'app.js',
-					dest: paths.js.dest + 'app.js'
-				}],
-				options: {
-					browserifyOptions: {
-						debug: (config.sourcemaps)
-					}
-				}
-			},
-			watchDev: {
-				files: [{
-					src: paths.js.src + 'app.js',
-					dest: paths.js.dest + 'app.js'
-				}],
-				options: {
-					watch: true
-				}
-			},
-			styleguide: {
-				files: [{
-					src: 'doc/styleguide/js/main.js',
-					dest: 'doc/dist/styleguide/main.js'
-				}],
-				options: {
-					transform: ['hbsfy']
-				}
-			},
-			watchStyleguide: {
-				files: [{
-					src: 'doc/styleguide/js/main.js',
-					dest: 'doc/dist/styleguide/main.js'
-				}],
-				options: {
-					transform: ['hbsfy'],
-					watch: true
-				}
-			}
-		},
-		external_sourcemap: {
-			browserify: {
-				files: [{
-					dest: paths.js.dest,
-					src: paths.js.dest + 'app.js'
-				}]
-			}
-		},
-		connect: {
-			doc: {
-				options: {
-					port: config.port || 5000,
-					base: 'doc/dist'
-				}
-			}
-		},
-		jscs: {
-			src: '**/*.js',
-			options: {
-				config: './.jscsrc'
-			}
-		},
-		jshint: {
-			options: {
-				reporter: require('jshint-stylish'),
-				jshintrc: true
-			},
-			target: ['**/*.js']
-		},
-		mochaTest: {
-			unit: {
-				options: {
-					reporter: config.reporter,
-					timeout: config.timeout
-				},
-				src: ['test/unit/' + config.suite + '/**/*.js']
-			}
-		},
-		webdriver: {
-			application: _.assign({
-				configFile: 'test/application/webdriver/wdio.conf.js'
-			}, config)
-		},
-		'gh-pages': {
-			doc: {
-				src: '**/*',
-				options: {
-					base: 'doc/dist',
-					clone: 'doc/.tmp',
-					message: 'Update ' + new Date().toISOString(),
-					repo: require('./doc/deploy.json').options.remoteUrl
-				}
-			}
-		},
-		jsdoc: {
-			server: {
-				src: ['app_storefront_controllers/README.md', '.'],
-				options: {
-					destination: 'doc/dist/js/server',
-					configure: 'doc/js/server/conf.json'
-				}
-			},
-			client: {
-				src: ['app_storefront_core/cartridge/js/README.md', '.'],
-				options: {
-					destination: 'doc/dist/js/client',
-					configure: 'doc/js/client/conf.json'
-				}
-			}
-		},
-		copy: {
-			doc: {
-				files: [
-					{'doc/dist/index.html': 'doc/index.html'},
-					{'doc/dist/styleguide/index.html': 'doc/styleguide/index.html'},
-					{expand: true, cwd: 'doc/styleguide', src: ['lib/**/*'], dest: 'doc/dist/styleguide'},
-					{expand: true, cwd: 'doc/styleguide', src: ['templates/**/*'], dest: 'doc/dist/styleguide'}
-				]
-			}
-		}
-	});
-
-	grunt.registerTask('sourcemap', function () {
-		if (config.sourcemaps) {
-			grunt.task.run(['external_sourcemap:browserify']);
-		}
-	});
-	grunt.registerTask('css', ['sass:dev', 'autoprefixer:dev']);
-	grunt.registerTask('css:styleguide', ['sass:styleguide', 'autoprefixer:styleguide']);
-	grunt.registerTask('default', ['css', 'browserify:watchDev', 'watch:dev']);
-	grunt.registerTask('js', ['browserify:dev', 'sourcemap']);
-	grunt.registerTask('test:application', ['webdriver:application']);
-	grunt.registerTask('test:unit', ['mochaTest:unit']);
-	grunt.registerTask('build', ['js', 'css']);
-	grunt.registerTask('lint', ['jshint', 'jscs']);
-	grunt.registerTask('styleguide', ['css:styleguide', 'browserify:watchStyleguide']);
-	grunt.registerTask('doc', ['jsdoc:server', 'jsdoc:client', 'styleguide', 'copy:doc', 'connect:doc', 'watch']);
-	grunt.registerTask('doc:deploy', ['jsdoc:server', 'jsdoc:client', 'styleguide', 'copy:doc', 'gh-pages:doc']);
+    grunt.registerTask('sourcemap', function () {
+        if (config.sourcemaps) {
+            grunt.task.run(['external_sourcemap:browserify']);
+        }
+    });
+    grunt.registerTask('css', ['sass:dev', 'autoprefixer:dev']);
+    grunt.registerTask('css:styleguide', ['sass:styleguide', 'autoprefixer:styleguide']);
+    grunt.registerTask('default', ['css', 'browserify:watchDev', 'watch:dev']);
+    grunt.registerTask('js', ['browserify:dev', 'sourcemap']);
+    grunt.registerTask('test:application', ['webdriver:application']);
+    grunt.registerTask('test:unit', ['mochaTest:unit']);
+    grunt.registerTask('build', ['js', 'css']);
+    grunt.registerTask('lint', ['jshint', 'jscs']);
+    grunt.registerTask('styleguide', ['css:styleguide', 'browserify:watchStyleguide']);
+    grunt.registerTask('doc', ['jsdoc:server', 'jsdoc:client', 'styleguide', 'copy:doc', 'connect:doc', 'watch']);
+    grunt.registerTask('doc:deploy', ['jsdoc:server', 'jsdoc:client', 'styleguide', 'copy:doc', 'gh-pages:doc']);
 };

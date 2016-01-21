@@ -25,7 +25,7 @@ export const MINI_PMT_METHOD_DETAILS = MINI_SECTION_PMT_METHOD + ' .details';
 export const RADIO_BTN_PAYPAL = 'input[value="PayPal"]';
 export const CHECKOUT_PROGRESS = '.checkout-progress-indicator .active';
 export const USE_AS_BILLING_ADDR = '[name*="shippingAddress_useAsBillingAddress"]';
-export const SAVED_ADDRESSES_SELECT_MENU = '[name*=singleshipping_addressList]';
+
 export const DISCOVER_CARD = 'option[value*=Discover]';
 
 const basePath = '/checkout';
@@ -39,21 +39,21 @@ export function pressBtnCheckoutAsGuest () {
         .waitForVisible(BREADCRUMB_SHIPPING);
 }
 
-export function fillOutShippingForm (shippingData) {
+export function fillOutShippingForm (shippingData, locale) {
     let fieldTypes = new Map();
     let fieldsPromise = [];
-
     fieldTypes.set('firstName', 'input');
     fieldTypes.set('lastName', 'input');
     fieldTypes.set('address1', 'input');
     fieldTypes.set('address2', 'input');
     fieldTypes.set('country', 'selectByValue');
-    fieldTypes.set('states_state', 'selectByValue');
+    if (locale && locale === 'x_default') {
+        fieldTypes.set('states_state', 'selectByValue');
+    }
     fieldTypes.set('city', 'input');
     fieldTypes.set('postal', 'input');
     fieldTypes.set('phone', 'input');
     fieldTypes.set('addressList', 'selectByValue');
-
     _.each(shippingData, (value, key) => {
         let prefix = '[name*=';
 
@@ -74,6 +74,16 @@ export function fillOutShippingForm (shippingData) {
 export function fillOutBillingForm (billingFields) {
     let fieldTypes = new Map();
     let fieldsPromise = [];
+
+    fieldTypes.set('postal', {
+        type: 'input',
+        fieldPrefix: 'billingAddress_addressFields_'
+    });
+
+    fieldTypes.set('phone', {
+        type: 'input',
+        fieldPrefix: 'billingAddress_addressFields_'
+    });
 
     fieldTypes.set('emailAddress', {
         type: 'input',
