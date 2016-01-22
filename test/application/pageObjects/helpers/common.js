@@ -169,3 +169,21 @@ export function getLocale () {
             Promise.resolve(params && params.lang && supportedLocales.indexOf(params.lang) > -1 ? params.lang : defaultLocale)
         );
 }
+
+/**
+ * Returns the current Site name
+ *
+ * Assumptions:
+ *   - In BM > Merchant Tools > Storefront URLs, "Enable new rule-based storefront URLs to replaced
+ *     legacy SEO URLs" is checked
+ *   - When this function is called, a Webdriver.IO client has already been instantiated and has a URL with the
+ *     following format, http[s]://<server>/s/<Site name>[/<path>]
+ *
+ *     i.e., https://myserver.com/s/SiteGenesis/mens/clothing/dress%20shirts/?lang=en_US
+ *
+ * @returns {String} - Site name (i.e., SiteGenesis or SiteGenesisGlobal)
+ */
+export function getCurrentSiteName() {
+    return browser.url()
+        .then(url => url.value.split('/s/')[1].split('/')[0]);
+}

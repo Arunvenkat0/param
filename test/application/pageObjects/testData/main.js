@@ -8,6 +8,7 @@ import * as customers from './customers.js';
 import * as products from './products.js';
 import * as prices from './prices.js';
 import * as pricingHelpers from '../helpers/pricing';
+import * as promotions from './promotions.js';
 
 export const defaultPassword = 'Test123!';
 export const creditCard1 = {
@@ -52,6 +53,13 @@ let subjectMeta = {
             demoDataDir + '/pricebooks/usd-sale-prices.xml'
         ],
         processor: prices.parsePriceBooks
+    },
+    promotions: {
+        files: [
+            demoDataDir + '/sites/SiteGenesis/promotions.xml',
+            demoDataDir + '/sites/SiteGenesisGlobal/promotions.xml'
+        ],
+        processor: promotions.parsePromotions
     }
 };
 
@@ -62,7 +70,7 @@ const bundleProductId = 'microsoft-xbox360-bundle';
 
 // Used to determine whether parsedData should be regenerated.  Please modify this any time a change to the structure of
 // parsedData is made.  In an OS X Terminal, please use 'date -u' to generate this value.
-const version = 'Thu Dec 10 04:07:59 UTC 2015';
+const version = 'Mon Feb  1 21:28:07 UTC 2016';
 
 export let parsedData = {};
 export let parsedDataFile = './test/application/pageObjects/testData/parsedData.txt';
@@ -87,13 +95,14 @@ export function load () {
             } else {
                 _generateParsedDataFile(resolve);
             }
-
         });
     });
 }
 
 function _generateParsedDataFile (resolve) {
     let promises = [];
+
+    parsedData = {};
 
     Object.keys(subjectMeta).forEach(subject => {
         promises.push(_loadAndJsonifyXmlData(subject));
@@ -115,7 +124,8 @@ function _loadAndJsonifyXmlData (subject) {
                 fs.readFile(file, (err, data) => {
                     let parser = xml2js.Parser();
                     parser.parseString(data, (err, result) => {
-                        parsedData[subject] = subjectMeta[subject].processor(result, parsedData[subject]);
+                        // file is an optional processor parameter
+                        parsedData[subject] = subjectMeta[subject].processor(result, parsedData[subject], file);
                         resolve(parsedData[subject]);
                     });
                 })
@@ -220,6 +230,28 @@ export function getVariationMasterInstances () {
     return products.getVariationMasters(parsedData.catalog.products);
 }
 
+/* PROMOTIONS */
+
+/**
+ * Promotions are Site-specific, so we need to specify the Site when calling functions that retrieve them.  If not
+ * specified, we default to "SiteGenesis".  There is a getCurrentSiteName() helper function in helpers/common.js.
+ *
+ */
+const defaultSite = 'SiteGenesis';
+
+export function getPromotionById(id, site = defaultSite) {
+    return promotions.getPromotion(parsedData.promotions[site].promotions, id);
+}
+
+export function getPromotionCampaignById(id, site = defaultSite) {
+    return promotions.getCampaign(parsedData.promotions[site].campaigns, id);
+}
+
+export function getPromotionCampaignAssignmentById(promotionId, campaignId, site = defaultSite) {
+    return promotions.getPromotionCampaignAssignment(parsedData.promotions[site].promotionCampaignAssignments, promotionId, campaignId);
+}
+
+/* Helper Methods for this module only */
 function _getCurrentYear() {
     return moment(new Date()).year();
 }
