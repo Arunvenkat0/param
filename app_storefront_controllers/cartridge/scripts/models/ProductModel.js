@@ -182,6 +182,10 @@ var ProductModel = AbstractModel.extend(
                 return false;
             }
 
+            if (!this.isAssignedToSiteCatalog()) {
+                return false;
+            }
+
             if (this.isProductSet() && this.getOnlineProductSetProducts().isEmpty()) {
                 return false;
             }
