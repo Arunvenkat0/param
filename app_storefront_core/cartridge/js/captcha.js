@@ -1,6 +1,7 @@
 'use strict';
 
 var dialog = require('./dialog');
+var util = require('./util');
 var SessionAttributes = window.SessionAttributes;
 
 /**
@@ -20,8 +21,9 @@ module.exports = function () {
                 buttons: [{
                     text: Resources.OK,
                     click: function () {
+                        var url = util.appendParamsToUrl(Urls.rateLimiterReset, {format: 'ajax'});
                         $.ajax({
-                            url: Urls.rateLimiterReset
+                            url: url
                         });
                         $(this).dialog('close');
                     }
