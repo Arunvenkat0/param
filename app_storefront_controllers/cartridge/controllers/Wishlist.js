@@ -104,7 +104,7 @@ function wishListForm() {
             return;
         },
         addToCart: function (formgroup) {
-            if (formgroup.items.triggeredFormAction.parent.object.type === formgroup.items.triggeredFormAction.parent.object.TYPE_GIFT_CERTIFICATE) {
+            if (formgroup.items.triggeredAction.parent.object.type === formgroup.items.triggeredAction.parent.object.TYPE_GIFT_CERTIFICATE) {
                 // TODO redirect?
                 var GiftCertController = app.getController('GiftCert');
                 GiftCertController.Purchase();
