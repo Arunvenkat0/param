@@ -16,11 +16,24 @@ var opts = _.assign({}, getConfig({
 
 var specs = 'test/application/' + opts.suite;
 
+var sauce = {};
+
+if (opts.sauce) {
+    if (!process.env.SAUCE_USER && !process.env.SAUCE_ACCESS_KEY) {
+        throw new Error('Sauce Labs user and access key are required');
+    }
+    sauce.host = 'ondemand.saucelabs.com';
+    sauce.port = 80;
+    sauce.user = process.env.SAUCE_USER;
+    sauce.key = process.env.SAUCE_ACCESS_KEY;
+    sauce.capabilities = opts.capabilities;
+}
+
 if (opts.suite.indexOf('.js') === -1) {
     specs += '/**';
 }
 
-exports.config = {
+exports.config = _.assign({
     framework: 'mocha',
     mochaOpts: {
         ui: 'bdd',
@@ -40,4 +53,4 @@ exports.config = {
         outputDir: 'test/reports'
     },
     locale: opts.locale
-};
+}, sauce);
