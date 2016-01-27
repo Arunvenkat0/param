@@ -3,31 +3,38 @@
 export const localeCurrency = {
     'x-default': {
         currencyCode: 'usd',
-        fractionDigits: 2
+        fractionDigits: 2,
+        symbol: '$'
     },
     'en-US':  {
         currencyCode: 'usd',
-        fractionDigits: 2
+        fractionDigits: 2,
+        symbol: '$'
     },
     'en-GB': {
         currencyCode: 'gbp',
-        fractionDigits: 2
+        fractionDigits: 2,
+        symbol: '£'
     },
     'fr-FR': {
         currencyCode: 'eur',
-        fractionDigits: 2
+        fractionDigits: 2,
+        symbol: '€'
     },
     'it-IT': {
         currencyCode: 'eur',
-        fractionDigits: 2
+        fractionDigits: 2,
+        symbol: '€'
     },
     'ja-JP': {
         currencyCode: 'jpy',
-        fractionDigits: 0
+        fractionDigits: 0,
+        symbol: '¥'
     },
     'zh-CN': {
         currencyCode: 'cny',
-        fractionDigits: 0
+        fractionDigits: 0,
+        symbol: '¥'
     }
 };
 
@@ -61,4 +68,9 @@ export function getFormattedPrice(price, locale = 'en-US') {
         default:
             return `$${formattedAmount}`;
     }
+}
+
+export function getCurrencySymbol(locale = 'en-US') {
+    let normalizedLocale = locale.replace('_', '-');
+    return localeCurrency[normalizedLocale].symbol;
 }

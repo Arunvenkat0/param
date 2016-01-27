@@ -21,7 +21,7 @@ Full-Block-Element: yes
 	<div class="promotion-callout">
 		<isloop items="${promos}" var="promo">
 		<i class="fa fa-tags"></i>
-		<isprint value="${promo.calloutMsg}" encoding="off"/>
+		<span class="callout-message"><isprint value="${promo.calloutMsg}" encoding="off"/></span>
 		<isif condition="${! empty(promo.details)}">
 			<a class="tooltip" href="#">
 				${Resource.msg('global.details','locale',null)}

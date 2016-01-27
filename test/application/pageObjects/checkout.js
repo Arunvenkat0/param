@@ -10,7 +10,12 @@ export const BREADCRUMB_PLACE_ORDER = '.step-3.active';
 export const BTN_CONTINUE_BILLING_SAVE = 'button[name*="billing_save"]';
 export const BTN_CONTINUE_SHIPPING_SAVE = '[name*="shippingAddress_save"]';
 export const BTN_PLACE_ORDER = 'button[name*="submit"]';
+export const CHECKOUT_PROGRESS = '.checkout-progress-indicator .active';
 export const CSS_ORDER_SUBTOTAL = '.nav.summary .order-subtotal td:nth-child(2)';
+export const CVN_INPUT = 'input[id*=paymentMethods_creditCard_cvn]';
+export const ORDER_LEVEL_DISCOUNT_TEXT = '.summary .order-discount';
+export const DISCOUNT = ORDER_LEVEL_DISCOUNT_TEXT + ' ' + 'td:nth-child(2)';
+export const DISCOVER_CARD = 'option[value*=Discover]';
 export const LABEL_ORDER_THANK_YOU = '.confirmation-message h1';
 export const MINI_SECTION_SHIPPING_ADDR = '.mini-shipment';
 export const MINI_SECTION_BILLING_ADDR = '.mini-billing-address';
@@ -22,11 +27,13 @@ export const LINK_EDIT_PMT_METHOD = MINI_SECTION_PMT_METHOD + ' a';
 export const MINI_SHIPPING_ADDR_DETAILS = MINI_SECTION_SHIPPING_ADDR + ' .details';
 export const MINI_BILLING_ADDR_DETAILS = MINI_SECTION_BILLING_ADDR + ' .details';
 export const MINI_PMT_METHOD_DETAILS = MINI_SECTION_PMT_METHOD + ' .details';
+export const ORDER_TOTAL_AMOUNT = '.summary .order-value';
+export const ORDER_SUBTOTAL = '.summary .order-subtotal td:nth-child(2)';
+export const PAYMENT_METHOD_TOTAL = '.minibillinginfo-amount';
 export const RADIO_BTN_PAYPAL = 'input[value="PayPal"]';
-export const CHECKOUT_PROGRESS = '.checkout-progress-indicator .active';
+export const SELECT_ADDRESS = '[name*="singleshipping_addressList"]';
+export const SELECT_CREDITCARD = '[name*=creditCardList]';
 export const USE_AS_BILLING_ADDR = '[name*="shippingAddress_useAsBillingAddress"]';
-
-export const DISCOVER_CARD = 'option[value*=Discover]';
 
 const basePath = '/checkout';
 

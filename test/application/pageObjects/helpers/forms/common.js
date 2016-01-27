@@ -10,7 +10,7 @@
 export function populateField (selector, value, fieldType = 'input') {
     switch (fieldType) {
         case 'input':
-            return browser.setValue(selector, value);
+            return browser.clearElement(selector).setValue(selector, value);
         case 'selectByValue':
             return browser.selectByValue(selector, value);
         case 'selectByIndex':
