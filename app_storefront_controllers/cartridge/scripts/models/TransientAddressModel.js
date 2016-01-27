@@ -36,9 +36,7 @@ function copyFields(from, to) {
  * @class module:models/TransientAddressModel~TransientAddressModel
  * @extends module:util/Class
  */
-var TransientAddressModel = Class.extend(
-/** @lends module:models/TransientAddressModel~TransientAddressModel.prototype */
-{
+var TransientAddressModel = Class.extend({
     UUID: null,
     ID: null,
     firstName: null,

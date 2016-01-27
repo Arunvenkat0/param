@@ -158,7 +158,7 @@ function handleLoginForm () {
             var foundOrder = orders.next();
 
             if (foundOrder.billingAddress.postalCode.toUpperCase() !== orderPostalCode.toUpperCase() || foundOrder.customerEmail !== orderFormEmail) {
-                 app.getView('Login', {
+                app.getView('Login', {
                     OrderNotFound: true
                 }).render();
                 return;
@@ -391,8 +391,8 @@ function handleOAuthReentry() {
                     lastName = extProfile.name.familyName;
                 } else {
                     // The other providers use one of these, GitHub & SinaWeibo have just a 'name'.
-                    firstName = extProfile['first-name'] || extProfile.first_name || extProfile.name;
-                    lastName = extProfile['last-name'] || extProfile.last_name || extProfile.name;
+                    firstName = extProfile['first-name'] || extProfile.first_name || extProfile.name;
+                    lastName = extProfile['last-name'] || extProfile.last_name || extProfile.name;
                 }
                 // Simple email addresses.
                 email =  extProfile['email-address'] || extProfile.email;
@@ -404,7 +404,7 @@ function handleOAuthReentry() {
                         profile.setEmail(extProfile.emails[0].value);
                     // While MS comes with an object.
                     } else {
-                        email = emails.preferred || extProfile['emails.account'] || extProfile['emails.personal'] ||
+                        email = emails.preferred || extProfile['emails.account'] || extProfile['emails.personal'] ||
                             extProfile['emails.business'];
                     }
                 }

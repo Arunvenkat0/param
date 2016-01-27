@@ -129,7 +129,7 @@ function start() {
 function handleShippingSettings(cart) {
 
     Transaction.wrap(function () {
-        var defaultShipment, shippingAddress, validationResult, BasketStatus, EnableCheckout;
+        var defaultShipment, shippingAddress;
         defaultShipment = cart.getDefaultShipment();
         shippingAddress = cart.createShipmentShippingAddress(defaultShipment.getID());
 
@@ -148,12 +148,7 @@ function handleShippingSettings(cart) {
         cart.updateShipmentShippingMethod(cart.getDefaultShipment().getID(), session.forms.singleshipping.shippingAddress.shippingMethodID.value, null, null);
         cart.calculate();
 
-        validationResult = cart.validateForCheckout();
-
-        // TODO - what are those variables used for, do they need to be returned ?
-        BasketStatus = validationResult.BasketStatus;
-        EnableCheckout = validationResult.EnableCheckout;
-
+        cart.validateForCheckout();
     });
 
     return;
@@ -429,9 +424,9 @@ function editAddress() {
  *  - __remove__ - removes the address from the current customer's address book and renders the dialogdelete template.
  */
 function editShippingAddress() {
-    var shippingAddressForm, formResult;
+    var shippingAddressForm;
     shippingAddressForm = app.getForm('shippingaddress');
-    formResult = shippingAddressForm.handleAction({
+    shippingAddressForm.handleAction({
         apply: function () {
             var object = {};
             // @FIXME what is this statement used for?

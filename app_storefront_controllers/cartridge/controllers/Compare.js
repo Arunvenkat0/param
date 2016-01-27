@@ -47,7 +47,7 @@ function show() {
  * @return {object} JSON object indicating success or failure.
  */
 function addProduct() {
-	let r = require('~/cartridge/scripts/util/Response');
+    let r = require('~/cartridge/scripts/util/Response');
 
     var product = Product.get(request.httpParameterMap.pid.value);
     if (!product) {
@@ -81,8 +81,8 @@ function addProduct() {
  * If both are available, gets the comparison object and removes the product. If successful, renders a JSON message indicating success.
  * @return {object} JSON object indicating success or failure.
  */
- function removeProduct() {
-	let r = require('~/cartridge/scripts/util/Response');
+function removeProduct() {
+    let r = require('~/cartridge/scripts/util/Response');
 
     var product = Product.get(request.httpParameterMap.pid.value);
     if (!product) {

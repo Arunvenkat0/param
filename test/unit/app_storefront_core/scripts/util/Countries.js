@@ -10,33 +10,33 @@ let country = {countryCode: countryCode};
 let proxyquire = proxyquireModule.noCallThru();
 
 let Countries = proxyquire('../../../../../app_storefront_core/cartridge/scripts/util/Countries.ds', {
-	'~/cartridge/countries': [country],
-	'dw/util/Locale': Locale
+    '~/cartridge/countries': [country],
+    'dw/util/Locale': Locale
 });
 
 describe('Countries Script', () => {
 
-	describe('.getCurrent()', () => {
+    describe('.getCurrent()', () => {
 
-		it('should return a country given a locale', () => {
-			let result = Countries.getCurrent({
-				CurrentRequest: {
-					locale: countryCode
-				}
-			});
+        it('should return a country given a locale', () => {
+            let result = Countries.getCurrent({
+                CurrentRequest: {
+                    locale: countryCode
+                }
+            });
 
-			assert.equal(result, country);
-		});
+            assert.equal(result, country);
+        });
 
-		it('should return the first country if locale has no country', () => {
-			let stubGetLocale = sinon.stub(Locale, 'getLocale', () => { return {}; });
-			let result = Countries.getCurrent({
-				CurrentRequest: {locale: countryCode}
-			});
+        it('should return the first country if locale has no country', () => {
+            let stubGetLocale = sinon.stub(Locale, 'getLocale', () => { return {}; });
+            let result = Countries.getCurrent({
+                CurrentRequest: {locale: countryCode}
+            });
 
-			assert.equal(result, country);
+            assert.equal(result, country);
 
-			stubGetLocale.restore();
-		});
-	});
+            stubGetLocale.restore();
+        });
+    });
 });

@@ -76,7 +76,8 @@ var View = Class.extend({
         }
         return this;
 
-}});
+    }
+});
 
 /** @type {module:views/View~View.prototype} */
 module.exports = View;

@@ -28,7 +28,7 @@ export const ERROR_EMAIL_ALREADY_TAKEN = '#RegistrationForm div.form-caption.err
 export function editAccount (profileFields) {
     return Object.keys(profileFields).reduce((setField, field) => {
         return setField.then(() => browser.setValue(field, profileFields[field]));
-        }, Promise.resolve())
+    }, Promise.resolve())
     .then(() => browser.getValue(FIELD_EMAIL))
     .then(email => browser.setValue(FIELD_EMAIL_CONFIRM, email))
     .then(() => browser.click(BTN_APPLY));

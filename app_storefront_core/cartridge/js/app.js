@@ -41,9 +41,9 @@ function initializeEvents() {
                 charsLimit = $(this).data('character-limit'),
                 charsUsed = text.length;
 
-                if ((charsUsed >= charsLimit) && (controlKeys.indexOf(e.which.toString()) < 0)) {
-                    e.preventDefault();
-                }
+            if ((charsUsed >= charsLimit) && (controlKeys.indexOf(e.which.toString()) < 0)) {
+                e.preventDefault();
+            }
         })
         .on('change keyup mouseup', 'textarea[data-character-limit]', function () {
             var text = $.trim($(this).val()),

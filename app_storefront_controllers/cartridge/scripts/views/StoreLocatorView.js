@@ -11,8 +11,7 @@ var View = require('./View');
  * @extends module:views/View
  * @lends module:views/StoreLocatorView~StoreLocatorView.prototype
 */
-var StoreLocatorView = View.extend(
-{
+var StoreLocatorView = View.extend({
     /**
      * Generates the view consumed by template storelocator/storelocatorresults
      *

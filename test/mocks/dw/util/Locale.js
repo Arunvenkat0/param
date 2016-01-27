@@ -1,11 +1,11 @@
 'use strict';
 
 function getLocale (locale) {
-	return {
-		country: locale
-	};
+    return {
+        country: locale
+    };
 }
 
 module.exports = {
-	getLocale: getLocale
+    getLocale: getLocale
 };

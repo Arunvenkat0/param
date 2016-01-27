@@ -122,7 +122,7 @@ export function emptyCart () {
                 items.value.forEach(item =>
             browser.elementIdClear(item.ELEMENT)
                         .elementIdValue(item.ELEMENT, '0'));
-        return browser.click(BTN_UPDATE_CART);
+                return browser.click(BTN_UPDATE_CART);
             }
         })
         // There are some products, like Gift Certificates, whose

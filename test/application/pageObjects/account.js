@@ -15,5 +15,5 @@ export const VALID_PASSWORD_SELECTOR = '#dialog-container a';  // TODO: We need 
 const basePath = '/account';
 
 export function navigateTo (locale = 'en_US') {
-	return browser.url(basePath + `?lang=${locale}`);
+    return browser.url(basePath + `?lang=${locale}`);
 }

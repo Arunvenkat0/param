@@ -35,7 +35,7 @@ export function deselectAllAttributes() {
         .then(attrsToDeselect => {
             return attrsToDeselect.value.reduce((deselect) => {
                 return deselect.then(() => {
-            return browser.element('.swatches .selected')
+                    return browser.element('.swatches .selected')
                         .click()
                         .waitForVisible('.loader-bg', 500, true);
                 });

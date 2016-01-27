@@ -18,9 +18,7 @@ var Pipelet = require('dw/system/Pipelet');
  *
  * @param {dw.customer.Customer} parameter - The customer object to enhance/wrap.
  */
-var CustomerModel = AbstractModel.extend(
-/** @lends module:models/CustomerModel~CustomerModel.prototype */
-{
+var CustomerModel = AbstractModel.extend({
 
     /**
      * Checks the validity of a password reset token.

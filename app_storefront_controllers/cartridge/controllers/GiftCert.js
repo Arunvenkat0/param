@@ -342,15 +342,15 @@ function updateGiftCert(cart) {
 
     Transaction.begin();
 
-        giftCertificateLineItem.senderName = purchaseForm.get('from').value();
-        giftCertificateLineItem.recipientName = purchaseForm.get('recipient').value();
-        giftCertificateLineItem.recipientEmail = purchaseForm.get('recipientEmail').value();
-        giftCertificateLineItem.message = purchaseForm.get('message').value();
+    giftCertificateLineItem.senderName = purchaseForm.get('from').value();
+    giftCertificateLineItem.recipientName = purchaseForm.get('recipient').value();
+    giftCertificateLineItem.recipientEmail = purchaseForm.get('recipientEmail').value();
+    giftCertificateLineItem.message = purchaseForm.get('message').value();
 
-        var amount = purchaseForm.get('amount').value();
-        giftCertificateLineItem.basePrice = new Money(amount, giftCertificateLineItem.basePrice.currencyCode);
-        giftCertificateLineItem.grossPrice = new Money(amount, giftCertificateLineItem.grossPrice.currencyCode);
-        giftCertificateLineItem.netPrice = new Money(amount, giftCertificateLineItem.netPrice.currencyCode);
+    var amount = purchaseForm.get('amount').value();
+    giftCertificateLineItem.basePrice = new Money(amount, giftCertificateLineItem.basePrice.currencyCode);
+    giftCertificateLineItem.grossPrice = new Money(amount, giftCertificateLineItem.grossPrice.currencyCode);
+    giftCertificateLineItem.netPrice = new Money(amount, giftCertificateLineItem.netPrice.currencyCode);
 
     Transaction.commit();
 
