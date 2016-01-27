@@ -278,7 +278,7 @@ function submitForm() {
 function addProduct() {
     var cart = app.getModel('Cart').goc();
     var params = request.httpParameterMap;
-    var format = params.format.stringValue ? params.format.stringValue.toLowerCase() : '';
+    var format = (params.hasOwnProperty('format') && params.format.stringValue) ? params.format.stringValue.toLowerCase() : '';
     var Product = app.getModel('Product');
     var productOptionModel;
     var product;
