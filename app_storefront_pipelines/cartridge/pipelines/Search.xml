@@ -491,32 +491,11 @@
         <start-node name="GetSuggestions" secure="false"/>
         <node-display x="7" y="2"/>
       </node>
-      <simple-transition/>
-      <node>
-        <decision-node condition-key="!(CurrentHttpParameterMap.legacy &amp;&amp; CurrentHttpParameterMap.legacy == 'true')" condition-operator="expr"/>
-        <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="yes">
-          <transition target-connector="in"/>
-          <segment>
-            <node>
-              <interaction-node transaction-required="false">
-                <template buffered="true" dynamic="false" name="search/suggestionsbeta"/>
-              </interaction-node>
-              <node-display x="0" y="2"/>
-            </node>
-          </segment>
-        </branch>
-      </node>
-      <simple-transition/>
-      <node>
-        <pipelet-node pipelet-name="GetSearchSuggestions" pipelet-set-identifier="bc_api">
-          <key-binding alias="Suggestions" key="Suggestions"/>
-          <key-binding alias="CurrentHttpParameterMap.q.value" key="SearchPhrase"/>
-          <key-binding alias="10" key="MaxSuggestions"/>
-        </pipelet-node>
-        <node-display x="1" y="1"/>
-      </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <interaction-node transaction-required="false">
           <template buffered="true" dynamic="false" name="search/suggestions.isml"/>
@@ -529,23 +508,13 @@
     <segment>
       <node>
         <text-node>
-          <description>Switches between legacy and beta versions of the search suggest feature based on the site preference (enhancedSearchSuggestions).</description>
-        </text-node>
-        <node-display x="6" y="3"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_8">
-    <segment>
-      <node>
-        <text-node>
           <description>Set CacheTag to true so that the redirect template will set the &lt;iscache&gt;.</description>
         </text-node>
         <node-display x="3" y="6"/>
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_9">
+  <branch basename="_ANONYMOUS_BRANCH_8">
     <segment>
       <node>
         <text-node>
@@ -664,7 +633,7 @@
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_11">
+  <branch basename="_ANONYMOUS_BRANCH_10">
     <segment>
       <node>
         <text-node>
@@ -675,7 +644,7 @@ This is also used in Product pipeline for product navigation i.e. next/prev.</de
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_12">
+  <branch basename="_ANONYMOUS_BRANCH_11">
     <segment>
       <node>
         <text-node>

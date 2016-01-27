@@ -7,10 +7,10 @@
  */
 
 /* API Includes */
-var ISML = require('dw/template/ISML');
 var PagingModel = require('dw/web/PagingModel');
 var URLUtils = require('dw/web/URLUtils');
 var ContentMgr = require('dw/content/ContentMgr');
+var SearchModel = require('dw/catalog/SearchModel');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
@@ -45,16 +45,13 @@ function show() {
         return;
     }
 
-    // TODO - replace with script API equivalent once available
-    var SearchRedirectURLResult = new dw.system.Pipelet('SearchRedirectURL').execute({
-        SearchPhrase: params.q.value
-    });
-
-    if (SearchRedirectURLResult.result === PIPELET_NEXT) {
-        ISML.renderTemplate('util/redirect', {
-            Location: SearchRedirectURLResult.Location,
+    var redirectUrl = SearchModel.getSearchRedirect(params.q.value);
+    
+    if (redirectUrl){
+        app.getView({
+            Location: redirectUrl.location,
             CacheTag: true
-        });
+        }).render('util/redirect');
         return;
     }
 
@@ -128,9 +125,10 @@ function show() {
                 }
             }
 
-            ISML.renderTemplate('util/redirect', {
+            app.getView({
                 Location: URLUtils.http('Product-Show', 'pid', productID)
-            });
+            }).render('util/redirect');
+
         }
     } else {
         app.getView({
@@ -202,31 +200,12 @@ function showContent() {
 }
 
 /**
- * Determines search suggestions based on httpParameterMap query information and renders the JSON response for the list of suggestions.
  * Renders the search suggestion page (search/suggestions template).
  */
 function getSuggestions() {
 
-    /*
-     * Switches between legacy and beta versions of the search suggest feature based on the enhancedSearchSuggestions site preference.
-     */
-    if (!(request.httpParameterMap.legacy && request.httpParameterMap.legacy === 'true')) {
-        app.getView().render('search/suggestionsbeta');
-    } else {
-        // TODO - refactor once search suggestion can be retrieved via the script API.
-        var GetSearchSuggestionsResult = new dw.system.Pipelet('GetSearchSuggestions').execute({
-            MaxSuggestions: 10,
-            SearchPhrase: request.httpParameterMap.q.value
-        });
-
-        app.getView({
-            Suggestions: GetSearchSuggestionsResult.Suggestions
-        }).render('search/suggestions');
-
-    }
-
+    app.getView().render('search/suggestions');
 }
-
 
 /**
  * Renders the partial content of the product grid of a search result as rich HTML.
@@ -292,11 +271,15 @@ function showProductGrid() {
  * Web exposed methods
  */
 /** Renders a full featured product search result page.
- * @see module:controllers/Search~show */
+ * @see module:controllers/Search~show 
+ * */
 exports.Show            = guard.ensure(['get'], show);
+
 /** Renders a full featured content search result page.
- * @see module:controllers/Search~showContent */
+ * @see module:controllers/Search~showContent 
+ * */
 exports.ShowContent     = guard.ensure(['get'], showContent);
+
 /** Determines search suggestions based on a given input and renders the JSON response for the list of suggestions.
  * @see module:controllers/Search~getSuggestions */
-exports.GetSuggestions  = guard.ensure(['get'], getSuggestions);
+exports.GetSuggestions = guard.ensure(['get'], getSuggestions);

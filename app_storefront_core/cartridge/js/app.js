@@ -14,7 +14,6 @@ var countries = require('./countries'),
     rating = require('./rating'),
     searchplaceholder = require('./searchplaceholder'),
     searchsuggest = require('./searchsuggest'),
-    searchsuggestbeta = require('./searchsuggest-beta'),
     tooltip = require('./tooltip'),
     util = require('./util'),
     validator = require('./validator'),
@@ -64,11 +63,7 @@ function initializeEvents() {
      * this will either init the legacy(false) or the beta versions(true) of the the search suggest feature.
      * */
     var $searchContainer = $('#navigation .header-search');
-    if (SitePreferences.LISTING_SEARCHSUGGEST_LEGACY) {
-        searchsuggest.init($searchContainer, Resources.SIMPLE_SEARCH);
-    } else {
-        searchsuggestbeta.init($searchContainer, Resources.SIMPLE_SEARCH);
-    }
+    searchsuggest.init($searchContainer, Resources.SIMPLE_SEARCH);
 
     // add show/hide navigation elements
     $('.secondary-navigation .toggle').click(function () {
