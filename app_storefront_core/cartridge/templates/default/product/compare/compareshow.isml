@@ -31,7 +31,7 @@
 						<a class="remove-link" href="${removeUrl}" title="${Resource.msg('compareshow.removeitem', 'product', null)}"><i class="fa fa-remove fa-lg"></i></a>
 
 						<iscomment>render a full featured product tile</iscomment>
-						<isproducttile product="${compareProduct}" showswatches="${true}" showpricing="${true}" showpromotion="${true}" showrating="${true}"/>
+						<isproducttile product="${compareProduct}" showswatches="${true}" showpricing="${true}" showpromotion="${true}" showrating="${true}" cache="${false}"/>
 
 						<iscomment>add to cart (opens the quick view if product is a master)</iscomment>
 

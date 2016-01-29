@@ -49,6 +49,7 @@
 	attribute="showpromotion"
 	attribute="showrating"
 	attribute="showcompare"
+	attribute="cache"
 />
 
 <iscomment>

@@ -1,5 +1,8 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
-<iscache type="relative" hour="24" varyby="price_promotion"/>
+<isset name="cache" value="${(pdict.cache != null) ? pdict.cache : true}" scope="page"/>
+<isif condition="${cache}">
+	<iscache type="relative" hour="24" varyby="price_promotion"/>
+</isif>
 <iscomment>
 	This template is best used via a **remote** include (Product-HitTile) and _not_ local include.
 	This template renders a product tile using a product. The following parameters
