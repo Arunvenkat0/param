@@ -20,8 +20,8 @@ function execute( pdict : PipelineDictionary ) : Number
 			case "Product-Show":
 			case "Product-ShowInCategory":
 				// product detail page click(s)
-				// replace well-known http parameter names "source" and "format" to avoid loading partial page markup only
-				pdict.Location = 'http://' + click.host + click.url.replace(/source=/g, "src=").replace(/format=/g, "frmt=");
+				// replace well-known http parameter names "source", "format" and "uuid" to avoid loading partial page markup only, or wrong behaviour
+				pdict.Location = 'http://' + click.host + click.url.replace(/source=/g, "src=").replace(/format=/g, "frmt=").replace(/uuid=/g, "_uuid=");
 				return PIPELET_NEXT;
 			case "Search-Show":
 				// catalog related click
