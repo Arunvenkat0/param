@@ -317,7 +317,7 @@ function addProduct() {
     } else if (params.plid.stringValue) {
         // Adds a product to a product list.
         var productList = ProductListMgr.getProductList(params.plid.stringValue);
-        cart.addProductListItem(productList && productList.getItem(params.itemid.stringValue), params.Quantity.doubleValue, params.cgid.value);
+        cart.addProductListItem(productList && productList.getItem(params.itemid.stringValue), params.Quantity.doubleValue);
     } else {
         // Adds a product.
         product = Product.get(params.pid.stringValue);
@@ -333,13 +333,13 @@ function addProduct() {
 
                 if (childProduct.object && !childProduct.isProductSet()) {
                     var childProductOptionModel = childProduct.updateOptionSelection(request.httpParameterMap);
-                    cart.addProductItem(childProduct.object, parseInt(childQtys[counter]), params.cgid.value, childProductOptionModel);
+                    cart.addProductItem(childProduct.object, parseInt(childQtys[counter]), childProductOptionModel);
                 }
                 counter++;
             }
         } else {
             productOptionModel = product.updateOptionSelection(request.httpParameterMap);
-            cart.addProductItem(product.object, params.Quantity.doubleValue, params.cgid.value, productOptionModel);
+            cart.addProductItem(product.object, params.Quantity.doubleValue, productOptionModel);
         }
 
         // When adding a new product to the cart, check to see if it has triggered a new bonus discount line item.
