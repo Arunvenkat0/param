@@ -128,7 +128,10 @@
             2,
             "single"
         ],
-        "radix": 2,
+        "radix": [
+            2,
+            "as-needed"
+        ],
         "semi-spacing": [
             2,
             {
