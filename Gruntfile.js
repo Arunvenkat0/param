@@ -125,18 +125,8 @@ module.exports = function (grunt) {
                 }
             }
         },
-        jscs: {
-            src: '**/*.js',
-            options: {
-                config: './.jscsrc'
-            }
-        },
-        jshint: {
-            options: {
-                reporter: require('jshint-stylish'),
-                jshintrc: true
-            },
-            target: ['**/*.js']
+        eslint: {
+            target: './'
         },
         mochaTest: {
             unit: {
@@ -203,7 +193,7 @@ module.exports = function (grunt) {
     grunt.registerTask('test:application', ['webdriver:application']);
     grunt.registerTask('test:unit', ['mochaTest:unit']);
     grunt.registerTask('build', ['js', 'css']);
-    grunt.registerTask('lint', ['jshint', 'jscs']);
+    grunt.registerTask('lint', ['eslint']);
     grunt.registerTask('styleguide', ['css:styleguide', 'browserify:watchStyleguide']);
     grunt.registerTask('doc', ['jsdoc:server', 'jsdoc:client', 'styleguide', 'copy:doc', 'connect:doc', 'watch']);
     grunt.registerTask('doc:deploy', ['jsdoc:server', 'jsdoc:client', 'styleguide', 'copy:doc', 'gh-pages:doc']);

@@ -10,9 +10,7 @@ var Class = require('~/cartridge/scripts/util/Class').Class;
 var Logger = require('dw/system/Logger');
 
 
-var AbstractModel = Class.extend(
-/** @lends module:models/AbstractModel~AbstractModel.prototype */
-{
+var AbstractModel = Class.extend({
     /**
      * Property holding the wrapped object that is initialized in the child classes. Usually,
      * the static get() method of the app.js module is used to obtain a model instance.

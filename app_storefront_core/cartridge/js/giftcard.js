@@ -1,7 +1,7 @@
 'use strict';
 
 var ajax = require('./ajax'),
-	util = require('./util');
+    util = require('./util');
 /**
  * @function
  * @description Load details to a given gift certificate
@@ -9,11 +9,11 @@ var ajax = require('./ajax'),
  * @param {Function} callback A function to called
  */
 exports.checkBalance = function (id, callback) {
-	// load gift certificate details
-	var url = util.appendParamToURL(Urls.giftCardCheckBalance, 'giftCertificateID', id);
+    // load gift certificate details
+    var url = util.appendParamToURL(Urls.giftCardCheckBalance, 'giftCertificateID', id);
 
-	ajax.getJson({
-		url: url,
-		callback: callback
-	});
+    ajax.getJson({
+        url: url,
+        callback: callback
+    });
 };

@@ -309,7 +309,6 @@ function confirmation() {
     var currentForms = session.forms;
     var CreateProductListRegistrantResult;
     var ProductListRegistrant;
-    var Address;
     var GetCustomerAddressResult;
     var ProductList;
     // TODO this should trigger some redirect
@@ -344,8 +343,6 @@ function confirmation() {
                     Customer: customer
                 });
                 if (GetCustomerAddressResult.result === PIPELET_NEXT) {
-                    Address = GetCustomerAddressResult.Address;
-
                     currentForms.giftregistry.eventaddress.addressBeforeEvent.addressid.invalidateFormElement();
 
                     showAddresses();
@@ -360,8 +357,6 @@ function confirmation() {
                     Customer: customer
                 });
                 if (GetCustomerAddressResult.result === PIPELET_NEXT) {
-                    Address = GetCustomerAddressResult.Address;
-
                     currentForms.giftregistry.eventaddress.addressAfterEvent.addressid.invalidateFormElement();
 
                     showAddresses();
@@ -378,10 +373,7 @@ function confirmation() {
             Transaction.wrap(function () {
                 CreatedProductList.eventState = currentForms.giftregistry.event.eventaddress.states.state.value;
                 CreatedProductList.eventCountry = currentForms.giftregistry.event.eventaddress.country.value;
-             }
-                );
-
-
+            });
 
             if (!Form.get(currentForms.giftregistry.event).copyTo(CreatedProductList)) {
                 return {
@@ -607,23 +599,7 @@ function showEditParticipantForm() {
 // }
 
 /**
- * Clears the giftregistry.purchases form and calls the {@link module:controllers/GiftRegistry~showPurchases|showPurchases} function.
- * @FIXME Should line 610 "copyForm" be "copyFrom"? And why is there another showPurchases function?
- */
-function showPurchases() {
-    var currentForms = session.forms;
-
-
-    Form.get(currentForms.giftregistry.purchases).clear();
-    Form.get(currentForms.giftregistry.purchases).copyForm(ProductList.purchases);
-
-
-    showPurchases();
-}
-
-/**
  * Renders the gift registry purchases page.
- * @FIXME Why are there two identically named functions?
  */
 function showPurchases() {
     app.getView().render('account/giftregistry/purchases');
@@ -698,16 +674,14 @@ function showRegistry(args) {
  */
 function showRegistryInteraction() {
     var currentForms = session.forms;
-    var ProductListItem;
     // TODO this should end in redirects
     var TriggeredAction = request.triggeredFormAction;
     if (TriggeredAction !== null) {
         if (TriggeredAction.formId === 'addGiftCertificate') {
-            var AddGiftCertificateToProductListResult = new Pipelet('AddGiftCertificateToProductList').execute({
+            new Pipelet('AddGiftCertificateToProductList').execute({
                 ProductList: ProductList,
                 Priority: 2
             });
-            ProductListItem = AddGiftCertificateToProductListResult.ProductListItem;
 
             showRegistry({
                 ProductList: ProductList
@@ -748,16 +722,14 @@ function showRegistryInteraction() {
             editAddresses();
             return;
         } else if (TriggeredAction.formId === 'purchaseGiftCertificate') {
-            ProductListItem = TriggeredAction.object;
 
             var GiftRegistryCustomerController = require('./GiftRegistryCustomer');
             GiftRegistryCustomerController.PurchaseGiftCertificate();
             return;
         } else if (TriggeredAction.formId === 'setPrivate') {
             Transaction.wrap(function () {
-                         ProductList.public = false;
-                    }
-                );
+                ProductList.public = false;
+            });
 
             showRegistry({
                 ProductList: ProductList
@@ -765,8 +737,8 @@ function showRegistryInteraction() {
             return;
         } else if (TriggeredAction.formId === 'setPublic') {
             Transaction.wrap(function () {
-                         ProductList.public = true;
-                    }
+                ProductList.public = true;
+            }
                 );
 
             showRegistry({
@@ -1000,43 +972,6 @@ function replaceProductListItem() {
     //TODO : AddProductToProductListResult was never used and jshint was reporting errors as a result
 
     app.getView().render('account/giftregistry/refreshgiftregistry', {});
-}
-
-
-/**
- * Provides gift registry actions such as address changes.
- * Clears the giftregistry form. If there is a shipping address for the current product list, copies that to the
- * before-the-event shipping address  in the form. If there is an after-the-event shipping address set for the current product list,
- * copies that to the gift registry form.
- * Calls the {@link module:controllers/GiftRegistry~showAddresses|showAddresses} function.
- * @FIXME Why are there two functions with the same name?
- */
-function editAddresses() {
-    var currentForms = session.forms;
-
-
-    Form.get(currentForms.giftregistry).clear();
-
-
-    if (ProductList.shippingAddress !== null) {
-        Form.get(currentForms.giftregistry.eventaddress.addressBeforeEvent).copyFrom(ProductList.shippingAddress);
-        Form.get(currentForms.giftregistry.eventaddress.addressBeforeEvent.states).copyFrom(ProductList.shippingAddress);
-    }
-
-
-    if (ProductList.postEventShippingAddress !== null) {
-        Form.get(currentForms.giftregistry.eventaddress.addressAfterEvent).copyFrom(ProductList.postEventShippingAddress);
-        Form.get(currentForms.giftregistry.eventaddress.addressAfterEvent.states).copyFrom(ProductList.postEventShippingAddress);
-    }
-
-    showAddresses();
-}
-
-/**
- * Renders the gift registry address page (account/giftregistry/addresses template).
- */
-function showAddresses() {
-    app.getView().render('account/giftregistry/addresses');
 }
 
 /**

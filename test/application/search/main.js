@@ -11,13 +11,12 @@ describe('Search', () => {
     let productNoVariantsKeyword = 'sony-xel-1';
     let bundleKeyword = 'Playstation 3 Bundle';
     let productSetKeyword = 'Fall Look';
-    let catalog;
     let productVariationMaster;
     let variantIds;
     let locale = config.locale;
 
     before(() => testData.load()
-        .then(() => catalog = testData.parsedData.catalog)
+        .then(() => testData.parsedData.catalog)
         .then(() => testData.getProductVariationMaster())
         .then(variationMaster => {
             productVariationMaster = variationMaster;

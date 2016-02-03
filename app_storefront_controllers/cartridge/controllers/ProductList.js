@@ -58,7 +58,6 @@ function EnsureShipment(args) {
     var ProductList = args.ProductList;
     var ProductListItem = args.ProductListItem;
     var Basket = args.Basket;
-    var Shipment;
 
     var ShipmentID = ProductListItem.list.name;
 
@@ -72,13 +71,12 @@ function EnsureShipment(args) {
 
 
     if (Basket.getShipment(ShipmentID) !== null) {
-        Shipment = Basket.getShipment(ShipmentID);
+        Basket.getShipment(ShipmentID);
     } else {
-        var CreateShipmentResult = new dw.system.Pipelet('CreateShipment').execute({
+        new dw.system.Pipelet('CreateShipment').execute({
             Basket: Basket,
             ID: ShipmentID
         });
-        Shipment = CreateShipmentResult.Shipment;
     }
 
     // TODO define returns

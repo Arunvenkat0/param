@@ -408,7 +408,7 @@ var CartModel = AbstractModel.extend({
                 break;
             }
         }
-       return newBonusDiscountLineItem;
+        return newBonusDiscountLineItem;
     },
 
     /**
@@ -501,7 +501,7 @@ var CartModel = AbstractModel.extend({
 
                 if (!shipment.isDefault()) {
                     if (shipment.getProductLineItems().isEmpty() && shipment.getGiftCertificateLineItems().isEmpty()) {
-                            that.removeShipment(shipment);
+                        that.removeShipment(shipment);
                     }
                 }
             }
@@ -1393,8 +1393,8 @@ var CartModel = AbstractModel.extend({
         var CreateOrder2Result = new Pipelet('CreateOrder2', {
             CreateCustomerNo: true
         }).execute({
-                Basket: this.object
-            });
+            Basket: this.object
+        });
         if (CreateOrder2Result.result === PIPELET_ERROR) {
             return null;
         } else {

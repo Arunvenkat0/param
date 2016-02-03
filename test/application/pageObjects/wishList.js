@@ -11,22 +11,22 @@ export const WISHLIST_ITEMS = '.item-list tbody tr:not(.headings)';
 const basePath = '/wishlist';
 
 export function navigateTo () {
-	return browser.url(basePath);
+    return browser.url(basePath);
 }
 
 export function clickAddGiftCertButton () {
-	return browser.click(BTN_ADD_GIFT_CERT)
-		.waitForVisible('table.item-list');
+    return browser.click(BTN_ADD_GIFT_CERT)
+        .waitForVisible('table.item-list');
 }
 
 export function emptyWishList () {
-	return navigateTo()
-		.waitForVisible(BTN_TOGGLE_PRIVACY)
-		// Must click the Remove link on each product in the Wishlist.
-		.then(() => common.removeItems(LINK_REMOVE))
-		.then(() => browser.waitForExist('table.item-list', 5000, true));
+    return navigateTo()
+        .waitForVisible(BTN_TOGGLE_PRIVACY)
+        // Must click the Remove link on each product in the Wishlist.
+        .then(() => common.removeItems(LINK_REMOVE))
+        .then(() => browser.waitForExist('table.item-list', 5000, true));
 }
 
 export function getItemNameByRow (rowNum) {
-	return browser.getText(`${WISHLIST_ITEMS}:nth-child(${rowNum}) .name`);
+    return browser.getText(`${WISHLIST_ITEMS}:nth-child(${rowNum}) .name`);
 }

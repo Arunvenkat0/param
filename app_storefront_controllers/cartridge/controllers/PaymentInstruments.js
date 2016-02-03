@@ -138,21 +138,22 @@ function create() {
     }
 
     Transaction.begin();
-        var paymentInstrument = wallet.createPaymentInstrument(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
+    var paymentInstrument = wallet.createPaymentInstrument(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
 
-        try {
-            save({
-                PaymentInstrument: paymentInstrument,
-                CreditCardFormFields: newCreditCardForm.object
-            });
-        } catch (err) {
-            Transaction.rollback();
-            return false;
-        }
+    try {
+        save({
+            PaymentInstrument: paymentInstrument,
+            CreditCardFormFields: newCreditCardForm.object
+        });
+    } catch (err) {
+        Transaction.rollback();
+        return false;
+    }
 
-        if (isDuplicateCard) {
-            wallet.removePaymentInstrument(oldCard);
-        }
+    if (isDuplicateCard) {
+        wallet.removePaymentInstrument(oldCard);
+    }
+
     Transaction.commit();
 
     paymentForm.clear();

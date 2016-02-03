@@ -17,15 +17,15 @@ export const RESULTS_TITLE = TBL_RESULTS_DETAILS_MODEL + ' h1';
 const basePath = '/stores';
 
 export function navigateTo() {
-	return browser.url(basePath);
+    return browser.url(basePath);
 }
 
 export function getResults () {
-	return browser
-		.elements(TBL_RESULTS_ROWS);
+    return browser
+        .elements(TBL_RESULTS_ROWS);
 }
 
 export function getStoreInfo() {
-	var storeInfoSelector =  RESULTS_TITLE;
-	return browser.getText(storeInfoSelector);
+    var storeInfoSelector =  RESULTS_TITLE;
+    return browser.getText(storeInfoSelector);
 }

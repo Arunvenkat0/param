@@ -11,8 +11,7 @@ var View = require('./View');
  * @extends module:views/View
  * @lends module:views/LoginView~LoginView.prototype
 */
-var LoginView = View.extend(
-{
+var LoginView = View.extend({
     // does not work, hence workaround via init()
     //ContinueURL : dw.web.URLUtils.https('Login-LoginForm'),
     template: 'account/login/accountlogin',

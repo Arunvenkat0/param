@@ -22,8 +22,8 @@ let RateLimiter = proxyquire('../../../../../app_storefront_core/cartridge/scrip
 
 global.session = {
     privacy: {
-    showCaptcha: null,
-    foo: null
+        showCaptcha: null,
+        foo: null
     }
 };
 
@@ -35,8 +35,8 @@ describe('RateLimiter', () => {
             var result;
 
             for (var i = 0; i < iterations; i++) {
-              result = RateLimiter.isOverThreshold('foo');
-              assert.isFalse(result);
+                result = RateLimiter.isOverThreshold('foo');
+                assert.isFalse(result);
             }
         });
 

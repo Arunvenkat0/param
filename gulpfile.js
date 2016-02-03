@@ -77,20 +77,12 @@ gulp.task('js', function () {
 	return rebundle();
 });
 
-var jscs = require('gulp-jscs');
-
-gulp.task('jscs', function () {
-	return gulp.src('**/*.js')
-		.pipe(jscs());
-});
-
-var jshint = require('gulp-jshint');
-var stylish = require('jshint-stylish');
-
-gulp.task('jshint', function () {
-	return gulp.src('**/*.js')
-		.pipe(jshint())
-		.pipe(jshint.reporter(stylish));
+var eslint = require('gulp-eslint');
+gulp.task('lint', function() {
+	return gulp.src('./**/*.js')
+		.pipe(eslint())
+		.pipe(eslint.format())
+		.pipe(eslint.failAfterError());
 });
 
 var webdriver = require('gulp-webdriver');
@@ -112,7 +104,6 @@ gulp.task('test:unit', function () {
 });
 
 gulp.task('build', ['js', 'css']);
-gulp.task('lint', ['jshint', 'jscs']);
 
 gulp.task('default', ['enable-watch-mode', 'js', 'css'], function () {
 	gulp.watch(paths.css.map(function (path) {

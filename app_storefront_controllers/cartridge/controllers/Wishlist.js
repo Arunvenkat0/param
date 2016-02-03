@@ -21,8 +21,8 @@ function landingForm() {
     var wishlistForm = app.getForm('wishlist');
     wishlistForm.handleAction({
         register: function () {
-           response.redirect(dw.web.URLUtils.https('Account-StartRegister'));
-           return;
+            response.redirect(dw.web.URLUtils.https('Account-StartRegister'));
+            return;
         },
         search: function () {
             search();
@@ -83,12 +83,12 @@ function wishListForm() {
         },
         setItemPrivate: function (formgroup, action) {
             Transaction.wrap(function () {
-                  action.object.public = false;
+                action.object.public = false;
             });
         },
         setItemPublic: function (formgroup, action) {
             Transaction.wrap(function () {
-                  action.object.public = true;
+                action.object.public = true;
             });
         },
         setListPrivate: function () {
@@ -206,7 +206,7 @@ function search() {
  */
 function setShippingAddress() {
     var address = null;
-    var addressId = request.httpParameterMap.AddressID.stringValue || request.httpParameterMap.editAddress.stringValue;
+    var addressId = request.httpParameterMap.AddressID.stringValue || request.httpParameterMap.editAddress.stringValue;
 
     if (addressId) {
         address = dw.customer.AddressBook.getAddress(addressId);
@@ -215,7 +215,7 @@ function setShippingAddress() {
     var ProductList = app.getModel('ProductList');
     var productList = ProductList.get();
     Transaction.wrap(function () {
-         productList.setShippingAddress(address);
+        productList.setShippingAddress(address);
     });
     response.redirect(dw.web.URLUtils.https('Wishlist-Show'));
 }

@@ -333,7 +333,7 @@ function addProduct() {
 
                 if (childProduct.object && !childProduct.isProductSet()) {
                     var childProductOptionModel = childProduct.updateOptionSelection(request.httpParameterMap);
-                    cart.addProductItem(childProduct.object, parseInt(childQtys[counter], 10), params.cgid.value, childProductOptionModel);
+                    cart.addProductItem(childProduct.object, parseInt(childQtys[counter]), params.cgid.value, childProductOptionModel);
                 }
                 counter++;
             }
@@ -409,7 +409,7 @@ function addToWishlist() {
  * If the transaction fails, rolls back the transaction and renders a JSON object indicating failure.
  */
 function addBonusProductJson() {
-    var h, i, j, cart, data, productsJSON, bonusDiscountLineItem, product, lineItem, childPids, childProduct, ScriptResult, foundLineItem, Product;
+    var h, i, j, cart, data, productsJSON, bonusDiscountLineItem, product, lineItem, childPids, childProduct, foundLineItem, Product;
     cart = app.getModel('Cart').goc();
     Product = app.getModel('Product');
 
@@ -430,7 +430,7 @@ function addBonusProductJson() {
     for (i = 0; i < productsJSON.length; i += 1) {
 
         product = Product.get(productsJSON[i].pid).object;
-        lineItem = cart.addBonusProduct(bonusDiscountLineItem, product, new ArrayList(productsJSON[i].options), parseInt(productsJSON[i].qty, 10));
+        lineItem = cart.addBonusProduct(bonusDiscountLineItem, product, new ArrayList(productsJSON[i].options), parseInt(productsJSON[i].qty));
 
         if (lineItem && product) {
             if (product.isBundle()) {
@@ -445,8 +445,8 @@ function addBonusProductJson() {
                         // TODO: CommonJSify cart/UpdateProductOptionSelections.ds and import here
 
                         var UpdateProductOptionSelections = require('app_storefront_core/cartridge/scripts/cart/UpdateProductOptionSelections');
-                        ScriptResult = UpdateProductOptionSelections.update({
-                            SelectedOptions:  new ArrayList(productsJSON[i].options),
+                        UpdateProductOptionSelections.update({
+                            SelectedOptions: new ArrayList(productsJSON[i].options),
                             Product: childProduct
                         });
 

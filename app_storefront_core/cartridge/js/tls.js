@@ -15,15 +15,15 @@ function getUserAgent() {
     // Test to see if this browser has already been flagged by looking at its cookies
     if (!cookieValue) {
         getTLS(url, function (message) {
-           if (message.length > 0) {
-               showWarning(message[0]);
+            if (message.length > 0) {
+                showWarning(message[0]);
 
-               // the browser is bad - set the cookie to true (for 15 minutes)
-               setCookie(cookieName, 'true', 15);
-           } else {
-               // else the browser is good, set the cookie to false (for 30 days) so we don't check again
-               setCookie(cookieName, 'false', 60 * 24 * 30);
-           }
+                // the browser is bad - set the cookie to true (for 15 minutes)
+                setCookie(cookieName, 'true', 15);
+            } else {
+                // else the browser is good, set the cookie to false (for 30 days) so we don't check again
+                setCookie(cookieName, 'false', 60 * 24 * 30);
+            }
         });
     } else if (cookieValue === 'true') {
         // if we already know that this is an invalid browser, show the warning

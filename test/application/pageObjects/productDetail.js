@@ -54,9 +54,9 @@ export function getDisplayedThumbnailPaths () {
             return elements.value.reduce(
                 (getPathTask, value) => getPathTask.then(() =>
             browser.elementIdAttribute(value.ELEMENT, 'src').then(src => {
-                        thumbnailPaths.push(getImagePath(src.value));
-                        return thumbnailPaths;
-                    })
+                thumbnailPaths.push(getImagePath(src.value));
+                return thumbnailPaths;
+            })
                 ),
                 Promise.resolve());
         });

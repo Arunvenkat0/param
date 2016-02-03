@@ -109,9 +109,9 @@ export function getVariationMasterInstances (catalog) {
 
 export function getVariantParent (catalog, variant) {
     let variationMasters = getVariationMasterInstances(catalog);
-    return _.find(variationMasters, master =>
-        master.hasOwnProperty('variants') ? master.variants.indexOf(variant) > -1 : undefined
-    );
+    return _.find(variationMasters, master => {
+        return master.hasOwnProperty('variants') ? master.variants.indexOf(variant) > -1 : undefined;
+    });
 }
 
 export class Category {
@@ -152,11 +152,11 @@ export class AbstractProductBase {
         this.ean = product.ean[0];
         this.upc = product.upc[0];
         this.unit = product.unit[0];
-        this.minOrderQuantity = +product['min-order-quantity'][0];
-        this.stepQuantity = +product['step-quantity'][0];
-        this.onlineFlag = !!product['online-flag'][0];
-        this.availableFlag = !!product['available-flag'][0];
-        this.searchableFlag = !!product['searchable-flag'][0];
+        this.minOrderQuantity = Number(product['min-order-quantity'][0]);
+        this.stepQuantity = Number(product['step-quantity'][0]);
+        this.onlineFlag = Boolean(product['online-flag'][0]);
+        this.availableFlag = Boolean(product['available-flag'][0]);
+        this.searchableFlag = Boolean(product['searchable-flag'][0]);
         this.taxClassId = product['tax-export class-id'] ? product['tax-export class-id'][0] : null;
 
         if (_.size(product['online-from'])) {
@@ -235,10 +235,6 @@ export class AbstractProductBase {
 }
 
 export class ProductStandard extends AbstractProductBase {
-    constructor (product) {
-        super(product);
-    }
-
     getPrices (pricebooks, locale) {
         let prices = {};
 
@@ -263,7 +259,7 @@ export class ProductSet extends AbstractProductBase {
         let categoryAssignmentJSON = catalog.categoryAssignments[this.id];
         let categoryAssignment = new CategoryAssignment(categoryAssignmentJSON);
         let categoryJSON = catalog.categories[categoryAssignment.categoryId];
-        this.resource = `/${this.id}.html`;
+        this.resource = `/${ this.id}.html`;
 
         // Keys are locale codes
         this.urlResourcePaths = {};
@@ -412,9 +408,9 @@ export class ProductVariationMaster extends AbstractProductBase {
             let variantPrices = variant.getPrices(pricebooks, locale);
             priceTypes.forEach(type => {
                 if (variantPrices[type]) {
-                    prices[type] = !prices[type] || variantPrices[type] < prices[type] ?
-                        pricingHelpers.getFormattedPrice(variantPrices[type], locale) :
-                        pricingHelpers.getFormattedPrice(prices[type], locale);
+                    prices[type] = !prices[type] || variantPrices[type] < prices[type]
+                        ? pricingHelpers.getFormattedPrice(variantPrices[type], locale)
+                        : pricingHelpers.getFormattedPrice(prices[type], locale);
                 }
             });
         });

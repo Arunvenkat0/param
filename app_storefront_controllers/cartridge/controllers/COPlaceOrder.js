@@ -120,11 +120,6 @@ function start() {
             }
         });
 
-        var validationResult = cart.validateForCheckout();
-
-        // TODO - what are those used for - do they need to be returned/passed to a template ?
-        var BasketStatus = validationResult.BasketStatus;
-
         // Recalculate the payments. If there is only gift certificates, make sure it covers the order total, if not
         // back to billing page.
         Transaction.wrap(function () {
@@ -150,7 +145,6 @@ function start() {
 
         if (!order) {
             // TODO - need to pass BasketStatus to Cart-Show ?
-            BasketStatus = new Status(Status.ERROR);
             app.getController('Cart').Show();
 
             return {};
@@ -289,18 +283,10 @@ function submitPaymentJSON() {
             var asyncPaymentMethodResponse = requestObject[requestObjectItem];
 
             var terms = requestObjectItem.split('_');
-            if (terms[0] === 'creditCard' && terms[1] === 'number') {
-                form.creditCard.number.setValue(asyncPaymentMethodResponse);
-            } else if (terms[0] === 'creditCard' && terms[1] === 'cvn') {
-                form.creditCard.cvn.setValue(asyncPaymentMethodResponse);
-            } else if (terms[0] === 'creditCard' && terms[1] === 'month') {
-                form.creditCard.month.setValue(Number(asyncPaymentMethodResponse));
-            } else if (terms[0] === 'creditCard' && terms[1] === 'year') {
-                form.creditCard.year.setValue(Number(asyncPaymentMethodResponse));
-            } else if (terms[0] === 'creditCard' && terms[1] === 'owner') {
-                form.creditCard.owner.setValue(asyncPaymentMethodResponse);
-            } else if (terms[0] === 'creditCard' && terms[1] === 'type') {
-                form.creditCard.type.setValue(asyncPaymentMethodResponse);
+            if (terms[0] === 'creditCard') {
+                var value = (terms[1] === 'month' || terms[1] === 'year')
+                    ? Number(asyncPaymentMethodResponse) : asyncPaymentMethodResponse;
+                form.creditCard[terms[1]].setValue(value);
             } else if (terms[0] === 'selectedPaymentMethodID') {
                 form.selectedPaymentMethodID.setValue(asyncPaymentMethodResponse);
             }

@@ -15,9 +15,7 @@ var Form = require('~/cartridge/scripts/models/FormModel');
  * @class module:models/AddressModel~AddressModel
  * @extends module:models/AbstractModel
  */
-var AddressModel = AbstractModel.extend(
-/** @lends module:models/AddressModel~AddressModel.prototype */
-{
+var AddressModel = AbstractModel.extend({
     /**
      * Removes the address.
      * Note that the deletion will fail in case the address is still associated with a product list

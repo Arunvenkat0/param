@@ -11,7 +11,7 @@ export const ELECTRONICS = '.menu-category li:nth-child(4) .has-sub-menu';
 export const TOP_SELLERS = '.menu-category a[href*="top-seller"]';
 
 export function navigateTo() {
-	return browser.url(basePath);
+    return browser.url(basePath);
 }
 
 /**
@@ -19,10 +19,10 @@ export function navigateTo() {
  * @param {number} position - slide position, start from 1
  */
 export function mainCarouselSlide(position) {
-	var carouselControlSelector = MAIN_CAROUSEL + ' .jcarousel-control a:nth-child(' + position + ')';
-	return browser.waitForExist(carouselControlSelector)
-		// wait 500ms after carousel transition
-		.then(() => browser.click(carouselControlSelector)).pause(500);
+    var carouselControlSelector = MAIN_CAROUSEL + ' .jcarousel-control a:nth-child(' + position + ')';
+    return browser.waitForExist(carouselControlSelector)
+        // wait 500ms after carousel transition
+        .then(() => browser.click(carouselControlSelector)).pause(500);
 }
 
 /**
@@ -30,15 +30,15 @@ export function mainCarouselSlide(position) {
  * @param {number} position - slide position, start from 1
  */
 export function verticalCarouselSlide(position) {
-	var carouselNextSelector = VERTICAL_CAROUSEL + ' .jcarousel-next';
-	return browser.waitForExist(carouselNextSelector)
-		.then(() => {
-			if (position !== 1) {
-				return browser.click(carouselNextSelector)
-					// wait for carousel transition
-					.pause(500);
-			}
-		});
+    var carouselNextSelector = VERTICAL_CAROUSEL + ' .jcarousel-next';
+    return browser.waitForExist(carouselNextSelector)
+        .then(() => {
+            if (position !== 1) {
+                return browser.click(carouselNextSelector)
+                    // wait for carousel transition
+                    .pause(500);
+            }
+        });
 }
 
 /**
@@ -46,8 +46,8 @@ export function verticalCarouselSlide(position) {
  * @param {number} position - slide position, start from 1
  */
 export function isVerticalCarouselSlideVisible(position) {
-	var slideSelector = VERTICAL_CAROUSEL + ' ul li:nth-child(' + position + ') .product-tile';
-	return browser.isVisible(slideSelector);
+    var slideSelector = VERTICAL_CAROUSEL + ' ul li:nth-child(' + position + ') .product-tile';
+    return browser.isVisible(slideSelector);
 }
 
 /**
@@ -55,6 +55,6 @@ export function isVerticalCarouselSlideVisible(position) {
  * @param {number} position - slide position, start from 1
  */
 export function getVerticalCarouselProductName(position) {
-	var slideProductNameSelector = VERTICAL_CAROUSEL + ' ul li:nth-child(' + position + ') .product-name a';
-	return browser.getText(slideProductNameSelector);
+    var slideProductNameSelector = VERTICAL_CAROUSEL + ' ul li:nth-child(' + position + ') .product-name a';
+    return browser.getText(slideProductNameSelector);
 }

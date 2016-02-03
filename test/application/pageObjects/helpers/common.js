@@ -25,7 +25,7 @@ export const PRIMARY_CONTENT = '.primary-content';
 
 export function getPageTitle() {
     return Q.Promise(resolve => {
-	browser.getTitle()
+        browser.getTitle()
             .then(title => resolve(title.split('|')[0].trim()));
     });
 }
@@ -57,7 +57,7 @@ export function clickCheckbox(selector) {
         .isSelected(selector)
         .then(selected => {
             if (!selected) {
-		return browser.click(selector);
+                return browser.click(selector);
             }
             return Promise.resolve();
         });
@@ -71,11 +71,11 @@ export function selectAttributeByIndex (attributeName, index, deselect) {
         .then(() => _isAttributeSelected(selector))
         .then(isAlreadySelected => {
             if (deselect && isAlreadySelected) {
-		return browser.waitForVisible('.loader', 500, true)
+                return browser.waitForVisible('.loader', 500, true)
                     .click(selector + ' a')
                     .waitForText('.swatches.' + attributeName + ' .selected-value', 500, true);
             } else if (!isAlreadySelected) {
-		return browser.waitForVisible('.loader', 500, true)
+                return browser.waitForVisible('.loader', 500, true)
                     .click(selector + ' a')
                     .waitForText('.swatches.' + attributeName + ' .selected-value');
             }
@@ -119,7 +119,7 @@ export function addProductVariationToBasket (product, btnAdd) {
             }
             return Promise.resolve();
         })
-	.then(() => browser.waitForVisible('.loader-bg', 500, true)
+    .then(() => browser.waitForVisible('.loader-bg', 500, true)
             .waitForEnabled(btnAdd)
             .click(btnAdd)
         )
@@ -134,7 +134,7 @@ function _clickFirstRemoveLink (removeLink) {
     return browser.elements(removeLink)
         .then(removeLinks => {
             if (removeLinks.value.length) {
-		return browser.elementIdClick(removeLinks.value[0].ELEMENT);
+                return browser.elementIdClick(removeLinks.value[0].ELEMENT);
             }
             return Promise.resolve();
         });

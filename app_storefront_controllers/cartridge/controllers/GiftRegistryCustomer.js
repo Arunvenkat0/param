@@ -98,15 +98,13 @@ function PurchaseGiftCertificate() {
 
 
     //TODO : Variable assignment
-    var EnsureShipmentResult;
     var ProductList;
-    var ProductListController;
     if (!GetBasketResult.error) {
         var Basket = GetBasketResult.Basket;
 
         // TODO this can't be right, PLI is not passed if this method is called from the web?
-        ProductListController = require('./ProductList');
-        EnsureShipmentResult = ProductList.EnsureShipment({
+        require('./ProductList');
+        ProductList.EnsureShipment({
             Basket: Basket
         });
     }

@@ -28,21 +28,20 @@ export const JOBS_LANDING_STRING    = 'Jobs Landing Page';
 
 // Social link elements
 export const socialLinks = {
-	facebook: {
-		selector: 'a[title*="Go to Facebook"]',
-		baseUrl: 'https://www.facebook.com/demandware'
-	},
-	twitter: {
-		selector: 'a[title*="Go to Twitter"]',
-		baseUrl: 'https://twitter.com/demandware'
-	},
-	linkedin: {
-		selector: 'a[title*="Go to LinkedIn"]',
-		baseUrl: 'https://www.linkedin.com/company/demandware'
-	},
-	youtube: {
-		selector: 'a[title*="Go to YouTube"]',
-		baseUrl: 'https://www.youtube.com/user/demandware'
-	}
+    facebook: {
+        selector: 'a[title*="Go to Facebook"]',
+        baseUrl: 'https://www.facebook.com/demandware'
+    },
+    twitter: {
+        selector: 'a[title*="Go to Twitter"]',
+        baseUrl: 'https://twitter.com/demandware'
+    },
+    linkedin: {
+        selector: 'a[title*="Go to LinkedIn"]',
+        baseUrl: 'https://www.linkedin.com/company/demandware'
+    },
+    youtube: {
+        selector: 'a[title*="Go to YouTube"]',
+        baseUrl: 'https://www.youtube.com/user/demandware'
+    }
 };
-

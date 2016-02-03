@@ -18,9 +18,7 @@ var LinkedHashMap = require('dw/util/LinkedHashMap');
  * @lends module:views/CustomerServiceView~CustomerServiceView.prototype
  * @returns {module:views/CustomerServiceView~CustomerServiceView} A view with updated information.
  */
-var CustomerServiceView = View.extend(
-/** @lends module:views/CustomerServiceView~CustomerServiceView.prototype */
-{
+var CustomerServiceView = View.extend({
 
     /**
      * Determines the customer navigation from the folder structure in the content library. Returns the list of

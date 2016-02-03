@@ -20,8 +20,8 @@ describe('Header #C147202', () => {
             .waitForVisible(common.PRIMARY_CONTENT)
             .url()
             .then(currentUrl => {
-               let parseUrl = url.parse(currentUrl.value);
-               return assert.isTrue(parseUrl.pathname.endsWith('new%20arrivals/'));
+                let parseUrl = url.parse(currentUrl.value);
+                return assert.isTrue(parseUrl.pathname.endsWith('new%20arrivals/'));
             })
     );
 
@@ -42,8 +42,8 @@ describe('Header #C147202', () => {
            .waitForVisible(common.PRIMARY_CONTENT)
            .url()
            .then(currentURL => {
-              let parseUrl = url.parse(currentURL.value);
-              return assert.isTrue(parseUrl.pathname.endsWith('mens/'));
+               let parseUrl = url.parse(currentURL.value);
+               return assert.isTrue(parseUrl.pathname.endsWith('mens/'));
            })
     );
 
