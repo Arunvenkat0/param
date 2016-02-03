@@ -3,6 +3,7 @@
 import _ from 'lodash';
 import * as common from '../helpers/common';
 import * as pricingHelpers from '../helpers/pricing';
+import {AbstractDwModelMock} from './common';
 
 export let priceTypes = ['list', 'sale'];
 
@@ -13,6 +14,7 @@ let defaultLocale = common.defaultLocale;
  *   instances
  *
  * @param {Object} fileData - Parsed data from XML files
+ * @param {Object} [currentCatalog] - parsedData.catalog processed-to-date
  * @returns {Object} - Map of Product* instances grouped by Product IDs
  */
 export function parseCatalog (fileData, currentCatalog) {
@@ -145,8 +147,10 @@ export class CategoryAssignment {
     }
 }
 
-export class AbstractProductBase {
+export class AbstractProductBase extends AbstractDwModelMock {
     constructor (product) {
+        super(product);
+
         this.id = product.$['product-id'];
         this.type = getProductType(product);
         this.ean = product.ean[0];
@@ -216,21 +220,6 @@ export class AbstractProductBase {
      */
     getImages (viewType, attrValue) {
         return _.find(this.images, {viewType: viewType, variationValue: attrValue}).paths;
-    }
-
-    /**
-     * If get localized product property exists then return localized product property
-     * else return default product property
-     * @param {String} propertyPath - dot notation property path (i.e., for a variation master product, 'pageAttributes.pageTitle')
-     * @param {String} locale - Locale code (i.e., fr_FR or zh_CN)
-     * @returns {String}
-     */
-    getLocalizedProperty (propertyPath, locale = 'x_default') {
-        let tokens = propertyPath.split('.');
-        let property = tokens.reduce((product, token) => product[token], this);
-        let keys = Object.keys(property);
-        locale = keys.indexOf(locale) > -1 ? locale : 'x_default';
-        return property[locale];
     }
 }
 
