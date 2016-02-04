@@ -26,7 +26,7 @@ function getDeviceType() {
         deviceType = 'mobile';
 
     } else if (httpUserAgent.indexOf(androidDevice) > -1) {
-        if (httpUserAgent.indexOf('mobile') > -1) {
+        if (httpUserAgent.toLowerCase().indexOf('mobile') > -1) {
             deviceType = 'mobile';
         }
     } else if (httpUserAgent.indexOf(iPadDevice) > -1) {
