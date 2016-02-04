@@ -250,9 +250,8 @@ function process() {
         });
 
         if (initiateOAuthLoginResult.result === PIPELET_ERROR) {
-            var oauthLoginForm = app.getForm('oauthlogin.');
+            var oauthLoginForm = app.getForm('oauthlogin');
             oauthLoginForm.get('loginsucceeded').invalidate();
-            finishOAuthLogin();
             return false;
         }
 
@@ -512,6 +511,7 @@ function getSinaWeiboAccountInfo(accessToken, userId) {
  */
 function finishOAuthLogin() {
     // To continue to the destination that is already preserved in the session.
+    session.custom.ContinuationURL = getTargetUrl().toString();
     var location = session.custom.ContinuationURL;
     delete session.custom.ContinuationURL;
     response.redirect(location);
