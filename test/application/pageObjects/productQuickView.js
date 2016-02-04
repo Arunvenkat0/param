@@ -3,9 +3,13 @@
 import * as common from '../pageObjects/helpers/common';
 
 export const BTN_CLOSE = 'button[title=Close]';
+export const BTN_NEXT = '.quickview-nav .quickview-next';
 export const CONTAINER = '.ui-dialog';
 export const SWATCHES_SIZE = '.swatches.size';
 export const VARIATION_CONTAINER = '.product-variations';
+export const PRODUCT_PRIMARY_IMAGE = '.primary-image';
+export const PRODUCT_ID = '#QuickViewDialog .product-number [itemprop="productID"]';
+export const QUICK_VIEW = '#search-result-items li:nth-child(1) .product-image #quickviewbutton';
 
 function getCssSizeByIdx (idx) {
     return [

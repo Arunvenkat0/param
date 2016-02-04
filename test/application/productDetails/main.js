@@ -5,6 +5,7 @@ import * as homePage from '../pageObjects/home';
 import * as productDetailPage from '../pageObjects/productDetail';
 import * as testData from '../pageObjects/testData/main';
 import {config} from '../webdriver/wdio.conf';
+import * as productQuickView from '../pageObjects/productQuickView';
 
 let locale = config.locale;
 
@@ -321,5 +322,69 @@ describe('Product Details Page', () => {
                 .then(button => browser.elementIdEnabled(button.value.ELEMENT))
                 .then(enabled => assert.isTrue(enabled.value))
         );
+    });
+
+    describe('Quick View', () => {
+        let basePath = '/mens/clothing/suits';
+        let firstProductInGridTile = '#search-result-items li:nth-child(1) .product-image';
+        let searchResultItems = '#search-result-items';
+        let noImage = 'noimageLarge.png';
+
+
+        let numProducts = 0;
+
+        before(() => browser.url(basePath));
+
+        it('should display product image for each product', () =>
+            browser.waitForVisible(searchResultItems)
+                .then(() => browser.elements('#search-result-items .grid-tile'))
+                .then(tiles => {
+                    numProducts = tiles.value.length;
+                    return Promise.resolve();
+                })
+                .then(() => browser.moveToObject(firstProductInGridTile))
+                .then(() => browser.click(productQuickView.QUICK_VIEW))
+                .then(() => browser.waitForVisible(productQuickView.CONTAINER))
+                .then(() => {
+                    let arr = [];
+                    for (var i = 0; i < numProducts; i++) {
+                        arr.push(i);
+                    }
+                    return arr.reduce(function (checkImage) {
+                        //check all products in sequence
+                        return checkImage.then(() => {
+                            let productID;
+                            return browser.getText(productQuickView.PRODUCT_ID)
+                                .then(id => {
+                                    productID = id;
+                                    return Promise.resolve();
+                                })
+                                .then(() => browser.getAttribute(productQuickView.PRODUCT_PRIMARY_IMAGE, 'src'))
+                                .then(src => {
+                                    // make sure product image exists
+                                    assert.isTrue(src.indexOf(noImage) === -1);
+                                    return Promise.resolve();
+                                }).then(() => {
+                                    // check if there is next product
+                                    return browser.isEnabled(productQuickView.BTN_NEXT);
+                                }).then(enabled => {
+                                    if (!enabled) {
+                                        return Promise.resolve();
+                                    }
+                                    // click next product, wait for it to load
+                                    return browser.click(productQuickView.BTN_NEXT)
+                                        .then(() => {
+                                            return browser.waitUntil(() => {
+                                                return browser.getText(productQuickView.PRODUCT_ID).then(id => {
+                                                    return id !== productID;
+                                                });
+                                            });
+                                        });
+                                });
+                        });
+                    }, Promise.resolve());
+                })
+        );
+
     });
 });
