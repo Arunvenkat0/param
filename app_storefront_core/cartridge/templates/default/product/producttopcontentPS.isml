@@ -133,6 +133,7 @@
 
 	<isinclude template="product/components/promotions"/>
 	<isif condition=${pdict.isBundle}>
+		<isset name="showTieredPrice" value="${true}" scope="page"/>
 		<form action="${URLUtils.url('Cart-AddProduct')}" method="post" id="${pdict.CurrentForms.product.addtocart.dynamicHtmlName}" class="pdpForm bundle">
 	</isif>
 	<div id="product-set-list" class="product-set-list">
