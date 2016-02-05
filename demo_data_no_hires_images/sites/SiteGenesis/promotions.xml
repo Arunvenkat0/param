@@ -31,13 +31,13 @@
             <customer-group group-id="Everyone"/>
         </customer-groups>
     </campaign>
-	
+
     <campaign campaign-id="PromotionTest_PriceDisplay_MD">
         <enabled-flag>false</enabled-flag>
         <customer-groups>
             <customer-group group-id="Everyone"/>
         </customer-groups>
-    </campaign>	
+    </campaign>
 
     <campaign campaign-id="mens-clothing-suits">
         <description>This is a campaign that displays a landing banner, with a 25% discount on all suits and default sorting rule of top selling suits.</description>
@@ -50,6 +50,13 @@
     <campaign campaign-id="Payment-promo">
         <description>$50 off on selecting Visa</description>
         <enabled-flag>false</enabled-flag>
+        <customer-groups>
+            <customer-group group-id="Everyone"/>
+        </customer-groups>
+    </campaign>
+
+    <campaign campaign-id="PromotionTests">
+        <enabled-flag>true</enabled-flag>
         <customer-groups>
             <customer-group group-id="Everyone"/>
         </customer-groups>
@@ -95,7 +102,7 @@
             </simple-discount>
         </product-promotion-rule>
     </promotion>
-	
+
     <promotion promotion-id="$50offShippingAmountAbove150">
         <enabled-flag>false</enabled-flag>
         <searchable-flag>true</searchable-flag>
@@ -2010,14 +2017,45 @@
         </order-promotion-rule>
     </promotion>
 
+    <promotion promotion-id="PromotionTest_20%offOrderAmountOver200">
+        <enabled-flag>true</enabled-flag>
+        <archived-flag>false</archived-flag>
+        <searchable-flag>false</searchable-flag>
+        <exclusivity>no</exclusivity>
+        <name xml:lang="x-default">20%offOrderAmountOver200</name>
+        <callout-msg xml:lang="x-default">Get 20% off Order Amount Over 200</callout-msg>
+        <details xml:lang="x-default">Get 20% off Order Amount Over 200</details>
+        <order-promotion-rule>
+            <qualifying-products>
+                <included-products>
+                    <condition-group>
+                        <product-id-condition operator="is equal">
+                            <product-id>82936941</product-id>
+                        </product-id-condition>
+                    </condition-group>
+                </included-products>
+            </qualifying-products>
+            <payment-methods>
+                <method-id>CREDIT_CARD</method-id>
+            </payment-methods>
+            <discount-only-qualifying-products>true</discount-only-qualifying-products>
+            <discounts condition-type="order-total">
+                <discount>
+                    <threshold>200.0</threshold>
+                    <percentage>20.0</percentage>
+                </discount>
+            </discounts>
+        </order-promotion-rule>
+    </promotion>
+
     <promotion-campaign-assignment promotion-id="PromotionTest_WithoutQualifying" campaign-id="PromotionTest_PriceDisplay_MD">
         <qualifiers match-mode="any">
             <customer-groups/>
             <source-codes/>
             <coupons/>
         </qualifiers>
-    </promotion-campaign-assignment>	
-	
+    </promotion-campaign-assignment>
+
     <promotion-campaign-assignment promotion-id="$50offShippingAmountAbove150" campaign-id="Automation">
         <qualifiers match-mode="any">
             <customer-groups/>
@@ -2308,6 +2346,14 @@
     </promotion-campaign-assignment>
 
     <promotion-campaign-assignment promotion-id="Rank-Exclusivity-No" campaign-id="Automation">
+        <qualifiers match-mode="any">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="PromotionTest_20%offOrderAmountOver200" campaign-id="PromotionTests">
         <qualifiers match-mode="any">
             <customer-groups/>
             <source-codes/>
