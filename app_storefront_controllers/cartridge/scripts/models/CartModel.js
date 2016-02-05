@@ -9,12 +9,13 @@ var Transaction = require('dw/system/Transaction');
 /* API Includes */
 var AbstractModel = require('./AbstractModel');
 var ArrayList = require('dw/util/ArrayList');
+var BasketMgr = require('dw/order/BasketMgr');
 var List = require('dw/util/List');
 var Money = require('dw/value/Money');
 var MultiShippingLogger = dw.system.Logger.getLogger('multishipping');
+var OrderMgr = require('dw/order/OrderMgr');
 var PaymentInstrument = require('dw/order/PaymentInstrument');
 var PaymentMgr = require('dw/order/PaymentMgr');
-var Pipelet = require('dw/system/Pipelet');
 var Product = require('~/cartridge/scripts/models/ProductModel');
 var ProductInventoryMgr = require('dw/catalog/ProductInventoryMgr');
 var QuantityLineItem = require('~/cartridge/scripts/models/QuantityLineItemModel');
@@ -54,27 +55,15 @@ var CartModel = AbstractModel.extend({
      * @transactional
      * @param {dw.customer.ProductListItem} productListItem The product list item whose associated product is added to the basket.
      * @param {Number} quantity The quantity of the product.
-     * @param {String} cgid The ID of the category context to be stored with the product line item.
      */
-    addProductListItem: function (productListItem, quantity, cgid) {
+    addProductListItem: function (productListItem, quantity) {
 
         if (productListItem) {
             var cart = this;
 
             Transaction.wrap(function () {
-                var productOptionSelections = Product.get(productListItem.getProduct()).updateOptionSelection(request.httpParameterMap);
-
-                // TODO
-                var AddProductToBasketResult = new Pipelet('AddProductToBasket').execute({
-                    Basket: cart.object,
-                    ProductOptionModel: productOptionSelections,
-                    Quantity: quantity,
-                    Category: dw.catalog.CatalogMgr.getCategory(cgid),
-                    ProductListItem: productListItem
-                });
-                if (AddProductToBasketResult.result === PIPELET_ERROR) {
-                    return;
-                }
+                var shipment = cart.object.defaultShipment;
+                cart.createProductLineItem(productListItem, shipment).setQuantityValue(quantity);
 
                 cart.calculate();
             });
@@ -93,25 +82,18 @@ var CartModel = AbstractModel.extend({
      * @alias module:models/CartModel~CartModel/addProductItem
      * @param {String} pid - ID of the product that is to be added to the basket.
      * @param {Number} quantity - The quantity of the product.
-     * @param {String} cgid - ID of the category context to be stored with the product line item.
      * @param {dw.catalog.ProductOptionModel} productOptionModel - The option model of the product that is to be added to the basket.
      */
-    addProductItem: function (product, quantity, cgid, productOptionModel) {
+    addProductItem: function (product, quantity, productOptionModel) {
         var cart = this;
         Transaction.wrap(function () {
             var i;
             if (product) {
+                var shipment = cart.object.defaultShipment;
+                var productLineItem = cart.createProductLineItem(product, productOptionModel, shipment);
 
-                var AddProductToBasketResult = new Pipelet('AddProductToBasket').execute({
-                    Basket: cart.object,
-                    Product: product,
-                    ProductOptionModel: productOptionModel,
-                    Quantity: quantity,
-                    Category: dw.catalog.CatalogMgr.getCategory(cgid)
-                });
-
-                if (AddProductToBasketResult.result === PIPELET_ERROR) {
-                    return;
+                if (quantity !== null) {
+                    productLineItem.setQuantityValue(quantity);
                 }
 
                 if (product.bundle) {
@@ -204,14 +186,14 @@ var CartModel = AbstractModel.extend({
      */
     addCoupon: function (couponCode) {
         if (couponCode) {
-
-            var AddCouponToBasket2Result = new Pipelet('AddCouponToBasket2').execute({
-                Basket: this.object,
-                CouponCode: couponCode
+            var cart = this;
+            var campaignBased = true;
+            var addCouponToBasket2Result = Transaction.wrap(function () {
+                return cart.createCouponLineItem(couponCode, campaignBased);
             });
 
             this.calculate();
-            return {CouponStatus: AddCouponToBasket2Result.Status};
+            return {CouponStatus: addCouponToBasket2Result.statusCode};
         }
     },
 
@@ -245,22 +227,6 @@ var CartModel = AbstractModel.extend({
         var shipment = null;
 
         return this.object.createBonusProductLineItem(bonusDiscountLineItem, product, ScriptResult, shipment);
-    },
-
-    /**
-     * Removes a gift certificate line item from the basket.
-     *
-     * @transactional
-     * @alias module:models/CartModel~CartModel/removeGiftCertificateLineItem
-     * @param {dw.order.GiftCertificateLineItem} giftCertificateLineItem - The gift certificate to remove from the basket.
-     */
-    removeGiftCertificateLineItem: function (giftCertificateLineItem) {
-        // TODO - add check whether the given lineitem actually belongs to this cart object
-        new Pipelet('RemoveGiftCertificateLineItem').execute({
-            GiftCertificateLineItem: giftCertificateLineItem
-        });
-
-        return;
     },
 
     /**
@@ -1390,16 +1356,17 @@ var CartModel = AbstractModel.extend({
      * @returns {dw.order.Order} The created order in status CREATED or null if an error occured.
      */
     createOrder: function () {
-        var CreateOrder2Result = new Pipelet('CreateOrder2', {
-            CreateCustomerNo: true
-        }).execute({
-            Basket: this.object
-        });
-        if (CreateOrder2Result.result === PIPELET_ERROR) {
-            return null;
-        } else {
-            return CreateOrder2Result.Order;
+        var basket = this.object;
+        var order;
+        try {
+            order = Transaction.wrap(function () {
+                return OrderMgr.createOrder(basket);
+            });
+        } catch (error) {
+            return;
         }
+
+        return order;
     },
 
     /**
@@ -1447,19 +1414,20 @@ var CartModel = AbstractModel.extend({
  * @returns {module:models/CartModel~CartModel}
  */
 CartModel.get = function (parameter) {
-    var obj = null;
+    var basket = null;
 
     if (!parameter) {
-        var GetBasketResult = new Pipelet('GetBasket', {
-            Create: false
-        }).execute();
-        if (GetBasketResult.result !== PIPELET_ERROR) {
-            obj = GetBasketResult.Basket;
+
+        var currentBasket = BasketMgr.getCurrentBasket();
+
+        if (currentBasket !== null) {
+            basket = currentBasket;
         }
+
     } else if (typeof parameter === 'object') {
-        obj = parameter;
+        basket = parameter;
     }
-    return (obj !== null) ? new CartModel(obj) : null;
+    return (basket !== null) ? new CartModel(basket) : null;
 };
 
 /**
@@ -1471,12 +1439,10 @@ CartModel.get = function (parameter) {
 CartModel.goc = function () {
     var obj = null;
 
-    var GetBasketResult = new Pipelet('GetBasket', {
-        Create: true
-    }).execute();
+    var basket = BasketMgr.getCurrentOrNewBasket();
 
-    if (GetBasketResult.result !== PIPELET_ERROR) {
-        obj = GetBasketResult.Basket;
+    if (basket && basket !== null) {
+        obj = basket;
     }
 
     return new CartModel(obj);
