@@ -32,14 +32,11 @@ export function navigateTo () {
 }
 
 export function addProductVariationMasterToCart (num1, num2, num3) {
-    return testData.getProductVariationMaster()
-        .then(productVariationMaster => {
-            let product = new Map();
-            product.set('resourcePath', productVariationMaster.getUrlResourcePath());
-            product.set('colorIndex', num1);
-            product.set('sizeIndex', num2);
-            product.set('widthIndex', num3);
-            return product;
-        })
-        .then(product => productDetailPage.addProductVariationToCart(product));
+    let product = new Map();
+    product.set('resourcePath', testData.getProductVariationMaster().getUrlResourcePath());
+    product.set('colorIndex', num1);
+    product.set('sizeIndex', num2);
+    product.set('widthIndex', num3);
+
+    return productDetailPage.addProductVariationToCart(product);
 }

@@ -19,16 +19,16 @@ import * as customers from '../pageObjects/testData/customers';
 
 
 describe('Checkout', () => {
-    let login = 'testuser1@demandware.com';
+    const login = 'testuser1@demandware.com';
+    const successfulCheckoutTitle = 'Thank you for your order.';
+    const locale = config.locale;
     let shippingData = {};
     let billingFormData = {};
-    let successfulCheckoutTitle = 'Thank you for your order.';
-    let locale = config.locale;
 
     before(() =>
         testData.load()
-            .then(() => testData.getCustomerByLogin(login))
-            .then(customer => {
+            .then(() => {
+                const customer = testData.getCustomerByLogin(login);
                 customer.addresses[0].postalCode = customers.globalPostalCode[locale];
                 customer.addresses[0].countryCode = customers.globalCountryCode[locale];
                 customer.addresses[0].phone = customers.globalPhone[locale];
@@ -45,9 +45,11 @@ describe('Checkout', () => {
                     phone: address.phone,
                     addressList: address.addressId
                 };
+
                 if (locale && locale === 'x_default') {
                     shippingData.states_state = address.stateCode;
                 }
+
                 billingFormData = {
                     postal: address.postalCode,
                     phone: address.phone,
@@ -62,16 +64,13 @@ describe('Checkout', () => {
     );
 
     function addProductVariationMasterToCart () {
-        return testData.getProductVariationMaster()
-            .then(productVariationMaster => {
-                let product = new Map();
-                product.set('resourcePath', productVariationMaster.getUrlResourcePath());
-                product.set('colorIndex', 1);
-                product.set('sizeIndex', 2);
-                product.set('widthIndex', 1);
-                return product;
-            })
-            .then(product => productDetailPage.addProductVariationToCart(product));
+        let product = new Map();
+        product.set('resourcePath', testData.getProductVariationMaster().getUrlResourcePath());
+        product.set('colorIndex', 1);
+        product.set('sizeIndex', 2);
+        product.set('widthIndex', 1);
+
+        return productDetailPage.addProductVariationToCart(product);
     }
 
     describe('Checkout as Guest', () => {

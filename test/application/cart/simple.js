@@ -1,13 +1,13 @@
 'use strict';
 
 import {assert} from 'chai';
+import {config} from '../webdriver/wdio.conf';
 import * as cartPage from '../pageObjects/cart';
 import * as common from '../pageObjects/helpers/common';
 import * as productDetailPage from '../pageObjects/productDetail';
 import * as productQuickViewPage from '../pageObjects/productQuickView';
 import * as testData from '../pageObjects/testData/main';
 import * as products from '../pageObjects/testData/products';
-import {config} from '../webdriver/wdio.conf';
 
 describe('Cart - Simple', () => {
     let locale = config.locale;
@@ -58,16 +58,16 @@ describe('Cart - Simple', () => {
 
     before(() => {
         return testData.load()
-            .then(() => catalog = testData.parsedData.catalog)
-            .then(() => testData.getProductVariationMaster())
-            .then(variationMaster => {
+            .then(() => {
+                productVariationMaster = testData.getProductVariationMaster();
+                return browser.url(productVariationMaster.getUrlResourcePath());
+            })
+            .then(() => {
                 let variantIds;
                 let variant1Selection = new Map();
-                productVariationMaster = variationMaster;
-                resourcePath = productVariationMaster.getUrlResourcePath();
-                browser.url(resourcePath);
-
+                catalog = testData.parsedData.catalog;
                 variantIds = productVariationMaster.getVariantProductIds();
+
                 variant1.instance = products.getProduct(catalog, variantIds[0]);
                 variant2.instance = products.getProduct(catalog, variantIds[10]);
 

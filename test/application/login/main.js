@@ -9,18 +9,15 @@ import * as navHeader from '../pageObjects/navHeader';
 import * as Resource from '../../mocks/dw/web/Resource';
 
 describe('Login Page', () => {
-    let login = 'testuser1@demandware.com';
     let oauthLoginErrorMsg = Resource.msg('account.login.logininclude.oauthloginerror', 'account', null);
 
-    before(() => testData.load()
-        .then(() => testData.getCustomerByLogin(login))
-    );
-
-    after(() => navHeader.logout());
+    before(() => testData.load());
 
     beforeEach(() => loginPage.navigateTo()
         .then(() => browser.waitForVisible(loginPage.LOGIN_BOX))
     );
+
+    after(() => navHeader.logout());
 
     it('should get error message for incorrect login credentials', () => {
         let errorMessage = Resource.msg('account.login.logininclude.loginerror', 'account', null);

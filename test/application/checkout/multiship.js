@@ -18,8 +18,8 @@ describe('Multi Shipping', () => {
     let shipmentText2 = Resource.msgf('multishippingshipments.shipment','checkout', null, 2);
 
     before(() => testData.load()
-        .then(() => testData.getCustomerByLogin(login))
-        .then(customer => {
+        .then(() => {
+            const customer = testData.getCustomerByLogin(login);
             billingFormData = {
                 postal: customers.globalPostalCode[locale],
                 phone: customers.globalPhone[locale],
@@ -31,6 +31,7 @@ describe('Multi Shipping', () => {
                 creditCard_cvn: testData.creditCard1.cvn
             };
 
+            return Promise.resolve();
         })
         .then(() => multiShipPage.addProductVariationMasterToCart(1, 2, 1))
         .then(() => multiShipPage.addProductVariationMasterToCart(1, 5, 1))

@@ -17,9 +17,8 @@ describe('Payment Settings', () => {
 
 
     before(() => testData.load()
-        .then(() => testData.getCustomerByLogin(login))
-        .then(cust => {
-            customer = cust;
+        .then(() => {
+            customer = testData.getCustomerByLogin(login);
             amexCardData = {
                 owner: customer.firstName + ' ' + customer.lastName,
                 type: 'Amex',

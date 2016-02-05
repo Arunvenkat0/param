@@ -70,7 +70,7 @@ const bundleProductId = 'microsoft-xbox360-bundle';
 
 // Used to determine whether parsedData should be regenerated.  Please modify this any time a change to the structure of
 // parsedData is made.  In an OS X Terminal, please use 'date -u' to generate this value.
-const version = 'Mon Feb  1 21:28:07 UTC 2016';
+const version = 'Sun Feb  7 01:54:41 UTC 2016';
 
 export let parsedData = {};
 export let parsedDataFile = './test/application/pageObjects/testData/parsedData.txt';
@@ -141,48 +141,46 @@ function _loadAndJsonifyXmlData (subject) {
  * Returns a Promise that returns a JSON object of a specific product's test data
  *
  * @param {String} productId - product ID
- * @returns {Promise.Object} - JSON object of product
+ * @returns {Object} - JSON object of product
  */
 export function getProductById (productId) {
-    let catalog = parsedData.catalog;
-    let product = products.getProduct(catalog, productId);
-    return Promise.resolve(product);
+    return products.getProduct(parsedData.catalog, productId);
 }
 
 /**
  * Returns a Promise that returns a Product Standard instance
  *
- * @returns {Promise.Object} - ProductStandard instance
+ * @returns {Object} - ProductStandard instance
  */
 export function getProductStandard () {
-    return Promise.resolve(getProductById(standardProductId));
+    return getProductById(standardProductId);
 }
 
 /**
  * Returns a Promise that returns a ProductVariationMaster instance
  *
- * @returns {Promise.Object} - ProductVariationMaster instance
+ * @returns {Object} - ProductVariationMaster instance
  */
 export function getProductVariationMaster () {
-    return Promise.resolve(getProductById(variationMasterProductId));
+    return getProductById(variationMasterProductId);
 }
 
 /**
  * Returns a Promise that returns a ProductSet instance
  *
- * @returns {Promise.Object} - ProductSet instance
+ * @returns {Object} - ProductSet instance
  */
 export function getProductSet () {
-    return Promise.resolve(getProductById(setProductId));
+    return getProductById(setProductId);
 }
 
 /**
  * Returns a Promise that returns a ProductBundle instance
  *
- * @returns {Promise.Object} - ProductBundle instance
+ * @returns {Object} - ProductBundle instance
  */
 export function getProductBundle () {
-    return Promise.resolve(getProductById(bundleProductId));
+    return getProductById(bundleProductId);
 }
 
 /* CUSTOMERS */
@@ -194,10 +192,7 @@ export function getProductBundle () {
  * @returns {Promise.Object} - JSON object with Customer's test data
  */
 export function getCustomerByLogin (login) {
-    let customersData = parsedData.customers;
-    let customer = customers.getCustomer(customersData, login);
-    customersData[login] = customer;
-    return Promise.resolve(customersData[login]);
+    return customers.getCustomer(parsedData.customers, login);
 }
 
 /* PRICES */
@@ -210,20 +205,17 @@ export function getCustomerByLogin (login) {
  * @returns {Object} - Product* instance
  */
 export function getPricesByProductId (productId, locale = 'x_default') {
-    let normalizedLocale = locale.replace(/_/g, '-');
-    let currencyCode = pricingHelpers.localeCurrency[normalizedLocale].currencyCode;
+    const normalizedLocale = locale.replace(/_/g, '-');
+    const currencyCode = pricingHelpers.localeCurrency[normalizedLocale].currencyCode;
+    const product = getProductById(productId);
+    let applicablePricebooks = {};
 
-    return getProductById(productId)
-        .then(product => {
-            let applicablePricebooks = {};
+    products.priceTypes.forEach(type => {
+        const pricebookName = [currencyCode, type, 'prices'].join('-');
+        applicablePricebooks[type] = parsedData.pricebooks[pricebookName];
+    });
 
-            products.priceTypes.forEach(type => {
-                let pricebookName = [currencyCode, type, 'prices'].join('-');
-                applicablePricebooks[type] = parsedData.pricebooks[pricebookName];
-            });
-
-            return Promise.resolve(product.getPrices(applicablePricebooks, locale, parsedData.catalog));
-        });
+    return product.getPrices(applicablePricebooks, locale, parsedData.catalog);
 }
 
 export function getVariationMasterInstances () {

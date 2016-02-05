@@ -19,7 +19,6 @@ import {config} from '../webdriver/wdio.conf';
 
 describe('Promotions - 20% off Order Amount Over 200', () => {
     let billingFormData = {};
-    let catalog;
     let locale = config.locale;
     let login = 'testuser1@demandware.com';
     let orderAmountTotal;
@@ -27,7 +26,6 @@ describe('Promotions - 20% off Order Amount Over 200', () => {
     let orderSubtotal;
     let orderTotal;
     let paymentMethodTotalAmount;
-    let productVariation;
     let promotionInfo;
     let resourcePath;
     let shippingFormData = {};
@@ -35,29 +33,23 @@ describe('Promotions - 20% off Order Amount Over 200', () => {
 
     before(() => {
         return testData.load()
-            .then(() => catalog = testData.parsedData.catalog)
-            .then(() => testData.getProductById('82936941'))
-            .then(productMaster => {
-                let variantIds;
+            .then(() => {
+                const customer = testData.getCustomerByLogin(login);
+                const address = customer.getPreferredAddress();
+                const productVariation = testData.getProductById('82936941');
+                const variantIds = productVariation.getVariantProductIds();
+                const instance = products.getProduct(testData.parsedData.catalog, variantIds[0]);
+                const promotion = testData.getPromotionById('PromotionTest_20%offOrderAmountOver200');
 
-                productVariation = productMaster;
                 resourcePath = productVariation.getUrlResourcePath();
-                variantIds = productVariation.getVariantProductIds();
-
-                let instance = products.getProduct(catalog, variantIds[0]);
 
                 variantSelection.set('resourcePath', resourcePath);
                 variantSelection.set('colorIndex', (productVariation.getAttrTypeValueIndex('color', instance.customAttributes.color) + 1));
                 variantSelection.set('sizeIndex', (productVariation.getAttrTypeValueIndex('size', instance.customAttributes.size) + 1));
-            })
 
-            .then(() => testData.getCustomerByLogin(login))
-            .then(customer => {
                 customer.addresses[0].postalCode = customers.globalPostalCode[locale];
                 customer.addresses[0].countryCode = customers.globalCountryCode[locale];
                 customer.addresses[0].phone = customers.globalPhone[locale];
-
-                let address = customer.getPreferredAddress();
 
                 shippingFormData = {
                     firstName: customer.firstName,
@@ -73,6 +65,7 @@ describe('Promotions - 20% off Order Amount Over 200', () => {
                 if (locale && locale === 'x_default') {
                     shippingFormData.states_state = address.stateCode;
                 }
+
                 billingFormData = {
                     postal: address.postalCode,
                     phone: address.phone,
@@ -82,15 +75,14 @@ describe('Promotions - 20% off Order Amount Over 200', () => {
                     creditCard_expiration_year: testData.creditCard1.yearIndex,
                     creditCard_cvn: testData.creditCard1.cvn
                 };
-            })
 
-            .then(() => testData.getPromotionById('PromotionTest_20%offOrderAmountOver200'))
-            .then(promotion => {
                 promotionInfo = {
                     calloutMsg: promotion.getCalloutMsg(locale),
                     discountThreshold: promotion.getDiscountThreshold(),
                     discountAmount: promotion.getDiscountPercentage()
                 };
+
+                return Promise.resolve();
             });
     });
 
@@ -98,7 +90,7 @@ describe('Promotions - 20% off Order Amount Over 200', () => {
 
     it('should get the promo message on pdp', () =>
         browser.url(resourcePath)
-            .then(() => browser.getText(productDetailPage.PROMOTION_CALLOUT))
+            .getText(productDetailPage.PROMOTION_CALLOUT)
             .then(promoCallOut => assert.equal(promoCallOut, promotionInfo.calloutMsg))
     );
 
@@ -161,5 +153,4 @@ describe('Promotions - 20% off Order Amount Over 200', () => {
             .then(paymentMethodTotal => paymentMethodTotalAmount = paymentMethodTotal.replace(pricingHelpers.getCurrencySymbol(locale), '').trim())
             .then(() => assert.equal(parseFloat(paymentMethodTotalAmount), parseFloat(orderAmountTotal)))
     );
-
 });

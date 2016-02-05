@@ -16,8 +16,7 @@ describe('Profile', () => {
 
     before(() => {
         return testData.load()
-            .then(() => testData.getCustomerByLogin(customerEmail))
-            .then(user => customer = user)
+            .then(() => customer = testData.getCustomerByLogin(customerEmail))
             .then(() => accountPage.navigateTo())
             .then(() => loginForm.loginAsDefaultCustomer());
     });

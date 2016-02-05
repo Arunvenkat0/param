@@ -17,13 +17,14 @@ describe('Product Details Page', () => {
         if (locale && locale !== 'x_default') {
             return;
         }
+
         before(() => homePage.navigateTo()
-        .then(() => browser.waitForExist('form[role="search"]')
-            .setValue('#q', 'bundle')
-            .submitForm('form[role="search"]')
-            .waitForExist('#search-result-items')
-            .click('[title*="Playstation 3 Bundle"]')
-            .waitForVisible(productDetailPage.PDP_MAIN))
+            .then(() => browser.waitForExist('form[role="search"]')
+                .setValue('#q', 'bundle')
+                .submitForm('form[role="search"]')
+                .waitForExist('#search-result-items')
+                .click('[title*="Playstation 3 Bundle"]')
+                .waitForVisible(productDetailPage.PDP_MAIN))
         );
 
         it('should have the right name', () =>
@@ -72,26 +73,22 @@ describe('Product Details Page', () => {
     });
 
     describe('Set', () => {
+        const productSetId = 'spring-look';
         let expectedProductSetPrice;
         let productSet;
         let productSetProducts = [];
-        let productSetId = 'spring-look';
 
-        before(() =>
-            testData.getPricesByProductId(productSetId, locale)
-                .then(price => expectedProductSetPrice = price)
-                .then(() => testData.getProductById(productSetId))
-                .then(set => {
-                    productSet = set;
-                    return productSet.getProductIds();
-                })
-                // Get Product Set Products
-                .then(productIds => productIds.reduce((getProduct, productId) => {
-                    return testData.getProductById(productId)
-                        .then(product => productSetProducts.push(product));
-                }, Promise.resolve()))
-        .then(() => browser.url(productSet.getUrlResourcePath()))
-        );
+        before(() => {
+            expectedProductSetPrice = testData.getPricesByProductId(productSetId, locale);
+            productSet = testData.getProductById(productSetId);
+
+            // Get Product Set Products
+            productSet.getProductIds().forEach(productId =>
+                productSetProducts.push(testData.getProductById(productId))
+            );
+
+            return browser.url(productSet.getUrlResourcePath());
+        });
 
         /**
          * Extracts the product item number (the last text token) from the provided string
@@ -201,18 +198,19 @@ describe('Product Details Page', () => {
         let expectedSalePrice;
         let firstAttributeID;
         let firstAttributeValues;
+        let prices;
         let variationMaster;
 
         before(() => {
-            return testData.getProductVariationMaster()
-                .then(master => {
-                    variationMaster = master;
-                    firstAttributeID = variationMaster.getAttrTypes()[0];
-                    firstAttributeValues = variationMaster.getAttrValuesByType(firstAttributeID);
-                    return testData.getProductById(variationMaster.getVariantProductIds()[0]);
-                })
-                .then(product => defaultVariant = product)
-                .then(() => browser.url(variationMaster.getUrlResourcePath()));
+            variationMaster = testData.getProductVariationMaster();
+            defaultVariant = testData.getProductById(variationMaster.getVariantProductIds()[0]);
+            firstAttributeID = variationMaster.getAttrTypes()[0];
+            firstAttributeValues = variationMaster.getAttrValuesByType(firstAttributeID);
+            prices = testData.getPricesByProductId(variationMaster.id, locale);
+            expectedListPrice = prices.list;
+            expectedSalePrice = prices.sale;
+
+            return browser.url(variationMaster.getUrlResourcePath());
         });
 
         it('should display a product name', () =>
@@ -235,8 +233,9 @@ describe('Product Details Page', () => {
         });
 
         it('should display the default Variant thumbnail images', () => {
-            let displayedThumbnailPaths;
             let defaultThumbnailPaths = variationMaster.getImages('small', defaultVariant.customAttributes[firstAttributeID]);
+            let displayedThumbnailPaths;
+
             return browser.waitUntil(
                     () => productDetailPage.getDisplayedThumbnailPaths()
                         .then(paths => paths.length === defaultThumbnailPaths.length)
@@ -270,9 +269,9 @@ describe('Product Details Page', () => {
             // This waitUntil is necessary to ensure that the thumbnail images have been replaced with the images that
             // match the newly selected value before assertions are made.  This only checks the first thumbnail.
             return browser.waitUntil(() =>
-            browser.element(productDetailPage.PRODUCT_THUMBNAILS_IMAGES)
-                .then(el => browser.elementIdAttribute(el.value.ELEMENT, 'src'))
-                .then(src => src.value.indexOf(attrValue) > -1)
+                browser.element(productDetailPage.PRODUCT_THUMBNAILS_IMAGES)
+                    .then(el => browser.elementIdAttribute(el.value.ELEMENT, 'src'))
+                    .then(src => src.value.indexOf(attrValue) > -1)
                 )
                 .then(() => productDetailPage.getDisplayedThumbnailPaths())
                 .then(paths => displayedThumbnailPaths = paths)
@@ -289,12 +288,7 @@ describe('Product Details Page', () => {
         });
 
         it('should display a struck out list price when applicable', () =>
-            testData.getPricesByProductId(variationMaster.id, locale)
-                .then(prices => {
-                    expectedListPrice = prices.list;
-                    expectedSalePrice = prices.sale;
-                    return browser.getText(productDetailPage.PRICE_SALE);
-                })
+            browser.getText(productDetailPage.PRICE_SALE)
                 .then(price => assert.equal(price, expectedSalePrice))
         );
 
@@ -310,24 +304,14 @@ describe('Product Details Page', () => {
 
         it('should redirect to a Variant PDP when it only has one variant with two attributes each with one value and first attribute is selected', () => {
             let masterWithOneVariant = '25795715';
-            let master;
-            let variantID;
-            let variant;
-            let firstAttrType;
-            let firstAttrValue;
+            let master = testData.getProductById(masterWithOneVariant);
+            let variantID = master.getVariantProductIds()[0];
+            let firstAttrType = master.getAttrTypes()[0];
+            let variant = testData.getProductById(variantID);
+            let firstAttrValue = variant.customAttributes[firstAttrType];
+            let queryString = `?dwvar_${masterWithOneVariant}_${firstAttrType}=${firstAttrValue}`;
 
-            return testData.getProductById(masterWithOneVariant)
-                .then(product => {
-                    master = product;
-                    firstAttrType = master.getAttrTypes()[0];
-                    variantID = master.getVariantProductIds()[0];
-                    return testData.getProductById(variantID);
-                })
-                .then(product => {
-                    variant = product;
-                    firstAttrValue = variant.customAttributes[firstAttrType];
-                })
-                .then(() => browser.url(master.getUrlResourcePath() + `?dwvar_${masterWithOneVariant}_${firstAttrType}=${firstAttrValue}`))
+            return browser.url(master.getUrlResourcePath() + queryString)
                 .then(() => browser.getValue(productDetailPage.PID))
                 .then(pid => assert.equal(pid, variantID));
         });

@@ -54,7 +54,6 @@ describe('Gift Registry', () => {
         }
     };
 
-
     let giftRegistryTitle = {
         'x_default': 'WEDDING OF THE CENTURY - 3/28/08',
         'en_GB': 'WEDDING OF THE CENTURY - 28/03/2008',
@@ -65,38 +64,43 @@ describe('Gift Registry', () => {
     };
 
     before(() => testData.load()
-        .then(() => testData.getCustomerByLogin(login))
-        .then(customer => {
-            customer.addresses[0].postalCode = customers.globalPostalCode[locale];
-            customer.addresses[0].countryCode = customers.globalCountryCode[locale];
-            customer.addresses[0].phone = customers.globalPhone[locale];
-
-            let address = customer.getPreferredAddress();
+        .then(() => {
+            const customer = testData.getCustomerByLogin(login);
+            const address = customer.getPreferredAddress();
 
             firstName = customer.firstName;
             lastName = customer.lastName;
+
+            customer.addresses[0].postalCode = customers.globalPostalCode[locale];
+            customer.addresses[0].countryCode = customers.globalCountryCode[locale];
+            customer.addresses[0].phone = customers.globalPhone[locale];
 
             eventFormData.set('type', 'wedding');
             eventFormData.set('name', 'Wedding of the Century');
             eventFormData.set('date', '03-28-2008');
             eventFormData.set('eventaddress_country', address.countryCode);
+
             if (locale && locale === 'x_default') {
                 eventFormData.set('eventaddress_states_state', address.stateCode);
             }
+
             eventFormData.set('town', address.city);
             eventFormData.set('participant_role', 'Groom');
             eventFormData.set('participant_firstName', customer.firstName);
             eventFormData.set('participant_lastName', customer.lastName);
             eventFormData.set('participant_email', customer.email);
+
             //addressid field cannot have the same value as an existing Address name, ex. Home or Work
             eventFormShippingData.set('addressid', 'summerHome');
             eventFormShippingData.set('firstname', customer.firstName);
             eventFormShippingData.set('lastname', customer.lastName);
             eventFormShippingData.set('address1', address.address1);
             eventFormShippingData.set('city', address.city);
+
             if (locale && locale === 'x_default') {
                 eventFormShippingData.set('states_state', address.stateCode);
             }
+
             eventFormShippingData.set('postal', address.postalCode);
             eventFormShippingData.set('country', address.countryCode);
             eventFormShippingData.set('phone',address.phone);
