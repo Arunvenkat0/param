@@ -325,13 +325,11 @@ describe('Product Details Page', () => {
     });
 
     describe('Quick View', () => {
-        let basePath = '/mens/clothing/suits';
-        let firstProductInGridTile = '#search-result-items li:nth-child(1) .product-image';
-        let searchResultItems = '#search-result-items';
-        let noImage = 'noimageLarge.png';
-
-
-        let numProducts = 0;
+        const basePath = '/mens/clothing/suits';
+        const firstProductInGridTile = '#search-result-items li:nth-child(1) .product-image';
+        const searchResultItems = '#search-result-items';
+        let numTiles = 0;
+        let myProductTiles =[];
 
         before(() => browser.url(basePath));
 
@@ -339,30 +337,33 @@ describe('Product Details Page', () => {
             browser.waitForVisible(searchResultItems)
                 .then(() => browser.elements('#search-result-items .grid-tile'))
                 .then(tiles => {
-                    numProducts = tiles.value.length;
+                    numTiles = tiles.value.length;
+                    myProductTiles = [numTiles];
+                    for (var i = 0; i < numTiles; i++) {
+                        myProductTiles.push(i);
+                    }
                     return Promise.resolve();
                 })
                 .then(() => browser.moveToObject(firstProductInGridTile))
-                .then(() => browser.click(productQuickView.QUICK_VIEW))
+                .then(() => browser.click(productQuickView.BTN_QUICK_VIEW))
                 .then(() => browser.waitForVisible(productQuickView.CONTAINER))
                 .then(() => {
-                    let arr = [];
-                    for (var i = 0; i < numProducts; i++) {
-                        arr.push(i);
-                    }
-                    return arr.reduce(function (checkImage) {
+                    return myProductTiles.reduce(function (checkImage) {
                         //check all products in sequence
                         return checkImage.then(() => {
                             let productID;
+                            let expectedPrimaryImage;
                             return browser.getText(productQuickView.PRODUCT_ID)
                                 .then(id => {
                                     productID = id;
+                                    expectedPrimaryImage = testData.getProductById(productID).getImage('large');
                                     return Promise.resolve();
                                 })
                                 .then(() => browser.getAttribute(productQuickView.PRODUCT_PRIMARY_IMAGE, 'src'))
                                 .then(src => {
-                                    // make sure product image exists
-                                    assert.isTrue(src.indexOf(noImage) === -1);
+                                    // make sure product image equals to the testData image
+                                    let actualImage = productDetailPage.getImagePath(src);
+                                    assert.equal(actualImage,expectedPrimaryImage);
                                     return Promise.resolve();
                                 }).then(() => {
                                     // check if there is next product
