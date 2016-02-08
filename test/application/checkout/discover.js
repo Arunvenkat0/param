@@ -24,9 +24,9 @@ describe('Checkout with Discover Card', () => {
 
     before(() =>
         testData.load()
-            .then(() => testData.getCustomerByLogin(login))
-            .then(customer => {
-                let address = customer.getPreferredAddress();
+            .then(() => {
+                const customer = testData.getCustomerByLogin(login);
+                const address = customer.getPreferredAddress();
 
                 shippingData = {
                     firstName: customer.firstName,
@@ -48,21 +48,19 @@ describe('Checkout with Discover Card', () => {
                     creditCard_expiration_year: testData.creditCard2.yearIndex,
                     creditCard_cvn: testData.creditCard2.cvn
                 };
+
+                return Promise.resolve();
             })
-            .then(() => Promise.resolve())
     );
 
     function addProductVariationMasterToCart () {
-        return testData.getProductVariationMaster()
-            .then(productVariationMaster => {
-                let product = new Map();
-                product.set('resourcePath', productVariationMaster.getUrlResourcePath());
-                product.set('colorIndex', 1);
-                product.set('sizeIndex', 2);
-                product.set('widthIndex', 1);
-                return product;
-            })
-            .then(product => productDetailPage.addProductVariationToCart(product));
+        let product = new Map();
+        product.set('resourcePath', testData.getProductVariationMaster().getUrlResourcePath());
+        product.set('colorIndex', 1);
+        product.set('sizeIndex', 2);
+        product.set('widthIndex', 1);
+
+        return productDetailPage.addProductVariationToCart(product);
     }
 
     let shippingFormData;

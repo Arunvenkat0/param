@@ -17,10 +17,10 @@ describe('Search', () => {
 
     before(() => testData.load()
         .then(() => testData.parsedData.catalog)
-        .then(() => testData.getProductVariationMaster())
-        .then(variationMaster => {
-            productVariationMaster = variationMaster;
+        .then(() => {
+            productVariationMaster = testData.getProductVariationMaster();
             variantIds = productVariationMaster.getVariantProductIds();
+            return Promise.resolve();
         })
     );
 

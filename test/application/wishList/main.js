@@ -154,12 +154,10 @@ describe('Wishlist', () => {
         });
 
         it('should automatically populate the Your Name field', () => {
-            let defaultCustomer;
-            return testData.getCustomerByLogin(loginForm.DEFAULT_RETURNING_CUSTOMER)
-                .then(customer => defaultCustomer = customer)
-                .then(() => browser.getValue(giftCertPurchasePage.INPUT_FROM_FIELD))
+            const defaultCustomer = testData.getCustomerByLogin(loginForm.DEFAULT_RETURNING_CUSTOMER);
+            return browser.getValue(giftCertPurchasePage.INPUT_FROM_FIELD)
                 .then(from => {
-                    let expectedYourName = defaultCustomer.firstName + ' ' + defaultCustomer.lastName;
+                    const expectedYourName = defaultCustomer.firstName + ' ' + defaultCustomer.lastName;
                     assert.equal(from, expectedYourName);
                 });
         });
@@ -179,34 +177,31 @@ describe('Wishlist', () => {
     });
 
     describe('Adding Items', () => {
-        let productVariationMaster;
         let locale = config.locale;
+        let productVariationMaster;
+        let product = new Map();
 
         function addProductVariationMasterToWishList () {
-            return testData.getProductVariationMaster()
-                .then(variationMaster => productVariationMaster = variationMaster)
-                .then(() => productVariationMaster.getUrlResourcePath())
-                .then(resourcePath => {
-                    let product = new Map();
-                    product.set('resourcePath', resourcePath);
-                    product.set('colorIndex', 1);
-                    product.set('sizeIndex', 2);
-                    product.set('widthIndex', 1);
-                    return product;
-                })
-                .then(product => productDetailPage.addProductVariationToWishList(product))
+            return productDetailPage.addProductVariationToWishList(product)
                 // To ensure that the product has been added to the wishlist before proceeding,
                 // we need to wait for a selector in the resulting page to display
                 .then(() => browser.waitForVisible('table.item-list'));
         }
 
         describe('as a returning customer', () => {
-            before(() => wishListPage.navigateTo()
-                .then(() => loginForm.loginAsDefaultCustomer())
-                .then(() => browser.waitForVisible(wishListPage.BTN_TOGGLE_PRIVACY))
-                .then(() => wishListPage.emptyWishList())
-                .then(() => addProductVariationMasterToWishList())
-            );
+            before(() => {
+                productVariationMaster = testData.getProductVariationMaster();
+                product.set('resourcePath', productVariationMaster.getUrlResourcePath());
+                product.set('colorIndex', 1);
+                product.set('sizeIndex', 2);
+                product.set('widthIndex', 1);
+
+                return wishListPage.navigateTo()
+                    .then(() => loginForm.loginAsDefaultCustomer())
+                    .then(() => browser.waitForVisible(wishListPage.BTN_TOGGLE_PRIVACY))
+                    .then(() => wishListPage.emptyWishList())
+                    .then(() => addProductVariationMasterToWishList())
+            });
 
             it('should directly navigate to the WishList Page', () =>
                 browser.isExisting('label[for=editAddress]')

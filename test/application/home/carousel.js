@@ -9,11 +9,10 @@ import * as testData from '../pageObjects/testData/main';
 
 describe('Homepage General #C84584', () => {
 
-    before(() => testData.load());
-
     describe('Main carousel links', () => {
         let categoryBanner = searchResultsPage.CATEGORY_BANNER;
 
+        before(() => testData.load());
         beforeEach(() => homePage.navigateTo());
 
         it('#1 should go to Mens Suits', () =>
@@ -63,23 +62,30 @@ describe('Homepage General #C84584', () => {
     });
 
     describe('Vertical carousel', () => {
-
-        before(() => homePage.navigateTo());
-
-        let locale = config.locale;
         let verticalCarouselSlide1ProductName;
         let verticalCarouselSlide2ProductName;
         let verticalCarouselSlide3ProductName;
         let verticalCarouselSlide4ProductName;
-        let productMaster;
+
+        function getDisplayName (productId) {
+            return testData.getProductById(productId).getLocalizedProperty('displayName', locale)
+        }
+
+        before(() => testData.load()
+            .then(() => {
+                verticalCarouselSlide1ProductName = getDisplayName('25591535');
+                verticalCarouselSlide2ProductName = getDisplayName('25686395');
+                verticalCarouselSlide3ProductName = getDisplayName('54736828');
+                verticalCarouselSlide4ProductName = getDisplayName('25590891');
+                return Promise.resolve();
+            })
+            .then(() => homePage.navigateTo())
+        );
+
+        let locale = config.locale;
 
         it('#1 should be Sleeveless Cowl Neck Top', () =>
-            testData.getProductById('25591535')
-            .then(variationMaster => {
-                productMaster = variationMaster;
-                verticalCarouselSlide1ProductName = productMaster.getLocalizedProperty('displayName', locale);
-            })
-            .then(() => homePage.verticalCarouselSlide(1))
+            homePage.verticalCarouselSlide(1)
             .then(() => homePage.isVerticalCarouselSlideVisible(1))
             .then(visible => assert.ok(visible))
             .then(() => homePage.getVerticalCarouselProductName(1))
@@ -87,12 +93,7 @@ describe('Homepage General #C84584', () => {
         );
 
         it('#2 should be Charcoal Flat Front Athletic Fit Shadow Striped Wool Suit', () =>
-            testData.getProductById('25686395')
-                .then(variationMaster => {
-                    productMaster = variationMaster;
-                    verticalCarouselSlide2ProductName = productMaster.getLocalizedProperty('displayName', locale);
-                })
-                .then(() => homePage.verticalCarouselSlide(2))
+            homePage.verticalCarouselSlide(2)
                 .then(() => homePage.isVerticalCarouselSlideVisible(2))
                 .then(visible => assert.ok(visible))
                 .then(() => homePage.getVerticalCarouselProductName(2))
@@ -100,12 +101,7 @@ describe('Homepage General #C84584', () => {
         );
 
         it('#3 should be Straight Fit Shorts', () =>
-            testData.getProductById('54736828')
-                .then(variationMaster => {
-                    productMaster = variationMaster;
-                    verticalCarouselSlide3ProductName = productMaster.getLocalizedProperty('displayName', locale);
-                })
-                .then(() => homePage.verticalCarouselSlide(3))
+            homePage.verticalCarouselSlide(3)
                 .then(() => homePage.isVerticalCarouselSlideVisible(3))
                 .then(visible => assert.ok(visible))
                 .then(() => homePage.getVerticalCarouselProductName(3))
@@ -113,12 +109,7 @@ describe('Homepage General #C84584', () => {
         );
 
         it('#4 should be Button Front Skirt', () =>
-            testData.getProductById('25590891')
-                .then(variationMaster => {
-                    productMaster = variationMaster;
-                    verticalCarouselSlide4ProductName = productMaster.getLocalizedProperty('displayName', locale);
-                })
-                .then(() => homePage.verticalCarouselSlide(4))
+            homePage.verticalCarouselSlide(4)
                 .then(() => homePage.isVerticalCarouselSlideVisible(4))
                 .then(visible => assert.ok(visible))
                 .then(() => homePage.getVerticalCarouselProductName(4))
@@ -128,16 +119,13 @@ describe('Homepage General #C84584', () => {
         it('should display prices in the product tile', () => {
             // Button Front Skirt (4th vertical carousel tile)
             var productId = '25590891';
+            var prices = testData.getPricesByProductId(productId, locale);
             var priceLabelPrefix = `.product-tile[data-itemid="${productId}"] .product-pricing `;
             var displayedStandardPrice = `${priceLabelPrefix} .product-standard-price`;
             var displayedSalePrice = `${priceLabelPrefix} .product-sales-price`;
-            var prices;
 
-            return testData.getPricesByProductId(productId, locale)
-                .then(productPrices => prices = productPrices)
-
+            return browser.getText(displayedStandardPrice)
                 // Test Standard Price
-                .then(() => browser.getText(displayedStandardPrice))
                 .then(standardPrice => assert.equal(standardPrice, prices.list))
 
                 // Test Sale Price

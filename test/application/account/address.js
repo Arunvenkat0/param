@@ -23,13 +23,13 @@ describe('Address', () => {
     let editAddressFormData = {};
 
     before(() => testData.load()
-        .then(() => testData.getCustomerByLogin(login))
-        .then(customer => {
+        .then(() => {
+            const customer = testData.getCustomerByLogin(login);
+            const address = customer.getPreferredAddress();
+
             customer.addresses[0].postalCode = customers.globalPostalCode[locale];
             customer.addresses[0].countryCode = customers.globalCountryCode[locale];
             customer.addresses[0].phone = customers.globalPhone[locale];
-
-            let address = customer.getPreferredAddress();
 
             addressFormData = {
                 addressid: 'ZZZZZ Test Address',
