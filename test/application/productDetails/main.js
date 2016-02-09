@@ -328,8 +328,7 @@ describe('Product Details Page', () => {
         const basePath = '/mens/clothing/suits';
         const firstProductInGridTile = '#search-result-items li:nth-child(1) .product-image';
         const searchResultItems = '#search-result-items';
-        let numTiles = 0;
-        let myProductTiles =[];
+        let productTiles;
 
         before(() => browser.url(basePath));
 
@@ -337,54 +336,48 @@ describe('Product Details Page', () => {
             browser.waitForVisible(searchResultItems)
                 .then(() => browser.elements('#search-result-items .grid-tile'))
                 .then(tiles => {
-                    numTiles = tiles.value.length;
-                    myProductTiles = [numTiles];
-                    for (var i = 0; i < numTiles; i++) {
-                        myProductTiles.push(i);
-                    }
+                    productTiles = tiles.value;
                     return Promise.resolve();
                 })
                 .then(() => browser.moveToObject(firstProductInGridTile))
                 .then(() => browser.click(productQuickView.BTN_QUICK_VIEW))
                 .then(() => browser.waitForVisible(productQuickView.CONTAINER))
-                .then(() => {
-                    return myProductTiles.reduce(function (checkImage) {
-                        //check all products in sequence
-                        return checkImage.then(() => {
-                            let productID;
-                            let expectedPrimaryImage;
-                            return browser.getText(productQuickView.PRODUCT_ID)
-                                .then(id => {
-                                    productID = id;
-                                    expectedPrimaryImage = testData.getProductById(productID).getImage('large');
+                .then(() => productTiles.reduce(checkImage => {
+                    //check all products in sequence
+                    return checkImage.then(() => {
+                        let productID;
+                        let expectedPrimaryImage;
+                        return browser.getText(productQuickView.PRODUCT_ID)
+                            .then(id => {
+                                productID = id;
+                                expectedPrimaryImage = testData.getProductById(productID).getImage('large');
+                                return Promise.resolve();
+                            })
+                            .then(() => browser.getAttribute(productQuickView.PRODUCT_PRIMARY_IMAGE, 'src'))
+                            .then(src => {
+                                // make sure product image equals to the testData image
+                                let actualImage = productDetailPage.getImagePath(src);
+                                assert.equal(actualImage,expectedPrimaryImage);
+                                return Promise.resolve();
+                            }).then(() => {
+                                // check if there is next product
+                                return browser.isEnabled(productQuickView.BTN_NEXT);
+                            }).then(enabled => {
+                                if (!enabled) {
                                     return Promise.resolve();
-                                })
-                                .then(() => browser.getAttribute(productQuickView.PRODUCT_PRIMARY_IMAGE, 'src'))
-                                .then(src => {
-                                    // make sure product image equals to the testData image
-                                    let actualImage = productDetailPage.getImagePath(src);
-                                    assert.equal(actualImage,expectedPrimaryImage);
-                                    return Promise.resolve();
-                                }).then(() => {
-                                    // check if there is next product
-                                    return browser.isEnabled(productQuickView.BTN_NEXT);
-                                }).then(enabled => {
-                                    if (!enabled) {
-                                        return Promise.resolve();
-                                    }
-                                    // click next product, wait for it to load
-                                    return browser.click(productQuickView.BTN_NEXT)
-                                        .then(() => {
-                                            return browser.waitUntil(() => {
-                                                return browser.getText(productQuickView.PRODUCT_ID).then(id => {
-                                                    return id !== productID;
-                                                });
+                                }
+                                // click next product, wait for it to load
+                                return browser.click(productQuickView.BTN_NEXT)
+                                    .then(() => {
+                                        return browser.waitUntil(() => {
+                                            return browser.getText(productQuickView.PRODUCT_ID).then(id => {
+                                                return id !== productID;
                                             });
                                         });
-                                });
-                        });
-                    }, Promise.resolve());
-                })
+                                    });
+                            });
+                    });
+                }, Promise.resolve()))
         );
 
     });
