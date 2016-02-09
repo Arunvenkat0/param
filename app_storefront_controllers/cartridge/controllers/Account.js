@@ -234,36 +234,41 @@ function setNewPasswordForm() {
             return;
         },
         send: function () {
-            var resettingCustomer, success, passwordchangedmail, Customer, Email;
+            var Customer;
+            var Email;
+            var passwordChangedMail;
+            var resettingCustomer;
+            var success;
 
             Customer = app.getModel('Customer');
             Email = app.getModel('Email');
             resettingCustomer = Customer.getByPasswordResetToken(request.httpParameterMap.Token.getStringValue());
 
-            if (empty(resettingCustomer)) {
+            if (!resettingCustomer) {
                 response.redirect(URLUtils.https('Account-PasswordReset'));
+            }
+
+            if (app.getForm('resetpassword.password').value() !== app.getForm('resetpassword.passwordconfirm').value()) {
+                app.getForm('resetpassword.passwordconfirm').invalidate();
+                app.getView({
+                    ContinueURL: URLUtils.https('Account-SetNewPasswordForm')
+                }).render('account/password/setnewpassword');
             } else {
 
-                if (app.getForm('resetpassword.password').value() !== app.getForm('resetpassword.passwordconfirm').value()) {
-                    app.getForm('resetpassword.passwordconfirm').invalidate();
+                success = resettingCustomer.resetPasswordByToken(request.httpParameterMap.Token.getStringValue(), app.getForm('resetpassword.password').value());
+                if (!success) {
                     app.getView({
+                        ErrorCode: 'formnotvalid',
                         ContinueURL: URLUtils.https('Account-SetNewPasswordForm')
                     }).render('account/password/setnewpassword');
                 } else {
+                    passwordChangedMail = Email.get('mail/passwordchangedemail', resettingCustomer.object.profile.email);
+                    passwordChangedMail.setSubject(Resource.msg('resource.passwordassistance', 'email', null));
+                    passwordChangedMail.send({
+                        Customer: resettingCustomer.object
+                    });
 
-                    success = resettingCustomer.resetPasswordByToken(request.httpParameterMap.Token.getStringValue(), app.getForm('resetpassword.password').value());
-                    if (!success) {
-                        app.getView({
-                            ErrorCode: 'formnotvalid',
-                            ContinueURL: URLUtils.https('Account-SetNewPasswordForm')
-                        }).render('account/password/setnewpassword');
-                    } else {
-                        passwordchangedmail = Email.get('mail/passwordchangedemail', resettingCustomer.object.profile.email);
-                        passwordchangedmail.setSubject(Resource.msg('resource.passwordassistance', 'email', null));
-                        passwordchangedmail.send({});
-
-                        app.getView().render('account/password/setnewpassword_confirm');
-                    }
+                    app.getView().render('account/password/setnewpassword_confirm');
                 }
             }
         }
