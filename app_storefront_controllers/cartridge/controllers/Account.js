@@ -10,6 +10,7 @@
 /* API includes */
 var Resource = require('dw/web/Resource');
 var URLUtils = require('dw/web/URLUtils');
+var Form = require('~/cartridge/scripts/models/FormModel');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
@@ -138,7 +139,8 @@ function passwordResetFormHandler(templateName, continueURL) {
             var Customer, resettingCustomer, Email;
             Customer = app.getModel('Customer');
             Email = app.getModel('Email');
-            resettingCustomer = Customer.getCustomerByLogin(session.forms.requestpassword.email.htmlValue);
+            var requestForm = Form.get('requestpassword').object.email.htmlValue;
+            resettingCustomer = Customer.retrieveCustomerByLogin(requestForm);
 
             if (!empty(resettingCustomer)) {
                 resetPasswordToken = resettingCustomer.generatePasswordResetToken();
@@ -318,7 +320,7 @@ function registrationForm() {
             }
 
             // Checks if login is already taken.
-            existingCustomer = Customer.getCustomerByLogin(email);
+            existingCustomer = Customer.retrieveCustomerByLogin(email);
             if (existingCustomer !== null) {
                 app.getForm('profile.customer.email').invalidate();
                 profileValidation = false;
