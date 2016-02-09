@@ -354,15 +354,15 @@ describe('Product Details Page', () => {
                                 return Promise.resolve();
                             })
                             .then(() => browser.getAttribute(productQuickView.PRODUCT_PRIMARY_IMAGE, 'src'))
-                            .then(src => {
+                            .then(src =>
                                 // make sure product image equals to the testData image
-                                let actualImage = productDetailPage.getImagePath(src);
-                                assert.equal(actualImage,expectedPrimaryImage);
-                                return Promise.resolve();
-                            }).then(() => {
+                                assert.equal(productDetailPage.getImagePath(src), expectedPrimaryImage)
+                            )
+                            .then(() => {
                                 // check if there is next product
                                 return browser.isEnabled(productQuickView.BTN_NEXT);
-                            }).then(enabled => {
+                            })
+                            .then(enabled => {
                                 if (!enabled) {
                                     return Promise.resolve();
                                 }
