@@ -335,10 +335,7 @@ describe('Product Details Page', () => {
         it('should display product image for each product', () =>
             browser.waitForVisible(searchResultItems)
                 .then(() => browser.elements('#search-result-items .grid-tile'))
-                .then(tiles => {
-                    productTiles = tiles.value;
-                    return Promise.resolve();
-                })
+                .then(tiles => productTiles = tiles.value)
                 .then(() => browser.moveToObject(firstProductInGridTile))
                 .then(() => browser.click(productQuickView.BTN_QUICK_VIEW))
                 .then(() => browser.waitForVisible(productQuickView.CONTAINER))
@@ -350,15 +347,12 @@ describe('Product Details Page', () => {
                         return browser.getText(productQuickView.PRODUCT_ID)
                             .then(id => {
                                 productID = id;
-                                expectedPrimaryImage = testData.getProductById(productID).getImage('large');
-                                return Promise.resolve();
+                                return expectedPrimaryImage = testData.getProductById(productID).getImage('large');
                             })
                             .then(() => browser.getAttribute(productQuickView.PRODUCT_PRIMARY_IMAGE, 'src'))
-                            .then(src =>
+                            .then(src => {
                                 // make sure product image equals to the testData image
-                                assert.equal(productDetailPage.getImagePath(src), expectedPrimaryImage)
-                            )
-                            .then(() => {
+                                assert.equal(productDetailPage.getImagePath(src), expectedPrimaryImage);
                                 // check if there is next product
                                 return browser.isEnabled(productQuickView.BTN_NEXT);
                             })
@@ -368,13 +362,10 @@ describe('Product Details Page', () => {
                                 }
                                 // click next product, wait for it to load
                                 return browser.click(productQuickView.BTN_NEXT)
-                                    .then(() => {
-                                        return browser.waitUntil(() => {
-                                            return browser.getText(productQuickView.PRODUCT_ID).then(id => {
-                                                return id !== productID;
-                                            });
-                                        });
-                                    });
+                                    .then(() => browser.waitUntil(() =>
+                                        browser.getText(productQuickView.PRODUCT_ID)
+                                            .then(id => id !== productID))
+                                    );
                             });
                     });
                 }, Promise.resolve()))
