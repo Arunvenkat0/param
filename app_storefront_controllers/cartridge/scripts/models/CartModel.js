@@ -89,11 +89,29 @@ var CartModel = AbstractModel.extend({
         Transaction.wrap(function () {
             var i;
             if (product) {
+                var productInCart;
+                var productListItems = cart.object.productLineItems;
+                var quantityInCart;
+                var quantityToSet;
                 var shipment = cart.object.defaultShipment;
-                var productLineItem = cart.createProductLineItem(product, productOptionModel, shipment);
+                
+                for (var q = 0; q < cart.object.productLineItems.length; q++) {
+                    if (productListItems[q].productID === product.ID) {
+                        productInCart = productListItems[q];
+                        break;
+                    }
+                }
 
-                if (quantity !== null) {
-                    productLineItem.setQuantityValue(quantity);
+                if (productInCart) {
+                    quantityInCart = productInCart.getQuantity();
+                    quantityToSet = quantity ? quantity + quantityInCart : quantityInCart + 1;
+                    productInCart.setQuantityValue(quantityToSet);
+                } else {
+                    var productLineItem = cart.createProductLineItem(product, productOptionModel, shipment);
+
+                    if (quantity) {
+                        productLineItem.setQuantityValue(quantity);
+                    }
                 }
 
                 if (product.bundle) {
