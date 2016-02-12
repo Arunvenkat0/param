@@ -58,8 +58,7 @@ describe('Promotions - 20% off Order Amount Over 200', () => {
                     country: address.countryCode,
                     city: address.city,
                     postal: address.postalCode,
-                    phone: address.phone,
-                    addressList: address.addressId
+                    phone: address.phone
                 };
 
                 if (locale && locale === 'x_default') {
