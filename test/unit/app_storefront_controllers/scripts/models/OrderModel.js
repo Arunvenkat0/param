@@ -6,37 +6,39 @@ var sinon = require('sinon');
 /**
  * Mocks
  */
-var mockRequire = require('proxyquire');
-var mockAbstractModel = {
+var proxyquire = require('proxyquire').noCallThru();
+var AbstractModel = {
     extend: function () {
         return function (inputParam) {
             return {orderNo: inputParam};
         };
-    },
-    '@noCallThru': true
+    }
 };
 
-var mockArrayList = {'@noCallThru': true};
-
-var mockOrderMgr = {
+var OrderMgr = {
     getOrder: function (inputParam) {
         return inputParam;
-    },
-    '@noCallThru': true
+    }
 };
+
+var ArrayList = require('../../../../mocks/dw/util/ArrayList');
+var GiftCertificateMgr = require('../../../../mocks/dw/order/GiftCertificateMgr');
+var Transaction = require('../../../../mocks/dw/system/Transaction');
 
 /**
  * Spies
  */
-var spyAbstractModel = sinon.spy(mockAbstractModel, 'extend');
-var spyOrderMgr = sinon.spy(mockOrderMgr, 'getOrder');
+var spyAbstractModel = sinon.spy(AbstractModel, 'extend');
+var spyOrderMgr = sinon.spy(OrderMgr, 'getOrder');
 
 // Mock out module dependencies
 var modelsDirectory = '../../../../../app_storefront_controllers/cartridge/scripts/models/';
-var OrderModel = mockRequire(modelsDirectory + 'OrderModel.js', {
-    './AbstractModel': mockAbstractModel,
-    'dw/util/ArrayList': mockArrayList,
-    'dw/order/OrderMgr': mockOrderMgr
+var OrderModel = proxyquire(modelsDirectory + 'OrderModel.js', {
+    './AbstractModel': AbstractModel,
+    'dw/util/ArrayList': ArrayList,
+    'dw/order/OrderMgr': OrderMgr,
+    'dw/order/GiftCertificateMgr': GiftCertificateMgr,
+    'dw/system/Transaction': Transaction
 });
 
 
@@ -76,7 +78,6 @@ describe('Order model', function () {
 
         it('should instantiate an Order with null when given null', function () {
             var order = OrderModel.get();
-            /* jshint expr:true */
             expect(order.orderNo).to.be.null;
         });
     });

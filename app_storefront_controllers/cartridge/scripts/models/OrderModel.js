@@ -8,7 +8,9 @@
 /* API Includes */
 var AbstractModel = require('./AbstractModel');
 var ArrayList = require('dw/util/ArrayList');
+var GiftCertificateMgr = require('dw/order/GiftCertificateMgr');
 var OrderMgr = require('dw/order/OrderMgr');
+var Transaction = require('dw/system/Transaction');
 
 /**
  * Order helper class providing enhanced order functionality.
@@ -30,24 +32,26 @@ var OrderModel = AbstractModel.extend(
 
             var giftCertificates = new ArrayList();
             var giftCertificateLineItems = this.getGiftCertificateLineItems();
+            var orderNo = this.getOrderNo();
 
             for (var i = 0; i < giftCertificateLineItems.length; i++) {
                 var giftCertificateLineItem = giftCertificateLineItems[i];
+                var newGiftCertificate;
 
-                var CreateGiftCertificateResult = new dw.system.Pipelet('CreateGiftCertificate').execute({
-                    Amount: giftCertificateLineItem.netPrice.value,
-                    RecipientEmail: giftCertificateLineItem.recipientEmail,
-                    RecipientName: giftCertificateLineItem.recipientName,
-                    SenderName: giftCertificateLineItem.senderName,
-                    GiftCertificateLineItem: giftCertificateLineItem,
-                    Message: giftCertificateLineItem.message,
-                    OrderNo: this.getOrderNo()
+                Transaction.wrap(function () {
+                    newGiftCertificate = GiftCertificateMgr.createGiftCertificate(giftCertificateLineItem.netPrice.value);
+                    newGiftCertificate.setRecipientEmail(giftCertificateLineItem.recipientEmail);
+                    newGiftCertificate.setRecipientName(giftCertificateLineItem.recipientName);
+                    newGiftCertificate.setSenderName(giftCertificateLineItem.senderName);
+                    newGiftCertificate.setMessage(giftCertificateLineItem.message);
+                    newGiftCertificate.setOrderNo(orderNo);
                 });
-                if (CreateGiftCertificateResult.result === PIPELET_ERROR) {
+
+                if (!newGiftCertificate) {
                     return null;
                 }
 
-                giftCertificates.add(CreateGiftCertificateResult.GiftCertificate);
+                giftCertificates.add(newGiftCertificate);
             }
 
             return giftCertificates;
