@@ -112,7 +112,9 @@ CustomerModel.login = function (username, password, rememberMe) {
     });
     if (LoginCustomerResult.result === PIPELET_ERROR) {
         if (typeof (TempCustomer) !== 'undefined' && TempCustomer !== null && TempCustomer.profile !== null && TempCustomer.profile.credentials.locked) {
-            Email.get('mail/lockoutemail', TempCustomer.profile.email).setSubject((dw.web.Resource.msg('email.youraccount', 'email', null)).send({}));
+            Email.get('mail/lockoutemail', TempCustomer.profile.email).setSubject((dw.web.Resource.msg('resource.youraccount', 'email', null))).send({
+                TempCustomer: TempCustomer
+            });
         }
 
         return false;
