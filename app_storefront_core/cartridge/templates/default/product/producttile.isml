@@ -1,6 +1,5 @@
 <iscontent type="text/html" charset="UTF-8" compact="true"/>
-<isset name="cache" value="${(pdict.cache != null) ? pdict.cache : true}" scope="page"/>
-<isif condition="${cache}">
+<isif condition="${(pdict.cache != null) ? pdict.cache : true}">
 	<iscache type="relative" hour="24" varyby="price_promotion"/>
 </isif>
 <iscomment>
