@@ -10,7 +10,6 @@
 var GiftCertificateMgr = require('dw/order/GiftCertificateMgr');
 var HashMap = require('dw/util/HashMap');
 var Money = require('dw/value/Money');
-var Pipelet = require('dw/system/Pipelet');
 var Resource = require('dw/web/Resource');
 var Transaction = require('dw/system/Transaction');
 var URLUtils = require('dw/web/URLUtils');
@@ -285,39 +284,32 @@ function showMiniCart() {
  * current basket or product list.
  */
 function createGiftCert(cart) {
+    var giftCertificateLineItem;
+    var productLineItemId = request.httpParameterMap.plid.stringValue;
+    var productListItem = null;
     var purchaseForm = app.getForm('giftcert.purchase');
 
-    var plid = request.httpParameterMap.plid.stringValue;
-
-    var productListItem = null;
-
-    if (plid) {
-        var productList = ProductList.get(plid).object;
+    if (productLineItemId) {
+        var productList = ProductList.get(productLineItemId).object;
         if (productList) {
             productListItem = productList.getItem(purchaseForm.get('lineItemId').value());
         }
     }
 
-    // @TODO Replace pipelet with dw.order.LineItemCtnr.createGiftCertificateLineItem
-    // Transaction.wrap(function () {
-    //     basket.createGiftCertificateLineItem();
-    // });
-
-    var AddGiftCertificateToBasketResult = new Pipelet('AddGiftCertificateToBasket').execute({
-        Amount: purchaseForm.get('amount').value(),
-        Basket: cart.object,
-        RecipientEmail: purchaseForm.get('recipientEmail').value(),
-        RecipientName: purchaseForm.get('recipient').value(),
-        SenderName: purchaseForm.get('from').value(),
-        Message: purchaseForm.get('message').value(),
-        ProductListItem: productListItem,
-        // TODO originally Shipment : Shipment, but where should this come from?
-        Shipment: null
+    Transaction.wrap(function() {
+        giftCertificateLineItem = cart.object.createGiftCertificateLineItem(purchaseForm.get('amount').value(), purchaseForm.get('recipientEmail').value())
+        giftCertificateLineItem.setRecipientName(purchaseForm.get('recipient').value());
+        giftCertificateLineItem.setSenderName(purchaseForm.get('from').value());
+        giftCertificateLineItem.setMessage(purchaseForm.get('message').value());
+        if (productListItem) {
+            giftCertificateLineItem.setProductListItem(productListItem);
+        }
+        return giftCertificateLineItem;
     });
-    if (AddGiftCertificateToBasketResult.result === PIPELET_ERROR) {
+
+    if (!giftCertificateLineItem) {
         return null;
     }
-    var giftCertificateLineItem = AddGiftCertificateToBasketResult.GiftCertificateLineItem;
 
     return giftCertificateLineItem;
 }
