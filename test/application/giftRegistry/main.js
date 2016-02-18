@@ -119,36 +119,37 @@ describe('Gift Registry', () => {
         giftRegistryPage.fillOutEventForm(eventFormData, locale)
             // FIXME: This button is always enabled, even if form is not filled
             // out.  Would be better to check on some other attribute RAP-4690
-            .then(() => browser.isEnabled(giftRegistryPage.BTN_EVENT_CONTINUE))
+            .then(() => browser.isEnabled(giftRegistryPage.BTN_EVENT_SET_PARTICIPANTS))
             .then(enabled => assert.ok(enabled))
     );
 
     it('should fill out the event shipping form', () =>
-        browser.click(giftRegistryPage.BTN_EVENT_CONTINUE)
+        browser.click(giftRegistryPage.BTN_EVENT_SET_PARTICIPANTS)
             .waitForVisible(giftRegistryPage.USE_PRE_EVENT)
             .then(() => giftRegistryPage.fillOutEventShippingForm(eventFormShippingData, locale))
             // This wait is necessary, since without it, the .click() will fire
             // even if the required fields have not been filled in
-            .then(() => browser.waitForValue('[name*=addressBeforeEvent_phone]'))
-            .then(() => browser.click(giftRegistryPage.USE_PRE_EVENT))
-            .then(() => browser.waitForVisible(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE))
-            .then(() => browser.isEnabled(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE))
+            .then(() => browser.waitForValue('[name*=addressBeforeEvent_phone]')
+                .click(giftRegistryPage.USE_PRE_EVENT)
+                .waitForVisible(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE)
+                .isEnabled(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE)
+            )
             .then(enabled => assert.ok(enabled))
     );
 
     it('should submit the event', () =>
         browser.click(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE)
-            .then(() => browser.waitForVisible(giftRegistryPage.BTN_EVENT_CONTINUE))
-            .then(() => browser.click(giftRegistryPage.BTN_EVENT_CONTINUE))
-            .then(() => browser.waitForVisible(giftRegistryPage.REGISTRY_HEADING))
-            .then(() => browser.getText(giftRegistryPage.REGISTRY_HEADING))
+            .waitForVisible(giftRegistryPage.BTN_EVENT_CONFIRM)
+            .click(giftRegistryPage.BTN_EVENT_CONFIRM)
+            .waitForVisible(giftRegistryPage.REGISTRY_HEADING)
+            .getText(giftRegistryPage.REGISTRY_HEADING)
             .then(eventTitle => assert.equal(eventTitle, giftRegistryTitle[locale]))
     );
 
     it('should make the gift registry public', () =>
         browser.click(giftRegistryPage.BTN_SET_PUBLIC)
             .waitForVisible(giftRegistryPage.SHARE_OPTIONS)
-            .then(() => browser.isVisible(giftRegistryPage.SHARE_OPTIONS))
+            .isVisible(giftRegistryPage.SHARE_OPTIONS)
             .then(visible => assert.isTrue(visible))
     );
 
@@ -209,8 +210,8 @@ describe('Gift Registry', () => {
 
     it('should display a URL when chain icon clicked', () =>
         browser.click(giftRegistryPage.SHARE_LINK)
-            .then(() => browser.waitForVisible(socialLinks.shareLinkUrl.selector))
-            .then(() => browser.isVisible(socialLinks.shareLinkUrl.selector))
+            .waitForVisible(socialLinks.shareLinkUrl.selector)
+            .isVisible(socialLinks.shareLinkUrl.selector)
             .then(visible => assert.isTrue(visible))
             .then(() => browser.getAttribute(socialLinks.shareLinkUrl.selector, 'href'))
             .then(href => {
@@ -222,7 +223,7 @@ describe('Gift Registry', () => {
     it('should return the event at Gift Registry search', () => {
         return navHeader.logout()
             .then(() => browser.click(footerPage.GIFT_REGISTRY))
-            .then(() => browser.waitForVisible(footerPage.GIFT_REGISTRY))
+            .waitForVisible(footerPage.GIFT_REGISTRY)
             .then(() => giftRegistryPage.searchGiftRegistry(
                 lastName,
                 firstName,
@@ -231,7 +232,7 @@ describe('Gift Registry', () => {
             .then(rows => assert.equal(1, rows))
             .then(() => giftRegistryPage.openGiftRegistry())
             .then(() => browser.waitForVisible(giftRegistryPage.BUTTON_FIND))
-            .then(() => browser.getText(giftRegistryPage.eventTitle))
+            .getText(giftRegistryPage.eventTitle)
             .then(str => assert.equal(str, giftRegistryTitle[locale]));
     });
 
@@ -243,5 +244,4 @@ describe('Gift Registry', () => {
             .then(() => browser.isExisting(giftRegistryPage.LINK_REMOVE))
             .then(doesExist => assert.isFalse(doesExist));
     });
-
 });

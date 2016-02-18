@@ -7,6 +7,7 @@
 var AbstractModel = require('./AbstractModel');
 var ProductListMgr = require('dw/customer/ProductListMgr');
 var Transaction = require('dw/system/Transaction');
+
 /**
  * ProductList helper function providing enhanced functionality for wishlists and other product lists.
  * @class module:models/ProductListModel~ProductListModel
@@ -15,13 +16,28 @@ var ProductListModel = AbstractModel.extend(
     /** @lends module:models/ProductListModel~ProductListModel.prototype */
     {
         /**
+         * Deletes this Product List
+         */
+        remove: function () {
+            var productList = this.object;
+            Transaction.wrap(function () {
+                if (productList.getOwner() === customer) {
+                    ProductListMgr.removeProductList(productList);
+                    delete this;
+                } else {
+                    throw 'Error: Only the owner of a Gift Registry can delete it.';
+                }
+            });
+        },
+
+        /**
          * Removes the given item from the product list.
          *
          * @transactional
          * @alias module:models/ProductListModel~ProductListModel/remove
          * @param  {dw.customer.ProductListItem} item the item to remove
          */
-        remove: function (item) {
+        removeItem: function (item) {
             var list = this.object;
             Transaction.wrap(function () {
                 list.removeItem(item);
@@ -48,11 +64,27 @@ var ProductListModel = AbstractModel.extend(
                     item.setProductOptionModel(optionModel);
                 }
                 // Inherit the public flag from the wishlist.
-                item.setPublic(list.public);
+                item.setPublic(true);
 
                 return item;
             });
             return null;
+        },
+
+        /**
+         * Updates an item in the Gift Registry
+         *
+         * @param {dw.web.FormList} formListItems
+         */
+        updateItem: function (formListItems) {
+            Transaction.wrap(function () {
+                var productListItemForm;
+
+                for (var i = 0; i < formListItems.getChildCount(); i++) {
+                    productListItemForm = formListItems[i];
+                    productListItemForm.copyTo(productListItemForm.object);
+                }
+            });
         },
 
         /**
@@ -63,17 +95,11 @@ var ProductListModel = AbstractModel.extend(
          * @param {Boolean} isPublic is the value the public flag is set to.
          */
         setPublic: function (isPublic) {
-            var list = this.object;
+            var productList = this.object;
             Transaction.wrap(function () {
-                list.setPublic(isPublic);
-                var items = list.items.iterator();
-                while (items.hasNext()) {
-                    var anItem = items.next();
-                    anItem.setPublic(isPublic);
-                }
+                productList.setPublic(isPublic);
             });
         }
-
     });
 
 /**
@@ -101,6 +127,28 @@ ProductListModel.get = function (parameter) {
         obj = parameter;
     }
     return new ProductListModel(obj);
+};
+
+/**
+ * Searches for a Product List
+ *
+ * @param {dw.web.FormGroup} simpleForm - ProductList simple form
+ * @param {Number} listType - dw.customer.ProductList.TYPE_* constant
+ * @returns {dw.util.Collection.<dw.customer.ProductList>}
+ */
+ProductListModel.search = function (searchForm, listType) {
+    var registrantFirstName = searchForm.registrantFirstName;
+    var registrantLastName = searchForm.registrantLastName;
+    var eventType = searchForm.eventType.value;
+
+    var CustomerMgr = require('dw/customer/CustomerMgr');
+    var listOwner = CustomerMgr.queryProfile('firstName = {0} AND lastName = {1}', registrantFirstName.value, registrantLastName.value).getCustomer();
+
+    if (eventType) {
+        return ProductListMgr.getProductLists(listOwner, listType, eventType);
+    } else {
+        return ProductListMgr.getProductLists(listOwner, listType);
+    }
 };
 
 /** The ProductList class */

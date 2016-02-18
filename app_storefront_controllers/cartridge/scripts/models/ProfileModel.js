@@ -173,29 +173,8 @@ var ProfileModel = AbstractModel.extend(
          * @returns {String | null} Returns a unique address ID. If the city parameter is null, returns null.
          */
         determineUniqueAddressID: function (city) {
-            var counter = 0;
-
-            // Checks if the attribute "city" is set and has a value.
-            if (city) {
-                // Initializes the candidate ID.
-                var candidateID = city;
-                var existingAddress = null;
-
-                while (existingAddress === null) {
-                    existingAddress = this.getAddressBook().getAddress(candidateID);
-                    if (existingAddress !== null) {
-                        // This ID is already taken, increment the counter
-                        // and try the next one.
-                        counter++;
-                        candidateID = city + '-' + counter;
-                        existingAddress = null;
-                    } else {
-                        return candidateID;
-                    }
-                }
-            }
-
-            return null;
+            var accountUtils = require('app_storefront_core/cartridge/scripts/account/Utils');
+            return accountUtils.determineUniqueAddressID(city, this.getAddressBook());
         },
 
         /**

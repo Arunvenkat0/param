@@ -4,8 +4,9 @@ import * as formHelpers from './helpers/forms/common';
 
 export const SHARE_LINK = '.share-link';
 export const USE_PRE_EVENT = '.usepreevent';
-export const BTN_EVENT_CONTINUE = '[name*="giftregistry_event_confirm"]';
-export const BTN_EVENT_ADDRESS_CONTINUE = '[name*="giftregistry_eventaddress_confirm"]';
+export const BTN_EVENT_SET_PARTICIPANTS = '[name*="giftregistry_event_setParticipants"]';
+export const BTN_EVENT_ADDRESS_CONTINUE = '[name*="giftregistry_eventaddress_setBeforeAfterAddresses"]';
+export const BTN_EVENT_CONFIRM = '[name*="giftregistry_event_confirm"]';
 export const BTN_SET_PUBLIC = '[name*="giftregistry_setPublic"]';
 export const SHARE_OPTIONS = '[class*="share-options"]';
 export const BTN_CREATE_REGISTRY = '[name*="giftregistry_create"]';
