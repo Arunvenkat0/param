@@ -10,6 +10,7 @@ export const PRICE_SALE = '.product-pricing .product-sales-price';
 export const PRODUCTID_TEXT = 'span[itemprop*=productID]';
 export const PRODUCTGRID_CONTAINER = '#search-result-items';
 export const SEARCH_FORM = 'form[role*=search]';
+export const RESULT_CONTENT = '.pt_product-search-result .search-result-content';
 
 export function getProductTilePricingByPid (pid) {
     return browser.getText('[data-itemid="' + pid + '"] .product-pricing')
