@@ -310,17 +310,15 @@ function submitPaymentJSON() {
  * Identifies if an order exists, submits the order, and shows a confirmation message.
  */
 function submit() {
-
     var order = Order.get(request.httpParameterMap.order_id.stringValue);
-    if (!order.object || (request.httpParameterMap.order_token.stringValue !== order.getOrderToken())) {
-        app.getController('COSummary').Start();
-        return;
-    } else if (submitImpl().error) {
-        app.getController('COSummary').Start();
-        return;
+    var orderPlacementStatus;
+    if (order.object && request.httpParameterMap.order_token.stringValue === order.getOrderToken()) {
+        orderPlacementStatus = submitImpl(order);
+        if (!orderPlacementStatus.error) {
+            return app.getController('COSummary').ShowConfirmation(order);
+        }
     }
-
-    app.getController('COSummary').ShowConfirmation();
+    app.getController('COSummary').Start();
 }
 
 /*
