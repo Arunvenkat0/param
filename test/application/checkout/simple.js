@@ -8,6 +8,8 @@ import * as checkoutPage from '../pageObjects/checkout';
 import * as homePage from '../pageObjects/home';
 import * as orderConfPage from '../pageObjects/orderConfirmation';
 import * as productDetailPage from '../pageObjects/productDetail';
+import * as products from '../pageObjects/testData/products';
+import * as pricingHelpers from '../pageObjects/helpers/pricing';
 import * as testData from '../pageObjects/testData/main';
 import * as formLogin from '../pageObjects/helpers/forms/login';
 import * as formHelpers from '../pageObjects/helpers/forms/common';
@@ -270,4 +272,104 @@ describe('Checkout', () => {
                 .then(paymentMethod => assert.isAbove(paymentMethod.indexOf(paymentMethodLabel), -1));
         });
     });
+
+    describe.only('shipping methods', () => {
+        const productWithOneVariant = '25720074';
+        const defaultShippingCost = {
+            x_default: '15.99',
+            fr_FR: '15,99',
+            it_IT: '15,99',
+            jp_JP: '42',
+            cn_CN: '19.99'
+        }
+        const expressShippingCost = {
+            x_default: '9.99',
+            fr_FR: '9,99',
+            it_IT: '9,99',
+            jp_JP: '21',
+            cn_CN: '15.99'
+        }
+        let catalog;
+        let productVariation;
+        let resourcePath;
+        let shippingCost;
+        let updatedShippingCost;
+        let locale = config.locale;
+        let shippingFormData;
+
+
+        before(() => {
+            return testData.load()
+                .then(() => browser.deleteCookie())
+                .then(() => catalog = testData.parsedData.catalog)
+                .then(() => testData.getProductById(productWithOneVariant))
+                .then(productMaster => {
+                    let variantIds;
+                    let variantSelection = new Map();
+
+                    productVariation = productMaster;
+                    resourcePath = productVariation.getUrlResourcePath();
+                    variantIds = productVariation.getVariantProductIds();
+
+                    let instance = products.getProduct(catalog, variantIds[0]);
+
+                    variantSelection.set('resourcePath', resourcePath);
+                    variantSelection.set('colorIndex', (productVariation.getAttrTypeValueIndex('color', instance.customAttributes.color) + 1));
+
+                    return productDetailPage.addProductVariationToCart(variantSelection);
+                })
+                .then(() => {
+                    // Set form data without preferred address, since manually
+                    // entering form fields as Guest
+                    shippingFormData = _.cloneDeep(shippingData);
+                    delete shippingFormData.addressList;
+                })
+                .then(() => checkoutPage.navigateTo())
+                .then(() => checkoutPage.pressBtnCheckoutAsGuest())
+                .then(() => browser.waitForVisible(checkoutPage.BREADCRUMB_SHIPPING))
+                .then(() => checkoutPage.fillOutShippingForm(shippingFormData, locale))
+        });
+
+        it('#1 Ground shipping method should be selected by default', () => {
+            return browser.getAttribute(checkoutPage.BTN_SHIPPING_METHOD_FIRST, 'checked')
+                .then(val => assert.strictEqual(val, 'true'))
+        });
+
+        it('#2 default shipping cost should be displayed properly', () => {
+            return browser.getText(checkoutPage.ORDER_SHIPPING_COST)
+                .then(shippingCharge => shippingCost = shippingCharge.replace(pricingHelpers.getCurrencySymbol(locale), '').trim())
+                .then(() => assert.equal(parseFloat(shippingCost), defaultShippingCost[locale]))//TODO:RAP-4743:add shipping parsing
+        });
+
+        it('#3 select 2-Day Express shipping method, shipping cost should be displayed properly', () => {
+            return browser.click(checkoutPage.RADIO_BTN_SHIPPING_METHOD2)
+                .then(() => {
+                    if (browser.getAttribute(checkoutPage.RADIO_BTN_SHIPPING_METHOD2, 'checked') !== 'true') {
+                        return browser.click(checkoutPage.RADIO_BTN_SHIPPING_METHOD2)
+                    }
+                })
+                .then(() => checkoutPage.checkUseAsBillingAddress())
+                .then(() => browser.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
+                .then(() => checkoutPage.fillOutBillingForm(billingFormData))
+                .then(() => browser.waitForExist(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+                .then(() => browser.waitForEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+                .then(() => browser.getText(checkoutPage.ORDER_SHIPPING_COST))
+                .then(shippingCharge => updatedShippingCost = shippingCharge.replace(pricingHelpers.getCurrencySymbol(locale), '').trim())
+                .then(() => assert.equal(parseFloat(updatedShippingCost), expressShippingCost[locale]))//TODO:RAP-4743:add shipping parsing
+        });
+
+        it('#4 should checkout successfully with 2-Day Express shipping method ', () => {
+            browser.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE)
+                .then(() => browser.waitUntil(browser.isEnabled(checkoutPage.BTN_PLACE_ORDER)))
+                .then(() => browser.click(checkoutPage.BTN_PLACE_ORDER))
+                .then(() => browser.waitForVisible(orderConfPage.ORDER_CONF_DETAILS))
+                .then(() => checkoutPage.getLabelOrderConfirmation())
+                .then(title => assert.equal(title, successfulCheckoutTitle))
+                .then(() => browser.getText(checkoutPage.ORDER_SHIPPING_COST))
+                .then(shippingCharge => updatedShippingCost = shippingCharge.replace(pricingHelpers.getCurrencySymbol(locale), '').trim())
+                .then(() => assert.equal(parseFloat(updatedShippingCost), expressShippingCost[locale]))//TODO:RAP-4743:add shipping parsing
+
+        });
+    });
+
 });

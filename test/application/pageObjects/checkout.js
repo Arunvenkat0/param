@@ -10,6 +10,7 @@ export const BREADCRUMB_PLACE_ORDER = '.step-3.active';
 export const BTN_CONTINUE_BILLING_SAVE = 'button[name*="billing_save"]';
 export const BTN_CONTINUE_SHIPPING_SAVE = '[name*="shippingAddress_save"]';
 export const BTN_PLACE_ORDER = 'button[name*="submit"]';
+export const BTN_SHIPPING_METHOD_FIRST = '#shipping-method-001';
 export const CHECKOUT_PROGRESS = '.checkout-progress-indicator .active';
 export const CSS_ORDER_SUBTOTAL = '.nav.summary .order-subtotal td:nth-child(2)';
 export const CVN_INPUT = 'input[id*=paymentMethods_creditCard_cvn]';
@@ -29,8 +30,10 @@ export const MINI_BILLING_ADDR_DETAILS = MINI_SECTION_BILLING_ADDR + ' .details'
 export const MINI_PMT_METHOD_DETAILS = MINI_SECTION_PMT_METHOD + ' .details';
 export const ORDER_TOTAL_AMOUNT = '.summary .order-value';
 export const ORDER_SUBTOTAL = '.summary .order-subtotal td:nth-child(2)';
+export const ORDER_SHIPPING_COST = '.order-shipping td:nth-child(2)';
 export const PAYMENT_METHOD_TOTAL = '.minibillinginfo-amount';
 export const RADIO_BTN_PAYPAL = 'input[value="PayPal"]';
+export const RADIO_BTN_SHIPPING_METHOD2 = '#shipping-method-002';
 export const SELECT_ADDRESS = '[name*="singleshipping_addressList"]';
 export const SELECT_CREDITCARD = '[name*=creditCardList]';
 export const USE_AS_BILLING_ADDR = '[name*="shippingAddress_useAsBillingAddress"]';
