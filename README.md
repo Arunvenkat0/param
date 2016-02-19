@@ -2,6 +2,7 @@
 
 Please note that `master` is under active development, so please use with caution.
 Check out our tagged versions if you'd like more stable, tested releases.  We recommend starting any new project based off the latest [tag](https://bitbucket.org/demandware/sitegenesis#tags), and never from the HEAD of the `master` branch!
+A version compatibility matrix can be found at [https://xchange.demandware.com/community/developer/site_genesis](https://xchange.demandware.com/community/developer/site_genesis).
 
 # Purpose
 
