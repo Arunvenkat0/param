@@ -98,6 +98,19 @@ For JavaScript, when watching is happening, [watchify](https://github.com/substa
 
 The equivalent default task for grunt, `grunt`, is also available.
 
+Both `grunt` and `gulp` watch task will also watch all of your directories for changes and upload modified files
+to your sandbox. You need to create `dw.json` file in the root directory of the repository to provide credentials
+for upload. This file should be in JSON format and include the following:
+
+```js
+{
+    "hostname": "", // address of your sandbox without protocol
+    "username": "", // name of the user that has permissions to upload
+    "password": "", // password for the user
+    "version": "" // folder to upload to. Default is version1
+}
+```
+
 ### Sourcemaps
 For sourcemaps support, run `gulp` or `grunt` in development mode by specificying `type` flag, i.e. `:; gulp --sourcemaps`.
 

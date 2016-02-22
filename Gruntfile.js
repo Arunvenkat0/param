@@ -1,6 +1,10 @@
 'use strict';
 
 var _ = require('lodash');
+var fs = require('fs');
+var path = require('path');
+var dwdav = require('dwdav');
+var configReader = require('@tridnguyen/config');
 
 module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
@@ -38,6 +42,19 @@ module.exports = function (grunt) {
             doc: {
                 files: ['doc/js/**/*', '!doc/dist/', '!doc/.tmp', 'app_storefront_core/**/*.{js,ds}', 'app_storefront_controllers/**/*.{js,ds}'],
                 tasks: ['jsdoc']
+            },
+            server: {
+                files: [
+                    'app_storefront_controllers/cartridge/**/*.{js,json,properties}',
+                    'app_storefront_core/cartridge/**/*.{isml,json,properties,xml}',
+                    'app_storefront_core/cartridge/scripts/**/*.{js,ds}',
+                    'app_storefront_core/cartridge/static/**/*.{js,css,png,gif}',
+                    'app_storefront_pipelines/cartridge/**/*.{properties,xml}'
+                ],
+                tasks: ['dwDavUpload'],
+                options: {
+                    spawn: false
+                }
             }
         },
         sass: {
@@ -178,7 +195,42 @@ module.exports = function (grunt) {
                     {expand: true, cwd: 'doc/styleguide', src: ['templates/**/*'], dest: 'doc/dist/styleguide'}
                 ]
             }
+        },
+        dwDavUpload: {
+            options: {
+                authFile: './dw.json'
+            },
+            src: 'app_storefront_controllers/cartridge/controllers/Product.js'
+        },
+        concurrent: {
+            options: {
+                logConcurrentOutput: true
+            },
+            dev: ['watch:dev', 'watch:server']
         }
+    });
+
+    grunt.registerMultiTask('dwDavUpload', 'webDav uploader for Demandware', function() {
+        var done = this.async();
+        var options = this.options({ authFile: 'dw.json' });
+        var authFile = path.resolve(options.authFile);
+        var credentials = configReader(authFile, {caller: false});
+        grunt.log.ok('Loaded auth credentials from: ' + authFile);
+        var server = dwdav(credentials);
+        Promise.all(this.files.map(function(f) {
+            var file = f.src;
+            grunt.log.ok('Uploading ' + file[0]);
+            return server.post(file[0]);
+        })).then(function() {
+            done(0);
+        }).catch(function(err) {
+            grunt.log.error(err);
+            done(1);
+        });
+    });
+
+    grunt.event.on('watch', function(action, filepath) {
+        grunt.config('dwDavUpload.src', filepath);
     });
 
     grunt.registerTask('sourcemap', function () {
@@ -188,7 +240,7 @@ module.exports = function (grunt) {
     });
     grunt.registerTask('css', ['sass:dev', 'autoprefixer:dev']);
     grunt.registerTask('css:styleguide', ['sass:styleguide', 'autoprefixer:styleguide']);
-    grunt.registerTask('default', ['css', 'browserify:watchDev', 'watch:dev']);
+    grunt.registerTask('default', ['css', 'browserify:watchDev', 'concurrent:dev']);
     grunt.registerTask('js', ['browserify:dev', 'sourcemap']);
     grunt.registerTask('test:application', ['webdriver:application']);
     grunt.registerTask('test:unit', ['mochaTest:unit']);

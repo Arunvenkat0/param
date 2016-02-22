@@ -77,6 +77,21 @@ gulp.task('js', function () {
 	return rebundle();
 });
 
+var dwdav = require('dwdav');
+var path = require('path');
+var config = require('@tridnguyen/config');
+function upload(files) {
+	var credentials = config('dw.json', {caller: false});
+	var server = dwdav(credentials);
+	Promise.all(files.map(function (f) {
+		return server.post(path.relative(process.cwd(), f));
+	})).then(function() {
+		gutil.log(gutil.colors.green('Uploaded ' + files.join(',') + ' to the server'));
+	}).catch(function(err) {
+		futil.log(gutil.colors.red('Error uploading ' + files.join(','), err));
+	});
+}
+
 var eslint = require('gulp-eslint');
 gulp.task('lint', function() {
 	return gulp.src('./**/*.js')
@@ -105,7 +120,18 @@ gulp.task('test:unit', function () {
 
 gulp.task('build', ['js', 'css']);
 
-gulp.task('default', ['enable-watch-mode', 'js', 'css'], function () {
+gulp.task('watch:server', function() {
+    gulp.watch(['app_storefront_controllers/cartridge/**/*.{js,json,properties}',
+                    'app_storefront_core/cartridge/**/*.{isml,json,properties,xml}',
+                    'app_storefront_core/cartridge/scripts/**/*.{js,ds}',
+                    'app_storefront_core/cartridge/static/**/*.{js,css,png,gif}',
+                    'app_storefront_pipelines/cartridge/**/*.{properties,xml}'], {}, function(event) {
+                        upload([event.path]);
+                    }
+    );
+});
+
+gulp.task('default', ['enable-watch-mode', 'js', 'css', 'watch:server'], function () {
 	gulp.watch(paths.css.map(function (path) {
 		return path.src + '**/*.scss';
 	}), ['css']);
