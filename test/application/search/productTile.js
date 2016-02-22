@@ -2,7 +2,7 @@
 
 import {assert} from 'chai';
 import {config} from '../webdriver/wdio.conf';
-import * as searchResultsPage from '../pageObjects/searchResults';
+import * as search from '../pageObjects/search';
 import * as testData from '../pageObjects/testData/main';
 
 describe('Search Results - Product Tile', () => {
@@ -22,12 +22,12 @@ describe('Search Results - Product Tile', () => {
 
     before(() => testData.load()
         .then(() => browser.url(categoryPath)
-            .waitForVisible(searchResultsPage.PRODUCTGRID_CONTAINER)
+            .waitForVisible(search.PRODUCTGRID_CONTAINER)
         )
     );
 
     it('should display a single list price if a product has no sales prices and all variants prices are the same', () => {
-        return searchResultsPage.getProductTilePricingByPid(productIdSinglePrice)
+        return search.getProductTilePricingByPid(productIdSinglePrice)
             .then(price => displayPrice = price)
             .then(() => {
                 const expectedPrice = testData.getPricesByProductId(productIdSinglePrice, locale);
@@ -36,7 +36,7 @@ describe('Search Results - Product Tile', () => {
     });
 
     it('should display a price range if a product has no sales prices and variants prices span a range', () => {
-        return searchResultsPage.getProductTilePricingByPid(productIdPriceRange)
+        return search.getProductTilePricingByPid(productIdPriceRange)
             .then(price => displayPrice = price)
             .then(() => {
                 const expectedPrice = testData.getPricesByProductId(productIdPriceRange, locale);
@@ -50,9 +50,9 @@ describe('Search Results - Product Tile', () => {
         const expectedListPrice = expectedPrice.list;
         const expectedSalePrice = expectedPrice.sale;
 
-        return browser.getText(productTile + ' ' + searchResultsPage.PRICE_LIST)
+        return browser.getText(productTile + ' ' + search.PRICE_LIST)
             .then(displayedListPrice => assert.equal(displayedListPrice, expectedListPrice))
-            .then(() => browser.getText(productTile + ' ' + searchResultsPage.PRICE_SALE))
+            .then(() => browser.getText(productTile + ' ' + search.PRICE_SALE))
             .then(displayedSalePrice => assert.equal(displayedSalePrice, expectedSalePrice));
     });
 });
