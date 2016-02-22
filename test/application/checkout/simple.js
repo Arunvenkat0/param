@@ -277,6 +277,7 @@ describe('Checkout', () => {
         const productWithOneVariant = '25720074';
         const defaultShippingCost = {
             x_default: '15.99',
+            en_GB: '15.99',
             fr_FR: '15,99',
             it_IT: '15,99',
             jp_JP: '42',
@@ -284,6 +285,7 @@ describe('Checkout', () => {
         }
         const expressShippingCost = {
             x_default: '9.99',
+            en_GB: '9.99',
             fr_FR: '9,99',
             it_IT: '9,99',
             jp_JP: '21',
@@ -331,7 +333,7 @@ describe('Checkout', () => {
         });
 
         it('#1 Ground shipping method should be selected by default', () => {
-            return browser.getAttribute(checkoutPage.BTN_SHIPPING_METHOD_FIRST, 'checked')
+            return browser.getAttribute(checkoutPage.RADIO_BTN_SHIPPING_METHOD_FIRST, 'checked')
                 .then(val => assert.strictEqual(val, 'true'))
         });
 
@@ -359,7 +361,7 @@ describe('Checkout', () => {
         });
 
         it('#4 should checkout successfully with 2-Day Express shipping method ', () => {
-            browser.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE)
+            return browser.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE)
                 .then(() => browser.waitUntil(browser.isEnabled(checkoutPage.BTN_PLACE_ORDER)))
                 .then(() => browser.click(checkoutPage.BTN_PLACE_ORDER))
                 .then(() => browser.waitForVisible(orderConfPage.ORDER_CONF_DETAILS))
