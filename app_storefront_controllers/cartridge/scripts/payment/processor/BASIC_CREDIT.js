@@ -5,36 +5,31 @@ var Cart = require('~/cartridge/scripts/models/CartModel');
 var PaymentMgr = require('dw/order/PaymentMgr');
 var Transaction = require('dw/system/Transaction');
 
+/* Script Modules */
+var app = require('~/cartridge/scripts/app');
+
 /**
  * Verifies a credit card against a valid card number and expiration date and possibly invalidates invalid form fields.
  * If the verification was successful a credit card payment instrument is created.
  */
 function Handle(args) {
     var cart = Cart.get(args.Basket);
+    var creditCardForm = app.getForm('billing.paymentMethods.creditCard');
     var PaymentMgr = require('dw/order/PaymentMgr');
 
-    var VerifyPaymentCardResult = new dw.system.Pipelet('VerifyPaymentCard', {
-        VerifySecurityCode: true
-    }).execute({
-        PaymentCard: PaymentMgr.getPaymentCard(session.forms.billing.paymentMethods.creditCard.type.value),
-        CardNumber: session.forms.billing.paymentMethods.creditCard.number.value,
-        ExpirationMonth: session.forms.billing.paymentMethods.creditCard.expiration.month.value,
-        ExpirationYear: session.forms.billing.paymentMethods.creditCard.expiration.year.value,
-        CardSecurityCode: session.forms.billing.paymentMethods.creditCard.cvn.value
-    });
+    var cardNumber = creditCardForm.get('number').value();
+    var cardSecurityCode = creditCardForm.get('cvn').value();
+    var cardType = creditCardForm.get('type').value();
+    var expirationMonth = creditCardForm.get('expiration.month').value();
+    var expirationYear = creditCardForm.get('expiration.year').value();
+    var paymentCard = PaymentMgr.getPaymentCard(cardType);
 
-    if (VerifyPaymentCardResult.result === PIPELET_ERROR) {
-        // TODO is this also return in case of error?
-        var CreditCardStatus = VerifyPaymentCardResult.Status;
+    var creditCardStatus = paymentCard.verify(expirationMonth, expirationYear, cardNumber, cardSecurityCode);
 
-        new dw.system.Pipelet('Script', {
-            Transactional: false,
-            OnError: 'PIPELET_ERROR',
-            ScriptFile: 'app_storefront_core:checkout/InvalidatePaymentCardFormElements.ds'
-        }).execute({
-            CreditCardForm: session.forms.billing.paymentMethods.creditCard,
-            Status: CreditCardStatus
-        });
+    if (creditCardStatus.error) {
+
+        var invalidatePaymentCardFormElements = require('app_storefront_core/cartridge/scripts/checkout/InvalidatePaymentCardFormElements');
+        invalidatePaymentCardFormElements.invalidatePaymentCardForm(creditCardStatus, session.forms.billing.paymentMethods.creditCard);
 
         return {error: true};
     }
@@ -43,11 +38,11 @@ function Handle(args) {
         cart.removeExistingPaymentInstruments(dw.order.PaymentInstrument.METHOD_CREDIT_CARD);
         var paymentInstrument = cart.createPaymentInstrument(dw.order.PaymentInstrument.METHOD_CREDIT_CARD, cart.getNonGiftCertificateAmount());
 
-        paymentInstrument.creditCardHolder = session.forms.billing.paymentMethods.creditCard.owner.value;
-        paymentInstrument.creditCardNumber = session.forms.billing.paymentMethods.creditCard.number.value;
-        paymentInstrument.creditCardType = session.forms.billing.paymentMethods.creditCard.type.value;
-        paymentInstrument.creditCardExpirationMonth = session.forms.billing.paymentMethods.creditCard.expiration.month.value;
-        paymentInstrument.creditCardExpirationYear = session.forms.billing.paymentMethods.creditCard.expiration.year.value;
+        paymentInstrument.creditCardHolder = creditCardForm.get('owner').value();
+        paymentInstrument.creditCardNumber = cardNumber;
+        paymentInstrument.creditCardType = cardType;
+        paymentInstrument.creditCardExpirationMonth = expirationMonth;
+        paymentInstrument.creditCardExpirationYear = expirationYear;
     });
 
     return {success: true};
