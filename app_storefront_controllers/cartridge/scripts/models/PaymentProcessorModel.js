@@ -34,11 +34,13 @@ PaymentProcessorModel.handle = function (cart, paymentMethodID) {
     var processor = PaymentMgr.getPaymentMethod(paymentMethodID).getPaymentProcessor();
     if (dw.system.HookMgr.hasHook('app.payment.processor.' + processor.ID)) {
         return dw.system.HookMgr.callHook('app.payment.processor.' + processor.ID, 'Handle', {
-            Basket: cart
+            Basket: cart,
+            PaymentMethodID: paymentMethodID
         });
     } else {
         return dw.system.HookMgr.callHook('app.payment.processor.default', 'Handle', {
-            Basket: cart
+            Basket: cart,
+            PaymentMethodID: paymentMethodID
         });
     }
 };
@@ -58,11 +60,13 @@ PaymentProcessorModel.authorize = function (order, paymentInstrument) {
     var processor = PaymentMgr.getPaymentMethod(paymentInstrument.getPaymentMethod()).getPaymentProcessor();
     if (HookMgr.hasHook('app.payment.processor.' + processor.ID)) {
         return HookMgr.callHook('app.payment.processor.' + processor.ID, 'Authorize', {
+            Order: order,
             OrderNo: order.getOrderNo(),
             PaymentInstrument: paymentInstrument
         });
     } else {
         return HookMgr.callHook('app.payment.processor.default', 'Authorize', {
+            Order: order,
             OrderNo: order.getOrderNo(),
             PaymentInstrument: paymentInstrument
         });
