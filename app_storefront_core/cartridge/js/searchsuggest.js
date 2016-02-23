@@ -2,14 +2,12 @@
 
 var util = require('./util');
 
-var qlen = 0,
+var currentQuery = null,
+    lastQuery = null,
+    runningQuery = null,
     listTotal = -1,
     listCurrent = -1,
-    delay = 300,
-    fieldDefault = null,
-    $searchForm,
-    $searchField,
-    $searchContainer,
+    delay = 30,
     $resultsContainer;
 /**
  * @function
@@ -33,20 +31,19 @@ function handleArrowKeys(keyCode) {
     }
 
     $resultsContainer.children().removeClass('selected').eq(listCurrent).addClass('selected');
-    $searchField.val($resultsContainer.find('.selected .suggestionterm').first().text());
+    $('input[name="q"]').val($resultsContainer.find('.selected .suggestionterm').first().text());
     return true;
 }
+
 var searchsuggest = {
     /**
      * @function
      * @description Configures parameters and required object instances
      */
     init: function (container, defaultValue) {
-        // initialize vars
-        $searchContainer = $(container);
-        $searchForm = $searchContainer.find('form[name="simpleSearch"]');
-        $searchField = $searchForm.find('input[name="q"]');
-        fieldDefault = defaultValue;
+        var $searchContainer = $(container);
+        var $searchForm = $searchContainer.find('form[name="simpleSearch"]');
+        var $searchField = $searchForm.find('input[name="q"]');
 
         // disable browser auto complete
         $searchField.attr('autocomplete', 'off');
@@ -55,19 +52,17 @@ var searchsuggest = {
         $searchField.focus(function () {
             if (!$resultsContainer) {
                 // create results container if needed
-                $resultsContainer = $('<div/>').attr('id', 'suggestions').appendTo($searchContainer).css({
-                    'top': $searchContainer[0].offsetHeight,
-                    'left': 0,
-                    'width': $searchField[0].offsetWidth
-                });
+                $resultsContainer = $('<div/>').attr('id', 'search-suggestions').appendTo($searchContainer);
             }
-            if ($searchField.val() === fieldDefault) {
+            if ($searchField.val() === defaultValue) {
                 $searchField.val('');
             }
         });
-        // on blur listener
-        $searchField.blur(function () {
-            setTimeout(this.clearResults, 200);
+
+        $(document).on('click', function (e) {
+            if (!$searchContainer.is(e.target)) {
+                setTimeout(this.clearResults, 200);
+            }
         }.bind(this));
         // on key up listener
         $searchField.keyup(function (e) {
@@ -85,79 +80,69 @@ var searchsuggest = {
                 return;
             }
 
-            var lastVal = $searchField.val();
+            currentQuery = $searchField.val().trim();
 
-            // if is text, call with delay
-            setTimeout(function () {
-                this.suggest(lastVal);
-            }.bind(this), delay);
-        }.bind(this));
-        // on submit we do not submit the form, but change the window location
-        // in order to avoid https to http warnings in the browser
-        // only if it's not the default value and it's not empty
-        $searchForm.submit(function (e) {
-            e.preventDefault();
-            var searchTerm = $searchField.val();
-            if (searchTerm === fieldDefault || searchTerm.length === 0) {
-                return false;
+            // no query currently running, init an update
+            if (!runningQuery) {
+                runningQuery = currentQuery;
+                setTimeout(this.suggest.bind(this), delay);
             }
-            window.location = util.appendParamToURL($(this).attr('action'), 'q', searchTerm);
-        });
+        }.bind(this));
     },
 
     /**
      * @function
      * @description trigger suggest action
-     * @param lastValue
      */
-    suggest: function (lastValue) {
-        // get the field value
-        var part = $searchField.val();
+    suggest: function () {
+        // check whether query to execute (runningQuery) is still up to date and had not changed in the meanwhile
+        // (we had a little delay)
+        if (runningQuery !== currentQuery) {
+            // update running query to the most recent search phrase
+            runningQuery = currentQuery;
+        }
 
-        // if it's empty clear the resuts box and return
-        if (part.length === 0) {
+        // if it's empty clear the results box and return
+        if (runningQuery.length === 0) {
             this.clearResults();
+            runningQuery = null;
             return;
         }
 
-        // if part is not equal to the value from the initiated call,
-        // or there were no results in the last call and the query length
-        // is longer than the last query length, return
-        // #TODO: improve this to look at the query value and length
-        if ((lastValue !== part) || (listTotal === 0 && part.length > qlen)) {
+        // if the current search phrase is the same as for the last suggestion call, just return
+        if (lastQuery === runningQuery) {
+            runningQuery = null;
             return;
         }
-        qlen = part.length;
 
         // build the request url
-        var reqUrl = util.appendParamToURL(Urls.searchsuggest, 'q', part);
-        reqUrl = util.appendParamToURL(reqUrl, 'legacy', 'true');
+        var reqUrl = util.appendParamToURL(Urls.searchsuggest, 'q', runningQuery);
 
-        // get remote data as JSON
-        $.getJSON(reqUrl, function (data) {
-            // get the total of results
-            var suggestions = data,
-                ansLength = suggestions.length;
+        // execute server call
+        $.get(reqUrl, function (data) {
+            var suggestionHTML = data,
+                ansLength = suggestionHTML.trim().length;
 
             // if there are results populate the results div
             if (ansLength === 0) {
                 this.clearResults();
-                return;
-            }
-            var html = '';
-            for (var i = 0; i < ansLength; i++) {
-                html += '<div><div class="suggestionterm">' + suggestions[i].suggestion + '</div><span class="hits">' + suggestions[i].hits + '</span></div>';
+            } else {
+                // update the results div
+                $resultsContainer.html(suggestionHTML).fadeIn(200);
             }
 
-            // update the results div
-            $resultsContainer.html(html).show().on('hover', 'div', function () {
-                $(this).toggleClass = 'selected';
-            }).on('click', 'div', function () {
-                // on click copy suggestion to search field, hide the list and submit the search
-                $searchField.val($(this).children('.suggestionterm').text());
-                this.clearResults();
-                $searchForm.trigger('submit');
-            }.bind(this));
+            // record the query that has been executed
+            lastQuery = runningQuery;
+            // reset currently running query
+            runningQuery = null;
+
+            // check for another required update (if current search phrase is different from just executed call)
+            if (currentQuery !== lastQuery) {
+                // ... and execute immediately if search has changed while this server call was in transit
+                runningQuery = currentQuery;
+                setTimeout(this.suggest.bind(this), delay);
+            }
+            this.hideLeftPanel();
         }.bind(this));
     },
     /**
@@ -166,7 +151,19 @@ var searchsuggest = {
      */
     clearResults: function () {
         if (!$resultsContainer) { return; }
-        $resultsContainer.empty().hide();
+        $resultsContainer.fadeOut(200, function () {$resultsContainer.empty();});
+    },
+    /**
+     * @function
+     * @description
+     */
+    hideLeftPanel: function () {
+        //hide left panel if there is only a matching suggested custom phrase
+        if ($('.search-suggestion-left-panel-hit').length === 1 && $('.search-phrase-suggestion a').text().replace(/(^[\s]+|[\s]+$)/g, '').toUpperCase() === $('.search-suggestion-left-panel-hit a').text().toUpperCase()) {
+            $('.search-suggestion-left-panel').css('display', 'none');
+            $('.search-suggestion-wrapper-full').addClass('search-suggestion-wrapper');
+            $('.search-suggestion-wrapper').removeClass('search-suggestion-wrapper-full');
+        }
     }
 };
 

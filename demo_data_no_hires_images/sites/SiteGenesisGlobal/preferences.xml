@@ -58,7 +58,6 @@
             <preference preference-id="enableInfiniteScroll">false</preference>
             <preference preference-id="enableMultiShipping">false</preference>
             <preference preference-id="enableStorePickUp">false</preference>
-            <preference preference-id="enhancedSearchSuggestions">true</preference>
         </development>
         <staging>
             <preference preference-id="disableResponsiveDesign">false</preference>
