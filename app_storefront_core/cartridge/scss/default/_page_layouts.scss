@@ -58,15 +58,16 @@
         padding: 0 0 20px;
         position: relative;
         width: 787px;
-    }
-    .primary-focus & {
-        border: 0 none;
-        float: left;
-        margin: 0;
-        width: 76%;
-    }
+	    .primary-focus & {
+	        border: none;
+	        float: left;
+	        margin: 0;
+	        width: 76%;
+	    } 
+	 }
+
     .full-width & {
-        border: 0 none;
+        border: none;
         width: 100%;
     }
 }
@@ -105,12 +106,6 @@
         @media screen and (min-width: 768px) {
             display: block;
         }
-    }
-}
-
-@media screen and (max-width: 400px) {
-    #secondary {
-        float: left;
     }
 }
 
