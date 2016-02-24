@@ -64,12 +64,11 @@
 	        margin: 0;
 	        width: 76%;
 	    } 
+	    .full-width & {
+	        border: none;
+	        width: 100%;
+	    }
 	 }
-
-    .full-width & {
-        border: none;
-        width: 100%;
-    }
 }
 
 #secondary {
