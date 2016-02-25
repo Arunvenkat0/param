@@ -8,8 +8,6 @@ import * as checkoutPage from '../pageObjects/checkout';
 import * as homePage from '../pageObjects/home';
 import * as orderConfPage from '../pageObjects/orderConfirmation';
 import * as productDetailPage from '../pageObjects/productDetail';
-import * as products from '../pageObjects/testData/products';
-import * as pricingHelpers from '../pageObjects/helpers/pricing';
 import * as testData from '../pageObjects/testData/main';
 import * as formLogin from '../pageObjects/helpers/forms/login';
 import * as formHelpers from '../pageObjects/helpers/forms/common';
@@ -276,22 +274,21 @@ describe('Checkout', () => {
     describe('shipping methods', () => {
         const productWithOneVariant = '25720074';
         const defaultShippingCost = {
-            x_default: '15.99',
-            en_GB: '15.99',
-            fr_FR: '15,99',
-            it_IT: '15,99',
-            jp_JP: '42',
-            cn_CN: '19.99'
+            x_default: '$15.99',
+            en_GB: '£15.99',
+            fr_FR: '15,99 €',
+            it_IT: '€ 15,99',
+            jp_JP: '¥ 36 ',
+            zh_CN: '¥29.99'
         }
         const expressShippingCost = {
-            x_default: '9.99',
-            en_GB: '9.99',
-            fr_FR: '9,99',
-            it_IT: '9,99',
-            jp_JP: '21',
-            cn_CN: '15.99'
+            x_default: '$9.99',
+            en_GB: '£9.99',
+            fr_FR: '9,99 €',
+            it_IT: '€ 9,99',
+            jp_JP: '¥ 21',
+            zh_CN: '¥15.99'
         }
-        let catalog;
         let productVariation;
         let resourcePath;
         let shippingCost;
@@ -303,21 +300,12 @@ describe('Checkout', () => {
         before(() => {
             return testData.load()
                 .then(() => browser.deleteCookie())
-                .then(() => catalog = testData.parsedData.catalog)
                 .then(() => testData.getProductById(productWithOneVariant))
                 .then(productMaster => {
-                    let variantIds;
                     let variantSelection = new Map();
-
                     productVariation = productMaster;
                     resourcePath = productVariation.getUrlResourcePath();
-                    variantIds = productVariation.getVariantProductIds();
-
-                    let instance = products.getProduct(catalog, variantIds[0]);
-
                     variantSelection.set('resourcePath', resourcePath);
-                    variantSelection.set('colorIndex', (productVariation.getAttrTypeValueIndex('color', instance.customAttributes.color) + 1));
-
                     return productDetailPage.addProductVariationToCart(variantSelection);
                 })
                 .then(() => {
@@ -333,20 +321,20 @@ describe('Checkout', () => {
         });
 
         it('#1 Ground shipping method should be selected by default', () => {
-            return browser.getAttribute(checkoutPage.RADIO_BTN_SHIPPING_METHOD_FIRST, 'checked')
-                .then(val => assert.strictEqual(val, 'true'))
+            return browser.isSelected(checkoutPage.RADIO_BTN_SHIPPING_METHOD_FIRST)
+                .then(val => assert.isTrue(val))
         });
 
         it('#2 default shipping cost should be displayed properly', () => {
             return browser.getText(checkoutPage.ORDER_SHIPPING_COST)
-                .then(shippingCharge => shippingCost = shippingCharge.replace(pricingHelpers.getCurrencySymbol(locale), '').trim())
-                .then(() => assert.equal(parseFloat(shippingCost), defaultShippingCost[locale]))//TODO:RAP-4743:add shipping parsing
+                .then(shippingCharge => shippingCost = shippingCharge)
+                .then(() => assert.equal(shippingCost, defaultShippingCost[locale]))//TODO:RAP-4743:add shipping parsing
         });
 
         it('#3 select 2-Day Express shipping method, shipping cost should be displayed properly', () => {
             return browser.click(checkoutPage.RADIO_BTN_SHIPPING_METHOD2)
                 .then(() => {
-                    if (browser.getAttribute(checkoutPage.RADIO_BTN_SHIPPING_METHOD2, 'checked') !== 'true') {
+                    if (browser.isSelected(checkoutPage.RADIO_BTN_SHIPPING_METHOD2) !== 'true') {
                         return browser.click(checkoutPage.RADIO_BTN_SHIPPING_METHOD2)
                     }
                 })
@@ -356,8 +344,8 @@ describe('Checkout', () => {
                 .then(() => browser.waitForExist(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
                 .then(() => browser.waitForEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
                 .then(() => browser.getText(checkoutPage.ORDER_SHIPPING_COST))
-                .then(shippingCharge => updatedShippingCost = shippingCharge.replace(pricingHelpers.getCurrencySymbol(locale), '').trim())
-                .then(() => assert.equal(parseFloat(updatedShippingCost), expressShippingCost[locale]))//TODO:RAP-4743:add shipping parsing
+                .then(shippingCharge => updatedShippingCost = shippingCharge)
+                .then(() => assert.equal(updatedShippingCost, expressShippingCost[locale]))//TODO:RAP-4743:add shipping parsing
         });
 
         it('#4 should checkout successfully with 2-Day Express shipping method ', () => {
@@ -368,8 +356,8 @@ describe('Checkout', () => {
                 .then(() => checkoutPage.getLabelOrderConfirmation())
                 .then(title => assert.equal(title, successfulCheckoutTitle))
                 .then(() => browser.getText(checkoutPage.ORDER_SHIPPING_COST))
-                .then(shippingCharge => updatedShippingCost = shippingCharge.replace(pricingHelpers.getCurrencySymbol(locale), '').trim())
-                .then(() => assert.equal(parseFloat(updatedShippingCost), expressShippingCost[locale]))//TODO:RAP-4743:add shipping parsing
+                .then(shippingCharge => updatedShippingCost = shippingCharge)
+                .then(() => assert.equal(updatedShippingCost, expressShippingCost[locale]))//TODO:RAP-4743:add shipping parsing
 
         });
     });
