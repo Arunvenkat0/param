@@ -306,6 +306,7 @@ describe('Checkout', () => {
                     productVariation = productMaster;
                     resourcePath = productVariation.getUrlResourcePath();
                     variantSelection.set('resourcePath', resourcePath);
+                    variantSelection.set('colorIndex', 1);
                     return productDetailPage.addProductVariationToCart(variantSelection);
                 })
                 .then(() => {
