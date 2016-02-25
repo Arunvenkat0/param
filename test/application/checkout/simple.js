@@ -296,7 +296,6 @@ describe('Checkout', () => {
         let locale = config.locale;
         let shippingFormData;
 
-
         before(() => {
             return testData.load()
                 .then(() => browser.deleteCookie())
@@ -322,7 +321,7 @@ describe('Checkout', () => {
         });
 
         it('#1 Ground shipping method should be selected by default', () => {
-            return browser.isSelected(checkoutPage.RADIO_BTN_SHIPPING_METHOD_FIRST)
+            return browser.isSelected(checkoutPage.RADIO_BTN_SHIPPING_METHOD1)
                 .then(val => assert.isTrue(val))
         });
 

@@ -32,7 +32,7 @@ export const ORDER_SUBTOTAL = '.summary .order-subtotal td:nth-child(2)';
 export const ORDER_SHIPPING_COST = '.order-shipping td:nth-child(2)';
 export const PAYMENT_METHOD_TOTAL = '.minibillinginfo-amount';
 export const RADIO_BTN_PAYPAL = 'input[value="PayPal"]';
-export const RADIO_BTN_SHIPPING_METHOD_FIRST = '.input-radio[id$="001"]';
+export const RADIO_BTN_SHIPPING_METHOD1 = '.input-radio[id$="001"]';
 export const RADIO_BTN_SHIPPING_METHOD2 = '.input-radio[id$="002"]';
 export const SELECT_ADDRESS = '[name*="singleshipping_addressList"]';
 export const SELECT_CREDITCARD = '[name*=creditCardList]';
