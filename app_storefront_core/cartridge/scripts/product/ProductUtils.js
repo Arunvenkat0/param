@@ -579,12 +579,14 @@ ProductUtils.getVariantHierarchy = function (item, pvm, quantity) {
     var variants = {};
     if (!item.isVariant() && !item.isMaster()) { return variants; }
 
-    for (var i = 0,len = pvm.variants.length; i < len; i++) {
-        var v = pvm.variants[i];
+    var allVariants = pvm.variants;
+    var allVariationAttributes = pvm.productVariationAttributes;
+    for (var i = 0,len = allVariants.length; i < len; i++) {
+        var v = allVariants[i];
         var target = variants;
         // attributes
-        for (var a = 0, alen = pvm.productVariationAttributes.length; a < alen; a++) {
-            var att = pvm.productVariationAttributes[a];
+        for (var a = 0, alen = allVariationAttributes.length; a < alen; a++) {
+            var att = allVariationAttributes[a];
             var variationValue = pvm.getVariationValue(v, att);
             if (!variationValue) { continue; }
             var key = att.ID + '-' + variationValue.value;
