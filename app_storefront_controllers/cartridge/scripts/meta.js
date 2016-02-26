@@ -70,8 +70,6 @@ Meta.prototype = {
                 this.data.page.description = object.pageDescription;
             }
 
-            this.updatePageMetaData();
-
             // Update breadcrumbs for content
             if (object.class === dw.content.Content) {
                 var path = require('~/cartridge/scripts/models/ContentModel').get(object).getFolderPath();
@@ -101,8 +99,8 @@ Meta.prototype = {
                 this.data.page.description = object.pageDescription;
             }
             // @TODO do an _.extend(this.data, object) of the passed object
-            this.updatePageMetaData();
         }
+        this.updatePageMetaData();
     },
     /**
      * Update the Page Metadata with the current internal data
