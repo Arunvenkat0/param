@@ -106,6 +106,24 @@ describe('Checkout', () => {
                 .then(activeBreadCrumb => assert.equal(activeBreadCrumb, 'STEP 2: Billing'))
         );
 
+        // This test won't work in January, because of UI limitations barring the selection of a previous year
+        // That is why this test contains a conditional skip.
+        it('should fill out the billing form with expired credit card information', function () {
+            const date = new Date();
+            let expiredBillingFormData = _.cloneDeep(billingFormData);
+            expiredBillingFormData.creditCard_expiration_year = testData.creditCard1.yearIndex - 1;
+
+            if (!date.getMonth()) {
+                this.skip();
+            }
+
+            return checkoutPage.fillOutBillingForm(expiredBillingFormData)
+                .then(() => browser.waitForEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+                .then(() => browser.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+                .then(() => browser.waitForExist(checkoutPage.CREDIT_CARD_MONTH_ERROR_MSG))
+                .then(doesExist => assert.isTrue(doesExist))
+        });
+
         // Fill in Billing Form
         it('should allow saving of Billing Form when required fields filled', () =>
             checkoutPage.fillOutBillingForm(billingFormData)
