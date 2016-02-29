@@ -291,8 +291,6 @@ describe('Checkout', () => {
         }
         let productVariation;
         let resourcePath;
-        let shippingCost;
-        let updatedShippingCost;
         let locale = config.locale;
         let shippingFormData;
 
@@ -327,8 +325,7 @@ describe('Checkout', () => {
 
         it('#2 default shipping cost should be displayed properly', () => {
             return browser.getText(checkoutPage.ORDER_SHIPPING_COST)
-                .then(shippingCharge => shippingCost = shippingCharge)
-                .then(() => assert.equal(shippingCost, defaultShippingCost[locale]))//TODO:RAP-4743:add shipping parsing
+                .then(shippingCharge => assert.equal(shippingCharge, defaultShippingCost[locale]))//TODO:RAP-4743:add shipping parsing
         });
 
         it('#3 select 2-Day Express shipping method, shipping cost should be displayed properly', () => {
@@ -344,8 +341,7 @@ describe('Checkout', () => {
                 .then(() => browser.waitForExist(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
                 .then(() => browser.waitForEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
                 .then(() => browser.getText(checkoutPage.ORDER_SHIPPING_COST))
-                .then(shippingCharge => updatedShippingCost = shippingCharge)
-                .then(() => assert.equal(updatedShippingCost, expressShippingCost[locale]))//TODO:RAP-4743:add shipping parsing
+                .then(shippingCharge => assert.equal(shippingCharge, expressShippingCost[locale]))//TODO:RAP-4743:add shipping parsing
         });
 
         it('#4 should checkout successfully with 2-Day Express shipping method ', () => {
@@ -356,9 +352,7 @@ describe('Checkout', () => {
                 .then(() => checkoutPage.getLabelOrderConfirmation())
                 .then(title => assert.equal(title, successfulCheckoutTitle))
                 .then(() => browser.getText(checkoutPage.ORDER_SHIPPING_COST))
-                .then(shippingCharge => updatedShippingCost = shippingCharge)
-                .then(() => assert.equal(updatedShippingCost, expressShippingCost[locale]))//TODO:RAP-4743:add shipping parsing
-
+                .then(shippingCharge => assert.equal(shippingCharge, expressShippingCost[locale]))//TODO:RAP-4743:add shipping parsing
         });
     });
 
