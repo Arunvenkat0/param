@@ -249,7 +249,7 @@ describe('Checkout', () => {
                 .then(() => checkoutPage.fillOutBillingForm(billingFormData))
                 .then(() => browser.waitForEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
                 .then(() => helpers.clickAndWait(checkoutPage.BTN_CONTINUE_BILLING_SAVE, checkoutPage.BREADCRUMB_PLACE_ORDER))
-                .then(() => cartPage.getQuantityByRow(1))
+                .then(() => checkoutPage.getQuantityByRow(1))
                 .then(updatedQuantity => assert.equal(updatedQuantity, '3'));
         });
 

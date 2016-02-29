@@ -28,10 +28,6 @@ function _createCssNthCartRow (idx) {
     return CART_ITEMS + ':nth-child(' + idx + ')';
 }
 
-function _createCssUpdateQtyInput (idx) {
-    return [_createCssNthCartRow(idx), ITEM_QUANTITY, 'input'].join(' ');
-}
-
 // Public methods
 export function navigateTo () {
     return browser.url(basePath);
@@ -69,12 +65,12 @@ export function getItemAttrByRow (rowNum, attr) {
 }
 //get the quantity in Cart for a particular row
 export function getQuantityByRow(rowNum) {
-    var selector = [_createCssNthCartRow(rowNum), ITEM_QUANTITY].join(' ');
-    return browser.getText(selector);
+    var selector = [_createCssNthCartRow(rowNum), ITEM_QUANTITY, 'input'].join(' ');
+    return browser.getValue(selector);
 }
 
 export function updateQuantityByRow (rowNum, value) {
-    let selector = _createCssUpdateQtyInput(rowNum);
+    let selector = [_createCssNthCartRow(rowNum), ITEM_QUANTITY, 'input'].join(' ');
     return browser.waitForVisible(selector)
         .setValue(selector, value)
         .click(BTN_UPDATE_CART)
@@ -85,6 +81,10 @@ export function updateQuantityByRow (rowNum, value) {
 
 export function getPriceByRow (rowNum) {
     return browser.getText(_createCssNthCartRow(rowNum) + ' .item-total .price-total');
+}
+
+export function getSelectPriceByRow (rowNum, selection) {
+    return browser.getText(_createCssNthCartRow(rowNum) + ' ' + selection);
 }
 
 export function getItemEditLinkByRow (rowNum) {

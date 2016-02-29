@@ -10,6 +10,7 @@ export const BREADCRUMB_PLACE_ORDER = '.step-3.active';
 export const BTN_CONTINUE_BILLING_SAVE = 'button[name*="billing_save"]';
 export const BTN_CONTINUE_SHIPPING_SAVE = '[name*="shippingAddress_save"]';
 export const BTN_PLACE_ORDER = 'button[name*="submit"]';
+export const PLACE_ORDER_ITEMS = '.item-list tbody tr';
 export const CHECKOUT_PROGRESS = '.checkout-progress-indicator .active';
 export const CREDIT_CARD_MONTH_ERROR_MSG = '.month .error-message';
 export const CSS_ORDER_SUBTOTAL = '.nav.summary .order-subtotal td:nth-child(2)';
@@ -149,4 +150,8 @@ export function getActiveBreadCrumb () {
 
 export function getOrderSubTotal () {
     return browser.getText(CSS_ORDER_SUBTOTAL);
+}
+
+export function getQuantityByRow (rowNum) {
+    return browser.getText(PLACE_ORDER_ITEMS + ':nth-child(' + rowNum + ') .item-quantity');
 }
