@@ -1,5 +1,6 @@
 'use strict';
 
+import _ from 'lodash';
 import fs from 'fs';
 import moment from 'moment-timezone';
 import xml2js from 'xml2js';
@@ -144,7 +145,20 @@ function _loadAndJsonifyXmlData (subject) {
  * @returns {Object} - JSON object of product
  */
 export function getProductById (productId) {
-    return products.getProduct(parsedData.catalog, productId);
+    var product = products.getProduct(parsedData.catalog, productId);
+
+    switch (product.type) {
+        case 'variationMaster':
+            product.variants = product.getVariantProductIds().map(variantId =>
+                products.getProduct(parsedData.catalog, variantId)
+            );
+            break;
+        case 'standard':
+            product.master = products.getVariantParent(parsedData.catalog, productId);
+            break;
+    }
+
+    return product;
 }
 
 /**
@@ -202,7 +216,7 @@ export function getCustomerByLogin (login) {
  *
  * @param {String} productId - product ID
  * @param {String} [locale=x_default] - page locale
- * @returns {Object} - Product* instance
+ * @returns {Object} - prices
  */
 export function getPricesByProductId (productId, locale = 'x_default') {
     const normalizedLocale = locale.replace(/_/g, '-');
@@ -210,12 +224,77 @@ export function getPricesByProductId (productId, locale = 'x_default') {
     const product = getProductById(productId);
     let applicablePricebooks = {};
 
-    products.priceTypes.forEach(type => {
+    prices.priceTypes.forEach(type => {
         const pricebookName = [currencyCode, type, 'prices'].join('-');
         applicablePricebooks[type] = parsedData.pricebooks[pricebookName];
     });
 
-    return product.getPrices(applicablePricebooks, locale, parsedData.catalog);
+    switch (product.type) {
+        case 'set':
+            return getPricesForProductSet(productId, locale);
+        case 'variationMaster':
+            return getPricesForVariationMaster(productId, locale);
+        case 'standard':
+            return getPricesForStandardProduct(applicablePricebooks, productId, locale);
+        case 'bundle':
+            return getPricesForProductBundle(applicablePricebooks, productId, locale);
+        default:
+            return {};
+    }
+}
+
+function getPricesForStandardProduct (pricebooks, productId, locale = 'x_default') {
+    let priceResults = {};
+
+    prices.priceTypes.forEach(type => {
+        let entry = _.find(pricebooks[type].products, {productId: productId});
+
+        if (entry) {
+            const localizedNumber = pricingHelpers.localizeNumber(entry.amount, locale);
+            priceResults[type] = pricingHelpers.getFormattedPrice(localizedNumber, locale);
+        }
+    });
+
+    return priceResults;
+}
+
+function getPricesForVariationMaster (productId, locale = 'x_default') {
+    const variationMaster = getProductById(productId);
+    let priceResults = {};
+
+    variationMaster.getVariantProductIds().forEach(variantId => {
+        let variantPrices = getPricesByProductId(variantId, locale);
+        prices.priceTypes.forEach(type => {
+            if (variantPrices[type]) {
+                let variantPrice = pricingHelpers.getCurrencyValue(variantPrices[type], locale);
+                let priceResult = priceResults.hasOwnProperty(type) ? pricingHelpers.getCurrencyValue(priceResults[type], locale) : undefined;
+                priceResults[type] = !priceResult || variantPrice < priceResult
+                    ? pricingHelpers.getFormattedPrice(variantPrices[type], locale)
+                    : pricingHelpers.getFormattedPrice(priceResults[type], locale);
+            }
+        });
+    });
+
+    return priceResults;
+}
+
+function getPricesForProductSet (productId, locale = 'x_default') {
+    let productSet = getProductById(productId);
+    let price = 0.00;
+
+    productSet.getProductIds().forEach(productId => {
+        var prices = getPricesByProductId(productId, locale);
+        let values = _.values(prices);
+        values = values.map(value => pricingHelpers.getCurrencyValue(value, locale));
+        price += _.min(values);
+    });
+
+    return pricingHelpers.getFormattedPrice(price.toString(), locale);
+}
+
+function getPricesForProductBundle (pricebooks, productId, locale = 'x_default') {
+    let entry = _.find(pricebooks.list.products, {productId: productId});
+    return pricingHelpers.getFormattedPrice(entry.amount, locale);
 }
 
 export function getVariationMasterInstances () {
