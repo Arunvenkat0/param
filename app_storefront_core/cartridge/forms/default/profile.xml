@@ -24,8 +24,18 @@
 			parse-error="profile.usernameerror"
 			value-error="profile.usernametaken" />
 
-		<field formid="password" label="label.password" description="resource.8_255characters" type="string" mandatory="true" min-length="8" max-length="255"
+		<field formid="currentpassword" label="label.currentpassword" type="string" mandatory="true" min-length="8" max-length="255" 
+			   range-error="resource.8_255characters" value-error="profile.currentpasswordnomatch"/>
+
+		<field formid="newpassword" label="label.newpassword" description="resource.8_255characters" type="string" mandatory="true" min-length="8" max-length="255"
 			   range-error="resource.8_255characters" />
+
+		<field formid="newpasswordconfirm" label="profile.newpasswordconfirm" type="string" mandatory="true" min-length="8" max-length="255"
+			   range-error="resource.8_255characters"
+			   value-error="profile.passwordnomatch"/>
+
+		<field formid="password" label="label.password" description="resource.8_255characters" type="string" mandatory="true" min-length="8" max-length="255"
+			   range-error="resource.8_255characters"  value-error="profile.currentpasswordnomatch" />
 
 		<field formid="passwordconfirm" label="profile.passwordconfirm" type="string" mandatory="true" min-length="8" max-length="255"
 			   range-error="resource.8_255characters"
@@ -58,6 +68,7 @@
 		<action formid="add" valid-form="false"/>
 	</group>
 
+	<action formid="changepassword" valid-form="true"/>
 	<action formid="confirm" valid-form="true"/>
 	<action formid="register" valid-form="true"/>
 	<action formid="cancel" valid-form="false"/>

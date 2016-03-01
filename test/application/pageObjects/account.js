@@ -10,7 +10,9 @@ export const PASSWORD_ERROR = '.error-form';
 export const PASSWORD_RESET_LINK = '#password-reset';
 export const PASSWORD_SEND_BUTTON = 'button[name*=send]';
 export const PERSONAL_DATA = 'ul.account-options > li > a:nth-child(1)';
+export const PERSONAL_DATA_SIDENAV = '.secondary-navigation .content-asset:first ul:first li:first a';
 export const VALID_PASSWORD_SELECTOR = '#dialog-container a';  // TODO: We need a better selector for determining success
+export const ACCOUNT_PAGE_OPTIONS = '.account-options';
 
 const basePath = '/account';
 
