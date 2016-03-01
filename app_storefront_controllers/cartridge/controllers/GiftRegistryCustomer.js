@@ -7,7 +7,6 @@
  */
 
 /* API Includes */
-var Pipelet = require('dw/system/Pipelet');
 var URLUtils = require('dw/web/URLUtils');
 
 /* Script Modules */
@@ -25,39 +24,39 @@ var guard = require('~/cartridge/scripts/guard');
  */
 function Show() {
     var Status = require('dw/system/Status');
-    var CurrentHttpParameterMap = request.httpParameterMap;
-    var CurrentForms = session.forms;
-    var ProductListID = CurrentHttpParameterMap.ID.stringValue;
-    var ProductList = null;
+    var ProductListMgr = require('dw/customer/ProductListMgr');
 
-    CurrentForms.giftregistry.clearFormElement();
+    var registryForm = app.getForm('giftregistry');
+    var productList;
+    var productListID = request.httpParameterMap.ID.stringValue;
+    var productListStatus;
 
-    if (typeof(ProductListID) !== 'undefined' && ProductListID !== null) {
-        var GetProductListResult = new Pipelet('GetProductList', {
-            Create: false
-        }).execute({
-            ProductListID: ProductListID
-        });
-        if (GetProductListResult.result === PIPELET_ERROR) {
-            Status = new dw.system.Status(dw.system.Status.ERROR, 'notfound');
+    registryForm.clearFormElement();
+
+    if (productListID) {
+
+        productList = ProductListMgr.getProductList(productListID);
+
+        if (!productList) {
+            productListStatus = new Status(Status.ERROR, 'notfound');
         } else {
-            ProductList = GetProductListResult.ProductList;
 
-            if (ProductList.public) {
-                CurrentForms.giftregistry.items.copyFrom(ProductList.publicItems);
-                CurrentForms.giftregistry.event.copyFrom(ProductList);
-            } else {
-                Status = new dw.system.Status(dw.system.Status.ERROR, 'private');
-                ProductList = null;
+            if (productList.public) {
+                registryForm.get('items').copyFrom(productList.publicItems);
+                registryForm.get('event').copyFrom(productList);
+            }  else {
+                productListStatus = new Status(Status.ERROR, 'private');
+                productList = null;
             }
         }
+
     } else {
-        Status = new Status(Status.ERROR, 'notfound');
+        productListStatus = new Status(Status.ERROR, 'notfound');
     }
 
     app.getView({
-        Status: Status,
-        ProductList: ProductList,
+        Status: productListStatus,
+        ProductList: productList,
         ContinueURL: URLUtils.https('GiftRegistry-SubmitForm')
     }).render('account/giftregistry/registrycustomer');
 
