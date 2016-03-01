@@ -188,35 +188,35 @@
       </node>
       <simple-transition/>
       <node>
-	<pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
-	  <config-property key="Transactional" value="false"/>
-	  <key-binding alias="&quot;FailedLoginCounter&quot;" key="From_0"/>
-	  <key-binding alias="CounterLabel" key="To_0"/>
-	  <key-binding alias="null" key="From_1"/>
-	  <key-binding alias="null" key="To_1"/>
-	  <key-binding alias="null" key="From_2"/>
-	  <key-binding alias="null" key="To_2"/>
-	  <key-binding alias="null" key="From_3"/>
-	  <key-binding alias="null" key="To_3"/>
-	  <key-binding alias="null" key="From_4"/>
-	  <key-binding alias="null" key="To_4"/>
-	  <key-binding alias="null" key="From_5"/>
-	  <key-binding alias="null" key="To_5"/>
-	  <key-binding alias="null" key="From_6"/>
-	  <key-binding alias="null" key="To_6"/>
-	  <key-binding alias="null" key="From_7"/>
-	  <key-binding alias="null" key="To_7"/>
-	  <key-binding alias="null" key="From_8"/>
-	  <key-binding alias="null" key="To_8"/>
-	  <key-binding alias="null" key="From_9"/>
-	  <key-binding alias="null" key="To_9"/>
-	</pipelet-node>
-	<node-display x="0" y="1"/>
+        <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+          <config-property key="Transactional" value="false"/>
+          <key-binding alias="&quot;FailedLoginCounter&quot;" key="From_0"/>
+          <key-binding alias="CounterLabel" key="To_0"/>
+          <key-binding alias="null" key="From_1"/>
+          <key-binding alias="null" key="To_1"/>
+          <key-binding alias="null" key="From_2"/>
+          <key-binding alias="null" key="To_2"/>
+          <key-binding alias="null" key="From_3"/>
+          <key-binding alias="null" key="To_3"/>
+          <key-binding alias="null" key="From_4"/>
+          <key-binding alias="null" key="To_4"/>
+          <key-binding alias="null" key="From_5"/>
+          <key-binding alias="null" key="To_5"/>
+          <key-binding alias="null" key="From_6"/>
+          <key-binding alias="null" key="To_6"/>
+          <key-binding alias="null" key="From_7"/>
+          <key-binding alias="null" key="To_7"/>
+          <key-binding alias="null" key="From_8"/>
+          <key-binding alias="null" key="To_8"/>
+          <key-binding alias="null" key="From_9"/>
+          <key-binding alias="null" key="To_9"/>
+        </pipelet-node>
+        <node-display x="0" y="1"/>
       </node>
       <simple-transition/>
       <node>
-	<call-node start-name-ref="RateLimiter-Check"/>
-	<node-display x="0" y="1"/>
+        <call-node start-name-ref="RateLimiter-Check"/>
+        <node-display x="0" y="1"/>
       </node>
       <simple-transition/>
       <node>
@@ -318,15 +318,15 @@
       </node>
       <simple-transition/>
       <node>
-	<call-node start-name-ref="RateLimiter-HideCaptcha"/>
-	<node-display x="0" y="1"/>
+        <call-node start-name-ref="RateLimiter-HideCaptcha"/>
+        <node-display x="0" y="1"/>
       </node>
       <simple-transition/>
       <node>
         <pipelet-node pipelet-name="ClearFormElement" pipelet-set-identifier="bc_api">
           <key-binding alias="CurrentForms.login" key="FormElement"/>
         </pipelet-node>
-	<node-display x="0" y="4"/>
+        <node-display x="0" y="4"/>
       </node>
       <simple-transition/>
       <node>
@@ -362,12 +362,7 @@
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="app_storefront_core:account/login/oauth/ObtainAccountFromLinkedInProviderAndLogin.ds"/>
-          <key-binding alias="rememberMe" key="rememberMe"/>
-          <key-binding alias="CurrentSession.privacy.ContinuationURL" key="ContinuationURL"/>
-          <key-binding alias="OAuthProviderID" key="OAuthProviderId"/>
-          <key-binding alias="CurrentSession.privacy.RememberMe" key="RememberMe"/>
           <key-binding alias="ResponseText" key="ResponseText"/>
-          <key-binding alias="Location" key="Location"/>
           <key-binding alias="OAuthProviderID" key="OAuthProviderID"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
@@ -437,15 +432,7 @@
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="app_storefront_core:account/login/oauth/ObtainAccountFromGoogleProviderAndLogin.ds"/>
-          <key-binding alias="rememberMe" key="rememberMe"/>
-          <key-binding alias="CurrentSession.['oauthProvider']" key="oauthProvider"/>
-          <key-binding alias="OAuthProvider" key="OAuthProvider"/>
-          <key-binding alias="OAuthProviderId" key="OauthProviderId"/>
-          <key-binding alias="CurrentSession.privacy.RememberMe" key="RememberMe"/>
           <key-binding alias="ResponseText" key="ResponseText"/>
-          <key-binding alias="CurrentSession.privacy.OAuthProviderId" key="OAuthProviderId"/>
-          <key-binding alias="CurrentSession.privacy.ContinuationURL" key="ContinuationURL"/>
-          <key-binding alias="Location" key="Location"/>
           <key-binding alias="OAuthProviderID" key="OAuthProviderID"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
@@ -494,15 +481,7 @@
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="app_storefront_core:account/login/oauth/ObtainAccountFromGooglePlusProviderAndLogin.ds"/>
           <key-binding alias="logger" key="ScriptLog"/>
-          <key-binding alias="rememberMe" key="rememberMe"/>
-          <key-binding alias="CurrentSession.['oauthProvider']" key="oauthProvider"/>
-          <key-binding alias="OAuthProvider" key="OAuthProvider"/>
-          <key-binding alias="OAuthProviderId" key="OauthProviderId"/>
-          <key-binding alias="CurrentSession.privacy.RememberMe" key="RememberMe"/>
           <key-binding alias="ResponseText" key="ResponseText"/>
-          <key-binding alias="CurrentSession.privacy.OAuthProviderId" key="OAuthProviderId"/>
-          <key-binding alias="CurrentSession.privacy.ContinuationURL" key="ContinuationURL"/>
-          <key-binding alias="Location" key="Location"/>
           <key-binding alias="OAuthProviderID" key="OAuthProviderID"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
@@ -554,14 +533,7 @@
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="app_storefront_core:account/login/oauth/ObtainAccountFromMicrosoftProviderAndLogin.ds"/>
-          <key-binding alias="rememberMe" key="rememberMe"/>
-          <key-binding alias="CurrentSession.['oauthProvider']" key="oauthProvider"/>
-          <key-binding alias="OAuthProvider" key="OAuthProvider"/>
-          <key-binding alias="CurrentSession.privacy.ContinuationURL" key="ContinuationURL"/>
-          <key-binding alias="OAuthProviderID" key="OAuthProviderId"/>
-          <key-binding alias="CurrentSession.privacy.RememberMe" key="RememberMe"/>
           <key-binding alias="ResponseText" key="ResponseText"/>
-          <key-binding alias="Location" key="Location"/>
           <key-binding alias="OAuthProviderID" key="OAuthProviderID"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
@@ -613,12 +585,7 @@
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="app_storefront_core:account/login/oauth/ObtainAccountFromFacebookProviderAndLogin.ds"/>
-          <key-binding alias="rememberMe" key="rememberMe"/>
-          <key-binding alias="CurrentSession.privacy.ContinuationURL" key="ContinuationURL"/>
-          <key-binding alias="OAuthProviderID" key="OAuthProviderId"/>
-          <key-binding alias="CurrentSession.privacy.RememberMe" key="RememberMe"/>
           <key-binding alias="ResponseText" key="ResponseText"/>
-          <key-binding alias="Location" key="Location"/>
           <key-binding alias="OAuthProviderID" key="OAuthProviderID"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
@@ -670,12 +637,7 @@
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="app_storefront_core:account/login/oauth/ObtainAccountFromGitHubProviderAndLogin.ds"/>
-          <key-binding alias="rememberMe" key="rememberMe"/>
-          <key-binding alias="CurrentSession.privacy.ContinuationURL" key="ContinuationURL"/>
-          <key-binding alias="OAuthProviderID" key="OAuthProviderId"/>
-          <key-binding alias="CurrentSession.privacy.RememberMe" key="RememberMe"/>
           <key-binding alias="ResponseText" key="ResponseText"/>
-          <key-binding alias="Location" key="Location"/>
           <key-binding alias="OAuthProviderID" key="OAuthProviderID"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
@@ -727,12 +689,7 @@
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="app_storefront_core:account/login/oauth/ObtainAccountFromSinaWeiboProviderAndLogin.ds"/>
-          <key-binding alias="rememberMe" key="rememberMe"/>
-          <key-binding alias="CurrentSession.privacy.ContinuationURL" key="ContinuationURL"/>
-          <key-binding alias="OAuthProviderID" key="OAuthProviderId"/>
-          <key-binding alias="CurrentSession.privacy.RememberMe" key="RememberMe"/>
           <key-binding alias="ResponseText" key="ResponseText"/>
-          <key-binding alias="Location" key="Location"/>
           <key-binding alias="OAuthProviderID" key="OAuthProviderID"/>
           <key-binding alias="AccessToken" key="AccessToken"/>
           <key-binding alias="ErrorStatus" key="ErrorStatus"/>
@@ -796,12 +753,7 @@
           <config-property key="Transactional" value="true"/>
           <config-property key="OnError" value="PIPELET_ERROR"/>
           <config-property key="ScriptFile" value="app_storefront_core:account/login/oauth/ObtainAccountFromVKontakteProviderAndLogin.ds"/>
-          <key-binding alias="rememberMe" key="rememberMe"/>
-          <key-binding alias="CurrentSession.privacy.ContinuationURL" key="ContinuationURL"/>
-          <key-binding alias="OAuthProviderID" key="OAuthProviderId"/>
-          <key-binding alias="CurrentSession.privacy.RememberMe" key="RememberMe"/>
           <key-binding alias="ResponseText" key="ResponseText"/>
-          <key-binding alias="Location" key="Location"/>
           <key-binding alias="OAuthProviderID" key="OAuthProviderID"/>
         </pipelet-node>
         <node-display x="0" y="1"/>

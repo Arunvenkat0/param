@@ -1333,10 +1333,8 @@ formatted prices as json</description>
           <key-binding alias="CurrentHttpParameterMap.bonusDiscountLineItemUUID.stringValue" key="uuid"/>
           <key-binding alias="Basket.bonusDiscountLineItems" key="BonusDiscountLineItems"/>
           <key-binding alias="BonusDiscountProducts" key="BonusDiscountProducts"/>
-          <key-binding alias="CurrentHttpParameterMap.bpTotal.intValue" key="bpTotals"/>
           <key-binding alias="CurrentHttpParameterMap.pageSize.intValue" key="pageSize"/>
           <key-binding alias="CurrentHttpParameterMap.pageStart.intValue" key="pageStart"/>
-          <key-binding alias="bpTotal" key="bpTotal"/>
           <key-binding alias="BPTotal" key="BPTotal"/>
         </pipelet-node>
         <node-display x="0" y="1"/>
