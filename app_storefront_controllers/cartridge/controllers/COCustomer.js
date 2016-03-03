@@ -69,41 +69,19 @@ function start() {
  */
 function showLoginForm() {
     var loginForm = app.getForm('login');
+    session.custom.TargetLocation = URLUtils.https('COShipping-Start');
 
-    var formResult = loginForm.handleAction({
+    loginForm.handleAction({
         login: function () {
-            // Delegate login to appropriate authentication controller and react on success/failure
-            // @TODO find better solution
-            if (app.getController('Login').Process()) {
-                response.redirect(URLUtils.https('COShipping-Start'));
-                return;
-            } else {
-                return {};
-            }
+            app.getController('Login').LoginForm();
         },
         register: function () {
-            session.custom.TargetLocation = URLUtils.https('COShipping-Start');
             response.redirect(URLUtils.https('Account-StartRegister'));
-
-            return;
         },
         unregistered: function () {
             response.redirect(URLUtils.https('COShipping-Start'));
-
-            return;
         }
     });
-
-    if (formResult) {
-        var loginAsset = Content.get('myaccount-login');
-
-        var pageMeta = require('~/cartridge/scripts/meta');
-        pageMeta.update(loginAsset);
-
-        app.getView({
-            ContinueURL: URLUtils.https('COCustomer-LoginForm')
-        }).render('checkout/checkoutlogin');
-    }
 }
 
 /*

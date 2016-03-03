@@ -185,39 +185,6 @@ function submitForm() {
             ISML.renderTemplate('checkout/cart/refreshcart');
             return null;
         },
-        'login': function () {
-            // TODO should not be processed here at all
-            var success, result;
-            success = app.getController('Login').Process();
-
-            if (success) {
-                response.redirect(URLUtils.https('COCustomer-Start'));
-            } else if (!success) {
-                result = {
-                    cart: cart
-                };
-            }
-            return result;
-        },
-        'logout': function () {
-            var CustomerMgr = require('dw/customer/CustomerMgr');
-            CustomerMgr.logoutCustomer();
-            return {
-                cart: cart
-            };
-        },
-        'register': function () {
-            app.getController('Account').StartRegister();
-            Transaction.wrap(function () {
-                cart.calculate();
-            });
-
-            return null;
-        },
-        'unregistered': function () {
-            app.getController('COShipping').Start();
-            return null;
-        },
         'updateCart': function () {
 
             Transaction.wrap(function () {
