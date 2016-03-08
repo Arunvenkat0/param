@@ -96,7 +96,7 @@
             2,
             "functions"
         ],
-        "no-invalid-this": 2,
+        "no-invalid-this": 0,
         "no-lonely-if": 2,
         "no-multi-str": 0,
         "no-multiple-empty-lines": 2,

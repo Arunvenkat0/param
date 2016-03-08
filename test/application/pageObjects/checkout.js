@@ -11,6 +11,7 @@ export const BTN_CONTINUE_BILLING_SAVE = 'button[name*="billing_save"]';
 export const BTN_CONTINUE_SHIPPING_SAVE = '[name*="shippingAddress_save"]';
 export const BTN_PLACE_ORDER = 'button[name*="submit"]';
 export const CHECKOUT_PROGRESS = '.checkout-progress-indicator .active';
+export const CREDIT_CARD_MONTH_ERROR_MSG = '.month .error-message';
 export const CSS_ORDER_SUBTOTAL = '.nav.summary .order-subtotal td:nth-child(2)';
 export const CVN_INPUT = 'input[id*=paymentMethods_creditCard_cvn]';
 export const ORDER_LEVEL_DISCOUNT_TEXT = '.summary .order-discount';
