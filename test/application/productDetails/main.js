@@ -140,7 +140,7 @@ describe('Product Details Page', () => {
 
             before(() => {
                 productItem = productSetProducts[0];
-                firstVariant = productItem.getVariants()[0];
+                firstVariant = testData.getProductById(productItem.getVariantProductIds()[0]);
             });
 
             /**
@@ -176,7 +176,9 @@ describe('Product Details Page', () => {
                     let expectedSelectedIndex = attrValues.indexOf(variantAttrValue);
 
                     return browser.elements(generateAttrSelector(firstVariant.id, attrType))
-                        .then(attrChoices => browser.elementIdAttribute(attrChoices.value[expectedSelectedIndex].ELEMENT, 'class'))
+                        .then(attrChoices => {
+                            return browser.elementIdAttribute(attrChoices.value[expectedSelectedIndex].ELEMENT, 'class');
+                        })
                         .then(expectedSelected => assert.isTrue(expectedSelected.value.indexOf('selected') > -1));
                 }, Promise.resolve())
             );
@@ -304,15 +306,16 @@ describe('Product Details Page', () => {
         );
 
         it('should redirect to a Variant PDP when it only has one variant with two attributes each with one value and first attribute is selected', () => {
-            let masterWithOneVariant = '25795715';
-            let master = testData.getProductById(masterWithOneVariant);
-            let variantID = master.getVariantProductIds()[0];
-            let firstAttrType = master.getAttrTypes()[0];
-            let variant = testData.getProductById(variantID);
-            let firstAttrValue = variant.customAttributes[firstAttrType];
-            let queryString = `?dwvar_${masterWithOneVariant}_${firstAttrType}=${firstAttrValue}`;
+            const masterWithOneVariant = '25795715';
+            const master = testData.getProductById(masterWithOneVariant);
+            const variantID = master.getVariantProductIds()[0];
+            const firstAttrType = master.getAttrTypes()[0];
+            const variant = testData.getProductById(variantID);
+            const firstAttrValue = variant.customAttributes[firstAttrType];
+            const masterUrl = master.getUrlResourcePath();
+            const queryString = `&dwvar_${masterWithOneVariant}_${firstAttrType}=${firstAttrValue}`;
 
-            return browser.url(master.getUrlResourcePath() + queryString)
+            return browser.url(masterUrl + queryString)
                 .then(() => browser.getValue(productDetailPage.PID))
                 .then(pid => assert.equal(pid, variantID));
         });
