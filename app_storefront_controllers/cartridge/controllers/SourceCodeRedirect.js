@@ -14,16 +14,14 @@ var guard = require('~/cartridge/scripts/guard');
  * If the redirect fails, calls the {@link module:controllers/Home~Show|Home controller Show function}.
  */
 function start() {
-    var sourceCodeRedirectURLResult = new dw.system.Pipelet('SourceCodeRedirectURL').execute();
-    if (sourceCodeRedirectURLResult.result === PIPELET_ERROR) {
+    var sourceCodeRedirectURL = session.sourceCodeInfo.redirect;
+
+    if (!sourceCodeRedirectURL) {
         app.getController('Home').Show();
         return;
     }
-    var location = sourceCodeRedirectURLResult.Location;
 
-    app.getView().render('util/redirect', {
-        Location: location
-    });
+    app.getView({Location: sourceCodeRedirectURL.location}).render('util/redirect');
 }
 
 /*
