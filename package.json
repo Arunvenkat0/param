@@ -52,13 +52,17 @@
     "gulp-webdriver": "^1.0.2",
     "handlebars": "^4.0.4",
     "hbsfy": "^2.4.1",
+    "http-server": "^0.9.0",
+    "jsdoc": "^3.4.0",
     "jshint-stylish": "^2.0.1",
     "load-grunt-tasks": "^3.3.0",
     "merge-stream": "^1.0.0",
     "minimist": "^1.2.0",
     "mocha": "^2.3.3",
     "moment-timezone": "^0.4.1",
+    "node-sass": "^3.4.2",
     "phantomjs": "^1.9.18",
+    "postcss-cli": "^2.5.1",
     "properties-parser": "^0.3.0",
     "proxyquire": "^1.7.3",
     "q": "^1.4.1",
@@ -78,7 +82,8 @@
     "lint": "grunt lint",
     "build": "gulp build",
     "preversion": "version > old_version",
-    "version": "bin/version.js && rm old_version && git add ."
+    "version": "bin/version.js && rm old_version && git add .",
+    "doc": "bin/doc.sh"
   },
   "repository": {
     "type": "git",
