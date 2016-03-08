@@ -33,14 +33,14 @@ Please note: the tests that we are offering is not a complete, fixed set of test
 
 # How to Use
 ## Build tools
-Starting with 15.1, SiteGenesis supports both [gulp](http://gulpjs.com) and [Grunt](http://gruntjs.com) as build tools.
+SiteGenesis supports [gulp](http://gulpjs.com), [Grunt](http://gruntjs.com) and [npm run scripts](https://docs.npmjs.com/cli/run-script) as build tools. This means that _most_ build tasks are available on all three tools under the same interface. For eg: `npm run build`, `gulp build` and `grunt build`.
 
 ### Getting started
 - Pull down the latest copy of SiteGenesis. If you're reading this doc, it is likely that you already have a version of SG with the build tool config.
 - `cd` into the `sitegenesis` directory.
 - Install node modules:
 ```sh
-$ npm install
+:; npm install
 ```
 This assumes that you already have `npm` installed on your command line. If not, please [install node](http://nodejs.org/download/) first.
 If you encounter an error, please try and address that first, either by Googling or [contacting us](mailto:tnguyen@demandware.com).
@@ -49,13 +49,13 @@ If you encounter an error, please try and address that first, either by Googling
 #### gulp
 Install gulp globally
 ```sh
-$ npm install -g gulp
+:; npm install -g gulp
 ```
 
 #### grunt
 Install the grunt command line tools
 ```sh
-$ npm install -g grunt-cli
+:; npm install -g grunt-cli
 ```
 
 Now that you have gulp (or grunt) and its dependencies installed, you can start using it in your workflow.
@@ -64,7 +64,10 @@ Now that you have gulp (or grunt) and its dependencies installed, you can start 
 ### SCSS
 Before authoring SCSS, make sure to check out the README in the `app_storefront_core/cartridge/scss` directory.
 
-#### `gulp css`
+```sh
+:; gulp css
+```
+
 This task does 2 things:
 - Compile `.scss` code into `.css`
 - [Auto-prefix](https://github.com/ai/autoprefixer) for vendor prefixes
@@ -78,18 +81,31 @@ Before authoring JS, make sure to checkout the README in `app_storefront_core/ca
 
 The new modular JavaScript architecture relies on [browserify](https://github.com/substack/node-browserify) to compile JS code written in CommonJS standard.
 
-#### `gulp js`
+```sh
+:; gulp js
+```
 
-Compile JS modules in the `js` directory into `static/default/js` directory. The entry point for browserify is `app_storefront_core/cartridge/js/app.js`, and the bundled js is output to `app_storefront_core/cartridge/static/default/js/app.js`.
+This task compiles JS modules in the `js` directory into `static/default/js` directory. The entry point for browserify is `app_storefront_core/cartridge/js/app.js`, and the bundled js is output to `app_storefront_core/cartridge/static/default/js/app.js`.
 
 This task is also run automatically on any `.js` file change by using the `gulp watch` task.
 
 The equivalent task for grunt, `grunt js`, is also available.
 
-#### `gulp jscs` and `gulp jshint`
-Run code format and style validators. New code must not have any errors reported before being accepted.
+### Build
+Instead of running `gulp js` and `gulp css` separately, a convenient alias is provided to combine those tasks
 
-The equivalent tasks for grunt, `grunt jscs` and `grunt jshint`, are also available.
+```sh
+:; gulp build
+```
+
+### Linting
+Run code static analysis and style validator. New code (i.e. pull requests) must not have any errors reported before being accepted.
+
+```sh
+:; gulp lint
+```
+
+The equivalent task for grunt, `grunt lint`, is also available.
 
 ### Watching
 To make the development process easier, running `gulp` on the command line will run the default task and automatically watch any changes in both `scss` and `js` code to run the right compilers.
@@ -116,3 +132,12 @@ For sourcemaps support, run `gulp` or `grunt` in development mode by specificyin
 
 We only support external sourcemaps because Eclipse tend to crash with inline sourcemaps.
 As a result, if you're using Grunt, sourcemaps is only available when the build steps are run explicitly, i.e. `grunt js --sourcemaps`. Sourcemaps is not enabled during `watch` mode.
+
+### Doc and styleguide
+SiteGenesis also comes with inline code documentation (JSDoc), tutorials and a living style guide. These can be accessed locally at `http://localhost:5000` after running the following command:
+
+```sh
+:; npm run doc
+```
+
+The equivalent task for grunt, `grunt doc`, is also available.
