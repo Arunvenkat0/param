@@ -92,6 +92,16 @@ function submitForm() {
             productList.updateItem(form.items);
 
             showRegistry({ProductList: productList.object});
+        },
+
+        addGiftCertificate: function (form) {
+            var productList = ProductList.get(form.object);
+
+            Transaction.wrap(function () {
+                productList.createGiftCertificateItem();
+            });
+
+            showRegistry({ProductList: productList.object});
         }
     });
 }
