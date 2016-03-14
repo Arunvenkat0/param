@@ -40,7 +40,7 @@ function show() {
         app.getView({
             Content: content.object,
             ContentSearchResult: contentSearchModel
-        }).render(content.template || 'content/content/contentpage');
+        }).render(content.object.template || 'content/content/contentpage');
     }
 
 }
@@ -58,7 +58,7 @@ function include() {
     if (content) {
         app.getView({
             Content: content.object
-        }).render(content.template || 'content/content/contentassetinclude');
+        }).render(content.object.template || 'content/content/contentassetinclude');
     } else {
         Logger.warn('Content asset with ID {0} was included but not found',request.httpParameterMap.cid.stringValue);
     }
