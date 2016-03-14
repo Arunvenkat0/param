@@ -44,9 +44,10 @@ export const localeCurrency = {
  * @returns {Number}
  */
 export function getCurrencyValue (price, locale = 'en-US') {
+    const normalizedLocale = normalizeLocale(locale);
     const normalizedPrice = price.replace(/[^0-9-.,]/g, '');
 
-    return globalize(locale).numberParser()(normalizedPrice);
+    return globalize(normalizedLocale).numberParser()(normalizedPrice);
 }
 
 /**
