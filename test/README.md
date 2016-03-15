@@ -147,490 +147,59 @@ The following options are supported on the command line:
 
 Here are some generic test accounts that are used in the application tests suite,
 along with their differences for testing different scenarios:
-( **Note** : The password for each account is **Test123!** )
+**Note**: The password for each account is **Test123!**
 
-<style type='text/css'>
-	td {
-		vertical-align: top;
-	}
-	table {
-		border: 1px solid red;
-		padding: 2px;
-	}
-	.test-users, .center {
-		text-align: center;
-	}
-	.test-users, .test-data {
-		padding: 2px;
-	}
-	.variation-master {
-		color: #0000ff;
-		font-weight: bold;
-		font-style: italic;
-	}
-	.top-level-product {
-		font-weight: bold;
-	}
-
-</style>
-<table class="test-users">
-<thead>
-<tr>
-	<th>Email</th>
-	<th>First Name</th>
-	<th>Last Name</th>
-	<th>Address1</th>
-	<th>City</th>
-	<th>State Code</th>
-	<th>Postal Code</th>
-	<th>Country Code</th>
-	<th>Phone</th>
-	<th>AddressID</th>
-	<th>Preferred Address</th>
-	<th>Gender</th>
-</tr>
-</thead>
-<tr>
-	<td>testuser1@demandware.com</td>
-	<td>Test1</td>
-	<td>User1</td>
-	<td>104 Presidential Way</td>
-	<td>Woburn</td>
-	<td>MA</td>
-	<td>01801</td>
-	<td>US</td>
-	<td>781-555-1212</td>
-	<td>Home</td>
-	<td>&#10004;</td>
-	<td>F</td>
-</tr>
-<tr>
-	<td></td>
-	<td>Test1</td>
-	<td>User1</td>
-	<td>91 Middlesex Tpke</td>
-	<td>Woburn</td>
-	<td>MA</td>
-	<td>01801</td>
-	<td>US</td>
-	<td>781-555-1212</td>
-	<td>Work</td>
-	<td></td>
-	<td></td>
-</tr>
-
-<tr>
-	<td>testuser2@demandware.com</td>
-	<td>Test2</td>
-	<td>User2</td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td>M</td>
-</tr>
-
-<tr>
-	<td>testuser3@demandware.com</td>
-	<td>Test3</td>
-	<td>User3</td>
-	<td>3486 Mission St</td>
-	<td>San Francisco</td>
-	<td>CA</td>
-	<td>94110</td>
-	<td>US</td>
-	<td>415-555-1212</td>
-	<td>Mom's</td>
-	<td>&#10004;</td>
-	<td>F</td>
-</tr>
-
-</table>
+| Email                    | First Name | Last Name | Address1             | City          | State Code | Postal Code | Country Code | Phone        | Address ID | Preferred Address | Gender |
+|--------------------------|------------|-----------|----------------------|---------------|------------|-------------|--------------|--------------|-----------|-------------------|--------|
+| testuser1@demandware.com | Test1      | User1     | 104 Presidential Way | Woburn        | MA         | 01801       | US           | 781-555-1212 | Home      | ✔                 | F      |
+|                          |            |           | 91 Middlesex Tpke    | Woburn        | MA         | 01801       | US           | 781-555-1212 | Work      |                   |        |
+| testuser2@demandware.com | Test2      | User2     |                      |               |            |             |              |              |           |                   | M      |
+| testuser3@demandware.com | Test3      | User3     | 3486 Mission St      | San Francisco | CA         | 94110       | 415-555-1212 | Mom's        |           | ✔                 | F      |
 
 
 ### Test products
-
-<table class='test-data'>
-<thead>
-<tr>
-	<th>Type</th>
-	<th>Product ID</th>
-	<th>Display Name</th>
-	<th>Color</th>
-	<th>Size</th>
-	<th>Width</th>
-	<th>Product Options</th>
-</tr>
-</thead>
-<tbody>
-<tr class='top-level-product'>
-	<td>
-	Option Product
-	</td>
-<td>samsung-ln55a950</td>
-	<td>Samsung Series 9 55" LCD High Definition Television</td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td>tvWarranty</td>
-</tr>
-<tr class='top-level-product'>
-	<td>VariationMaster</td>
-	<td>25686514</td>
-	<td>Navy Single Pleat Wool Suit</td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>750518548258</td>
-	<td></td>
-	<td>Navy<br />(NAVYWL)</td>
-	<td class='center'>46</td>
-	<td class='center'>Regular</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>750518548265</td>
-	<td></td>
-	<td>Navy</td>
-	<td class='center'>48</td>
-	<td class='center'>Regular</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>750518548227</td>
-	<td></td>
-	<td>Navy</td>
-	<td class='center'>42</td>
-	<td class='center'>Regular</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>750518548197</td>
-	<td></td>
-	<td>Navy</td>
-	<td class='center'>39</td>
-	<td class='center'>Regular</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>750518548234</td>
-	<td></td>
-	<td>Navy</td>
-	<td class='center'>43</td>
-	<td class='center'>Regular</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>750518548203</td>
-	<td></td>
-	<td>Navy</td>
-	<td class='center'>40</td>
-	<td class='center'>Regular</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>750518548241</td>
-	<td></td>
-	<td>Navy</td>
-	<td class='center'>44</td>
-	<td class='center'>Regular</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>750518548432</td>
-	<td></td>
-	<td>Navy</td>
-	<td class='center'>40</td>
-	<td class='center'>Long</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>750518548487</td>
-	<td></td>
-	<td>Navy</td>
-	<td class='center'>46</td>
-	<td class='center'>Long</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>750518548456</td>
-	<td></td>
-	<td>Navy</td>
-	<td class='center'>42</td>
-	<td class='center'>Long</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>750518548319</td>
-	<td></td>
-	<td>Navy</td>
-	<td class='center'>38</td>
-	<td class='center'>Short</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>750518548357</td>
-	<td></td>
-	<td>Navy</td>
-	<td class='center'>42</td>
-	<td class='center'>Short</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>750518548371</td>
-	<td></td>
-	<td>Navy</td>
-	<td class='center'>44</td>
-	<td class='center'>Short</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>750518548296</td>
-	<td></td>
-	<td>Navy</td>
-	<td class='center'>36</td>
-	<td class='center'>Short</td>
-	<td></td>
-</tr>
-<tr class='top-level-product'>
-	<td>Set</td>
-	<td>spring-look</td>
-	<td>Spring Look</td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
-<tr class='variation-master'>
-	<td></td>
-	<td>25517787<br />(Master Product)</td>
-	<td>Long Sleeve Raglan Button Out Turtle Neck</td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>701642808268</td>
-	<td></td>
-	<td>Fire Red Multi</td>
-	<td class='center'>S</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>701642808251</td>
-	<td></td>
-	<td>Fire Red Multi</td>
-	<td class='center'>M</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>701642808244</td>
-	<td></td>
-	<td>Fire Red Multi</td>
-	<td class='center'>L</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>701642808275</td>
-	<td></td>
-	<td>Fire Red Multi</td>
-	<td class='center'>XL</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr class='variation-master'>
-	<td></td>
-	<td>25553432<br />(Master Product)</td>
-	<td>Trouser Leg Pant</td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>701643489442</td>
-	<td></td>
-	<td>Chino<br />(JJ493XX)</td>
-	<td class='center'>16</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>701643489398</td>
-	<td></td>
-	<td>midnight navy<br />(JJ0VWXX)</td>
-	<td class='center'>6</td>
-	<td></td>
-	<td></td>
-</tr>
-<tr class='variation-master'>
-	<td></td>
-	<td>25791388<br />(Master Product)</td>
-	<td>Zacco</td>
-	<td>Black (BLKBKPA)</td>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>740357431040</td>
-	<td></td>
-	<td>Black</td>
-	<td class='center'>6</td>
-	<td class='center'>M</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>740357431057</td>
-	<td></td>
-	<td>Black</td>
-	<td class='center'>6.5</td>
-	<td class='center'>M</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>740357431064</td>
-	<td></td>
-	<td>Black</td>
-	<td class='center'>7</td>
-	<td class='center'>M</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>740357431071</td>
-	<td></td>
-	<td>Black</td>
-	<td class='center'>7.5</td>
-	<td class='center'>M</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>740357431088</td>
-	<td></td>
-	<td>Black</td>
-	<td class='center'>8</td>
-	<td class='center'>M</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>740357431095</td>
-	<td></td>
-	<td>Black</td>
-	<td class='center'>8.5</td>
-	<td class='center'>M</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>740357431101</td>
-	<td></td>
-	<td>Black</td>
-	<td class='center'>9</td>
-	<td class='center'>M</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>740357431118</td>
-	<td></td>
-	<td>Black</td>
-	<td class='center'>9.5</td>
-	<td class='center'>M</td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>740357431125</td>
-	<td></td>
-	<td>Black</td>
-	<td class='center'>10</td>
-	<td class='center'>M</td>
-	<td></td>
-</tr>
-<tr class='top-level-product'>
-	<td>Bundle</td>
-	<td>microsoft-xbox360-bundle</td>
-	<td>Xbox 360 Bundle</td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td>consoleWarranty</td>
-</tr>
-<tr>
-	<td></td>
-	<td>microsoft-xbox360-console</td>
-	<td>Microsoft X-Box 360 Game Console</td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td>consoleWarranty</td>
-</tr>
-<tr>
-	<td></td>
-	<td>easports-fight-night-round-3-xbox360</td>
-	<td>Fight Night: Round 3 (for X-Box 360)</td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>rockstar-games-grand-theft-auto-iv-xbox360</td>
-	<td>Grand Theft Auto 4 (for X-Box 360)</td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td>sierra-the-bourne-conspiracy-xbox360</td>
-	<td>Robert Ludlum's: The Bourne Conspiracy (for X-Box 360)</td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-</tr>
-</tbody>
-</table>
+| Type             | Product ID                                 | Display Name                                           | Color                   | Size | Width   | Product Options |
+|------------------|--------------------------------------------|--------------------------------------------------------|-------------------------|------|---------|-----------------|
+| Option Product   | samsung-ln55a950                           | Samsung Series 9 55" LCD High Definition Television    |                         |      |         | tvWarranty      |
+| Variation Master | 25686514                                   | Navy Single Pleat Wool Suit                            |                         |      |         |                 |
+| Variant          | 750518548258                               |                                                        | Navy (NAVYWL)           | 46   | Regular |                 |
+| Variant          | 750518548265                               |                                                        | Navy                    | 48   | Regular |                 |
+| Variant          | 750518548227                               |                                                        | Navy                    | 42   | Regular |                 |
+| Variant          | 750518548197                               |                                                        | Navy                    | 39   | Regular |                 |
+| Variant          | 750518548234                               |                                                        | Navy                    | 43   | Regular |                 |
+| Variant          | 750518548203                               |                                                        | Navy                    | 40   | Regular |                 |
+| Variant          | 750518548241                               |                                                        | Navy                    | 44   | Regular |                 |
+| Variant          | 750518548432                               |                                                        | Navy                    | 40   | Long    |                 |
+| Variant          | 750518548487                               |                                                        | Navy                    | 46   | Long    |                 |
+| Variant          | 750518548456                               |                                                        | Navy                    | 42   | Long    |                 |
+| Variant          | 750518548319                               |                                                        | Navy                    | 38   | Short   |                 |
+| Variant          | 750518548357                               |                                                        | Navy                    | 42   | Short   |                 |
+| Variant          | 750518548371                               |                                                        | Navy                    | 44   | Short   |                 |
+| Variant          | 750518548296                               |                                                        | Navy                    | 36   | Short   |                 |
+| Set              | spring-look                                | Spring Look                                            |                         |      |         |                 |
+| Variation Master | 25517787                                   | Long Sleeve Raglan Button Out Turtle Neck              |                         |      |         |                 |
+| Variant          | 701642808268                               |                                                        | Fire Red Multi          | S    |         |                 |
+| Variant          | 701642808251                               |                                                        | Fire Red Multi          | M    |         |                 |
+| Variant          | 701642808244                               |                                                        | Fire Red Multi          | L    |         |                 |
+| Variant          | 701642808275                               |                                                        | Fire Red Multi          | XL   |         |                 |
+| Variation Master | 25553432                                   | Trouser Leg Pant                                       |                         |      |         |                 |
+| Variant          | 701643489442                               |                                                        | Chino (JJ493XX)         | 16   |         |                 |
+| Variant          | 701643489398                               |                                                        | midnight navy (JJ0VWXX) | 6    |         |                 |
+| Variation Master | 25791388                                   | Zacco                                                  | Black (BLKBKPA)         |      |         |                 |
+| Variant          | 740357431040                               |                                                        | Black                   | 6    | M       |                 |
+| Variant          | 740357431057                               |                                                        | Black                   | 6.5  | M       |                 |
+| Variant          | 740357431064                               |                                                        | Black                   | 7    | M       |                 |
+| Variant          | 740357431071                               |                                                        | Black                   | 7.5  | M       |                 |
+| Variant          | 740357431088                               |                                                        | Black                   | 8    | M       |                 |
+| Variant          | 740357431095                               |                                                        | Black                   | 8.5  | M       |                 |
+| Variant          | 740357431101                               |                                                        | Black                   | 9    | M       |                 |
+| Variant          | 740357431118                               |                                                        | Black                   | 9.5  | M       |                 |
+| Variant          | 740357431125                               |                                                        | Black                   | 10   | M       |                 |
+| Bundle           | microsoft-xbox360-bundle                   | Xbox 360 Bundle                                        |                         |      |         | consoleWarranty |
+| Product          | microsoft-xbox360-console                  | Microsoft X-Box 360 Game Console                       |                         |      |         | consoleWarranty |
+| Product          | easports-fight-night-round-3-xbox360       | Fight Night: Round 3 (for X-Box 360)                   |                         |      |         |                 |
+| Product          | rockstar-games-grand-theft-auto-iv-xbox360 | Grand Theft Auto 4 (for X-Box 360)                     |                         |      |         |                 |
+| Product          | sierra-the-bourne-conspiracy-xbox360       | Robert Ludlum's: The Bourne Conspiracy (for X-Box 360) |                         |      |         |                 |
 
 # Troubleshooting
 
