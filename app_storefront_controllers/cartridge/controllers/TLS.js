@@ -2,21 +2,20 @@
 
 /**
  * Controller that renders the home page.
+ * These empty controllers are called by the client-side TLS detectors to collect reporting information
  *
  * @module controllers/TLS
- *
- * These empty pipelines are called by the client-side TLS detectors to collect reporting information
  */
 
 var guard = require('~/cartridge/scripts/guard');
 
 /**
- * @function BadTLS called when a bad TLS browser is detected
+ * @function BadTLS called when a browser is detected that does not support TLS 1.1 or later.
  */
 function BadTLS() {}
 
 /**
- * @function BadBrowser called when a bad TLS browser is detected
+ * @function BadBrowser called a browser is detected that does not support TLS 1.1 or later.
  */
 function BadBrowser() {}
 
