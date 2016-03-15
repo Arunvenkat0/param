@@ -7,7 +7,9 @@
  */
 
 /* API Includes */
+var GiftCertProductListItem = require('dw/customer/ProductListItem').TYPE_GIFT_CERTIFICATE;
 var Transaction = require('dw/system/Transaction');
+var URLUtils = require('dw/web/URLUtils');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
@@ -103,22 +105,32 @@ function wishListForm() {
             setShippingAddress();
             return;
         },
-        addToCart: function (formgroup) {
-            if (formgroup.items.triggeredAction.parent.object.type === dw.customer.ProductListItem.TYPE_GIFT_CERTIFICATE) {
-                // TODO redirect?
-                var GiftCertController = app.getController('GiftCert');
-                GiftCertController.Purchase();
-                return;
+        addToCart: function (form) {
+            var cart = app.getModel('Cart').goc();
+
+            if (form.items.triggeredAction.parent.object.type === GiftCertProductListItem) {
+                response.redirect(URLUtils.https('GiftCert-Purchase'));
             } else {
-                // TODO redirect?
-                var CartController = app.getController('Cart');
-                CartController.AddProduct();
-                return;
+                var renderInfo = cart.addProductToCart();
+
+                if (renderInfo.template === 'checkout/cart/cart') {
+                    app.getView('Cart', {
+                        Basket: cart
+                    }).render(renderInfo.template);
+                } else if (renderInfo.format === 'ajax') {
+                    app.getView('Cart', {
+                        cart: cart,
+                        BonusDiscountLineItem: renderInfo.newBonusDiscountLineItem
+                    }).render(renderInfo.template);
+                } else {
+                    response.redirect(URLUtils.url('Cart-Show'));
+                }
+
             }
         }
     });
 
-    response.redirect(dw.web.URLUtils.https('Wishlist-Show'));
+    response.redirect(URLUtils.https('Wishlist-Show'));
 }
 
 

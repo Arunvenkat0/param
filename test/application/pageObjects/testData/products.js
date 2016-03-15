@@ -240,6 +240,10 @@ export class ProductStandard extends AbstractProductBase {
         const pageUrl = this.master.getPageUrl(locale);
         return `/${pageUrl}/${this.id}.html?lang=${locale}`;
     }
+
+    getDisplayName (locale = defaultLocale) {
+        return this.master.displayName[locale];
+    }
 }
 
 export class ProductSet extends AbstractProductBase {

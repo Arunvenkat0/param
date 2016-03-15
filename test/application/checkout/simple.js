@@ -239,7 +239,10 @@ describe('Checkout', () => {
             .then(() => helpers.clickAndWait(checkoutPage.BTN_CONTINUE_BILLING_SAVE, checkoutPage.BREADCRUMB_PLACE_ORDER))
         );
 
-        after(() => navHeader.logout());
+        after(() =>
+            cartPage.emptyCart()
+                .then(() => navHeader.logout())
+        );
 
         it('should allow editing of the Order Summary form', () => {
             return browser.click(checkoutPage.LINK_EDIT_ORDER_SUMMARY)

@@ -29,7 +29,10 @@ export const eventType = 'wedding';
 export const eventTitle = '.list-title';
 export const eventName = 'WEDDING OF THE CENTURY - 3/28/08';
 export const buttonPrint = 'button[class=print-page]';
-
+export const GIFT_REGISTRY_PORDUCT_LIST_FORM = 'form[id*=giftregistry]';
+export const GIFT_CERT_ADDED_TO_GIFT_REGISTRY = ITEM_LIST  + ' tr:nth-of-type(2) .name';
+export const ITEM_ADDED_TO_GIFT_REGISTRY = ITEM_LIST + ' tr:nth-of-type(3) .name';
+export const BTN_ADD_PRODUCT_TO_CART = ITEM_LIST + ' tr:nth-of-type(3) [name*=addToCart]';
 
 const basePath = '/giftregistry';
 

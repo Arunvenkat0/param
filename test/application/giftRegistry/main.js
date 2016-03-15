@@ -9,6 +9,8 @@ import * as navHeader from '../pageObjects/navHeader';
 import * as footerPage from '../pageObjects/footer';
 import * as customers from '../pageObjects/testData/customers';
 import * as Resource from '../../mocks/dw/web/Resource';
+import * as productDetailPage from '../pageObjects/productDetail';
+import * as cartPage from '../pageObjects/cart';
 
 let locale = config.locale;
 
@@ -17,8 +19,10 @@ describe('Gift Registry', () => {
     let eventFormData = new Map();
     let eventFormShippingData = new Map();
     let firstName;
-    let itemName = Resource.msg('global.giftcertificate', 'locale', null);
+    let giftCert = Resource.msg('global.giftcertificate', 'locale', null);
     let lastName;
+    let productToAdd;
+    let productResourcePath;
 
     let socialLinks = {
         facebook: {
@@ -67,6 +71,8 @@ describe('Gift Registry', () => {
 
     before(() => testData.load()
         .then(() => {
+            productToAdd = testData.getProductById('701644389758');
+            productResourcePath = productToAdd.getUrlResourcePath();
             const customer = testData.getCustomerByLogin(login);
             const address = customer.getPreferredAddress();
 
@@ -115,7 +121,10 @@ describe('Gift Registry', () => {
         .then(() => browser.waitForVisible(giftRegistryPage.FORM_REGISTRY))
     );
 
-    after(() => navHeader.logout());
+    after(() =>
+        cartPage.emptyCart()
+        .then(() => navHeader.logout())
+    );
 
     it('should fill out the event form', () =>
         giftRegistryPage.fillOutEventForm(eventFormData, locale)
@@ -225,8 +234,23 @@ describe('Gift Registry', () => {
     it('should add gift certificate to gift registry', () =>
         browser.click(giftRegistryPage.BTN_ADD_GIFT_CERT)
             .then(() => browser.waitForVisible(giftRegistryPage.ITEM_LIST))
-            .then(() => browser.getText(giftRegistryPage.ITEM_NAME))
-            .then(text => assert.equal(text, itemName))
+            .then(() => browser.getText(giftRegistryPage.GIFT_CERT_ADDED_TO_GIFT_REGISTRY))
+            .then(text => assert.equal(text, giftCert))
+    );
+
+    it('should add a product to the gift registry', () =>
+        browser.url(productResourcePath)
+            .then(() => browser.click(productDetailPage.BTN_ADD_TO_GIFT_REGISTRY))
+            .then(() => browser.waitForVisible(giftRegistryPage.GIFT_REGISTRY_PORDUCT_LIST_FORM))
+            .then(() => browser.getText(giftRegistryPage.ITEM_ADDED_TO_GIFT_REGISTRY))
+            .then(text => assert.equal(text, productToAdd.getDisplayName(locale)))
+    );
+
+    it('should add a product to the cart', () =>
+        browser.click(giftRegistryPage.BTN_ADD_PRODUCT_TO_CART)
+            .then(() => browser.waitForVisible(cartPage.CART_ITEMS))
+            .then(() => browser.getText(cartPage.ITEM_NAME))
+            .then(text => assert.equal(text, productToAdd.getDisplayName(locale)))
     );
 
     it('should return the event at Gift Registry search', () => {
