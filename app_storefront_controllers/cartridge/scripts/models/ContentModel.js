@@ -112,7 +112,7 @@ ContentModel.get = function (parameter) {
     } else if (typeof parameter === 'object') {
         obj = parameter;
     }
-    return new ContentModel(obj);
+    return (obj !== null) ? new ContentModel(obj) : null;
 };
 
 /** The content class */
