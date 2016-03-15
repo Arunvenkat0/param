@@ -8,6 +8,7 @@ import * as loginForm from '../pageObjects/helpers/forms/login';
 import * as navHeader from '../pageObjects/navHeader';
 import * as footerPage from '../pageObjects/footer';
 import * as customers from '../pageObjects/testData/customers';
+import * as Resource from '../../mocks/dw/web/Resource';
 
 let locale = config.locale;
 
@@ -16,6 +17,7 @@ describe('Gift Registry', () => {
     let eventFormData = new Map();
     let eventFormShippingData = new Map();
     let firstName;
+    let itemName = Resource.msg('global.giftcertificate', 'locale', null);
     let lastName;
 
     let socialLinks = {
@@ -218,6 +220,13 @@ describe('Gift Registry', () => {
                 assert.isTrue(href.startsWith(socialLinks.shareLinkUrl.baseUrl));
                 assert.ok(href.match(socialLinks.shareLinkUrl.regex));
             })
+    );
+
+    it('should add gift certificate to gift registry', () =>
+        browser.click(giftRegistryPage.BTN_ADD_GIFT_CERT)
+            .then(() => browser.waitForVisible(giftRegistryPage.ITEM_LIST))
+            .then(() => browser.getText(giftRegistryPage.ITEM_NAME))
+            .then(text => assert.equal(text, itemName))
     );
 
     it('should return the event at Gift Registry search', () => {
