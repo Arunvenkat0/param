@@ -55,6 +55,7 @@
     "handlebars": "^4.0.4",
     "hbsfy": "^2.4.1",
     "http-server": "^0.9.0",
+    "istanbul": "next",
     "jsdoc": "^3.4.0",
     "jshint-stylish": "^2.0.1",
     "load-grunt-tasks": "^3.3.0",
