@@ -11,7 +11,8 @@
     "globals": {
         "browser": true,
         "session": true,
-        "process": true
+        "process": true,
+        "global": true
     },
     "extends": "eslint:recommended",
     "parserOptions": {
