@@ -62,12 +62,17 @@ export function removeAddresses () {
         })
         // remove addresses sequentially
         .then(addressTextsToRemove => {
-            return addressTextsToRemove.reduce(function (removeTask, addressText) {
+	    return addressTextsToRemove.reduce(function (removeTask, addressText, addressIndex) {
                 return removeTask.then(() => {
                     return browser.element('li*=' + addressText)
                         .click('.delete')
                         .alertAccept();
-                });
+		}).then(() => browser.waitUntil(() =>
+		    // wait until the address is removed, i.e.
+		    // there is one less addresses to be removed
+		    getAddressCount().then(count => count === defaultAddresses.length + addressTextsToRemove.length
+		    - (addressIndex + 1))
+		));
             }, Promise.resolve());
         })
         .then(() => browser.waitUntil(() =>
