@@ -71,10 +71,13 @@ function assignEventAddresses(pdict) {
  *
  */
 function addAddress(addressFields, addressBook) {
-
+    var addressID;
+    if (addressFields.addressid.value) {
+        addressID = addressFields.addressid.value;
     // get a unique address ID
-    var addressID = accountUtils.determineUniqueAddressID(addressFields.city.value, addressBook);
-
+    } else {
+        addressID = accountUtils.determineUniqueAddressID(addressFields.city.value, addressBook);
+    }
     // check on empty address ID
     if (!addressID) {
         var error = 'Cannot add address to address book with an empty address ID.';
@@ -93,9 +96,6 @@ function addAddress(addressFields, addressBook) {
     address.setStateCode( addressFields.states.state.value );
     address.setCountryCode( addressFields.country.value );
     address.setPhone( addressFields.phone.value );
-
-    //set the form with the new id.
-    addressFields.addressid.value = addressID;
 }
 
 /**
