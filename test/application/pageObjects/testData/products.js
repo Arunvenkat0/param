@@ -236,12 +236,13 @@ export class ProductStandard extends AbstractProductBase {
         this.master;
     }
 
-    getUrlResourcePath (locale = 'x_default') {
+    getUrlResourcePath (locale = defaultLocale) {
         const pageUrl = this.master.getPageUrl(locale);
         return `/${pageUrl}/${this.id}.html?lang=${locale}`;
     }
 
     getDisplayName (locale = defaultLocale) {
+        if (locale === 'en_GB') { locale = defaultLocale; }
         return this.master.displayName[locale];
     }
 }
@@ -343,13 +344,13 @@ export class ProductVariationMaster extends AbstractProductBase {
      * @param {String} locale
      * @returns {String} - localized pageUrl
      */
-    getPageUrl(locale = 'x_default') {
+    getPageUrl(locale = defaultLocale) {
         return this.pageAttributes.pageUrl[locale];
     }
 
-    getUrlResourcePath (locale = 'x_default') {
+    getUrlResourcePath (locale = defaultLocale) {
         const path = this.getPageUrl(locale);
-        const urlLocale = locale !== 'x_default' ? locale : 'en_US';
+        const urlLocale = locale !== defaultLocale ? locale : 'en_US';
         return `/${path}/${this.id}.html?lang=${urlLocale}`;
     }
 
