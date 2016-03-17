@@ -18,6 +18,7 @@ var PaymentInstrument = require('dw/order/PaymentInstrument');
 var PaymentMgr = require('dw/order/PaymentMgr');
 var Product = require('~/cartridge/scripts/models/ProductModel');
 var ProductInventoryMgr = require('dw/catalog/ProductInventoryMgr');
+var ProductListMgr = require('dw/customer/ProductListMgr');
 var QuantityLineItem = require('~/cartridge/scripts/models/QuantityLineItemModel');
 var Resource = require('dw/web/Resource');
 var ShippingMgr = require('dw/order/ShippingMgr');
@@ -27,6 +28,7 @@ var UUIDUtils = require('dw/util/UUIDUtils');
 
 //TODO
 var lineItem;
+var app = require('~/cartridge/scripts/app');
 
 /**
  * Cart helper providing enhanced cart functionality
@@ -46,6 +48,94 @@ var CartModel = AbstractModel.extend({
      */
     calculate: function () {
         dw.system.HookMgr.callHook('dw.ocapi.shop.basket.calculate', 'calculate', this.object);
+    },
+
+    addProductToCart: function() {
+        var cart = this;
+        var params = request.httpParameterMap;
+        var format = params.hasOwnProperty('format') && params.format.stringValue ? params.format.stringValue.toLowerCase() : '';
+        var newBonusDiscountLineItem;
+        var Product = app.getModel('Product');
+        var productOptionModel;
+        var productToAdd;
+        var template = 'checkout/cart/minicart';
+
+        // TODO : Investigate this please reference RAP-4817
+        //Replaces a product in the gift registry.
+        if (params.source && params.source.stringValue === 'giftregistry' && params.cartAction && params.cartAction.stringValue === 'update') {
+            app.getController('GiftRegistry').ReplaceProductListItem();
+            return;
+        }
+
+        // TODO : Investigate this please reference RAP-4817
+        // Replaces an item in the wishlist.
+        if (params.source && params.source.stringValue === 'wishlist' && params.cartAction && params.cartAction.stringValue === 'update') {
+            app.getController('Wishlist').ReplaceProductListItem();
+            return;
+        }
+
+        // Updates a product line item.
+        if (params.uuid.stringValue) {
+            var lineItem = cart.getProductLineItemByUUID(params.uuid.stringValue);
+            if (lineItem) {
+                var productModel = Product.get(params.pid.stringValue);
+                var quantity = parseInt(params.Quantity.value);
+
+                productToAdd = productModel.object;
+                productOptionModel = productModel.updateOptionSelection(params);
+
+                Transaction.wrap(function () {
+                    cart.updateLineItem(lineItem, productToAdd, quantity, productOptionModel);
+                });
+
+                if (format === 'ajax') {
+                    template = 'checkout/cart/refreshcart';
+                }
+            } else {
+                return {
+                    template: 'checkout/cart/cart'
+                };
+            }
+        // Adds a product from a product list.
+        } else if (params.plid.stringValue) {
+            var productList = ProductListMgr.getProductList(params.plid.stringValue);
+            if (productList) {
+                cart.addProductListItem(productList.getItem(params.itemid.stringValue), params.Quantity.doubleValue);
+            }
+
+        // Adds a product.
+        } else {
+            var previousBonusDiscountLineItems = cart.getBonusDiscountLineItems();
+            productToAdd = Product.get(params.pid.stringValue);
+
+            if (productToAdd.object.isProductSet()) {
+                var childPids = params.childPids.stringValue.split(',');
+                var childQtys = params.childQtys.stringValue.split(',');
+                var counter = 0;
+
+                for (var i = 0; i < childPids.length; i++) {
+                    var childProduct = Product.get(childPids[i]);
+
+                    if (childProduct.object && !childProduct.isProductSet()) {
+                        var childProductOptionModel = childProduct.updateOptionSelection(params);
+                        cart.addProductItem(childProduct.object, parseInt(childQtys[counter]), childProductOptionModel);
+                    }
+                    counter++;
+                }
+            } else {
+                productOptionModel = productToAdd.updateOptionSelection(params);
+                cart.addProductItem(productToAdd.object, params.Quantity.doubleValue, productOptionModel);
+            }
+
+            // When adding a new product to the cart, check to see if it has triggered a new bonus discount line item.
+            newBonusDiscountLineItem = cart.getNewBonusDiscountLineItem(previousBonusDiscountLineItems);
+        }
+
+        return {
+            format: format,
+            template: template,
+            BonusDiscountLineItem: newBonusDiscountLineItem
+        };
     },
 
     /**
@@ -94,7 +184,7 @@ var CartModel = AbstractModel.extend({
                 var quantityInCart;
                 var quantityToSet;
                 var shipment = cart.object.defaultShipment;
-                
+
                 for (var q = 0; q < cart.object.productLineItems.length; q++) {
                     if (productListItems[q].productID === product.ID) {
                         productInCart = productListItems[q];
@@ -114,38 +204,25 @@ var CartModel = AbstractModel.extend({
                     }
                 }
 
-                if (product.bundle) {
-                    /**
-                     * By default, when a bundle is added to cart, all its child products are added too, but if those products are
-                     * variants then the code must replace the master products with the selected variants that get passed in the
-                     * HTTP params as childPids along with any options. Params: CurrentHttpParameterMap.childPids - comma separated list of
-                     * pids of the bundled products that are variations.
-                     */
+                /**
+                 * By default, when a bundle is added to cart, all its child products are added too, but if those products are
+                 * variants then the code must replace the master products with the selected variants that get passed in the
+                 * HTTP params as childPids along with any options. Params: CurrentHttpParameterMap.childPids - comma separated list of
+                 * pids of the bundled products that are variations.
+                 */
+                if (request.httpParameterMap.childPids.stringValue && product.bundle) {
+                    var childPids = request.httpParameterMap.childPids.stringValue.split(',');
 
-                    if (request.httpParameterMap.childPids.stringValue && product.bundle) {
-                        /**
-                         * By default, when a bundle is added to cart, all its child products are added too, but if those products are
-                         * variants then the code must replace the master products with the selected variants that get passed in the
-                         * HTTP params as childPids along with any options. Params: CurrentHttpParameterMap.childPids - comma separated list of
-                         * pids of the bundled products that are variations.
-                         */
-                        if (request.httpParameterMap.childPids.stringValue) {
-                            var childPids = request.httpParameterMap.childPids.stringValue.split(',');
+                    for (i = 0; i < childPids.length; i++) {
+                        var childProduct = Product.get(childPids[i]).object;
 
-                            for (i = 0; i < childPids.length; i++) {
-                                var childProduct = Product.get(childPids[i]).object;
+                        if (childProduct) {
+                            childProduct.updateOptionSelection(request.httpParameterMap);
 
-                                if (childProduct) {
-                                    // why is this needed ?
-                                    childProduct.updateOptionSelection(request.httpParameterMap);
+                            var foundLineItem = this.getBundledProductLineItemByPID(lineItem, childProduct.isVariant() ? childProduct.masterProduct.ID : childProduct.ID);
 
-                                    var foundLineItem = null;
-                                    foundLineItem = this.getBundledProductLineItemByPID(lineItem, childProduct.isVariant() ? childProduct.masterProduct.ID : childProduct.ID);
-
-                                    if (foundLineItem) {
-                                        foundLineItem.replaceProduct(childProduct);
-                                    }
-                                }
+                            if (foundLineItem) {
+                                foundLineItem.replaceProduct(childProduct);
                             }
                         }
                     }

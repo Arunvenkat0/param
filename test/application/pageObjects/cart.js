@@ -14,6 +14,7 @@ export const BTN_UPDATE_CART = '.cart-footer button[name*="_updateCart"]';
 export const BTN_CHECKOUT = 'button[name*="checkoutCart"]';
 export const LINK_REMOVE = 'button[value="Remove"]';
 export const ITEM_DETAILS = '.item-details';
+export const ITEM_NAME = '.item-list .item-details .name';
 export const ITEM_QUANTITY = '.item-quantity';
 export const SELECT_STORE = '.set-preferred-store';
 export const SELECTED_STORE_ADDRESS = '.selected-store-address';

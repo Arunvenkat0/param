@@ -10,7 +10,6 @@
 /* API Includes */
 var ArrayList = require('dw/util/ArrayList');
 var ISML = require('dw/template/ISML');
-var ProductListMgr = require('dw/customer/ProductListMgr');
 var Resource = require('dw/web/Resource');
 var Transaction = require('dw/system/Transaction');
 var URLUtils = require('dw/web/URLUtils');
@@ -244,80 +243,17 @@ function submitForm() {
  */
 function addProduct() {
     var cart = app.getModel('Cart').goc();
-    var params = request.httpParameterMap;
-    var format = params.hasOwnProperty('format') && params.format.stringValue ? params.format.stringValue.toLowerCase() : '';
-    var Product = app.getModel('Product');
-    var productOptionModel;
-    var product;
-    var template = 'checkout/cart/minicart';
-    var newBonusDiscountLineItem;
+    var renderInfo = cart.addProductToCart();
 
-    if (params.source && params.source.stringValue === 'giftregistry' && params.cartAction && params.cartAction.stringValue === 'update') {
-        app.getController('GiftRegistry').ReplaceProductListItem();
-        return;
-    }
-
-    if (params.source && params.source.stringValue === 'wishlist' && params.cartAction && params.cartAction.stringValue === 'update') {
-        app.getController('Wishlist').ReplaceProductListItem();
-        return;
-    }
-
-    // Updates a product line item.
-    if (params.uuid.stringValue) {
-        var lineItem = cart.getProductLineItemByUUID(params.uuid.stringValue);
-        if (lineItem) {
-            var productModel = Product.get(request.httpParameterMap.pid.stringValue);
-            product = productModel.object;
-            var quantity = parseInt(params.Quantity.value);
-            productOptionModel = productModel.updateOptionSelection(request.httpParameterMap);
-
-            Transaction.wrap(function () {
-                cart.updateLineItem(lineItem, product, quantity, productOptionModel);
-            });
-
-            if (format === 'ajax') {
-                template = 'checkout/cart/refreshcart';
-            }
-        } else {
-            app.getView('Cart', {Basket: cart}).render('checkout/cart/cart');
-        }
-    } else if (params.plid.stringValue) {
-        // Adds a product to a product list.
-        var productList = ProductListMgr.getProductList(params.plid.stringValue);
-        cart.addProductListItem(productList && productList.getItem(params.itemid.stringValue), params.Quantity.doubleValue);
-    } else {
-        // Adds a product.
-        product = Product.get(params.pid.stringValue);
-        var previousBonusDiscountLineItems = cart.getBonusDiscountLineItems();
-
-        if (product.object.isProductSet()) {
-            var childPids = params.childPids.stringValue.split(',');
-            var childQtys = params.childQtys.stringValue.split(',');
-            var counter = 0;
-
-            for (var i = 0; i < childPids.length; i++) {
-                var childProduct = Product.get(childPids[i]);
-
-                if (childProduct.object && !childProduct.isProductSet()) {
-                    var childProductOptionModel = childProduct.updateOptionSelection(request.httpParameterMap);
-                    cart.addProductItem(childProduct.object, parseInt(childQtys[counter]), childProductOptionModel);
-                }
-                counter++;
-            }
-        } else {
-            productOptionModel = product.updateOptionSelection(request.httpParameterMap);
-            cart.addProductItem(product.object, params.Quantity.doubleValue, productOptionModel);
-        }
-
-        // When adding a new product to the cart, check to see if it has triggered a new bonus discount line item.
-        newBonusDiscountLineItem = cart.getNewBonusDiscountLineItem(previousBonusDiscountLineItems);
-    }
-
-    if (format === 'ajax') {
+    if (renderInfo.template === 'checkout/cart/cart') {
+        app.getView('Cart', {
+            Basket: cart
+        }).render(renderInfo.template);
+    } else if (renderInfo.format === 'ajax') {
         app.getView('Cart', {
             cart: cart,
-            BonusDiscountLineItem: newBonusDiscountLineItem
-        }).render(template);
+            BonusDiscountLineItem: renderInfo.newBonusDiscountLineItem
+        }).render(renderInfo.template);
     } else {
         response.redirect(URLUtils.url('Cart-Show'));
     }

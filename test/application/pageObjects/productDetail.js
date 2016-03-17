@@ -6,6 +6,7 @@ import * as wishListPage from './wishList';
 export const BTN_ADD_TO_CART = '#add-to-cart';
 export const BTN_ADD_ALL_TO_CART = '#add-all-to-cart';
 export const BTN_ADD_TO_WISHLIST = 'a[data-action="wishlist"]';
+export const BTN_ADD_TO_GIFT_REGISTRY = 'a[data-action=gift-registry]';
 const MINI_CART = '.mini-cart-content';
 export const PID = '#pid';
 export const PDP_MAIN = '.pdp-main';
