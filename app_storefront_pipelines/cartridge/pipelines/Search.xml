@@ -307,11 +307,6 @@
           <config-property key="Transactional" value="false"/>
           <key-binding alias="&quot;true&quot;" key="From_0"/>
           <key-binding alias="CacheTag" key="To_0"/>
-          <key-binding alias="null" key="From_1"/>
-          <key-binding alias="null" key="To_1"/>
-          <key-binding alias="null" key="From_2"/>
-          <key-binding alias="null" key="To_2"/>
-          <key-binding alias="null" key="From_3"/>
           <key-binding alias="null" key="To_3"/>
           <key-binding alias="null" key="From_4"/>
           <key-binding alias="null" key="To_4"/>
@@ -325,6 +320,8 @@
           <key-binding alias="null" key="To_8"/>
           <key-binding alias="null" key="From_9"/>
           <key-binding alias="null" key="To_9"/>
+          <key-binding alias="(Location.indexOf('contactus') || Location.indexOf('account')) ? Location.replace('http:', 'https:') : Location" key="From_1"/>
+          <key-binding alias="Location" key="To_1"/>
         </pipelet-node>
         <node-display orientation="horizontal" x="1" y="0"/>
       </node>
