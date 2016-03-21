@@ -69,11 +69,7 @@ function wishListForm() {
 
     app.getForm('wishlist').handleAction({
         addGiftCertificate: function () {
-            new dw.system.Pipelet('AddGiftCertificateToProductList')
-                .execute({
-                    ProductList: productList.object,
-                    Priority: 0
-                });
+            productList.createGiftCertificateItem();
         },
         deleteItem: function (formgroup, action) {
             productList.remove(action.object);
