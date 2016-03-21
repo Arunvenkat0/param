@@ -5,6 +5,7 @@
  */
 
 var AbstractModel = require('./AbstractModel');
+var CustomerMgr = require('dw/customer/CustomerMgr');
 var ProductListMgr = require('dw/customer/ProductListMgr');
 var Transaction = require('dw/system/Transaction');
 
@@ -137,11 +138,39 @@ ProductListModel.get = function (parameter) {
  * @returns {dw.util.Collection.<dw.customer.ProductList>}
  */
 ProductListModel.search = function (searchForm, listType) {
+    var ProductList = require('dw/customer/ProductList');
+
+    if (listType === ProductList.TYPE_WISH_LIST) {
+        return searchWishLists(searchForm, listType);
+    } else if (listType === ProductList.TYPE_GIFT_REGISTRY) {
+        return searchGiftRegistries(searchForm, listType)
+    }
+
+};
+
+function searchWishLists (searchForm, listType) {
+    var email = searchForm.get('email').value();
+    var firstName = searchForm.get('firstname').value();
+    var lastName = searchForm.get('lastname').value();
+    var listOwner;
+
+    if (email) {
+        listOwner = CustomerMgr.getCustomerByLogin(email);
+    } else if (firstName && lastName) {
+        var profile = CustomerMgr.queryProfile('firstName = {0} AND lastName = {1}', firstName, lastName)
+        if (profile) {
+            listOwner = profile.getCustomer();
+        }
+    }
+
+    return listOwner ? ProductListMgr.getProductLists(listOwner, listType) : undefined;
+}
+
+function searchGiftRegistries (searchForm, listType) {
     var registrantFirstName = searchForm.registrantFirstName;
     var registrantLastName = searchForm.registrantLastName;
     var eventType = searchForm.eventType.value;
 
-    var CustomerMgr = require('dw/customer/CustomerMgr');
     var listOwner = CustomerMgr.queryProfile('firstName = {0} AND lastName = {1}', registrantFirstName.value, registrantLastName.value).getCustomer();
 
     if (eventType) {
@@ -149,7 +178,7 @@ ProductListModel.search = function (searchForm, listType) {
     } else {
         return ProductListMgr.getProductLists(listOwner, listType);
     }
-};
+}
 
 /** The ProductList class */
 module.exports = ProductListModel;
