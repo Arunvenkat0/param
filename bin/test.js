@@ -22,13 +22,20 @@ if (argv.timeout) {
 
 var stdio = reporter === 'xunit' ? [process.stdin, 'pipe', process.stderr] : 'inherit';
 
-var mochaProcess = spawn('mocha', args, {stdio: stdio});
+var testProcess;
 
-mochaProcess.on('close', function (code) {
+if (argv.coverage) {
+    args.unshift('cover', '_mocha', '--'); //use _mocha instead of mocha because otherwise some of the flags will not be parsed properly by istanbul
+    testProcess = spawn('istanbul', args, {stdio: stdio});
+} else {
+    testProcess = spawn('mocha', args, {stdio: stdio});
+}
+
+testProcess.on('close', function (code) {
 	process.exit(code);
 });
 
 // write to reports
 if (reporter === 'xunit') {
-	mochaProcess.stdout.pipe(fs.createWriteStream('test/reports/UNIT.xunit.' + new Date().getTime() + '.xml'));
+	testProcess.stdout.pipe(fs.createWriteStream('test/reports/UNIT.xunit.' + new Date().getTime() + '.xml'));
 }

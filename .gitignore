@@ -11,3 +11,4 @@ app_storefront_core/cartridge/static/*/css/style.css
 app_storefront_core/cartridge/static/*/js/app.js
 test/application/pageObjects/testData/parsedData.txt
 test/reports/*.xml
+coverage
