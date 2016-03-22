@@ -65,22 +65,16 @@ function show() {
  */
 function wishListForm() {
     var productList = app.getModel('ProductList').get();
+    var shouldRedirectToShow = true;
 
-    var wishlistForm = app.getForm('wishlist');
-    wishlistForm.handleAction({
+    app.getForm('wishlist').handleAction({
         addGiftCertificate: function () {
-            new dw.system.Pipelet('AddGiftCertificateToProductList')
-                .execute({
-                    ProductList: productList.object,
-                    Priority: 0
-                });
+            productList.createGiftCertificateItem();
         },
         deleteItem: function (formgroup, action) {
-            dw.system.Logger.info('Deleting product {0} from wishlist.',action.object.productID);
             productList.remove(action.object);
         },
         updateItem: function (formgroup, action) {
-            dw.system.Logger.info('Updating product {0} on wishlist.',action.object.productID);
             app.getForm(action.parent).copyTo(action.object);
         },
         setItemPrivate: function (formgroup, action) {
@@ -94,16 +88,13 @@ function wishListForm() {
             });
         },
         setListPrivate: function () {
-            dw.system.Logger.info('Customer {0} set wishlist private.',customer.ID);
             productList.setPublic(false);
         },
         setListPublic: function () {
-            dw.system.Logger.info('Customer {0} set wishlist public.',customer.ID);
             productList.setPublic(true);
         },
         selectAddressWishlist: function () {
             setShippingAddress();
-            return;
         },
         addToCart: function (form) {
             var cart = app.getModel('Cart').goc();
@@ -127,10 +118,38 @@ function wishListForm() {
                 }
 
             }
+        },
+        search: function () {
+            var ProductList = app.getModel('ProductList');
+            var listType = require('dw/customer/ProductList').TYPE_WISH_LIST;
+            var searchForm = app.getForm('wishlist.search');
+            var searchFirstName = searchForm.get('firstname').value();
+            var searchLastName = searchForm.get('lastname').value();
+            var searchEmail = searchForm.get('email').value();
+            var wishLists;
+
+            if (searchForm.isValid()) {
+                wishLists = ProductList.search(searchForm, listType);
+
+                Transaction.wrap(function () {
+                    app.getForm('wishlist.productlists').copyFrom(wishLists);
+                    searchForm.clear();
+                });
+            }
+
+            shouldRedirectToShow = false;
+
+            app.getView({
+                SearchFirstName: searchFirstName,
+                SearchLastName: searchLastName,
+                SearchEmail: searchEmail
+            }).render('account/wishlist/wishlistresults');
         }
     });
 
-    response.redirect(URLUtils.https('Wishlist-Show'));
+    if (shouldRedirectToShow) {
+        response.redirect(URLUtils.https('Wishlist-Show'));
+    }
 }
 
 
@@ -138,6 +157,7 @@ function wishListForm() {
  * TODO Expects: UserID
  */
 function showOther() {
+    var URLUtils = require('dw/web/URLUtils');
     var wishlistForm = app.getForm('wishlist');
     wishlistForm.get('send').clear();
 
@@ -147,7 +167,7 @@ function showOther() {
 
     app.getView({
         ProductList: productList.object,
-        ContinueURL: dw.web.URLUtils.https('Wishlist-WishListForm')
+        ContinueURL: URLUtils.https('Wishlist-WishListForm')
     }).render('account/wishlist/wishlist');
 }
 
@@ -173,44 +193,12 @@ function add() {
     response.redirect(dw.web.URLUtils.https('Wishlist-Show'));
 }
 
-
-/**
- * TODO
- * Expects (optional): - OwnerEmail - OwnerFirstName - OwnerLastName
- */
-function search() {
-    var searchForm = app.getForm('wishlist.search');
-
-    var searchFirstName, searchLastName, searchEmail = null;
-
-    searchFirstName = searchForm.get('firstname').value();
-    searchLastName = searchForm.get('lastname').value();
-    searchEmail = searchForm.get('email').value();
-
-    if (searchForm.valid() && (!empty(searchFirstName) && !empty(searchLastName) && !empty(searchEmail))) {
-        // @TODO API is different from pipelet SearchProductLists
-        // var queryString = 'OwnerFirstName = ' + searchFirstName + ' AND OwnerLastName = ' +
-        //     searchLastName + ' AND OwnerEmail = ' + searchEmail;
-        // var productLists = dw.customer.ProductListMgr.queryProductLists(queryString, null, null);
-        var productLists = new dw.system.Pipelet('SearchProductLists').execute({
-            OwnerFirstName: searchFirstName,
-            OwnerLastName: searchLastName,
-            OwnerEmail: searchEmail,
-            Type: dw.customer.ProductList.TYPE_WISH_LIST
-        }).ProductLists;
-
-        app.getForm('wishlist.productlists').copyFrom(productLists);
-
-        searchForm.clear();
-    }
-
+function search () {
+    app.getForm('wishlist.search').clear();
     app.getView({
-        SearchFirstName: searchFirstName,
-        SearchLastName: searchLastName,
-        SearchEmail: searchEmail
+        ContinueURL: URLUtils.https('Wishlist-WishListForm')
     }).render('account/wishlist/wishlistresults');
 }
-
 
 /**
  * Set the shipping address for the wishlist.
@@ -275,7 +263,7 @@ exports.SetShippingAddress = guard.ensure(['get', 'https', 'loggedIn'], setShipp
 
 // others wishlist
 /** @see module:controllers/Wishlist~Search */
-exports.Search = guard.ensure(['post', 'https'], search);
+exports.Search = guard.ensure(['get', 'https'], search);
 /** @see module:controllers/Wishlist~ShowOther */
 exports.ShowOther = guard.ensure(['get', 'https'], showOther);
 
