@@ -162,11 +162,6 @@
 
                 </isif>
 
-
-                <input type="hidden"
-                       name="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.addressid.htmlName}"
-                       value="${pdict.CurrentForms.giftregistry.eventaddress.addressAfterEvent.addressid.value}"/>
-
                 <isscript>
                     var currentCountry = require('~/cartridge/scripts/util/Countries').getCurrent(pdict);
                 </isscript>

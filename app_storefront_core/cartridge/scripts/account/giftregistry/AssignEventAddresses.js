@@ -1,5 +1,3 @@
-var accountUtils = require('app_storefront_core/cartridge/scripts/account/Utils');
-
 /**
  * Handles Pipeline call for assignEventAddresses
  *
@@ -54,7 +52,7 @@ function assignEventAddresses(pdict) {
 
     // if the after event address was changed add it to the address book
     if (hasChangedAfterAddress) {
-        addAddress(giftRegistryForm.eventaddress.addressAfterEvent,addressBook);
+        addAddress(addressAfterEvent, addressBook);
     }
 
     // set the after address event
@@ -71,18 +69,40 @@ function assignEventAddresses(pdict) {
  *
  */
 function addAddress(addressFields, addressBook) {
+    var address;
     var addressID;
+    var candidateID;
+    var counter = 0;
+    var existingAddress;
+
     if (addressFields.addressid.value) {
         addressID = addressFields.addressid.value;
-    // get a unique address ID
+        if (addressBook.getAddress(addressID)) {
+            addressID = addressFields.city.value;
+        }
     } else {
-        addressID = accountUtils.determineUniqueAddressID(addressFields.city.value, addressBook);
+        addressID = addressFields.city.value;
     }
-    // check on empty address ID
-    if (!addressID) {
-        var error = 'Cannot add address to address book with an empty address ID.';
-        Logger.debug(error);
-        throw error;
+
+    candidateID = addressID;
+
+    while (!existingAddress) {
+        existingAddress = addressBook.getAddress(candidateID);
+
+        if (existingAddress) {
+            // this ID is already taken, increment the counter
+            // and try the next one
+            if(isAddressChanged(addressFields, existingAddress)) {
+                counter++;
+                candidateID = addressFields.city.value + "-" + counter;
+                existingAddress = null;
+            } else {
+                return;
+            }
+        } else {
+            addressID = candidateID;
+            break;
+        }
     }
 
     // create the new address and copy the form values
