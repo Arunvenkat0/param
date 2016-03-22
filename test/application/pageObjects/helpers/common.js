@@ -63,6 +63,17 @@ export function clickCheckbox(selector) {
         });
 }
 
+export function uncheckCheckbox(selector) {
+    return browser.click(selector)
+        .isSelected(selector)
+        .then(selected => {
+            if (selected) {
+                return browser.click(selector);
+            }
+        });
+}
+
+
 export function selectAttributeByIndex (attributeName, index, deselect) {
     let selector = '.swatches.' + attributeName + ' li:nth-child(' + index + ')';
     return browser.waitForVisible(selector)

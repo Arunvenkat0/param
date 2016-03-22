@@ -83,6 +83,7 @@ describe('Multi Shipping', () => {
                 browser.isEnabled(multiShipPage.BTN_CHECKOUT_CONTINUE)
                     .then(enabled => enabled === true)
             ))
+            .then(() => checkoutPage.uncheckSaveThisCreditCard())
             .then(() => browser.isEnabled(multiShipPage.BTN_CHECKOUT_CONTINUE))
             .then(enabled => assert.isTrue(enabled))
     );

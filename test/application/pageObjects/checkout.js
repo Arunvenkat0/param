@@ -39,6 +39,7 @@ export const RADIO_BTN_SHIPPING_METHOD2 = '.input-radio[id$="002"]';
 export const SELECT_ADDRESS = '[name*="singleshipping_addressList"]';
 export const SELECT_CREDITCARD = '[name*=creditCardList]';
 export const USE_AS_BILLING_ADDR = '[name*="shippingAddress_useAsBillingAddress"]';
+export const CHECK_BOX_SAVE_THIS_CARD = '#dwfrm_billing_paymentMethods_creditCard_saveCard';
 
 const basePath = '/checkout';
 
@@ -137,6 +138,10 @@ export function fillOutBillingForm (billingFields) {
 
 export function checkUseAsBillingAddress () {
     return common.clickCheckbox(USE_AS_BILLING_ADDR);
+}
+
+export function uncheckSaveThisCreditCard () {
+    return common.uncheckCheckbox(CHECK_BOX_SAVE_THIS_CARD);
 }
 
 export function getLabelOrderConfirmation () {
