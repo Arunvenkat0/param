@@ -127,6 +127,13 @@ function submitForm() {
             });
 
             showRegistry({ProductList: productList.object});
+        },
+
+        navPurchases: function (form) {
+            var productList = ProductList.get(form.object);
+            app.getView({
+                ProductList: productList.object
+            }).render('account/giftregistry/purchases');
         }
     });
 }
