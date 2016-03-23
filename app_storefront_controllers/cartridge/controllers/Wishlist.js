@@ -69,7 +69,9 @@ function wishListForm() {
 
     app.getForm('wishlist').handleAction({
         addGiftCertificate: function () {
-            productList.createGiftCertificateItem();
+            Transaction.wrap(function () {
+                productList.createGiftCertificateItem();
+            });
         },
         deleteItem: function (formgroup, action) {
             productList.remove(action.object);
