@@ -14,6 +14,7 @@ export const BTN_UPDATE_CART = '.cart-footer button[name*="_updateCart"]';
 export const BTN_CHECKOUT = 'button[name*="checkoutCart"]';
 export const LINK_REMOVE = 'button[value="Remove"]';
 export const ITEM_DETAILS = '.item-details';
+export const ITEM_NAME = '.item-list .item-details .name';
 export const ITEM_QUANTITY = '.item-quantity';
 export const SELECT_STORE = '.set-preferred-store';
 export const SELECTED_STORE_ADDRESS = '.selected-store-address';
@@ -26,10 +27,6 @@ const basePath = '/cart';
 // Pseudo private methods
 function _createCssNthCartRow (idx) {
     return CART_ITEMS + ':nth-child(' + idx + ')';
-}
-
-function _createCssUpdateQtyInput (idx) {
-    return [_createCssNthCartRow(idx), ITEM_QUANTITY, 'input'].join(' ');
 }
 
 // Public methods
@@ -69,12 +66,12 @@ export function getItemAttrByRow (rowNum, attr) {
 }
 //get the quantity in Cart for a particular row
 export function getQuantityByRow(rowNum) {
-    var selector = [_createCssNthCartRow(rowNum), ITEM_QUANTITY].join(' ');
-    return browser.getText(selector);
+    var selector = [_createCssNthCartRow(rowNum), ITEM_QUANTITY, 'input'].join(' ');
+    return browser.getValue(selector);
 }
 
 export function updateQuantityByRow (rowNum, value) {
-    let selector = _createCssUpdateQtyInput(rowNum);
+    let selector = [_createCssNthCartRow(rowNum), ITEM_QUANTITY, 'input'].join(' ');
     return browser.waitForVisible(selector)
         .setValue(selector, value)
         .click(BTN_UPDATE_CART)
@@ -85,6 +82,10 @@ export function updateQuantityByRow (rowNum, value) {
 
 export function getPriceByRow (rowNum) {
     return browser.getText(_createCssNthCartRow(rowNum) + ' .item-total .price-total');
+}
+
+export function getSelectPriceByRow (rowNum, selection) {
+    return browser.getText(_createCssNthCartRow(rowNum) + ' ' + selection);
 }
 
 export function getItemEditLinkByRow (rowNum) {

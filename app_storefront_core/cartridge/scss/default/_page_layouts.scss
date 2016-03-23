@@ -58,17 +58,17 @@
         padding: 0 0 20px;
         position: relative;
         width: 787px;
-    }
-    .primary-focus & {
-        border: 0 none;
-        float: left;
-        margin: 0;
-        width: 76%;
-    }
-    .full-width & {
-        border: 0 none;
-        width: 100%;
-    }
+	    .primary-focus & {
+	        border: none;
+	        float: left;
+	        margin: 0;
+	        width: 76%;
+	    } 
+	    .full-width & {
+	        border: none;
+	        width: 100%;
+	    }
+	 }
 }
 
 #secondary {

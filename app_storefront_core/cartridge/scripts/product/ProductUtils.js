@@ -571,39 +571,41 @@ ProductUtils.getVariants = function (item, pvm, quantity) {
  * Gets Variant Hierarchy
  *
  * @param {dw.catalog.Product} item
- * @param {dw.catalog.ProductVariationModel} pvm
+ * @param {dw.catalog.ProductVariationModel} productVariationModel
  * @param {String|Number} quantity
  * @returns {Object}
  */
-ProductUtils.getVariantHierarchy = function (item, pvm, quantity) {
+ProductUtils.getVariantHierarchy = function (item, productVariationModel, quantity) {
     var variants = {};
     if (!item.isVariant() && !item.isMaster()) { return variants; }
 
-    for (var i = 0,len = pvm.variants.length; i < len; i++) {
-        var v = pvm.variants[i];
+    var allVariants = productVariationModel.variants;
+    var allVariationAttributes = productVariationModel.productVariationAttributes;
+    for (var i = 0, numVariants = allVariants.length; i < numVariants; i++) {
+        var variant = allVariants[i];
         var target = variants;
         // attributes
-        for (var a = 0, alen = pvm.productVariationAttributes.length; a < alen; a++) {
-            var att = pvm.productVariationAttributes[a];
-            var variationValue = pvm.getVariationValue(v, att);
+        for (var j = 0, numVariationAttributes = allVariationAttributes.length; j < numVariationAttributes; j++) {
+            var attribute = allVariationAttributes[j];
+            var variationValue = productVariationModel.getVariationValue(variant, attribute);
             if (!variationValue) { continue; }
-            var key = att.ID + '-' + variationValue.value;
+            var key = attribute.ID + '-' + variationValue.value;
             if (!('attributes' in target)) {
                 target.attributes = {};
             }
             if (!(key in target.attributes)) {
                 target.attributes[key] = {
-                    id: att.ID,
+                    id: attribute.ID,
                     value: variationValue.value,
                     display: !variationValue.displayValue ? variationValue.value : variationValue.displayValue,
-                    selected: pvm.isSelectedAttributeValue(att, variationValue)
+                    selected: productVariationModel.isSelectedAttributeValue(attribute, variationValue)
                 };
             }
             target = target.attributes[key];
         }
-        target.productId = v.ID;
-        target.availability = ProductUtils.getAvailability(v, quantity);
-        target.pricing = ProductUtils.getPricing(v);
+        target.productId = variant.ID;
+        target.availability = ProductUtils.getAvailability(variant, quantity);
+        target.pricing = ProductUtils.getPricing(variant);
     }
 
     return variants;

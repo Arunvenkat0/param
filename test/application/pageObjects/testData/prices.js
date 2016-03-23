@@ -2,7 +2,7 @@
 
 import _ from 'lodash';
 
-let priceTypes = ['list', 'sale'];
+export const priceTypes = ['list', 'sale'];
 
 /**
  * Loads Price Books test data

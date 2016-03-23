@@ -1,76 +1,128 @@
 'use strict';
 
+const globalize = require('globalize');
+const cldrData = require('cldr-data');
+globalize.load(cldrData.entireSupplemental());
+globalize.load(cldrData.entireMainFor('en', 'en-GB', 'en-US-POSIX', 'fr', 'it', 'ja', 'zh'));
+
 export const localeCurrency = {
     'x-default': {
         currencyCode: 'usd',
-        fractionDigits: 2,
         symbol: '$'
     },
     'en-US':  {
         currencyCode: 'usd',
-        fractionDigits: 2,
         symbol: '$'
     },
     'en-GB': {
         currencyCode: 'gbp',
-        fractionDigits: 2,
         symbol: '£'
     },
     'fr-FR': {
         currencyCode: 'eur',
-        fractionDigits: 2,
         symbol: '€'
     },
     'it-IT': {
         currencyCode: 'eur',
-        fractionDigits: 2,
         symbol: '€'
     },
     'ja-JP': {
         currencyCode: 'jpy',
-        fractionDigits: 0,
         symbol: '¥'
     },
     'zh-CN': {
         currencyCode: 'cny',
-        fractionDigits: 0,
         symbol: '¥'
     }
 };
 
 /**
+ * Parses a localized currency value
+ *
+ * @param {String} price
+ * @param {String} [locale]
+ * @returns {Number}
+ */
+export function getCurrencyValue (price, locale = 'en-US') {
+    const normalizedLocale = normalizeLocale(locale);
+    const normalizedPrice = price.replace(/[^0-9-.,]/g, '');
+
+    return globalize(normalizedLocale).numberParser()(normalizedPrice);
+}
+
+/**
  * Returns a locale-formatted price
  *
  * @param {String} price
- * @param {String} locale
+ * @param {String} [locale]
  * @returns {String} - Formatted price
  */
-export function getFormattedPrice(price, locale = 'en-US') {
-    let normalizedLocale = locale.replace('_', '-');
-    let formatOptions = {minimumFractionDigits: localeCurrency[normalizedLocale].fractionDigits};
-    let normalizedPrice = price.replace(/\$|£|€|¥|,/g, '');
-    let formattedAmount;
+export function getFormattedPrice (price, locale = 'en-US') {
+    const normalizedLocale = normalizeLocale(locale);
+    const currencyCode = localeCurrency[normalizedLocale].currencyCode.toUpperCase();
+    const currencyValue = getCurrencyValue(price, normalizedLocale);
 
-    normalizedPrice = parseFloat(normalizedPrice);
-    formattedAmount = normalizedPrice.toLocaleString(normalizedLocale, formatOptions);
+    globalize.locale(normalizedLocale);
 
-    switch (normalizedLocale) {
-        case 'en-GB':
-            return `£${formattedAmount}`;
-        case 'fr-FR':
-            return `${formattedAmount} €`;
-        case 'it-IT':
-            return `€ ${formattedAmount}`;
-        case 'ja-JP':
-            return `¥ ${formattedAmount}`;
-        case 'zh-CN':
-            return `¥${formattedAmount}`;
-        default:
-            return `$${formattedAmount}`;
+    // Special handling for certain locales as globalize has some slight differences from how we render localize prices
+    if (normalizedLocale === 'it-IT') {
+        const amount = globalize.numberFormatter({
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        })(currencyValue);
+
+        return `${localeCurrency[normalizedLocale].symbol} ${amount}`;
+
+    } else if (normalizedLocale === 'ja-JP') {
+        const symbol = localeCurrency[normalizedLocale].symbol;
+        const number = globalize.numberFormatter()(currencyValue, normalizedLocale);
+
+        return `${symbol} ${number}`;
+
+    } else if (normalizedLocale === 'zh-CN') {
+        const number = globalize.numberFormatter({
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        })(currencyValue, normalizedLocale);
+
+        return `${localeCurrency[normalizedLocale].symbol}${number}`;
+
+    } else {
+        return globalize.currencyFormatter(currencyCode)(currencyValue);
     }
 }
 
-export function getCurrencySymbol(locale = 'en-US') {
-    let normalizedLocale = locale.replace('_', '-');
-    return localeCurrency[normalizedLocale].symbol;
+export function getCurrencySymbol (locale = 'en-US') {
+    return localeCurrency[normalizeLocale(locale)].symbol;
+}
+
+/**
+ * Convert 'xx_XX' locales to 'xx-XX', which is the format that the cldr-data module requires
+ *
+ * @param {String} locale - 'xx_XX'
+ * @returns {String} - 'xx-XX'
+ */
+function normalizeLocale (locale = 'en-US') {
+    return locale.replace('_', '-');
+}
+
+/**
+ * Return localized number, e.g. 23.99 ('en-US') -> 23,99 ('it-US')
+ *
+ * Background:  This function is primarily used for converting values from the pricebook demo data to a localized number.
+ *   The eur-list-prices.xml file stores values as xx.xx, but Euro prices for fr-FR and it-IT are in xx,xx format
+ *
+ * @param {String} price - English number format xxxx.xx
+ * @param {String} [locale]
+ * @returns {String}
+ */
+export function localizeNumber(price, locale = 'en-US') {
+    // price must be in xxxx.xx format
+    const number = globalize('en').numberParser()(price);
+    const localizedNumber = globalize(normalizeLocale(locale)).numberFormatter({
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    })(number);
+
+    return localizedNumber;
 }

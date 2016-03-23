@@ -10,7 +10,7 @@
 		<isinclude template="account/giftregistry/giftregistrysearch"/>
 	</div>
 	<isif condition="${pdict.ProductList == null}">
-		<div class="registrynone">${Resource.msgf('registrycustomer.' + pdict.Status.code, 'account',null, pdict.Status.parameters)}</div><!-- END: registrynone -->
+		<div class="registrynone">${Resource.msgf('account.registrycustomer.' + pdict.Status.code, 'account', null, pdict.Status.parameters)}</div><!-- END: registrynone -->
 	<iselse/>
 
 	<div class="list-share">
@@ -35,7 +35,7 @@
 		<h3>${Resource.msg('giftregistryconfirmation.eventinfo','account',null)}</h3>
 		<dl class="event">
 			<dt>${Resource.msg('account.registrycustomer.eventtype','account',null)}</dt>
-			<dd><isprint value="${Resource.msg('giftregistry.' + pdict.ProductList.eventType, 'forms', null}"/></dd>
+			<dd><isprint value="${Resource.msg('giftregistry.' + pdict.ProductList.eventType, 'forms', null)}"/></dd>
 			<dt>${Resource.msg('account.registrycustomer.location','account',null)}</dt>
 			<dd><isprint value="${pdict.ProductList.eventCity}"/>,<isprint value="${pdict.ProductList.eventState}"/></dd>
 		</dl>

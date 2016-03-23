@@ -2,26 +2,41 @@
 
 import path from 'path';
 import properties from 'properties-parser';
+import wdioConfig from '../../../application/webdriver/wdio.conf';
+
+const locale = wdioConfig.locale;
 
 function msg (key, bundleName, defaultValue) {
-    let bundlePath, props, value;
+    let bundlePath , props;
+    const resourceDirPath = './app_storefront_core/cartridge/templates/resources/';
     if (!key) {
         return;
     }
     if (bundleName) {
-        bundlePath = path.resolve('./app_storefront_core/cartridge/templates/resources/' + bundleName + '.properties');
-        props = properties.read(bundlePath);
-        value = props[key];
-    }
-    if (!value) {
-        if (defaultValue) {
-            return defaultValue;
-        } else {
-            return key;
+        if (locale !== 'x_default') {
+            bundlePath = path.resolve(resourceDirPath + bundleName + '_' + locale + '.properties');
+            try {
+                props = properties.read(bundlePath);
+                if (props[key]) {
+                    return props[key];
+                }
+            } catch (e) {
+                // continue
+            }
+        }
+        bundlePath = path.resolve(resourceDirPath + bundleName + '.properties');
+        try {
+            props = properties.read(bundlePath);
+            if (props[key]) {
+                return props[key];
+            }
+        } catch (e) {
+            // continue
         }
     }
-    return value;
+    return defaultValue || key;
 }
+
 function msgf () {
     // pass through to msg if there are no extra format arguments
     if (arguments.length < 4) {

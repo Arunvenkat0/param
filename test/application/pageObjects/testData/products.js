@@ -2,10 +2,7 @@
 
 import _ from 'lodash';
 import * as common from '../helpers/common';
-import * as pricingHelpers from '../helpers/pricing';
 import {AbstractDwModelMock} from './common';
-
-export let priceTypes = ['list', 'sale'];
 
 let defaultLocale = common.defaultLocale;
 
@@ -56,8 +53,8 @@ export function parseCatalog (fileData, currentCatalog) {
  * @returns {ProductStandard|ProductVariationMaster|ProductSet|ProductBundle} - product instance
  */
 export function getProduct (catalog, productId) {
-    let product = catalog.products[productId];
-    let type = getProductType(product);
+    const product = catalog.products[productId];
+    const type = getProductType(product);
 
     switch (type) {
         case 'set':
@@ -103,17 +100,25 @@ export function isProductStandard (product) {
         !isProductBundle(product);
 }
 
-export function getVariationMasterInstances (catalog) {
-    return _.filter(catalog, product =>
-        product.type === 'variationMaster'
-    );
+export function getVariationMasterInstances (catalogProducts) {
+    return _.filter(catalogProducts, product => isProductVariationMaster(product));
 }
 
-export function getVariantParent (catalog, variant) {
-    let variationMasters = getVariationMasterInstances(catalog);
-    return _.find(variationMasters, master => {
-        return master.hasOwnProperty('variants') ? master.variants.indexOf(variant) > -1 : undefined;
+/**
+ * Retrieves product variation master of a variant
+ *
+ * @param {Object} catalog - parsedData.catalog.product
+ * @param {String} variantId
+ * @returns {ProductVariationMaster}
+ */
+export function getVariantParent (catalog, variantID) {
+    const variationMasters = getVariationMasterInstances(catalog.products);
+    const variantParent = _.find(variationMasters, master => {
+        const variants = master.variations[0].variants;
+        return variants ? _.some(variants[0].variant, {$: {'product-id': variantID}}) : false;
     });
+
+    return new ProductVariationMaster(variantParent, catalog);
 }
 
 export class Category {
@@ -224,17 +229,21 @@ export class AbstractProductBase extends AbstractDwModelMock {
 }
 
 export class ProductStandard extends AbstractProductBase {
-    getPrices (pricebooks, locale) {
-        let prices = {};
+    constructor (product) {
+        super(product);
 
-        priceTypes.forEach(type => {
-            let entry = _.find(pricebooks[type].products, {productId: this.id});
-            if (entry) {
-                prices[type] = pricingHelpers.getFormattedPrice(entry.amount, locale);
-            }
-        });
+        // Assigned when testData/main:getProductById is called
+        this.master;
+    }
 
-        return prices;
+    getUrlResourcePath (locale = defaultLocale) {
+        const pageUrl = this.master.getPageUrl(locale);
+        return `/${pageUrl}/${this.id}.html?lang=${locale}`;
+    }
+
+    getDisplayName (locale = defaultLocale) {
+        if (locale === 'en_GB') { locale = defaultLocale; }
+        return this.master.displayName[locale];
     }
 }
 
@@ -266,7 +275,6 @@ export class ProductSet extends AbstractProductBase {
             category = new Category(catalog.categories[categoryParent]);
             categoryParent = category.parent;
         } while (categoryParent);
-
     }
 
     getUrlResourcePath (locale = defaultLocale) {
@@ -286,21 +294,6 @@ export class ProductSet extends AbstractProductBase {
         return this.getProductIds().map(id => getProduct(catalog, id));
     }
 
-    getPrices (pricebooks, locale, catalog) {
-        let price = 0.00;
-
-        this.getProducts(catalog).forEach(product => {
-            let values = _.values(product.getPrices(pricebooks, locale, catalog));
-            let minValue;
-
-            values = values.map(value => value.replace(/\$|£|€|¥|,/g, ''));
-            minValue = _.min(values);
-
-            price += parseFloat(minValue);
-        });
-
-        return pricingHelpers.getFormattedPrice(price.toString(), locale);
-    }
 }
 
 export class ProductVariationMaster extends AbstractProductBase {
@@ -308,6 +301,8 @@ export class ProductVariationMaster extends AbstractProductBase {
         super(product);
 
         this.variationAttributes = {};
+        // Populated when testData/main:getProductById is called
+        this.variants = [];
         let self = this;
         let mainKey;
 
@@ -340,29 +335,27 @@ export class ProductVariationMaster extends AbstractProductBase {
 
         if (product.variations[0].hasOwnProperty('variants')) {
             this.variantIds = _.pluck(product.variations[0].variants[0].variant, '$.product-id');
-            this.variants = this.getVariantProductIds().map(id => getProduct(catalog, id));
         }
-
     }
 
-    getUrlResourcePath () {
-        let path = this.classificationCategory.replace(/-/g, '/');
-        let productId = this.id;
-        return `/${path}/${productId}.html`;
+    /**
+     * Returns a product's localized pageUrl
+     *
+     * @param {String} locale
+     * @returns {String} - localized pageUrl
+     */
+    getPageUrl(locale = defaultLocale) {
+        return this.pageAttributes.pageUrl[locale];
+    }
+
+    getUrlResourcePath (locale = defaultLocale) {
+        const path = this.getPageUrl(locale);
+        const urlLocale = locale !== defaultLocale ? locale : 'en_US';
+        return `/${path}/${this.id}.html?lang=${urlLocale}`;
     }
 
     getVariantProductIds () {
         return this.variantIds;
-    }
-
-    /**
-     * Gets a Product Variation Master's Variant instances
-     *
-     * @param {Object} catalog - testData.parsedData.catalog
-     * @returns {Array.<ProductStandard>} - Variants of VariationMaster
-     */
-    getVariants () {
-        return this.variants;
     }
 
     getAttrTypeValueIndex (type, value) {
@@ -389,23 +382,6 @@ export class ProductVariationMaster extends AbstractProductBase {
 
         return _.intersection(definedValues, _.unique(implementedValues));
     }
-
-    getPrices (pricebooks, locale) {
-        let prices = {};
-
-        this.getVariants().forEach(variant => {
-            let variantPrices = variant.getPrices(pricebooks, locale);
-            priceTypes.forEach(type => {
-                if (variantPrices[type]) {
-                    prices[type] = !prices[type] || variantPrices[type] < prices[type]
-                        ? pricingHelpers.getFormattedPrice(variantPrices[type], locale)
-                        : pricingHelpers.getFormattedPrice(prices[type], locale);
-                }
-            });
-        });
-
-        return prices;
-    }
 }
 
 export class ProductBundle extends AbstractProductBase {
@@ -426,11 +402,6 @@ export class ProductBundle extends AbstractProductBase {
 
     getOptions () {
         return this.options || [];
-    }
-
-    getPrices (pricebooks, locale) {
-        let entry = _.find(pricebooks.list.products, {productId: this.id});
-        return pricingHelpers.getFormattedPrice(entry.amount, locale);
     }
 }
 

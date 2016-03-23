@@ -106,6 +106,24 @@ describe('Checkout', () => {
                 .then(activeBreadCrumb => assert.equal(activeBreadCrumb, 'STEP 2: Billing'))
         );
 
+        // This test won't work in January, because of UI limitations barring the selection of a previous year
+        // That is why this test contains a conditional skip.
+        it('should fill out the billing form with expired credit card information', function () {
+            const date = new Date();
+            let expiredBillingFormData = _.cloneDeep(billingFormData);
+            expiredBillingFormData.creditCard_expiration_year = testData.creditCard1.yearIndex - 1;
+
+            if (!date.getMonth()) {
+                this.skip();
+            }
+
+            return checkoutPage.fillOutBillingForm(expiredBillingFormData)
+                .then(() => browser.waitForEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+                .then(() => browser.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+                .then(() => browser.waitForExist(checkoutPage.CREDIT_CARD_MONTH_ERROR_MSG))
+                .then(doesExist => assert.isTrue(doesExist))
+        });
+
         // Fill in Billing Form
         it('should allow saving of Billing Form when required fields filled', () =>
             checkoutPage.fillOutBillingForm(billingFormData)
@@ -221,7 +239,10 @@ describe('Checkout', () => {
             .then(() => helpers.clickAndWait(checkoutPage.BTN_CONTINUE_BILLING_SAVE, checkoutPage.BREADCRUMB_PLACE_ORDER))
         );
 
-        after(() => navHeader.logout());
+        after(() =>
+            cartPage.emptyCart()
+                .then(() => navHeader.logout())
+        );
 
         it('should allow editing of the Order Summary form', () => {
             return browser.click(checkoutPage.LINK_EDIT_ORDER_SUMMARY)
@@ -231,7 +252,7 @@ describe('Checkout', () => {
                 .then(() => checkoutPage.fillOutBillingForm(billingFormData))
                 .then(() => browser.waitForEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
                 .then(() => helpers.clickAndWait(checkoutPage.BTN_CONTINUE_BILLING_SAVE, checkoutPage.BREADCRUMB_PLACE_ORDER))
-                .then(() => cartPage.getQuantityByRow(1))
+                .then(() => checkoutPage.getQuantityByRow(1))
                 .then(updatedQuantity => assert.equal(updatedQuantity, '3'));
         });
 
@@ -270,4 +291,90 @@ describe('Checkout', () => {
                 .then(paymentMethod => assert.isAbove(paymentMethod.indexOf(paymentMethodLabel), -1));
         });
     });
+
+    describe('shipping methods', () => {
+        const productWithOneVariant = '25720074';
+        const defaultShippingCost = {
+            x_default: '$15.99',
+            en_GB: '£15.99',
+            fr_FR: '15,99 €',
+            it_IT: '€ 15,99',
+            jp_JP: '¥ 36 ',
+            zh_CN: '¥29.99'
+        }
+        const expressShippingCost = {
+            x_default: '$9.99',
+            en_GB: '£9.99',
+            fr_FR: '9,99 €',
+            it_IT: '€ 9,99',
+            jp_JP: '¥ 21',
+            zh_CN: '¥15.99'
+        }
+        let productVariation;
+        let resourcePath;
+        let locale = config.locale;
+        let shippingFormData;
+
+        before(() => {
+            return testData.load()
+                .then(() => browser.deleteCookie())
+                .then(() => testData.getProductById(productWithOneVariant))
+                .then(productMaster => {
+                    let variantSelection = new Map();
+                    productVariation = productMaster;
+                    resourcePath = productVariation.getUrlResourcePath();
+                    variantSelection.set('resourcePath', resourcePath);
+                    variantSelection.set('colorIndex', 1);
+                    return productDetailPage.addProductVariationToCart(variantSelection);
+                })
+                .then(() => {
+                    // Set form data without preferred address, since manually
+                    // entering form fields as Guest
+                    shippingFormData = _.cloneDeep(shippingData);
+                    delete shippingFormData.addressList;
+                })
+                .then(() => checkoutPage.navigateTo())
+                .then(() => checkoutPage.pressBtnCheckoutAsGuest())
+                .then(() => browser.waitForVisible(checkoutPage.BREADCRUMB_SHIPPING))
+                .then(() => checkoutPage.fillOutShippingForm(shippingFormData, locale))
+        });
+
+        it('#1 Ground shipping method should be selected by default', () => {
+            return browser.isSelected(checkoutPage.RADIO_BTN_SHIPPING_METHOD1)
+                .then(val => assert.isTrue(val))
+        });
+
+        it('#2 default shipping cost should be displayed properly', () => {
+            return browser.getText(checkoutPage.ORDER_SHIPPING_COST)
+                .then(shippingCharge => assert.equal(shippingCharge, defaultShippingCost[locale]))//TODO:RAP-4743:add shipping parsing
+        });
+
+        it('#3 select 2-Day Express shipping method, shipping cost should be displayed properly', () => {
+            return browser.click(checkoutPage.RADIO_BTN_SHIPPING_METHOD2)
+                .then(() => {
+                    if (browser.isSelected(checkoutPage.RADIO_BTN_SHIPPING_METHOD2) !== 'true') {
+                        return browser.click(checkoutPage.RADIO_BTN_SHIPPING_METHOD2)
+                    }
+                })
+                .then(() => checkoutPage.checkUseAsBillingAddress())
+                .then(() => browser.click(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
+                .then(() => checkoutPage.fillOutBillingForm(billingFormData))
+                .then(() => browser.waitForExist(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+                .then(() => browser.waitForEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
+                .then(() => browser.getText(checkoutPage.ORDER_SHIPPING_COST))
+                .then(shippingCharge => assert.equal(shippingCharge, expressShippingCost[locale]))//TODO:RAP-4743:add shipping parsing
+        });
+
+        it('#4 should checkout successfully with 2-Day Express shipping method ', () => {
+            return browser.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE)
+                .then(() => browser.waitUntil(browser.isEnabled(checkoutPage.BTN_PLACE_ORDER)))
+                .then(() => browser.click(checkoutPage.BTN_PLACE_ORDER))
+                .then(() => browser.waitForVisible(orderConfPage.ORDER_CONF_DETAILS))
+                .then(() => checkoutPage.getLabelOrderConfirmation())
+                .then(title => assert.equal(title, successfulCheckoutTitle))
+                .then(() => browser.getText(checkoutPage.ORDER_SHIPPING_COST))
+                .then(shippingCharge => assert.equal(shippingCharge, expressShippingCost[locale]))//TODO:RAP-4743:add shipping parsing
+        });
+    });
+
 });

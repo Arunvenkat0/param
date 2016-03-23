@@ -1,7 +1,6 @@
 'use strict';
 
 var _ = require('lodash');
-var fs = require('fs');
 var path = require('path');
 var dwdav = require('dwdav');
 var configReader = require('@tridnguyen/config');
@@ -210,26 +209,26 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerMultiTask('dwDavUpload', 'webDav uploader for Demandware', function() {
+    grunt.registerMultiTask('dwDavUpload', 'webDav uploader for Demandware', function () {
         var done = this.async();
-        var options = this.options({ authFile: 'dw.json' });
+        var options = this.options({authFile: 'dw.json'});
         var authFile = path.resolve(options.authFile);
         var credentials = configReader(authFile, {caller: false});
         grunt.log.ok('Loaded auth credentials from: ' + authFile);
         var server = dwdav(credentials);
-        Promise.all(this.files.map(function(f) {
+        Promise.all(this.files.map(function (f) {
             var file = f.src;
             grunt.log.ok('Uploading ' + file[0]);
             return server.post(file[0]);
-        })).then(function() {
+        })).then(function () {
             done(0);
-        }).catch(function(err) {
+        }).catch(function (err) {
             grunt.log.error(err);
             done(1);
         });
     });
 
-    grunt.event.on('watch', function(action, filepath) {
+    grunt.event.on('watch', function (action, filepath) {
         grunt.config('dwDavUpload.src', filepath);
     });
 

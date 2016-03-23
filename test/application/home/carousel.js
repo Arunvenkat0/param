@@ -4,13 +4,13 @@ import {assert} from 'chai';
 import {config} from '../webdriver/wdio.conf';
 import * as homePage from '../pageObjects/home';
 import * as common from '../pageObjects/helpers/common';
-import * as searchResultsPage from '../pageObjects/searchResults';
+import * as search from '../pageObjects/search';
 import * as testData from '../pageObjects/testData/main';
 
 describe('Homepage General #C84584', () => {
 
     describe('Main carousel links', () => {
-        let categoryBanner = searchResultsPage.CATEGORY_BANNER;
+        let categoryBanner = search.CATEGORY_BANNER;
 
         before(() => testData.load());
         beforeEach(() => homePage.navigateTo());

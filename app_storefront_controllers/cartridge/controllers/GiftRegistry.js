@@ -9,6 +9,7 @@
 /* API Includes */
 var Pipelet = require('dw/system/Pipelet');
 var giftRegistryType = require('dw/customer/ProductList').TYPE_GIFT_REGISTRY;
+var GiftCertProductListItem = require('dw/customer/ProductListItem').TYPE_GIFT_CERTIFICATE;
 var ProductListMgr = require('dw/customer/ProductListMgr');
 var Transaction = require('dw/system/Transaction');
 var URLUtils = require('dw/web/URLUtils');
@@ -49,6 +50,30 @@ function start() {
  */
 function submitForm() {
     Form.get('giftregistry').handleAction({
+        addToCart: function (form) {
+            var cart = app.getModel('Cart').goc();
+
+            if (form.items.triggeredAction.parent.object.type === GiftCertProductListItem) {
+                response.redirect(URLUtils.https('GiftCert-Purchase'));
+            } else {
+                var renderInfo = cart.addProductToCart();
+
+                if (renderInfo.template === 'checkout/cart/cart') {
+                    app.getView('Cart', {
+                        Basket: cart
+                    }).render(renderInfo.template);
+                } else if (renderInfo.format === 'ajax') {
+                    app.getView('Cart', {
+                        cart: cart,
+                        BonusDiscountLineItem: renderInfo.newBonusDiscountLineItem
+                    }).render(renderInfo.template);
+                } else {
+                    response.redirect(URLUtils.url('Cart-Show'));
+                }
+
+            }
+        },
+
         create: createOne,
 
         confirm: confirm,
@@ -90,6 +115,16 @@ function submitForm() {
         updateItem: function (form, action) {
             var productList = ProductList.get(action.object.list);
             productList.updateItem(form.items);
+
+            showRegistry({ProductList: productList.object});
+        },
+
+        addGiftCertificate: function (form) {
+            var productList = ProductList.get(form.object);
+
+            Transaction.wrap(function () {
+                productList.createGiftCertificateItem();
+            });
 
             showRegistry({ProductList: productList.object});
         }

@@ -4,6 +4,7 @@ import * as formHelpers from './helpers/forms/common';
 
 export const SHARE_LINK = '.share-link';
 export const USE_PRE_EVENT = '.usepreevent';
+export const BTN_ADD_GIFT_CERT = '[name*=addGiftCertificate]';
 export const BTN_EVENT_SET_PARTICIPANTS = '[name*="giftregistry_event_setParticipants"]';
 export const BTN_EVENT_ADDRESS_CONTINUE = '[name*="giftregistry_eventaddress_setBeforeAfterAddresses"]';
 export const BTN_EVENT_CONFIRM = '[name*="giftregistry_event_confirm"]';
@@ -17,6 +18,8 @@ export const SEARCH_GIFTREGISTRY = 'button[name$="giftregistry_search_search"]';
 export const INPUT_LASTTNAME = 'input[name$="registrantLastName"]';
 export const INPUT_FIRSTNAME = 'input[name$="registrantFirstName"]';
 export const INPUT_EVENTTYPE = 'select[id*="giftregistry_search_simple_eventType"]';
+export const ITEM_LIST = '.item-list';
+export const ITEM_NAME = '.name';
 export const BUTTON_FIND = 'button[value=Find]';
 export const LINK_VIEW_GIFTREGISTRY = 'a[href*="giftregistryshow"]';
 export const TABLE_GR_ITEMS = 'table[class*="item-list"] tr';
@@ -26,7 +29,10 @@ export const eventType = 'wedding';
 export const eventTitle = '.list-title';
 export const eventName = 'WEDDING OF THE CENTURY - 3/28/08';
 export const buttonPrint = 'button[class=print-page]';
-
+export const GIFT_REGISTRY_PORDUCT_LIST_FORM = 'form[id*=giftregistry]';
+export const GIFT_CERT_ADDED_TO_GIFT_REGISTRY = ITEM_LIST  + ' tr:nth-of-type(2) .name';
+export const ITEM_ADDED_TO_GIFT_REGISTRY = ITEM_LIST + ' tr:nth-of-type(3) .name';
+export const BTN_ADD_PRODUCT_TO_CART = ITEM_LIST + ' tr:nth-of-type(3) [name*=addToCart]';
 
 const basePath = '/giftregistry';
 

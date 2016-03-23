@@ -21,7 +21,7 @@ var guard = require('~/cartridge/scripts/guard');
 function show() {
 
     var Content = app.getModel('Content');
-    var content = Content.get(request.httpParameterMap.cid.stringValue).object;
+    var content = Content.get(request.httpParameterMap.cid.stringValue);
 
     if (!content) {
         Logger.warn('Content page for asset ID {0} was requested but asset not found',request.httpParameterMap.cid.stringValue);
@@ -38,9 +38,9 @@ function show() {
         require('~/cartridge/scripts/meta').update(content);
 
         app.getView({
-            Content: content,
+            Content: content.object,
             ContentSearchResult: contentSearchModel
-        }).render(content.template || 'content/content/contentpage');
+        }).render(content.object.template || 'content/content/contentpage');
     }
 
 }
@@ -53,12 +53,12 @@ function show() {
 function include() {
 
     var Content = app.getModel('Content');
-    var content = Content.get(request.httpParameterMap.cid.stringValue).object;
+    var content = Content.get(request.httpParameterMap.cid.stringValue);
 
     if (content) {
         app.getView({
-            Content: content
-        }).render(content.template || 'content/content/contentassetinclude');
+            Content: content.object
+        }).render(content.object.template || 'content/content/contentassetinclude');
     } else {
         Logger.warn('Content asset with ID {0} was included but not found',request.httpParameterMap.cid.stringValue);
     }

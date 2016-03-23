@@ -5,12 +5,12 @@
     <isset name="imageProduct" value="${pdict.Product}" scope="page"/>
 </isif>
 <isif condition="${pdict.BonusDiscountLineItem.bonusProducts.size() > 1}">
-    <isif condition="${!empty(imageProduct.getImage('small',0))}">
+    <isif condition="${!empty(imageProduct.getImage('medium',0))}">
         <isset name="imageUrl" value="${imageProduct.getImage('medium',0).getURL()}" scope="page"/>
         <isset name="imageAlt" value="${imageProduct.getImage('medium',0).alt}" scope="page"/>
         <isset name="imageTitle" value="${imageProduct.getImage('medium',0).title}" scope="page"/>
     <iselse/>
-        <isset name="imageUrl" value="${URLUtils.staticURL('/images/noimagemediuml.png')}" scope="page"/>
+        <isset name="imageUrl" value="${URLUtils.staticURL('/images/noimagemedium.png')}" scope="page"/>
         <isset name="imageAlt" value="${pdict.Product.name}" scope="page"/>
         <isset name="imageTitle" value="${pdict.Product.name}" scope="page"/>
     </isif>

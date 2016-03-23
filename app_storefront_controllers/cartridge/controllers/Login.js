@@ -7,10 +7,10 @@
  */
 
 /* API Includes */
+var OAuthLoginFlowMgr = require('dw/customer/oauth/OAuthLoginFlowMgr');
 var OrderMgr = require('dw/order/OrderMgr');
 var Transaction = require('dw/system/Transaction');
 var URLUtils = require('dw/web/URLUtils');
-var Pipelet = require('dw/system/Pipelet');
 var RateLimiter    = require('app_storefront_core/cartridge/scripts/util/RateLimiter');
 
 /* Script Modules */
@@ -78,7 +78,7 @@ function getTargetUrl () {
         var target = session.custom.TargetLocation;
         delete session.custom.TargetLocation;
         //@TODO make sure only path, no hosts are allowed as redirect target
-        dw.system.Logger.info('Redirecting to "{0}" after successful login',target);
+        dw.system.Logger.info('Redirecting to "{0}" after successful login', target);
         return decodeURI(target);
     } else {
         return URLUtils.https('Account-Show');
@@ -135,7 +135,7 @@ function handleLoginForm () {
             var orderFormEmail = orderTrackForm.getValue('orderEmail');
             var orderPostalCode = orderTrackForm.getValue('postalCode');
 
-            if (empty(orderNumber) || empty(orderPostalCode) || empty(orderFormEmail)) {
+            if (!orderNumber || !orderPostalCode || !orderFormEmail) {
                 response.redirect(URLUtils.https('Login-Show'));
                 return;
             }
@@ -199,20 +199,19 @@ function handleOAuthLoginForm() {
         login: function () {
             if (request.httpParameterMap.OAuthProvider.stringValue) {
                 session.custom.RememberMe = request.httpParameterMap.rememberme.booleanValue || false;
-                session.custom.ContinuationURL = getTargetUrl().toString();
 
-                var initiateOAuthLoginResult = new Pipelet('InitiateOAuthLogin').execute({
-                    OAuthProviderID: request.httpParameterMap.OAuthProvider.stringValue
-                });
-                if (initiateOAuthLoginResult.result === PIPELET_ERROR || initiateOAuthLoginResult.AuthorizationURL === null) {
+                var OAuthProviderID = request.httpParameterMap.OAuthProvider.stringValue;
+                var initiateOAuthLoginResult = OAuthLoginFlowMgr.initiateOAuthLogin(OAuthProviderID);
+
+                if (!initiateOAuthLoginResult) {
                     oauthLoginForm.get('loginsucceeded').invalidate();
 
                     // Show login page with error.
                     app.getView('Login').render();
                     return;
-                }
 
-                response.redirect(initiateOAuthLoginResult.AuthorizationURL);
+                }
+                response.redirect(initiateOAuthLoginResult.location);
             }
             return;
         },
@@ -236,51 +235,6 @@ function processLoginForm () {
     }
 }
 
-
-/**
- * This is a central place to login a user from the login form.
- * @deprecated Only kept until all controllers are migrated, as functionality has been moved to other methods
- */
-function process() {
-    // handle OAuth login
-    if (request.httpParameterMap.OAuthProvider.stringValue) {
-        session.custom.RememberMe = request.httpParameterMap.rememberme.booleanValue || false;
-        session.custom.ContinuationURL = URLUtils.https('Login-OAuthReentry').toString();
-
-        var initiateOAuthLoginResult = new Pipelet('InitiateOAuthLogin').execute({
-            OAuthProviderID: request.httpParameterMap.OAuthProvider.stringValue
-        });
-
-        if (initiateOAuthLoginResult.result === PIPELET_ERROR) {
-            var oauthLoginForm = app.getForm('oauthlogin');
-            oauthLoginForm.get('loginsucceeded').invalidate();
-            return false;
-        }
-
-        response.redirect(initiateOAuthLoginResult.AuthorizationURL);
-
-        return false;
-    } else {
-        // handle 'normal' login
-        var loginForm = app.getForm('login');
-
-        // Check to see if the number of attempts has exceeded the session threshold
-        if (RateLimiter.isOverThreshold('FailedLoginCounter')) {
-            RateLimiter.showCaptcha();
-        }
-
-        var success = Customer.login(loginForm.getValue('username'), loginForm.getValue('password'), loginForm.getValue('rememberme'));
-
-        if (!success) {
-            loginForm.get('loginsucceeded').invalidate();
-        } else {
-            loginForm.clear();
-        }
-
-        RateLimiter.hideCaptcha();
-        return success;
-    }
-}
 /**
  * Invalidates the oauthlogin form.
  * Calls the {@link module:controllers/Login~finishOAuthLogin|finishOAuthLogin} function.
@@ -307,130 +261,126 @@ function oAuthSuccess() {
  * The function also handles multiple error conditions and logs them.
 */
 function handleOAuthReentry() {
-    var FinalizeOAuthLoginResult = new Pipelet('FinalizeOAuthLogin').execute();
-    if (FinalizeOAuthLoginResult.result === PIPELET_ERROR) {
+    var finalizeOAuthLoginResult = OAuthLoginFlowMgr.finalizeOAuthLogin();
+    if (!finalizeOAuthLoginResult) {
         oAuthFailed();
         return;
     }
-    var responseText = FinalizeOAuthLoginResult.ResponseText;
-    var oAuthProviderID = FinalizeOAuthLoginResult.OAuthProviderID;
-    var accessToken = FinalizeOAuthLoginResult.AccessToken;
-    // var refreshToken = FinalizeOAuthLoginResult.RefreshToken;
-    // var accessTokenExpiry = FinalizeOAuthLoginResult.AccessTokenExpiry;
-    // var errorStatus = FinalizeOAuthLoginResult.ErrorStatus;
+    var responseText = finalizeOAuthLoginResult.userInfoResponse.userInfo;
+    var oAuthProviderID = finalizeOAuthLoginResult.accessTokenResponse.oauthProviderId;
+    var accessToken = finalizeOAuthLoginResult.accessTokenResponse.accessToken;
 
-
-    if (null === oAuthProviderID) {
+    if (!oAuthProviderID) {
         LOGGER.warn('OAuth provider id is null.');
         oAuthFailed();
         return;
     }
-    LOGGER.debug('{0} response:\n{1}', oAuthProviderID, responseText);
-    if (null !== responseText) {
-        //whether to drop the rememberMe cookie (preserved in the session before InitiateOAuthLogin pipelet)
-        var rememberMe = session.custom.RememberMe;
-        delete session.custom.RememberMe;
 
-        // LinkedIn returns XML.
-        var extProfile = {};
-        if (oAuthProviderID === 'LinkedIn') {
-            var responseReader = new dw.io.Reader(responseText);
-            var xmlStreamReader = new dw.io.XMLStreamReader(responseReader);
-            while (xmlStreamReader.hasNext()) {
-                if (xmlStreamReader.next() === dw.io.XMLStreamConstants.START_ELEMENT) {
-                    var localElementName = xmlStreamReader.getLocalName();
-                    // Ignore the top level person element and read the rest into a plain object.
-                    if (localElementName !== 'person') {
-                        extProfile[localElementName] = xmlStreamReader.getElementText();
-                    }
-                }
-            }
-            xmlStreamReader.close();
-            responseReader.close();
-        } else {
-            // All other providers return JSON.
-            extProfile = JSON.parse(responseText);
-            if (null === extProfile) {
-                LOGGER.warn('Data could not be extracted from the response:\n{0}', responseText);
-                oAuthFailed();
-                return;
-            }
-            if (oAuthProviderID === 'VKontakte') {
-                // They use JSON, but thought it would be cool to add some extra top level elements
-                extProfile = extProfile.response[0];
-            }
-        }
-
-        // This is always id or uid for all providers.
-        var userId = extProfile.id || extProfile.uid;
-        if (!userId) {
-            LOGGER.warn('Undefined user identifier - make sure you are mapping the correct property from the response.' +
-                ' We are mapping "id" which is not available in the response: \n', extProfile);
-            oAuthFailed();
-            return;
-        }
-        LOGGER.debug('Parsed UserId "{0}" from response: {1}', userId, JSON.stringify(extProfile));
-
-        if (oAuthProviderID === 'SinaWeibo') {
-            // requires additional requests to get the info
-            extProfile = getSinaWeiboAccountInfo(accessToken, userId);
-        }
-
-        var profile = dw.customer.CustomerMgr.getExternallyAuthenticatedCustomerProfile(oAuthProviderID, userId);
-        var customer;
-
-        if (profile === null) {
-            Transaction.wrap(function () {
-                LOGGER.debug('User id: ' + userId + ' not found, creating a new profile.');
-                customer = dw.customer.CustomerMgr.createExternallyAuthenticatedCustomer(oAuthProviderID, userId);
-                profile = customer.getProfile();
-                var firstName, lastName, email;
-
-                // Google comes with a 'name' property that holds first and last name.
-                if (typeof extProfile.name === 'object') {
-                    firstName = extProfile.name.givenName;
-                    lastName = extProfile.name.familyName;
-                } else {
-                    // The other providers use one of these, GitHub & SinaWeibo have just a 'name'.
-                    firstName = extProfile['first-name'] || extProfile.first_name || extProfile.name;
-                    lastName = extProfile['last-name'] || extProfile.last_name || extProfile.name;
-                }
-                // Simple email addresses.
-                email =  extProfile['email-address'] || extProfile.email;
-                if (!email) {
-                    var emails = extProfile.emails;
-                    // Google comes with an array
-                    if (emails && emails.length) {
-                        //First element of the array is the account email according to Google.
-                        profile.setEmail(extProfile.emails[0].value);
-                    // While MS comes with an object.
-                    } else {
-                        email = emails.preferred || extProfile['emails.account'] || extProfile['emails.personal'] ||
-                            extProfile['emails.business'];
-                    }
-                }
-                LOGGER.debug('Updating profile with "{0} {1} - {2}".',firstName, lastName,email);
-                profile.setFirstName(firstName);
-                profile.setLastName(lastName);
-                profile.setEmail(email);
-            });
-        } else {
-            customer = profile.getCustomer();
-        }
-        var credentials = profile.getCredentials();
-        if (credentials.isEnabled()) {
-            Transaction.wrap(function () {
-                dw.customer.CustomerMgr.loginExternallyAuthenticatedCustomer(oAuthProviderID, userId, rememberMe);
-            });
-            LOGGER.debug('Logged in external customer with id: {0}', userId);
-        } else {
-            LOGGER.warn('Customer attempting to login into a disabled profile: {0} with id: {1}',
-                profile.getCustomer().getCustomerNo(), userId);
-            oAuthFailed();
-            return;
-        }
-    } else {
+    if (!responseText) {
         LOGGER.warn('Response from provider is empty');
+        oAuthFailed();
+        return;
+    }
+
+    //whether to drop the rememberMe cookie (preserved in the session before InitiateOAuthLogin)
+    var rememberMe = session.custom.RememberMe;
+    delete session.custom.RememberMe;
+
+    // LinkedIn returns XML.
+    var extProfile = {};
+    if (oAuthProviderID === 'LinkedIn') {
+        var responseReader = new dw.io.Reader(responseText);
+        var xmlStreamReader = new dw.io.XMLStreamReader(responseReader);
+        while (xmlStreamReader.hasNext()) {
+            if (xmlStreamReader.next() === dw.io.XMLStreamConstants.START_ELEMENT) {
+                var localElementName = xmlStreamReader.getLocalName();
+                // Ignore the top level person element and read the rest into a plain object.
+                if (localElementName !== 'person') {
+                    extProfile[localElementName] = xmlStreamReader.getElementText();
+                }
+            }
+        }
+        xmlStreamReader.close();
+        responseReader.close();
+    } else {
+        // All other providers return JSON.
+        extProfile = JSON.parse(responseText);
+        if (!extProfile) {
+            LOGGER.warn('Data could not be extracted from the response:\n{0}', responseText);
+            oAuthFailed();
+            return;
+        }
+        if (oAuthProviderID === 'VKontakte') {
+            // They use JSON, but thought it would be cool to add some extra top level elements
+            extProfile = extProfile.response[0];
+        }
+    }
+
+    // This is always id or uid for all providers.
+    var userId = extProfile.id || extProfile.uid;
+    if (!userId) {
+        LOGGER.warn('Undefined user identifier - make sure you are mapping the correct property from the response.' +
+            ' We are mapping "id" which is not available in the response: \n', extProfile);
+        oAuthFailed();
+        return;
+    }
+    LOGGER.debug('Parsed UserId "{0}" from response: {1}', userId, JSON.stringify(extProfile));
+
+    if (oAuthProviderID === 'SinaWeibo') {
+        // requires additional requests to get the info
+        extProfile = getSinaWeiboAccountInfo(accessToken, userId);
+    }
+
+    var profile = dw.customer.CustomerMgr.getExternallyAuthenticatedCustomerProfile(oAuthProviderID, userId);
+    var customer;
+
+    if (!profile) {
+        Transaction.wrap(function () {
+            LOGGER.debug('User id: ' + userId + ' not found, creating a new profile.');
+            customer = dw.customer.CustomerMgr.createExternallyAuthenticatedCustomer(oAuthProviderID, userId);
+            profile = customer.getProfile();
+            var firstName, lastName, email;
+
+            // Google comes with a 'name' property that holds first and last name.
+            if (typeof extProfile.name === 'object') {
+                firstName = extProfile.name.givenName;
+                lastName = extProfile.name.familyName;
+            } else {
+                // The other providers use one of these, GitHub & SinaWeibo have just a 'name'.
+                firstName = extProfile['first-name'] || extProfile.first_name || extProfile.name;
+                lastName = extProfile['last-name'] || extProfile.last_name || extProfile.name;
+            }
+            // Simple email addresses.
+            email =  extProfile['email-address'] || extProfile.email;
+            if (!email) {
+                var emails = extProfile.emails;
+                // Google comes with an array
+                if (emails && emails.length) {
+                    //First element of the array is the account email according to Google.
+                    profile.setEmail(extProfile.emails[0].value);
+                // While MS comes with an object.
+                } else {
+                    email = emails.preferred || extProfile['emails.account'] || extProfile['emails.personal'] ||
+                        extProfile['emails.business'];
+                }
+            }
+            LOGGER.debug('Updating profile with "{0} {1} - {2}".',firstName, lastName,email);
+            profile.setFirstName(firstName);
+            profile.setLastName(lastName);
+            profile.setEmail(email);
+        });
+    } else {
+        customer = profile.getCustomer();
+    }
+    var credentials = profile.getCredentials();
+    if (credentials.isEnabled()) {
+        Transaction.wrap(function () {
+            dw.customer.CustomerMgr.loginExternallyAuthenticatedCustomer(oAuthProviderID, userId, rememberMe);
+        });
+        LOGGER.debug('Logged in external customer with id: {0}', userId);
+    } else {
+        LOGGER.warn('Customer attempting to login into a disabled profile: {0} with id: {1}',
+            profile.getCustomer().getCustomerNo(), userId);
         oAuthFailed();
         return;
     }
@@ -508,14 +458,11 @@ function getSinaWeiboAccountInfo(accessToken, userId) {
 /**
  * Internal helper function to finish the OAuth login.
  * Redirects user to the location set in either the
- * {@link module:controllers/Login~handleOAuthLoginForm|handleOAuthLoginForm} function or
- * {@link module:controllers/Login~process|process} function.
+ * {@link module:controllers/Login~handleOAuthLoginForm|handleOAuthLoginForm} function
  */
 function finishOAuthLogin() {
     // To continue to the destination that is already preserved in the session.
-    session.custom.ContinuationURL = getTargetUrl().toString();
-    var location = session.custom.ContinuationURL;
-    delete session.custom.ContinuationURL;
+    var location = getTargetUrl().toString();
     response.redirect(location);
 }
 /**
@@ -532,7 +479,6 @@ function Logout() {
     //Cart.get().calculate();
 
     response.redirect(URLUtils.https('Account-Show'));
-    return;
 }
 
 /*
@@ -569,9 +515,3 @@ exports.OAuthReentryVKontakte   = guard.ensure(['https','get'], handleOAuthReent
 /** Contains the login page preparation and display.
  * @see module:controllers/Login~show */
 exports.Logout                  = guard.all(Logout);
-
-/*
- * Local methods
- */
-/** @deprecated This is only kept for compatibility reasons, use {@link module:controllers/Login~handleOAuthReentry|handleOAuthReentry} instead */
-exports.Process                 = process;

@@ -24,7 +24,6 @@ $(function () {
             $el.find('li, .itemMembers').show();
             $el.find('.itemMembers').hide();
             $el.find('.item').has('.itemMembers').children('.expand').text('+');
-            //$el.find('.expand').text('+');
         }
 
         $el.find('.list').scrollTop(0);
@@ -33,7 +32,7 @@ $(function () {
     // Toggle when click an item element
     $('.navigation').on('click', '.expand', function (e) {
         $(this).parent().find('.itemMembers').toggle();
-        if($(this).text() === '+'){
+        if ($(this).text() === '+') {
            $(this).text('-');
        } else if ($(this).text() === '-') {
            $(this).text('+');

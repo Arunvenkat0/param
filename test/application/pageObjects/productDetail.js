@@ -6,6 +6,7 @@ import * as wishListPage from './wishList';
 export const BTN_ADD_TO_CART = '#add-to-cart';
 export const BTN_ADD_ALL_TO_CART = '#add-all-to-cart';
 export const BTN_ADD_TO_WISHLIST = 'a[data-action="wishlist"]';
+export const BTN_ADD_TO_GIFT_REGISTRY = 'a[data-action=gift-registry]';
 const MINI_CART = '.mini-cart-content';
 export const PID = '#pid';
 export const PDP_MAIN = '.pdp-main';
@@ -41,6 +42,13 @@ export function addProductVariationToWishList (product) {
         // To ensure that the product has been added to the wishlist before proceeding,
         // we need to wait for a selector in the resulting page to display
     .then(() => browser.waitForVisible(wishListPage.BTN_TOGGLE_PRIVACY));
+}
+
+export function clickAddToCartButton() {
+    return browser.waitForVisible('.loader-bg', 500, true)
+        .waitForEnabled(BTN_ADD_TO_CART)
+        .click(BTN_ADD_TO_CART)
+        .then(() => browser.waitForVisible(MINI_CART));
 }
 
 /**
