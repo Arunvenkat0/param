@@ -98,8 +98,11 @@
 
 					<div class="item-option option-add-to-cart">
 						<isset name="isGiftCert" value="${item.object.type == item.object.TYPE_GIFT_CERTIFICATE}" scope="page"/>
-
-						<form action="${isGiftCert ? URLUtils.url('GiftCert-Purchase') : URLUtils.url('Cart-AddProduct')}" method="post" name="${isGiftCert ? 'gift-cert-purchase' : pdict.CurrentForms.product.addtocart.htmlName}">
+						<isif condition="${isGiftCert}">
+							<form action="${URLUtils.url('GiftCert-Purchase')}" method="get" name="gift-cert-purchase">
+						<iselse/>
+							<form action="${URLUtils.url('Cart-AddProduct')}" method="post" name="${pdict.CurrentForms.product.addtocart.htmlName}">
+						</isif>
 							<fieldset>
 								<input type="hidden" name="itemid" value="${item.object.ID}"/>
 								<input type="hidden" name="plid" value="${pdict.ProductList.UUID}"/>

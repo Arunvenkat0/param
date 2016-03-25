@@ -262,50 +262,7 @@
           <template buffered="true" dynamic="false" name="account/giftregistry/registrycustomer"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="purchaseGiftCertificate">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="target" x="0" y="-1"/>
-            </transition-display>
-          </transition>
-          <segment>
-            <node>
-              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
-                <key-binding alias="TriggeredAction.object" key="From_0"/>
-                <key-binding alias="ProductListItem" key="To_0"/>
-                <key-binding alias="null" key="From_1"/>
-                <key-binding alias="null" key="To_1"/>
-                <key-binding alias="null" key="From_2"/>
-                <key-binding alias="null" key="To_2"/>
-                <key-binding alias="null" key="From_3"/>
-                <key-binding alias="null" key="To_3"/>
-                <key-binding alias="null" key="From_4"/>
-                <key-binding alias="null" key="To_4"/>
-                <key-binding alias="null" key="From_5"/>
-                <key-binding alias="null" key="To_5"/>
-                <key-binding alias="null" key="From_6"/>
-                <key-binding alias="null" key="To_6"/>
-                <key-binding alias="null" key="From_7"/>
-                <key-binding alias="null" key="To_7"/>
-                <key-binding alias="null" key="From_8"/>
-                <key-binding alias="null" key="To_8"/>
-                <key-binding alias="null" key="From_9"/>
-                <key-binding alias="null" key="To_9"/>
-              </pipelet-node>
-              <node-display x="0" y="2"/>
-            </node>
-            <simple-transition>
-              <transition-display>
-                <bend-point relative-to="source" x="0" y="1"/>
-              </transition-display>
-            </simple-transition>
-            <node>
-              <jump-node start-name-ref="GiftRegistryCustomer-PurchaseGiftCertificate"/>
-              <node-display x="0" y="1"/>
-            </node>
-          </segment>
-        </branch>
-        <branch basename="b3" source-connector="search">
+        <branch basename="b2" source-connector="search">
           <transition target-connector="in">
             <transition-display>
               <bend-point relative-to="target" x="0" y="-1"/>
@@ -314,58 +271,10 @@
           <segment>
             <node>
               <jump-node start-name-ref="GiftRegistry-Search"/>
-              <node-display x="1" y="2"/>
+              <node-display x="0" y="2"/>
             </node>
           </segment>
         </branch>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_3">
-    <segment>
-      <node>
-        <text-node>
-          <description>Provides action to add a gift certificate to the basket. As shipping address the address of the gift registry owner is used.</description>
-        </text-node>
-        <node-display width="2" x="5" y="1"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="PurchaseGiftCertificate">
-    <segment>
-      <node>
-        <start-node call-mode="public" name="PurchaseGiftCertificate" secure="true"/>
-        <node-display x="5" y="2"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <call-node start-name-ref="Cart-GetBasket"/>
-        <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="error">
-          <transition target-connector="in2" target-path="./+1">
-            <transition-display>
-              <bend-point relative-to="source" x="1" y="1"/>
-              <bend-point relative-to="target" x="1" y="-1"/>
-            </transition-display>
-          </transition>
-        </branch>
-      </node>
-      <simple-transition/>
-      <node>
-        <call-node start-name-ref="ProductList-EnsureShipment"/>
-        <node-display x="0" y="1"/>
-      </node>
-      <transition target-connector="in1" target-path="./+1"/>
-    </segment>
-    <segment>
-      <node>
-        <join-node/>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <jump-node start-name-ref="GiftCert-Purchase"/>
-        <node-display x="0" y="1"/>
       </node>
     </segment>
   </branch>

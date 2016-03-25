@@ -556,7 +556,6 @@ function showRegistry(pdict) {
  * - __navEvent__ - calls the {@link module:controllers/GiftRegistry~editEvent|editEvent} function
  * - __navPurchases__ - calls the {@link module:controllers/GiftRegistry~showPurchases|showPurchases} function.
  * - __navShipping __ - calls the {@link module:controllers/GiftRegistry~editAddresses|editAddresses} function.
- * - __purchaseGiftCertificate __ - calls the {@link module:controllers/GiftRegistryCustomer~PurchaseGiftCertificate|GiftRegistryCustomer controller PurchaseGiftCertificate function}.
  * - __setPrivate__ - sets the current product list as private and calls the {@link module:controllers/GiftRegistry~showRegistry|showRegistry} function.
  * - __setPublic __ - sets the current product list as public and calls the {@link module:controllers/GiftRegistry~showRegistry|showRegistry} function.
  * - __updateItem__ -  calls the {@link module:controllers/GiftRegistry~showRegistry|showRegistry} function.
@@ -610,11 +609,6 @@ function showRegistryInteraction() {
             return;
         } else if (TriggeredAction.formId === 'navShipping') {
             editAddresses();
-            return;
-        } else if (TriggeredAction.formId === 'purchaseGiftCertificate') {
-
-            var GiftRegistryCustomerController = require('./GiftRegistryCustomer');
-            GiftRegistryCustomerController.PurchaseGiftCertificate();
             return;
         } else if (TriggeredAction.formId === 'setPrivate') {
             Transaction.wrap(function () {

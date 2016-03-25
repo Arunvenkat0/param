@@ -2399,11 +2399,15 @@
           </segment>
         </branch>
         <branch basename="b5" source-connector="navEvent">
-          <transition target-connector="in"/>
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
           <segment>
             <node>
               <jump-node start-name-ref="GiftRegistry-EditEvent"/>
-              <node-display x="-3" y="3"/>
+              <node-display x="-2" y="3"/>
             </node>
           </segment>
         </branch>
@@ -2425,44 +2429,7 @@
             </node>
           </segment>
         </branch>
-        <branch basename="b8" source-connector="purchaseGiftCertificate">
-          <transition target-connector="in"/>
-          <segment>
-            <node>
-              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
-                <key-binding alias="TriggeredAction.object" key="From_1"/>
-                <key-binding alias="ProductListItem" key="To_1"/>
-                <key-binding alias="null" key="From_2"/>
-                <key-binding alias="null" key="To_2"/>
-                <key-binding alias="null" key="From_3"/>
-                <key-binding alias="null" key="To_3"/>
-                <key-binding alias="null" key="From_4"/>
-                <key-binding alias="null" key="To_4"/>
-                <key-binding alias="null" key="From_5"/>
-                <key-binding alias="null" key="To_5"/>
-                <key-binding alias="null" key="From_6"/>
-                <key-binding alias="null" key="To_6"/>
-                <key-binding alias="null" key="From_7"/>
-                <key-binding alias="null" key="To_7"/>
-                <key-binding alias="null" key="From_8"/>
-                <key-binding alias="null" key="To_8"/>
-                <key-binding alias="null" key="From_9"/>
-                <key-binding alias="null" key="To_9"/>
-              </pipelet-node>
-              <node-display x="-2" y="3"/>
-            </node>
-            <simple-transition>
-              <transition-display>
-                <bend-point relative-to="source" x="0" y="1"/>
-              </transition-display>
-            </simple-transition>
-            <node>
-              <jump-node start-name-ref="GiftRegistryCustomer-PurchaseGiftCertificate"/>
-              <node-display x="0" y="1"/>
-            </node>
-          </segment>
-        </branch>
-        <branch basename="b9" source-connector="setPrivate">
+        <branch basename="b8" source-connector="setPrivate">
           <transition target-connector="in"/>
           <segment>
             <node>
@@ -2508,7 +2475,7 @@
             <transition target-connector="in1" target-path="../b2.2"/>
           </segment>
         </branch>
-        <branch basename="b10" source-connector="setPublic">
+        <branch basename="b9" source-connector="setPublic">
           <transition target-connector="in"/>
           <segment>
             <node>
@@ -2537,10 +2504,10 @@
               </pipelet-node>
               <node-display x="0" y="3"/>
             </node>
-            <transition target-connector="in1" target-path="../b9.3"/>
+            <transition target-connector="in1" target-path="../b8.3"/>
           </segment>
         </branch>
-        <branch basename="b11" source-connector="updateItem">
+        <branch basename="b10" source-connector="updateItem">
           <transition target-connector="in"/>
           <segment>
             <node>
