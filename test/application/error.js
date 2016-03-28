@@ -1,15 +1,14 @@
 'use strict';
 
 import {assert} from 'chai';
-import * as homePage from '../pageObjects/home';
-import * as search from '../pageObjects/search';
-import * as common from '../pageObjects/helpers/common';
+import * as homePage from './pageObjects/home';
+import * as search from './pageObjects/search';
+import * as common from './pageObjects/helpers/common';
 import url from 'url';
 
-describe('Search Redirects', () => {
+describe('Error Redirects', () => {
     let simpleRedirect = 'about';
     let contactUsRedirect = 'contact us';
-    let accountRedirect = 'account';
     let aboutUsString = 'About Us'
 
     beforeEach(() => homePage.navigateTo()
@@ -32,17 +31,6 @@ describe('Search Redirects', () => {
             .then(currentUrl => {
                 let parsedUrl = url.parse(currentUrl.value);
                 return assert.isTrue(parsedUrl.pathname.endsWith('contactus'));
-            })
-    );
-
-    it('should redirect from HTTP to an HTTPS page, Account', () =>
-        browser.setValue('#q', accountRedirect)
-            .then(() => browser.submitForm(search.SEARCH_FORM))
-            .waitForVisible(search.LOGIN_FORM)
-            .url()
-            .then(currentUrl => {
-                let parsedUrl = url.parse(currentUrl.value);
-                return assert.isTrue(parsedUrl.pathname.endsWith('account'));
             })
     );
 
