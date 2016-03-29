@@ -23,6 +23,52 @@ ErrorText</description>
         <start-node name="Start" secure="false"/>
         <node-display x="2" y="2"/>
       </node>
+      <simple-transition/>
+      <node>
+        <decision-node condition-key="ErrorText == 'Secure connection required for this request.' &amp;&amp; !CurrentRequest.httpSecure &amp;&amp; (CurrentRequest.httpHeaders.containsKey(&quot;x-is-request_method&quot;)) &amp;&amp; (CurrentRequest.httpHeaders[&quot;x-is-request_method&quot;] == 'GET')" condition-operator="expr"/>
+        <node-display orientation="horizontal" x="0" y="1"/>
+        <branch basename="b2" source-connector="yes">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <pipelet-node custom-name="Set location to redirect" pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="false"/>
+                <key-binding alias="null" key="To_2"/>
+                <key-binding alias="null" key="From_3"/>
+                <key-binding alias="null" key="To_3"/>
+                <key-binding alias="null" key="From_4"/>
+                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="null" key="From_5"/>
+                <key-binding alias="null" key="To_5"/>
+                <key-binding alias="null" key="From_6"/>
+                <key-binding alias="null" key="To_6"/>
+                <key-binding alias="null" key="From_7"/>
+                <key-binding alias="null" key="To_7"/>
+                <key-binding alias="null" key="From_8"/>
+                <key-binding alias="null" key="To_8"/>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
+                <key-binding alias="!empty(CurrentRequest.httpQueryString) ? ('?' + CurrentRequest.httpQueryString) : ''" key="From_0"/>
+                <key-binding alias="'https://' + (CurrentRequest.httpHost || '') + (CurrentRequest.httpPath || '') +QueryString" key="From_1"/>
+                <key-binding alias="Location" key="To_1"/>
+                <key-binding alias="QueryString" key="To_0"/>
+              </pipelet-node>
+              <node-display orientation="horizontal" x="1" y="0"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="1" y="0"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <interaction-node transaction-required="false">
+                <template buffered="true" dynamic="false" name="util/redirect"/>
+              </interaction-node>
+              <node-display orientation="horizontal" x="1" y="0"/>
+            </node>
+          </segment>
+        </branch>
+      </node>
       <simple-transition>
         <transition-display>
           <bend-point relative-to="source" x="0" y="1"/>
@@ -31,7 +77,7 @@ ErrorText</description>
       <node>
         <decision-node condition-key="CurrentRequest.getHttpHeaders().get(&quot;x-requested-with&quot;) != null &amp;&amp; CurrentRequest.getHttpHeaders().get(&quot;x-requested-with&quot;) === &quot;XMLHttpRequest&quot;" condition-operator="expr"/>
         <node-display x="0" y="1"/>
-        <branch basename="b2" source-connector="yes">
+        <branch basename="b3" source-connector="yes">
           <transition target-connector="in">
             <transition-display>
               <bend-point relative-to="source" x="0" y="1"/>
@@ -120,12 +166,9 @@ ErrorText</description>
     <segment>
       <node>
         <text-node>
-          <description>Determine if it was an ajax request by looking at X-Requested-With=XMLHttpRequest
-request header.
-this header is set by jQuery for every ajax request.
-in case the requested response is not json then the decorator is empty. for json, a json response is sent</description>
+          <description>Redirect to same URL through HTTPS protocol if only secure connection is needed</description>
         </text-node>
-        <node-display height="2" x="1" y="3"/>
+        <node-display x="1" y="3"/>
       </node>
     </segment>
   </branch>
@@ -171,9 +214,22 @@ in case the requested response is not json then the decorator is empty. for json
     <segment>
       <node>
         <text-node>
+          <description>Determine if it was an ajax request by looking at X-Requested-With=XMLHttpRequest
+request header.
+this header is set by jQuery for every ajax request.
+in case the requested response is not json then the decorator is empty. for json, a json response is sent</description>
+        </text-node>
+        <node-display height="2" x="1" y="4"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_7">
+    <segment>
+      <node>
+        <text-node>
           <description>the requested output format is json so the error response needs to be json</description>
         </text-node>
-        <node-display x="1" y="6"/>
+        <node-display x="1" y="7"/>
       </node>
     </segment>
   </branch>
