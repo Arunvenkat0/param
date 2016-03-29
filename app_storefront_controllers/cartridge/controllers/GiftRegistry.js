@@ -134,6 +134,11 @@ function submitForm() {
             app.getView({
                 ProductList: productList.object
             }).render('account/giftregistry/purchases');
+        },
+
+        navEvent: function (form) {
+            var productList = ProductList.get(form.object);
+            editParticipant(productList.object, form);
         }
     });
 }
@@ -385,118 +390,93 @@ function selectProductListInteraction() {
  * Clears the giftregistry form and prepopulates event and participant information from the current ProductListModel.
  * Calls the {@link module:controllers/GiftRegistry~showEditParticipantForm|showEditParticipantForm} function.
  */
-function editEvent() {
-    var currentForms = session.forms;
+function editParticipant(productList, giftRegistryForm) {
+    var eventForm = app.getForm(giftRegistryForm.event);
+    var participantForm = app.getForm(giftRegistryForm.event.participant);
+    var coParticipantForm =  app.getForm(giftRegistryForm.event.coParticipant);
 
+    eventForm.clear();
+    participantForm.clear();
+    coParticipantForm.clear();
 
-    Form.get(currentForms.giftregistry).clear();
-    Form.get(currentForms.giftregistry.event).copyFrom(ProductList, true);
-    Form.get(currentForms.giftregistry.event.participant).copyFrom(ProductList.registrant);
+    eventForm.copyFrom(productList);
+    participantForm.copyFrom(productList.registrant);
 
-    if (ProductList.coRegistrant !== null) {
-        Form.get(currentForms.giftregistry.event.coParticipant).copyFrom(ProductList.coRegistrant);
+    if (productList.coRegistrant) {
+        coParticipantForm.copyFrom(productList.coRegistrant);
     }
 
+    app.getForm(giftRegistryForm.event.eventaddress.states).setValue('state', productList.eventState);
+    app.getForm(giftRegistryForm.event.eventaddress).setValue('country', productList.eventCountry);
 
-    currentForms.giftregistry.event.eventaddress.states.state.value = ProductList.eventState;
-    currentForms.giftregistry.event.eventaddress.country.value = ProductList.eventCountry;
-
-
-    showEditParticipantForm();
+    // Renders the event participant page (account/giftregistry/eventparticipant template).
+    app.getView({
+        ProductList: productList,
+        ContinueURL: URLUtils.https('GiftRegistry-EditEvent')
+    }).render('account/giftregistry/eventparticipant');
 }
 
-/**
- * Renders the event participant page (account/giftregistry/eventparticipant template).
- */
-function showEditParticipantForm() {
-    app.getView().render('account/giftregistry/eventparticipant');
+function editEvent() {
+    Form.get('giftregistry').handleAction({
+        setParticipants: function (form) {
+            var productList = ProductList.get(form.object);
+
+            Transaction.wrap(function () {
+                app.getForm(form.event).copyTo(productList.object);
+                app.getForm(form.event.participant).copyTo(productList.object.registrant);
+                productList.object.setEventState(form.event.eventaddress.states.state.value);
+                productList.object.setEventCountry(form.event.eventaddress.country.value);
+
+                if (form.event.coParticipant) {
+                    app.getForm(form.event.coParticipant).copyTo(productList.object.coRegistrant);
+                }
+            });
+
+            start();
+        },
+
+        navPurchases: function (form) {
+            var productList = ProductList.get(form.object);
+            app.getView({
+                ProductList: productList.object
+            }).render('account/giftregistry/purchases');
+        },
+
+        navEvent: function (form) {
+            var productList = ProductList.get(form.object);
+            editParticipant(productList.object, form);
+        },
+
+        navShipping: function(form) {
+            var productList = ProductList.get(form.object);
+            editEventAddresses(productList.object, form);
+        },
+
+        navRegistry: function(form) {
+            var productList = ProductList.get(form.object);
+            showRegistry({
+                ProductList: productList.object
+            });
+        }
+
+    })
 }
-/**
- * TODO
- */
-// TODO this is probably never called?
-// TODO : jshint -> 'editEventParticipant' is defined but never used.
-// function editEventParticipant() {
-//     var currentForms = session.forms;
-//     var TriggeredAction = request.triggeredFormAction;
-//     if (TriggeredAction !== null) {
-//         if (TriggeredAction.formId === 'back') {
-//             // TODO back???
-//             showRegistry({
-//                 ProductList: ProductList
-//             });
-//             return;
-//         } else if (TriggeredAction.formId === 'confirm') {
-//             if (!Form.get(currentForms.giftregistry.event).copyTo(ProductList)) {
-//                 return {
-//                     error: true
-//                 };
-//             }
 
+function editEventAddresses(productList, eventAddressForm) {
+    app.getForm(eventAddressForm.eventaddress).clear();
+    if (productList.shippingAddress) {
+        app.getForm(eventAddressForm.eventaddress.addressBeforeEvent).copyFrom(productList.shippingAddress);
+    }
 
-//             if (!Form.get(currentForms.giftregistry.event.participant).copyTo(ProductList.registrant)) {
-//                 return {
-//                     error: true
-//                 };
-//             }
+    if (productList.postEventShippingAddress) {
+        app.getForm(eventAddressForm.eventaddress.addressAfterEvent).copyFrom(productList.postEventShippingAddress);
+    }
 
-//             Transaction.wrap(function () {
-//                       ProductList.eventState = currentForms.giftregistry.event.eventaddress.states.state.value;
-//                       ProductList.eventCountry = currentForms.giftregistry.event.eventaddress.country.value;
-//                     }
-//                 );
-
-//             if (ProductList.coRegistrant !== null) {
-//                 if (!Form.get(currentForms.giftregistry.event.coParticipant).copyTo(ProductList.coRegistrant)) {
-//                     return {
-//                         error: true
-//                     };
-//                 }
-//             } else {
-//                 if (!(currentForms.giftregistry.event.coParticipant.role.selectedOption === null || currentForms.giftregistry.event.coParticipant.role.selectedOption.htmlValue === '')) {
-//                     var CreateProductListRegistrantResult = new Pipelet('CreateProductListRegistrant', {
-//                         CreateCoRegistrant: true
-//                     }).execute({
-//                         ProductList: ProductList
-//                     });
-//                     if (CreateProductListRegistrantResult.result === PIPELET_ERROR) {
-//                         return {
-//                             error: true
-//                         };
-//                     }
-
-//                     //TODO : jshint -> 'ProductListRegistrant' is defined but never used.
-//                     //var ProductListRegistrant = CreateProductListRegistrantResult.ProductListRegistrant;
-
-
-//                     if (!Form.get(currentForms.giftregistry.event.coParticipant).copyTo(ProductList.coRegistrant)) {
-//                         return {
-//                             error: true
-//                         };
-//                     }
-//                 }
-//             }
-
-//             showRegistry({
-//                 ProductList: ProductList
-//             });
-//             return;
-//         } else if (TriggeredAction.formId === 'navPurchases') {
-//             showPurchases();
-//             return;
-//         } else if (TriggeredAction.formId === 'navRegistry') {
-//             showRegistry({
-//                 ProductList: ProductList
-//             });
-//             return;
-//         } else if (TriggeredAction.formId === 'navShipping') {
-//             editAddresses();
-//             return;
-//         }
-//     }
-
-//     showEditParticipantForm();
-// }
+    app.getView({
+        ProductList: productList,
+        ContinueURL: URLUtils.https('GiftRegistry-EditEvent')
+    }).render('account/giftregistry/addresses');
+}
 
 /**
  * Renders the gift registry purchases page.
@@ -876,12 +856,10 @@ function replaceProductListItem() {
  * the {@link module:controllers/GiftRegistry~setParticipants|setParticipants} function is called.
  * Otherwise, the {@link module:controllers/GiftRegistry~confirm|confirm} function is called.
  *
- * @FIXME Why are there two functions with the same name?
  */
 // @secure
 function editAddresses() {
     var currentForms = session.forms;
-    // TODO this should end in some redirect
     var TriggeredAction = request.triggeredFormAction;
     if (TriggeredAction !== null) {
         if (TriggeredAction.formId === 'back') {
@@ -1020,6 +998,12 @@ exports.Delete = guard.ensure(['get', 'https'], deleteList);
  * @see module:controllers/GiftRegistry~editAddresses
  */
 exports.EditAddresses = guard.ensure(['post', 'https'], editAddresses);
+
+/**
+ * Event handler for editing of gift registry.
+ * @see module:controllers/GiftRegistry~editEvent
+ */
+exports.EditEvent = guard.ensure(['post', 'https'], editEvent);
 
 /**
  * Event handler for gift registry addresses.
