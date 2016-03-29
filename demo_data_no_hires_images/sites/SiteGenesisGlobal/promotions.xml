@@ -16,6 +16,18 @@
         </customer-groups>
     </campaign>
 
+    <campaign campaign-id="5_off_ties_campaign">
+        <description>$5 off men's ties</description>
+        <enabled-flag>true</enabled-flag>
+        <campaign-scope>
+            <applicable-online/>
+            <applicable-in-store/>
+        </campaign-scope>
+        <coupons>
+            <coupon coupon-id="5ties"/>
+        </coupons>
+    </campaign>
+
     <campaign campaign-id="Payment-promo">
         <description>$50 off on selecting Visa</description>
         <enabled-flag>false</enabled-flag>
@@ -109,6 +121,33 @@
             </discounts>
         </order-promotion-rule>
     </promotion>
+
+    <promotion promotion-id="$5_off_ties_promotion">
+         <enabled-flag>true</enabled-flag>
+         <archived-flag>false</archived-flag>
+         <searchable-flag>false</searchable-flag>
+         <exclusivity>no</exclusivity>
+         <name xml:lang="x-default">5 Off Ties Promotion</name>
+         <callout-msg xml:lang="x-default">$5 off Men's Ties</callout-msg>
+         <details xml:lang="x-default">$5 off Men's Ties (with coupon)</details>
+         <product-promotion-rule>
+             <qualifying-products>
+                 <included-products>
+                     <condition-group>
+                         <product-id-condition operator="is equal">
+                             <product-id>25752986</product-id>
+                         </product-id-condition>
+                     </condition-group>
+                 </included-products>
+             </qualifying-products>
+             <discounts condition-type="product-amount">
+                 <discount>
+                     <threshold>1.0</threshold>
+                     <amount>5.0</amount>
+                 </discount>
+             </discounts>
+         </product-promotion-rule>
+     </promotion>
 
     <promotion promotion-id="%offproductOptions">
         <enabled-flag>false</enabled-flag>
@@ -1450,6 +1489,14 @@
     </promotion>
 
     <promotion-campaign-assignment promotion-id="Duplicate-Rank-Exclusivity-No" campaign-id="Automation">
+        <qualifiers match-mode="any">
+            <customer-groups/>
+            <source-codes/>
+            <coupons/>
+        </qualifiers>
+    </promotion-campaign-assignment>
+
+    <promotion-campaign-assignment promotion-id="$5_off_ties_promotion" campaign-id="5_off_ties_campaign">
         <qualifiers match-mode="any">
             <customer-groups/>
             <source-codes/>
