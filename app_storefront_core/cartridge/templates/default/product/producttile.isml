@@ -24,7 +24,11 @@
 	</iscomment>
 	<isscript>
 		// set default settings
-		var showswatches = pdict.showswatches || false;
+		/*
+			Relies on the fact that the represented product is a variant if color slicing is enabled
+		 	See script API doc @ProductSearchHit.product
+		*/
+		var showswatches = pdict.showswatches || Product.isMaster();
 		var showpricing = pdict.showpricing || false;
 		var showpromotion = pdict.showpromotion || false;
 		var showrating = pdict.showrating || false;

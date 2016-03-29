@@ -36,18 +36,13 @@ ProductGridUtils.getRepresentedVariationValueIDs = function (productHit, variati
 */
 ProductGridUtils.buildHitTileURL = function (productHit, cgidValue) {
 	var productHitURL = URLUtils.url('Product-HitTile');
-	productHitURL.append('pid', productHit.product.ID);
+	productHitURL.append('pid', productHit.productID);
 	if (!empty(cgidValue)){
 		productHitURL.append('cgid', cgidValue);
 	}
 	// productHitURL.append('vpid', productHit.firstRepresentedProduct.ID);
 	productHitURL.append('maxprice', productHit.maxPrice);
 	productHitURL.append('minprice', productHit.minPrice);
-	/*
-		Relies on the fact that the represented product is a variant if color slicing is enabled
-	 	See script API doc @ProductSearchHit.product
-	*/
-	productHitURL.append('showswatches', productHit.product.isMaster());
 	productHitURL.append('showpricing', true);
 	productHitURL.append('showpromotion', true);
 	productHitURL.append('showrating', true);
