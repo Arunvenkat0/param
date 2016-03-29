@@ -6,7 +6,7 @@ if [[ $@ == *"--debug"* ]]; then
     ip=$(grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}' <<< "$@")
     docker run -d --name $CONTAINER_NAME -p 4444:4444 -p 5900:5900 -v /dev/shm:/dev/shm selenium/standalone-chrome-debug:2.52.0
     sleep 2 # wait a bit for container to start
-    open vnc://"$ip":5900
+    open vnc://:secret@"$ip":5900
 else
     docker run -d --name $CONTAINER_NAME -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome:2.52.0
 fi

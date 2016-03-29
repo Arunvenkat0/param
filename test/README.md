@@ -131,8 +131,6 @@ If you want to visually look at what the browser is doing for your tests, you ca
 ```
 This will expose the docker selenium node via VNC port 5900. On OS X, it will also open the VNC session via Screen Sharing.
 
-When prompted, the password for the VNC session is `secret`.
-
 ### Test Data Reset
 
 To ensure that the application tests can consistently compare results with their expected values, we have implemented a process to reset test data.  During the SiteGenesis build process, a job called, **TestDataReset**, is created and available to run.  **Note:** By default, the site associated with the job is SiteGenesis.
