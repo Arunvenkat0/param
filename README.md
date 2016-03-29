@@ -27,7 +27,7 @@ One of the new features as of SiteGenesis 14.8 is the ability to demonstrate the
 
 # Test Automation
 
-Please read the README.md file in the test directory, but essentially, we have a series of application and unit tests that are runnable from the commandline using either 'grunt' or 'gulp'.  The README.md in the test directory will guide in installing and running the tools that you need for executing these tests.
+Please read the `README.md` file in the `test` directory. Essentially, we have a series of application and unit tests that are runnable from the command line using either npm run scripts, grunt or gulp.  The `README.md` in the `test` directory will guide in installing and running the tools that you need for executing these tests.
 
 Please note: the tests that we are offering is not a complete, fixed set of tests.  This is a living directory which we will continue to add to as our team is able.  We also encourage any reader of this document to use these tests as a model and to enhance this capability by adding their own tests.
 

@@ -18,7 +18,7 @@ We use [Mocha](http://mochajs.org) as the primary framework to run tests on node
 [WebdriverIO](http://webdriver.io) provides bindings for WebDriver protocols in JavaScript. Not only does it provide a simple and clean API to work with, it also integrates nicely with different Selenium drivers for Chrome, Firefox and PhantomJS browsers and support services like SauceLabs that could enable tests to be run on a wide variety of browsers.
 
 ### Build tools
-Both current build tools that are supported in SiteGenesis, namely gulp and grunt, will be able to run application and unit tests.
+All current build tools that are supported in SiteGenesis, namely npm run scripts, gulp and grunt, will be able to run application and unit tests.
 
 ### Directory structure
 
@@ -49,17 +49,13 @@ The tests are contained in suites, which are represented as directories. For exa
 
 1. Install all dependencies
 
-```shell
-:; npm install
-```
+        :; npm install
 
 1. Install phantomjs and standalone Selenium driver
 
-```shell
-:; npm install -g phantomjs # see note [1]
-:; npm install --production -g selenium-standalone@latest
-:; selenium-standalone install # see note [2]
-```
+        :; npm install -g phantomjs # see note [1]
+        :; npm install --production -g selenium-standalone@latest
+        :; selenium-standalone install
 
 1. Use a WebDAV client (i.e. Cyberduck at https://cyberduck.io/) to upload the
 **demo_data_no_hires_images/inventory-lists/inventory/inventory*.xml** files to the "**Impex/src/testdata/inventory-list/**"
@@ -75,64 +71,76 @@ Settings:
 
 1. Update site url config and desired browser client in `test/application/webdriver/config.json`. For example:
 
-```javascript
-{
-	"url": "https://example.demandware.net/s/SiteGenesis",
-	"client": "phantomjs"
-}
-```
- *Note: please use Storefront URL format for application tests, but without the ending `/home` part.*
+        {
+            "url": "https://example.demandware.net/s/SiteGenesis",
+            "client": "phantomjs"
+        }
+
+    *Note: please use Storefront URL format for application tests, but without the ending `/home` part.*
 
 These 5 steps only need to be performed once.
 
 ## Run the tests
 
-### Application tests
-
-After installing the dependencies, start selenium server each time you wish to run the tests.
+### Unit tests
 
 ```shell
-:; selenium-standalone start # see note [3]
+:; npm run test:unit
+```
+
+### Application tests
+
+#### Option 1: run your own selenium server
+Start selenium server each time you wish to run the tests.
+
+```shell
+:; selenium-standalone start
 ```
 
 It's important to keep this command-line instance running in the background. Open a new terminal window for next steps. For more information, see http://webdriver.io/guide/getstarted/install.html
 
-1. Reset test data
-
-    To ensure that the application tests can consistently compare results with their
-expected values, we have implemented a process to reset test data.  During the
-SiteGenesis build process, a job called, **TestDataReset**, is created and available
-to run.  **Note:** By default, the site associated with the job is SiteGenesis.
-If you are using a different site, please alter the job to point to it.
-
-    Before running a test, please reset the data by following these steps:
-
-    a. Go to **Business Manager > Administration > Job Schedules**
-
-    b. Click on the **TestDataReset** link, which will redirect you to the Job Detail page.
-
-    c. Click the Run button, wait a moment, then periodically click the Refresh
-button under the **TestDataReset - History** section until the Status column reports
-**Finished**.  The Error column should display **None**.  At this point, you can run
-the application tests.
-
-1. Run the test
-
-```sh
-:; gulp test:application
+```shell
+:; npm run test:application
 ```
 
- This command runs all the test suites by default. In order to run specific test suite(s), you can specify from the command line, for eg. `gulp test:application --suite homepage`.
-Other configurations are also available, see below.
+This command runs all the test suites by default. In order to run specific test suite(s), you can specify from the command line, for eg. `npm run test:application -- --suite home` or `npm run test:application -- --suite account/address.js`.
+Other configuration options are also available, see below.
 
-### Unit tests
+#### Option 2: use docker-selenium
+Instead of running your own selenium server in the background, you could have one spun up automatically for you using docker.
+
+To use this option, please make sure you have [docker](https://www.docker.com/) installed.
 
 ```shell
-:; gulp test:unit
+:; npm run test:application:docker
 ```
 
-This command runs all the test suites by default. In order to run specific test suite(s), you can specify from the command line, for eg. `gulp test:unit --suite util`.
-Other configurations are also available, see below.
+A note for **OS X** and **Windows** users: most likely your docker daemon is running on a separate IP address. You can pass this address in through the `--host` flag.
+For example, if you're using `docker-machine` running a docker VM called `dev`, then you would do something like this:
+
+```shell
+:; npm run test:application:docker -- --host $(docker-machine ip dev)
+```
+If you're using boot2docker, then just replace `docker-machine ip dev` with `boot2docker ip`.
+
+##### Debug
+If you want to visually look at what the browser is doing for your tests, you can do so with the `--debug` flag.
+
+```shell
+:; npm run test:application:docker -- --host $(docker-machine ip dev) --suite account --debug
+```
+This will expose the docker selenium node via VNC port 5900. On OS X, it will also open the VNC session via Screen Sharing.
+
+### Test Data Reset
+
+To ensure that the application tests can consistently compare results with their expected values, we have implemented a process to reset test data.  During the SiteGenesis build process, a job called, **TestDataReset**, is created and available to run.  **Note:** By default, the site associated with the job is SiteGenesis.
+If you are using a different site, please alter the job to point to it.
+
+Before running a test, please reset the data by following these steps:
+
+1. Go to **Business Manager > Administration > Job Schedules**
+2. Click on the **TestDataReset** link, which will redirect you to the Job Detail page.
+3. Click the Run button, wait a moment, then periodically click the Refresh button under the **TestDataReset - History** section until the Status column reports **Finished**.  The Error column should display **None**.  At this point, you can run the application tests.
 
 ### Options
 The following options are supported on the command line:
@@ -229,8 +237,4 @@ failing**
 
 # Notes
 *[1] You do not need to install `phantomjs` globally if `./node_modules/bin` is in your `$PATH`.*
-
-*[2] Selenium version 2.44.0 is not compatible with PhantomJS (see https://code.google.com/p/selenium/issues/detail?id=8088). In order to circumvent this, install version 2.43.1 instead: `selenium-standalone install --version=2.43.1`.*
-
-*[3] You might need to use the flag `--version=2.43.1` to start the server as well, similar to note [2].*
 
