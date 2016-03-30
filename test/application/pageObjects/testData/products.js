@@ -253,33 +253,11 @@ export class ProductSet extends AbstractProductBase {
 
         let productSet = product['product-set-products'][0]['product-set-product'];
         this.productSetProducts = _.pluck(productSet, '$.product-id') || [];
-
-        let categoryAssignmentJSON = catalog.categoryAssignments[this.id];
-        let categoryAssignment = new CategoryAssignment(categoryAssignmentJSON);
-        let categoryJSON = catalog.categories[categoryAssignment.categoryId];
-        this.resource = `/${ this.id}.html`;
-
-        // Keys are locale codes
-        this.urlResourcePaths = {};
-
-        let category = new Category(categoryJSON);
-        let categoryParent = category.parent;
-        var self = this;
-        function addUrlResourcePath (locale) {
-            if (locale === 'en_GB') { locale = defaultLocale; }
-            let currentPath = self.urlResourcePaths[locale] || '';
-            self.urlResourcePaths[locale] = `/${category.getDisplayName(locale).toLowerCase()}${currentPath}`;
-        }
-        do {
-            common.supportedLocales.forEach(addUrlResourcePath);
-            category = new Category(catalog.categories[categoryParent]);
-            categoryParent = category.parent;
-        } while (categoryParent);
+        this.urlResourcePaths = _generateUrlResourcePaths(catalog, this.id);
     }
 
-    getUrlResourcePath (locale = defaultLocale) {
-        if (locale === 'en_GB') { locale = defaultLocale; }
-        return this.urlResourcePaths[locale] + this.resource;
+    getUrlResourcePath (locale = 'en_US') {
+        return `${this.urlResourcePaths[locale]}/${this.id}.html?lang=${locale}`;
     }
 
     getDisplayName (locale = defaultLocale) {
@@ -385,11 +363,12 @@ export class ProductVariationMaster extends AbstractProductBase {
 }
 
 export class ProductBundle extends AbstractProductBase {
-    constructor (product) {
+    constructor (product, catalog) {
         super(product);
 
         let bundleProducts = product['bundled-products'][0]['bundled-product'];
         this.bundleProducts = _.pluck(bundleProducts, '$.product-id');
+        this.urlResourcePaths = _generateUrlResourcePaths(catalog, this.id);
     }
 
     getProductIds () {
@@ -402,6 +381,10 @@ export class ProductBundle extends AbstractProductBase {
 
     getOptions () {
         return this.options || [];
+    }
+
+    getUrlResourcePath (locale = 'en_US') {
+        return `${this.urlResourcePaths[locale]}/${this.id}.html?lang=${locale}`;
     }
 }
 
@@ -448,4 +431,28 @@ function _getLocalizedValues (values) {
 
 function _validateLocale(values, locale) {
     return _.keys(values).indexOf(locale) > -1 ? locale : defaultLocale;
+}
+
+function _generateUrlResourcePaths (catalog, productId) {
+    const categoryAssignmentJSON = catalog.categoryAssignments[productId];
+    const categoryAssignment = new CategoryAssignment(categoryAssignmentJSON);
+    const categoryJSON = catalog.categories[categoryAssignment.categoryId];
+    let category = new Category(categoryJSON);
+    let categoryParent = category.parent;
+    let urlResourcePaths = {};
+
+    function addUrlResourcePath (locale) {
+        const currentPath = urlResourcePaths[locale] || '';
+        const demoDataLocale = locale === 'en_GB' || locale === 'en_US' ? defaultLocale : locale;
+
+        urlResourcePaths[locale] = `/${category.getDisplayName(demoDataLocale).toLowerCase()}${currentPath}`;
+    }
+
+    do {
+        common.supportedLocales.forEach(addUrlResourcePath);
+        category = new Category(catalog.categories[categoryParent]);
+        categoryParent = category.parent;
+    } while (categoryParent);
+
+    return urlResourcePaths;
 }

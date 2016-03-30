@@ -9,6 +9,7 @@ import nodeUrl from 'url';
 
 export const defaultLocale = 'x_default';
 export const supportedLocales = [
+    'en_US',
     'en_GB',
     'fr_FR',
     'it_IT',
