@@ -103,6 +103,7 @@ describe('Promotions - 20% off Order Amount Over 200', () => {
             .then(() => browser.waitForEnabled(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
             .then(() => helpers.clickAndWait(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE, checkoutPage.BREADCRUMB_BILLING))
             .then(() => checkoutPage.fillOutBillingForm(billingFormData))
+            .then(() => checkoutPage.uncheckSaveThisCreditCard())
             .then(() => browser.waitForEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
             .then(() => browser.click(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
             .then(() => browser.waitForVisible(checkoutPage.BREADCRUMB_PLACE_ORDER))

@@ -173,6 +173,7 @@ describe('Checkout', () => {
                 .then(() => browser.waitForEnabled(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE))
                 .then(() => helpers.clickAndWait(checkoutPage.BTN_CONTINUE_SHIPPING_SAVE, checkoutPage.BREADCRUMB_BILLING))
                 .then(() => checkoutPage.fillOutBillingForm(billingFormData))
+                .then(() => checkoutPage.uncheckSaveThisCreditCard())
                 .then(() => browser.waitForEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
                 .then(() => helpers.clickAndWait(checkoutPage.BTN_CONTINUE_BILLING_SAVE, checkoutPage.BREADCRUMB_PLACE_ORDER))
                 .then(() => helpers.clickAndWait(checkoutPage.BTN_PLACE_ORDER, orderConfPage.ORDER_CONF_DETAILS))
@@ -208,6 +209,7 @@ describe('Checkout', () => {
         it('should allow check out as a returning customer', () => {
             return browser.waitForVisible(checkoutPage.BREADCRUMB_BILLING)
                 .then(() => checkoutPage.fillOutBillingForm(billingFormData))
+                .then(() => checkoutPage.uncheckSaveThisCreditCard())
                 .then(() => browser.waitForEnabled(checkoutPage.BTN_CONTINUE_BILLING_SAVE))
                 .then(() => helpers.clickAndWait(checkoutPage.BTN_CONTINUE_BILLING_SAVE, checkoutPage.BREADCRUMB_PLACE_ORDER))
                 .then(() => helpers.clickAndWait(checkoutPage.BTN_PLACE_ORDER, orderConfPage.ORDER_CONF_DETAILS))
