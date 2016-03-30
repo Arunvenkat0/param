@@ -10,12 +10,10 @@ var Transaction = require('dw/system/Transaction');
 var AbstractModel = require('./AbstractModel');
 var ArrayList = require('dw/util/ArrayList');
 var BasketMgr = require('dw/order/BasketMgr');
-var List = require('dw/util/List');
 var Money = require('dw/value/Money');
 var MultiShippingLogger = dw.system.Logger.getLogger('multishipping');
 var OrderMgr = require('dw/order/OrderMgr');
 var PaymentInstrument = require('dw/order/PaymentInstrument');
-var PaymentMgr = require('dw/order/PaymentMgr');
 var Product = require('~/cartridge/scripts/models/ProductModel');
 var ProductInventoryMgr = require('dw/catalog/ProductInventoryMgr');
 var ProductListMgr = require('dw/customer/ProductListMgr');
@@ -1141,64 +1139,8 @@ var CartModel = AbstractModel.extend({
      * @returns {dw.util.Collection} InvalidPaymentInstruments - The collection of invalid payment instruments.
      */
     validatePaymentInstruments: function (customer, countryCode, amount) {
-
-        var paymentInstruments = this.getPaymentInstruments();
-
-        // Gets applicable payment methods.
-        var methods = PaymentMgr.getApplicablePaymentMethods(customer, countryCode, amount);
-
-        // Gets applicable payment cards from CREDIT_CARD payment method.
-        var ccMethod = PaymentMgr.getPaymentMethod(PaymentInstrument.METHOD_CREDIT_CARD);
-        var cards = ccMethod ? ccMethod.getApplicablePaymentCards(customer, countryCode, amount) : List.EMPTY_LIST;
-
-        // Collects all not applicable payment instruments.
-        var validPaymentInstruments = new ArrayList(paymentInstruments);
-        var invalidPaymentInstruments = new ArrayList();
-
-        // Gets payment instruments from basket.
-
-        for (var i = 0; i < paymentInstruments.length; i++) {
-            var pi = paymentInstruments[i];
-            // ignore gift certificate payment instruments
-            if (PaymentInstrument.METHOD_GIFT_CERTIFICATE.equals(pi.paymentMethod)) {
-                continue;
-            }
-
-            // Gets payment method.
-            var method = PaymentMgr.getPaymentMethod(pi.getPaymentMethod());
-
-            // Checks whether payment method is still applicable.
-            if (method && methods.contains(method)) {
-                // In case of method CREDIT_CARD, check payment cards.
-                if (PaymentInstrument.METHOD_CREDIT_CARD.equals(pi.paymentMethod)) {
-                    // Gets payment card.
-                    var card = PaymentMgr.getPaymentCard(pi.creditCardType);
-
-                    // Checks whether payment card is still applicable.
-                    if (card && cards.contains(card)) {
-                        continue;
-                    }
-                } else {
-                    // Continue, if method is applicable.
-                    continue;
-                }
-            }
-
-            // Collects invalid payment instruments.
-            invalidPaymentInstruments.add(pi);
-            validPaymentInstruments.remove(pi);
-        }
-
-        if (!invalidPaymentInstruments.empty) {
-            return {
-                InvalidPaymentInstruments: invalidPaymentInstruments,
-                ValidPaymentInstruments: validPaymentInstruments
-            };
-        } else {
-            return {
-                ValidPaymentInstruments: validPaymentInstruments
-            };
-        }
+        var paymentHelpers = require('~/cartridge/scripts/payment/common');
+        return paymentHelpers.validatePaymentInstruments(this, countryCode, amount);
     },
 
     /**

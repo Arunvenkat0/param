@@ -294,7 +294,7 @@ describe('Checkout', () => {
         });
     });
 
-    describe('shipping methods', () => {
+    describe('Shipping Methods', () => {
         const productWithOneVariant = '25720074';
         const defaultShippingCost = {
             x_default: '$15.99',

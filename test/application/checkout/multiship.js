@@ -41,13 +41,13 @@ describe('Multi Shipping', () => {
 
     after(() => navHeader.logout());
 
-    it('Should be on the checkout page', () =>
+    it('should be on the checkout page', () =>
         browser.waitForVisible(multiShipPage.CHECKOUT_MULTI_SHIP)
         .then(() => browser.isVisible(multiShipPage.CHECKOUT_MULTI_SHIP))
         .then(visible => assert.isTrue(visible))
     );
 
-    it('Should go to multi shipping page then select addresses', () =>
+    it('should go to multi shipping page then select addresses', () =>
         browser.click(multiShipPage.BTN_CHECKOUT_MULTI_SHIP)
             .then(() => browser.waitForVisible(multiShipPage.CHECKOUT_ADDRESS_DROPDOWN))
             .then(() => browser.selectByIndex(multiShipPage.SELECT_ADDRESS_LIST_1, 1))
@@ -56,19 +56,19 @@ describe('Multi Shipping', () => {
             .then(enabled => assert.isTrue(enabled))
     );
 
-    it('Should go to shipping methods then make sure shipment one exists', () =>
+    it('should go to shipping methods then make sure shipment one exists', () =>
         browser.click(multiShipPage.BTN_CHECKOUT_CONTINUE)
             .then(() => browser.waitForVisible(multiShipPage.CHECKOUT_STEP_TWO))
             .then(() => browser.getText(multiShipPage.SHIPPMENT_HEADER_1))
             .then(headerText => assert.equal(headerText, shipmentText1.toUpperCase()))
     );
 
-    it('Should check that shipment two exists', () =>
+    it('should check that shipment two exists', () =>
         browser.getText(multiShipPage.SHIPPMENT_HEADER_2)
             .then(headerText => assert.equal(headerText, shipmentText2.toUpperCase()))
     );
 
-    it('Should select shipping methods for shipments then go to billing page', () =>
+    it('should select shipping methods for shipments then go to billing page', () =>
         browser.selectByIndex(multiShipPage.SHIPPMENT_METHOD_1, 1)
             .then(() => browser.selectByIndex(multiShipPage.SHIPPMENT_METHOD_2, 2))
             .then(() => browser.click(multiShipPage.BTN_CHECKOUT_CONTINUE))
@@ -77,7 +77,7 @@ describe('Multi Shipping', () => {
             .then(doesExist => assert.isTrue(doesExist))
     );
 
-    it('Should fill out the billing form', () =>
+    it('should fill out the billing form', () =>
         checkoutPage.fillOutBillingForm(billingFormData)
             .then(() => browser.waitUntil(() =>
                 browser.isEnabled(multiShipPage.BTN_CHECKOUT_CONTINUE)
@@ -88,7 +88,7 @@ describe('Multi Shipping', () => {
             .then(enabled => assert.isTrue(enabled))
     );
 
-    it('Should place order', () =>
+    it('should place order', () =>
         browser.click(multiShipPage.BTN_CHECKOUT_CONTINUE)
             .then(() => browser.waitForVisible(multiShipPage.CHECKOUT_STEP_FOUR))
             .then(() => browser.click(multiShipPage.BTN_CHECKOUT_PLACE_ORDER))

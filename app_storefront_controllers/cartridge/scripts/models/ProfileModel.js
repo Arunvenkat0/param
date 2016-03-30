@@ -5,11 +5,8 @@
 
 /* API Includes */
 var AbstractModel = require('./AbstractModel');
-var ArrayList = require('dw/util/ArrayList');
-var List = require('dw/util/List');
-var PaymentInstrument = require('dw/order/PaymentInstrument');
-var PaymentMgr = require('dw/order/PaymentMgr');
 var Transaction = require('dw/system/Transaction');
+var paymentHelpers = require('~/cartridge/scripts/payment/common');
 
 /**
  * Profile helper providing enhanced profile functionality
@@ -186,75 +183,7 @@ var ProfileModel = AbstractModel.extend(
          * @returns {ArrayList} Returns an array with the valid PaymentInstruments.
          */
         validateWalletPaymentInstruments: function (countryCode, amount) {
-
-            // TODO - duplicates code with Cart.validatePaymentInstruments(), modularize better
-            // TODO - remove pipelet code once APP-30656 is fixed
-            //var paymentInstruments = this.getWallet().getPaymentInstruments()
-            var customer = this.getCustomer();
-            var paymentInstruments = new ArrayList();
-
-            var GetCustomerPaymentInstrumentsResult = new dw.system.Pipelet('GetCustomerPaymentInstruments').execute({
-                Customer: customer
-            });
-
-            if (GetCustomerPaymentInstrumentsResult.result !== PIPELET_ERROR) {
-                paymentInstruments = GetCustomerPaymentInstrumentsResult.PaymentInstruments;
-            }
-
-            // Gets applicable payment methods.
-            var methods = PaymentMgr.getApplicablePaymentMethods(customer, countryCode, amount);
-
-            // Gets applicable payment cards from CREDIT_CARD payment method.
-            var ccMethod = PaymentMgr.getPaymentMethod(PaymentInstrument.METHOD_CREDIT_CARD);
-            var cards = ccMethod !== null ? ccMethod.getApplicablePaymentCards(customer, countryCode, amount) : List.EMPTY_LIST;
-
-            // Collects all invalid payment instruments.
-            var validPaymentInstruments = new ArrayList(paymentInstruments);
-            var invalidPaymentInstruments = new ArrayList();
-
-            for (var i = 0; i < paymentInstruments.length; i++) {
-                var pi = paymentInstruments[i];
-                // Ignores gift certificate payment instruments.
-                if (PaymentInstrument.METHOD_GIFT_CERTIFICATE.equals(pi.paymentMethod)) {
-                    continue;
-                }
-
-                // Gets a payment method.
-                var method = PaymentMgr.getPaymentMethod(pi.getPaymentMethod());
-
-                // Checks whether payment method is still applicable.
-                if (method !== null && methods.contains(method)) {
-                    // In case of method CREDIT_CARD, check payment cards
-                    if (PaymentInstrument.METHOD_CREDIT_CARD.equals(pi.paymentMethod)) {
-                        // Gets payment card.
-                        var card = PaymentMgr.getPaymentCard(pi.creditCardType);
-
-                        // Checks whether payment card is still applicable.
-                        if (card !== null && cards.contains(card)) {
-                            continue;
-                        }
-                    } else {
-                        // Continues if method is applicable.
-                        continue;
-                    }
-                }
-
-                // Collects invalid payment instruments.
-                invalidPaymentInstruments.add(pi);
-                validPaymentInstruments.remove(pi);
-            }
-
-            if (!invalidPaymentInstruments.empty) {
-                return {
-                    InvalidPaymentInstruments: invalidPaymentInstruments,
-                    ValidPaymentInstruments: validPaymentInstruments
-                };
-            } else {
-                return {
-                    ValidPaymentInstruments: validPaymentInstruments
-                };
-            }
-
+            return paymentHelpers.validatePaymentInstruments(this.getWallet(), countryCode, amount);
         }
 
     });
