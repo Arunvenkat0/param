@@ -375,12 +375,16 @@ function editEvent() {
                 productList.object.setEventCountry(form.event.eventaddress.country.value);
 
                 if (form.event.coParticipant.firstName.value || form.event.coParticipant.lastName.value) {
-                    productList.object.createCoRegistrant();
+                    if (!productList.object.coRegistrant) {
+                        productList.object.createCoRegistrant();
+                    }
                     app.getForm(form.event.coParticipant).copyTo(productList.object.coRegistrant);
                 }
             });
 
-            start();
+            showRegistry({
+                ProductList: productList.object
+            });
         },
 
         navPurchases: function (form) {

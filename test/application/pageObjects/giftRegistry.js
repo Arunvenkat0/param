@@ -1,5 +1,6 @@
 'use strict';
 
+import _ from 'lodash';
 import * as formHelpers from './helpers/forms/common';
 
 export const SHARE_LINK = '.share-link';
@@ -8,10 +9,15 @@ export const BTN_ADD_GIFT_CERT = '[name*=addGiftCertificate]';
 export const BTN_EVENT_SET_PARTICIPANTS = '[name*="giftregistry_event_setParticipants"]';
 export const BTN_EVENT_ADDRESS_CONTINUE = '[name*="giftregistry_eventaddress_setBeforeAfterAddresses"]';
 export const BTN_EVENT_CONFIRM = '[name*="giftregistry_event_confirm"]';
+export const BTN_NAV_EVENT = '[name*=giftregistry_navigation_navEvent]';
+export const BTN_NAV_PURCHASES = '[name*=giftregistry_navigation_navPurchases]';
+export const BTN_NAV_REGISTRY = '[name*=giftregistry_navigation_navRegistry]';
+export const BTN_NAV_SHIPPING = '[name*=giftregistry_navigation_navShipping]';
 export const BTN_SET_PUBLIC = '[name*="giftregistry_setPublic"]';
 export const SHARE_OPTIONS = '[class*="share-options"]';
 export const BTN_CREATE_REGISTRY = '[name*="giftregistry_create"]';
 export const REGISTRY_HEADING = '.page-content-tab-wrapper h2';
+export const REGISTRY_NO_PURCHASES_MSG = '.item-list.gift-reg-purchases tr:nth-of-type(1)';
 export const FORM_REGISTRY = 'form[name*="giftregistry_event"]';
 export const LINK_REMOVE = '[class*="delete-registry"]';
 export const SEARCH_GIFTREGISTRY = 'button[name$="giftregistry_search_search"]';
@@ -34,55 +40,116 @@ export const GIFT_CERT_ADDED_TO_GIFT_REGISTRY = ITEM_LIST  + ' tr:nth-of-type(2)
 export const ITEM_ADDED_TO_GIFT_REGISTRY = ITEM_LIST + ' tr:nth-of-type(3) .name';
 export const BTN_ADD_PRODUCT_TO_CART = ITEM_LIST + ' tr:nth-of-type(3) [name*=addToCart]';
 
+export const EVENT_TYPE = '[name*=giftregistry_event_type]';
+export const EVNET_NAME = '[name*=giftregistry_event_name]';
+export const EVENT_STATE = '[name*=giftregistry_event_eventaddress_states_state]';
+export const EVENT_TOWN = '[name*=giftregistry_event_town]';
+export const PARTICIPANT_ROLE = '[name*=giftregistry_event_participant_role]';
+export const PARTICIPANT_FIRST_NAME = '[name*=giftregistry_event_participant_firstName]';
+export const PARTICIPANT_LAST_NAME = '[name*=giftregistry_event_participant_lastName]';
+export const PARTICIPANT_EMAIL = '[name*=giftregistry_event_participant_email]';
+export const COPARTICIPANT_ROLE = '[name*=giftregistry_event_coParticipant_role]';
+export const COPARTICIPANT_FIRST_NAME = '[name*=giftregistry_event_coParticipant_firstName]';
+export const COPARTICIPANT_LAST_NAME = '[name*=giftregistry_event_coParticipant_lastName]';
+export const COPARTICIPANT_EMAIL = '[name*=giftregistry_event_coParticipant_email]';
+
+export const BEFORE_SHIPPING_ID = '[name*=giftregistry_eventaddress_addressBeforeEvent_addressid]';
+export const BEFORE_SHIPPING_FIRST_NAME = '[name*=giftregistry_eventaddress_addressBeforeEvent_firstname]';
+export const BEFORE_SHIPPING_LAST_NAME = '[name*=giftregistry_eventaddress_addressBeforeEvent_lastname]';
+export const BEFORE_SHIPPING_ADDRESS1 = '[name*=giftregistry_eventaddress_addressBeforeEvent_address1]';
+export const BEFORE_SHIPPING_CITY = '[name*=giftregistry_eventaddress_addressBeforeEvent_city]';
+export const BEFORE_SHIPPING_STATE = '[name*=giftregistry_eventaddress_addressBeforeEvent_states_state]';
+export const BEFORE_SHIPPING_ZIP_CODE = '[name*=giftregistry_eventaddress_addressBeforeEvent_postal]';
+export const BEFORE_SHIPPING_COUNTRY = '[name*=giftregistry_eventaddress_addressBeforeEvent_country]';
+export const BEFORE_SHIPPING_PHONE = '[name*=giftregistry_eventaddress_addressBeforeEvent_phone]';
+
+export const AFTER_SHIPPING_ID = '[name*=giftregistry_eventaddress_addressAfterEvent_addressid]';
+export const AFTER_SHIPPING_FIRST_NAME = '[name*=giftregistry_eventaddress_addressAfterEvent_firstname]';
+export const AFTER_SHIPPING_LAST_NAME = '[name*=giftregistry_eventaddress_addressAfterEvent_lastname]';
+export const AFTER_SHIPPING_ADDRESS1 = '[name*=giftregistry_eventaddress_addressAfterEvent_address1]';
+export const AFTER_SHIPPING_CITY = '[name*=giftregistry_eventaddress_addressAfterEvent_city]';
+export const AFTER_SHIPPING_STATE = '[name*=giftregistry_eventaddress_addressAfterEvent_states_state]';
+export const AFTER_SHIPPING_ZIP_CODE = '[name*=giftregistry_eventaddress_addressAfterEvent_postal]';
+export const AFTER_SHIPPING_COUNTRY = '[name*=giftregistry_eventaddress_addressAfterEvent_country]';
+export const AFTER_SHIPPING_PHONE = '[name*=giftregistry_eventaddress_addressAfterEvent_phone]';
+
 const basePath = '/giftregistry';
 
 export function navigateTo () {
     return browser.url(basePath);
 }
 
-export function fillOutEventForm (eventData) {
-    let fieldTypes = new Map();
+export function fillOutEventForm (addressFormData) {
     let fieldsPromise = [];
 
-    fieldTypes.set('type', 'selectByValue');
-    fieldTypes.set('name', 'input');
-    fieldTypes.set('date', 'date');
-    fieldTypes.set('eventaddress_country', 'selectByValue');
-    fieldTypes.set('eventaddress_states_state', 'selectByValue');
-    fieldTypes.set('town', 'input');
-    fieldTypes.set('participant_role', 'selectByValue');
-    fieldTypes.set('participant_firstName', 'input');
-    fieldTypes.set('participant_lastName', 'input');
-    fieldTypes.set('participant_email', 'input');
+    let fieldTypes = {
+        type: 'selectByValue',
+        name: 'input',
+        date: 'date',
+        eventaddress_country: 'selectByValue',
+        eventaddress_states_state: 'selectByValue',
+        town: 'input',
+        participant_role: 'selectByValue',
+        participant_firstName: 'input',
+        participant_lastName: 'input',
+        participant_email: 'input',
+        coParticipant_role: 'selectByValue',
+        coParticipant_firstName: 'input',
+        coParticipant_lastName: 'input',
+        coParticipant_email: 'input'
 
-    for (let [key, value] of eventData) {
+    };
+
+    _.each(addressFormData, (value, key) => {
         let selector = '[name*="event_' + key + '"]';
-        fieldsPromise.push(formHelpers.populateField(selector, value, fieldTypes.get(key)));
-    }
+        fieldsPromise.push(formHelpers.populateField(selector, value, fieldTypes[key]));
+    });
 
     return Promise.all(fieldsPromise);
 }
 
-export function fillOutEventShippingForm (eventShippingData, locale) {
-    let fieldTypes = new Map();
+export function fillOutEventShippingForm (addressFormData) {
     let fieldsPromise = [];
 
-    fieldTypes.set('addressid', 'input');
-    fieldTypes.set('firstname', 'input');
-    fieldTypes.set('lastname', 'input');
-    fieldTypes.set('address1', 'input');
-    fieldTypes.set('city', 'input');
-    if (locale && locale === 'x_default') {
-        fieldTypes.set('states_state', 'selectByValue');
-    }
-    fieldTypes.set('postal', 'input');
-    fieldTypes.set('country', 'selectByValue');
-    fieldTypes.set('phone', 'input');
+    let fieldTypes = {
+        addressid: 'input',
+        firstname: 'input',
+        lastname: 'input',
+        address1: 'input',
+        city: 'input',
+        postal: 'input',
+        states_state: 'selectByValue',
+        country: 'selectByValue',
+        phone: 'input'
+    };
 
-    for (let [key, value] of eventShippingData) {
-        let selector = '[name*=eventaddress_addressBeforeEvent_' + key + ']';
-        fieldsPromise.push(formHelpers.populateField(selector, value, fieldTypes.get(key)));
-    }
+    _.each(addressFormData, (value, key) => {
+        let selector = '[name*=giftregistry_eventaddress_addressBeforeEvent_' + key + ']';
+        fieldsPromise.push(formHelpers.populateField(selector, value, fieldTypes[key]));
+    });
+
+    return Promise.all(fieldsPromise);
+}
+
+export function fillOutAfterEventShippingForm (addressFormData) {
+    let fieldsPromise = [];
+
+    let fieldTypes = {
+        addressid: 'input',
+        firstname: 'input',
+        lastname: 'input',
+        address1: 'input',
+        city: 'input',
+        postal: 'input',
+        states_state: 'selectByValue',
+        country: 'selectByValue',
+        phone: 'input'
+    };
+
+    _.each(addressFormData, (value, key) => {
+        let selector = '[name*=giftregistry_eventaddress_addressAfterEvent_' + key + ']';
+        fieldsPromise.push(formHelpers.populateField(selector, value, fieldTypes[key]));
+    });
 
     return Promise.all(fieldsPromise);
 }
