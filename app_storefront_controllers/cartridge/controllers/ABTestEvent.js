@@ -8,10 +8,6 @@
  * @module controllers/ABTestEvent
  */
 
-/* API Includes */
-var ISML = require('dw/template/ISML');
-var Pipelet = require('dw/system/Pipelet');
-
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
@@ -25,12 +21,10 @@ function startCheckout() {
     var cart = app.getModel('Cart').get();
 
     if (cart) {
-        new Pipelet('StartCheckout').execute({
-            Basket: cart.object
-        });
-        ISML.renderTemplate('util/reporting/reporting');
+        cart.object.startCheckout();
+        app.getView().render('util/reporting/reporting');
     } else {
-        ISML.renderTemplate('util/reporting/reporting');
+        app.getView().render('util/reporting/reporting');
     }
 }
 
