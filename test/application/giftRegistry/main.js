@@ -16,8 +16,8 @@ let locale = config.locale;
 
 describe('Gift Registry', () => {
     let login = 'testuser1@demandware.com';
-    let eventFormData = new Map();
-    let eventFormShippingData = new Map();
+    let eventFormData = {};
+    let eventFormShippingData = {};
     let firstName;
     let giftCert = Resource.msg('global.giftcertificate', 'locale', null);
     let lastName;
@@ -83,35 +83,33 @@ describe('Gift Registry', () => {
             customer.addresses[0].countryCode = customers.globalCountryCode[locale];
             customer.addresses[0].phone = customers.globalPhone[locale];
 
-            eventFormData.set('type', 'wedding');
-            eventFormData.set('name', 'Wedding of the Century');
-            eventFormData.set('date', '03-28-2008');
-            eventFormData.set('eventaddress_country', address.countryCode);
+            eventFormData = {
+                type: 'wedding',
+                name: 'Wedding of the Century',
+                date: '03/28/2008',
+                eventaddress_country: address.countryCode,
+                town: address.city,
+                participant_role: 'Groom',
+                participant_firstName: customer.firstName,
+                participant_lastName: customer.lastName,
+                participant_email: customer.email
+            };
 
-            if (locale && locale === 'x_default') {
-                eventFormData.set('eventaddress_states_state', address.stateCode);
+            eventFormShippingData = {
+                addressid: 'summerHome',
+                firstname: customer.firstName,
+                lastname: customer.lastName,
+                address1: address.address1,
+                city: address.city,
+                postal: address.postalCode,
+                country: address.countryCode,
+                phone: address.phone
+            };
+
+            if (locale && (locale === 'x_default' || locale === 'en_US')) {
+                eventFormData.eventaddress_states_state = address.stateCode;
+                eventFormShippingData.states_state = address.stateCode;
             }
-
-            eventFormData.set('town', address.city);
-            eventFormData.set('participant_role', 'Groom');
-            eventFormData.set('participant_firstName', customer.firstName);
-            eventFormData.set('participant_lastName', customer.lastName);
-            eventFormData.set('participant_email', customer.email);
-
-            //addressid field cannot have the same value as an existing Address name, ex. Home or Work
-            eventFormShippingData.set('addressid', 'summerHome');
-            eventFormShippingData.set('firstname', customer.firstName);
-            eventFormShippingData.set('lastname', customer.lastName);
-            eventFormShippingData.set('address1', address.address1);
-            eventFormShippingData.set('city', address.city);
-
-            if (locale && locale === 'x_default') {
-                eventFormShippingData.set('states_state', address.stateCode);
-            }
-
-            eventFormShippingData.set('postal', address.postalCode);
-            eventFormShippingData.set('country', address.countryCode);
-            eventFormShippingData.set('phone',address.phone);
         })
         .then(() => giftRegistryPage.navigateTo())
         .then(() => loginForm.loginAsDefaultCustomer(locale))

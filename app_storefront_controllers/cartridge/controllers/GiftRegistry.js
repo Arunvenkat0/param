@@ -139,6 +139,18 @@ function submitForm() {
         navEvent: function (form) {
             var productList = ProductList.get(form.object);
             editParticipant(productList.object, form);
+        },
+
+        navShipping: function(form) {
+            var productList = ProductList.get(form.object);
+            editEventAddresses(productList.object, form);
+        },
+
+        navRegistry: function(form) {
+            var productList = ProductList.get(form.object);
+            showRegistry({
+                ProductList: productList.object
+            });
         }
     });
 }
@@ -269,71 +281,6 @@ function setParticipants() {
 }
 
 /**
- * TODO
- */
- //TODO : jshint -> 'participantAddresses' is defined but never used.
-// function participantAddresses() {
-//     var currentForms = session.forms;
-//     var AddressFormType;
-//     // TODO this should trigger some redirect
-//     var TriggeredAction = request.triggeredFormAction;
-//     if (TriggeredAction !== null) {
-//         if (TriggeredAction.formId === 'back') {
-//             new Pipelet('Script', {
-//                 Transactional: false,
-//                 OnError: 'PIPELET_ERROR',
-//                 ScriptFile: 'account/giftregistry/CopyAddressFormFields.ds'
-//             }).execute({
-//                 GiftRegistryForm: currentForms.giftregistry
-//             });
-
-//             app.getView().render('account/giftregistry/eventparticipant');
-//             return;
-//         } else if (TriggeredAction.formId === 'confirm') {
-//             if (currentForms.giftregistry.copyAddress.checked) {
-//                 new Pipelet('Script', {
-//                     Transactional: false,
-//                     OnError: 'PIPELET_ERROR',
-//                     ScriptFile: 'account/giftregistry/AssignPostEventShippingAddress.ds'
-//                 }).execute({
-//                     GiftRegistryForm: currentForms.giftregistry
-//                 });
-//             }
-
-//             showConfirmation();
-//             return;
-//         } else if (TriggeredAction.formId === 'selectAddressAfter') {
-//             AddressFormType = 'after';
-
-//             updateAddressDetails();
-//             return;
-//         } else if (TriggeredAction.formId === 'selectAddressBefore') {
-//             AddressFormType = 'before';
-
-//             updateAddressDetails();
-//             return;
-//         }
-//     }
-
-//     if (!currentForms.giftregistry.eventaddress.valid) {
-//         setParticipants();
-//         return;
-//     }
-
-//     if (currentForms.giftregistry.eventaddress.beforeEventAddress.value === 'newaddress' && !currentForms.giftregistry.eventaddress.addressBeforeEvent.valid) {
-//         setParticipants();
-//         return;
-//     }
-
-//     if (currentForms.giftregistry.eventaddress.afterEventAddress.value === 'newaddress' && !currentForms.giftregistry.eventaddress.addressAfterEvent.valid) {
-//         setParticipants();
-//         return;
-//     }
-
-//     showConfirmation();
-// }
-
-/**
  * Renders the gift registry confirmation page (account/giftregistry/giftregistryconfirmation template).
  */
 function handleRegistryAddresses() {
@@ -427,12 +374,17 @@ function editEvent() {
                 productList.object.setEventState(form.event.eventaddress.states.state.value);
                 productList.object.setEventCountry(form.event.eventaddress.country.value);
 
-                if (form.event.coParticipant) {
+                if (form.event.coParticipant.firstName.value || form.event.coParticipant.lastName.value) {
+                    if (!productList.object.coRegistrant) {
+                        productList.object.createCoRegistrant();
+                    }
                     app.getForm(form.event.coParticipant).copyTo(productList.object.coRegistrant);
                 }
             });
 
-            start();
+            showRegistry({
+                ProductList: productList.object
+            });
         },
 
         navPurchases: function (form) {
@@ -457,6 +409,24 @@ function editEvent() {
             showRegistry({
                 ProductList: productList.object
             });
+        },
+
+        setBeforeAfterAddresses: function(form) {
+            var assignEventAddresses = require('app_storefront_core/cartridge/scripts/account/giftregistry/AssignEventAddresses');
+            var productList = ProductList.get(form.object);
+
+            Transaction.wrap(function () {
+                assignEventAddresses.assignEventAddresses({
+                    ProductList: productList.object,
+                    Customer: customer,
+                    GiftRegistryForm: form
+                });
+            });
+
+            showRegistry({
+                ProductList: productList.object
+            });
+
         }
 
     })
@@ -466,54 +436,18 @@ function editEventAddresses(productList, eventAddressForm) {
     app.getForm(eventAddressForm.eventaddress).clear();
     if (productList.shippingAddress) {
         app.getForm(eventAddressForm.eventaddress.addressBeforeEvent).copyFrom(productList.shippingAddress);
+        app.getForm(eventAddressForm.eventaddress.addressBeforeEvent.states).setValue('state', productList.shippingAddress.stateCode);
     }
 
     if (productList.postEventShippingAddress) {
         app.getForm(eventAddressForm.eventaddress.addressAfterEvent).copyFrom(productList.postEventShippingAddress);
+        app.getForm(eventAddressForm.eventaddress.addressAfterEvent.states).setValue('state', productList.postEventShippingAddress.stateCode);
     }
 
     app.getView({
         ProductList: productList,
         ContinueURL: URLUtils.https('GiftRegistry-EditEvent')
     }).render('account/giftregistry/addresses');
-}
-
-/**
- * Renders the gift registry purchases page.
- */
-function showPurchases() {
-    app.getView().render('account/giftregistry/purchases');
-}
-
-/**
- * Event handler for gift registry navigation.
- * Checks the last triggered action and handles them depending on the formId associated
- * with the triggered action. If the formId is:
- * - __navEvent__ - calls the {@link module:controllers/GiftRegistry~editEvent|editEvent} function.
- * - __navRegistry__ - calls the {@link module:controllers/GiftRegistry~showRegistry|showRegistry} function.
- * - __navShipping __ - - {@link module:controllers/GiftRegistry~editAddresses|editAddresses} function.
- * If the last triggered action is none of these or null, the function calls the {@link module:controllers/GiftRegistry~showPurchases|showPurchases} function.
- */
-// @secure
-function showPurchasesInteraction() {
-    // TODO this should end in a redirect
-    var TriggeredAction = request.triggeredFormAction;
-    if (TriggeredAction !== null) {
-        if (TriggeredAction.formId === 'navEvent') {
-            editEvent();
-            return;
-        } else if (TriggeredAction.formId === 'navRegistry') {
-            showRegistry({
-                ProductList: ProductList
-            });
-            return;
-        } else if (TriggeredAction.formId === 'navShipping') {
-            editAddresses();
-            return;
-        }
-    }
-
-    showPurchases();
 }
 
 /**
@@ -532,108 +466,6 @@ function showRegistry(pdict) {
         ContinueURL: URLUtils.https('GiftRegistry-SubmitForm')
     }).render('account/giftregistry/registry');
 }
-
-/**
- * Event handler for gift registry interactions.
- * Checks the last triggered action and handles them depending on the formId associated with the triggered action.
- * If the formId is:
- * - __addGiftCertificate__ - adds a gift certificate to the product list and alls the {@link module:controllers/GiftRegistry~showRegistry|showRegistry} function.
- * - __addToCart__ - calls the {@link module:controllers/GiftCert~purchase|purchase} function.
- * - __deleteItem __ - changes the purchased quantity to zero. If this fails , it renders the registry page (account/giftregistry/registry template) with a status message.
- * - __navEvent__ - calls the {@link module:controllers/GiftRegistry~editEvent|editEvent} function
- * - __navPurchases__ - calls the {@link module:controllers/GiftRegistry~showPurchases|showPurchases} function.
- * - __navShipping __ - calls the {@link module:controllers/GiftRegistry~editAddresses|editAddresses} function.
- * - __setPrivate__ - sets the current product list as private and calls the {@link module:controllers/GiftRegistry~showRegistry|showRegistry} function.
- * - __setPublic __ - sets the current product list as public and calls the {@link module:controllers/GiftRegistry~showRegistry|showRegistry} function.
- * - __updateItem__ -  calls the {@link module:controllers/GiftRegistry~showRegistry|showRegistry} function.
- * If the last triggered action is none of these or null, the function renders the registry page (account/giftregistry/registry template).
- */
-function showRegistryInteraction() {
-    var currentForms = session.forms;
-    // TODO this should end in redirects
-    var TriggeredAction = request.triggeredFormAction;
-    if (TriggeredAction !== null) {
-        if (TriggeredAction.formId === 'addGiftCertificate') {
-            new Pipelet('AddGiftCertificateToProductList').execute({
-                ProductList: ProductList,
-                Priority: 2
-            });
-
-            showRegistry({
-                ProductList: ProductList
-            });
-            return;
-        } else if (TriggeredAction.formId === 'addToCart') {
-            if (currentForms.giftregistry.items.triggeredFormAction.parent.object.type === currentForms.giftregistry.items.triggeredFormAction.parent.object.TYPE_GIFT_CERTIFICATE) {
-                var GiftCertController = require('./GiftCert');
-                GiftCertController.Purchase();
-                return;
-            } else {
-                var CartController = require('./Cart');
-                CartController.AddProduct();
-                return;
-            }
-        } else if (TriggeredAction.formId === 'deleteItem') {
-            if (TriggeredAction.object.purchasedQuantity.value === 0) {
-
-                //TODO : jshint -> 'RemoveProductListItemResult' is defined but never used.
-                //var RemoveProductListItemResult = new Pipelet('RemoveProductListItem').execute({
-                //    ProductListItem: TriggeredAction.object
-                //});
-            } else {
-                var Status = new dw.system.Status(dw.system.Status.ERROR, 'delete.restriction');
-
-                app.getView().render('account/giftregistry/registry', {
-                    Status: Status
-                });
-                return;
-            }
-        } else if (TriggeredAction.formId === 'navEvent') {
-            editEvent();
-            return;
-        } else if (TriggeredAction.formId === 'navPurchases') {
-            showPurchases();
-            return;
-        } else if (TriggeredAction.formId === 'navShipping') {
-            editAddresses();
-            return;
-        } else if (TriggeredAction.formId === 'setPrivate') {
-            Transaction.wrap(function () {
-                ProductList.public = false;
-            });
-
-            showRegistry({
-                ProductList: ProductList
-            });
-            return;
-        } else if (TriggeredAction.formId === 'setPublic') {
-            Transaction.wrap(function () {
-                ProductList.public = true;
-            }
-                );
-
-            showRegistry({
-                ProductList: ProductList
-            });
-            return;
-        } else if (TriggeredAction.formId === 'updateItem') {
-
-            //TODO : jshint -> 'updateAllResult' is defined but never used.
-            //var updateAllResult = updateAll();
-
-            showRegistry({
-                ProductList: ProductList
-            });
-            return;
-        }
-    }
-
-    // TODO
-    app.getView().render('account/giftregistry/registry', {
-
-    });
-}
-
 
 /**
  * Searches a gift registry by various parameters.
@@ -734,46 +566,6 @@ function showRegistryByID() {
     AccountController.Show();
 }
 
-
-/**
- * TODO
- */
-//TODO jshint -> 'updateAddressDetails' is defined but never used. after commenting out 'participantAddresses'
-// function updateAddressDetails() {
-//     var currentHttpParameterMap = request.httpParameterMap;
-//     var currentForms = session.forms;
-//     var Address;
-//     var GetCustomerAddressResult;
-//     //TODO : variable assignment
-//     var AddressFormType;
-
-//     if (AddressFormType === 'before') {
-//         GetCustomerAddressResult = new Pipelet('GetCustomerAddress').execute({
-//             AddressID: empty(currentHttpParameterMap.addressID.value) ? currentHttpParameterMap.dwfrm_giftregistry_eventaddress_addressBeforeList.value : currentHttpParameterMap.addressID.value,
-//             Customer: customer
-//         });
-//         Address = GetCustomerAddressResult.Address;
-
-
-//         Form.get(currentForms.giftregistry.eventaddress.addressBeforeEvent).copyFrom(Address);
-//         Form.get(currentForms.giftregistry.eventaddress.addressBeforeEvent.states).copyForm(Address);
-//     } else {
-//         GetCustomerAddressResult = new Pipelet('GetCustomerAddress').execute({
-//             AddressID: empty(currentHttpParameterMap.addressID.value) ? currentHttpParameterMap.dwfrm_giftregistry_eventaddress_addressAfterList.value : currentHttpParameterMap.addressID.value,
-//             Customer: customer
-//         });
-//         Address = GetCustomerAddressResult.Address;
-
-
-//         Form.get(currentForms.giftregistry.eventaddress.addressAfterEvent).copyFrom(Address);
-//         Form(currentForms.giftregistry.eventaddress.addressAfterEvent.states).copyForm(Address);
-//     }
-
-
-//     setParticipants();
-// }
-
-
 /**
  * Attempts to replace a product in the gift registry.
  * @return {Object} JSON object indicating the error state if any pipelets called throw a PIPELET_ERROR.
@@ -841,65 +633,6 @@ function replaceProductListItem() {
     //TODO : AddProductToProductListResult was never used and jshint was reporting errors as a result
 
     app.getView().render('account/giftregistry/refreshgiftregistry', {});
-}
-
-/**
- * Event handler for gift registry addresses.
- * Checks the last triggered action and handles them depending on the formId associated with the triggered action.
- * If the formId is:
- * - __back__ -  calls the {@link module:controllers/GiftRegistry~showRegistry|showRegistry} function.
- * - __confirm__ - calls {@link module:controllers/GiftRegistry~confirm|confirm} function.
- * - __navEvent__ - calls the {@link module:controllers/GiftRegistry~editEvent|editEvent} function
- * - __navPurchases__ - calls the {@link module:controllers/GiftRegistry~showPurchases|showPurchases} function.
- * - __navRegistry__ - calls the {@link module:controllers/GiftRegistry~showRegistry|showRegistry} function.
- * If none of these are the formId of the last triggered action, then if the event addresses are not valid or are new
- * the {@link module:controllers/GiftRegistry~setParticipants|setParticipants} function is called.
- * Otherwise, the {@link module:controllers/GiftRegistry~confirm|confirm} function is called.
- *
- */
-// @secure
-function editAddresses() {
-    var currentForms = session.forms;
-    var TriggeredAction = request.triggeredFormAction;
-    if (TriggeredAction !== null) {
-        if (TriggeredAction.formId === 'back') {
-            showRegistry({
-                ProductList: ProductList
-            });
-            return;
-        } else if (TriggeredAction.formId === 'confirm') {
-            confirm();
-            return;
-        } else if (TriggeredAction.formId === 'navEvent') {
-            editEvent();
-            return;
-        } else if (TriggeredAction.formId === 'navPurchases') {
-            showPurchases();
-            return;
-        } else if (TriggeredAction.formId === 'navRegistry') {
-            showRegistry({
-                ProductList: ProductList
-            });
-            return;
-        }
-    }
-
-    if (!currentForms.giftregistry.eventaddress.valid) {
-        setParticipants();
-        return;
-    }
-
-    if (currentForms.giftregistry.eventaddress.beforeEventAddress.value === 'newaddress' && !currentForms.giftregistry.eventaddress.addressBeforeEvent.valid) {
-        setParticipants();
-        return;
-    }
-
-    if (currentForms.giftregistry.eventaddress.afterEventAddress.value === 'newaddress' && !currentForms.giftregistry.eventaddress.addressAfterEvent.valid) {
-        setParticipants();
-        return;
-    }
-
-    confirm();
 }
 
 /**
@@ -994,12 +727,6 @@ exports.Create = guard.ensure(['get', 'https'], create);
 exports.Delete = guard.ensure(['get', 'https'], deleteList);
 
 /**
- * Event handler for gift registry addresses.
- * @see module:controllers/GiftRegistry~editAddresses
- */
-exports.EditAddresses = guard.ensure(['post', 'https'], editAddresses);
-
-/**
  * Event handler for editing of gift registry.
  * @see module:controllers/GiftRegistry~editEvent
  */
@@ -1024,22 +751,10 @@ exports.SearchGiftRegistry = guard.ensure(['post'], searchGiftRegistry);
 exports.SelectProductListInteraction = guard.ensure(['post', 'https'], selectProductListInteraction);
 
 /**
- * Event handler for gift registry navigation.
- * @see module:controllers/GiftRegistry~showPurchasesInteraction
- */
-exports.ShowPurchasesInteraction = guard.ensure(['post', 'https'], showPurchasesInteraction);
-
-/**
  * Looks up a gift registry by its public UUID.
  * @see module:controllers/GiftRegistry~showRegistryByID
  */
 exports.ShowRegistryByID = guard.ensure(['get', 'https'], showRegistryByID);
-
-/**
- * Event handler for gift registry interactions.
- * @see module:controllers/GiftRegistry~showRegistryInteraction
- */
-exports.ShowRegistryInteraction = guard.ensure(['get', 'https'], showRegistryInteraction);
 
 /**
  * Controls the login that is required to access gift registry actions.
