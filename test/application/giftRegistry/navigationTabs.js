@@ -17,9 +17,11 @@ describe('Gift Registry Navigation', () => {
     let login2 = 'testuser3@demandware.com';
     let editedEventFormData = {};
     let editedEventFormShippingData = {};
+    let editedEventFormShippingData2 = {};
     let eventFormData = {};
     let eventFormShippingData = {};
     let editedAfterEventFormShippingData = {};
+    let editedAfterEventFormShippingData2 = {};
     let purchasesNoProductsFound = Resource.msg('registry.noproductsfound', 'account', null);
 
     let editedGiftRegistryTitle = {
@@ -113,12 +115,36 @@ describe('Gift Registry Navigation', () => {
                 phone: address2.phone
             };
 
+            editedEventFormShippingData2 = {
+                addressid: 'Other Home',
+                firstname: customer.firstName,
+                lastname: customer.lastName,
+                address1: address.address1,
+                city: 'Rome',
+                postal: address.postalCode,
+                country: address.countryCode,
+                phone: address.phone
+            };
+
+            editedAfterEventFormShippingData2 = {
+                addressid: 'After Event',
+                firstname: customer.firstName,
+                lastname: customer.lastName,
+                address1: address.address1,
+                city: 'Augusta',
+                postal: address.postalCode,
+                country: address.countryCode,
+                phone: address.phone
+            };
+
             if (locale && (locale === 'x_default' || locale === 'en_US')) {
                 editedEventFormData.eventaddress_states_state = 'ME';
                 eventFormData.eventaddress_states_state = address.stateCode;
                 editedEventFormShippingData.states_state = address2.stateCode;
                 eventFormShippingData.states_state = address.stateCode;
                 editedAfterEventFormShippingData.states_state = 'ME';
+                editedEventFormShippingData2.states_state = 'NH';
+                editedAfterEventFormShippingData2.states_state = 'NH';
             }
         })
         .then(() => giftRegistryPage.navigateTo())
@@ -293,6 +319,86 @@ describe('Gift Registry Navigation', () => {
                 .then(afterAddressStateValue => assert.equal(afterAddressStateValue, editedAfterEventFormShippingData.states_state))
         );
     }
+
+    //Should edit everything but the addressId
+    it('Should edit all the pre and post event shipping information except the addressId ', () =>
+        giftRegistryPage.fillOutEventShippingForm(editedEventFormShippingData2)
+            .then(() => giftRegistryPage.fillOutAfterEventShippingForm(editedAfterEventFormShippingData2))
+            .then(() => browser.click(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE))
+            .then(() => browser.isExisting(giftRegistryPage.REGISTRY_HEADING))
+            .then(doesExist => assert.isTrue(doesExist))
+    );
+
+
+    it('Should verify that before event shipping info was edited and uses the city as the addressId', () =>
+        browser.click(giftRegistryPage.BTN_NAV_SHIPPING)
+            .then(() => browser.waitForVisible(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE))
+            // checks to see that before event shipping address id changed
+            .then(() => browser.getValue(giftRegistryPage.BEFORE_SHIPPING_ID))
+            .then(beforeAddressIdValue => assert.equal(beforeAddressIdValue, editedEventFormShippingData2.city))
+            // checks to see that before event shipping address first name changed
+            .then(() => browser.getValue(giftRegistryPage.BEFORE_SHIPPING_FIRST_NAME))
+            .then(beforeFirstNameValue => assert.equal(beforeFirstNameValue, editedEventFormShippingData2.firstname))
+            // checks to see that before event shipping address last name changed
+            .then(() => browser.getValue(giftRegistryPage.BEFORE_SHIPPING_LAST_NAME))
+            .then(beforeLastNameValue => assert.equal(beforeLastNameValue, editedEventFormShippingData2.lastname))
+            // checks to see that before event shipping address address 1 changed
+            .then(() => browser.getValue(giftRegistryPage.BEFORE_SHIPPING_ADDRESS1))
+            .then(beforeAddressOneId => assert.equal(beforeAddressOneId, editedEventFormShippingData2.address1))
+            // checks to see that before event shipping address city changed
+            .then(() => browser.getValue(giftRegistryPage.BEFORE_SHIPPING_CITY))
+            .then(beforeAddressCityValue => assert.equal(beforeAddressCityValue, editedEventFormShippingData2.city))
+            // checks to see that before event shipping address zip changed
+            .then(() => browser.getValue(giftRegistryPage.BEFORE_SHIPPING_ZIP_CODE))
+            .then(beforeAddressZipCodeValue => assert.equal(beforeAddressZipCodeValue, editedEventFormShippingData2.postal))
+            // checks to see that before event shipping address country changed
+            .then(() => browser.getValue(giftRegistryPage.BEFORE_SHIPPING_COUNTRY))
+            .then(beforeAddressCountryValue => assert.equal(beforeAddressCountryValue, editedEventFormShippingData2.country))
+            // checks to see that before event shipping address phone changed
+            .then(() => browser.getValue(giftRegistryPage.BEFORE_SHIPPING_PHONE))
+            .then(beforeAddressPhoneValue => assert.equal(beforeAddressPhoneValue, editedEventFormShippingData2.phone))
+    );
+
+    if (locale && (locale === 'x_default' || locale === 'en_US')) {
+        it('Should verify that the address state value has changed', () =>
+            browser.getValue(giftRegistryPage.BEFORE_SHIPPING_STATE)
+                .then(beforeAddressStateValue => assert.equal(beforeAddressStateValue, editedEventFormShippingData2.states_state))
+        );
+    }
+
+    it('Should verify that post event shipping info was edited and uses the city as the addressId', () =>
+        browser.getValue(giftRegistryPage.AFTER_SHIPPING_ID)
+            .then(afterAddressIdValue => assert.equal(afterAddressIdValue, editedAfterEventFormShippingData2.city))
+            // checks to see that post event shipping address first name changed
+            .then(() => browser.getValue(giftRegistryPage.AFTER_SHIPPING_FIRST_NAME))
+            .then(afterFirstNameValue => assert.equal(afterFirstNameValue, editedAfterEventFormShippingData2.firstname))
+            // checks to see that post event shipping address last name changed
+            .then(() => browser.getValue(giftRegistryPage.AFTER_SHIPPING_LAST_NAME))
+            .then(afterLastNameValue => assert.equal(afterLastNameValue, editedAfterEventFormShippingData2.lastname))
+            // checks to see that post event shipping address address 1 changed
+            .then(() => browser.getValue(giftRegistryPage.AFTER_SHIPPING_ADDRESS1))
+            .then(afterAddressOneId => assert.equal(afterAddressOneId, editedAfterEventFormShippingData2.address1))
+            // checks to see that post event shipping address city changed
+            .then(() => browser.getValue(giftRegistryPage.AFTER_SHIPPING_CITY))
+            .then(afterAddressCityValue => assert.equal(afterAddressCityValue, editedAfterEventFormShippingData2.city))
+            // checks to see that post event shipping address zip changed
+            .then(() => browser.getValue(giftRegistryPage.AFTER_SHIPPING_ZIP_CODE))
+            .then(afterAddressZipCodeValue => assert.equal(afterAddressZipCodeValue, editedAfterEventFormShippingData2.postal))
+            // checks to see that post event shipping address country changed
+            .then(() => browser.getValue(giftRegistryPage.AFTER_SHIPPING_COUNTRY))
+            .then(afterAddressCountryValue => assert.equal(afterAddressCountryValue, editedAfterEventFormShippingData2.country))
+            // checks to see that post event shipping address phone changed
+            .then(() => browser.getValue(giftRegistryPage.AFTER_SHIPPING_PHONE))
+            .then(afterAddressPhoneValue => assert.equal(afterAddressPhoneValue, editedAfterEventFormShippingData2.phone))
+    );
+
+    if (locale && locale === 'x_default') {
+        it('Should check to verify that the post event address state value has edited', () =>
+            browser.getValue(giftRegistryPage.AFTER_SHIPPING_STATE)
+                .then(afterAddressStateValue => assert.equal(afterAddressStateValue, editedAfterEventFormShippingData2.states_state))
+        );
+    }
+
 
     it('Should go to the purchases page in gift registry', () =>
         browser.click(giftRegistryPage.BTN_NAV_PURCHASES)
