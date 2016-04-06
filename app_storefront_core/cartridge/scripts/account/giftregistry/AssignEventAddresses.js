@@ -28,6 +28,8 @@ function assignEventAddresses(pdict) {
     var giftRegistryForm = pdict.GiftRegistryForm;
     var customer = pdict.Customer;
 
+    var afterAddressId;
+    var beforeAddressId;
     var addressBook = customer.getProfile().getAddressBook();
 
     // check to see if the before event address was changed by the user
@@ -37,11 +39,16 @@ function assignEventAddresses(pdict) {
 
     // if the before event address was changed add it to the address book
     if (hasChangedBeforeAddress) {
-        addAddress(addressBeforeEvent, addressBook);
+        beforeAddressId = determineAddressId(addressBeforeEvent, addressBook);
+        if(beforeAddressId) {
+            addAddress(addressBeforeEvent, addressBook, beforeAddressId);
+        }
     }
 
     // set the before address event
-    if (addressBeforeEventId) {
+    if (beforeAddressId) {
+        productList.setShippingAddress(addressBook.getAddress(beforeAddressId));
+    } else {
         productList.setShippingAddress(addressBook.getAddress(addressBeforeEventId));
     }
 
@@ -52,11 +59,16 @@ function assignEventAddresses(pdict) {
 
     // if the after event address was changed add it to the address book
     if (hasChangedAfterAddress) {
-        addAddress(addressAfterEvent, addressBook);
+        afterAddressId = determineAddressId(addressAfterEvent, addressBook);
+        if (afterAddressId) {
+            addAddress(addressAfterEvent, addressBook, afterAddressId);
+        }
     }
 
     // set the after address event
-    if (addressAfterEventId) {
+    if (afterAddressId) {
+        productList.setPostEventShippingAddress(addressBook.getAddress(afterAddressId));
+    } else {
         productList.setPostEventShippingAddress(addressBook.getAddress(addressAfterEventId));
     }
 }
@@ -68,8 +80,7 @@ function assignEventAddresses(pdict) {
  * @param {dw.customer.CustomerAddress} address
  *
  */
-function addAddress(addressFields, addressBook) {
-    var address;
+function determineAddressId(addressFields, addressBook) {
     var addressID;
     var candidateID;
     var counter = 0;
@@ -92,18 +103,21 @@ function addAddress(addressFields, addressBook) {
         if (existingAddress) {
             // this ID is already taken, increment the counter
             // and try the next one
-            if(isAddressChanged(addressFields, existingAddress)) {
+            if (isAddressChanged(addressFields, existingAddress)) {
                 counter++;
                 candidateID = addressFields.city.value + "-" + counter;
                 existingAddress = null;
             } else {
-                return;
+                return null;
             }
         } else {
-            addressID = candidateID;
-            break;
+            return candidateID;
         }
     }
+}
+
+function addAddress(addressFields, addressBook, addressID) {
+    var address;
 
     // create the new address and copy the form values
     address = addressBook.createAddress( addressID );
