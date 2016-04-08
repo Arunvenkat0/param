@@ -128,7 +128,6 @@ describe('Address', () => {
 
     it('should delete unused addresses', () =>
         addressPage.removeAddresses()
-            .then(() => addressPage.getAddressCount())
             .then(() => browser.getText(addressPage.TITLE_ADDRESS_SELECTOR))
             .then(titlesLeft => assert.deepEqual(titlesLeft.sort(), ['Home', 'Work']))
     );

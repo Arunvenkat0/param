@@ -1,6 +1,5 @@
 'use strict';
 
-import _ from 'lodash';
 import * as formHelpers from './helpers/forms/common';
 
 export const BTN_EDIT_ADDRESS = 'button[name*=address_edit]';
@@ -24,7 +23,7 @@ export function navigateTo () {
 export function fillAddressForm (addressFormData) {
     let fieldsPromise = [];
 
-    let fieldTypes = {
+    const fieldTypes = {
         addressid: 'input',
         firstname: 'input',
         lastname: 'input',
@@ -36,9 +35,9 @@ export function fillAddressForm (addressFormData) {
         phone: 'input'
     };
 
-    _.each(addressFormData, (value, key) => {
-        let selector = '[name*=profile_address_' + key + ']';
-        fieldsPromise.push(formHelpers.populateField(selector, value, fieldTypes[key]));
+    Object.keys(addressFormData).forEach(key => {
+        const selector = '[name*=profile_address_' + key + ']';
+        fieldsPromise.push(formHelpers.populateField(selector, addressFormData[key], fieldTypes[key]));
     });
 
     return Promise.all(fieldsPromise);
@@ -50,10 +49,10 @@ export function getAddressTitles () {
 }
 
 export function removeAddresses () {
-    let defaultAddresses = ['Home', 'Work'];
+    const defaultAddresses = ['Home', 'Work'];
 
     // get all address titles
-    return browser.getText('.address-list li .mini-address-title')
+    return browser.getText('.address-tile .mini-address-title')
         .then(addressTexts => {
             // filter out Home and Work addresses
             return addressTexts.filter(function (addressText) {
@@ -62,27 +61,46 @@ export function removeAddresses () {
         })
         // remove addresses sequentially
         .then(addressTextsToRemove => {
-	    return addressTextsToRemove.reduce(function (removeTask, addressText, addressIndex) {
+            return addressTextsToRemove.reduce((removeTask, addressText, addressToRemoveIndex) => {
                 return removeTask.then(() => {
-                    return browser.element('li*=' + addressText)
-                        .click('.delete')
-                        .alertAccept();
-		}).then(() => browser.waitUntil(() =>
-		    // wait until the address is removed, i.e.
-		    // there is one less addresses to be removed
-		    getAddressCount().then(count => count === defaultAddresses.length + addressTextsToRemove.length
-		    - (addressIndex + 1))
-		));
+                    // look at all address tiles, find the one with the address title that matches `addressText`
+                    return browser.elements('.address-tile')
+                        .then(res => {
+                            return new Promise(resolve => {
+                                // loop through all address tiles
+                                res.value.forEach((addressTile, tileIndex) => {
+                                    // find the text of the address title by finding the element ID of the address title first
+                                    browser.getText('.address-tile:nth-of-type(' + (tileIndex + 1) + ') .mini-address-title')
+                                        .then(addressTitle => {
+                                            if (addressTitle === addressText) {
+                                                resolve(tileIndex);
+                                            }
+                                        });
+                                });
+                            });
+                        })
+                        // once the element ID of the address tile to be deleted is found, proceed to delete it
+                        .then(tileIndex => {
+                            return browser.click('.address-tile:nth-of-type(' + (tileIndex + 1) + ') .delete')
+                                .alertAccept()
+                                // wait until the address is removed, i.e.
+                                // there is one less addresses to be removed
+                                .waitUntil(() => {
+                                    return hasAddressCount(defaultAddresses.length + addressTextsToRemove.length - (addressToRemoveIndex + 1))
+                                });
+                        });
+                });
             }, Promise.resolve());
         })
-        .then(() => browser.waitUntil(() =>
-            getAddressCount().then(count => count === defaultAddresses.length)
-        ));
+        // make sure there are only default addresses left
+        .then(() => browser.waitUntil(() => {
+            return hasAddressCount(defaultAddresses.length);
+        }));
 }
 
-export function getAddressCount () {
+function hasAddressCount (n) {
     return browser.elements(ADDRESS_SELECTOR)
-        .then(rows => rows.value.length);
+        .then(rows => rows.value.length === n);
 }
 
 /**
