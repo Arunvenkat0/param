@@ -245,7 +245,9 @@ function addProduct() {
     var cart = app.getModel('Cart').goc();
     var renderInfo = cart.addProductToCart();
 
-    if (renderInfo.template === 'checkout/cart/cart') {
+    if (renderInfo.source === 'giftregistry') {
+        app.getView().render('account/giftregistry/refreshgiftregistry');
+    } else if (renderInfo.template === 'checkout/cart/cart') {
         app.getView('Cart', {
             Basket: cart
         }).render(renderInfo.template);

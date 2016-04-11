@@ -24,9 +24,9 @@ var StoreMgr = require('dw/catalog/StoreMgr');
 var TransientAddress = require('~/cartridge/scripts/models/TransientAddressModel');
 var UUIDUtils = require('dw/util/UUIDUtils');
 
-//TODO
 var lineItem;
 var app = require('~/cartridge/scripts/app');
+var ProductList = app.getModel('ProductList');
 
 /**
  * Cart helper providing enhanced cart functionality
@@ -58,15 +58,14 @@ var CartModel = AbstractModel.extend({
         var productToAdd;
         var template = 'checkout/cart/minicart';
 
-        // TODO : Investigate this please reference RAP-4817
-        //Replaces a product in the gift registry.
+        // Edit details of a gift registry
         if (params.source && params.source.stringValue === 'giftregistry' && params.cartAction && params.cartAction.stringValue === 'update') {
-            app.getController('GiftRegistry').ReplaceProductListItem();
-            return;
+            ProductList.replaceProductListItem();
+            return {
+                source: 'giftregistry'
+            };
         }
 
-        // TODO : Investigate this please reference RAP-4817
-        // Replaces an item in the wishlist.
         if (params.source && params.source.stringValue === 'wishlist' && params.cartAction && params.cartAction.stringValue === 'update') {
             app.getController('Wishlist').ReplaceProductListItem();
             return;

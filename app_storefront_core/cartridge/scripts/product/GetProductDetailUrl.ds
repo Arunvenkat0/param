@@ -129,7 +129,8 @@ function GetProductDetailUrl(pdict) {
 		pid: pdict.Product.ID,
 		source: pdict.CurrentHttpParameterMap.source.stringValue,
 		uuid: pdict.CurrentHttpParameterMap.uuid.stringValue,
-		Quantity: pdict.CurrentHttpParameterMap.Quantity.stringValue
+		Quantity: pdict.CurrentHttpParameterMap.Quantity.stringValue,
+		productlistid: pdict.CurrentHttpParameterMap.productlistid.stringValue
 	};
 
 	var variationAttributes = GetVariationAttributes(pdict);

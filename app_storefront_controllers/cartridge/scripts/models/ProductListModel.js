@@ -9,6 +9,8 @@ var CustomerMgr = require('dw/customer/CustomerMgr');
 var ProductListMgr = require('dw/customer/ProductListMgr');
 var Transaction = require('dw/system/Transaction');
 
+var app = require('~/cartridge/scripts/app');
+
 /**
  * ProductList helper function providing enhanced functionality for wishlists and other product lists.
  * @class module:models/ProductListModel~ProductListModel
@@ -148,6 +150,49 @@ ProductListModel.search = function (searchForm, listType) {
 
 };
 
+/**
+ * Attempts to replace a product in the gift registry.
+ * @return {Object} JSON object indicating the error state if any pipelets called throw a PIPELET_ERROR.
+ */
+ProductListModel.replaceProductListItem = function() {
+    var currentHttpParameterMap = request.httpParameterMap;
+    var newProductListItem;
+    var ProductModel = app.getModel('Product');
+    var product;
+    var productList = ProductListMgr.getProductList(currentHttpParameterMap.productlistid.stringValue);
+
+    if (!productList) {
+        return {
+            error: true
+        };
+    }
+
+    var productListItemToReplace = productList.getItem(currentHttpParameterMap.uuid.stringValue);
+    if (!productListItemToReplace) {
+        return {
+            error: true
+        };
+    }
+
+    Transaction.wrap(function () {
+        productList.removeItem(productListItemToReplace);
+    });
+
+    if (currentHttpParameterMap.pid.stringValue) {
+        product = ProductModel.get(currentHttpParameterMap.pid.stringValue);
+    } else {
+        throw 'Product ID required but not provided.';
+    }
+
+    var quantity = parseInt(currentHttpParameterMap.Quantity.stringValue);
+
+    Transaction.wrap(function () {
+        newProductListItem = productList.createProductItem(product.object);
+        newProductListItem.setQuantityValue(quantity);
+
+    });
+};
+
 function searchWishLists (searchForm, listType) {
     var email = searchForm.get('email').value();
     var firstName = searchForm.get('firstname').value();
@@ -157,7 +202,7 @@ function searchWishLists (searchForm, listType) {
     if (email) {
         listOwner = CustomerMgr.getCustomerByLogin(email);
     } else if (firstName && lastName) {
-        var profile = CustomerMgr.queryProfile('firstName = {0} AND lastName = {1}', firstName, lastName)
+        var profile = CustomerMgr.queryProfile('firstName = {0} AND lastName = {1}', firstName, lastName);
         if (profile) {
             listOwner = profile.getCustomer();
         }

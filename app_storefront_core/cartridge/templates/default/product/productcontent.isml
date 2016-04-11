@@ -154,9 +154,9 @@
 					var source = pdict.CurrentHttpParameterMap.source.stringValue;
 					var buttonTitle = dw.web.Resource.msg('global.addtocart','locale','Add to Cart');
 					var plid = null;
-					if( updateSources.indexOf(source)>-1 ){
+					if (updateSources.indexOf(source) > -1) {
 						buttonTitle = dw.web.Resource.msg('global.update','locale','Update');
-						if( pdict.CurrentHttpParameterMap.productlistid && pdict.CurrentHttpParameterMap.productlistid.stringValue ) {
+						if (pdict.CurrentHttpParameterMap.productlistid && pdict.CurrentHttpParameterMap.productlistid.stringValue) {
 							plid = pdict.CurrentHttpParameterMap.productlistid.stringValue;
 						}
 					} else {
