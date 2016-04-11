@@ -62,6 +62,12 @@
 				position: absolute;
 			}
 		}
+		display: none;
+
+		.pt_product-search-result &, .pt_product-compare & {
+   			display: block;
+   		}
+
 		&:hover ul.swatch-toggle {
 			display: block;
 		}
