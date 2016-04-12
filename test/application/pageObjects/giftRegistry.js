@@ -73,6 +73,20 @@ export const AFTER_SHIPPING_ZIP_CODE = '[name*=giftregistry_eventaddress_address
 export const AFTER_SHIPPING_COUNTRY = '[name*=giftregistry_eventaddress_addressAfterEvent_country]';
 export const AFTER_SHIPPING_PHONE = '[name*=giftregistry_eventaddress_addressAfterEvent_phone]';
 
+export const PRODUCT_LIST_ITEM = '.item-list tr:nth-of-type(2) .name';
+export const EDIT_DETAILS_LINK = '.item-edit-details a';
+export const EDIT_DETAILS_POP_UP = '#QuickViewDialog';
+export const UPDATE_BTN = '#add-to-cart';
+export const SWATCH_COLOR_VALUE = '.swatches.color .selected-value';
+export const SWATCH_SIZE_VALUE = '.swatches.size .selected-value';
+export const VIEW_REGISTRY = '.item-list .first .event-details a';
+export const QUICK_VIEW_ITEM_NUMBER = '.product-number span';
+export const ITEM_NUMBER = '.product-list-item .sku .value';
+export const ITEM_COLOR = '.product-list-item div:nth-child(3) .value';
+export const ITEM_SIZE = '.product-list-item div:nth-child(4) .value';
+export const QUICK_VIEW_ITEM_QUANTITY = 'input[name=Quantity]';
+export const DESIRED_QUANTITY = 'form-row option-quantity-desired input[name*=quantity]';
+
 const basePath = '/giftregistry';
 
 export function navigateTo () {
