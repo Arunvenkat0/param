@@ -7,7 +7,6 @@
  */
 
 /* API Includes */
-var Pipelet = require('dw/system/Pipelet');
 var giftRegistryType = require('dw/customer/ProductList').TYPE_GIFT_REGISTRY;
 var GiftCertProductListItem = require('dw/customer/ProductListItem').TYPE_GIFT_CERTIFICATE;
 var ProductListMgr = require('dw/customer/ProductListMgr');
@@ -153,35 +152,6 @@ function submitForm() {
             });
         }
     });
-}
-
-/**
- * Creates or searches for a gift registry. Renders the registry list
- * page (account/giftregistry/registrylist template).
- */
-function registrymain() {
-    // TODO this should trigger some redirect
-    var TriggeredAction = request.triggeredFormAction;
-    if (TriggeredAction !== null) {
-        if (TriggeredAction.formId === 'create') {
-            create();
-            return;
-        } else if (TriggeredAction.formId === 'search') {
-            var productListsForm = session.forms.productlists;
-
-            if (productListsForm.search.eventMonth.value !== null && productListsForm.search.eventYear.value === null) {
-                productListsForm.search.eventYear.invalidateFormElement();
-
-                app.getView().render('account/giftregistry/registrylist');
-                return;
-            }
-
-            search();
-            return;
-        }
-    }
-
-    app.getView().render('account/giftregistry/registrylist');
 }
 
 /**
@@ -468,66 +438,6 @@ function showRegistry(pdict) {
 }
 
 /**
- * Searches a gift registry by various parameters.
- */
-function search() {
-    var advancedSearchForm = session.forms.giftregistry.search.advanced;
-    var simpleSearchForm = session.forms.giftregistry.search.simple;
-    var SearchProductListsResult = new Pipelet('SearchProductLists', {
-        PublicOnly: true
-    }).execute({
-        EventType: simpleSearchForm.eventType.value,
-        EventCity: advancedSearchForm.eventCity.value,
-        EventState: advancedSearchForm.eventAddress.states.state.value,
-        EventCountry: advancedSearchForm.eventAddress.country.value,
-        RegistrantFirstName: simpleSearchForm.registrantFirstName.value,
-        RegistrantLastName: simpleSearchForm.registrantLastName.value,
-        Type: giftRegistryType,
-        EventMonth: advancedSearchForm.eventMonth.value,
-        EventYear: advancedSearchForm.eventYear.value,
-        EventName: advancedSearchForm.eventName.value
-    });
-
-    var ProductLists = SearchProductListsResult.ProductLists;
-/**
- * TODO
- */
-    showSearch({
-        ProductLists: ProductLists
-    });
-}
-
-/**
- * Renders the gift registry results page account/giftregistry/giftregistryresults).
- * @param {object} args - JSON object with ProductLists member and ProductLists value.
- * @FIXME only called by the search() function - no need for separate function.
- */
-function showSearch(args) {
-    app.getView().render('account/giftregistry/giftregistryresults', {
-        ProductLists: args.ProductLists
-    });
-}
-
-/**
- * Event handler for gift registry search.
- * Checks the last triggered action and handles it ifthe formId associated with the triggered action is 'search'.
- * calls the {@link module:controllers/GiftRegistry~search|search} function.
- */
-function searchGiftRegistry() {
-    // TODO this should end with a redirect
-    var TriggeredAction = request.triggeredFormAction;
-    if (TriggeredAction !== null) {
-        if (TriggeredAction.formId === 'search') {
-            search();
-            return;
-        }
-    }
-
-    showSearch();
-}
-
-
-/**
  * Looks up a gift registry by its public UUID. If the customer is authenticated, it calls
  * the {@link module:controllers/GiftRegistry~showRegistry|showRegistry} function. If the customer
  * is not authenticated, it calls calls the {@link module:controllers/Account~show|Account
@@ -535,35 +445,26 @@ function searchGiftRegistry() {
  */
 function showRegistryByID() {
     var currentHttpParameterMap = request.httpParameterMap;
+    var productList;
 
     if (!customer.authenticated) {
-        //TODO : RequireLoginResult was reported by jshint as never called
-        //var RequireLoginResult = RequireLogin();
+        response.redirect(URLUtils.https('Account-Show'));
         return;
     }
 
-    var GetProductListResult = new Pipelet('GetProductList', {
-        Create: false
-    }).execute({
-        ProductListID: currentHttpParameterMap.ProductListID.value
-    });
+    productList = ProductListMgr.getProductList(currentHttpParameterMap.ProductListID.value);
 
-    if (GetProductListResult.result === PIPELET_ERROR) {
+    if (!productList) {
         start();
         return;
     }
-    var ProductList = GetProductListResult.ProductList;
 
-    if (ProductList.owner.profile.customerNo === customer.profile.customerNo) {
+    if (productList.owner.profile.customerNo === customer.profile.customerNo) {
         showRegistry({
-            ProductList: ProductList
+            ProductList: productList
         });
         return;
     }
-
-
-    var AccountController = require('./Account');
-    AccountController.Show();
 }
 
 /**
@@ -670,12 +571,6 @@ exports.EditEvent = guard.ensure(['post', 'https'], editEvent);
 exports.EventParticipant = guard.ensure(['post', 'https'], eventParticipant);
 
 /**
- * Event handler for gift registry search.
- * @see module:controllers/GiftRegistry~searchGiftRegistry
- */
-exports.SearchGiftRegistry = guard.ensure(['post'], searchGiftRegistry);
-
-/**
  * Provides actions to edit a gift registry event.
  * @see module:controllers/GiftRegistry~selectProductListInteraction
  */
@@ -694,13 +589,6 @@ exports.ShowRegistryByID = guard.ensure(['get', 'https'], showRegistryByID);
 exports.SubmitForm = guard.ensure(['post', 'https', 'loggedIn'], submitForm);
 
 /**
- * Creates or searches for a gift registry.
- * @FIXME Why is this exported as lowercase?
- * @see module:controllers/GiftRegistry~registrymain
- */
-exports.registrymain = guard.ensure(['post', 'https'], registrymain);
-
-/**
  * Renders a list of gift registries associated with the current customer.
  * @see module:controllers/GiftRegistry~start
  */
@@ -711,12 +599,6 @@ exports.Start = guard.ensure(['get', 'https', 'loggedIn'], start, {scope: 'giftr
  * @see module:controllers/GiftRegistry~addProduct
  */
 exports.AddProduct = guard.ensure(['get', 'https', 'loggedIn'], addProduct);
-
-/**
- * Searches a gift registry by various parameters.
- * @see module:controllers/GiftRegistry~search
- */
-exports.Search = search;
 
 /**
  * Renders the gift registry details page.

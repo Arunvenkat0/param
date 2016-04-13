@@ -94,7 +94,6 @@ function getTargetUrl () {
  * {@link module:controllers/Login~Show|Login controller Show function}. If the order information exists, searches for the order
  * using that information. If the order cannot be found, renders the LoginView. Otherwise, renders the order details page
  * (account/orderhistory/orderdetails template).
- * - __search__ - calls the {@link module:controllers/GiftRegistry~searchGiftRegistry|GiftRegistry controller SearchGiftRegistry function}
  * - __error__ - renders the LoginView.
  */
 function handleLoginForm () {
