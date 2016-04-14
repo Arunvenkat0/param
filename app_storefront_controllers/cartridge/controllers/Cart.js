@@ -252,7 +252,7 @@ function addProduct() {
     } else if (renderInfo.format === 'ajax') {
         app.getView('Cart', {
             cart: cart,
-            BonusDiscountLineItem: renderInfo.newBonusDiscountLineItem
+            BonusDiscountLineItem: renderInfo.BonusDiscountLineItem
         }).render(renderInfo.template);
     } else {
         response.redirect(URLUtils.url('Cart-Show'));
