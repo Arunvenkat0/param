@@ -507,7 +507,170 @@
             </node>
           </segment>
         </branch>
-        <branch basename="b3" source-connector="confirm">
+        <branch basename="b3" source-connector="changepassword">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <call-node start-name-ref="Account-CheckUserName"/>
+              <node-display x="3" y="1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <config-property key="Transactional" value="false"/>
+                <key-binding alias="CurrentForms.profile.customer.email.value" key="From_0"/>
+                <key-binding alias="CurrentForms.profile.login.username.value" key="To_0"/>
+                <key-binding alias="null" key="From_1"/>
+                <key-binding alias="null" key="To_1"/>
+                <key-binding alias="null" key="From_2"/>
+                <key-binding alias="null" key="To_2"/>
+                <key-binding alias="null" key="From_3"/>
+                <key-binding alias="null" key="To_3"/>
+                <key-binding alias="null" key="From_4"/>
+                <key-binding alias="null" key="To_4"/>
+                <key-binding alias="null" key="From_5"/>
+                <key-binding alias="null" key="To_5"/>
+                <key-binding alias="null" key="From_6"/>
+                <key-binding alias="null" key="To_6"/>
+                <key-binding alias="null" key="From_7"/>
+                <key-binding alias="null" key="To_7"/>
+                <key-binding alias="null" key="From_8"/>
+                <key-binding alias="null" key="To_8"/>
+                <key-binding alias="null" key="From_9"/>
+                <key-binding alias="null" key="To_9"/>
+              </pipelet-node>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <decision-node condition-key="CurrentForms.profile.login.newpassword.value==CurrentForms.profile.login.newpasswordconfirm.value" condition-operator="expr"/>
+              <node-display x="0" y="1"/>
+              <branch basename="b2" source-connector="yes">
+                <transition target-connector="in" transaction-control="begin">
+                  <transition-display>
+                    <bend-point relative-to="source" x="0" y="1"/>
+                  </transition-display>
+                </transition>
+                <segment>
+                  <node>
+                    <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                      <config-property key="Transactional" value="true"/>
+                      <config-property key="ScriptFile" value="app_storefront_core:account/login/PasswordCheck.ds"/>
+                      <key-binding alias="Logger" key="ScriptLog"/>
+                      <key-binding alias="CurrentForms.profile.login.currentpassword.value" key="currentPassword"/>
+                      <key-binding alias="CurrentForms.profile.login.newpassword.value" key="password"/>
+                      <key-binding alias="CurrentCustomer" key="CurrentCustomer"/>
+                    </pipelet-node>
+                    <node-display x="0" y="1"/>
+                    <branch basename="b2" source-connector="error">
+                      <transition target-connector="in" transaction-control="rollback">
+                        <transition-display>
+                          <bend-point relative-to="source" x="1" y="0"/>
+                        </transition-display>
+                      </transition>
+                      <segment>
+                        <node>
+                          <pipelet-node pipelet-name="InvalidateFormElement" pipelet-set-identifier="bc_api">
+                            <key-binding alias="CurrentForms.profile.login.currentpassword" key="FormElement"/>
+                          </pipelet-node>
+                          <node-display orientation="horizontal" x="1" y="0"/>
+                        </node>
+                        <transition target-connector="in1" target-path="../../../+1">
+                          <transition-display>
+                            <bend-point relative-to="target" x="4" y="-4"/>
+                            <bend-point relative-to="target" x="3" y="-4"/>
+                            <bend-point relative-to="target" x="0" y="-4"/>
+                          </transition-display>
+                        </transition>
+                      </segment>
+                    </branch>
+                  </node>
+                  <transition target-connector="in1" target-path="./+1">
+                    <transition-display>
+                      <bend-point relative-to="target" x="6" y="-1"/>
+                    </transition-display>
+                  </transition>
+                </segment>
+                <segment>
+                  <node>
+                    <join-node/>
+                    <node-display x="-3" y="5"/>
+                  </node>
+                  <simple-transition transaction-control="commit"/>
+                  <node>
+                    <pipelet-node pipelet-name="ClearFormElement" pipelet-set-identifier="bc_api">
+                      <key-binding alias="CurrentForms.profile" key="FormElement"/>
+                    </pipelet-node>
+                    <node-display x="0" y="1"/>
+                  </node>
+                  <simple-transition/>
+                  <node>
+                    <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                      <config-property key="Transactional" value="false"/>
+                      <key-binding alias="null" key="From_0"/>
+                      <key-binding alias="null" key="From_1"/>
+                      <key-binding alias="null" key="To_1"/>
+                      <key-binding alias="null" key="From_2"/>
+                      <key-binding alias="null" key="To_2"/>
+                      <key-binding alias="null" key="From_3"/>
+                      <key-binding alias="null" key="To_3"/>
+                      <key-binding alias="null" key="From_4"/>
+                      <key-binding alias="null" key="To_4"/>
+                      <key-binding alias="null" key="From_5"/>
+                      <key-binding alias="null" key="To_5"/>
+                      <key-binding alias="null" key="From_6"/>
+                      <key-binding alias="null" key="To_6"/>
+                      <key-binding alias="null" key="From_7"/>
+                      <key-binding alias="null" key="To_7"/>
+                      <key-binding alias="null" key="From_8"/>
+                      <key-binding alias="null" key="To_8"/>
+                      <key-binding alias="null" key="From_9"/>
+                      <key-binding alias="null" key="To_9"/>
+                      <key-binding alias="bctext2" key="To_0"/>
+                    </pipelet-node>
+                    <node-display x="0" y="1"/>
+                  </node>
+                  <simple-transition/>
+                  <node>
+                    <jump-node start-name-ref="Account-Show"/>
+                    <node-display x="0" y="1"/>
+                  </node>
+                </segment>
+              </branch>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="1" y="0"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <pipelet-node pipelet-name="InvalidateFormElement" pipelet-set-identifier="bc_api">
+                <key-binding alias="CurrentForms.profile.login.passwordconfirm" key="FormElement"/>
+              </pipelet-node>
+              <node-display orientation="horizontal" x="1" y="0"/>
+            </node>
+            <transition target-connector="in1" target-path="..">
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="-8"/>
+                <bend-point relative-to="target" x="7" y="0"/>
+                <bend-point relative-to="target" x="4" y="0"/>
+              </transition-display>
+            </transition>
+          </segment>
+        </branch>
+        <branch basename="b4" source-connector="confirm">
           <transition target-connector="in">
             <transition-display>
               <bend-point relative-to="source" x="0" y="1"/>
@@ -554,167 +717,137 @@
                       </transition>
                       <segment>
                         <node>
-                          <decision-node condition-key="CurrentForms.profile.login.password.value==CurrentForms.profile.login.passwordconfirm.value" condition-operator="expr"/>
+                          <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                            <config-property key="Transactional" value="false"/>
+                            <key-binding alias="CurrentForms.profile.customer.email.value" key="From_0"/>
+                            <key-binding alias="CurrentForms.profile.login.username.value" key="To_0"/>
+                            <key-binding alias="null" key="From_1"/>
+                            <key-binding alias="null" key="To_1"/>
+                            <key-binding alias="null" key="From_2"/>
+                            <key-binding alias="null" key="To_2"/>
+                            <key-binding alias="null" key="From_3"/>
+                            <key-binding alias="null" key="To_3"/>
+                            <key-binding alias="null" key="From_4"/>
+                            <key-binding alias="null" key="To_4"/>
+                            <key-binding alias="null" key="From_5"/>
+                            <key-binding alias="null" key="To_5"/>
+                            <key-binding alias="null" key="From_6"/>
+                            <key-binding alias="null" key="To_6"/>
+                            <key-binding alias="null" key="From_7"/>
+                            <key-binding alias="null" key="To_7"/>
+                            <key-binding alias="null" key="From_8"/>
+                            <key-binding alias="null" key="To_8"/>
+                            <key-binding alias="null" key="From_9"/>
+                            <key-binding alias="null" key="To_9"/>
+                          </pipelet-node>
                           <node-display x="0" y="1"/>
-                          <branch basename="b2" source-connector="yes">
+                        </node>
+                        <simple-transition transaction-control="begin">
+                          <transition-display>
+                            <bend-point relative-to="source" x="0" y="1"/>
+                          </transition-display>
+                        </simple-transition>
+                        <node>
+                          <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
+                            <config-property key="Transactional" value="true"/>
+                            <config-property key="ScriptFile" value="app_storefront_core:account/login/PasswordCheck.ds"/>
+                            <key-binding alias="Logger" key="ScriptLog"/>
+                            <key-binding alias="CurrentForms.profile.login.password.value" key="currentPassword"/>
+                            <key-binding alias="CurrentForms.profile.login.password.value" key="password"/>
+                            <key-binding alias="CurrentCustomer" key="CurrentCustomer"/>
+                          </pipelet-node>
+                          <node-display x="0" y="1"/>
+                          <branch basename="b2" source-connector="error">
                             <transition target-connector="in">
                               <transition-display>
-                                <bend-point relative-to="source" x="0" y="1"/>
+                                <bend-point relative-to="source" x="1" y="0"/>
                               </transition-display>
                             </transition>
                             <segment>
                               <node>
-                                <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
-                                  <config-property key="Transactional" value="false"/>
-                                  <key-binding alias="CurrentForms.profile.customer.email.value" key="From_0"/>
-                                  <key-binding alias="CurrentForms.profile.login.username.value" key="To_0"/>
-                                  <key-binding alias="null" key="From_1"/>
-                                  <key-binding alias="null" key="To_1"/>
-                                  <key-binding alias="null" key="From_2"/>
-                                  <key-binding alias="null" key="To_2"/>
-                                  <key-binding alias="null" key="From_3"/>
-                                  <key-binding alias="null" key="To_3"/>
-                                  <key-binding alias="null" key="From_4"/>
-                                  <key-binding alias="null" key="To_4"/>
-                                  <key-binding alias="null" key="From_5"/>
-                                  <key-binding alias="null" key="To_5"/>
-                                  <key-binding alias="null" key="From_6"/>
-                                  <key-binding alias="null" key="To_6"/>
-                                  <key-binding alias="null" key="From_7"/>
-                                  <key-binding alias="null" key="To_7"/>
-                                  <key-binding alias="null" key="From_8"/>
-                                  <key-binding alias="null" key="To_8"/>
-                                  <key-binding alias="null" key="From_9"/>
-                                  <key-binding alias="null" key="To_9"/>
+                                <pipelet-node pipelet-name="InvalidateFormElement" pipelet-set-identifier="bc_api">
+                                  <key-binding alias="CurrentForms.profile.login.password" key="FormElement"/>
                                 </pipelet-node>
-                                <node-display x="0" y="1"/>
+                                <node-display orientation="horizontal" x="1" y="0"/>
                               </node>
-                              <simple-transition transaction-control="begin">
+                              <transition target-connector="in1" target-path="../b5.1" transaction-control="rollback">
                                 <transition-display>
-                                  <bend-point relative-to="source" x="0" y="1"/>
+                                  <bend-point relative-to="source" x="0" y="2"/>
                                 </transition-display>
-                              </simple-transition>
-                              <node>
-                                <pipelet-node custom-name="SetLogin" pipelet-name="Script" pipelet-set-identifier="bc_api">
-                                  <config-property key="Transactional" value="true"/>
-                                  <config-property key="OnError" value="PIPELET_ERROR"/>
-                                  <config-property key="ScriptFile" value="app_storefront_core:account/login/SetLogin.ds"/>
-                                  <key-binding alias="null" key="ScriptLog"/>
-                                  <key-binding alias="CurrentForms.profile.customer.email.value" key="Login"/>
-                                  <key-binding alias="CurrentForms.profile.login.password.value" key="Password"/>
-                                  <key-binding alias="CurrentCustomer" key="CurrentCustomer"/>
-                                </pipelet-node>
-                                <node-display x="0" y="1"/>
-                                <branch basename="b2" source-connector="error">
-                                  <transition target-connector="in1" target-path="./b4.1" transaction-control="rollback">
-                                    <transition-display>
-                                      <bend-point relative-to="source" x="2" y="0"/>
-                                    </transition-display>
-                                  </transition>
-                                </branch>
-                              </node>
-                              <simple-transition>
-                                <transition-display>
-                                  <bend-point relative-to="source" x="0" y="1"/>
-                                </transition-display>
-                              </simple-transition>
-                              <node>
-                                <pipelet-node pipelet-name="SetCustomerPassword" pipelet-set-identifier="bc_api">
-                                  <key-binding alias="CurrentForms.profile.login.password.value" key="Password"/>
-                                  <key-binding alias="CurrentCustomer" key="Customer"/>
-                                </pipelet-node>
-                                <node-display x="0" y="1"/>
-                                <branch basename="b3" source-connector="error">
-                                  <transition target-connector="in1" target-path="./b4.1" transaction-control="rollback"/>
-                                </branch>
-                              </node>
-                              <simple-transition>
-                                <transition-display>
-                                  <bend-point relative-to="source" x="0" y="1"/>
-                                </transition-display>
-                              </simple-transition>
-                              <node>
-                                <pipelet-node pipelet-name="UpdateObjectWithForm" pipelet-set-identifier="bc_api">
-                                  <key-binding alias="CurrentForms.profile.customer" key="Form"/>
-                                  <key-binding alias="CurrentCustomer.profile" key="Object"/>
-                                </pipelet-node>
-                                <node-display x="0" y="1"/>
-                                <branch basename="b4" source-connector="error">
-                                  <transition target-connector="in1" transaction-control="rollback">
-                                    <transition-display>
-                                      <bend-point relative-to="source" x="2" y="0"/>
-                                    </transition-display>
-                                  </transition>
-                                  <segment>
-                                    <node>
-                                      <join-node/>
-                                      <node-display x="1" y="-1"/>
-                                    </node>
-                                    <transition target-connector="in1" target-path="../../+1">
-                                      <transition-display>
-                                        <bend-point relative-to="source" x="2" y="0"/>
-                                      </transition-display>
-                                    </transition>
-                                  </segment>
-                                </branch>
-                              </node>
-                              <simple-transition transaction-control="commit"/>
-                              <node>
-                                <pipelet-node pipelet-name="ClearFormElement" pipelet-set-identifier="bc_api">
-                                  <key-binding alias="CurrentForms.profile" key="FormElement"/>
-                                </pipelet-node>
-                                <node-display x="0" y="2"/>
-                              </node>
-                              <simple-transition/>
-                              <node>
-                                <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
-                                  <config-property key="Transactional" value="false"/>
-                                  <key-binding alias="null" key="From_0"/>
-                                  <key-binding alias="null" key="From_1"/>
-                                  <key-binding alias="null" key="To_1"/>
-                                  <key-binding alias="null" key="From_2"/>
-                                  <key-binding alias="null" key="To_2"/>
-                                  <key-binding alias="null" key="From_3"/>
-                                  <key-binding alias="null" key="To_3"/>
-                                  <key-binding alias="null" key="From_4"/>
-                                  <key-binding alias="null" key="To_4"/>
-                                  <key-binding alias="null" key="From_5"/>
-                                  <key-binding alias="null" key="To_5"/>
-                                  <key-binding alias="null" key="From_6"/>
-                                  <key-binding alias="null" key="To_6"/>
-                                  <key-binding alias="null" key="From_7"/>
-                                  <key-binding alias="null" key="To_7"/>
-                                  <key-binding alias="null" key="From_8"/>
-                                  <key-binding alias="null" key="To_8"/>
-                                  <key-binding alias="null" key="From_9"/>
-                                  <key-binding alias="null" key="To_9"/>
-                                  <key-binding alias="bctext2" key="To_0"/>
-                                </pipelet-node>
-                                <node-display x="0" y="1"/>
-                              </node>
-                              <simple-transition/>
-                              <node>
-                                <jump-node start-name-ref="Account-Show"/>
-                                <node-display x="0" y="1"/>
-                              </node>
+                              </transition>
                             </segment>
                           </branch>
                         </node>
-                        <simple-transition/>
+                        <simple-transition>
+                          <transition-display>
+                            <bend-point relative-to="source" x="0" y="1"/>
+                          </transition-display>
+                        </simple-transition>
                         <node>
-                          <pipelet-node pipelet-name="InvalidateFormElement" pipelet-set-identifier="bc_api">
-                            <key-binding alias="CurrentForms.profile.login.passwordconfirm" key="FormElement"/>
+                          <pipelet-node custom-name="SetLogin" pipelet-name="Script" pipelet-set-identifier="bc_api">
+                            <config-property key="Transactional" value="true"/>
+                            <config-property key="OnError" value="PIPELET_ERROR"/>
+                            <config-property key="ScriptFile" value="app_storefront_core:account/login/SetLogin.ds"/>
+                            <key-binding alias="null" key="ScriptLog"/>
+                            <key-binding alias="CurrentForms.profile.customer.email.value" key="Login"/>
+                            <key-binding alias="CurrentForms.profile.login.password.value" key="Password"/>
+                            <key-binding alias="CurrentCustomer" key="CurrentCustomer"/>
                           </pipelet-node>
-                          <node-display orientation="horizontal" x="1" y="0"/>
+                          <node-display x="0" y="1"/>
+                          <branch basename="b3" source-connector="error">
+                            <transition target-connector="in1" target-path="./b5.1" transaction-control="rollback">
+                              <transition-display>
+                                <bend-point relative-to="source" x="2" y="0"/>
+                              </transition-display>
+                            </transition>
+                          </branch>
                         </node>
-                        <transition target-connector="in3" target-path="./+1"/>
-                      </segment>
-                      <segment>
+                        <simple-transition>
+                          <transition-display>
+                            <bend-point relative-to="source" x="0" y="1"/>
+                          </transition-display>
+                        </simple-transition>
                         <node>
-                          <join-node/>
-                          <node-display x="1" y="0"/>
+                          <pipelet-node pipelet-name="SetCustomerPassword" pipelet-set-identifier="bc_api">
+                            <key-binding alias="CurrentForms.profile.login.password.value" key="Password"/>
+                            <key-binding alias="CurrentCustomer" key="Customer"/>
+                          </pipelet-node>
+                          <node-display x="0" y="1"/>
+                          <branch basename="b4" source-connector="error">
+                            <transition target-connector="in1" target-path="./b5.1" transaction-control="rollback"/>
+                          </branch>
                         </node>
-                        <transition target-connector="in1" target-path="../+1"/>
+                        <simple-transition>
+                          <transition-display>
+                            <bend-point relative-to="source" x="0" y="1"/>
+                          </transition-display>
+                        </simple-transition>
+                        <node>
+                          <pipelet-node pipelet-name="UpdateObjectWithForm" pipelet-set-identifier="bc_api">
+                            <key-binding alias="CurrentForms.profile.customer" key="Form"/>
+                            <key-binding alias="CurrentCustomer.profile" key="Object"/>
+                          </pipelet-node>
+                          <node-display x="0" y="1"/>
+                          <branch basename="b5" source-connector="error">
+                            <transition target-connector="in1" transaction-control="rollback">
+                              <transition-display>
+                                <bend-point relative-to="source" x="2" y="0"/>
+                              </transition-display>
+                            </transition>
+                            <segment>
+                              <node>
+                                <join-node/>
+                                <node-display x="1" y="-1"/>
+                              </node>
+                              <transition target-connector="in1" target-path="../../+1">
+                                <transition-display>
+                                  <bend-point relative-to="source" x="2" y="0"/>
+                                </transition-display>
+                              </transition>
+                            </segment>
+                          </branch>
+                        </node>
+                        <transition target-connector="in1" target-path="../../../b3.1/b2.2"/>
                       </segment>
                     </branch>
                   </node>
@@ -759,7 +892,7 @@
         <text-node>
           <description>Renders the password reset dialog.</description>
         </text-node>
-        <node-display x="13" y="1"/>
+        <node-display x="15" y="1"/>
       </node>
     </segment>
   </branch>
@@ -767,7 +900,7 @@
     <segment>
       <node>
         <start-node name="PasswordResetDialog" secure="true"/>
-        <node-display x="13" y="2"/>
+        <node-display x="15" y="2"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -808,11 +941,7 @@
           </segment>
         </branch>
         <branch basename="b3" source-connector="send">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="target" x="0" y="-1"/>
-            </transition-display>
-          </transition>
+          <transition target-connector="in"/>
           <segment>
             <node>
               <pipelet-node pipelet-name="GetCustomer" pipelet-set-identifier="bc_api">
@@ -966,7 +1095,7 @@
         <text-node>
           <description>Renders the password reset screen.  This is very similar to the password reset dialog but has screen-based interaction instead of popup interaction.</description>
         </text-node>
-        <node-display x="18" y="1"/>
+        <node-display x="20" y="1"/>
       </node>
     </segment>
   </branch>
@@ -974,7 +1103,7 @@
     <segment>
       <node>
         <start-node name="PasswordReset" secure="true"/>
-        <node-display x="18" y="2"/>
+        <node-display x="20" y="2"/>
       </node>
       <simple-transition/>
       <node>
@@ -1194,7 +1323,7 @@
         <text-node>
           <description>Renders the screen for setting a new password.  If token not valid, just quietly forward to PasswordReset screen.</description>
         </text-node>
-        <node-display x="23" y="1"/>
+        <node-display x="25" y="1"/>
       </node>
     </segment>
   </branch>
@@ -1202,7 +1331,7 @@
     <segment>
       <node>
         <start-node name="SetNewPassword" secure="true"/>
-        <node-display x="23" y="2"/>
+        <node-display x="25" y="2"/>
       </node>
       <simple-transition/>
       <node>
@@ -1450,7 +1579,7 @@
                             <key-binding alias="null" key="From_9"/>
                             <key-binding alias="null" key="To_9"/>
                           </pipelet-node>
-                          <node-display x="0" y="3"/>
+                          <node-display x="0" y="1"/>
                         </node>
                         <simple-transition>
                           <transition-display>
@@ -1547,7 +1676,7 @@
     <segment>
       <node>
         <start-node name="SetNewPasswordConfirm" secure="true"/>
-        <node-display x="27" y="2"/>
+        <node-display x="29" y="2"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -2089,9 +2218,9 @@
     <segment>
       <node>
         <text-node>
-          <description>The stored password hash becomes invalid when login changes. Make sure password is set whenever login changes.</description>
+          <description>Store entered email address as login and email.</description>
         </text-node>
-        <node-display x="7" y="18"/>
+        <node-display x="8" y="16"/>
       </node>
     </segment>
   </branch>
@@ -2099,9 +2228,9 @@
     <segment>
       <node>
         <text-node>
-          <description>Store entered email address as login and email.</description>
+          <description>The stored password hash becomes invalid when login changes. Make sure password is set whenever login changes.</description>
         </text-node>
-        <node-display x="8" y="16"/>
+        <node-display x="8" y="18"/>
       </node>
     </segment>
   </branch>
@@ -2111,7 +2240,7 @@
         <text-node>
           <description>Renders the account navigation.</description>
         </text-node>
-        <node-display x="13" y="16"/>
+        <node-display x="15" y="16"/>
       </node>
     </segment>
   </branch>
@@ -2119,7 +2248,7 @@
     <segment>
       <node>
         <start-node name="IncludeNavigation" secure="false"/>
-        <node-display x="13" y="17"/>
+        <node-display x="15" y="17"/>
       </node>
       <simple-transition>
         <transition-display>

@@ -307,13 +307,13 @@ CustomerModel.getByPasswordResetToken = function (token) {
  * </li><li>the customer login cannot be set
  * </li><li>the new password cannot be saved to the customer profile.</li></ul>
  */
-CustomerModel.editAccount = function (email, password, form) {
+CustomerModel.editAccount = function (email, password, currentPassword, form) {
 
     Transaction.begin();
 
     var newPassword = password;
-    var oldPassword;
-    var setCustomerPassword = customer.profile.credentials.setPassword(newPassword, oldPassword, false);
+    var oldPassword = currentPassword;
+    var setCustomerPassword = customer.profile.credentials.setPassword(newPassword, oldPassword, true);
 
     if (setCustomerPassword.error || !CustomerModel.setLogin(customer, email, password) || !Form.get('profile.customer').copyTo(customer.profile)) {
         Transaction.rollback();

@@ -88,13 +88,51 @@ function editForm() {
                 isProfileUpdateValid = false;
             }
 
-            if (app.getForm('profile.login.password').value() !== app.getForm('profile.login.passwordconfirm').value()) {
-                app.getForm('profile.login.passwordconfirm').invalidate();
+            if (!app.getForm('profile.login.password').value()) {
+                app.getForm('profile.login.password').invalidate();
                 isProfileUpdateValid = false;
             }
 
             if (isProfileUpdateValid) {
-                hasEditSucceeded = Customer.editAccount(app.getForm('profile.customer.email').value(), app.getForm('profile.login.password').value(), app.getForm('profile'));
+                hasEditSucceeded = Customer.editAccount(app.getForm('profile.customer.email').value(), app.getForm('profile.login.password').value(), app.getForm('profile.login.password').value(), app.getForm('profile'));
+
+                if (!hasEditSucceeded) {
+                    app.getForm('profile.login.password').invalidate();
+                    isProfileUpdateValid = false;
+                }
+            }
+
+            if (isProfileUpdateValid && hasEditSucceeded) {
+                response.redirect(URLUtils.https('Account-Show'));
+            } else {
+                response.redirect(URLUtils.https('Account-EditProfile', 'invalid', 'true'));
+            }
+        },
+        changepassword: function () {
+            var isProfileUpdateValid = true;
+            var hasEditSucceeded = false;
+            var Customer = app.getModel('Customer');
+            
+            if (!Customer.checkUserName()) {
+                app.getForm('profile.customer.email').invalidate();
+                isProfileUpdateValid = false;
+            }
+
+            if (!app.getForm('profile.login.currentpassword').value()) {
+                app.getForm('profile.login.currentpassword').invalidate();
+                isProfileUpdateValid = false;
+            }
+            
+            if (app.getForm('profile.login.newpassword').value() !== app.getForm('profile.login.newpasswordconfirm').value()) {
+                app.getForm('profile.login.newpasswordconfirm').invalidate();
+                isProfileUpdateValid = false;
+            }
+
+            if (isProfileUpdateValid) {
+                hasEditSucceeded = Customer.editAccount(app.getForm('profile.customer.email').value(), app.getForm('profile.login.newpassword').value(), app.getForm('profile.login.currentpassword').value(), app.getForm('profile'));
+                if (!hasEditSucceeded) {
+                    app.getForm('profile.login.currentpassword').invalidate();
+                }
             }
 
             if (isProfileUpdateValid && hasEditSucceeded) {
