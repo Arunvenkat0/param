@@ -1,10 +1,3 @@
-/* jshint strict: false */
-
-/**
-* Special Note:  We are inserting the above jshint exception because of the argument.callee reference on line 105.
-*  Once a suitable alternative is implemented, we should be able to remove this exception.
-*/
-
 /**
  *
  * <p>This script provides inheritance support and is inspired by base2 and Prototype</p>

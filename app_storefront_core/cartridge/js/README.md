@@ -10,8 +10,8 @@ All codes are written in [strict mode](https://developer.mozilla.org/en-US/docs/
 
 In order to enforce a consistent style, please use [editorconfig](http://editorconfig.org/) to set up your editors.
 
-[jshint](http://www.jshint.com/) and [jscs](https://github.com/mdevils/node-jscs) are used for style and format validation.
-They can be run using the build tool, `gulp jscs` and `gulp jshint`. Grunt task equivalents are also available (`grunt jscs` and `grunt jshint`).
+[eslint](http://eslint.org/) is used for style and format validation.
+It can be run using the build tool, `npm run lint`. Grunt and gulp task equivalents are also available (`grunt lint` and `gulp lint`).
 
 ### Code styles
 
@@ -31,7 +31,7 @@ if (a === '1') {
 	a = a + '2';
 }
 ```
-For other more granular rules about spaces, see `.jscsrc`.
+For other more granular rules about spaces, see `.eslintrc.json`.
 
 #### Variables
 - Don't be overly descriptive with your variable names but don't abuse one-letter variables either. Find a sweet spot somewhere in between.
