@@ -83,7 +83,7 @@
     "test:unit": "bin/test.js",
     "test:application": "wdio test/application/webdriver/wdio.conf.js",
     "test:application:docker": "bin/test-application-docker.sh",
-    "lint": "grunt lint",
+    "lint": "eslint .",
     "build": "gulp build",
     "preversion": "version > old_version",
     "version": "bin/version.js && rm old_version && git add .",
