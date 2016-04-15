@@ -107,7 +107,7 @@
 								<input type="hidden" name="itemid" value="${item.object.ID}"/>
 								<input type="hidden" name="plid" value="${pdict.ProductList.UUID}"/>
 								<isif condition="${isGiftCert}">
-									<button type="submit" name="${item.addGiftCertificateToCart.htmlName}" title="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" value="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" class="button-fancy-small">
+									<button type="submit" name="${item.addGiftCertificate.htmlName}" title="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" value="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" class="button-fancy-small">
 										${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}
 									</button>
 								<iselse/>
