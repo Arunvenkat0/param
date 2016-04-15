@@ -567,75 +567,6 @@ function showRegistryByID() {
 }
 
 /**
- * Attempts to replace a product in the gift registry.
- * @return {Object} JSON object indicating the error state if any pipelets called throw a PIPELET_ERROR.
- */
-function replaceProductListItem() {
-    var currentHttpParameterMap = request.httpParameterMap;
-
-
-    var GetProductListResult = new Pipelet('GetProductList', {
-        Create: false
-    }).execute({
-        ProductListID: currentHttpParameterMap.productlistid.stringValue
-    });
-    if (GetProductListResult.result === PIPELET_ERROR) {
-        return {
-            error: true
-        };
-    }
-    var ProductList = GetProductListResult.ProductList;
-
-
-    var ScriptResult = new Pipelet('Script', {
-        Transactional: true,
-        OnError: 'PIPELET_ERROR',
-        ScriptFile: 'app_storefront_core:account/ReplaceProductListItem.ds'
-    }).execute({
-        ProductList: ProductList,
-        plid: currentHttpParameterMap.uuid.stringValue
-    });
-    if (ScriptResult.result === PIPELET_ERROR) {
-        app.getView().render('account/giftregistry/refreshgiftregistry', {
-        });
-        return;
-    }
-
-
-    var GetProductResult = new Pipelet('GetProduct').execute({
-        ProductID: currentHttpParameterMap.pid.stringValue
-    });
-    if (GetProductResult.result === PIPELET_ERROR) {
-        return {
-            error: true
-        };
-    }
-
-    //TODO : AddProductToProductListResult was never used and jshint was reporting errors as a result
-    //var Product = GetProductResult.Product;
-
-
-    //var UpdateProductOptionSelectionsResult = new Pipelet('UpdateProductOptionSelections').execute({
-    //    Product: Product
-    //});
-    //var ProductOptionModel = UpdateProductOptionSelectionsResult.ProductOptionModel;
-
-
-    // var AddProductToProductListResult = new Pipelet('AddProductToProductList', {
-    //     DisallowRepeats: true
-    // }).execute({
-    //     Product: Product,
-    //     ProductList: ProductList,
-    //     Quantity: currentHttpParameterMap.Quantity.doubleValue,
-    //     ProductOptionModel: ProductOptionModel,
-    //     Priority: 2
-    // });
-    //TODO : AddProductToProductListResult was never used and jshint was reporting errors as a result
-
-    app.getView().render('account/giftregistry/refreshgiftregistry', {});
-}
-
-/**
  * Handles the confirm action for the giftregistry form. Checks to makes sure the before and after
  * event addresses do not already exist in the customer profile. If the addresses are duplicates,
  * calls the {@link module:controllers/GiftRegistry~setParticipants|setParticipants} function.
@@ -780,15 +711,6 @@ exports.Start = guard.ensure(['get', 'https', 'loggedIn'], start, {scope: 'giftr
  * @see module:controllers/GiftRegistry~addProduct
  */
 exports.AddProduct = guard.ensure(['get', 'https', 'loggedIn'], addProduct);
-
-/*
- * Local methods
- */
-/**
- * Attempts to replace a product in the gift registry.
- * @see module:controllers/GiftRegistry~replaceProductListItem
- */
-exports.ReplaceProductListItem = replaceProductListItem;
 
 /**
  * Searches a gift registry by various parameters.

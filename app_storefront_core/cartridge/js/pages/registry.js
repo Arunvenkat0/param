@@ -65,7 +65,7 @@ function initializeEvents() {
         populateForm(addressID, $afterAddress);
     });
 
-    $('form[name$="_giftregistry_items"]').on('click', '.item-details a', function (e) {
+    $('.item-list').on('click', '.item-edit-details a', function (e) {
         e.preventDefault();
         var productListID = $('input[name=productListID]').val();
         quickview.show({
