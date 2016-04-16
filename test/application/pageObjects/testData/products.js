@@ -386,6 +386,19 @@ export class ProductBundle extends AbstractProductBase {
     getUrlResourcePath (locale = 'en_US') {
         return `${this.urlResourcePaths[locale]}/${this.id}.html?lang=${locale}`;
     }
+
+    getImage (viewType) {
+        let imgagePath = '';
+        let i;
+
+        for (i = 0; i < this.images.length; i++) {
+            if (this.images[i].viewType === viewType) {
+                imgagePath = this.images[i].paths;
+                break;
+            }
+        }
+        return imgagePath;
+    }
 }
 
 function _parseImages (images) {

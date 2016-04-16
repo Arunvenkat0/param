@@ -13,6 +13,8 @@ export const ORDER_SUBTOTAL = '.order-subtotal td:nth-child(2)';
 export const BTN_UPDATE_CART = '.cart-footer button[name*="_updateCart"]';
 export const BTN_CHECKOUT = 'button[name*="checkoutCart"]';
 export const LINK_REMOVE = 'button[value="Remove"]';
+export const BUNDLED_ITEM = '.rowbundle';
+export const ITEM_IMAGE = '.item-image';
 export const ITEM_DETAILS = '.item-details';
 export const ITEM_NAME = '.item-list .item-details .name';
 export const ITEM_QUANTITY = '.item-quantity';
@@ -54,8 +56,20 @@ export function getItemList () {
         .elements(CART_ITEMS);
 }
 
+export function getItemImageSrcAttrByRow (rowNum) {
+    let selector = _createCssNthCartRow(rowNum) + ' ' + ITEM_IMAGE + ' > img';
+    return browser.waitForVisible(selector)
+        .getAttribute(selector, 'src');
+}
+
 export function getItemNameByRow (rowNum) {
     let selector = _createCssNthCartRow(rowNum) + ' .name';
+    return browser.waitForVisible(selector)
+        .getText(selector);
+}
+
+export function getItemSkuValueByRow (rowNum) {
+    let selector = _createCssNthCartRow(rowNum) + ' .sku .value';
     return browser.waitForVisible(selector)
         .getText(selector);
 }
@@ -102,6 +116,55 @@ export function updateAttributesByRow (rowNum, selection) {
         .then(() => productQuickView.deselectAllAttributes())
         .then(() => productQuickView.selectAttributesByVariant(selection));
 }
+
+export function getBundledItemImageByRow (rowNum) {
+    let selector = _createCssNthCartRow(rowNum) + BUNDLED_ITEM + ' ' + ITEM_IMAGE;
+    return browser.waitForVisible(selector)
+        .getText(selector);
+}
+
+export function getBundledItemNameByRow (rowNum) {
+    let selector = _createCssNthCartRow(rowNum) + BUNDLED_ITEM + ' ' + ITEM_DETAILS + ' .name';
+    return browser.waitForVisible(selector)
+        .getText(selector);
+}
+
+export function getBundledItemNumberByRow (rowNum) {
+    let selector = _createCssNthCartRow(rowNum) + BUNDLED_ITEM + ' ' + ITEM_DETAILS + ' .itemnumber .value';
+    return browser.waitForVisible(selector)
+        .getText(selector);
+}
+
+export function getBundledItemDetailsImageSrcAttrByRow (rowNum) {
+    let selector = _createCssNthCartRow(rowNum) + BUNDLED_ITEM + ' ' + ITEM_DETAILS + ' > a > img';
+    return browser.waitForVisible(selector)
+        .getAttribute(selector, 'src');
+}
+
+export function getBundledItemQuantityByRow (rowNum) {
+    let selector = _createCssNthCartRow(rowNum) + BUNDLED_ITEM + ' ' + ITEM_QUANTITY + ' .bundleqtyincluded';
+    return browser.waitForVisible(selector)
+        .getText(selector);
+}
+
+export function getBundledItemQuantityTagNameByRow (rowNum) {
+    let selector = _createCssNthCartRow(rowNum) + BUNDLED_ITEM + ' ' + ITEM_QUANTITY + ' .bundleqtyincluded';
+    return browser.waitForVisible(selector)
+        .getTagName(selector);
+}
+
+export function getBundledItemUnitPriceByRow (rowNum) {
+    let selector = _createCssNthCartRow(rowNum) + BUNDLED_ITEM + ' .item-price';
+    return browser.waitForVisible(selector)
+        .getText(selector);
+}
+
+export function getBundledItemTotalPriceByRow (rowNum) {
+    let selector = _createCssNthCartRow(rowNum) + BUNDLED_ITEM + ' .item-total';
+    return browser.waitForVisible(selector)
+        .getText(selector);
+}
+
 
 /**
  * Retrieves the Cart's Sub-total value
