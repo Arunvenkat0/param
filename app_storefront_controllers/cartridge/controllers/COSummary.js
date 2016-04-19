@@ -22,8 +22,9 @@ var Cart = app.getModel('Cart');
 
 /**
  * Renders the summary page prior to order creation.
+ * @param {Object} context context object used for the view
  */
-function start() {
+function start(context) {
     var cart = Cart.get();
 
     // Checks whether all payment methods are still applicable. Recalculates all existing non-gift certificate payment
@@ -34,7 +35,6 @@ function start() {
         COBilling.Start();
         return;
     } else {
-
         Transaction.wrap(function () {
             cart.calculate();
         });
@@ -46,10 +46,11 @@ function start() {
         });
 
         var pageMeta = require('~/cartridge/scripts/meta');
-        pageMeta.update({pageTitle: Resource.msg('summary.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')});
-        app.getView({
+        var viewContext = require('app_storefront_core/cartridge/scripts/common/extend').immutable(context, {
             Basket: cart.object
-        }).render('checkout/summary/summary');
+        });
+        pageMeta.update({pageTitle: Resource.msg('summary.meta.pagetitle', 'checkout', 'SiteGenesis Checkout')});
+        app.getView(viewContext).render('checkout/summary/summary');
     }
 }
 
@@ -63,23 +64,9 @@ function submit() {
     // If the order creation failed, it returns a JSON object with an error key and a boolean value.
     var placeOrderResult = app.getController('COPlaceOrder').Start();
     if (placeOrderResult.error) {
-        var cart = Cart.get();
-        var COBilling = app.getController('COBilling');
-
-        if (!COBilling.ValidatePayment(cart)) {
-            COBilling.Start();
-            return;
-        } else {
-
-            Transaction.wrap(function () {
-                cart.calculate();
-            });
-
-            app.getView({
-                Basket: cart.object,
-                PlaceOrderError: placeOrderResult.PlaceOrderError
-            }).render('checkout/summary/summary');
-        }
+        start({
+            PlaceOrderError: placeOrderResult.PlaceOrderError
+        });
     } else if (placeOrderResult.order_created) {
         showConfirmation(placeOrderResult.Order);
     }
