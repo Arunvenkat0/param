@@ -62,7 +62,6 @@ function switchToHttps() {
 }
 
 function csrfValidationFailed() {
-
     if (request.httpParameterMap.format.stringValue === 'ajax') {
         app.getModel('Customer').logout();
         let r = require('~/cartridge/scripts/util/Response');
@@ -73,7 +72,6 @@ function csrfValidationFailed() {
         app.getModel('Customer').logout();
         app.getView().render('csrf/csrffailed');
     }
-
 
     return false;
 }
