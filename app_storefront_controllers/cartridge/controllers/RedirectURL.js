@@ -27,13 +27,14 @@ var guard = require('~/cartridge/scripts/guard');
  * renders an error page (util/redirecterrorutil/redirecterror template).
  */
 function start() {
-    var redirect = URLRedirectMgr.getRedirect();
+    var redirect = URLRedirectMgr.getRedirect(),
+        location = redirect ? redirect.getLocation() : null;
 
-    if (redirect === null) {
+    if (!location) {
         app.getView().render('util/redirecterrorutil/redirecterror');
     } else {
         app.getView({
-            Location: redirect.location
+            Location: location
         }).render('util/redirectpermanent');
     }
 }
