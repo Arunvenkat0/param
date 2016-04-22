@@ -16,6 +16,15 @@ var Transaction = require('dw/system/Transaction');
 var Email = require('./EmailModel');
 var GiftCertificate = require('./GiftCertificateModel');
 
+function placeOrder(order) {
+    var placeOrderStatus = OrderMgr.placeOrder(order);
+    if (placeOrderStatus === Status.ERROR) {
+        OrderMgr.failOrder(order);
+        throw new Error('Failed to place order.');
+    }
+    order.setConfirmationStatus(Order.CONFIRMATION_STATUS_CONFIRMED);
+    order.setExportStatus(Order.EXPORT_STATUS_READY);
+}
 /**
  * Order helper class providing enhanced order functionality.
  * @class module:models/OrderModel~OrderModel
@@ -32,18 +41,15 @@ var OrderModel = AbstractModel.extend({
      */
     submit: function () {
         var order = this;
-        var orderPlacementStatus = Transaction.wrap(function () {
-            var status = OrderMgr.placeOrder(order);
-            if (status === Status.ERROR) {
-                OrderMgr.failOrder(order);
-                return status;
-            }
-            order.setConfirmationStatus(order.CONFIRMATION_STATUS_CONFIRMED);
-            return status;
-        });
-
-        if (orderPlacementStatus === Status.ERROR) {
-            return {error: true};
+        Transaction.begin();
+        try {
+            placeOrder(order);
+        } catch (e) {
+            Transaction.rollback();
+            return {
+                error: true,
+                PlaceOrderError: new Status(Status.ERROR, 'confirm.error.technical')
+            };
         }
 
         // Creates gift certificates for all gift certificate line items in the order
@@ -58,11 +64,7 @@ var OrderModel = AbstractModel.extend({
                 Order: order
             });
 
-        // Mark order as EXPORT_STATUS_READY.
-        Transaction.wrap(function () {
-            order.setExportStatus(Order.EXPORT_STATUS_READY);
-            order.setConfirmationStatus(Order.CONFIRMATION_STATUS_CONFIRMED);
-        });
+        Transaction.commit();
 
         return {
             Order: order,
