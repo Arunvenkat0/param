@@ -7,7 +7,6 @@
 
 /* API Includes */
 var AbstractModel = require('./AbstractModel');
-var GiftCertificateMgr = require('dw/order/GiftCertificateMgr');
 var Order = require('dw/order/Order');
 var OrderMgr = require('dw/order/OrderMgr');
 var Resource = require('dw/web/Resource');
@@ -15,7 +14,32 @@ var Status = require('dw/system/Status');
 var Transaction = require('dw/system/Transaction');
 
 var Email = require('./EmailModel');
+var GiftCertificate = require('./GiftCertificateModel');
 
+/**
+ * Creates gift certificates for all gift certificate line items in the order
+ * and sends an email to the gift certificate receiver
+ *
+ * @param {dw.order.Order} order
+ * @return {Boolean} false if unable to create gift certificate, true otherwise
+ */
+function createAndSendGiftCertificates (order) {
+    var giftCertificateLineItems = order.getGiftCertificateLineItems();
+
+    for (var i = 0; i < giftCertificateLineItems.length; i++) {
+        var newGiftCertificate = GiftCertificate.createGiftCertificateFromLineItem(giftCertificateLineItems[i], order.getOrderNo());
+
+        if (!newGiftCertificate) {
+            return false;
+        }
+        Email.get('mail/giftcert', newGiftCertificate.recipientEmail)
+            .setSubject(Resource.msg('resource.ordergcemsg', 'email', null) + ' ' + newGiftCertificate.senderName)
+            .send({
+                GiftCertificate: newGiftCertificate
+            });
+    }
+    return true;
+}
 /**
  * Order helper class providing enhanced order functionality.
  * @class module:models/OrderModel~OrderModel
@@ -25,83 +49,46 @@ var Email = require('./EmailModel');
  */
 var OrderModel = AbstractModel.extend({
     /**
-     * Creates gift certificates for all gift certificate line items in the order
-     * and sends an email to the gift certificate receiver
-     *
-     * @alias module:models/OrderModel~OrderModel/createGiftCertificates
-     * @returns {Boolean} false if unable to create gift certificate, true otherwise
-     */
-    createAndSendGiftCertificates: function () {
-        var giftCertificateLineItems = this.getGiftCertificateLineItems();
-        var orderNo = this.getOrderNo();
-
-        for (var i = 0; i < giftCertificateLineItems.length; i++) {
-            var giftCertificateLineItem = giftCertificateLineItems[i];
-            var newGiftCertificate;
-
-            Transaction.wrap(function () {
-                newGiftCertificate = GiftCertificateMgr.createGiftCertificate(giftCertificateLineItem.netPrice.value);
-                newGiftCertificate.setRecipientEmail(giftCertificateLineItem.recipientEmail);
-                newGiftCertificate.setRecipientName(giftCertificateLineItem.recipientName);
-                newGiftCertificate.setSenderName(giftCertificateLineItem.senderName);
-                newGiftCertificate.setMessage(giftCertificateLineItem.message);
-                newGiftCertificate.setOrderNo(orderNo);
-            });
-
-            if (!newGiftCertificate) {
-                return false;
-            }
-            Email.get('mail/giftcert', newGiftCertificate.recipientEmail)
-                .setSubject(Resource.msg('resource.ordergcemsg', 'email', null) + ' ' + newGiftCertificate.senderName)
-                .send({
-                    GiftCertificate: newGiftCertificate
-                });
-        }
-
-        return true;
-    },
-
-    /**
      * Submits an order
      *
      * @transactional
      * @return {Object} object If order cannot be placed, object.error is set to true. Ortherwise, object.order_created is true, and object.Order is set to the order.
      */
     submit: function () {
-        var self = this;
+        var order = this;
         var orderPlacementStatus = Transaction.wrap(function () {
-            var status = OrderMgr.placeOrder(self);
+            var status = OrderMgr.placeOrder(order);
             if (status === Status.ERROR) {
-                OrderMgr.failOrder(self);
+                OrderMgr.failOrder(order);
                 return status;
             }
-            self.setConfirmationStatus(self.CONFIRMATION_STATUS_CONFIRMED);
+            order.setConfirmationStatus(order.CONFIRMATION_STATUS_CONFIRMED);
             return status;
         });
 
         if (orderPlacementStatus === Status.ERROR) {
             return {error: true};
         }
-        var giftCertficiatesStatus = self.createAndSendGiftCertificates();
+        var giftCertficiatesStatus = createAndSendGiftCertificates(order);
         if (!giftCertficiatesStatus) {
-            OrderMgr.failOrder(self);
+            OrderMgr.failOrder(order);
             return {error: true};
         }
 
-        Email.get('mail/orderconfirmation', self.getCustomerEmail())
-            .setSubject((Resource.msg('order.orderconfirmation-email.001', 'order', null) + ' ' + self.getOrderNo()).toString())
+        Email.get('mail/orderconfirmation', order.getCustomerEmail())
+            .setSubject((Resource.msg('order.orderconfirmation-email.001', 'order', null) + ' ' + order.getOrderNo()).toString())
             .send({
-                Order: self
+                Order: order
             });
 
         // Mark order as EXPORT_STATUS_READY.
         Transaction.wrap(function () {
-            self.setExportStatus(Order.EXPORT_STATUS_READY);
-            self.setConfirmationStatus(Order.CONFIRMATION_STATUS_CONFIRMED);
+            order.setExportStatus(Order.EXPORT_STATUS_READY);
+            order.setConfirmationStatus(Order.CONFIRMATION_STATUS_CONFIRMED);
         });
 
         return {
-            Order: self,
+            Order: order,
             order_created: true
         };
     }

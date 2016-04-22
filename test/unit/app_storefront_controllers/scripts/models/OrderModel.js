@@ -16,7 +16,6 @@ var AbstractModel = {
 };
 
 var mockPath = '../../../../mocks/';
-var GiftCertificateMgr = require(mockPath + 'dw/order/GiftCertificateMgr');
 var Logger = require(mockPath + 'dw/system/Logger');
 var Order = require(mockPath + 'dw/order/Order');
 var OrderMgr = require(mockPath + 'dw/order/OrderMgr');
@@ -36,12 +35,12 @@ var spyOrderMgr = sinon.spy(OrderMgr, 'getOrder');
 var OrderModel = proxyquire(cartridgePath + 'cartridge/scripts/models/OrderModel.js', {
     './AbstractModel': AbstractModel,
     './EmailModel': {},
+    './GiftCertificateModel': {},
     'dw/system/Logger': Logger,
     'dw/order/Order': Order,
     'dw/order/OrderMgr': OrderMgr,
     'dw/web/Resource': Resource,
     'dw/system/Status': Status,
-    'dw/order/GiftCertificateMgr': GiftCertificateMgr,
     'dw/system/Transaction': Transaction
 });
 
