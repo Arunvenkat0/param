@@ -17,30 +17,6 @@ var Email = require('./EmailModel');
 var GiftCertificate = require('./GiftCertificateModel');
 
 /**
- * Creates gift certificates for all gift certificate line items in the order
- * and sends an email to the gift certificate receiver
- *
- * @param {dw.order.Order} order
- * @return {Boolean} false if unable to create gift certificate, true otherwise
- */
-function createAndSendGiftCertificates (order) {
-    var giftCertificateLineItems = order.getGiftCertificateLineItems();
-
-    for (var i = 0; i < giftCertificateLineItems.length; i++) {
-        var newGiftCertificate = GiftCertificate.createGiftCertificateFromLineItem(giftCertificateLineItems[i], order.getOrderNo());
-
-        if (!newGiftCertificate) {
-            return false;
-        }
-        Email.get('mail/giftcert', newGiftCertificate.recipientEmail)
-            .setSubject(Resource.msg('resource.ordergcemsg', 'email', null) + ' ' + newGiftCertificate.senderName)
-            .send({
-                GiftCertificate: newGiftCertificate
-            });
-    }
-    return true;
-}
-/**
  * Order helper class providing enhanced order functionality.
  * @class module:models/OrderModel~OrderModel
  * @extends module:models/AbstractModel
@@ -69,11 +45,12 @@ var OrderModel = AbstractModel.extend({
         if (orderPlacementStatus === Status.ERROR) {
             return {error: true};
         }
-        var giftCertficiatesStatus = createAndSendGiftCertificates(order);
-        if (!giftCertficiatesStatus) {
-            OrderMgr.failOrder(order);
-            return {error: true};
-        }
+
+        // Creates gift certificates for all gift certificate line items in the order
+        // and sends an email to the gift certificate receiver
+        order.getGiftCertificateLineItems().map(function (lineItem) {
+            return GiftCertificate.createGiftCertificateFromLineItem(lineItem, order.getOrderNo());
+        }).forEach(GiftCertificate.sendGiftCertificateEmail);
 
         Email.get('mail/orderconfirmation', order.getCustomerEmail())
             .setSubject((Resource.msg('order.orderconfirmation-email.001', 'order', null) + ' ' + order.getOrderNo()).toString())
