@@ -22,11 +22,14 @@ function createGiftCertificateFromLineItem(giftCertificateLineItem, orderNo) {
 }
 
 function sendGiftCertificateEmail(giftCertificate) {
-    Email.get('mail/giftcert', giftCertificate.getRecipientEmail())
-        .setSubject(Resource.msg('resource.ordergcemsg', 'email', null) + ' ' + giftCertificate.getSenderName())
-        .send({
+    Email.sendMail({
+        recipient: giftCertificate.getRecipientEmail(),
+        template: 'mail/giftcert',
+        subject: Resource.msg('resource.ordergcemsg', 'email', null) + ' ' + giftCertificate.getSenderName(),
+        context: {
             GiftCertificate: giftCertificate
-        });
+        }
+    });
 }
 
 module.exports = {

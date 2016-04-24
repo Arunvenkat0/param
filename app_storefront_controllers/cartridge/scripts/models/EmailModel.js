@@ -6,8 +6,10 @@
  * @module models/EmailModel
  */
 
-/* API Includes */
 var AbstractModel = require('./AbstractModel');
+var Mail = require('dw/net/Mail');
+var Site = require('dw/system/Site');
+var Template = require('dw/util/Template');
 
 /**
  * Email helper providing enhanced email functionality
@@ -25,57 +27,55 @@ var AbstractModel = require('./AbstractModel');
  * @param {String} template The template that is rendered and then sent as email.
  * @param {String} recipient The email address where the text of the rendered template is sent.
  */
-var EmailModel = AbstractModel.extend(
-    /** @lends module:models/EmailModel~EmailModel.prototype */
-    {
-        template: null,
+var EmailModel = AbstractModel.extend({
+    template: null,
 
-        init: function (template, recipient) {
-            this._super(new dw.net.Mail());
-            this.template = template;
+    init: function (template, recipient) {
+        this._super(new Mail());
+        this.template = template;
 
-            // prepare the email object
-            var mail = this.object;
-            mail.addTo(recipient);
-            mail.setFrom(dw.system.Site.getCurrent().getCustomPreferenceValue('customerServiceEmail') || 'no-reply@demandware.com');
-        },
+        // prepare the email object
+        var mail = this.object;
+        mail.addTo(recipient);
+        mail.setFrom(Site.getCurrent().getCustomPreferenceValue('customerServiceEmail') || 'no-reply@demandware.com');
+    },
 
-        /**
-         * Prepares the email that is queued to the internal mail system for delivery.
-         *
-         * @alias module:models/EmailModel~EmailModel/send
-         * @param args JSON object added to the HashMap used when rendering the email template.
-         * @returns {dw.system.Status} Status tells whether the mail was successfully queued ( Status.OK) or not ( Status.ERROR).
-         * If an error is thrown, more information about the reason for the failure can be found within the log files.
-         * If the mandatory fields from, content, and subject are empty an IllegalArgumentException is thrown. An
-         * llegalArgumentException is thrown if neither to, cc, nor bcc are set.
-         */
-        send: function (args) {
-            // Add some default keys
-            var params = require('~/cartridge/scripts/object').toHashMap(args);
-            params.CurrentForms = session.forms;
-            params.CurrentHttpParameterMap = request.httpParameterMap;
-            params.CurrentCustomer = customer;
+    /**
+     * Prepares the email that is queued to the internal mail system for delivery.
+     *
+     * @alias module:models/EmailModel~EmailModel/send
+     * @param {Object} args object added to the HashMap used when rendering the email template.
+     * @returns {dw.system.Status} Status tells whether the mail was successfully queued ( Status.OK) or not ( Status.ERROR).
+     * If an error is thrown, more information about the reason for the failure can be found within the log files.
+     * If the mandatory fields from, content, and subject are empty an IllegalArgumentException is thrown. An
+     * llegalArgumentException is thrown if neither to, cc, nor bcc are set.
+     */
+    send: function (args) {
+        // Add some default keys
+        var params = require('~/cartridge/scripts/object').toHashMap(args);
+        params.CurrentForms = session.forms;
+        params.CurrentHttpParameterMap = request.httpParameterMap;
+        params.CurrentCustomer = customer;
 
-            // Creates a body template. Renders the template using the params HashMap.
-            var contentTemplate = new dw.util.Template(this.template);
-            params.put('MainContent', contentTemplate.render(params).text);
+        // Creates a body template. Renders the template using the params HashMap.
+        var contentTemplate = new Template(this.template);
+        params.put('MainContent', contentTemplate.render(params).text);
 
-            // @TODO Enable this to allow for a shared pt_email which creates consistent header/footer
-            // integrate the body in the global content
-            //var template = new dw.util.Template('mail/pt_email');
-            //var content = template.render(params);
+        // @TODO Enable this to allow for a shared pt_email which creates consistent header/footer
+        // integrate the body in the global content
+        //var template = new dw.util.Template('mail/pt_email');
+        //var content = template.render(params);
 
-            // Sets the content and sends it.
-            this.object.setContent(params.MainContent, 'text/html', 'UTF-8');
-            return this.object.send();
-        },
+        // Sets the content and sends it.
+        this.object.setContent(params.MainContent, 'text/html', 'UTF-8');
+        return this.object.send();
+    },
 
-        __noSuchMethod__: function (methodName, methodArgs) {
-            var result = this._super(methodName, methodArgs);
-            return result === this.object ? this : result;
-        }
-    });
+    __noSuchMethod__: function (methodName, methodArgs) {
+        var result = this._super(methodName, methodArgs);
+        return result === this.object ? this : result;
+    }
+});
 
 /**
  * Gets a wrapped email instance.
@@ -87,6 +87,33 @@ var EmailModel = AbstractModel.extend(
  */
 EmailModel.get = function (template, recipient) {
     return new EmailModel(template, recipient);
+};
+
+/**
+ * Send an email
+ * @param {Object} options
+ * @param {String} options.recipient
+ * @param {String} options.template
+ * @param {String} options.subject
+ * @param {Object} options.context
+ * @return {dw.system.Status} whether the mail was successfully queued (Status.OK) or not (Status.ERROR).
+ */
+EmailModel.sendMail = function (options) {
+    if (!options.template || !options.recipient || !options.subject) {
+        return;
+    }
+    var mail = new Mail();
+    mail.addTo(options.recipient);
+    mail.setSubject(options.subject);
+    mail.setFrom(Site.getCurrent().getCustomPreferenceValue('customerServiceEmail') || 'no-reply@demandware.com');
+    var context = require('~/cartridge/scripts/object').toHashMap(options.context);
+    context.CurrentForms = session.forms;
+    context.CurrentHttpParameterMap = request.httpParameterMap;
+    context.CurrentCustomer = customer;
+    var template = new Template(options.template);
+    var content = template.render(context).text;
+    mail.setContent(content, 'text/html', 'UTF-8');
+    return mail.send();
 };
 
 /** The Email Model class */

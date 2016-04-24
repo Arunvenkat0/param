@@ -58,11 +58,14 @@ var OrderModel = AbstractModel.extend({
             return GiftCertificate.createGiftCertificateFromLineItem(lineItem, order.getOrderNo());
         }).forEach(GiftCertificate.sendGiftCertificateEmail);
 
-        Email.get('mail/orderconfirmation', order.getCustomerEmail())
-            .setSubject((Resource.msg('order.orderconfirmation-email.001', 'order', null) + ' ' + order.getOrderNo()).toString())
-            .send({
+        Email.sendMail({
+            template: 'mail/orderconfirmation',
+            recipient: order.getCustomerEmail(),
+            subject: Resource.msg('order.orderconfirmation-email.001', 'order', null),
+            context: {
                 Order: order
-            });
+            }
+        });
 
         Transaction.commit();
 
