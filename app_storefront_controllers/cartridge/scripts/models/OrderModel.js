@@ -13,9 +13,6 @@ var Resource = require('dw/web/Resource');
 var Status = require('dw/system/Status');
 var Transaction = require('dw/system/Transaction');
 
-var Email = require('./EmailModel');
-var GiftCertificate = require('./GiftCertificateModel');
-
 function placeOrder(order) {
     var placeOrderStatus = OrderMgr.placeOrder(order);
     if (placeOrderStatus === Status.ERROR) {
@@ -40,6 +37,8 @@ var OrderModel = AbstractModel.extend({
      * @return {Object} object If order cannot be placed, object.error is set to true. Ortherwise, object.order_created is true, and object.Order is set to the order.
      */
     submit: function () {
+        var Email = require('./EmailModel');
+        var GiftCertificate = require('./GiftCertificateModel');
         var order = this;
         Transaction.begin();
         try {

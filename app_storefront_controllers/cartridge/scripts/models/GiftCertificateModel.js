@@ -1,9 +1,5 @@
 'use strict';
 
-var GiftCertificateMgr = require('dw/order/GiftCertificateMgr');
-var Email = require('./EmailModel');
-var Resource = require('dw/web/Resource');
-
 /**
  * Create a gift certificate for a gift certificate line item in the order
  * @param {dw.order.GiftCertificateLineItem} giftCertificateLineItem
@@ -11,6 +7,7 @@ var Resource = require('dw/web/Resource');
  * @return {dw.order.GiftCertificate}
  */
 function createGiftCertificateFromLineItem(giftCertificateLineItem, orderNo) {
+    var GiftCertificateMgr = require('dw/order/GiftCertificateMgr');
     var giftCertificate = GiftCertificateMgr.createGiftCertificate(giftCertificateLineItem.netPrice.value);
     giftCertificate.setRecipientEmail(giftCertificateLineItem.recipientEmail);
     giftCertificate.setRecipientName(giftCertificateLineItem.recipientName);
@@ -22,6 +19,8 @@ function createGiftCertificateFromLineItem(giftCertificateLineItem, orderNo) {
 }
 
 function sendGiftCertificateEmail(giftCertificate) {
+    var Email = require('./EmailModel');
+    var Resource = require('dw/web/Resource');
     Email.sendMail({
         recipient: giftCertificate.getRecipientEmail(),
         template: 'mail/giftcert',
