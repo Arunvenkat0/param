@@ -91,10 +91,23 @@ EmailModel.get = function (template, recipient) {
 
 /**
  * Send an email
+ * @example
+ * ```
+ * require('~/cartridge/scripts/models/EmailModel').sendMail({
+ *     recipient: 'customer@email.com',
+ *     template: 'mail/templatename',
+ *     subject: 'Your order was placed successfully',
+ *     from: 'no-reply@demandware.com',
+ *     context: {
+ *         Order: order
+ *     }
+ * });
+ * ````
  * @param {Object} options
  * @param {String} options.recipient
  * @param {String} options.template
  * @param {String} options.subject
+ * @param {String} options.from
  * @param {Object} options.context
  * @return {dw.system.Status} whether the mail was successfully queued (Status.OK) or not (Status.ERROR).
  */
@@ -105,7 +118,7 @@ EmailModel.sendMail = function (options) {
     var mail = new Mail();
     mail.addTo(options.recipient);
     mail.setSubject(options.subject);
-    mail.setFrom(Site.getCurrent().getCustomPreferenceValue('customerServiceEmail') || 'no-reply@demandware.com');
+    mail.setFrom(options.from || Site.getCurrent().getCustomPreferenceValue('customerServiceEmail') || 'no-reply@demandware.com');
     var context = require('~/cartridge/scripts/object').toHashMap(options.context);
     context.CurrentForms = session.forms;
     context.CurrentHttpParameterMap = request.httpParameterMap;
