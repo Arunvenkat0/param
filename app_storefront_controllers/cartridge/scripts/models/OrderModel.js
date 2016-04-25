@@ -43,6 +43,7 @@ var OrderModel = AbstractModel.extend({
         Transaction.begin();
         try {
             placeOrder(order);
+            Transaction.commit();
         } catch (e) {
             Transaction.rollback();
             return {
@@ -65,8 +66,6 @@ var OrderModel = AbstractModel.extend({
                 Order: order
             }
         });
-
-        Transaction.commit();
 
         return {
             Order: order,
