@@ -1,6 +1,10 @@
 'use strict';
 
 /**
+ * @module models/GiftCertificateModel
+ */
+
+/**
  * Create a gift certificate for a gift certificate line item in the order
  * @param {dw.order.GiftCertificateLineItem} giftCertificateLineItem
  * @param {String} orderNo the order number of the order to associate gift certificate to
@@ -18,6 +22,10 @@ function createGiftCertificateFromLineItem(giftCertificateLineItem, orderNo) {
     return giftCertificate;
 }
 
+/**
+ * Send an email to recipient of gift certificate
+ * @param {dw.order.GiftCertificate} giftCertificate
+ */
 function sendGiftCertificateEmail(giftCertificate) {
     var Email = require('./EmailModel');
     var Resource = require('dw/web/Resource');

@@ -13,6 +13,11 @@ var Resource = require('dw/web/Resource');
 var Status = require('dw/system/Status');
 var Transaction = require('dw/system/Transaction');
 
+/**
+ * Place an order using OrderMgr. If order is placed successfully,
+ * its status will be set as confirmed, and export status set to ready.
+ * @param {dw.order.Order} order
+ */
 function placeOrder(order) {
     var placeOrderStatus = OrderMgr.placeOrder(order);
     if (placeOrderStatus === Status.ERROR) {
@@ -40,8 +45,8 @@ var OrderModel = AbstractModel.extend({
         var Email = require('./EmailModel');
         var GiftCertificate = require('./GiftCertificateModel');
         var order = this;
-        Transaction.begin();
         try {
+            Transaction.begin();
             placeOrder(order);
             Transaction.commit();
         } catch (e) {
