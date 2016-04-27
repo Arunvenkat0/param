@@ -13,6 +13,7 @@ var ProductMgr = require('dw/catalog/ProductMgr');
 var PRODUCT_ID_PARAMETER_NAME = 'pid';
 var PRODUCT_PIPELINE_NAMES = new ArrayList(
     'Product-Show',
+    'Product-ShowInCategory',
     'Link-Product',
     'Link-CategoryProduct');
 
