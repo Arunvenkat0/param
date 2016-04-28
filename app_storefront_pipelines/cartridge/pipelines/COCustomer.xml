@@ -144,14 +144,7 @@
           </transition>
           <segment>
             <node>
-              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
-                <key-binding alias="CurrentForms.login.username.value" key="From_0"/>
-                <key-binding alias="CurrentForms.login.password.value" key="From_1"/>
-                <key-binding alias="Login" key="To_0"/>
-                <key-binding alias="Password" key="To_1"/>
-                <key-binding alias="CurrentForms.login.rememberme.value" key="From_2"/>
-                <key-binding alias="RememberMe" key="To_2"/>
-              </pipelet-node>
+              <call-node start-name-ref="CSRF-Validate"/>
               <node-display x="-1" y="2"/>
             </node>
             <simple-transition>
@@ -160,8 +153,24 @@
               </transition-display>
             </simple-transition>
             <node>
+              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+                <key-binding alias="CurrentForms.login.username.value" key="From_0"/>
+                <key-binding alias="CurrentForms.login.password.value" key="From_1"/>
+                <key-binding alias="Login" key="To_0"/>
+                <key-binding alias="Password" key="To_1"/>
+                <key-binding alias="CurrentForms.login.rememberme.value" key="From_2"/>
+                <key-binding alias="RememberMe" key="To_2"/>
+              </pipelet-node>
+              <node-display x="0" y="2"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
               <call-node start-name-ref="Login-Process"/>
-              <node-display x="0" y="3"/>
+              <node-display x="0" y="1"/>
               <branch basename="b2" source-connector="login_failed">
                 <transition target-connector="in1" target-path="../+1">
                   <transition-display>
@@ -225,12 +234,21 @@
           </transition>
           <segment>
             <node>
-              <call-node start-name-ref="Account-Register"/>
+              <call-node start-name-ref="CSRF-Validate"/>
               <node-display x="0" y="2"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <call-node start-name-ref="Account-Register"/>
+              <node-display x="0" y="1"/>
               <branch basename="b2" source-connector="ok">
                 <transition target-connector="in">
                   <transition-display>
-                    <bend-point relative-to="target" x="-1" y="0"/>
+                    <bend-point relative-to="source" x="0" y="1"/>
                   </transition-display>
                 </transition>
                 <segment>
@@ -258,7 +276,7 @@
                       <key-binding alias="null" key="From_9"/>
                       <key-binding alias="null" key="To_9"/>
                     </pipelet-node>
-                    <node-display orientation="horizontal" x="1" y="1"/>
+                    <node-display x="0" y="1"/>
                   </node>
                   <simple-transition>
                     <transition-display>
@@ -277,14 +295,22 @@
         <branch basename="b4" source-connector="unregistered">
           <transition target-connector="in">
             <transition-display>
-              <bend-point relative-to="source" x="4" y="3"/>
               <bend-point relative-to="target" x="0" y="-1"/>
             </transition-display>
           </transition>
           <segment>
             <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="1" y="2"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="target" x="0" y="-1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
               <jump-node start-name-ref="COShipping-Start"/>
-              <node-display x="2" y="4"/>
+              <node-display x="0" y="2"/>
             </node>
           </segment>
         </branch>
@@ -415,7 +441,7 @@
         <text-node>
           <description>Delegate login to appropriate authentication pipeline and react on success/failure</description>
         </text-node>
-        <node-display x="1" y="15"/>
+        <node-display x="1" y="16"/>
       </node>
     </segment>
   </branch>

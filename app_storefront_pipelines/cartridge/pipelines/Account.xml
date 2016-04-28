@@ -494,7 +494,7 @@
               <pipelet-node pipelet-name="ClearFormElement" pipelet-set-identifier="bc_api">
                 <key-binding alias="CurrentForms.profile" key="FormElement"/>
               </pipelet-node>
-              <node-display x="-1" y="1"/>
+              <node-display x="-2" y="1"/>
             </node>
             <simple-transition>
               <transition-display>
@@ -510,13 +510,22 @@
         <branch basename="b3" source-connector="changepassword">
           <transition target-connector="in">
             <transition-display>
-              <bend-point relative-to="target" x="0" y="-1"/>
+              <bend-point relative-to="target" x="-1" y="0"/>
             </transition-display>
           </transition>
           <segment>
             <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display orientation="horizontal" x="2" y="0"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="target" x="0" y="-1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
               <call-node start-name-ref="Account-CheckUserName"/>
-              <node-display x="3" y="1"/>
+              <node-display x="1" y="1"/>
             </node>
             <simple-transition>
               <transition-display>
@@ -587,11 +596,11 @@
                           </pipelet-node>
                           <node-display orientation="horizontal" x="1" y="0"/>
                         </node>
-                        <transition target-connector="in1" target-path="../../../+1">
+                        <transition target-connector="in1" target-path="../../..">
                           <transition-display>
-                            <bend-point relative-to="target" x="4" y="-4"/>
-                            <bend-point relative-to="target" x="3" y="-4"/>
-                            <bend-point relative-to="target" x="0" y="-4"/>
+                            <bend-point relative-to="target" x="8" y="0"/>
+                            <bend-point relative-to="target" x="7" y="0"/>
+                            <bend-point relative-to="target" x="4" y="0"/>
                           </transition-display>
                         </transition>
                       </segment>
@@ -599,23 +608,27 @@
                   </node>
                   <transition target-connector="in1" target-path="./+1">
                     <transition-display>
-                      <bend-point relative-to="target" x="6" y="-1"/>
+                      <bend-point relative-to="target" x="6" y="0"/>
                     </transition-display>
                   </transition>
                 </segment>
                 <segment>
                   <node>
                     <join-node/>
-                    <node-display x="-3" y="5"/>
+                    <node-display x="-3" y="7"/>
                   </node>
                   <simple-transition transaction-control="commit"/>
                   <node>
                     <pipelet-node pipelet-name="ClearFormElement" pipelet-set-identifier="bc_api">
                       <key-binding alias="CurrentForms.profile" key="FormElement"/>
                     </pipelet-node>
-                    <node-display x="0" y="1"/>
+                    <node-display x="0" y="2"/>
                   </node>
-                  <simple-transition/>
+                  <simple-transition>
+                    <transition-display>
+                      <bend-point relative-to="source" x="0" y="1"/>
+                    </transition-display>
+                  </simple-transition>
                   <node>
                     <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                       <config-property key="Transactional" value="false"/>
@@ -642,7 +655,11 @@
                     </pipelet-node>
                     <node-display x="0" y="1"/>
                   </node>
-                  <simple-transition/>
+                  <simple-transition>
+                    <transition-display>
+                      <bend-point relative-to="source" x="0" y="1"/>
+                    </transition-display>
+                  </simple-transition>
                   <node>
                     <jump-node start-name-ref="Account-Show"/>
                     <node-display x="0" y="1"/>
@@ -671,12 +688,17 @@
           </segment>
         </branch>
         <branch basename="b4" source-connector="confirm">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="source" x="0" y="1"/>
-            </transition-display>
-          </transition>
+          <transition target-connector="in"/>
           <segment>
+            <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
             <node>
               <call-node start-name-ref="Account-CheckUserName"/>
               <node-display x="0" y="1"/>
@@ -698,7 +720,7 @@
                 <segment>
                   <node>
                     <join-node/>
-                    <node-display x="1" y="0"/>
+                    <node-display x="1" y="-1"/>
                   </node>
                   <transition target-connector="in1" target-path="../../+1"/>
                 </segment>
@@ -742,11 +764,7 @@
                           </pipelet-node>
                           <node-display x="0" y="1"/>
                         </node>
-                        <simple-transition transaction-control="begin">
-                          <transition-display>
-                            <bend-point relative-to="source" x="0" y="1"/>
-                          </transition-display>
-                        </simple-transition>
+                        <simple-transition transaction-control="begin"/>
                         <node>
                           <pipelet-node pipelet-name="Script" pipelet-set-identifier="bc_api">
                             <config-property key="Transactional" value="true"/>
@@ -756,7 +774,7 @@
                             <key-binding alias="CurrentForms.profile.login.password.value" key="password"/>
                             <key-binding alias="CurrentCustomer" key="CurrentCustomer"/>
                           </pipelet-node>
-                          <node-display x="0" y="1"/>
+                          <node-display x="0" y="2"/>
                           <branch basename="b2" source-connector="error">
                             <transition target-connector="in">
                               <transition-display>
@@ -772,7 +790,7 @@
                               </node>
                               <transition target-connector="in1" target-path="../b5.1" transaction-control="rollback">
                                 <transition-display>
-                                  <bend-point relative-to="source" x="0" y="2"/>
+                                  <bend-point relative-to="source" x="2" y="0"/>
                                 </transition-display>
                               </transition>
                             </segment>
@@ -795,11 +813,7 @@
                           </pipelet-node>
                           <node-display x="0" y="1"/>
                           <branch basename="b3" source-connector="error">
-                            <transition target-connector="in1" target-path="./b5.1" transaction-control="rollback">
-                              <transition-display>
-                                <bend-point relative-to="source" x="2" y="0"/>
-                              </transition-display>
-                            </transition>
+                            <transition target-connector="in1" target-path="./b5.1" transaction-control="rollback"/>
                           </branch>
                         </node>
                         <simple-transition>
@@ -831,19 +845,15 @@
                           <branch basename="b5" source-connector="error">
                             <transition target-connector="in1" transaction-control="rollback">
                               <transition-display>
-                                <bend-point relative-to="source" x="2" y="0"/>
+                                <bend-point relative-to="source" x="4" y="0"/>
                               </transition-display>
                             </transition>
                             <segment>
                               <node>
                                 <join-node/>
-                                <node-display x="1" y="-1"/>
+                                <node-display x="2" y="-2"/>
                               </node>
-                              <transition target-connector="in1" target-path="../../+1">
-                                <transition-display>
-                                  <bend-point relative-to="source" x="2" y="0"/>
-                                </transition-display>
-                              </transition>
+                              <transition target-connector="in1" target-path="../../+1"/>
                             </segment>
                           </branch>
                         </node>
@@ -851,7 +861,11 @@
                       </segment>
                     </branch>
                   </node>
-                  <simple-transition/>
+                  <simple-transition>
+                    <transition-display>
+                      <bend-point relative-to="source" x="1" y="0"/>
+                    </transition-display>
+                  </simple-transition>
                   <node>
                     <pipelet-node pipelet-name="InvalidateFormElement" pipelet-set-identifier="bc_api">
                       <key-binding alias="CurrentForms.profile.customer.emailconfirm" key="FormElement"/>
@@ -892,7 +906,7 @@
         <text-node>
           <description>Renders the password reset dialog.</description>
         </text-node>
-        <node-display x="15" y="1"/>
+        <node-display x="16" y="1"/>
       </node>
     </segment>
   </branch>
@@ -900,7 +914,7 @@
     <segment>
       <node>
         <start-node name="PasswordResetDialog" secure="true"/>
-        <node-display x="15" y="2"/>
+        <node-display x="16" y="2"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -927,28 +941,42 @@
         </interaction-continue-node>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="cancel">
-          <transition target-connector="in1"/>
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="-3" y="1"/>
+              <bend-point relative-to="target" x="-1" y="0"/>
+            </transition-display>
+          </transition>
           <segment>
             <node>
-              <join-node/>
-              <node-display x="-1" y="1"/>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display orientation="horizontal" x="-1" y="-1"/>
             </node>
-            <transition target-connector="in1" target-path="..">
-              <transition-display>
-                <bend-point relative-to="target" x="-2" y="0"/>
-              </transition-display>
-            </transition>
+            <transition target-connector="in1" target-path=".."/>
           </segment>
         </branch>
         <branch basename="b3" source-connector="send">
-          <transition target-connector="in"/>
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
           <segment>
+            <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="0" y="2"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
             <node>
               <pipelet-node pipelet-name="GetCustomer" pipelet-set-identifier="bc_api">
                 <key-binding alias="CurrentForms.requestpassword.email.htmlValue" key="Login"/>
                 <key-binding alias="Customer" key="Customer"/>
               </pipelet-node>
-              <node-display x="0" y="2"/>
+              <node-display x="0" y="1"/>
               <branch basename="b2" source-connector="error">
                 <transition target-connector="in1" target-path="./+1">
                   <transition-display>
@@ -1050,11 +1078,12 @@
           </segment>
         </branch>
       </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="target" x="-1" y="0"/>
-        </transition-display>
-      </simple-transition>
+      <simple-transition/>
+      <node>
+        <call-node start-name-ref="CSRF-Validate"/>
+        <node-display orientation="horizontal" x="1" y="1"/>
+      </node>
+      <simple-transition/>
       <node>
         <pipelet-node custom-name="ErrorCode == &quot;formnotvalid&quot;" pipelet-name="Assign" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
@@ -1079,7 +1108,7 @@
           <key-binding alias="null" key="From_9"/>
           <key-binding alias="null" key="To_9"/>
         </pipelet-node>
-        <node-display orientation="horizontal" x="2" y="1"/>
+        <node-display orientation="horizontal" x="1" y="0"/>
       </node>
       <transition target-connector="in1" target-path=".">
         <transition-display>
@@ -1133,11 +1162,16 @@
           <transition target-connector="in"/>
           <segment>
             <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="0" y="2"/>
+            </node>
+            <simple-transition/>
+            <node>
               <pipelet-node pipelet-name="GetCustomer" pipelet-set-identifier="bc_api">
                 <key-binding alias="CurrentForms.requestpassword.email.htmlValue" key="Login"/>
                 <key-binding alias="Customer" key="Customer"/>
               </pipelet-node>
-              <node-display x="0" y="3"/>
+              <node-display x="0" y="1"/>
               <branch basename="b2" source-connector="error">
                 <transition target-connector="in">
                   <transition-display>
@@ -1173,7 +1207,7 @@
                   </node>
                   <transition target-connector="in1" target-path="../../+1">
                     <transition-display>
-                      <bend-point relative-to="source" x="2" y="0"/>
+                      <bend-point relative-to="source" x="4" y="0"/>
                     </transition-display>
                   </transition>
                 </segment>
@@ -1272,11 +1306,12 @@
           </segment>
         </branch>
       </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="target" x="-1" y="0"/>
-        </transition-display>
-      </simple-transition>
+      <simple-transition/>
+      <node>
+        <call-node start-name-ref="CSRF-Validate"/>
+        <node-display orientation="horizontal" x="1" y="1"/>
+      </node>
+      <simple-transition/>
       <node>
         <pipelet-node custom-name="ErrorCode == &quot;formnotvalid&quot;" pipelet-name="Assign" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
@@ -1301,7 +1336,7 @@
           <key-binding alias="null" key="From_9"/>
           <key-binding alias="null" key="To_9"/>
         </pipelet-node>
-        <node-display orientation="horizontal" x="1" y="1"/>
+        <node-display orientation="horizontal" x="1" y="0"/>
       </node>
       <transition target-connector="in1" target-path="./+1"/>
     </segment>
@@ -1857,17 +1892,23 @@
         </interaction-continue-node>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="confirm">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="source" x="0" y="1"/>
-            </transition-display>
-          </transition>
+          <transition target-connector="in"/>
           <segment>
+            <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition/>
             <node>
               <call-node start-name-ref="Account-CreateAccount"/>
               <node-display x="0" y="1"/>
               <branch basename="b2" source-connector="error">
-                <transition target-connector="in1" target-path="../+1"/>
+                <transition target-connector="in1" target-path="../+1">
+                  <transition-display>
+                    <bend-point relative-to="source" x="2" y="1"/>
+                    <bend-point relative-to="target" x="0" y="3"/>
+                  </transition-display>
+                </transition>
               </branch>
               <branch basename="b3" source-connector="ok">
                 <transition target-connector="in"/>
@@ -1898,9 +1939,13 @@
     <segment>
       <node>
         <join-node/>
-        <node-display x="1" y="0"/>
+        <node-display x="2" y="1"/>
       </node>
-      <transition target-connector="in3" target-path="./-1"/>
+      <transition target-connector="in3" target-path="./-1">
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="-4"/>
+        </transition-display>
+      </transition>
     </segment>
   </branch>
   <branch basename="_ANONYMOUS_BRANCH_18">
@@ -2133,28 +2178,29 @@
                 </transition>
                 <segment>
                   <node>
-                    <call-node start-name-ref="Login-Process"/>
+                    <call-node start-name-ref="CSRF-Validate"/>
                     <node-display x="0" y="2"/>
+                  </node>
+                  <simple-transition>
+                    <transition-display>
+                      <bend-point relative-to="source" x="0" y="1"/>
+                    </transition-display>
+                  </simple-transition>
+                  <node>
+                    <call-node start-name-ref="Login-Process"/>
+                    <node-display x="0" y="1"/>
                     <branch basename="b2" source-connector="login_failed">
-                      <transition target-connector="in1">
-                        <transition-display>
-                          <bend-point relative-to="target" x="1" y="0"/>
-                        </transition-display>
-                      </transition>
+                      <transition target-connector="in1"/>
                       <segment>
                         <node>
                           <join-node/>
-                          <node-display x="-1" y="1"/>
+                          <node-display x="-1" y="0"/>
                         </node>
                         <transition target-connector="in3" target-path="../../+1"/>
                       </segment>
                     </branch>
                     <branch basename="b3" source-connector="login_succeeded">
-                      <transition target-connector="in">
-                        <transition-display>
-                          <bend-point relative-to="target" x="0" y="-1"/>
-                        </transition-display>
-                      </transition>
+                      <transition target-connector="in"/>
                       <segment>
                         <node>
                           <jump-node start-name-ref="Login-Redirect"/>
@@ -2166,33 +2212,30 @@
                 </segment>
               </branch>
               <branch basename="b4" source-connector="register">
-                <transition target-connector="in">
-                  <transition-display>
-                    <bend-point relative-to="target" x="0" y="-2"/>
-                  </transition-display>
-                </transition>
+                <transition target-connector="in"/>
                 <segment>
                   <node>
+                    <call-node start-name-ref="CSRF-Validate"/>
+                    <node-display x="1" y="2"/>
+                  </node>
+                  <simple-transition/>
+                  <node>
                     <call-node start-name-ref="Account-Register"/>
-                    <node-display x="1" y="3"/>
+                    <node-display x="0" y="1"/>
                   </node>
                   <simple-transition>
                     <transition-display>
-                      <bend-point relative-to="source" x="0" y="1"/>
+                      <bend-point relative-to="target" x="0" y="-1"/>
                     </transition-display>
                   </simple-transition>
                   <node>
                     <jump-node start-name-ref="Login-Redirect"/>
-                    <node-display x="0" y="1"/>
+                    <node-display x="0" y="2"/>
                   </node>
                 </segment>
               </branch>
             </node>
-            <transition target-connector="in1" target-path="./+1">
-              <transition-display>
-                <bend-point relative-to="target" x="1" y="0"/>
-              </transition-display>
-            </transition>
+            <transition target-connector="in1" target-path="./+1"/>
           </segment>
           <segment>
             <node>
@@ -2240,7 +2283,7 @@
         <text-node>
           <description>Renders the account navigation.</description>
         </text-node>
-        <node-display x="15" y="16"/>
+        <node-display x="19" y="16"/>
       </node>
     </segment>
   </branch>
@@ -2248,7 +2291,7 @@
     <segment>
       <node>
         <start-node name="IncludeNavigation" secure="false"/>
-        <node-display x="15" y="17"/>
+        <node-display x="19" y="17"/>
       </node>
       <simple-transition>
         <transition-display>
@@ -2362,7 +2405,7 @@
         <text-node>
           <description>Ajax call to handle update of Customer first and last name.</description>
         </text-node>
-        <node-display x="11" y="24"/>
+        <node-display x="13" y="24"/>
       </node>
     </segment>
   </branch>
@@ -2370,7 +2413,7 @@
     <segment>
       <node>
         <start-node name="UpdateName" secure="true"/>
-        <node-display x="11" y="25"/>
+        <node-display x="13" y="25"/>
       </node>
       <simple-transition/>
       <node>

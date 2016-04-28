@@ -162,13 +162,13 @@
         </interaction-continue-node>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="login">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="target" x="0" y="-2"/>
-              <bend-point relative-to="target" x="0" y="-1"/>
-            </transition-display>
-          </transition>
+          <transition target-connector="in"/>
           <segment>
+            <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="1" y="1"/>
+            </node>
+            <simple-transition/>
             <node>
               <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                 <key-binding alias="CurrentForms.login.username.value" key="From_0"/>
@@ -178,7 +178,7 @@
                 <key-binding alias="CurrentForms.login.rememberme.value" key="From_2"/>
                 <key-binding alias="RememberMe" key="To_2"/>
               </pipelet-node>
-              <node-display x="1" y="0"/>
+              <node-display x="0" y="1"/>
             </node>
             <simple-transition>
               <transition-display>
@@ -191,18 +191,13 @@
               <branch basename="b2" source-connector="login_failed">
                 <transition target-connector="in1" target-path="../+1">
                   <transition-display>
-                    <bend-point relative-to="source" x="1" y="1"/>
-                    <bend-point relative-to="source" x="2" y="1"/>
+                    <bend-point relative-to="source" x="2" y="0"/>
                     <bend-point relative-to="target" x="2" y="0"/>
                   </transition-display>
                 </transition>
               </branch>
               <branch basename="b3" source-connector="login_succeeded">
-                <transition target-connector="in">
-                  <transition-display>
-                    <bend-point relative-to="target" x="0" y="-1"/>
-                  </transition-display>
-                </transition>
+                <transition target-connector="in"/>
                 <segment>
                   <node>
                     <end-node/>
@@ -216,6 +211,11 @@
         <branch basename="b3" source-connector="register">
           <transition target-connector="in"/>
           <segment>
+            <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition/>
             <node>
               <call-node start-name-ref="Account-Register"/>
               <node-display x="0" y="1"/>
@@ -234,30 +234,33 @@
         <branch basename="b4" source-connector="search">
           <transition target-connector="in">
             <transition-display>
-              <bend-point relative-to="source" x="-2" y="0"/>
               <bend-point relative-to="target" x="0" y="-1"/>
             </transition-display>
           </transition>
           <segment>
             <node>
               <jump-node start-name-ref="GiftRegistry-Search"/>
-              <node-display x="-1" y="1"/>
+              <node-display x="-2" y="0"/>
             </node>
           </segment>
         </branch>
       </node>
       <transition target-connector="in2" target-path="./+1">
         <transition-display>
-          <bend-point relative-to="target" x="0" y="3"/>
+          <bend-point relative-to="source" x="2" y="0"/>
         </transition-display>
       </transition>
     </segment>
     <segment>
       <node>
         <join-node/>
-        <node-display x="1" y="-3"/>
+        <node-display x="1" y="-2"/>
       </node>
-      <transition target-connector="in1" target-path="./-1"/>
+      <transition target-connector="in1" target-path="./-1">
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="2"/>
+        </transition-display>
+      </transition>
     </segment>
   </branch>
   <branch basename="_ANONYMOUS_BRANCH_4">

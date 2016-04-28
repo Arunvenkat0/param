@@ -165,21 +165,27 @@
           </transition>
           <segment>
             <node>
-              <call-node start-name-ref="Login-Process"/>
+              <call-node start-name-ref="CSRF-Validate"/>
               <node-display x="0" y="2"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <call-node start-name-ref="Login-Process"/>
+              <node-display x="0" y="1"/>
               <branch basename="b2" source-connector="login_failed">
                 <transition target-connector="in1" target-path="..">
                   <transition-display>
-                    <bend-point relative-to="target" x="4" y="0"/>
+                    <bend-point relative-to="source" x="2" y="-4"/>
+                    <bend-point relative-to="target" x="2" y="0"/>
                   </transition-display>
                 </transition>
               </branch>
               <branch basename="b3" source-connector="login_succeeded">
-                <transition target-connector="in">
-                  <transition-display>
-                    <bend-point relative-to="target" x="0" y="-1"/>
-                  </transition-display>
-                </transition>
+                <transition target-connector="in"/>
                 <segment>
                   <node>
                     <end-node/>
@@ -198,8 +204,17 @@
           </transition>
           <segment>
             <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="-2" y="1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
               <call-node start-name-ref="Account-Register"/>
-              <node-display x="-2" y="2"/>
+              <node-display x="0" y="1"/>
             </node>
             <simple-transition>
               <transition-display>
