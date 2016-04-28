@@ -1,5 +1,4 @@
-/*global env: true */
-// jscs:disable
+/* global env */
 'use strict';
 
 var doop = require('jsdoc/util/doop');

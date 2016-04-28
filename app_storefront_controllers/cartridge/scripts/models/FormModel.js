@@ -1,5 +1,4 @@
 'use strict';
-/* jshint indent:false,white:false */
 
 /**
  * Model for form functionality.
