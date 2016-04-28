@@ -74,7 +74,7 @@ function wishListForm() {
             });
         },
         deleteItem: function (formgroup, action) {
-            productList.remove(action.object);
+            productList.removeItem(action.object);
         },
         updateItem: function (formgroup, action) {
             app.getForm(action.parent).copyTo(action.object);
