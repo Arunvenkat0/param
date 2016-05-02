@@ -366,6 +366,12 @@ function getSetItem() {
  * @returns {dw.catalog.Product} - Either input product or selected product variant if all attributes selected
  */
 function getSelectedProduct (product) {
+    var Product = app.getModel('Product');
+
+    if (product.isVariationGroup()) {
+        product = new Product(product.getMasterProduct());
+    }
+
     var currentVariationModel = product.updateVariationSelection(params);
 
     if (currentVariationModel) {

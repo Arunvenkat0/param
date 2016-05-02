@@ -26,7 +26,7 @@
 		selectedVariants = [],
 		selectedVariant;
 	if (pdict.Product.variationGroup) {
-		PVM = pdict.Product.variationGroup.getVariationModel();
+		PVM = pdict.Product.getVariationModel();
 	}
 </isscript>
 <isif condition="${pdict.Product.variant || pdict.Product.variationGroup || pdict.Product.master}">
