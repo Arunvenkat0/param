@@ -309,7 +309,7 @@ var CartModel = AbstractModel.extend({
      *
      * @returns {dw.order.ProductLineItem} The newly created product line item.
      */
-    addBonusProduct: function (bonusDiscountLineItem, product, selectedOptions) {
+    addBonusProduct: function (bonusDiscountLineItem, product, selectedOptions, quantity) {
         // TODO: Should this actually be using the dw.catalog.ProductOptionModel.UpdateProductOptionSelections method instead?
         var UpdateProductOptionSelections = require('app_storefront_core/cartridge/scripts/cart/UpdateProductOptionSelections');
         var ScriptResult = UpdateProductOptionSelections.update({
@@ -317,8 +317,13 @@ var CartModel = AbstractModel.extend({
             Product: product
         });
         var shipment = null;
+        var productLineItem = this.object.createBonusProductLineItem(bonusDiscountLineItem, product, ScriptResult, shipment);
 
-        return this.object.createBonusProductLineItem(bonusDiscountLineItem, product, ScriptResult, shipment);
+        if (quantity) {
+            productLineItem.setQuantityValue(quantity);
+        }
+
+        return productLineItem;
     },
 
     /**
