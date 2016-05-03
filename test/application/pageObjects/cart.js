@@ -23,6 +23,7 @@ export const SELECTED_STORE_ADDRESS = '.selected-store-address';
 export const STORE_ADDRESS_TEXT = '.store-list .store-tile:nth-of-type(1) .store-address';
 export const STORE_LIST_CONTAINER = '.store-list-container';
 export const ZIP_CODE_POP_UP = '#preferred-store-panel';
+export const FRM_QUANTITY_ERROR = '#dwfrm_cart_shipments_i0_items_i0_quantity-error';
 
 const basePath = '/cart';
 
@@ -92,6 +93,18 @@ export function updateQuantityByRow (rowNum, value) {
         // TODO: Replace with waitUntil to check for quantity change
         .pause(1000)
         .getValue(selector);
+}
+
+export function getQuantityErrorMessageByRow (rowNum) {
+    let selector = _createCssNthCartRow(rowNum) + ' ' +  FRM_QUANTITY_ERROR;
+    return browser.waitForVisible(selector)
+        .getText(selector);
+}
+
+export function doesQuantityErrorMessageExistForRow (rowNum) {
+    let selector = _createCssNthCartRow(rowNum) + ' ' +  FRM_QUANTITY_ERROR;
+    return browser.waitForVisible(selector, 500, true)
+        .then(() => browser.isVisible(selector));
 }
 
 export function getPriceByRow (rowNum) {
