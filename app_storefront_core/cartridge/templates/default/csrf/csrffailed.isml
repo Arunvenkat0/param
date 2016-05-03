@@ -11,7 +11,7 @@
     <meta http-equiv="Robots" content="noindex, follow" />
 </head>
 <body>
-    <h1>${Resource.msg('global.csrf.failed','locale',null)}</h1>
+    <h1>${Resource.msg('global.csrf.failed.heading','locale',null)}</h1>
     <p class="error-page-message">
         ${Resource.msg('global.csrf.failed.message','locale',null)} <a href="${Location}">${Resource.msg('global.error_forbidden.home','locale',null)}</a>
     </p>

@@ -15,6 +15,7 @@
  * // allow only GET requests via HTTPS for logged in users
  * exports.Show = require('~/guard').ensure(['get','https','loggedIn'],show);
  */
+var CSRFProtection = require('dw/web/CSRFProtection');
 var browsing = require('~/cartridge/scripts/util/Browsing');
 var LOGGER   = dw.system.Logger.getLogger('guard');
 var app = require('~/cartridge/scripts/app');
@@ -64,7 +65,7 @@ function csrfValidationFailed() {
 
     app.getModel('Customer').logout();
     app.getView().render('csrf/csrffailed');
-    
+
     return false;
 }
 
@@ -90,7 +91,7 @@ var Filters = {
         return request.httpHeaders['x-is-requestid'].indexOf('-0-00') === -1;
     },
     csrf: function (){
-        return dw.web.CSRFProtection.validateRequest();
+        return CSRFProtection.validateRequest();
     }
 };
 
