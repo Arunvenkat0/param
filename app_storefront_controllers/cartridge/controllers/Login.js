@@ -16,24 +16,26 @@ var RateLimiter    = require('app_storefront_core/cartridge/scripts/util/RateLim
 /* Script Modules */
 var app            = require('~/cartridge/scripts/app');
 var guard          = require('~/cartridge/scripts/guard');
-
 var Customer       = app.getModel('Customer');
-
 var LOGGER         = dw.system.Logger.getLogger('login');
-
 
 /**
  * Contains the login page preparation and display, it is called from various
  * places implicitly when 'loggedIn' is ensured via the {@link module:guard}.
  */
 function show() {
+    var pageMeta = require('~/cartridge/scripts/meta');
+    var ContentMgr = dw.content.ContentMgr;
+    var content = ContentMgr.getContent('myaccount-login');
     var loginForm = app.getForm('login');
-    loginForm.clear();
-
     var oauthLoginForm = app.getForm('oauthlogin');
-    oauthLoginForm.clear();
-
     var orderTrackForm = app.getForm('ordertrack');
+    var loginView = app.getView('Login',{
+        RegistrationStatus: false
+    });
+
+    loginForm.clear();
+    oauthLoginForm.clear();
     orderTrackForm.clear();
 
     if (customer.registered) {
@@ -41,31 +43,28 @@ function show() {
         loginForm.setValue('rememberme', true);
     }
 
-    var pageMeta = require('~/cartridge/scripts/meta');
-    pageMeta.update(dw.content.ContentMgr.getContent('myaccount-login'));
+    if (content) {
+        pageMeta.update(content);
+    }
 
     // Save return URL in session.
     if (request.httpParameterMap.original.submitted) {
         session.custom.TargetLocation = request.httpParameterMap.original.value;
     }
 
-    var v = app.getView('Login',{
-        RegistrationStatus: false
-    });
     if (request.httpParameterMap.scope.submitted) {
         switch (request.httpParameterMap.scope.stringValue) {
             case 'wishlist':
-                // @TODO Update metadata for wishlist login.
-                v.template = 'account/wishlist/wishlistlanding';
+                loginView.template = 'account/wishlist/wishlistlanding';
                 break;
             case 'giftregistry':
-                // @TODO Update metadata for giftregistry login.
-                v.template = 'account/giftregistry/giftregistrylanding';
+                loginView.template = 'account/giftregistry/giftregistrylanding';
                 break;
             default:
         }
     }
-    v.render();
+
+    loginView.render();
 }
 
 /**
