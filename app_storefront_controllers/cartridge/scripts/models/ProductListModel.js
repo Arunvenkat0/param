@@ -215,14 +215,43 @@ function searchGiftRegistries (searchForm, listType) {
     var registrantFirstName = searchForm.registrantFirstName;
     var registrantLastName = searchForm.registrantLastName;
     var eventType = searchForm.eventType.value;
-
-    var listOwner = CustomerMgr.queryProfile('firstName = {0} AND lastName = {1}', registrantFirstName.value, registrantLastName.value).getCustomer();
+    var listOwner;
+    
+    var listProfile = CustomerMgr.queryProfile('firstName = {0} AND lastName = {1}', registrantFirstName.value, registrantLastName.value);
+    if (listProfile) {
+        listOwner = listProfile.getCustomer();
+    } else {
+        return null;        
+    }
 
     if (eventType) {
-        return ProductListMgr.getProductLists(listOwner, listType, eventType);
+        return filterOutPrivateLists(ProductListMgr.getProductLists(listOwner, listType, eventType));
     } else {
-        return ProductListMgr.getProductLists(listOwner, listType);
+        var pl = ProductListMgr.getProductLists(listOwner, listType);
+        var privateLists = filterOutPrivateLists(pl);
+        return privateLists;
     }
+}
+
+
+/**
+ * Takes a list of ProductLists and returns a list of the public ones
+ *
+ * @param {dw.util.Collection} listCollection - a list of ProductLists
+ * @returns {dw.util.Collection} publicList - a list of ProductLists that are public
+ */
+function filterOutPrivateLists (listCollection) {
+    var ArrayList = require('dw/util/ArrayList');
+    var listIterator = listCollection.iterator();
+    var publicList = new ArrayList();
+
+    while (listIterator.hasNext()) {
+        var list = listIterator.next();
+        if (list.public) {
+            publicList.add(list);
+        }
+    }
+    return publicList;
 }
 
 /** The ProductList class */
