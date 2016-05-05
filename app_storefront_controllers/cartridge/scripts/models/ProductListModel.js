@@ -227,9 +227,7 @@ function searchGiftRegistries (searchForm, listType) {
     if (eventType) {
         return filterOutPrivateLists(ProductListMgr.getProductLists(listOwner, listType, eventType));
     } else {
-        var pl = ProductListMgr.getProductLists(listOwner, listType);
-        var privateLists = filterOutPrivateLists(pl);
-        return privateLists;
+        return filterOutPrivateLists(ProductListMgr.getProductLists(listOwner, listType));
     }
 }
 

@@ -13,6 +13,7 @@ export const BTN_NAV_EVENT = '[name*=giftregistry_navigation_navEvent]';
 export const BTN_NAV_PURCHASES = '[name*=giftregistry_navigation_navPurchases]';
 export const BTN_NAV_REGISTRY = '[name*=giftregistry_navigation_navRegistry]';
 export const BTN_NAV_SHIPPING = '[name*=giftregistry_navigation_navShipping]';
+export const BTN_NEW_REGISTRY = '[name*="dwfrm_giftregistry_create"]';
 export const BTN_SET_PUBLIC = '[name*="giftregistry_setPublic"]';
 export const SHARE_OPTIONS = '[class*="share-options"]';
 export const BTN_CREATE_REGISTRY = '[name*="giftregistry_create"]';
