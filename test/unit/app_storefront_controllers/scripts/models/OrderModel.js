@@ -15,15 +15,15 @@ var AbstractModel = {
     }
 };
 
-var OrderMgr = {
-    getOrder: function (inputParam) {
-        return inputParam;
-    }
-};
+var mockPath = '../../../../mocks/';
+var Logger = require(mockPath + 'dw/system/Logger');
+var Order = require(mockPath + 'dw/order/Order');
+var OrderMgr = require(mockPath + 'dw/order/OrderMgr');
+var Resource = require(mockPath + 'dw/web/Resource');
+var Status = require(mockPath + 'dw/system/Status');
+var Transaction = require(mockPath + 'dw/system/Transaction');
 
-var ArrayList = require('../../../../mocks/dw/util/ArrayList');
-var GiftCertificateMgr = require('../../../../mocks/dw/order/GiftCertificateMgr');
-var Transaction = require('../../../../mocks/dw/system/Transaction');
+var cartridgePath = '../../../../../app_storefront_controllers/';
 
 /**
  * Spies
@@ -32,12 +32,15 @@ var spyAbstractModel = sinon.spy(AbstractModel, 'extend');
 var spyOrderMgr = sinon.spy(OrderMgr, 'getOrder');
 
 // Mock out module dependencies
-var modelsDirectory = '../../../../../app_storefront_controllers/cartridge/scripts/models/';
-var OrderModel = proxyquire(modelsDirectory + 'OrderModel.js', {
+var OrderModel = proxyquire(cartridgePath + 'cartridge/scripts/models/OrderModel.js', {
     './AbstractModel': AbstractModel,
-    'dw/util/ArrayList': ArrayList,
+    './EmailModel': {},
+    './GiftCertificateModel': {},
+    'dw/system/Logger': Logger,
+    'dw/order/Order': Order,
     'dw/order/OrderMgr': OrderMgr,
-    'dw/order/GiftCertificateMgr': GiftCertificateMgr,
+    'dw/web/Resource': Resource,
+    'dw/system/Status': Status,
     'dw/system/Transaction': Transaction
 });
 

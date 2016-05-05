@@ -13,7 +13,6 @@
 /* API Includes */
 var OrderMgr = require('dw/order/OrderMgr');
 var PaymentMgr = require('dw/order/PaymentMgr');
-var Resource = require('dw/web/Resource');
 var Status = require('dw/system/Status');
 var Transaction = require('dw/system/Transaction');
 
@@ -22,7 +21,6 @@ var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
 var Cart = app.getModel('Cart');
-var Email = app.getModel('Email');
 var Order = app.getModel('Order');
 var PaymentProcessor = app.getModel('PaymentProcessor');
 
@@ -88,179 +86,103 @@ function handlePayments(order) {
 function start() {
     var cart = Cart.get();
 
-    if (cart) {
+    if (!cart) {
+        app.getController('Cart').Show();
+        return {};
+    }
 
-        var COShipping = app.getController('COShipping');
+    var COShipping = app.getController('COShipping');
 
-        // Clean shipments.
-        COShipping.PrepareShipments(cart);
+    // Clean shipments.
+    COShipping.PrepareShipments(cart);
 
-        // Make sure there is a valid shipping address, accounting for gift certificates that do not have one.
-        if (cart.getProductLineItems().size() > 0 && cart.getDefaultShipment().getShippingAddress() === null) {
-            COShipping.Start();
+    // Make sure there is a valid shipping address, accounting for gift certificates that do not have one.
+    if (cart.getProductLineItems().size() > 0 && cart.getDefaultShipment().getShippingAddress() === null) {
+        COShipping.Start();
+        return {};
+    }
+
+    // Make sure the billing step is fulfilled, otherwise restart checkout.
+    if (!session.forms.billing.fulfilled.value) {
+        app.getController('COCustomer').Start();
+        return {};
+    }
+
+    Transaction.wrap(function () {
+        cart.calculate();
+    });
+
+    var COBilling = app.getController('COBilling');
+
+    Transaction.wrap(function () {
+        if (!COBilling.ValidatePayment(cart)) {
+            COBilling.Start();
             return {};
         }
+    });
 
-        // Make sure the billing step is fulfilled, otherwise restart checkout.
-        if (!session.forms.billing.fulfilled.value) {
-            app.getController('COCustomer').Start();
+    // Recalculate the payments. If there is only gift certificates, make sure it covers the order total, if not
+    // back to billing page.
+    Transaction.wrap(function () {
+        if (!cart.calculatePaymentTransactionTotal()) {
+            COBilling.Start();
             return {};
         }
+    });
 
-        Transaction.wrap(function () {
-            cart.calculate();
-        });
+    // Handle used addresses and credit cards.
+    var saveCCResult = COBilling.SaveCreditCard();
 
-        var COBilling = app.getController('COBilling');
+    if (!saveCCResult) {
+        return {
+            error: true,
+            PlaceOrderError: new Status(Status.ERROR, 'confirm.error.technical')
+        };
+    }
 
-        Transaction.wrap(function () {
-            if (!COBilling.ValidatePayment(cart)) {
-                COBilling.Start();
-                return {};
-            }
-        });
+    // Creates a new order. This will internally ReserveInventoryForOrder and will create a new Order with status
+    // 'Created'.
+    var order = cart.createOrder();
 
-        // Recalculate the payments. If there is only gift certificates, make sure it covers the order total, if not
-        // back to billing page.
-        Transaction.wrap(function () {
-            if (!cart.calculatePaymentTransactionTotal()) {
-                COBilling.Start();
-                return {};
-            }
-        });
+    if (!order) {
+        // TODO - need to pass BasketStatus to Cart-Show ?
+        app.getController('Cart').Show();
 
-        // Handle used addresses and credit cards.
-        var saveCCResult = COBilling.SaveCreditCard();
+        return {};
+    }
+    var handlePaymentsResult = handlePayments(order);
 
-        if (!saveCCResult) {
+    if (handlePaymentsResult.error) {
+        return Transaction.wrap(function () {
+            OrderMgr.failOrder(order);
             return {
                 error: true,
                 PlaceOrderError: new Status(Status.ERROR, 'confirm.error.technical')
             };
-        }
-
-        // Creates a new order. This will internally ReserveInventoryForOrder and will create a new Order with status
-        // 'Created'.
-        var order = cart.createOrder();
-
-        if (!order) {
-            // TODO - need to pass BasketStatus to Cart-Show ?
-            app.getController('Cart').Show();
-
-            return {};
-        } else {
-            var handlePaymentsResult = handlePayments(order);
-
-            if (handlePaymentsResult.error) {
-                return Transaction.wrap(function () {
-                    OrderMgr.failOrder(order);
-                    return {
-                        error: true,
-                        PlaceOrderError: new Status(Status.ERROR, 'confirm.error.technical')
-                    };
-                });
-
-            } else if (handlePaymentsResult.missingPaymentInfo) {
-                return Transaction.wrap(function () {
-                    OrderMgr.failOrder(order);
-                    return {
-                        error: true,
-                        PlaceOrderError: new Status(Status.ERROR, 'confirm.error.technical')
-                    };
-                });
-            }
-
-            return submitImpl(order);
-        }
-    } else {
-        app.getController('Cart').Show();
-        return {};
-    }
-}
-
-/**
- * Submits an order.
- *
- * @transactional
- * @param {dw.order.Order} order - the order to submit.
- * @return {Boolean | Object} false if order cannot be placed. true if the order confirmation status is CONFIRMED.
- * JSON object containing error information, or the order and/or order creation information.
- */
-function submitImpl(order) {
-
-    var orderPlacementStatus = Transaction.wrap(function () {
-        if (OrderMgr.placeOrder(order) === Status.ERROR) {
-            OrderMgr.failOrder(order);
-            return false;
-        }
-
-        order.setConfirmationStatus(order.CONFIRMATION_STATUS_CONFIRMED);
-
-        return true;
-    });
-
-    if (orderPlacementStatus === Status.ERROR) {
-        return {error: true};
-    }
-
-    // Creates purchased gift certificates with this order.
-    if (!createGiftCertificates(order)) {
-        OrderMgr.failOrder(order);
-        return {error: true};
-    }
-
-    // Send order confirmation and clear used forms within the checkout process.
-    Email.get('mail/orderconfirmation', order.getCustomerEmail())
-        .setSubject((Resource.msg('order.orderconfirmation-email.001', 'order', null) + ' ' + order.getOrderNo()).toString())
-        .send({
-            Order: order
         });
 
-    // Mark order as EXPORT_STATUS_READY.
-    Transaction.wrap(function () {
-        order.setExportStatus(dw.order.Order.EXPORT_STATUS_READY);
-        order.setConfirmationStatus(dw.order.Order.CONFIRMATION_STATUS_CONFIRMED);
-    });
+    } else if (handlePaymentsResult.missingPaymentInfo) {
+        return Transaction.wrap(function () {
+            OrderMgr.failOrder(order);
+            return {
+                error: true,
+                PlaceOrderError: new Status(Status.ERROR, 'confirm.error.technical')
+            };
+        });
+    }
 
+    var orderPlacementStatus = order.submit();
+    if (!orderPlacementStatus.error) {
+        clearForms();
+    }
+    return orderPlacementStatus;
+}
+
+function clearForms() {
     // Clears all forms used in the checkout process.
     session.forms.singleshipping.clearFormElement();
     session.forms.multishipping.clearFormElement();
     session.forms.billing.clearFormElement();
-
-    return {
-        Order: order,
-        order_created: true
-    };
-}
-
-/**
- * Creates a gift certificate for each gift certificate line item in the order
- * and sends an email to the gift certificate receiver.
- *
- * @param {dw.order.Order} order - the order to create the gift certificates for.
- * @return {Boolean} true if the order successfully created the gift certificates, false otherwise.
- */
-function createGiftCertificates(order) {
-
-    var giftCertificates = Order.get(order).createGiftCertificates();
-
-    if (giftCertificates) {
-
-        for (var i = 0; i < giftCertificates.length; i++) {
-            var giftCertificate = giftCertificates[i];
-
-            // Send order confirmation and clear used forms within the checkout process.
-            Email.get('mail/giftcert', giftCertificate.recipientEmail)
-                .setSubject(Resource.msg('resource.ordergcemsg', 'email', null) + ' ' + giftCertificate.senderName)
-                .send({
-                    GiftCertificate: giftCertificate
-                });
-        }
-
-        return true;
-    } else {
-        return false;
-    }
 }
 
 /**
@@ -270,39 +192,34 @@ function createGiftCertificates(order) {
  * message information if the payment is not authorized.
  */
 function submitPaymentJSON() {
-
     var order = Order.get(request.httpParameterMap.order_id.stringValue);
-    if (order.object && (request.httpParameterMap.order_token.stringValue === order.getOrderToken())) {
-
-        session.forms.billing.paymentMethods.clearFormElement();
-
-        var requestObject = JSON.parse(request.httpParameterMap.requestBodyAsString);
-        var form = session.forms.billing.paymentMethods;
-
-        for (var requestObjectItem in requestObject) {
-            var asyncPaymentMethodResponse = requestObject[requestObjectItem];
-
-            var terms = requestObjectItem.split('_');
-            if (terms[0] === 'creditCard') {
-                var value = (terms[1] === 'month' || terms[1] === 'year')
-                    ? Number(asyncPaymentMethodResponse) : asyncPaymentMethodResponse;
-                form.creditCard[terms[1]].setValue(value);
-            } else if (terms[0] === 'selectedPaymentMethodID') {
-                form.selectedPaymentMethodID.setValue(asyncPaymentMethodResponse);
-            }
-        }
-
-        if (app.getController('COBilling').HandlePaymentSelection('cart').error || handlePayments().error) {
-            app.getView().render('checkout/components/faults');
-            return;
-        } else {
-            app.getView().render('checkout/components/payment_methods_success');
-            return;
-        }
-    } else {
+    if (!order.object || request.httpParameterMap.order_token.stringValue !== order.getOrderToken()) {
         app.getView().render('checkout/components/faults');
         return;
     }
+    session.forms.billing.paymentMethods.clearFormElement();
+
+    var requestObject = JSON.parse(request.httpParameterMap.requestBodyAsString);
+    var form = session.forms.billing.paymentMethods;
+
+    for (var requestObjectItem in requestObject) {
+        var asyncPaymentMethodResponse = requestObject[requestObjectItem];
+
+        var terms = requestObjectItem.split('_');
+        if (terms[0] === 'creditCard') {
+            var value = (terms[1] === 'month' || terms[1] === 'year') ?
+                Number(asyncPaymentMethodResponse) : asyncPaymentMethodResponse;
+            form.creditCard[terms[1]].setValue(value);
+        } else if (terms[0] === 'selectedPaymentMethodID') {
+            form.selectedPaymentMethodID.setValue(asyncPaymentMethodResponse);
+        }
+    }
+
+    if (app.getController('COBilling').HandlePaymentSelection('cart').error || handlePayments().error) {
+        app.getView().render('checkout/components/faults');
+        return;
+    }
+    app.getView().render('checkout/components/payment_methods_success');
 }
 
 /*
@@ -312,9 +229,10 @@ function submitPaymentJSON() {
 function submit() {
     var order = Order.get(request.httpParameterMap.order_id.stringValue);
     var orderPlacementStatus;
-    if (order.object && request.httpParameterMap.order_token.stringValue === order.getOrderToken()) {
-        orderPlacementStatus = submitImpl(order);
+    if (!order.object || request.httpParameterMap.order_token.stringValue !== order.getOrderToken()) {
+        orderPlacementStatus = order.submit();
         if (!orderPlacementStatus.error) {
+            clearForms();
             return app.getController('COSummary').ShowConfirmation(order);
         }
     }

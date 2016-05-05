@@ -7,11 +7,26 @@
 
 /* API Includes */
 var AbstractModel = require('./AbstractModel');
-var ArrayList = require('dw/util/ArrayList');
-var GiftCertificateMgr = require('dw/order/GiftCertificateMgr');
+var Order = require('dw/order/Order');
 var OrderMgr = require('dw/order/OrderMgr');
+var Resource = require('dw/web/Resource');
+var Status = require('dw/system/Status');
 var Transaction = require('dw/system/Transaction');
 
+/**
+ * Place an order using OrderMgr. If order is placed successfully,
+ * its status will be set as confirmed, and export status set to ready.
+ * @param {dw.order.Order} order
+ */
+function placeOrder(order) {
+    var placeOrderStatus = OrderMgr.placeOrder(order);
+    if (placeOrderStatus === Status.ERROR) {
+        OrderMgr.failOrder(order);
+        throw new Error('Failed to place order.');
+    }
+    order.setConfirmationStatus(Order.CONFIRMATION_STATUS_CONFIRMED);
+    order.setExportStatus(Order.EXPORT_STATUS_READY);
+}
 /**
  * Order helper class providing enhanced order functionality.
  * @class module:models/OrderModel~OrderModel
@@ -19,45 +34,50 @@ var Transaction = require('dw/system/Transaction');
  *
  * @param {dw.order.Order} obj The order object to enhance/wrap.
  */
-var OrderModel = AbstractModel.extend(
-    /** @lends module:models/OrderModel~OrderModel.prototype */
-    {
-        /**
-         * Creates gift certificates for all gift certificate line items in the order.
-         *
-         * @alias module:models/OrderModel~OrderModel/createGiftCertificates
-         * @returns {dw.util.ArrayList} List containing all created gift certificates, null in case of an error.
-         */
-        createGiftCertificates: function () {
-
-            var giftCertificates = new ArrayList();
-            var giftCertificateLineItems = this.getGiftCertificateLineItems();
-            var orderNo = this.getOrderNo();
-
-            for (var i = 0; i < giftCertificateLineItems.length; i++) {
-                var giftCertificateLineItem = giftCertificateLineItems[i];
-                var newGiftCertificate;
-
-                Transaction.wrap(function () {
-                    newGiftCertificate = GiftCertificateMgr.createGiftCertificate(giftCertificateLineItem.netPrice.value);
-                    newGiftCertificate.setRecipientEmail(giftCertificateLineItem.recipientEmail);
-                    newGiftCertificate.setRecipientName(giftCertificateLineItem.recipientName);
-                    newGiftCertificate.setSenderName(giftCertificateLineItem.senderName);
-                    newGiftCertificate.setMessage(giftCertificateLineItem.message);
-                    newGiftCertificate.setOrderNo(orderNo);
-                });
-
-                if (!newGiftCertificate) {
-                    return null;
-                }
-
-                giftCertificates.add(newGiftCertificate);
-            }
-
-            return giftCertificates;
+var OrderModel = AbstractModel.extend({
+    /**
+     * Submits an order
+     *
+     * @transactional
+     * @return {Object} object If order cannot be placed, object.error is set to true. Ortherwise, object.order_created is true, and object.Order is set to the order.
+     */
+    submit: function () {
+        var Email = require('./EmailModel');
+        var GiftCertificate = require('./GiftCertificateModel');
+        var order = this;
+        try {
+            Transaction.begin();
+            placeOrder(order);
+            Transaction.commit();
+        } catch (e) {
+            Transaction.rollback();
+            return {
+                error: true,
+                PlaceOrderError: new Status(Status.ERROR, 'confirm.error.technical')
+            };
         }
 
-    });
+        // Creates gift certificates for all gift certificate line items in the order
+        // and sends an email to the gift certificate receiver
+        order.getGiftCertificateLineItems().map(function (lineItem) {
+            return GiftCertificate.createGiftCertificateFromLineItem(lineItem, order.getOrderNo());
+        }).forEach(GiftCertificate.sendGiftCertificateEmail);
+
+        Email.sendMail({
+            template: 'mail/orderconfirmation',
+            recipient: order.getCustomerEmail(),
+            subject: Resource.msg('order.orderconfirmation-email.001', 'order', null),
+            context: {
+                Order: order
+            }
+        });
+
+        return {
+            Order: order,
+            order_created: true
+        };
+    }
+});
 
 /**
  * Gets a new instance for a given order or order number.
