@@ -69,12 +69,8 @@ const variationMasterProductId = '25604455';
 const setProductId = 'spring-look';
 const bundleProductId = 'microsoft-xbox360-bundle';
 
-// Used to determine whether parsedData should be regenerated.  Please modify this any time a change to the structure of
-// parsedData is made.  In an OS X Terminal, please use 'date -u' to generate this value.
-const version = 'Sun Feb  7 01:54:41 UTC 2016';
-
 export let parsedData = {};
-export let parsedDataFile = './test/application/pageObjects/testData/parsedData.txt';
+
 /**
  * Load and parse XML demo data to JSON.  If parsedDataFile file exists, just read and parse data, then assign to
  * parsedData module object.  If not exists, process demo data XML files then write to parsedDataFile.
@@ -83,36 +79,15 @@ export let parsedDataFile = './test/application/pageObjects/testData/parsedData.
  */
 export function load () {
     return new Promise (resolve => {
-        fs.exists(parsedDataFile, exists => {
-            if (exists) {
-                fs.readFile(parsedDataFile, (err, data) => {
-                    parsedData = JSON.parse(data);
-                    if (parsedData.hasOwnProperty('version') && parsedData.version === version) {
-                        resolve(parsedData);
-                    } else {
-                        _generateParsedDataFile(resolve);
-                    }
-                });
-            } else {
-                _generateParsedDataFile(resolve);
-            }
+        let promises = [];
+
+        parsedData = {};
+
+        Object.keys(subjectMeta).forEach(subject => {
+            promises.push(_loadAndJsonifyXmlData(subject));
         });
-    });
-}
 
-function _generateParsedDataFile (resolve) {
-    let promises = [];
-
-    parsedData = {};
-
-    Object.keys(subjectMeta).forEach(subject => {
-        promises.push(_loadAndJsonifyXmlData(subject));
-    });
-
-    return Promise.all(promises).then(() => {
-        parsedData.version = version;
-        fs.writeFile(parsedDataFile, JSON.stringify(parsedData));
-        resolve();
+        return Promise.all(promises).then(() => resolve());
     });
 }
 
