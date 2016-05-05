@@ -11,7 +11,7 @@ import * as customers from '../pageObjects/testData/customers';
 
 let locale = config.locale;
 
-describe.only('Private Gift Registries', () => {
+describe('Private Gift Registries', () => {
     const login = 'testuser1@demandware.com';
     let publicEventFormData = {};
     let privateEventFormData = {};
@@ -84,16 +84,13 @@ describe.only('Private Gift Registries', () => {
         navHeader.logout()
     );
 
-    it('should fill out the public event form', () =>
+    it('should create a public registry', () =>
         giftRegistryPage.fillOutEventForm(publicEventFormData, locale)
             // FIXME: This button is always enabled, even if form is not filled
             // out.  Would be better to check on some other attribute RAP-4690
             .then(() => browser.isEnabled(giftRegistryPage.BTN_EVENT_SET_PARTICIPANTS))
             .then(enabled => assert.ok(enabled))
-    );
-
-    it('should create a public event', () =>
-        browser.click(giftRegistryPage.BTN_EVENT_SET_PARTICIPANTS)
+            .then(() => browser.click(giftRegistryPage.BTN_EVENT_SET_PARTICIPANTS)
             .waitForVisible(giftRegistryPage.USE_PRE_EVENT)
             .then(() => giftRegistryPage.fillOutEventShippingForm(eventFormShippingData, locale))
             // This wait is necessary, since without it, the .click() will fire
@@ -107,25 +104,24 @@ describe.only('Private Gift Registries', () => {
             .click(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE)
             .waitForVisible(giftRegistryPage.BTN_EVENT_CONFIRM)
             .click(giftRegistryPage.BTN_EVENT_CONFIRM)
+            // make the event public
             .click(giftRegistryPage.BTN_SET_PUBLIC)
             .waitForVisible(giftRegistryPage.SHARE_OPTIONS)
             .isVisible(giftRegistryPage.SHARE_OPTIONS)
             .then(visible => assert.isTrue(visible))
+            // navigate back to main gift registry page
             .then(() => giftRegistryPage.navigateTo())
             .click(giftRegistryPage.BTN_CREATE_REGISTRY)
-            .waitForVisible(giftRegistryPage.FORM_REGISTRY)
+            .waitForVisible(giftRegistryPage.FORM_REGISTRY))
     );
 
-    it('should fill out the private event form', () =>
+    it('should create a private registry', () =>
         giftRegistryPage.fillOutEventForm(privateEventFormData, locale)
             // FIXME: This button is always enabled, even if form is not filled
             // out.  Would be better to check on some other attribute RAP-4690
             .then(() => browser.isEnabled(giftRegistryPage.BTN_EVENT_SET_PARTICIPANTS))
             .then(enabled => assert.ok(enabled))
-    );
-
-    it('should create a private event', () =>
-        browser.click(giftRegistryPage.BTN_EVENT_SET_PARTICIPANTS)
+            .then(() => browser.click(giftRegistryPage.BTN_EVENT_SET_PARTICIPANTS)
             .waitForVisible(giftRegistryPage.USE_PRE_EVENT)
             .then(() => giftRegistryPage.fillOutEventShippingForm(eventFormShippingData, locale))
             // This wait is necessary, since without it, the .click() will fire
@@ -138,10 +134,10 @@ describe.only('Private Gift Registries', () => {
             .then(enabled => assert.ok(enabled))
             .click(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE)
             .waitForVisible(giftRegistryPage.BTN_EVENT_CONFIRM)
-            .click(giftRegistryPage.BTN_EVENT_CONFIRM)
+            .click(giftRegistryPage.BTN_EVENT_CONFIRM))
     );
 
-    it('should search for the user and only find 1 registry', () => {
+    it('should search for the user and only find 1 public registry', () => {
         return navHeader.logout()
             .then(() => browser.click(footerPage.GIFT_REGISTRY))
             .waitForVisible(footerPage.GIFT_REGISTRY)
@@ -155,7 +151,7 @@ describe.only('Private Gift Registries', () => {
             .then(() => browser.waitForVisible(giftRegistryPage.BUTTON_FIND));
     });
 
-    it('should login and see 2 registries', () => {
+    it('should login and see both the public and private registries', () => {
         return giftRegistryPage.navigateTo()
             .then(() => loginForm.loginAsDefaultCustomer(locale))
             .then(() => browser.waitForVisible(giftRegistryPage.BTN_CREATE_REGISTRY))
