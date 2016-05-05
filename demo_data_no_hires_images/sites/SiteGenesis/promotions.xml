@@ -32,13 +32,6 @@
         </customer-groups>
     </campaign>
 
-    <campaign campaign-id="PromotionTest_PriceDisplay_MD">
-        <enabled-flag>false</enabled-flag>
-        <customer-groups>
-            <customer-group group-id="Everyone"/>
-        </customer-groups>
-    </campaign>
-
     <campaign campaign-id="mens-clothing-suits">
         <description>This is a campaign that displays a landing banner, with a 25% discount on all suits and default sorting rule of top selling suits.</description>
         <enabled-flag>false</enabled-flag>
@@ -74,26 +67,22 @@
         </global-excluded-products>
     </global-promotion-settings>
 
-	<promotion promotion-id="PromotionTest_WithoutQualifying">
-        <enabled-flag>false</enabled-flag>
+    <promotion promotion-id="PromotionTest_WithoutQualifying">
+        <enabled-flag>true</enabled-flag>
         <archived-flag>false</archived-flag>
         <searchable-flag>false</searchable-flag>
         <exclusivity>no</exclusivity>
         <name xml:lang="x-default">PromotionTest_WithoutQualifying</name>
-        <callout-msg xml:lang="x-default">PromotionTest_WithoutQualifying</callout-msg>
-        <details xml:lang="x-default">PromotionTest_WithoutQualifying</details>
+        <callout-msg xml:lang="x-default">Get 20% off of this tie.</callout-msg>
+        <details xml:lang="x-default">Buy a tie with 20% percent off.</details>
         <product-promotion-rule>
             <discounted-products>
                 <included-products>
                     <condition-group>
-                        <category-condition catalog-id="storefront-catalog-en">
-                            <category-id>newarrivals</category-id>
-                            <category-id>womens</category-id>
-                            <category-id>mens</category-id>
-                            <category-id>electronics</category-id>
-                            <category-id>top-seller</category-id>
-                            <category-id>gift-certificates</category-id>
-                        </category-condition>
+                        <product-id-condition operator="is equal">
+                            <product-id>793775370033</product-id>
+                            <product-id>25686395</product-id>
+                        </product-id-condition>
                     </condition-group>
                 </included-products>
             </discounted-products>
@@ -2048,7 +2037,7 @@
         </order-promotion-rule>
     </promotion>
 
-    <promotion-campaign-assignment promotion-id="PromotionTest_WithoutQualifying" campaign-id="PromotionTest_PriceDisplay_MD">
+    <promotion-campaign-assignment promotion-id="PromotionTest_WithoutQualifying" campaign-id="PromotionTests">
         <qualifiers match-mode="any">
             <customer-groups/>
             <source-codes/>

@@ -24,6 +24,7 @@ export const STORE_ADDRESS_TEXT = '.store-list .store-tile:nth-of-type(1) .store
 export const STORE_LIST_CONTAINER = '.store-list-container';
 export const ZIP_CODE_POP_UP = '#preferred-store-panel';
 export const FRM_QUANTITY_ERROR = '#dwfrm_cart_shipments_i0_items_i0_quantity-error';
+export const PRODUCT_SLOT = '.product-slot';
 
 const basePath = '/cart';
 
