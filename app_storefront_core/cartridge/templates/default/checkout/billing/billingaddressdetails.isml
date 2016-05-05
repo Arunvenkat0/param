@@ -26,7 +26,7 @@
 				<button id="dialogCancelBtn" type="button" value="${Resource.msg('global.cancel', 'locale', null)}"><span>${Resource.msg('global.cancel', 'locale', null)}</span></button>
 				<button id="dialogDeleteBtn" name="${pdict.CurrentForms.billingaddress.remove.htmlName}" type="button" value="${Resource.msg('global.delete', 'locale', null)}"><span>${Resource.msg('global.delete', 'locale', null)}</span></button>
 			</div>
-
+			<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
 		</fieldset>
 	</form>
 <isscript>

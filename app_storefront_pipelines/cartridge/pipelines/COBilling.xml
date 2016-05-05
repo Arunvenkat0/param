@@ -1933,16 +1933,24 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
           <transition target-connector="in">
             <transition-display>
               <bend-point relative-to="target" x="0" y="-2"/>
-              <bend-point relative-to="target" x="0" y="-1"/>
             </transition-display>
           </transition>
           <segment>
+            <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="-1" y="2"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="target" x="0" y="-1"/>
+              </transition-display>
+            </simple-transition>
             <node>
               <pipelet-node pipelet-name="UpdateObjectWithForm" pipelet-set-identifier="bc_api">
                 <key-binding alias="CurrentForms.billingaddress" key="Form"/>
                 <key-binding alias="BillingAddress" key="Object"/>
               </pipelet-node>
-              <node-display x="-1" y="2"/>
+              <node-display x="0" y="2"/>
               <branch basename="b2" source-connector="error">
                 <transition target-connector="in">
                   <transition-display>
@@ -1959,14 +1967,14 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
             </node>
             <simple-transition>
               <transition-display>
-                <bend-point relative-to="source" x="0" y="1"/>
+                <bend-point relative-to="target" x="0" y="-1"/>
               </transition-display>
             </simple-transition>
             <node>
               <interaction-node transaction-required="false">
                 <template buffered="true" dynamic="false" name="components/dialog/dialogapply"/>
               </interaction-node>
-              <node-display x="0" y="1"/>
+              <node-display x="0" y="2"/>
             </node>
           </segment>
         </branch>
@@ -1974,16 +1982,24 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
           <transition target-connector="in">
             <transition-display>
               <bend-point relative-to="target" x="0" y="-2"/>
-              <bend-point relative-to="target" x="0" y="-1"/>
             </transition-display>
           </transition>
           <segment>
+            <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="1" y="2"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="target" x="0" y="-1"/>
+              </transition-display>
+            </simple-transition>
             <node>
               <pipelet-node pipelet-name="RemoveCustomerAddress" pipelet-set-identifier="bc_api">
                 <key-binding alias="CurrentForms.billingaddress.object" key="Address"/>
                 <key-binding alias="CurrentCustomer" key="Customer"/>
               </pipelet-node>
-              <node-display x="1" y="2"/>
+              <node-display x="0" y="2"/>
               <branch basename="b2" source-connector="error">
                 <transition target-connector="in">
                   <transition-display>
@@ -2000,21 +2016,21 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
             </node>
             <simple-transition>
               <transition-display>
-                <bend-point relative-to="source" x="0" y="1"/>
+                <bend-point relative-to="target" x="0" y="-1"/>
               </transition-display>
             </simple-transition>
             <node>
               <interaction-node transaction-required="false">
                 <template buffered="true" dynamic="false" name="components/dialog/dialogdelete"/>
               </interaction-node>
-              <node-display x="0" y="1"/>
+              <node-display x="0" y="2"/>
             </node>
           </segment>
         </branch>
       </node>
       <transition target-connector="in1" target-path="./+1">
         <transition-display>
-          <bend-point relative-to="source" x="2" y="0"/>
+          <bend-point relative-to="source" x="2" y="1"/>
         </transition-display>
       </transition>
     </segment>

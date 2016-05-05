@@ -168,29 +168,61 @@
         </interaction-continue-node>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="cancel">
-          <transition target-connector="in2" target-path="./+3">
-            <transition-display>
-              <bend-point relative-to="source" x="-1" y="1"/>
-              <bend-point relative-to="target" x="-1" y="-1"/>
-            </transition-display>
-          </transition>
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="-1" y="2"/>
+            </node>
+            <transition target-connector="in2" target-path="../+3">
+              <transition-display>
+                <bend-point relative-to="target" x="-2" y="0"/>
+              </transition-display>
+            </transition>
+          </segment>
         </branch>
         <branch basename="b3" source-connector="create">
-          <transition target-connector="in1" target-path="./+1"/>
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="0" y="2"/>
+            </node>
+            <transition target-connector="in1" target-path="../+1"/>
+          </segment>
         </branch>
       </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="target" x="0" y="-1"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <call-node start-name-ref="CSRF-Validate"/>
+        <node-display x="1" y="2"/>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <decision-node condition-key="!CurrentForms.paymentinstruments.creditcards.valid" condition-operator="expr"/>
-        <node-display x="1" y="1"/>
+        <node-display x="0" y="1"/>
         <branch basename="b4" source-connector="yes">
           <transition target-connector="in1" target-path="./+1/b2.1/b4.2"/>
         </branch>
       </node>
       <transition target-connector="in1" target-path="./+1">
         <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-          <bend-point relative-to="target" x="0" y="1"/>
+          <bend-point relative-to="source" x="1" y="0"/>
+          <bend-point relative-to="source" x="1" y="1"/>
+          <bend-point relative-to="source" x="-1" y="1"/>
+          <bend-point relative-to="source" x="-1" y="0"/>
         </transition-display>
       </transition>
     </segment>
@@ -199,22 +231,26 @@
         <join-node/>
         <node-display x="-1" y="0"/>
       </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <decision-node condition-key="CurrentCustomer.authenticated" condition-operator="expr"/>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="yes">
-          <transition target-connector="in" transaction-control="begin"/>
+          <transition target-connector="in" transaction-control="begin">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
           <segment>
             <node>
               <call-node start-name-ref="PaymentInstruments-VerifyCreditCard"/>
-              <node-display x="0" y="1"/>
+              <node-display x="0" y="2"/>
               <branch basename="b2" source-connector="error">
-                <transition target-connector="in1" target-path="./b4.1">
-                  <transition-display>
-                    <bend-point relative-to="target" x="-1" y="0"/>
-                  </transition-display>
-                </transition>
+                <transition target-connector="in1" target-path="./b4.1"/>
               </branch>
             </node>
             <simple-transition>
@@ -303,8 +339,8 @@
                   </node>
                   <transition target-connector="in3" target-path="../../-1">
                     <transition-display>
-                      <bend-point relative-to="source" x="1" y="-3"/>
-                      <bend-point relative-to="target" x="2" y="0"/>
+                      <bend-point relative-to="source" x="2" y="-3"/>
+                      <bend-point relative-to="target" x="4" y="0"/>
                     </transition-display>
                   </transition>
                 </segment>
@@ -359,7 +395,7 @@
     <segment>
       <node>
         <join-node/>
-        <node-display x="0" y="9"/>
+        <node-display x="0" y="10"/>
       </node>
       <simple-transition/>
       <node>
