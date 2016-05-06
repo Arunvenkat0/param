@@ -11,7 +11,7 @@ import * as pricingHelpers from '../pageObjects/helpers/pricing';
 
 describe('Cart - Various Coupon Scenarios', () => {
     const locale = config.locale;
-    const couponedProductId = '793775370033';
+    const couponedProductId = '682875540326';
     let variant;
     let unitPrices;
 
