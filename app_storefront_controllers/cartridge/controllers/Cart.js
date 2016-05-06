@@ -89,32 +89,34 @@ function submitForm() {
     formResult = cartForm.handleAction({
         //Add a coupon if a coupon was entered correctly and is active.
         'addCoupon': function (formgroup) {
-            var status, result;
+            var status;
+            var result = {
+                cart: cart,
+                EnableCheckout: true,
+                dontRedirect: true
+            };
+            
             if (formgroup.couponCode.htmlValue) {
-
-                status = Transaction.wrap(function () {
-                    return cart.addCoupon(formgroup.couponCode.htmlValue);
-                });
+                status = cart.addCoupon(formgroup.couponCode.htmlValue);
 
                 if (status) {
-                    result = {
-                        cart: cart,
-                        CouponStatus: status
+                    // if a status is returned, set the error state based on whether or not it was applied
+                    var statusError = (status.CouponStatus != 'APPLIED');
+
+                    result.dontRedirect = statusError;
+                    result.CouponStatus = {
+                        code: status.CouponStatus,
+                        error: statusError
                     };
                 } else {
-                    result = {
-                        cart: cart,
-                        CouponError: 'NO_ACTIVE_PROMOTION'
-                    };
+                    // no status means valid but inactive coupon
+                    result.CouponError = 'NO_ACTIVE_PROMOTION';
                 }
             } else {
-                result = {
-                    cart: cart,
-                    CouponError: 'COUPON_CODE_MISSING'
-                };
+                // no coupon code supplied
+                result.CouponError = 'COUPON_CODE_MISSING';
             }
             return result;
-
         },
         'calculateTotal': function () {
             // Nothing to do here as re-calculation happens during view anyways
@@ -207,7 +209,8 @@ function submitForm() {
             });
 
             return {
-                cart: cart
+                cart: cart,
+                EnableCheckout: true
             };
         },
         'error': function () {
@@ -220,8 +223,17 @@ function submitForm() {
 
         pageMeta = require('~/cartridge/scripts/meta');
         pageMeta.update(cartAsset);
-
-        response.redirect(URLUtils.https('Cart-Show'));
+        
+        if (formResult.dontRedirect) {
+            app.getView({
+                Basket: formResult.cart.object,
+                EnableCheckout: formResult.EnableCheckout,
+                CouponStatus: formResult.CouponStatus,
+                CouponError: formResult.CouponError
+            }).render('checkout/cart/cart');              
+        } else {
+            response.redirect(URLUtils.https('Cart-Show'));
+        }
     }
 }
 

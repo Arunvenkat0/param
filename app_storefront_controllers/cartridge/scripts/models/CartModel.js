@@ -280,12 +280,20 @@ var CartModel = AbstractModel.extend({
         if (couponCode) {
             var cart = this;
             var campaignBased = true;
-            var addCouponToBasket2Result = Transaction.wrap(function () {
-                return cart.createCouponLineItem(couponCode, campaignBased);
+            var addCouponToBasketResult;
+            
+            try {
+                addCouponToBasketResult = Transaction.wrap(function () {
+                    return cart.object.createCouponLineItem(couponCode, campaignBased); 
+                });
+            } catch (e) {
+                return {CouponStatus: e.errorCode};
+            }
+            
+            Transaction.wrap(function (){
+                cart.calculate();            	
             });
-
-            this.calculate();
-            return {CouponStatus: addCouponToBasket2Result.statusCode};
+            return {CouponStatus: addCouponToBasketResult.statusCode};
         }
     },
 

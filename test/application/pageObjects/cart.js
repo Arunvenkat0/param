@@ -3,12 +3,17 @@
 import * as common from './helpers/common';
 import * as productQuickView from './productQuickView';
 
+export const BTN_ADD_COUPON = '#add-coupon';
+export const BTN_REMOVE_COUPON = '.item-quantity-details .textbutton';
 export const BTN_SEARCH_FOR_STORE = '.ui-dialog-buttonset button[role*=button]';
 export const BTN_SELECT_STORE = '.select-store-button';
 export const BTN_SELECT_STORE_CONTINUE = '.ui-dialog-buttonset button:nth-of-type(2)';
 export const CART_EMPTY = '.cart-empty';
 export const CART_ITEMS = '.item-list tbody tr';
 export const CHANGE_LOCATION = '.ui-dialog-buttonset button:nth-of-type(1)';
+export const COUPON_CODE = '#dwfrm_cart_couponCode';
+export const COUPON_APPLIED_LABEL = '.cartcoupon .label';
+export const COUPON_ERROR = '.error';
 export const ORDER_SUBTOTAL = '.order-subtotal td:nth-child(2)';
 export const BTN_UPDATE_CART = '.cart-footer button[name*="_updateCart"]';
 export const BTN_CHECKOUT = 'button[name*="checkoutCart"]';
