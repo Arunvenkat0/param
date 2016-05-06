@@ -95,7 +95,7 @@ function submitForm() {
                 EnableCheckout: true,
                 dontRedirect: true
             };
-            
+
             if (formgroup.couponCode.htmlValue) {
                 status = cart.addCoupon(formgroup.couponCode.htmlValue);
 
@@ -223,14 +223,14 @@ function submitForm() {
 
         pageMeta = require('~/cartridge/scripts/meta');
         pageMeta.update(cartAsset);
-        
+
         if (formResult.dontRedirect) {
             app.getView({
                 Basket: formResult.cart.object,
                 EnableCheckout: formResult.EnableCheckout,
                 CouponStatus: formResult.CouponStatus,
                 CouponError: formResult.CouponError
-            }).render('checkout/cart/cart');              
+            }).render('checkout/cart/cart');
         } else {
             response.redirect(URLUtils.https('Cart-Show'));
         }
@@ -298,11 +298,11 @@ function addToWishlist() {
     Product = app.getModel('Product');
 
     productID = request.httpParameterMap.pid.stringValue;
-    product = Product.get(productID).object;
+    product = Product.get(productID);
     productOptionModel = product.updateOptionSelection(request.httpParameterMap);
 
     productList = app.getModel('ProductList').get();
-    productList.addProduct(product, request.httpParameterMap.Quantity.doubleValue, productOptionModel);
+    productList.addProduct(product.object, request.httpParameterMap.Quantity.doubleValue, productOptionModel);
 
     app.getView('Cart', {
         cart: app.getModel('Cart').get(),
