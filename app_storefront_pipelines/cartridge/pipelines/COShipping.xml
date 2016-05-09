@@ -137,12 +137,16 @@ This pipeline implements the logic for the default (single) shipping scenario. I
                     </pipelet-node>
                     <node-display x="0" y="1"/>
                   </node>
-                  <simple-transition/>
+                  <simple-transition>
+                    <transition-display>
+                      <bend-point relative-to="source" x="0" y="1"/>
+                    </transition-display>
+                  </simple-transition>
                   <node>
                     <interaction-continue-node secure="true" start-name="SingleShipping" transaction-required="false">
                       <template buffered="true" dynamic="false" name="checkout/shipping/singleshipping"/>
                     </interaction-continue-node>
-                    <node-display x="0" y="2"/>
+                    <node-display x="0" y="1"/>
                     <branch basename="b2" source-connector="save">
                       <transition target-connector="in">
                         <transition-display>
@@ -151,13 +155,21 @@ This pipeline implements the logic for the default (single) shipping scenario. I
                       </transition>
                       <segment>
                         <node>
+                          <call-node start-name-ref="CSRF-Validate"/>
+                          <node-display x="1" y="1"/>
+                        </node>
+                        <simple-transition>
+                          <transition-display>
+                            <bend-point relative-to="source" x="0" y="1"/>
+                          </transition-display>
+                        </simple-transition>
+                        <node>
                           <call-node start-name-ref="COShipping-HandleShippingSettings"/>
-                          <node-display x="2" y="1"/>
+                          <node-display x="0" y="1"/>
                           <branch basename="b2" source-connector="error">
                             <transition target-connector="in1" target-path="../+1">
                               <transition-display>
-                                <bend-point relative-to="source" x="2" y="-2"/>
-                                <bend-point relative-to="target" x="2" y="0"/>
+                                <bend-point relative-to="source" x="2" y="0"/>
                               </transition-display>
                             </transition>
                           </branch>
@@ -226,40 +238,59 @@ This pipeline implements the logic for the default (single) shipping scenario. I
                       </transition>
                       <segment>
                         <node>
-                          <jump-node start-name-ref="COShipping-UpdateAddressDetails"/>
+                          <call-node start-name-ref="CSRF-Validate"/>
                           <node-display x="-2" y="1"/>
+                        </node>
+                        <simple-transition>
+                          <transition-display>
+                            <bend-point relative-to="source" x="0" y="1"/>
+                          </transition-display>
+                        </simple-transition>
+                        <node>
+                          <jump-node start-name-ref="COShipping-UpdateAddressDetails"/>
+                          <node-display x="0" y="1"/>
                         </node>
                       </segment>
                     </branch>
                     <branch basename="b4" source-connector="shipToMultiple">
-                      <transition target-connector="in">
-                        <transition-display>
-                          <bend-point relative-to="target" x="0" y="-1"/>
-                        </transition-display>
-                      </transition>
+                      <transition target-connector="in"/>
                       <segment>
                         <node>
-                          <jump-node start-name-ref="COShippingMultiple-Start"/>
+                          <call-node start-name-ref="CSRF-Validate"/>
                           <node-display x="-1" y="1"/>
+                        </node>
+                        <simple-transition/>
+                        <node>
+                          <jump-node start-name-ref="COShippingMultiple-Start"/>
+                          <node-display x="0" y="1"/>
                         </node>
                       </segment>
                     </branch>
                   </node>
+                  <simple-transition>
+                    <transition-display>
+                      <bend-point relative-to="source" x="1" y="0"/>
+                    </transition-display>
+                  </simple-transition>
+                  <node>
+                    <call-node start-name-ref="CSRF-Validate"/>
+                    <node-display orientation="horizontal" x="1" y="0"/>
+                  </node>
                   <transition target-connector="in1" target-path="./+1">
                     <transition-display>
-                      <bend-point relative-to="source" x="1" y="-3"/>
-                      <bend-point relative-to="target" x="-1" y="1"/>
+                      <bend-point relative-to="source" x="2" y="0"/>
                     </transition-display>
                   </transition>
                 </segment>
                 <segment>
                   <node>
                     <join-node/>
-                    <node-display x="2" y="-2"/>
+                    <node-display x="1" y="-1"/>
                   </node>
                   <transition target-connector="in1" target-path="./-1">
                     <transition-display>
-                      <bend-point relative-to="source" x="0" y="-2"/>
+                      <bend-point relative-to="source" x="0" y="-3"/>
+                      <bend-point relative-to="target" x="1" y="-1"/>
                     </transition-display>
                   </transition>
                 </segment>
@@ -1118,7 +1149,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
         <text-node>
           <description>Mark step as fulfilled.</description>
         </text-node>
-        <node-display x="3" y="20"/>
+        <node-display x="2" y="20"/>
       </node>
     </segment>
   </branch>
@@ -1128,7 +1159,7 @@ This pipeline implements the logic for the default (single) shipping scenario. I
         <text-node>
           <description>Renders a form dialog to edit an address. The dialog is supposed to be opened by an Ajax request and ends in templates, which just trigger a certain JS event. The calling page of this dialog is responsible for handling these events.</description>
         </text-node>
-        <node-display width="2" x="2" y="21"/>
+        <node-display width="2" x="1" y="21"/>
       </node>
     </segment>
   </branch>
