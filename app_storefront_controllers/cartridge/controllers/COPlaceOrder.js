@@ -171,7 +171,7 @@ function start() {
         });
     }
 
-    var orderPlacementStatus = order.submit();
+    var orderPlacementStatus = Order.submit(order);
     if (!orderPlacementStatus.error) {
         clearForms();
     }
