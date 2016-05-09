@@ -183,7 +183,7 @@
 				<input type="hidden" name="pid" id="pid" value="${pdict.Product.ID}" />
 				<button id="add-to-cart" type="submit" title="${buttonTitle}" value="${buttonTitle}" class="button-fancy-large add-to-cart bundle"${disabledText}>${buttonTitle}</button>
 			</isif>
-
+			<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
 		</div><!-- END .addalltocart -->
 	</form>
 

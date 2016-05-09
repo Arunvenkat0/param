@@ -435,7 +435,7 @@ function addCouponJson() {
 */
 /** Adds a product to the cart.
  * @see {@link module:controllers/Cart~addProduct} */
-exports.AddProduct = guard.ensure(['post'], addProduct);
+exports.AddProduct = guard.ensure(['post', 'csrf'], addProduct);
 /** Invalidates the login and shipment forms. Renders the basket content.
  * @see {@link module:controllers/Cart~show} */
 exports.Show = guard.ensure(['https'], show);

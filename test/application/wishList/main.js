@@ -2,7 +2,6 @@
 
 import {assert} from 'chai';
 import {config} from '../webdriver/wdio.conf';
-import url from 'url';
 import * as cartPage from '../pageObjects/cart';
 import * as giftCertPurchasePage from '../pageObjects/giftCertPurchase';
 import * as loginForm from '../pageObjects/helpers/forms/login';
@@ -121,8 +120,6 @@ describe('Wishlist', () => {
     });
 
     describe('Gift Certificates', () => {
-        var giftCertItemSelector = 'table div a[href*=giftcertpurchase]';
-        var btnGiftCertAddToCart = giftCertItemSelector + '.button';
         let giftCertFieldMap = {
             recipient: 'Joe Smith',
             recipientEmail: 'jsmith@someBogusEmailDomain.tv',
@@ -144,13 +141,10 @@ describe('Wishlist', () => {
 
         it('should redirect to the Gift Certificate Purchase page when adding one to the Cart', () => {
             return wishListPage.clickAddGiftCertButton()
-                .then(() => browser.click(btnGiftCertAddToCart))
-                .then(() => browser.waitForVisible('.gift-certificate-purchase'))
-                .then(() => browser.url())
-                .then(currentUrl => {
-                    let parsedUrl = url.parse(currentUrl.value);
-                    return assert.isTrue(parsedUrl.pathname.endsWith('giftcertpurchase'));
-                });
+                .then(() => browser.click(wishListPage.GIFT_CERT))
+                .then(() => browser.waitForVisible(wishListPage.GIFT_CERT_PURCHASE))
+                .then(() => browser.isVisible(wishListPage.GIFT_CERT_PURCHASE))
+                .then(visible => assert.isTrue(visible))
         });
 
         it('should automatically populate the Your Name field', () => {

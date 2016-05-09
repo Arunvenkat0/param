@@ -562,7 +562,7 @@ exports.Delete = guard.ensure(['get', 'https'], deleteList);
  * Event handler for editing of gift registry.
  * @see module:controllers/GiftRegistry~editEvent
  */
-exports.EditEvent = guard.ensure(['post', 'https'], editEvent);
+exports.EditEvent = guard.ensure(['post', 'https', 'csrf'], editEvent);
 
 /**
  * Event handler for gift registry addresses.
@@ -586,7 +586,7 @@ exports.ShowRegistryByID = guard.ensure(['get', 'https'], showRegistryByID);
  * Controls the login that is required to access gift registry actions.
  * @see module:controllers/GiftRegistry~submitForm
  */
-exports.SubmitForm = guard.ensure(['post', 'https', 'loggedIn'], submitForm);
+exports.SubmitForm = guard.ensure(['post', 'https', 'loggedIn', 'csrf'], submitForm);
 
 /**
  * Renders a list of gift registries associated with the current customer.

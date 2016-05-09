@@ -51,6 +51,7 @@
 					</div>
 				</isif>
 			</div>
+			<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
 		</fieldset>
 	</form>
 
@@ -156,8 +157,10 @@
 								<button type="submit" name="${item.addToCart.htmlName}" title="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" value="${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}" class="button-fancy-small <isif condition="${!isGiftCert}">add-to-cart</isif>">
 									${Resource.msg('global.addtocart', 'locale', 'Add to Cart')}
 								</button>
+								
 							</fieldset>
 						</div><!-- .option-add-to-cart -->
+						<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
 						</form>
 					</td><!-- .item-dashboard -->
 				</tr>
