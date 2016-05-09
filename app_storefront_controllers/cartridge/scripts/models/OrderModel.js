@@ -35,48 +35,7 @@ function placeOrder(order) {
  * @param {dw.order.Order} obj The order object to enhance/wrap.
  */
 var OrderModel = AbstractModel.extend({
-    /**
-     * Submits an order
-     *
-     * @transactional
-     * @return {Object} object If order cannot be placed, object.error is set to true. Ortherwise, object.order_created is true, and object.Order is set to the order.
-     */
-    submit: function () {
-        var Email = require('./EmailModel');
-        var GiftCertificate = require('./GiftCertificateModel');
-        var order = this;
-        try {
-            Transaction.begin();
-            placeOrder(order);
-            Transaction.commit();
-        } catch (e) {
-            Transaction.rollback();
-            return {
-                error: true,
-                PlaceOrderError: new Status(Status.ERROR, 'confirm.error.technical')
-            };
-        }
 
-        // Creates gift certificates for all gift certificate line items in the order
-        // and sends an email to the gift certificate receiver
-        order.getGiftCertificateLineItems().map(function (lineItem) {
-            return GiftCertificate.createGiftCertificateFromLineItem(lineItem, order.getOrderNo());
-        }).forEach(GiftCertificate.sendGiftCertificateEmail);
-
-        Email.sendMail({
-            template: 'mail/orderconfirmation',
-            recipient: order.getCustomerEmail(),
-            subject: Resource.msg('order.orderconfirmation-email.001', 'order', null),
-            context: {
-                Order: order
-            }
-        });
-
-        return {
-            Order: order,
-            order_created: true
-        };
-    }
 });
 
 /**
@@ -95,6 +54,50 @@ OrderModel.get = function (parameter) {
     }
     return new OrderModel(obj);
 };
+
+/**
+ * Submits an order
+ * @param order {dw.order.Order} The order object to be submitted.
+ * @transactional
+ * @return {Object} object If order cannot be placed, object.error is set to true. Ortherwise, object.order_created is true, and object.Order is set to the order.
+ */
+OrderModel.submit = function (order) {
+    var Email = require('./EmailModel');
+    var GiftCertificate = require('./GiftCertificateModel');
+    try {
+        Transaction.begin();
+        placeOrder(order);
+
+        // Creates gift certificates for all gift certificate line items in the order
+        // and sends an email to the gift certificate receiver
+
+        order.getGiftCertificateLineItems().toArray().map(function (lineItem) {
+            return GiftCertificate.createGiftCertificateFromLineItem(lineItem, order.getOrderNo());
+        }).forEach(GiftCertificate.sendGiftCertificateEmail);
+        
+        Transaction.commit();
+    } catch (e) {
+        Transaction.rollback();
+        return {
+            error: true,
+            PlaceOrderError: new Status(Status.ERROR, 'confirm.error.technical')
+        };
+    }
+
+    Email.sendMail({
+        template: 'mail/orderconfirmation',
+        recipient: order.getCustomerEmail(),
+        subject: Resource.msg('order.orderconfirmation-email.001', 'order', null),
+        context: {
+            Order: order
+        }
+    });
+
+    return {
+        Order: order,
+        order_created: true
+    };
+}
 
 /** The order class */
 module.exports = OrderModel;
