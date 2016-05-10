@@ -1536,7 +1536,7 @@
         </qualifiers>
     </promotion-campaign-assignment>
 
-    <promotion-campaign-assignment promotion-id="PromotionTest_WithoutQualifying" campaign-id="PromotionTests">
+    <promotion-campaign-assignment promotion-id="PromotionTest_WithoutQualifying" campaign-id="Automation">
         <qualifiers match-mode="any">
             <customer-groups/>
             <source-codes/>

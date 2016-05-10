@@ -214,21 +214,27 @@
 						
 						while (promoIter.hasNext()) {
 							promoItem = promoIter.next();
-							if (promoItem.getPromotionClass() != null && promoItem.getPromotionClass().equals(dw.campaign.Promotion.PROMOTION_CLASS_PRODUCT)) {
+							if (promoItem.getPromotionClass()) {
 								promo = promoItem;
 								break;
 							}
 						}
 
 						SalesPrice = promo.getPromotionalPrice(promoVariantProduct, promoVariantProduct.getOptionModel());
-
-						price.class = 'product-standard-price';
-						price.title = Resource.msg('product.standardprice', 'product', null);
-						price.value = StandardPrice;
-						extraPrice.class = 'product-sales-price';
-						extraPrice.title = Resource.msg('product.saleprice', 'product', null);
-						extraPrice.value = SalesPrice;
-
+						
+						if(SalesPrice.available){
+							price.class = 'product-standard-price';
+							price.title = Resource.msg('product.standardprice', 'product', null);
+							price.value = StandardPrice;
+						
+							extraPrice.class = 'product-sales-price';
+							extraPrice.title = Resource.msg('product.saleprice', 'product', null);
+							extraPrice.value = SalesPrice;
+						}else{
+							price.class = 'product-sales-price';
+							price.title = Resource.msg('product-sales-pricee', 'product', null);
+							price.value = StandardPrice;
+						}
 					}
 					prices.push(price);
 					if (extraPrice) {prices.push(extraPrice);}
