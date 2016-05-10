@@ -28,5 +28,7 @@ export function emptyWishList () {
 }
 
 export function getItemNameByRow (rowNum) {
-    return browser.getText(`${WISHLIST_ITEMS}:nth-child(${rowNum}) .name`);
+    return browser.elements(`${WISHLIST_ITEMS} .product-list-item .name`)
+        .then(elements => browser.elementIdText(elements.value[rowNum - 1].ELEMENT))
+        .then(element => element.value);
 }

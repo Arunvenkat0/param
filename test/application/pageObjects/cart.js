@@ -3,6 +3,7 @@
 import * as common from './helpers/common';
 import * as productQuickView from './productQuickView';
 
+export const ADD_TO_WISHLIST_LINK = 'a.add-to-wishlist';
 export const BTN_ADD_COUPON = '#add-coupon';
 export const BTN_REMOVE_COUPON = '.item-quantity-details .textbutton';
 export const BTN_SEARCH_FOR_STORE = '.ui-dialog-buttonset button[role*=button]';
@@ -19,6 +20,7 @@ export const BTN_UPDATE_CART = '.cart-footer button[name*="_updateCart"]';
 export const BTN_CHECKOUT = 'button[name*="checkoutCart"]';
 export const LINK_REMOVE = 'button[value="Remove"]';
 export const BUNDLED_ITEM = '.rowbundle';
+export const IN_WISHLIST = '.in-wishlist';
 export const ITEM_IMAGE = '.item-image';
 export const ITEM_DETAILS = '.item-details';
 export const ITEM_NAME = '.item-list .item-details .name';
@@ -184,6 +186,27 @@ export function getBundledItemTotalPriceByRow (rowNum) {
         .getText(selector);
 }
 
+function getAddToWishListSelectorByRow(rowNum) {
+    return `${_createCssNthCartRow(rowNum)} ${ADD_TO_WISHLIST_LINK}`;
+}
+
+export function addItemToWishlistByRow(rowNum) {
+    const addToWishlistLink = getAddToWishListSelectorByRow(rowNum);
+
+    return browser.click(addToWishlistLink);
+}
+
+export function getAddToWishlistLabelByRow(rowNum) {
+    const addToWishlistLink = getAddToWishListSelectorByRow(rowNum);
+
+    return browser.getText(addToWishlistLink);
+}
+
+export function getInWishlistTextByRow(rowNum) {
+    const inWishlist =  `${_createCssNthCartRow(rowNum)} ${IN_WISHLIST}`;
+
+    return browser.getText(inWishlist);
+}
 
 /**
  * Retrieves the Cart's Sub-total value

@@ -6,8 +6,10 @@ import url from 'url';
 import * as cartPage from '../pageObjects/cart';
 import * as giftCertPurchasePage from '../pageObjects/giftCertPurchase';
 import * as loginForm from '../pageObjects/helpers/forms/login';
+import * as loginPage from '../pageObjects/loginPage';
 import * as navHeader from '../pageObjects/navHeader';
 import * as productDetailPage from '../pageObjects/productDetail';
+import * as Resource from '../../mocks/dw/web/Resource';
 import * as testData from '../pageObjects/testData/main';
 import * as wishListPage from '../pageObjects/wishList';
 
@@ -203,6 +205,12 @@ describe('Wishlist', () => {
                     .then(() => addProductVariationMasterToWishList())
             });
 
+            after(() => {
+                return wishListPage.navigateTo()
+                    .then(() => wishListPage.emptyWishList())
+                    .then(() => navHeader.logout())
+            });
+
             it('should directly navigate to the WishList Page', () =>
                 browser.isExisting('label[for=editAddress]')
                 .then(exists => assert.equal(exists, true))
@@ -221,5 +229,44 @@ describe('Wishlist', () => {
             });
         });
 
+        describe('from the Cart', () => {
+            const rowIndex = 1;
+            const variantId = '701644062682';
+            let product;
+
+            before(() => {
+                product = testData.getProductById(variantId);
+
+                return loginPage.navigateTo()
+                    .then(() => loginForm.loginAsDefaultCustomer())
+                    .then(() => browser.url(product.getUrlResourcePath()))
+                    .click(productDetailPage.BTN_ADD_TO_CART)
+                    .then(() => cartPage.navigateTo());
+            });
+
+            after(() => {
+                return cartPage.navigateTo()
+                    .then(() => cartPage.emptyCart())
+                    .then(() => wishListPage.navigateTo())
+                    .then(() => wishListPage.emptyWishList())
+                    .then(() => navHeader.logout())
+            });
+
+            it('should notify a customer when an item is added to a Wishlist', () => {
+                const expectedInWishlistText = Resource.msg('global.iteminwishlist', 'locale', null);
+
+                return cartPage.addItemToWishlistByRow(rowIndex)
+                    .then(() => cartPage.getInWishlistTextByRow(rowIndex))
+                    .then(text => assert.equal(text, expectedInWishlistText));
+            });
+
+            it('should display the added item in the Wishlist', () => {
+                const expectedName = product.getDisplayName(locale);
+
+                return wishListPage.navigateTo()
+                    .then(() => wishListPage.getItemNameByRow(rowIndex))
+                    .then(name => assert.equal(name, expectedName));
+            })
+        });
     });
 });
