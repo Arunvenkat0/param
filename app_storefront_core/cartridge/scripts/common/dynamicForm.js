@@ -1,7 +1,7 @@
 'use strict';
 
-var FormField = require('dw/web/FormField');
-var FormGroup = require('dw/web/FormGroup');
+const FormField = require('dw/web/FormField');
+const FormGroup = require('dw/web/FormGroup');
 
 /**
  * @description parse FormField element, create context and apply inputfield template to generate form field markup
@@ -10,8 +10,22 @@ var FormGroup = require('dw/web/FormGroup');
  * @return {String} HTML markup of the field
  */
 function getFieldContext(field, fieldData) {
-	var context = {};
-	var type;
+	const context = {};
+	let type;
+
+	/**
+	 * Compile array of form definition attr values.  These will set the
+	 * appropriate attrs in the rendered html to trigger form validation errors
+	 * on the client, with the exception of the 'required' field which is set in
+	 * countries.json
+	 */
+	const attrFields = {
+		min: field.maxValue,
+		max: field.minValue,
+		minlength: field.minLength,
+		maxlength: field.maxLength
+	};
+
 	switch (field.type) {
 		case FormField.FIELD_TYPE_BOOLEAN:
 			type = 'checkbox';
@@ -27,6 +41,13 @@ function getFieldContext(field, fieldData) {
 			type = 'text';
 			break;
 	}
+
+	// Add attributes from form field definitions.  Note: These may be
+	// overridden by the related fields in countries.json if specified.
+	if (_anyAttrHasValue(attrFields)) {
+		context.attributes = _getValuedAttrs(attrFields);
+	}
+
 	context.formfield = field;
 	context.type = type;
 	if (fieldData) {
@@ -34,7 +55,49 @@ function getFieldContext(field, fieldData) {
 			context[prop] = fieldData[prop];
 		});
 	}
+
 	return context;
+}
+
+/**
+ * Cycles through each property of a provided object and returns True if any has
+ * a value
+ *
+ * @param {Object} attrs - Map of form field attributes
+ * @returns {Boolean}
+ */
+function _anyAttrHasValue (attrs) {
+	var keys = Object.keys(attrs);
+	var value;
+
+	for(var i = 0; i < keys.length; i++) {
+		value = attrs[keys[i]];
+		if (value != null) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+/**
+ * Get a map of form field attributes with their respective values
+ *
+ * @param {Object} attrs - Map of handled form field attributes
+ * @returns {Object} - Filtered map of form field attributes with their values
+ */
+function _getValuedAttrs (attrs) {
+	var attrProxy = {};
+
+	Object.keys(attrs).forEach(function (attr) {
+		var value = attrs[attr];
+
+		if (value != null) {
+			attrProxy[attr] = value;
+		}
+	});
+
+	return attrProxy;
 }
 
 module.exports.getFields = function (formObject, formData) {

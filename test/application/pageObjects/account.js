@@ -2,7 +2,6 @@
 
 export const LOGOUT = '.account-logout';
 export const BTN_LOGIN = 'button[name*=login_login]';
-
 export const PASSWORD_DIALOG_CLOSE = 'span.ui-icon-closethick';
 export const PASSWORD_DIALOG_SELECTOR = '.ui-dialog';          // TODO: This can probably be a more specific selector
 export const PASSWORD_EMAIL_INPUT = '#dwfrm_requestpassword_email';
