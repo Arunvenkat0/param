@@ -36,6 +36,8 @@ function initializeAddressForm() {
                 if (data.success) {
                     dialog.close();
                     page.refresh();
+                } else if (data.error) {
+                    page.redirect(Urls.csrffailed);
                 } else {
                     window.alert(data.message);
                     return false;

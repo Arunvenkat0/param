@@ -333,15 +333,28 @@
         </interaction-continue-node>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="addGiftCertificate">
-          <transition target-connector="in"/>
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
           <segment>
+            <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="3" y="3"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
             <node>
               <pipelet-node pipelet-name="AddGiftCertificateToProductList" pipelet-set-identifier="bc_api">
                 <key-binding alias="ProductList" key="ProductList"/>
                 <key-binding alias="0" key="Priority"/>
                 <key-binding alias="GiftCertificate" key="ProductListItem"/>
               </pipelet-node>
-              <node-display x="3" y="4"/>
+              <node-display x="0" y="1"/>
               <branch basename="b2" source-connector="error">
                 <transition target-connector="in1"/>
                 <segment>
@@ -376,34 +389,47 @@
           </segment>
         </branch>
         <branch basename="b3" source-connector="addToCart">
-          <transition target-connector="in"/>
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="-1" y="0"/>
+            </transition-display>
+          </transition>
           <segment>
             <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display orientation="horizontal" x="2" y="0"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="1" y="0"/>
+              </transition-display>
+            </simple-transition>
+            <node>
               <decision-node condition-key="CurrentForms.wishlist.items.triggeredAction.parent.object.type == CurrentForms.wishlist.items.triggeredAction.parent.object.TYPE_GIFT_CERTIFICATE" condition-operator="expr"/>
-              <node-display orientation="horizontal" x="3" y="1"/>
+              <node-display orientation="horizontal" x="1" y="0"/>
               <branch basename="b2" source-connector="yes">
                 <transition target-connector="in">
                   <transition-display>
                     <bend-point relative-to="source" x="1" y="0"/>
+                    <bend-point relative-to="target" x="-1" y="0"/>
                   </transition-display>
                 </transition>
                 <segment>
                   <node>
                     <jump-node start-name-ref="GiftCert-Purchase"/>
-                    <node-display orientation="horizontal" x="1" y="0"/>
+                    <node-display orientation="horizontal" x="1" y="1"/>
                   </node>
                 </segment>
               </branch>
             </node>
             <simple-transition>
               <transition-display>
-                <bend-point relative-to="source" x="0" y="2"/>
                 <bend-point relative-to="target" x="-1" y="0"/>
               </transition-display>
             </simple-transition>
             <node>
               <jump-node start-name-ref="Cart-AddProduct"/>
-              <node-display orientation="horizontal" x="1" y="1"/>
+              <node-display orientation="horizontal" x="1" y="2"/>
             </node>
           </segment>
         </branch>
@@ -411,10 +437,15 @@
           <transition target-connector="in"/>
           <segment>
             <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="2" y="3"/>
+            </node>
+            <simple-transition/>
+            <node>
               <pipelet-node pipelet-name="RemoveProductListItem" pipelet-set-identifier="bc_api">
                 <key-binding alias="TriggeredAction.object" key="ProductListItem"/>
               </pipelet-node>
-              <node-display x="2" y="4"/>
+              <node-display x="0" y="1"/>
             </node>
             <transition target-connector="in2" target-path="./+1"/>
           </segment>
@@ -427,17 +458,35 @@
           </segment>
         </branch>
         <branch basename="b5" source-connector="selectAddressWishlist">
-          <transition target-connector="in"/>
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
           <segment>
             <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="-2" y="2"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="target" x="0" y="-1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
               <jump-node start-name-ref="Wishlist-SetShippingAddress"/>
-              <node-display x="-3" y="4"/>
+              <node-display x="-1" y="2"/>
             </node>
           </segment>
         </branch>
         <branch basename="b6" source-connector="setItemPrivate">
           <transition target-connector="in"/>
           <segment>
+            <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="-1" y="3"/>
+            </node>
+            <simple-transition/>
             <node>
               <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="true"/>
@@ -462,7 +511,7 @@
                 <key-binding alias="null" key="From_9"/>
                 <key-binding alias="null" key="To_9"/>
               </pipelet-node>
-              <node-display x="-1" y="4"/>
+              <node-display x="0" y="1"/>
             </node>
             <transition target-connector="in2" target-path="./+1"/>
           </segment>
@@ -489,8 +538,21 @@
           </segment>
         </branch>
         <branch basename="b7" source-connector="setItemPublic">
-          <transition target-connector="in"/>
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
           <segment>
+            <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="-2" y="3"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
             <node>
               <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="true"/>
@@ -515,7 +577,7 @@
                 <key-binding alias="null" key="From_9"/>
                 <key-binding alias="null" key="To_9"/>
               </pipelet-node>
-              <node-display x="-2" y="4"/>
+              <node-display x="0" y="1"/>
             </node>
             <transition target-connector="in1" target-path="./+1"/>
           </segment>
@@ -530,6 +592,11 @@
         <branch basename="b8" source-connector="setListPrivate">
           <transition target-connector="in"/>
           <segment>
+            <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="1" y="3"/>
+            </node>
+            <simple-transition/>
             <node>
               <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="true"/>
@@ -554,7 +621,7 @@
                 <key-binding alias="null" key="From_9"/>
                 <key-binding alias="null" key="To_9"/>
               </pipelet-node>
-              <node-display x="1" y="4"/>
+              <node-display x="0" y="1"/>
             </node>
             <simple-transition/>
             <node>
@@ -581,6 +648,15 @@
           </transition>
           <segment>
             <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="0" y="3"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
               <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="true"/>
                 <key-binding alias="true" key="From_0"/>
@@ -604,7 +680,7 @@
                 <key-binding alias="null" key="From_9"/>
                 <key-binding alias="null" key="To_9"/>
               </pipelet-node>
-              <node-display x="0" y="4"/>
+              <node-display x="0" y="1"/>
             </node>
             <simple-transition/>
             <node>
@@ -624,14 +700,27 @@
           </segment>
         </branch>
         <branch basename="b10" source-connector="updateItem">
-          <transition target-connector="in"/>
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
           <segment>
+            <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="4" y="3"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
             <node>
               <pipelet-node pipelet-name="UpdateObjectWithForm" pipelet-set-identifier="bc_api">
                 <key-binding alias="TriggeredAction.parent" key="Form"/>
                 <key-binding alias="TriggeredAction.object" key="Object"/>
               </pipelet-node>
-              <node-display x="4" y="4"/>
+              <node-display x="0" y="1"/>
               <branch basename="b2" source-connector="error">
                 <transition target-connector="in1" target-path="../b2.1/b2.2"/>
               </branch>
@@ -640,12 +729,21 @@
           </segment>
         </branch>
       </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="target" x="-1" y="0"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <call-node start-name-ref="CSRF-Validate"/>
+        <node-display orientation="horizontal" x="2" y="-1"/>
+      </node>
       <transition target-connector="in1" target-path="./+1"/>
     </segment>
     <segment>
       <node>
         <join-node/>
-        <node-display x="5" y="0"/>
+        <node-display x="3" y="1"/>
       </node>
       <transition target-connector="in3" target-path="./-1"/>
     </segment>
