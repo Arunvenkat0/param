@@ -211,27 +211,12 @@ along with their differences for testing different scenarios:
 
 # Test Promotions/Products
 These are promotions that have been turned on with a default installation  of SG for testing purposes.
-<table class="test-users">
-<thead>
-<tr>
-	<th>PromotionID</th>
-	<th>Type</th>
-	<th>Rules</th>
-	<th>Products</th>
-	<th>Pages</th>
-	<th>Note</th>
-</tr>
-</thead>
-<tr>
-	<td>PromotionTest_WithoutQualifying</td>
-	<td>Product</td>
-	<td>Order a specific product and get 20% of that product.</td>
-	<td>Mens tie<br>(793775370033)<br>Mens suit<br>(640188017003)</td>
-	<td>home page(carousel tiles), search grid, compare page, cart page and product page. </td>
-	<td>MA</td>
-</tr>
+### Test products
+| PromotionID|Type|Rules|Products|Pages|Notes|
+|---|---|---|---|---|---|
+|PromotionTest_WithoutQualifying| Product |Order a specific product and get 20% of that product.|Mens tie (793775370033), Mens suit (640188017003)|home page(carousel tiles), search grid, compare page, cart page and product page.|---|
+|PromotionTest_20%offOrderAmountOver200|Order|Get 20% off Order Amount Over 200|82936941|Product page, place order page|---|
 
-</table>
 
 # Troubleshooting
 
