@@ -63,7 +63,7 @@
 								${Resource.msg('global.createnowbutton','locale',null)}
 							</button>
 						</div>
-						<input type="hidden" name="${pdict.CurrentForms.login.secureKeyHtmlName}" value="${pdict.CurrentForms.login.secureKeyValue}"/>
+						<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
 					</fieldset>
 				</form>
 

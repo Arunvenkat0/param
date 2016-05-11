@@ -487,10 +487,10 @@ function Logout() {
 exports.Show                    = guard.ensure(['https'], show);
 /** Determines whether the request has an OAuth provider set.
  * @see module:controllers/Login~processLoginForm */
-exports.LoginForm               = guard.ensure(['https','post'], processLoginForm);
+exports.LoginForm               = guard.ensure(['https','post', 'csrf'], processLoginForm);
 /** Form handler for the oauthlogin form.
  * @see module:controllers/Login~handleOAuthLoginForm */
-exports.OAuthLoginForm          = guard.ensure(['https','post'], handleOAuthLoginForm);
+exports.OAuthLoginForm          = guard.ensure(['https','post', 'csrf'], handleOAuthLoginForm);
 /** Exchanges a user authentication code for a token and requests user information from an OAUTH provider.
  * @see module:controllers/Login~handleOAuthReentry */
 exports.OAuthReentry            = guard.ensure(['https','get'], handleOAuthReentry);
