@@ -2,6 +2,10 @@
 
 import _ from 'lodash';
 import * as formHelpers from './helpers/forms/common';
+import * as giftRegistryPage from '../pageObjects/giftRegistry';
+import * as loginForm from '../pageObjects/helpers/forms/login';
+import * as addressPage from '../pageObjects/addressBook';
+import * as navHeader from '../pageObjects/navHeader';
 
 export const SHARE_LINK = '.share-link';
 export const USE_PRE_EVENT = '.usepreevent';
@@ -211,4 +215,32 @@ export function searchGiftRegistry(lastName, firstName, eventType) {
 export function getGiftRegistryCount () {
     return browser.elements(TABLE_GR_ITEMS)
         .then(eventRows => eventRows.value.length - 1);
+}
+
+export function createGiftRegistry (locale, eventFormData, eventFormShippingData) {
+    return giftRegistryPage.navigateTo()
+        .then(() => loginForm.loginAsDefaultCustomer(locale))
+        .then(() => browser.waitForVisible(giftRegistryPage.BTN_CREATE_REGISTRY))
+        .then(() => browser.click(giftRegistryPage.BTN_CREATE_REGISTRY))
+        .then(() => browser.waitForVisible(giftRegistryPage.FORM_REGISTRY))
+        .then(() => giftRegistryPage.fillOutEventForm(eventFormData))
+        .then(() => browser.click(giftRegistryPage.BTN_EVENT_SET_PARTICIPANTS))
+        .then(() => browser.waitForVisible(giftRegistryPage.USE_PRE_EVENT))
+        .then(() => giftRegistryPage.fillOutEventShippingForm(eventFormShippingData))
+        .then(() => browser.waitForValue('[name*=addressBeforeEvent_phone]'))
+        .then(() => browser.click(giftRegistryPage.USE_PRE_EVENT))
+        .then(() => browser.waitForVisible(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE))
+        .then(() => browser.click(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE))
+        .then(() => browser.waitForVisible(giftRegistryPage.BTN_EVENT_CONFIRM))
+        .then(() => browser.click(giftRegistryPage.BTN_EVENT_CONFIRM))
+        .then(() => browser.waitForVisible(giftRegistryPage.REGISTRY_HEADING))
+}
+
+export function giftRegistryCleanUp () {
+    return giftRegistryPage.navigateTo()
+        .then(() => browser.waitForVisible(giftRegistryPage.BTN_CREATE_REGISTRY))
+        .then(() => giftRegistryPage.emptyAllGiftRegistries())
+        .then(() => addressPage.navigateTo())
+        .then(() => addressPage.removeAddresses())
+        .then(() => navHeader.logout())
 }
