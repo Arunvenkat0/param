@@ -46,7 +46,7 @@ describe('Cart - LastVisitedList', () => {
             .then(() => browser.getText(cartPage.LAST_VISITED_ITEM_PRICES))
             .then(actualPrice => assert.equal(actualPrice[0], expectedProductPrice.list), 'product price should be ' + expectedProductPrice)
             .then(() => browser.getAttribute(cartPage.LAST_VISITED_ITEM_IMAGES, 'src'))
-            .then(imgSrc => assert.isTrue(imgSrc[0].endsWith(expectedMediumImage),'product image should be '+expectedMediumImage))
+            .then(imgSrc => assert.isTrue(imgSrc[0].endsWith(expectedMediumImage), 'product image should be ' + expectedMediumImage))
     })
 
     it('should see the product bundle in the LastVisitedList', () => {
