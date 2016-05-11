@@ -40,7 +40,7 @@
 		<iselse/>
 			<isif condition="${pdict.SearchPromo != null}">
 				<isif condition="${'body' in pdict.SearchPromo.custom && pdict.SearchPromo.custom.body != null}">
-					<div class="contentasset"><!-- dwMarker="content" dwContentID="${pdict.Content.UUID}" -->
+					<div class="contentasset"><!-- dwMarker="content" dwContentID="${pdict.SearchPromo.UUID}" -->
 						<isprint value="${pdict.SearchPromo.custom.body}" encoding="off"/>
 					</div> <!-- End contentasset -->
 				</isif>
