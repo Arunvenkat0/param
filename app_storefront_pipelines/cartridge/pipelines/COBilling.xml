@@ -18,7 +18,7 @@
         <text-node>
           <description>Starting point for billing. After a successful shipping setup both COShipping and COShippingMultiple jump to this node.</description>
         </text-node>
-        <node-display x="2" y="3"/>
+        <node-display x="3" y="3"/>
       </node>
     </segment>
   </branch>
@@ -74,7 +74,7 @@
     <segment>
       <node>
         <start-node call-mode="public" name="Start" secure="true"/>
-        <node-display x="2" y="4"/>
+        <node-display x="3" y="4"/>
       </node>
       <simple-transition/>
       <node>
@@ -155,7 +155,11 @@
         <decision-node condition-key="!empty(Basket.paymentInstrument) &amp;&amp; Basket.paymentInstrument.paymentMethod == dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE" condition-operator="expr"/>
         <node-display orientation="horizontal" x="0" y="1"/>
         <branch basename="b2" source-connector="yes">
-          <transition target-connector="in"/>
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="source" x="1" y="0"/>
+            </transition-display>
+          </transition>
           <segment>
             <node>
               <pipelet-node pipelet-name="UpdateFormWithObject" pipelet-set-identifier="bc_api">
@@ -163,9 +167,14 @@
                 <key-binding alias="CurrentForms.billing" key="Form"/>
                 <key-binding alias="{giftCertCode: Basket.paymentInstrument.giftCertificateCode}" key="Object"/>
               </pipelet-node>
-              <node-display x="1" y="0"/>
+              <node-display orientation="horizontal" x="1" y="0"/>
             </node>
-            <transition target-connector="in3" target-path="../+1"/>
+            <transition target-connector="in3" target-path="../+1">
+              <transition-display>
+                <bend-point relative-to="source" x="1" y="0"/>
+                <bend-point relative-to="source" x="1" y="2"/>
+              </transition-display>
+            </transition>
           </segment>
         </branch>
       </node>
@@ -176,19 +185,28 @@
         <join-node/>
         <node-display x="0" y="1"/>
       </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <interaction-continue-node secure="true" start-name="Billing" transaction-required="false">
           <template buffered="true" dynamic="false" name="checkout/billing/billing"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="applyCoupon">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="target" x="0" y="-1"/>
-            </transition-display>
-          </transition>
+          <transition target-connector="in"/>
           <segment>
+            <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="-2" y="1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
             <node>
               <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="false"/>
@@ -213,7 +231,7 @@
                 <key-binding alias="null" key="From_9"/>
                 <key-binding alias="null" key="To_9"/>
               </pipelet-node>
-              <node-display x="-2" y="1"/>
+              <node-display x="0" y="1"/>
             </node>
             <simple-transition>
               <transition-display>
@@ -243,8 +261,17 @@
           </transition>
           <segment>
             <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="-3" y="-1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
               <jump-node start-name-ref="COBilling-UpdateCreditCardSelection"/>
-              <node-display x="-2" y="-1"/>
+              <node-display x="0" y="1"/>
             </node>
           </segment>
         </branch>
@@ -256,18 +283,28 @@
           </transition>
           <segment>
             <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="-2" y="-1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
               <jump-node start-name-ref="COBilling-UpdatePaymentMethodSelection"/>
-              <node-display x="-2" y="-2"/>
+              <node-display x="0" y="1"/>
             </node>
           </segment>
         </branch>
         <branch basename="b5" source-connector="redeemGiftCert">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="target" x="0" y="-1"/>
-            </transition-display>
-          </transition>
+          <transition target-connector="in"/>
           <segment>
+            <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="-1" y="1"/>
+            </node>
+            <simple-transition/>
             <node>
               <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="false"/>
@@ -292,7 +329,7 @@
                 <key-binding alias="null" key="From_9"/>
                 <key-binding alias="null" key="To_9"/>
               </pipelet-node>
-              <node-display x="-1" y="1"/>
+              <node-display x="0" y="1"/>
             </node>
             <simple-transition/>
             <node>
@@ -313,15 +350,20 @@
         <branch basename="b6" source-connector="save">
           <transition target-connector="in">
             <transition-display>
-              <bend-point relative-to="target" x="0" y="-1"/>
+              <bend-point relative-to="source" x="0" y="1"/>
             </transition-display>
           </transition>
           <segment>
             <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition/>
+            <node>
               <call-node start-name-ref="COBilling-ResetPaymentForms"/>
-              <node-display x="0" y="2"/>
+              <node-display x="0" y="1"/>
               <branch basename="b2" source-connector="error">
-                <transition target-connector="in1" target-path="../+1"/>
+                <transition target-connector="in1" target-path="./b5.4"/>
               </branch>
             </node>
             <simple-transition>
@@ -333,7 +375,7 @@
               <call-node start-name-ref="COBilling-ValidateBilling"/>
               <node-display x="0" y="1"/>
               <branch basename="b3" source-connector="Error">
-                <transition target-connector="in1" target-path="../+1"/>
+                <transition target-connector="in1" target-path="./b5.3"/>
               </branch>
             </node>
             <simple-transition/>
@@ -349,11 +391,7 @@
               <call-node start-name-ref="COBilling-HandlePaymentSelection"/>
               <node-display x="0" y="1"/>
               <branch basename="b5" source-connector="error">
-                <transition target-connector="in1">
-                  <transition-display>
-                    <bend-point relative-to="source" x="1" y="1"/>
-                  </transition-display>
-                </transition>
+                <transition target-connector="in1"/>
                 <segment>
                   <node>
                     <join-node/>
@@ -364,7 +402,21 @@
                 <segment>
                   <node>
                     <join-node/>
-                    <node-display x="0" y="-2"/>
+                    <node-display x="0" y="-1"/>
+                  </node>
+                  <transition target-connector="in1" target-path="./+1"/>
+                </segment>
+                <segment>
+                  <node>
+                    <join-node/>
+                    <node-display x="0" y="-1"/>
+                  </node>
+                  <transition target-connector="in1" target-path="./+1"/>
+                </segment>
+                <segment>
+                  <node>
+                    <join-node/>
+                    <node-display x="0" y="-1"/>
                   </node>
                   <transition target-connector="in1" target-path="../../+1"/>
                 </segment>
@@ -410,41 +462,45 @@
           </segment>
         </branch>
         <branch basename="b7" source-connector="selectAddress">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="target" x="0" y="-1"/>
-            </transition-display>
-          </transition>
+          <transition target-connector="in"/>
           <segment>
             <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="-3" y="1"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
               <jump-node start-name-ref="COBilling-UpdateAddressDetails"/>
-              <node-display x="-2" y="0"/>
+              <node-display x="0" y="1"/>
             </node>
           </segment>
         </branch>
+      </node>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="1" y="0"/>
+        </transition-display>
+      </simple-transition>
+      <node>
+        <call-node start-name-ref="CSRF-Validate"/>
+        <node-display orientation="horizontal" x="1" y="0"/>
       </node>
       <transition target-connector="in2" target-path="./+1"/>
     </segment>
     <segment>
       <node>
         <join-node/>
-        <node-display x="2" y="1"/>
+        <node-display x="1" y="0"/>
       </node>
-      <transition target-connector="in1" target-path="./-2"/>
-    </segment>
-  </branch>
-  <branch basename="UpdateAddress">
-    <segment>
-      <node>
-        <start-node name="UpdateAddress" secure="true"/>
-        <node-display x="3" y="7"/>
-      </node>
-      <simple-transition/>
-      <node>
-        <call-node start-name-ref="COBilling-InitCreditCardList"/>
-        <node-display x="0" y="1"/>
-      </node>
-      <transition target-connector="in3" target-path="/Start.2"/>
+      <transition target-connector="in1" target-path="./-2">
+        <transition-display>
+          <bend-point relative-to="target" x="4" y="0"/>
+        </transition-display>
+      </transition>
     </segment>
   </branch>
   <branch basename="InitForms">
@@ -545,6 +601,20 @@
         <end-node/>
         <node-display x="0" y="1"/>
       </node>
+    </segment>
+  </branch>
+  <branch basename="UpdateAddress">
+    <segment>
+      <node>
+        <start-node name="UpdateAddress" secure="true"/>
+        <node-display x="4" y="7"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <call-node start-name-ref="COBilling-InitCreditCardList"/>
+        <node-display x="0" y="1"/>
+      </node>
+      <transition target-connector="in3" target-path="/Start.2"/>
     </segment>
   </branch>
   <branch basename="InitAddressForm">
@@ -950,7 +1020,7 @@
         <text-node>
           <description>Clean shipments.</description>
         </text-node>
-        <node-display x="1" y="9"/>
+        <node-display x="2" y="8"/>
       </node>
     </segment>
   </branch>
@@ -958,7 +1028,7 @@
     <segment>
       <node>
         <start-node call-mode="private" name="ReturnToForm" secure="false"/>
-        <node-display x="4" y="10"/>
+        <node-display x="5" y="10"/>
       </node>
       <transition target-connector="in1" target-path="/Start.3">
         <transition-display>
@@ -1744,26 +1814,6 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
-  <branch basename="_ANONYMOUS_BRANCH_26">
-    <segment>
-      <node>
-        <text-node>
-          <description>Performs validation steps, based upon the entered billing address and address options.</description>
-        </text-node>
-        <node-display x="1" y="18"/>
-      </node>
-    </segment>
-  </branch>
-  <branch basename="_ANONYMOUS_BRANCH_27">
-    <segment>
-      <node>
-        <text-node>
-          <description>Performs payment method specific checks, such as credit card verification.</description>
-        </text-node>
-        <node-display x="1" y="19"/>
-      </node>
-    </segment>
-  </branch>
   <branch basename="HandleCoupon">
     <segment>
       <node>
@@ -1814,13 +1864,33 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
       </node>
     </segment>
   </branch>
+  <branch basename="_ANONYMOUS_BRANCH_27">
+    <segment>
+      <node>
+        <text-node>
+          <description>Performs validation steps, based upon the entered billing address and address options.</description>
+        </text-node>
+        <node-display x="1" y="20"/>
+      </node>
+    </segment>
+  </branch>
+  <branch basename="_ANONYMOUS_BRANCH_28">
+    <segment>
+      <node>
+        <text-node>
+          <description>Performs payment method specific checks, such as credit card verification.</description>
+        </text-node>
+        <node-display x="1" y="21"/>
+      </node>
+    </segment>
+  </branch>
   <branch basename="_ANONYMOUS_BRANCH_29">
     <segment>
       <node>
         <text-node>
           <description>Mark step as fulfilled.</description>
         </text-node>
-        <node-display x="1" y="21"/>
+        <node-display x="1" y="22"/>
       </node>
     </segment>
   </branch>
@@ -1830,7 +1900,7 @@ AdjustGiftCertificate pipeline removes and then adds currently added gift certif
         <text-node>
           <description>A successful billing page will jump to the next checkout step.</description>
         </text-node>
-        <node-display x="1" y="22"/>
+        <node-display x="1" y="23"/>
       </node>
     </segment>
   </branch>
