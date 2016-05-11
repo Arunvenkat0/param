@@ -363,10 +363,10 @@ exports.Edit            = guard.ensure(['https','get'],edit);
 exports.CheckBalance    = guard.ensure(['https','post'],checkBalance);
 /** Adds a gift certificate to the basket.
  * @see module:controllers/GiftCert~addToBasket */
-exports.AddToBasket     = guard.ensure(['https','post'],addToBasket);
+exports.AddToBasket     = guard.ensure(['https','post', 'csrf'],addToBasket);
 /** Updates the gift certificate in the basket.
  * @see module:controllers/GiftCert~update */
-exports.Update          = guard.ensure(['https','post'],update);
+exports.Update          = guard.ensure(['https','post', 'csrf'],update);
 /** Renders the minicart.
  * @see module:controllers/GiftCert~showMiniCart */
 exports.ShowMiniCart    = guard.ensure(['https','get'],showMiniCart);
