@@ -213,6 +213,7 @@
 			</div>
 
 			<form action="${URLUtils.https('COSummary-Submit')}" method="post" class="submit-order">
+				<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
 				<fieldset>
 					<div class="form-row">
 						<a class="back-to-cart" href="${URLUtils.url('Cart-Show')}">
