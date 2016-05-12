@@ -187,7 +187,7 @@ describe('Promotions - PromotionTest_WithoutQualifying product tile pricing', ()
         });
     });
 
-    describe('Compare page', () => {
+    describe.skip('Compare page', () => {
         before(() => browser.url('/mens/accessories/ties/')
            .waitForVisible(searchResultsPage.PRODUCTGRID_CONTAINER)
        );
