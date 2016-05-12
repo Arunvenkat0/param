@@ -61,13 +61,7 @@ var View = Class.extend({
         this.View = this;
         // provide Meta
         this.Meta = require('~/cartridge/scripts/meta');
-        // backward compatibility
-        this.CurrentForms = session.forms;
-        this.CurrentHttpParameterMap = request.httpParameterMap;
-        this.CurrentCustomer = customer;
-        this.CurrentSession = session;
-        this.CurrentPageMetaData = request.pageMetaData;
-        this.CurrentRequest = request;
+
         try {
             ISML.renderTemplate(templateName, this);
         } catch (e) {
