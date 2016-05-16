@@ -16,6 +16,7 @@
 
 			<div class="page-content-tab-navigaton">
 				<isinclude template="account/giftregistry/navigation"/>
+				<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
 			</div>
 
 			<div class="page-content-tab-wrapper">
@@ -79,7 +80,6 @@
 			</table>
 
 		</div>
-		<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
 	</fieldset>
 	</form>
 
