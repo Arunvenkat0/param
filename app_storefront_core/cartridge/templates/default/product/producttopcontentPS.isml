@@ -135,6 +135,7 @@
 	<isif condition=${pdict.isBundle}>
 		<isset name="showTieredPrice" value="${true}" scope="page"/>
 		<form action="${URLUtils.url('Cart-AddProduct')}" method="post" id="${pdict.CurrentForms.product.addtocart.dynamicHtmlName}" class="pdpForm bundle">
+		<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
 	</isif>
 	<div id="product-set-list" class="product-set-list">
 		<h2 class="visually-hidden">Products</h2>
@@ -183,7 +184,6 @@
 				<input type="hidden" name="pid" id="pid" value="${pdict.Product.ID}" />
 				<button id="add-to-cart" type="submit" title="${buttonTitle}" value="${buttonTitle}" class="button-fancy-large add-to-cart bundle"${disabledText}>${buttonTitle}</button>
 			</isif>
-			<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
 		</div><!-- END .addalltocart -->
 	</form>
 

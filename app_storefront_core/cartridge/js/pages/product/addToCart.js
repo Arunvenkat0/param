@@ -57,6 +57,11 @@ var addAllToCart = function (e) {
     var $productForms = $('#product-set-list').find('form').toArray();
     TPromise.all(_.map($productForms, addItemToCart))
         .then(function (responses) {
+            for (var i = 0; i < responses.length; i++) {
+                if (responses[i].error) {
+                    page.redirect(Urls.csrffailed);
+                }
+            }
             dialog.close();
             // show the final response only, which would include all the other items
             minicart.show(responses[responses.length - 1]);
