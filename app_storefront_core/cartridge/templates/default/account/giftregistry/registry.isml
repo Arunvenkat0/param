@@ -51,8 +51,8 @@
 					</div>
 				</isif>
 			</div>
-			<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
 		</fieldset>
+		<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
 	</form>
 
 	<div class="page-content-tab-wrapper">
