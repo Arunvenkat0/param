@@ -4,7 +4,7 @@ var dialog = require('../../dialog'),
     minicart = require('../../minicart'),
     page = require('../../page'),
     util = require('../../util'),
-    TPromise = require('promise'),
+    Promise = require('promise'),
     _ = require('lodash');
 
 /**
@@ -18,11 +18,18 @@ var addItemToCart = function (form) {
     if ($qty.length === 0 || isNaN($qty.val()) || parseInt($qty.val(), 10) === 0) {
         $qty.val('1');
     }
-    return TPromise.resolve($.ajax({
+    return Promise.resolve($.ajax({
         type: 'POST',
         url: util.ajaxUrl(Urls.addProduct),
         data: $form.serialize()
-    }));
+    })).then(function (response) {
+        // handle error in the response
+        if (response.error) {
+            Promise.reject(response.error);
+        } else {
+            Promise.resolve(response);
+        }
+    });
 };
 
 /**
@@ -36,8 +43,6 @@ var addToCart = function (e) {
         var $uuid = $form.find('input[name="uuid"]');
         if ($uuid.length > 0 && $uuid.val().length > 0) {
             page.refresh();
-        } else if (response.error) {
-            page.redirect(Urls.csrffailed);
         } else {
             // do not close quickview if adding individual item that is part of product set
             // @TODO should notify the user some other way that the add action has completed successfully
@@ -55,13 +60,8 @@ var addToCart = function (e) {
 var addAllToCart = function (e) {
     e.preventDefault();
     var $productForms = $('#product-set-list').find('form').toArray();
-    TPromise.all(_.map($productForms, addItemToCart))
+    Promise.all(_.map($productForms, addItemToCart))
         .then(function (responses) {
-            for (var i = 0; i < responses.length; i++) {
-                if (responses[i].error) {
-                    page.redirect(Urls.csrffailed);
-                }
-            }
             dialog.close();
             // show the final response only, which would include all the other items
             minicart.show(responses[responses.length - 1]);
