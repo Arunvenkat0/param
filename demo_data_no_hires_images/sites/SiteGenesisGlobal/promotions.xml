@@ -41,7 +41,7 @@
         <customer-groups>
             <customer-group group-id="Everyone"/>
         </customer-groups>
-    </campaign> 
+    </campaign>
 
     <campaign campaign-id="mens-clothing-suits">
         <description>This is a campaign that displays a landing banner, with a 25% discount on all suits and default sorting rule of top selling suits.</description>
@@ -135,7 +135,7 @@
                  <included-products>
                      <condition-group>
                          <product-id-condition operator="is equal">
-                             <product-id>25752986</product-id>
+                             <product-id>682875540326</product-id>
                          </product-id-condition>
                      </condition-group>
                  </included-products>

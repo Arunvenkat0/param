@@ -27,6 +27,12 @@ describe('Cart - Various Coupon Scenarios', () => {
 
     beforeEach(() => cartPage.navigateTo());
 
+    after(() => {
+        return cartPage
+            .removeItemByRow(1)
+            .then(() => cartPage.verifyCartEmpty())
+    })
+
     it('should verify that invalid coupons are reported', () => {
         let badCoupon = 'gobbledy_gook';
         let badCouponMessage = Resource.msgf('cart.NO_APPLICABLE_PROMOTION', 'checkout', null, badCoupon);
@@ -57,14 +63,14 @@ describe('Cart - Various Coupon Scenarios', () => {
             .then(displayText => assert.equal(displayText, goodCouponMessage));
     });
 
-    it('should verify the coupon correctly adjusts the price', () => 
+    it('should verify the coupon correctly adjusts the price', () =>
         cartPage
             .getSelectPriceByRow(1, '.price-adjusted-total')
             .then(subTotal => {
                 const discountAmount = 5.00;
                 var salePriceValue = pricingHelpers.getCurrencyValue(unitPrices.sale, locale) - discountAmount;
                 var subTotalValue = pricingHelpers.getCurrencyValue(subTotal, locale);
-                assert.equal(subTotalValue, salePriceValue);
+                assert.equal(subTotalValue, salePriceValue.toFixed(2));
             })
     );
 
