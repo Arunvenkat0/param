@@ -9,50 +9,50 @@
 	<isset name="inStockDate" value="${null}" scope="page"/>
 </isif>
 
-<ul class="product-availability-list">
+<div class="product-availability-list">
 <isif condition="${levels.inStock.value > 0}">
 	<isif condition="${levels.inStock.value == quantity}">
-		<li class="is-in-stock">${StringUtils.format(Resource.msg('global.instock','locale',null))}</li>
+		<span class="is-in-stock">${StringUtils.format(Resource.msg('global.instock','locale',null))}</span>
 	<iselse/>
-		<li class="is-in-stock">${StringUtils.format(Resource.msg('global.quantityinstock','locale',null),levels.inStock.value)}</li>
+		<span class="is-in-stock">${StringUtils.format(Resource.msg('global.quantityinstock','locale',null),levels.inStock.value)}</span>
 	</isif>
 </isif>
 
 <isif condition="${levels.preorder.value > 0}">
 	<isif condition="${levels.preorder.value == quantity}">
-		<li class="on-order">${StringUtils.format(Resource.msg('global.allpreorder','locale',null))}</li>
+		<span class="on-order">${StringUtils.format(Resource.msg('global.allpreorder','locale',null))}</span>
 	<iselseif condition="${levels.preorder.value == 0}">
-		<li class="on-order">${StringUtils.format(Resource.msg('global.remainingpreorder','locale',null))}</li>
+		<span class="on-order">${StringUtils.format(Resource.msg('global.remainingpreorder','locale',null))}</span>
 	<iselse/>
-		<li class="on-order">${StringUtils.format(Resource.msg('global.quantitypreorder','locale',null),levels.preorder.value)}</li>
+		<span class="on-order">${StringUtils.format(Resource.msg('global.quantitypreorder','locale',null),levels.preorder.value)}</span>
 	</isif>
 	<isif condition="${inStockDate != null}">
-		<li class="on-order">
+		<span class="on-order">
 			${Resource.msgf('global.inStockDate', 'locale', null, StringUtils.formatCalendar(new dw.util.Calendar(product.availabilityModel.inventoryRecord.inStockDate), pdict.CurrentRequest.locale, dw.util.Calendar.LONG_DATE_PATTERN))}
-		</li>
+		</span>
 	</isif>
 </isif>
 
 <isif condition="${levels.backorder.value > 0}">
 	<isif condition="${levels.backorder.value == quantity}">
-		<li class="on-order">${StringUtils.format(Resource.msg('global.allbackorder','locale',null))}</li>
+		<span class="on-order">${StringUtils.format(Resource.msg('global.allbackorder','locale',null))}</span>
 	<iselseif condition="${levels.notAvailable.value == 0}">
-		<li class="on-order">${StringUtils.format(Resource.msg('global.remainingbackorder','locale',null))}</li>
+		<span class="on-order">${StringUtils.format(Resource.msg('global.remainingbackorder','locale',null))}</span>
 	<iselse/>
-		<li class="on-order">${StringUtils.format(Resource.msg('global.quantitybackorder','locale',null),levels.backorder.value)}</li>
+		<span class="on-order">${StringUtils.format(Resource.msg('global.quantitybackorder','locale',null),levels.backorder.value)}</span>
 	</isif>
 	<isif condition="${inStockDate != null}">
-		<li class="on-order">
+		<span class="on-order">
 			${Resource.msgf('global.inStockDate', 'locale', null, StringUtils.formatCalendar(new dw.util.Calendar(product.availabilityModel.inventoryRecord.inStockDate), pdict.CurrentRequest.locale, dw.util.Calendar.LONG_DATE_PATTERN))}
-		</li>
+		</span>
 	</isif>
 </isif>
 
 <isif condition="${levels.notAvailable.value > 0}">
 	<isif condition="${levels.notAvailable.value == quantity}">
-		<li class="not-available">${StringUtils.format(Resource.msg('global.allnotavailable','locale',null))}</li>
+		<span class="not-available">${StringUtils.format(Resource.msg('global.allnotavailable','locale',null))}</span>
 	<iselse/>
-		<li class="not-available">${StringUtils.format(Resource.msg('global.remainingnotavailable','locale',null))}</li>
+		<span class="not-available">${StringUtils.format(Resource.msg('global.remainingnotavailable','locale',null))}</span>
 	</isif>
 </isif>
-</ul>
+</div>

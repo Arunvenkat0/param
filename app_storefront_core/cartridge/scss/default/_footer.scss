@@ -4,18 +4,15 @@ footer {
 	letter-spacing: 1px;
 }
 .footer-container {
-	display: table;
-	footer {
-		display: table-row;
-	}
 	.footer-item {
+		box-sizing: border-box;
 		display: block;
 		padding: .5em 1.5em;
 		width:100%;
 		@media screen and (min-width: 768px) {
 			display: table-cell;
 			padding: 1.5em;
-			width: 25%;		
+			width: 25%;
 		}
 	}
 	h3 {
@@ -51,7 +48,7 @@ footer {
 	padding-right: 0.5em;
 	}
 }
-	
+
 #email-alert-signup {
 	white-space: nowrap;
 	input[type="text"] {

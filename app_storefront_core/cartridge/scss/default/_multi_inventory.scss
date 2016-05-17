@@ -267,11 +267,6 @@
     background: url("../images/loading-progress-98x22.gif") no-repeat scroll left center transparent;
 }
 
-#cart-table .item-delivery-options {
-    padding: 1em 0 1em 0;
-    width: 8rem;
-}
-
 .instore-shipping-option {
     width: 100%;
 }
@@ -303,9 +298,4 @@
 
 .checkout-shipping fieldset .instore-continue-button {
     margin-left: 61.5%;
-}
-
-#cart-table .item-delivery-options label {
-    display: inline;
-    margin-left: 2%;
 }
