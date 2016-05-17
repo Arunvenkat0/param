@@ -92,12 +92,23 @@ function deviceLayouts() {
     app.getView().render('util/devicelayouts');
 }
 
+/**
+ * Logs the customer out before calling Home-Show
+ */
+function logout() {
+    app.getModel('Customer').logout();
+    show();
+}
+
 /*
  * Export the publicly available controller methods
  */
 /** Renders the home page.
  * @see module:controllers/Home~show */
 exports.Show = guard.ensure(['get'], show);
+/** Renders the home page after logging the customer out.
+ * @see module:controllers/Home~Logout */
+exports.Logout = guard.ensure(['get'], logout);
 /** Remote include for the header.
  * @see module:controllers/Home~includeHeader */
 exports.IncludeHeader = guard.ensure(['include'], includeHeader);

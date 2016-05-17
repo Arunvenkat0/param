@@ -314,4 +314,22 @@
       </node>
     </segment>
   </branch>
+  <branch basename="Logout">
+    <segment>
+      <node>
+        <start-node name="Logout" secure="false"/>
+        <node-display x="9" y="6"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <pipelet-node pipelet-name="LogoutCustomer" pipelet-set-identifier="bc_api"/>
+        <node-display x="0" y="1"/>
+      </node>
+      <simple-transition/>
+      <node>
+        <jump-node start-name-ref="Home-Show"/>
+        <node-display x="0" y="1"/>
+      </node>
+    </segment>
+  </branch>
 </pipeline>
