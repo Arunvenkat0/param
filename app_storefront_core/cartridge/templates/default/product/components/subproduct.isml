@@ -57,7 +57,6 @@
 						</div>
 						<isinclude template="product/components/pricing"/>
 					</div>
-					<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
 				</form>
 			</isif>
 		</div>

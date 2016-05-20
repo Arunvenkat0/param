@@ -10,11 +10,6 @@
       </node>
       <simple-transition/>
       <node>
-        <call-node start-name-ref="CSRF-Validate"/>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition/>
-      <node>
         <decision-node condition-key="!(CurrentHttpParameterMap.source &amp;&amp; CurrentHttpParameterMap.source.stringValue=='giftregistry' &amp;&amp; CurrentHttpParameterMap.cartAction &amp;&amp; CurrentHttpParameterMap.cartAction.stringValue=='update')" condition-operator="expr"/>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="yes">
@@ -147,7 +142,7 @@
         <text-node>
           <description>Cart-UpdateLineItem</description>
         </text-node>
-        <node-display x="3" y="2"/>
+        <node-display x="3" y="1"/>
       </node>
     </segment>
   </branch>

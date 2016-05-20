@@ -7,8 +7,6 @@ export const BTN_ADD_GIFT_CERT = 'button[name*=wishlist_addGiftCertificate]';
 export const BTN_TOGGLE_PRIVACY = '[name*=wishlist_setList]';
 export const LINK_REMOVE = 'button.delete-item';
 export const WISHLIST_ITEMS = '.item-list tbody tr:not(.headings)';
-export const GIFT_CERT = 'button[name*=dwfrm_wishlist_items_i0_addToCart]';
-export const GIFT_CERT_PURCHASE = '.gift-certificate-purchase';
 
 const basePath = '/wishlist';
 

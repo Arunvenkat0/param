@@ -196,8 +196,7 @@ ResourceHelper.getUrls = function(pageContext) {
         setSessionCurrency          : URLUtils.url('Currency-SetSessionCurrency').toString(),
         addEditAddress              : URLUtils.url('COShippingMultiple-AddEditAddressJSON').toString(),
         cookieHint                  : URLUtils.url('Page-Include', 'cid', 'cookie_hint').toString(),
-        rateLimiterReset            : URLUtils.url('RateLimiter-HideCaptcha').toString(),
-        csrffailed                  : URLUtils.url('CSRF-Failed').toString()
+        rateLimiterReset            : URLUtils.url('RateLimiter-HideCaptcha').toString()
     };
     return urls;
 }

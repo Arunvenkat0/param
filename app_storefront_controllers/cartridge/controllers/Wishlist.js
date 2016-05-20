@@ -102,7 +102,6 @@ function wishListForm() {
             var cart = app.getModel('Cart').goc();
 
             if (form.items.triggeredAction.parent.object.type === GiftCertProductListItem) {
-                shouldRedirectToShow = false;
                 response.redirect(URLUtils.https('GiftCert-Purchase'));
             } else {
                 var renderInfo = cart.addProductToCart();
@@ -274,4 +273,4 @@ exports.ShowOther = guard.ensure(['get', 'https'], showOther);
 /** @see module:controllers/Wishlist~LandingForm */
 exports.LandingForm = guard.ensure(['post', 'https'], landingForm);
 /** @see module:controllers/Wishlist~WishListForm */
-exports.WishListForm = guard.ensure(['post', 'https', 'loggedIn', 'csrf'], wishListForm, {scope: 'wishlist'});
+exports.WishListForm = guard.ensure(['post', 'https', 'loggedIn'], wishListForm, {scope: 'wishlist'});

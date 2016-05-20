@@ -16,5 +16,5 @@
 	<button type="submit" name="${pdict.CurrentForms.giftregistry.navigation.navPurchases.htmlName}" class="${pdict.currentpage == "purchases" ? "selected" : ""}">
 		${Resource.msg('navigation.tabpurchases','account',null)}
 	</button>
-	<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
+
 </fieldset>
