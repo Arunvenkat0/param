@@ -63,11 +63,13 @@ function switchToHttps() {
 
 function csrfValidationFailed() {
     if (request.httpParameterMap.format.stringValue === 'ajax') {
+        app.getModel('Customer').logout();
         let r = require('~/cartridge/scripts/util/Response');
         r.renderJSON({
             error: 'CSRF Token Mismatch'
         });
     } else {
+        app.getModel('Customer').logout();
         app.getView().render('csrf/csrffailed');
     }
 
