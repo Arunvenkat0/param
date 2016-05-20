@@ -26,7 +26,7 @@
 					<isinputfield formfield="${pdict.CurrentForms.profile.login.password}" type="password" dynamicname="true" attributes="${attributes}"/>
 					<isinputfield formfield="${pdict.CurrentForms.profile.login.passwordconfirm}" type="password" dynamicname="true" attributes="${attributes}"/>
 					<button type="submit" class="largebutton" value="${Resource.msg('global.createbutton','locale',null)}" name="${pdict.CurrentForms.profile.confirm.htmlName}"><span>${Resource.msg('global.createbutton','locale',null)}</span></button>
-					<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
+					<input type="hidden" name="${pdict.CurrentForms.profile.secureKeyHtmlName}" value="${pdict.CurrentForms.profile.secureKeyValue}"/>
 				</fieldset>
 			</form>
 

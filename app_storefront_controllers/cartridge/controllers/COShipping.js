@@ -452,7 +452,7 @@ exports.EditAddress = guard.ensure(['https', 'get'], editAddress);
 exports.UpdateAddressDetails = guard.ensure(['https', 'get'], updateAddressDetails);
 /** Form handler for the singleshipping form.
  * @see module:controllers/COShipping~singleShipping */
-exports.SingleShipping = guard.ensure(['https', 'post', 'csrf'], singleShipping);
+exports.SingleShipping = guard.ensure(['https', 'post'], singleShipping);
 /** Form handler for the shippingAddressForm.
  * @see module:controllers/COShipping~editShippingAddress */
 exports.EditShippingAddress = guard.ensure(['https', 'post'], editShippingAddress);
