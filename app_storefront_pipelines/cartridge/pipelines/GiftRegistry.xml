@@ -155,22 +155,14 @@
         <join-node/>
         <node-display x="0" y="2"/>
       </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
+      <simple-transition/>
       <node>
         <interaction-continue-node secure="true" start-name="SubmitFormLanding" transaction-required="false">
           <template buffered="true" dynamic="false" name="account/giftregistry/giftregistrylanding"/>
         </interaction-continue-node>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="login">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="target" x="0" y="-1"/>
-            </transition-display>
-          </transition>
+          <transition target-connector="in"/>
           <segment>
             <node>
               <call-node start-name-ref="CSRF-Validate"/>
@@ -217,11 +209,7 @@
           </segment>
         </branch>
         <branch basename="b3" source-connector="register">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="source" x="0" y="1"/>
-            </transition-display>
-          </transition>
+          <transition target-connector="in"/>
           <segment>
             <node>
               <call-node start-name-ref="CSRF-Validate"/>
@@ -244,21 +232,24 @@
           </segment>
         </branch>
         <branch basename="b4" source-connector="search">
-          <transition target-connector="in"/>
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
           <segment>
             <node>
-              <call-node start-name-ref="CSRF-Validate"/>
-              <node-display x="-1" y="1"/>
-            </node>
-            <simple-transition/>
-            <node>
               <jump-node start-name-ref="GiftRegistry-Search"/>
-              <node-display x="-1" y="1"/>
+              <node-display x="-2" y="0"/>
             </node>
           </segment>
         </branch>
       </node>
-      <transition target-connector="in2" target-path="./+1"/>
+      <transition target-connector="in2" target-path="./+1">
+        <transition-display>
+          <bend-point relative-to="source" x="2" y="0"/>
+        </transition-display>
+      </transition>
     </segment>
     <segment>
       <node>
