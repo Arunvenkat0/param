@@ -413,38 +413,38 @@
           <transition target-connector="in"/>
           <segment>
             <node>
-              <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
-                <config-property key="Transactional" value="false"/>
-                <key-binding alias="&quot;GCBalanceCounter&quot;" key="From_0"/>
-                <key-binding alias="CounterLabel" key="To_0"/>
-                <key-binding alias="null" key="From_1"/>
-                <key-binding alias="null" key="To_1"/>
-                <key-binding alias="null" key="From_2"/>
-                <key-binding alias="null" key="To_2"/>
-                <key-binding alias="null" key="From_3"/>
-                <key-binding alias="null" key="To_3"/>
-                <key-binding alias="null" key="From_4"/>
-                <key-binding alias="null" key="To_4"/>
-                <key-binding alias="null" key="From_5"/>
-                <key-binding alias="null" key="To_5"/>
-                <key-binding alias="null" key="From_6"/>
-                <key-binding alias="null" key="To_6"/>
-                <key-binding alias="null" key="From_7"/>
-                <key-binding alias="null" key="To_7"/>
-                <key-binding alias="null" key="From_8"/>
-                <key-binding alias="null" key="To_8"/>
-                <key-binding alias="null" key="From_9"/>
-                <key-binding alias="null" key="To_9"/>
-              </pipelet-node>
-              <node-display x="0" y="1"/>
-            </node>
-            <simple-transition/>
-            <node>
-              <call-node start-name-ref="RateLimiter-Check"/>
-              <node-display x="0" y="1"/>
-            </node>
-            <simple-transition/>
-            <node>
+	      <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
+		<config-property key="Transactional" value="false"/>
+		<key-binding alias="&quot;GCBalanceCounter&quot;" key="From_0"/>
+		<key-binding alias="CounterLabel" key="To_0"/>
+		<key-binding alias="null" key="From_1"/>
+		<key-binding alias="null" key="To_1"/>
+		<key-binding alias="null" key="From_2"/>
+		<key-binding alias="null" key="To_2"/>
+		<key-binding alias="null" key="From_3"/>
+		<key-binding alias="null" key="To_3"/>
+		<key-binding alias="null" key="From_4"/>
+		<key-binding alias="null" key="To_4"/>
+		<key-binding alias="null" key="From_5"/>
+		<key-binding alias="null" key="To_5"/>
+		<key-binding alias="null" key="From_6"/>
+		<key-binding alias="null" key="To_6"/>
+		<key-binding alias="null" key="From_7"/>
+		<key-binding alias="null" key="To_7"/>
+		<key-binding alias="null" key="From_8"/>
+		<key-binding alias="null" key="To_8"/>
+		<key-binding alias="null" key="From_9"/>
+		<key-binding alias="null" key="To_9"/>
+	      </pipelet-node>
+	      <node-display x="0" y="1"/>
+	    </node>
+	    <simple-transition/>
+	    <node>
+	      <call-node start-name-ref="RateLimiter-Check"/>
+	      <node-display x="0" y="1"/>
+	    </node>
+	    <simple-transition/>
+	    <node>
               <pipelet-node pipelet-name="GetGiftCertificate" pipelet-set-identifier="bc_api">
                 <key-binding alias="GiftCertificate" key="GiftCertificate"/>
                 <key-binding alias="empty(CurrentHttpParameterMap.giftCertID.stringValue) ? CurrentHttpParameterMap.dwfrm_giftcert_balance_giftCertID.stringValue : CurrentHttpParameterMap.giftCertID.stringValue" key="GiftCertificateID"/>
@@ -487,11 +487,11 @@
                 </segment>
               </branch>
             </node>
-            <simple-transition/>
-            <node>
-              <call-node start-name-ref="RateLimiter-HideCaptcha"/>
-              <node-display x="0" y="1"/>
-            </node>
+	    <simple-transition/>
+	    <node>
+	      <call-node start-name-ref="RateLimiter-HideCaptcha"/>
+	      <node-display x="0" y="1"/>
+	    </node>
             <transition target-connector="in1" target-path="../+4"/>
           </segment>
         </branch>
@@ -528,7 +528,7 @@
           <key-binding alias="null" key="From_9"/>
           <key-binding alias="null" key="To_9"/>
         </pipelet-node>
-        <node-display x="0" y="4"/>
+	<node-display x="0" y="4"/>
       </node>
       <transition target-connector="in1" target-path="./+1"/>
     </segment>
@@ -595,15 +595,6 @@
         </transition-display>
       </simple-transition>
       <node>
-        <call-node start-name-ref="CSRF-Validate"/>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
-      <node>
         <pipelet-node pipelet-name="Eval" pipelet-set-identifier="bc_api">
           <config-property key="OnError" value="null"/>
           <config-property key="Transactional" value="false"/>
@@ -633,7 +624,7 @@
         <branch basename="b2" source-connector="error">
           <transition target-connector="in1" target-path="./b3.2">
             <transition-display>
-              <bend-point relative-to="target" x="0" y="-2"/>
+              <bend-point relative-to="source" x="4" y="0"/>
             </transition-display>
           </transition>
         </branch>
@@ -649,7 +640,7 @@
         <branch basename="b3" source-connector="error">
           <transition target-connector="in">
             <transition-display>
-              <bend-point relative-to="source" x="1" y="0"/>
+              <bend-point relative-to="target" x="-1" y="0"/>
             </transition-display>
           </transition>
           <segment>
@@ -677,7 +668,7 @@
                 <key-binding alias="null" key="From_9"/>
                 <key-binding alias="null" key="To_9"/>
               </pipelet-node>
-              <node-display orientation="horizontal" x="1" y="0"/>
+              <node-display orientation="horizontal" x="1" y="1"/>
             </node>
             <transition target-connector="in1" target-path="./+1"/>
           </segment>
@@ -693,7 +684,7 @@
       <simple-transition/>
       <node>
         <decision-node condition-key="Updating" condition-operator="expr"/>
-        <node-display x="0" y="1"/>
+        <node-display x="0" y="2"/>
         <branch basename="b4" source-connector="yes">
           <transition target-connector="in">
             <transition-display>
@@ -833,12 +824,11 @@
         <start-node name="Update" secure="true"/>
         <node-display x="13" y="2"/>
       </node>
-      <simple-transition/>
-      <node>
-        <call-node start-name-ref="CSRF-Validate"/>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <pipelet-node pipelet-name="Eval" pipelet-set-identifier="bc_api">
           <config-property key="OnError" value="null"/>
