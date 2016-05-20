@@ -5,8 +5,6 @@
 	<isif condition="${pdict.ProductList != null}">
 		<div class="page-content-tab-navigaton">
 			<isinclude template="account/giftregistry/navigation"/>
-			<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
-			
 		</div>
 	</isif>
 

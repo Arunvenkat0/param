@@ -13,7 +13,6 @@
                 <isset name="currentpage" value="event" scope="pdict" />
                 <div class="page-content-tab-navigaton">
                     <isinclude template="account/giftregistry/navigation"/>
-                    <input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
                 </div>
             </form>
         </isif>
