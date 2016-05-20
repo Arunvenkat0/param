@@ -38,54 +38,33 @@ describe('Cart - UpdateQuantity ', () => {
             .then(() => cartPage.navigateTo())
     });
 
-    after(() =>
-        cartPage.emptyCart()
+    after(() => cartPage.emptyCart());
+
+    it('should be able to update quantity to a valid number by directly entering the number', () =>
+        cartPage.updateQuantityByRow(1, 2)
+            .then(quantity => assert.equal(quantity, 2, 'Expected the product quantity updated to 2'))
     );
 
-    it('should be able to update quantity to a valid number by directly entering the number', () => {
-        return cartPage
-            .updateQuantityByRow(1, 2)
-            .then(quantity => {
-                assert.equal(quantity, 2, 'Expected the product quantity updated to 2')
-            })
-    });
+    it('should NOT be able to set quantity to blank, quantity remained unchanged', () =>
+        cartPage.updateQuantityByRow(1, ' ')
+            .then(quantity => assert.equal(quantity, 2, 'Expected the product quantity remained at 2'))
+    );
 
-    it('should NOT be able to set quantity to blank, quantity remained unchanged', () => {
-        return cartPage
-            .updateQuantityByRow(1, ' ')
-            .then(quantity => {
-                assert.equal(quantity, 2, 'Expected the product quantity remained at 2')
-            })
-    });
-
-    it('should show error message with negative quantity', () => {
-        return cartPage
-            .updateQuantityByRow(1, -1)
-            .then(quantity => {
-                assert.equal(quantity, -1, 'Expected the product quantity set to -1')
-            })
+    it('should show error message with negative quantity', () =>
+        cartPage.updateQuantityByRow(1, -1)
+            .then(quantity => assert.equal(quantity, -1, 'Expected the product quantity set to -1'))
             .then(() => {
                 let invalidQtyMsg = Resource.msgf('validate.min', 'forms', null, '0');
                 return cartPage.getQuantityErrorMessageByRow(1)
-                    .then(errorMsg =>
-                        assert.equal(errorMsg, invalidQtyMsg,
-                            'Expected error message indicating quantity is must be greater than zero')
-                    )
-
+                    .then(errorMsg => assert.equal(errorMsg, invalidQtyMsg, 'Expected error message indicating quantity is must be greater than zero'));
             })
-    });
+    );
 
-    it('should NOT show error message with positive quantity', () => {
-        return cartPage
-            .updateQuantityByRow(1, 1)
-            .then(quantity => {
-                assert.equal(quantity, 1, 'Expected the product quantity can back be set back to positive number')
-            })
-            .then(() => {
-                return cartPage.doesQuantityErrorMessageExistForRow(1)
-                    .then(doesExist => assert.isFalse(doesExist, 'Expected error message not shown'));
-            })
-    });
-
+    it('should NOT show error message with positive quantity', () =>
+        cartPage.updateQuantityByRow(1, 1)
+            .then(quantity => assert.equal(quantity, 1, 'Expected the product quantity can back be set back to positive number'))
+            .then(() => cartPage.doesQuantityErrorMessageExistForRow(1))
+            .then(doesExist => assert.isFalse(doesExist, 'Expected error message not shown'))
+    );
 });
 

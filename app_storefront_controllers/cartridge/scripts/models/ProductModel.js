@@ -41,14 +41,14 @@ var ProductModel = AbstractModel.extend(
          * @returns {dw.catalog.ProductVariationModel}
          */
         updateVariationSelection: function (parameterMap, optionalCustomPrefix) {
-            var formPrefix = optionalCustomPrefix || 'dwvar_';
+            let formPrefix = optionalCustomPrefix || 'dwvar_';
 
             // Gets all variation-related parameters for the prefix.
-            var params = parameterMap.getParameterMap(formPrefix + this.object.ID.replace(/_/g,'__') + '_');
-            var paramNames = params.getParameterNames();
+            let params = parameterMap.getParameterMap(formPrefix + this.object.ID.replace(/_/g,'__') + '_');
+            let paramNames = params.getParameterNames();
 
             // Return the ProductVariationModel of a sole variant of a Product Master
-            var variants = this.getVariants();
+            let variants = this.getVariants();
             if (variants.length === 1) {
                 return variants[0].getVariationModel();
             }
@@ -61,24 +61,28 @@ var ProductModel = AbstractModel.extend(
                 return this.getVariationModel();
             }
 
-            var ProductVariationModel = app.getModel('ProductVariation');
-            var variationModel = new ProductVariationModel(this.getVariationModel());
+            let ProductVariationModel = app.getModel('ProductVariation');
+            let variationModel = new ProductVariationModel(this.getVariationModel());
 
-            for (var k = 0; k < paramNames.length; k++) {
-                var attributeID = paramNames[k];
-                var valueID = params.get(attributeID).getStringValue();
+            for (let k = 0; k < paramNames.length; k++) {
+                let attributeID = paramNames[k];
+                let valueID = params.get(attributeID).getStringValue();
+                let variationAttribute = variationModel.getProductVariationAttribute(attributeID);
+                let variationAttributeValue;
 
-                if (valueID) {
-                    var variationAttribute = variationModel.getProductVariationAttribute(attributeID);
+                if (variationAttribute && valueID) {
+                    variationAttributeValue = variationModel.getVariationAttributeValue(variationAttribute, valueID);
+                }
 
-                    if (variationAttribute && valueID) {
-                        var variationAttributeValue = variationModel.getVariationAttributeValue(variationAttribute, valueID);
-                        if (variationAttributeValue) {
-                            variationModel.setSelectedAttributeValue(variationAttribute.ID, variationAttributeValue.ID);
-                        }
+                if (variationAttribute && variationAttributeValue) {
+                    // When selecting an attribute value, we must prevent the selection of an attribute value for which
+                    // a Product Variation Group does not include
+                    if (!this.isVariationGroup() || isAttrSelectable(this, variationAttribute, variationAttributeValue)) {
+                        variationModel.setSelectedAttributeValue(variationAttribute.ID, variationAttributeValue.ID);
                     }
                 }
             }
+
             return variationModel.object;
         },
         /**
@@ -252,6 +256,33 @@ ProductModel.get = function (parameter) {
     }
     return new ProductModel(obj);
 };
+
+/**
+ * Determines whether an attribute is selectable for a given Variation Group
+ *
+ * @param {dw.catalog.VariationGroup} variationGroup
+ * @param {dw.catalog.ProductVariationAttribute} attr
+ * @param {dw.catalog.ProductVariationAttributeValue} value
+ * @returns {Boolean}
+ */
+function isAttrSelectable (variationGroup, attr, attrValue) {
+    let variationModel = variationGroup.getVariationModel();
+    let selectedVariantsIter = variationModel.getSelectedVariants().iterator();
+
+    while (selectedVariantsIter.hasNext()) {
+        let variant = selectedVariantsIter.next();
+        let variantAttrValue;
+
+        variationModel = variant.getVariationModel();
+        variantAttrValue = variationModel.getVariationValue(variant, attr);
+
+        if (variantAttrValue.value == attrValue.value) {
+            return true;
+        }
+    }
+
+    return false;
+}
 
 /** The product class */
 module.exports = ProductModel;

@@ -69,7 +69,9 @@ describe('Cart - Simple', () => {
                 catalog = testData.parsedData.catalog;
                 variantIds = productVariationMaster.getVariantProductIds();
 
+                // No-Iron Textured Dress Shirt (Color: White, Size: 14 1/2, Width: 32/33)
                 variant1.instance = products.getProduct(catalog, variantIds[0]);
+                // No-Iron Textured Dress Shirt (Color: White, Size: 17 1/2, Width: 34/35)
                 variant2.instance = products.getProduct(catalog, variantIds[10]);
 
                 // We must increment the index by 1 for the attribute selectors that use CSS nth-child which is one-based.
@@ -143,8 +145,7 @@ describe('Cart - Simple', () => {
         let expectedColor = productVariationMaster.getLocalizedProperty(`variationAttributes.color.values.${variant2.color.index - 1}.displayValues`, locale);
         let expectedSize = productVariationMaster.getLocalizedProperty(`variationAttributes.size.values.${variant2.size.index - 1}.displayValues`, locale);
         let expectedWidth = productVariationMaster.getLocalizedProperty(`variationAttributes.width.values.${variant2.width.index - 1}.displayValues`, locale);
-        return cartPage
-            .updateAttributesByRow(itemRow, variant2Selection)
+        return cartPage.updateAttributesByRow(itemRow, variant2Selection)
             .then(() => browser.getText('tr.cart-row:nth-child(1) .attribute[data-attribute=color] .value'))
             .then(color => assert.equal(color, expectedColor))
             .then(() => browser.getText('tr.cart-row:nth-child(1) .attribute[data-attribute=size] .value'))
@@ -178,7 +179,7 @@ describe('Cart - Simple', () => {
             })
 
             // Deselect already selected size attribute
-            .then(() => common.selectAttributeByIndex(attrToDeselect, selectedAttrIndexes.size, true))
+            .then(() => common.selectAttributeByIndex(attrToDeselect, selectedAttrIndexes[attrToDeselect], true))
 
             // Test that previously selected attributes are still selected
             .then(() => productQuickViewPage.isAttrValueSelected('color', selectedAttrIndexes.color))

@@ -84,12 +84,12 @@ export function selectAttributeByIndex (attributeName, index, deselect) {
         .then(isAlreadySelected => {
             if (deselect && isAlreadySelected) {
                 return browser.waitForVisible('.loader', 500, true)
-                    .click(selector + ' a')
-                    .waitForText('.swatches.' + attributeName + ' .selected-value', 500, true);
+                    .element(selector + ' a')
+                    .click()
+                    .waitForVisible('.swatches.' + attributeName + ' .selected-value', 5000, true);
             } else if (!isAlreadySelected) {
-                return browser.waitForVisible('.loader', 500, true)
-                    .click(selector + ' a')
-                    .waitForText('.swatches.' + attributeName + ' .selected-value');
+                return browser.click(selector + ' a')
+                    .waitForVisible('.swatches.' + attributeName + ' .selected-value');
             }
             return Promise.resolve();
         });
@@ -131,7 +131,7 @@ export function addProductVariationToBasket (product, btnAdd) {
             }
             return Promise.resolve();
         })
-    .then(() => browser.waitForVisible('.loader-bg', 500, true)
+        .then(() => browser.waitForVisible('.loader-bg', 5000, true)
             .waitForEnabled(btnAdd)
             .click(btnAdd)
         )

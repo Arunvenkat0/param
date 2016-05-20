@@ -134,8 +134,7 @@ export function getItemEditLinkByRow (rowNum) {
 }
 
 export function updateAttributesByRow (rowNum, selection) {
-    return browser
-        .click(getItemEditLinkByRow(rowNum))
+    return browser.click(getItemEditLinkByRow(rowNum))
         .waitForVisible(productQuickView.CONTAINER)
         // We must deselect all attributes before selecting the new variant choice as the selectable attributes are
         // dependent on values that are currently selected.  By deselecting all attributes, we can be assured that the
@@ -228,12 +227,13 @@ export function getOrderSubTotal () {
  */
 export function emptyCart () {
     return navigateTo()
-    .then(() => browser.elements('.item-quantity input'))
+        .then(() => browser.elements('.item-quantity input'))
         .then(items => {
             if (items.value.length) {
                 items.value.forEach(item =>
-            browser.elementIdClear(item.ELEMENT)
+                    browser.elementIdClear(item.ELEMENT)
                         .elementIdValue(item.ELEMENT, '0'));
+
                 return browser.click(BTN_UPDATE_CART);
             }
         })
@@ -241,5 +241,5 @@ export function emptyCart () {
         // quantities cannot be changed in the Cart. For these, we
         // must click the Remove link on each.
         .then(() => common.removeItems(LINK_REMOVE))
-    .then(() => browser.waitForExist(CART_EMPTY));
+        .then(() => browser.waitForExist(CART_EMPTY));
 }

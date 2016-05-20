@@ -258,12 +258,11 @@ describe('Product Details Page', () => {
 
             // Click first color swatch and test displayed images against what is expected
             return browser.element(productDetailPage.SWATCH_COLOR_ANCHORS)
-                .then(el => browser.elementIdClick(el.value.ELEMENT))
+                .click()
+                .waitForVisible('.loader', 1000, true)
                 .element(productDetailPage.PRIMARY_IMAGE)
                 .then(el => browser.elementIdAttribute(el.value.ELEMENT, 'src'))
-                .then(displayedImgSrc =>
-                    assert.equal(productDetailPage.getImagePath(displayedImgSrc.value), expectedPrimaryImage)
-                );
+                .then(displayedImgSrc => assert.equal(productDetailPage.getImagePath(displayedImgSrc.value), expectedPrimaryImage));
         });
 
         it('should display the thumbnail images of the first Variant matching selected attributes', () => {

@@ -9,12 +9,16 @@
 <iselse/>
 	<isset name="isQuickView" value="${pdict.CurrentHttpParameterMap.source.stringValue == 'quickview' || pdict.CurrentHttpParameterMap.source.stringValue == 'cart' || pdict.CurrentHttpParameterMap.source.stringValue == 'giftregistry' || pdict.CurrentHttpParameterMap.source.stringValue == 'wishlist'}" scope="page"/>
 	<isscript>
-		var masterId = pdict.Product.isVariant() ? pdict.Product.masterProduct.ID : pdict.Product.ID;
-		var avm = pdict.Product.availabilityModel;
-		pdict.available = avm.availability>0;
+		let product = pdict.Product;
+		let masterId = product.isVariant() || product.isVariationGroup() ? product.getMasterProduct().getID() : product.getID();
+		let variationModel = pdict.CurrentVariationModel || product.getVariationModel();
+		let selectedVariant = variationModel.getSelectedVariant();
 
-		var availableCount = "0";
-		if (pdict.available && !empty(avm.inventoryRecord)) {
+		let avm = selectedVariant ? selectedVariant.getAvailabilityModel() : product.getAvailabilityModel();
+		pdict.isProductAvailable = avm.availability > 0;
+
+		let availableCount = "0";
+		if (pdict.isProductAvailable && !empty(avm.inventoryRecord)) {
 			availableCount = avm.inventoryRecord.perpetual ? "999" : avm.inventoryRecord.ATS.value.toFixed().toString();
 		}
 	</isscript>
@@ -26,8 +30,20 @@
 	<h2 class="visually-hidden">Details</h2>
 	<span class="visually-hidden" itemprop="url">${URLUtils.http('Product-Show','pid', pdict.Product.ID)}</span>
 
+	<isscript>
+		let productNumber = masterId;
+
+		if (pdict.isProductAvailable) {
+			let product = pdict.Product;
+			let variationModel = pdict.CurrentVariationModel || product.getVariationModel();
+			let selectedVariant = variationModel.getSelectedVariant();
+			productNumber = selectedVariant
+				? selectedVariant.getID()
+				: product.getID();
+		}
+	</isscript>
 	<div class="product-number">
-		${Resource.msg('product.item','product',null)} <span itemprop="productID" data-masterid="${masterId}"><isprint value="${ pdict.available ? pdict.Product.ID : masterId }"/></span>
+		${Resource.msg('product.item','product',null)} <span itemprop="productID" data-masterid="${masterId}"><isprint value="${productNumber}"/></span>
 	</div>
 
 	<iscomment>
@@ -100,7 +116,14 @@
 					=============================================================
 				</iscomment>
 
-				<isif condition="${pdict.Product.custom.availableForInStorePickup && dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp')}">
+				<isscript>
+					let product = pdict.Product;
+					let variationModel = pdict.CurrentVariationModel || product.getVariationModel();
+					let selectedVariant = variationModel.getSelectedVariant();
+					let availableForInStorePickup = selectedVariant ? selectedVariant.custom.availableForInStorePickup : product.custom.availableForInStorePickup;
+					let isStorePickUpEnabled = dw.system.Site.getCurrent().getCustomPreferenceValue('enableStorePickUp');
+				</isscript>
+				<isif condition="${isStorePickUpEnabled && availableForInStorePickup}">
 					<div class="availability-storepickup">
 						<div class="availability-web">
 							<i class="fa fa-truck fa-lg pull-left"></i>
@@ -180,9 +203,23 @@
 					<input type="hidden" name="productlistid" id="productlistid" value="${plid}" />
 				</isif>
 				<input type="hidden" name="cartAction" id="cartAction" value="${cartAction}" />
-				<input type="hidden" name="pid" id="pid" value="${pdict.Product.ID}" />
-				<isset name="disabledAttr" value="${pdict.available && !pdict.Product.master && !pdict.Product.variationGroup ? '' : ' disabled="disabled"'}" scope="page"/>
-				<isif condition="${disabledAttr.length == 0}">
+				<isscript>
+					let product = pdict.Product;
+					let pid = pdict.Product.getID();
+					let disabledAttr = pdict.isProductAvailable && !product.master ? '' : ' disabled="disabled"';
+
+					if (product.isVariationGroup()) {
+						let variationModel = pdict.CurrentVariationModel || product.getVariationModel();
+						let selectedVariant = variationModel.getSelectedVariant();
+						if (selectedVariant) {
+							pid = selectedVariant.getID();
+						} else {
+							disabledAttr = ' disabled="disabled"';
+						}
+					};
+				</isscript>
+				<input type="hidden" name="pid" id="pid" value="${pid}" />
+				<isif condition="${!disabledAttr}">
 					<button id="add-to-cart" type="submit" title="${buttonTitle}" value="${buttonTitle}" class="button-fancy-large add-to-cart">${buttonTitle}</button>
 				<iselse/>
 					<isscript>
@@ -223,7 +260,7 @@
 		</isscript>
 
 		<isif condition="${pdict.CurrentHttpParameterMap.source && pdict.CurrentHttpParameterMap.source.stringValue != 'giftregistry'}">
-			<isif condition="${pdict.available && !pdict.Product.bundle && !(pdict.Product.master || pdict.Product.variationGroup)}">
+			<isif condition="${pdict.isProductAvailable && !pdict.Product.bundle && !(pdict.Product.master || pdict.Product.variationGroup)}">
 				<a class="button simple" data-action="wishlist" href="${URLUtils.https('Wishlist-Add', 'pid', pdict.Product.ID, 'source', 'productdetail')}" title="${Resource.msg('global.addtowishlist.label','locale',null)}">${Resource.msg('global.addtowishlist','locale',null)}</a>
 				<a class="button simple" data-action="gift-registry" href="${URLUtils.https('GiftRegistry-AddProduct', 'pid', pdict.Product.ID, 'source', 'productdetail')}" title="${Resource.msg('global.addtogiftregistry.label','locale',null)}">${Resource.msg('global.addtogiftregistry','locale',null)}</a>
 			</isif>
