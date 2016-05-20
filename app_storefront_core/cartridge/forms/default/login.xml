@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<form xmlns="http://www.demandware.com/xml/form/2008-04-19" secure="false">
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19" secure="true">
 	<field formid="username" label="label.username" type="string" mandatory="true"/>
 	<field formid="password" label="label.password" type="string" mandatory="true"/>
 	

@@ -196,37 +196,14 @@ function initLoginPage() {
             options: {
                 open: function () {
                     validator.init();
-                    var $requestPasswordForm = $('[name$="_requestpassword"]');
-                    var $submit = $requestPasswordForm.find('[name$="_requestpassword_send"]');
-                    $submit.on('click', function (e) {
+                    var $requestPasswordForm = $('[name$="_requestpassword"]'),
+                        $submit = $requestPasswordForm.find('[name$="_requestpassword_send"]');
+                    $($submit).on('click', function (e) {
                         if (!$requestPasswordForm.valid()) {
                             return;
                         }
                         e.preventDefault();
-                        var data = $requestPasswordForm.serialize();
-                        // add form action to data
-                        data += '&' + $submit.attr('name') + '=';
-                        // make sure the server knows this is an ajax request
-                        if (data.indexOf('ajax') === -1) {
-                            data += '&format=ajax';
-                        }
-                        $.ajax({
-                            type: 'POST',
-                            url: $requestPasswordForm.attr('action'),
-                            data: data,
-                            success: function (response) {
-                                if (typeof response === 'object' &&
-                                        !response.success &&
-                                        response.error === 'CSRF Token Mismatch') {
-                                    page.redirect(Urls.csrffailed);
-                                } else if (typeof response === 'string') {
-                                    dialog.$container.html(response);
-                                }
-                            },
-                            failure: function () {
-                                dialog.$container.html('<h1>' + Resources.SERVER_ERROR + '</h1>');
-                            }
-                        });
+                        dialog.submit($submit.attr('name'));
                     });
                 }
             }

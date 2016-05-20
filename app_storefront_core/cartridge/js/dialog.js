@@ -112,6 +112,39 @@ var dialog = {
         }
         this.$container.dialog('close');
     },
+    /**
+     * @function
+     * @description Submits the dialog form with the given action
+     * @param {String} The action which will be triggered upon form submit
+     */
+    submit: function (action) {
+        var $form = this.$container.find('form:first');
+        // set the action
+        $('<input/>').attr({
+            name: action,
+            type: 'hidden'
+        }).appendTo($form);
+        // serialize the form and get the post url
+        var data = $form.serialize();
+        var url = $form.attr('action');
+        // make sure the server knows this is an ajax request
+        if (data.indexOf('ajax') === -1) {
+            data += '&format=ajax';
+        }
+        // post the data and replace current content with response content
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            dataType: 'html',
+            success: function (html) {
+                this.$container.html(html);
+            }.bind(this),
+            failure: function () {
+                window.alert(Resources.SERVER_ERROR);
+            }
+        });
+    },
     exists: function () {
         return this.$container && (this.$container.length > 0);
     },

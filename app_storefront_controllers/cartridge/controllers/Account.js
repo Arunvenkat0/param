@@ -112,7 +112,7 @@ function editForm() {
             var isProfileUpdateValid = true;
             var hasEditSucceeded = false;
             var Customer = app.getModel('Customer');
-
+            
             if (!Customer.checkUserName()) {
                 app.getForm('profile.customer.email').invalidate();
                 isProfileUpdateValid = false;
@@ -122,7 +122,7 @@ function editForm() {
                 app.getForm('profile.login.currentpassword').invalidate();
                 isProfileUpdateValid = false;
             }
-
+            
             if (app.getForm('profile.login.newpassword').value() !== app.getForm('profile.login.newpasswordconfirm').value()) {
                 app.getForm('profile.login.newpasswordconfirm').invalidate();
                 isProfileUpdateValid = false;
@@ -411,7 +411,7 @@ exports.Show = guard.ensure(['get', 'https', 'loggedIn'], show);
 exports.EditProfile = guard.ensure(['get', 'https', 'loggedIn'], editProfile);
 /** Handles the form submission on profile update of edit profile.
  * @see {@link module:controllers/Account~editForm} */
-exports.EditForm = guard.ensure(['post', 'https', 'loggedIn', 'csrf'], editForm);
+exports.EditForm = guard.ensure(['post', 'https', 'loggedIn'], editForm);
 /** Renders the password reset dialog.
  * @see {@link module:controllers/Account~passwordResetDialog} */
 exports.PasswordResetDialog = guard.ensure(['get', 'https'], passwordResetDialog);
@@ -420,7 +420,7 @@ exports.PasswordResetDialog = guard.ensure(['get', 'https'], passwordResetDialog
 exports.PasswordReset = guard.ensure(['get', 'https'], passwordReset);
 /** Handles the password reset form.
  * @see {@link module:controllers/Account~passwordResetDialogForm} */
-exports.PasswordResetDialogForm = guard.ensure(['post', 'https', 'csrf'], passwordResetDialogForm);
+exports.PasswordResetDialogForm = guard.ensure(['post', 'https'], passwordResetDialogForm);
 /** The form handler for password resets.
  * @see {@link module:controllers/Account~passwordResetForm} */
 exports.PasswordResetForm = guard.ensure(['post', 'https'], passwordResetForm);
@@ -435,7 +435,7 @@ exports.SetNewPasswordForm = guard.ensure(['post', 'https'], setNewPasswordForm)
 exports.StartRegister = guard.ensure(['https'], startRegister);
 /** Handles registration form submit.
  * @see {@link module:controllers/Account~registrationForm} */
-exports.RegistrationForm = guard.ensure(['post', 'https', 'csrf'], registrationForm);
+exports.RegistrationForm = guard.ensure(['post', 'https'], registrationForm);
 /** Renders the account navigation.
  * @see {@link module:controllers/Account~includeNavigation} */
 exports.IncludeNavigation = guard.ensure(['get'], includeNavigation);

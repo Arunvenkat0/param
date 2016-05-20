@@ -76,7 +76,8 @@
 			</isif>
 
 			<input type="hidden" name="rememberme" id="rememberme" value="">
-			<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
+			<input type="hidden" name="${pdict.CurrentForms.oauthlogin.secureKeyHtmlName}"
+				value="${pdict.CurrentForms.oauthlogin.secureKeyValue}"/>
 			<input type="hidden" name="OAuthProvider" id="OAuthProvider" value=""/>
 		</fieldset>
 	</form>
