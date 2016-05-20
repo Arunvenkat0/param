@@ -24,7 +24,7 @@
 			parse-error="profile.usernameerror"
 			value-error="profile.usernametaken" />
 
-		<field formid="currentpassword" label="label.currentpassword" type="string" mandatory="true" min-length="8" max-length="255"
+		<field formid="currentpassword" label="label.currentpassword" type="string" mandatory="true" min-length="8" max-length="255" 
 			   range-error="resource.8_255characters" value-error="profile.currentpasswordnomatch"/>
 
 		<field formid="newpassword" label="label.newpassword" description="resource.8_255characters" type="string" mandatory="true" min-length="8" max-length="255"
