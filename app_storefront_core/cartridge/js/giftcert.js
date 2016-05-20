@@ -37,7 +37,7 @@ var setAddToCartHandler = function (e) {
                     $('#' + id).after($errorEl);
                 }
                 $errorEl.text(response.errors.FormErrors[id].replace(/\\'/g, '\'')).show();
-            });
+            )};
         }
     }).fail(function (xhr, textStatus) {
         // failed
