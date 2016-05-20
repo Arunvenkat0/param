@@ -839,7 +839,7 @@ exports.UpdateCreditCardSelection = guard.ensure(['https', 'get'], updateCreditC
 exports.Billing = guard.ensure(['https'], billing);
 /** Form handler for the returnToForm form.
  * @see module:controllers/COBilling~editBillingAddress */
-exports.EditBillingAddress = guard.ensure(['https', 'post', 'csrf'], editBillingAddress);
+exports.EditBillingAddress = guard.ensure(['https', 'post'], editBillingAddress);
 
 /*
  * Local methods

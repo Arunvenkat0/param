@@ -246,7 +246,7 @@ exports.List = guard.ensure(['https', 'get', 'loggedIn'], list);
 exports.Add = guard.ensure(['https', 'get', 'loggedIn'], add);
 /** Handles the submitted form for creating payment instruments.
  * @see module:controllers/PaymentInstruments~handlePaymentForm */
-exports.PaymentForm = guard.ensure(['https', 'post', 'loggedIn', 'csrf'], handlePaymentForm);
+exports.PaymentForm = guard.ensure(['https', 'post', 'loggedIn'], handlePaymentForm);
 /** Deletes a saved credit card payment instrument.
  * @see module:controllers/PaymentInstruments~Delete */
 exports.Delete = guard.ensure(['https', 'loggedIn'], Delete);
