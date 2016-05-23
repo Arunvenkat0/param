@@ -10,8 +10,8 @@ import * as Resource from '../../mocks/dw/web/Resource';
 let locale = config.locale;
 
 describe('Gift Registry Navigation', () => {
-    let login = 'testuser1@demandware.com';
-    let login2 = 'testuser3@demandware.com';
+    let userEmail = 'testuser1@demandware.com';
+    let userEmail2 = 'testuser3@demandware.com';
     let editedEventFormData = {};
     let editedEventFormShippingData = {};
     let editedEventFormShippingData2 = {};
@@ -28,18 +28,18 @@ describe('Gift Registry Navigation', () => {
 
     before(() => testData.load()
         .then(() => {
-            const customer = testData.getCustomerByLogin(login);
-            const customer2 = testData.getCustomerByLogin(login2);
+            const customer = testData.getCustomerByLogin(userEmail);
+            const customer2 = testData.getCustomerByLogin(userEmail2);
             const address = customer.getPreferredAddress();
             const address2 = customer2.getPreferredAddress();
 
-            customer.addresses[0].postalCode = customers.globalPostalCode[locale];
-            customer.addresses[0].countryCode = customers.globalCountryCode[locale];
-            customer.addresses[0].phone = customers.globalPhone[locale];
+            address.postalCode = customers.globalPostalCode[locale];
+            address.countryCode = customers.globalCountryCode[locale];
+            address.phone = customers.globalPhone[locale];
 
-            customer2.addresses[0].postalCode = customers.globalPostalCode[locale];
-            customer2.addresses[0].countryCode = customers.globalCountryCode[locale];
-            customer2.addresses[0].phone = customers.globalPhone[locale];
+            address2.postalCode = customers.globalPostalCode[locale];
+            address2.countryCode = customers.globalCountryCode[locale];
+            address2.phone = customers.globalPhone[locale];
 
             editedEventFormData = {
                 type: 'other',
@@ -54,7 +54,7 @@ describe('Gift Registry Navigation', () => {
                 coParticipant_role: 'Other',
                 coParticipant_firstName: customer2.firstName,
                 coParticipant_lastName: customer.lastName,
-                coParticipant_email: login2
+                coParticipant_email: userEmail2
             };
 
             eventFormData = {

@@ -11,7 +11,7 @@ import * as customers from '../pageObjects/testData/customers';
 import * as checkoutPage from '../pageObjects/checkout';
 
 describe('Multi Shipping - Registered User', () => {
-    let login = 'testuser1@demandware.com';
+    const login = config.userEmail;
     let billingFormData = {};
     let locale = config.locale;
     let shipmentText1 = Resource.msgf('multishippingshipments.shipment','checkout', null, 1);
@@ -36,7 +36,7 @@ describe('Multi Shipping - Registered User', () => {
         .then(() => multiShipPage.addProductVariationMasterToCart(1, 2, 1))
         .then(() => multiShipPage.addProductVariationMasterToCart(1, 5, 1))
         .then(() => multiShipPage.navigateTo())
-        .then(() => formLogin.loginAsDefaultCustomer())
+        .then(() => formLogin.loginAs(login))
     );
 
     after(() => navHeader.logout());

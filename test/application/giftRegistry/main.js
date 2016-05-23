@@ -1,5 +1,3 @@
-'use strict';
-
 import {assert} from 'chai';
 import {config} from '../webdriver/wdio.conf';
 import * as giftRegistryPage from '../pageObjects/giftRegistry';
@@ -12,10 +10,10 @@ import * as Resource from '../../mocks/dw/web/Resource';
 import * as productDetailPage from '../pageObjects/productDetail';
 import * as cartPage from '../pageObjects/cart';
 
-let locale = config.locale;
+const locale = config.locale;
+const userEmail = config.userEmail;
 
 describe('Gift Registry', () => {
-    let login = 'testuser1@demandware.com';
     let eventFormData = {};
     let eventFormShippingData = {};
     let firstName;
@@ -73,15 +71,15 @@ describe('Gift Registry', () => {
         .then(() => {
             productToAdd = testData.getProductById('701644389758');
             productResourcePath = productToAdd.getUrlResourcePath();
-            const customer = testData.getCustomerByLogin(login);
+            const customer = testData.getCustomerByLogin(userEmail);
             const address = customer.getPreferredAddress();
 
             firstName = customer.firstName;
             lastName = customer.lastName;
 
-            customer.addresses[0].postalCode = customers.globalPostalCode[locale];
-            customer.addresses[0].countryCode = customers.globalCountryCode[locale];
-            customer.addresses[0].phone = customers.globalPhone[locale];
+            address.postalCode = customers.globalPostalCode[locale];
+            address.countryCode = customers.globalCountryCode[locale];
+            address.phone = customers.globalPhone[locale];
 
             eventFormData = {
                 type: 'wedding',
@@ -112,7 +110,7 @@ describe('Gift Registry', () => {
             }
         })
         .then(() => giftRegistryPage.navigateTo())
-        .then(() => loginForm.loginAsDefaultCustomer(locale))
+        .then(() => loginForm.loginAs(userEmail))
         .then(() => browser.waitForVisible(giftRegistryPage.BTN_CREATE_REGISTRY))
         .then(() => giftRegistryPage.emptyAllGiftRegistries())
         .then(() => browser.click(giftRegistryPage.BTN_CREATE_REGISTRY))
@@ -269,7 +267,7 @@ describe('Gift Registry', () => {
 
     it('should delete all the gift registry events', () => {
         return giftRegistryPage.navigateTo()
-            .then(() => loginForm.loginAsDefaultCustomer(locale))
+            .then(() => loginForm.loginAs(userEmail))
             .then(() => browser.waitForVisible(giftRegistryPage.BTN_CREATE_REGISTRY))
             .then(() => giftRegistryPage.emptyAllGiftRegistries())
             .then(() => browser.isExisting(giftRegistryPage.LINK_REMOVE))

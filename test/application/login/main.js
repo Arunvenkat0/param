@@ -9,6 +9,7 @@ import * as navHeader from '../pageObjects/navHeader';
 import * as productDetailPage from '../pageObjects/productDetail';
 import * as Resource from '../../mocks/dw/web/Resource';
 import * as checkoutPage from '../pageObjects/checkout';
+import {config} from '../webdriver/wdio.conf';
 
 function addProductVariationMasterToCart () {
     let product = new Map();
@@ -79,7 +80,7 @@ describe('Login Page', () => {
     );
 
     it('should login using login form', () =>
-        loginForm.loginAsDefaultCustomer()
+        loginForm.loginAs(config.userEmail)
             .then(() => browser.waitForExist('.account-options'))
             .then(() => browser.isExisting('.account-options'))
             .then(doesExist => assert.isTrue(doesExist))

@@ -8,13 +8,10 @@ import * as navHeader from '../pageObjects/navHeader';
 import * as Resource from '../../mocks/dw/web/Resource';
 import {config} from '../webdriver/wdio.conf';
 
-
 describe('Payment Settings', () => {
-    let login = 'testuser1@demandware.com';
     let amexCardData = {};
     let customer;
-    let locale = config.locale;
-
+    let login = config.userEmail;
 
     before(() => testData.load()
         .then(() => {
@@ -28,7 +25,7 @@ describe('Payment Settings', () => {
             return Promise.resolve();
         })
         .then(() => paymentSettingsPage.navigateTo())
-        .then(() => loginForm.loginAsDefaultCustomer(locale))
+        .then(() => loginForm.loginAs(login))
         .then(() => browser.waitForVisible(paymentSettingsPage.LINK_ADD_CREDIT_CARD))
     );
 

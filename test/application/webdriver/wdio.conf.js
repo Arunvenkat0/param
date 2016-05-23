@@ -12,7 +12,8 @@ var opts = _.assign({}, getConfig({
     coverage : 'smoke',
     reporter: 'spec',
     timeout: 60000,
-    locale: 'x_default'
+    locale: 'x_default',
+    user: 'testuser1'
 }, './config.json'), argv);
 
 var specs = 'test/application/' + opts.suite;
@@ -55,4 +56,6 @@ exports.config = _.assign({
     },
     locale: opts.locale,
     coverage: opts.coverage
+    user: opts.user,
+    userEmail: opts.userEmail || opts.user + '@demandware.com'
 }, sauce);

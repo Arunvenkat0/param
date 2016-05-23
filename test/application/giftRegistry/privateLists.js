@@ -12,24 +12,24 @@ import * as customers from '../pageObjects/testData/customers';
 let locale = config.locale;
 
 describe('Private Gift Registries', () => {
-    const login = 'testuser1@demandware.com';
     let publicEventFormData = {};
     let privateEventFormData = {};
     let eventFormShippingData = {};
     let firstName;
     let lastName;
+    const userEmail = config.userEmail;
 
     before(() => testData.load()
         .then(() => {
-            const customer = testData.getCustomerByLogin(login);
+            const customer = testData.getCustomerByLogin(userEmail);
             const address = customer.getPreferredAddress();
 
             firstName = customer.firstName;
             lastName = customer.lastName;
 
-            customer.addresses[0].postalCode = customers.globalPostalCode[locale];
-            customer.addresses[0].countryCode = customers.globalCountryCode[locale];
-            customer.addresses[0].phone = customers.globalPhone[locale];
+            address.postalCode = customers.globalPostalCode[locale];
+            address.countryCode = customers.globalCountryCode[locale];
+            address.phone = customers.globalPhone[locale];
 
             publicEventFormData = {
                 type: 'wedding',
@@ -66,7 +66,7 @@ describe('Private Gift Registries', () => {
                 phone: address.phone
             };
 
-            if (locale && (locale === 'x_default' || locale === 'en_US')) {
+            if (locale === 'x_default' || locale === 'en_US') {
                 publicEventFormData.eventaddress_states_state = address.stateCode;
                 privateEventFormData.eventaddress_states_state = address.stateCode;
                 eventFormShippingData.states_state = address.stateCode;
@@ -107,7 +107,7 @@ describe('Private Gift Registries', () => {
 
     it('should login and see both the public and private registries', () => {
         return giftRegistryPage.navigateTo()
-            .then(() => loginForm.loginAsDefaultCustomer(locale))
+            .then(() => loginForm.loginAs(userEmail))
             .then(() => browser.waitForVisible(giftRegistryPage.BTN_CREATE_REGISTRY))
             .then(() => giftRegistryPage.getGiftRegistryCount())
             .then(rows => assert.equal(2, rows));

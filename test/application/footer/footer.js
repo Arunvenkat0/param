@@ -1,5 +1,3 @@
-'use strict';
-
 import {assert} from 'chai';
 
 import * as footerPage from '../pageObjects/footer';
@@ -9,13 +7,14 @@ import * as formLogin from '../pageObjects/helpers/forms/login';
 import * as accountPage from '../pageObjects/account';
 import * as navHeader from '../pageObjects/navHeader';
 import url from 'url';
+import {config} from '../webdriver/wdio.conf';
 
 describe('Footer #C147201', () => {
 
     // Click on links in the footer, then validate that you got to the right place by checking the URL
     describe('Account links', () => {
         before(() => accountPage.navigateTo()
-            .then(() => formLogin.loginAsDefaultCustomer())
+            .then(() => formLogin.loginAs(config.userEmail))
         );
         after(() => navHeader.logout());
 

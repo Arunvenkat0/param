@@ -13,6 +13,8 @@ import * as Resource from '../../mocks/dw/web/Resource';
 import * as testData from '../pageObjects/testData/main';
 import * as wishListPage from '../pageObjects/wishList';
 
+const userEmail = config.userEmail;
+
 describe('Wishlist', () => {
     before(() => testData.load());
 
@@ -54,7 +56,7 @@ describe('Wishlist', () => {
         };
 
         before(() => wishListPage.navigateTo()
-            .then(() => loginForm.loginAsDefaultCustomer())
+            .then(() => loginForm.loginAs(userEmail))
         );
 
         after(() => navHeader.logout());
@@ -133,7 +135,7 @@ describe('Wishlist', () => {
             amount: '250'
         };
         before(() => wishListPage.navigateTo()
-            .then(() => loginForm.loginAsDefaultCustomer())
+            .then(() => loginForm.loginAs(userEmail))
             .then(() => browser.waitForVisible(wishListPage.BTN_TOGGLE_PRIVACY))
             .then(() => cartPage.emptyCart())
             .then(() => wishListPage.navigateTo())
@@ -156,7 +158,7 @@ describe('Wishlist', () => {
         });
 
         it('should automatically populate the Your Name field', () => {
-            const defaultCustomer = testData.getCustomerByLogin(loginForm.DEFAULT_RETURNING_CUSTOMER);
+            const defaultCustomer = testData.getCustomerByLogin(userEmail);
             return browser.getValue(giftCertPurchasePage.INPUT_FROM_FIELD)
                 .then(from => {
                     const expectedYourName = defaultCustomer.firstName + ' ' + defaultCustomer.lastName;
@@ -199,7 +201,7 @@ describe('Wishlist', () => {
                 product.set('widthIndex', 1);
 
                 return wishListPage.navigateTo()
-                    .then(() => loginForm.loginAsDefaultCustomer())
+                    .then(() => loginForm.loginAs(userEmail))
                     .then(() => browser.waitForVisible(wishListPage.BTN_TOGGLE_PRIVACY))
                     .then(() => wishListPage.emptyWishList())
                     .then(() => addProductVariationMasterToWishList())
@@ -238,7 +240,7 @@ describe('Wishlist', () => {
                 product = testData.getProductById(variantId);
 
                 return loginPage.navigateTo()
-                    .then(() => loginForm.loginAsDefaultCustomer())
+                    .then(() => loginForm.loginAs(userEmail))
                     .then(() => browser.url(product.getUrlResourcePath()))
                     .click(productDetailPage.BTN_ADD_TO_CART)
                     .then(() => cartPage.navigateTo());
