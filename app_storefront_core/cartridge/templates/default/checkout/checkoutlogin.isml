@@ -20,7 +20,7 @@
 					<div class="form-row formbuttonrow">
 						<button type="submit" value="${Resource.msg('checkoutlogin.checkoutguestbutton','checkout',null)}" name="${pdict.CurrentForms.login.unregistered.htmlName}"><span>${Resource.msg('checkoutlogin.checkoutguestbutton','checkout',null)}</span></button>
 					</div>
-					<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
+					<input type="hidden" name="${pdict.CurrentForms.login.secureKeyHtmlName}" value="${pdict.CurrentForms.login.secureKeyValue}"/>
 				</fieldset>
 				</form>
 				</isif>
@@ -31,7 +31,7 @@
 						<div class="form-row form-row-button">
 							<button type="submit" value="${Resource.msg('global.createbutton','locale',null)}" name="${pdict.CurrentForms.login.register.htmlName}"><span>${Resource.msg('global.createnowbutton','locale',null)}</span></button>
 						</div>
-						<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
+						<input type="hidden" name="${pdict.CurrentForms.login.secureKeyHtmlName}" value="${pdict.CurrentForms.login.secureKeyValue}"/>
 					</fieldset>
 				</form>
 				

@@ -36,8 +36,6 @@ var addToCart = function (e) {
         var $uuid = $form.find('input[name="uuid"]');
         if ($uuid.length > 0 && $uuid.val().length > 0) {
             page.refresh();
-        } else if (response.error) {
-            page.redirect(Urls.csrffailed);
         } else {
             // do not close quickview if adding individual item that is part of product set
             // @TODO should notify the user some other way that the add action has completed successfully
@@ -57,11 +55,6 @@ var addAllToCart = function (e) {
     var $productForms = $('#product-set-list').find('form').toArray();
     TPromise.all(_.map($productForms, addItemToCart))
         .then(function (responses) {
-            for (var i = 0; i < responses.length; i++) {
-                if (responses[i].error) {
-                    page.redirect(Urls.csrffailed);
-                }
-            }
             dialog.close();
             // show the final response only, which would include all the other items
             minicart.show(responses[responses.length - 1]);

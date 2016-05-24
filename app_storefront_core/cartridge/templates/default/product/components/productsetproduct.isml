@@ -85,7 +85,6 @@
 				<button type="submit" value="${Resource.msg('global.addtocart','locale',null)}" class="button-fancy-medium sub-product-item add-to-cart"<isprint value="${disabledText}" encoding="off"/>>
 					${Resource.msg('global.addtocart','locale',null)}
 				</button>
-				<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
 			</form>
 		</div>
 	</isif>

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<form xmlns="http://www.demandware.com/xml/form/2008-04-19" secure="false">
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19" secure="true">
 	<group formid="customer">
 		<field formid="firstname" label="profile.firstname" type="string" mandatory="true" binding="firstName" max-length="50"/>
 		<field formid="lastname" label="profile.lastname" type="string" mandatory="true" binding="lastName" max-length="50"/>
@@ -24,7 +24,7 @@
 			parse-error="profile.usernameerror"
 			value-error="profile.usernametaken" />
 
-		<field formid="currentpassword" label="label.currentpassword" type="string" mandatory="true" min-length="8" max-length="255"
+		<field formid="currentpassword" label="label.currentpassword" type="string" mandatory="true" min-length="8" max-length="255" 
 			   range-error="resource.8_255characters" value-error="profile.currentpasswordnomatch"/>
 
 		<field formid="newpassword" label="label.newpassword" description="resource.8_255characters" type="string" mandatory="true" min-length="8" max-length="255"

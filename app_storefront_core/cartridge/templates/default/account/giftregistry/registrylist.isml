@@ -16,7 +16,7 @@
 					${Resource.msg('registrylist.newregistry','account',null)}
 				</button>
 			</div>
-			<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
+
 		</fieldset>
 	</form>
 

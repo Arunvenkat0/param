@@ -15,10 +15,8 @@
  * // allow only GET requests via HTTPS for logged in users
  * exports.Show = require('~/guard').ensure(['get','https','loggedIn'],show);
  */
-var CSRFProtection = require('dw/web/CSRFProtection');
 var browsing = require('~/cartridge/scripts/util/Browsing');
 var LOGGER   = dw.system.Logger.getLogger('guard');
-var app = require('~/cartridge/scripts/app');
 
 /**
  * This method contains the login to handle a not logged in customer
@@ -61,19 +59,6 @@ function switchToHttps() {
     return true;
 }
 
-function csrfValidationFailed() {
-    if (request.httpParameterMap.format.stringValue === 'ajax') {
-        let r = require('~/cartridge/scripts/util/Response');
-        r.renderJSON({
-            error: 'CSRF Token Mismatch'
-        });
-    } else {
-        app.getView().render('csrf/csrffailed');
-    }
-
-    return false;
-}
-
 /**
  * The available filters for endpoints, the names of the methods can be used in {@link module:guard~ensure}
  * @namespace
@@ -94,9 +79,6 @@ var Filters = {
         // the main request will be something like kjhNd1UlX_80AgAK-0-00, all includes
         // have incremented trailing counters
         return request.httpHeaders['x-is-requestid'].indexOf('-0-00') === -1;
-    },
-    csrf: function (){
-        return CSRFProtection.validateRequest();
     }
 };
 
@@ -126,8 +108,6 @@ function ensure (filters, action, params) {
                     error = switchToHttps;
                 } else if (filters[i] === 'loggedIn') {
                     error = requireLogin;
-                } else if (filters[i] === 'csrf') {
-                    error = csrfValidationFailed;
                 }
                 break;
             }

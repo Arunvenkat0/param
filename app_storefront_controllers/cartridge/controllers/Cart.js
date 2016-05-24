@@ -10,6 +10,7 @@
 /* API Includes */
 var ArrayList = require('dw/util/ArrayList');
 var ISML = require('dw/template/ISML');
+var Resource = require('dw/web/Resource');
 var Transaction = require('dw/system/Transaction');
 var URLUtils = require('dw/web/URLUtils');
 
@@ -395,6 +396,36 @@ function addBonusProductJson() {
     });
 }
 
+/**
+ * Adds a coupon to the cart using JSON.
+ *
+ * Gets the CartModel. Gets the coupon code from the httpParameterMap couponCode parameter.
+ * In a transaction, adds the coupon to the cart and renders a JSON object that includes the coupon code
+ * and the status of the transaction.
+ *
+ */
+function addCouponJson() {
+    var couponCode, cart, couponStatus;
+
+    couponCode = request.httpParameterMap.couponCode.stringValue;
+    cart = app.getModel('Cart').goc();
+
+    Transaction.wrap(function () {
+        couponStatus = cart.addCoupon(couponCode);
+    });
+
+    if (request.httpParameterMap.format.stringValue === 'ajax') {
+        let r = require('~/cartridge/scripts/util/Response');
+        r.renderJSON({
+            status: couponStatus.code,
+            message: Resource.msgf('cart.' + couponStatus.code, 'checkout', null, couponCode),
+            success: !couponStatus.error,
+            baskettotal: cart.object.adjustedMerchandizeTotalGrossPrice.value,
+            CouponCode: couponCode
+        });
+    }
+}
+
 /*
 * Module exports
 */
@@ -404,16 +435,19 @@ function addBonusProductJson() {
 */
 /** Adds a product to the cart.
  * @see {@link module:controllers/Cart~addProduct} */
-exports.AddProduct = guard.ensure(['post', 'csrf'], addProduct);
+exports.AddProduct = guard.ensure(['post'], addProduct);
 /** Invalidates the login and shipment forms. Renders the basket content.
  * @see {@link module:controllers/Cart~show} */
 exports.Show = guard.ensure(['https'], show);
 /** Form handler for the cart form.
  * @see {@link module:controllers/Cart~submitForm} */
-exports.SubmitForm = guard.ensure(['post', 'https', 'csrf'], submitForm);
+exports.SubmitForm = guard.ensure(['post', 'https'], submitForm);
 /** Redirects the user to the last visited catalog URL.
  * @see {@link module:controllers/Cart~continueShopping} */
 exports.ContinueShopping = guard.ensure(['https'], continueShopping);
+/** Adds a coupon to the cart using JSON. Called during checkout.
+ * @see {@link module:controllers/Cart~addCouponJson} */
+exports.AddCouponJson = guard.ensure(['get', 'https'], addCouponJson);
 /** Displays the current items in the cart in the minicart panel.
  * @see {@link module:controllers/Cart~miniCart} */
 exports.MiniCart = guard.ensure(['get'], miniCart);

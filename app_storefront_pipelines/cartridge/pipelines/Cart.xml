@@ -10,11 +10,6 @@
       </node>
       <simple-transition/>
       <node>
-        <call-node start-name-ref="CSRF-Validate"/>
-        <node-display x="0" y="1"/>
-      </node>
-      <simple-transition/>
-      <node>
         <decision-node condition-key="!(CurrentHttpParameterMap.source &amp;&amp; CurrentHttpParameterMap.source.stringValue=='giftregistry' &amp;&amp; CurrentHttpParameterMap.cartAction &amp;&amp; CurrentHttpParameterMap.cartAction.stringValue=='update')" condition-operator="expr"/>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="yes">
@@ -147,7 +142,7 @@
         <text-node>
           <description>Cart-UpdateLineItem</description>
         </text-node>
-        <node-display x="3" y="2"/>
+        <node-display x="3" y="1"/>
       </node>
     </segment>
   </branch>
@@ -257,13 +252,12 @@
         </interaction-continue-node>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="addCoupon">
-          <transition target-connector="in"/>
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-2"/>
+            </transition-display>
+          </transition>
           <segment>
-            <node>
-              <call-node start-name-ref="CSRF-Validate"/>
-              <node-display x="1" y="7"/>
-            </node>
-            <simple-transition/>
             <node>
               <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="false"/>
@@ -288,13 +282,9 @@
                 <key-binding alias="null" key="From_9"/>
                 <key-binding alias="null" key="To_9"/>
               </pipelet-node>
-              <node-display x="0" y="1"/>
+              <node-display x="1" y="7"/>
             </node>
-            <simple-transition>
-              <transition-display>
-                <bend-point relative-to="source" x="0" y="1"/>
-              </transition-display>
-            </simple-transition>
+            <simple-transition/>
             <node>
               <call-node start-name-ref="Cart-AddCoupon"/>
               <node-display x="0" y="1"/>
@@ -304,7 +294,7 @@
           <segment>
             <node>
               <join-node/>
-              <node-display x="0" y="1"/>
+              <node-display x="0" y="2"/>
             </node>
             <transition target-connector="in1" target-path="./+1"/>
           </segment>
