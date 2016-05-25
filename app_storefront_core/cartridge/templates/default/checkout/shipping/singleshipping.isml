@@ -36,10 +36,11 @@
                     <isif condition="${dw.system.Site.getCurrent().getCustomPreferenceValue('enableMultiShipping')}">
                         <isscript>
                             var plicount = 0;
-                            for each (var pli : ProductLineItem in pdict.Basket.allProductLineItems){
-                                if(pli.custom.fromStoreId == null ){
-                                    plicount += pli.quantityValue;
-                                }
+
+                            for each (var shipment in pdict.Basket.shipments) {
+                            	for each (var product in shipment.productLineItems) {
+	                                plicount += product.quantity;
+                            	}
                             }
                         </isscript>
                         <isif condition="${plicount > 1 }">

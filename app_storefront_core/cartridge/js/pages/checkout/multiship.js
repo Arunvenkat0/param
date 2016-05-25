@@ -3,7 +3,8 @@
 var address = require('./address'),
     formPrepare = require('./formPrepare'),
     dialog = require('../../dialog'),
-    util = require('../../util');
+    util = require('../../util'),
+    validator = require('../../validator');
 
 /**
  * @function
@@ -34,18 +35,26 @@ function addEditAddress(target) {
         $addressDropdown = $addressForm.find('select[name$=_addressList]'),
         $addressList = $addressForm.find('.address-list'),
         add = true,
+        originalUUID,
+        resetOptionValue = false,
         selectedAddressUUID = $(target).parent().siblings('.select-address').val();
 
     $addressDropdown.on('change', function (e) {
         e.preventDefault();
+
         var selectedAddress = $addressList.find('select').val();
         if (selectedAddress !== 'newAddress') {
             selectedAddress = $.grep($addressList.data('addresses'), function (add) {
                 return add.UUID === selectedAddress;
             })[0];
             add = false;
+            resetOptionValue = false;
             // proceed to fill the form with the selected address
             util.fillAddressFields(selectedAddress, $addressForm);
+        } else if  (selectedAddress === 'newAddress') {
+            add = true;
+            resetOptionValue = true;
+            $addressForm.find('.input-text, .input-select').val('');
         } else {
             //reset the form if the value of the option is not a UUID
             $addressForm.find('.input-text, .input-select').val('');
@@ -59,11 +68,17 @@ function addEditAddress(target) {
 
     $addressForm.on('submit', function (e) {
         e.preventDefault();
+        if (!$addressForm.valid()) {
+            return false;
+        }
+
         $.getJSON(Urls.addEditAddress, $addressForm.serialize(), function (response) {
             if (!response.success) {
-                // @TODO: figure out a way to handle error on the form
+                $('#multiaddresserror').html(Resources.COULD_NOT_SAVE_ADDRESS);
                 return;
             }
+            $('#multiaddresserror').toggleClass('hidden', response.success);
+
             var address = response.address,
                 $shippingAddress = $(target).closest('.shippingaddress'),
                 $select = $shippingAddress.find('.select-address'),
@@ -73,6 +88,11 @@ function addEditAddress(target) {
                     address.address1 + ', ' + address.city + ', ' + address.stateCode + ', ' + address.postalCode +
                     '</option>';
             dialog.close();
+
+            if (address.UUID !== originalUUID) {
+                resetOptionValue = true;
+            }
+
             if (add) {
                 $('.shippingaddress select').removeClass('no-option').append(newOption);
                 $('.no-address').hide();
@@ -80,7 +100,7 @@ function addEditAddress(target) {
                 $('.shippingaddress select').find('option[value="' + address.UUID + '"]').html(newOption);
             }
             // if there's no previously selected option, select it
-            if ($selected.length === 0 || $selected.val() === '') {
+            if ($selected.length === 0 || $selected.val() === '' || resetOptionValue) {
                 $select.find('option[value="' + address.UUID + '"]').prop('selected', 'selected').trigger('change');
             }
         });
@@ -96,7 +116,10 @@ function addEditAddress(target) {
                 $addressDropdown.trigger('change');
             }
         });
+        originalUUID = selectedAddressUUID;
     }
+
+    validator.init();
 }
 
 /**
@@ -111,8 +134,8 @@ exports.init = function () {
             formSelector: '[id$="multishipping_addressSelection"]'
         });
     }
-    $('.edit-address').on('click', 'span', function (e) { 
-        dialog.open({url: this.attributes[0].value,  options: {open: function () {
+    $('.edit-address').on('click', 'span', function (e) {
+        dialog.open({url: this.attributes.href.value,  options: {open: function () {
             address.init();
             addEditAddress(e.target);
         }}});

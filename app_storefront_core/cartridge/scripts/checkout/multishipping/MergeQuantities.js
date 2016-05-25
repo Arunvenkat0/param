@@ -36,7 +36,7 @@ function createAddressProductRelations(quantityLineItemList) {
 
         var quantityLineItem = quantityLineItemList[i];
         var selectedAddress = quantityLineItem.addressList.selectedOptionObject;
-        var addressId = selectedAddress.ID;
+        var addressId = selectedAddress.ID ? selectedAddress.ID : quantityLineItem.addressList.selectedOptionObject.UUID;
         var productID = quantityLineItem.object.productID;
         var productOptionID = quantityLineItem.object.optionID;
         var isBonusProduct = quantityLineItem.object.bonusProductLineItem;

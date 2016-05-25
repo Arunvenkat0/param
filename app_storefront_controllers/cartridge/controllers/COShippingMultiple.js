@@ -18,7 +18,6 @@ var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
 
 var Cart = app.getModel('Cart');
-var Profile = app.getModel('Profile');
 var TransientAddress = app.getModel('TransientAddress');
 
 /**
@@ -311,11 +310,11 @@ function addEditAddress() {
             if (referenceAddress) {
                 // Gets address from address book.
                 if (referenceAddress.ID) {
-                    customerAddress = Profile.get().getAddessBook().getAddress(referenceAddress.ID);
+                    customerAddress = customer.addressBook.getAddress(referenceAddress.ID);
                 }
             } else {
                 customerAddress = Transaction.wrap(function () {
-                    return Profile.get().addAddressToAddressBook(newAddress);
+                    return app.getModel('Profile').get(customer.profile).addAddressToAddressBook(newAddress);
                 });
                 newAddress.ID = customerAddress.ID;
                 newAddress.referenceAddressUUID = customerAddress.getUUID();
@@ -348,7 +347,7 @@ function addEditAddress() {
             quantityLineItem.addressList.setOptions(cart.getAddressBookAddresses().iterator());
         }
 
-        return {sucess: true, address: newAddress};
+        return {success: true, address: newAddress};
     }
 }
 
