@@ -46,15 +46,20 @@ var ProductListModel = AbstractModel.extend(
         },
 
         /**
-         * Adds a product to the wishlist.
+         * Adds a product to the product list. In case product is already in list null will be returned
          *
          * @transactional
          * @alias module:models/ProductListModel~ProductListModel/addProduct
          * @param {dw.catalog.Product} product - The product to add
          * @param {Number} quantity - The quantity to add
          * @param {dw.catalog.ProductOptionModel} optionModel The option model for the given product
+         * @returns {dw.customer.ProductListItem|null} Added item or null
          */
         addProduct: function (product, quantity, optionModel) {
+            if (this.isProductInProductList(product)){
+                return null;
+            } 
+
             var list = this.object;
             Transaction.wrap(function () {
                 var item = list.createProductItem(product);
@@ -69,7 +74,6 @@ var ProductListModel = AbstractModel.extend(
 
                 return item;
             });
-            return null;
         },
 
         /**
@@ -86,6 +90,23 @@ var ProductListModel = AbstractModel.extend(
                     productListItemForm.copyTo(productListItemForm.object);
                 }
             });
+        },
+
+        /**
+         * Check is product already in the wishlist.
+         *
+         * @param {dw.catalog.Product} product - The product to check
+         */
+        isProductInProductList: function(product){
+            var productItems = this.getProductItems().iterator();
+
+            while (productItems.hasNext()) {
+                let productItem = productItems.next();
+                if (product.ID === productItem.productID) {
+                    return true;
+                }
+            }
+            return false;
         },
 
         /**
