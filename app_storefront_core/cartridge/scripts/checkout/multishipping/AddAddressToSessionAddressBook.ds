@@ -19,6 +19,7 @@ importPackage( dw.web );
 importPackage( dw.customer );
 
 var accountUtils = require ('app_storefront_core/cartridge/scripts/account/Utils');
+var checkoutUtils = require('app_storefront_core/cartridge/scripts/checkout/Utils');
 
 function execute( args : PipelineDictionary ) : Number {
 
@@ -67,7 +68,7 @@ function execute( args : PipelineDictionary ) : Number {
 	// Handle session address book update process
 	if (referenceAddress == null){
 		// Add Address
-		sessionAddressBook = addAddressToJSON(sessionAddressBook, formAddress);
+		sessionAddressBook = checkoutUtils.addAddressToJSON(sessionAddressBook, formAddress);
 	} else {
 		// Update Address
 		formAddress.UUID = referenceAddress.UUID;

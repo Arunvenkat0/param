@@ -111,8 +111,8 @@ exports.init = function () {
             formSelector: '[id$="multishipping_addressSelection"]'
         });
     }
-    $('.edit-address').on('click', 'a', function (e) {
-        dialog.open({url: this.href, options: {open: function () {
+    $('.edit-address').on('click', 'span', function (e) { 
+        dialog.open({url: this.attributes[0].value,  options: {open: function () {
             address.init();
             addEditAddress(e.target);
         }}});

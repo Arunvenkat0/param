@@ -115,7 +115,7 @@
                                 </isloop>
                             </select>
                             <div class="edit-address">
-                                <a href="${URLUtils.url('COShippingMultiple-EditAddresses')}" class="edit">${Resource.msg('multishipping.editaddress','checkout',null)}</a>
+								<span href="${URLUtils.url('COShippingMultiple-EditAddresses')}" class="edit">${Resource.msg('multishipping.editaddress','checkout',null)}</span>
                             </div>
                         </td>
                     </tr>

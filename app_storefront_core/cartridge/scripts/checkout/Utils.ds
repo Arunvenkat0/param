@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * This script provides utility functions shared across other checkout scripts.
  * Reused script components for checkout should be contained here, while this
@@ -413,7 +415,7 @@ function getSessionAddresses(basket : Basket) : ArrayList {
 *	Helper object to store ProductLineItem information for each quantity.
 *	Used in Multi-Shipping Checkout to save creation of new PLIs for each quantity.
 */
-function QuantityLineItem(){
+function QuantityLineItem() {
 	var productID : String = null;
 	var lineItemText : String = null;
 	var quantity : Quantity = null;
@@ -421,4 +423,17 @@ function QuantityLineItem(){
 	var optionID : String = null;
 }
 
-module.exports = ShippingAddress;
+module.exports = {
+    calculateNonGiftCertificateAmount: calculateNonGiftCertificateAmount,		
+	determineUniqueShipmentID: determineUniqueShipmentID,
+	ShippingAddress: ShippingAddress,
+	createShippingAddress: createShippingAddress,
+	findShippingAddress: findShippingAddress,
+	removeShippingAddress: removeShippingAddress,
+	removeExistingPaymentInstruments: removeExistingPaymentInstruments,
+	addAddressToJSON: addAddressToJSON,
+	updateAddressInJSON: updateAddressInJSON,
+	getSessionAddresses: getSessionAddresses,
+	QuantityLineItem: QuantityLineItem
+};
+	

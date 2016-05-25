@@ -115,7 +115,7 @@ function createNewShipmentsAndProductLineItems(addressRelations, bonusDiscountLi
         }
         orderAddress = shipment.createShippingAddress();
         // type: Object
-        var shippingAddress = new checkoutUtils();
+        var shippingAddress =  new checkoutUtils.ShippingAddress();
         shippingAddress.UUID = UUIDUtils.createUUID();
         shippingAddress.copyFrom(address);
         shippingAddress.copyTo(orderAddress);
