@@ -9,6 +9,7 @@ import * as pricingHelpers from '../pageObjects/helpers/pricing';
 import * as productDetailPage from '../pageObjects/productDetail';
 import * as promotions from '../pageObjects/promotions';
 import * as cartPage from '../pageObjects/cart';
+import * as common from '../pageObjects/helpers/common';
 
 describe('Promotions - PromotionTest_WithoutQualifying product tile pricing', () => {
 
@@ -36,7 +37,7 @@ describe('Promotions - PromotionTest_WithoutQualifying product tile pricing', ()
     });
 
     describe('Category / Search Results', () => {
-        it('Should display promotional pricing for the qualifiying product tile.', () => {
+        it('Should display promotional pricing for the qualifying product tile.', () => {
 
             const productTile = 'div[data-itemid="' + productMasterID1 + '"]';
             const expectedSalePrice = testData.getPricesByProductId(productMasterID1, locale).sale;
@@ -53,14 +54,15 @@ describe('Promotions - PromotionTest_WithoutQualifying product tile pricing', ()
                 });
         });
 
-        it('Should display with promotional messaging for the qualifiying product tile.', () => {
+
+        it('Should display with promotional messaging for the qualifying product tile.', () => {
             const productTile = 'div[data-itemid="' + productMasterID1 + '"]';
 
             return browser.getText(productTile + ' ' + '.promotional-message')
                 .then(promoCallOut => assert.equal(promoCallOut.toLowerCase(), promotionInfo.calloutMsg.toLowerCase()))
         });
 
-        it('Should display promotional pricing for the qualifiying product tile.', () => {
+        it('Should display promotional pricing for the qualifying product tile.', () => {
             const productTile = 'div[data-itemid="' + productMasterID2 + '"]';
             const expectedSalePrice = testData.getPricesByProductId(productMasterID2, locale).sale;
 
@@ -76,7 +78,7 @@ describe('Promotions - PromotionTest_WithoutQualifying product tile pricing', ()
                 })
         });
 
-        it('Should display with promotional messaging for the qualifiying product tile.', () => {
+        it('Should display with promotional messaging for the qualifying product tile.', () => {
             const productTile = 'div[data-itemid="' + productMasterID2 + '"]';
 
             return browser.getText(productTile + ' ' + '.promotional-message')
@@ -92,7 +94,7 @@ describe('Promotions - PromotionTest_WithoutQualifying product tile pricing', ()
             return browser.url(variant.getUrlResourcePath());
         });
 
-        it('Should display with promotional pricing', () => {
+        it('Should display with promotional pricing on Product Details Page', () => {
             const expectedSalePrice = testData.getPricesByProductId(productMasterID1, locale).sale;
 
             browser.getText(productDetailPage.PRICE_SALE)
@@ -103,7 +105,7 @@ describe('Promotions - PromotionTest_WithoutQualifying product tile pricing', ()
                 })
         });
 
-        it('Should display with promotional messaging', () =>
+        it('Should display with promotional messaging on Product Details Page', () =>
             browser.getText(productDetailPage.PROMOTION_CALLOUT)
                 .then(promoCallOut => assert.equal(promoCallOut, promotionInfo.calloutMsg))
         );
@@ -141,7 +143,7 @@ describe('Promotions - PromotionTest_WithoutQualifying product tile pricing', ()
     describe('Vertical carousel', () => {
         before(() => homePage.navigateTo());
 
-        it('Should display promotional pricing for the qualifiying product tile.', () => {
+        it('Should display promotional pricing for the qualifying Striped Wool Suit on vertical carousel.', () => {
             const priceLabelPrefix = `.product-tile[data-itemid="${productID2}"] .product-pricing `;
             const displayedStandardPrice = `${priceLabelPrefix} .product-standard-price`;
             const displayedSalePrice = `${priceLabelPrefix} .product-sales-price`;
@@ -162,7 +164,7 @@ describe('Promotions - PromotionTest_WithoutQualifying product tile pricing', ()
                 })
         });
 
-        it('Should display promotional pricing for the qualifiying product tile.', () => {
+        it('Should display promotional pricing for the qualifying Striped Silk Tie on vertical carousal.', () => {
             const priceLabelPrefix = `.product-tile[data-itemid="${productID1}"] .product-pricing `;
             const displayedStandardPrice = `${priceLabelPrefix} .product-standard-price`;
             const displayedSalePrice = `${priceLabelPrefix} .product-sales-price`;
@@ -187,22 +189,23 @@ describe('Promotions - PromotionTest_WithoutQualifying product tile pricing', ()
         });
     });
 
-    describe.skip('Compare page', () => {
+    describe('Compare page', () => {
         before(() => browser.url('/mens/accessories/ties/')
            .waitForVisible(searchResultsPage.PRODUCTGRID_CONTAINER)
        );
 
-        it('Should display promotional pricing for the qualifiying product tile.', () => {
+        it('Should display promotional pricing for the qualifying product Striped Silk Tie on comparePage.', () => {
             const productTile = 'div[data-itemid="' + productMasterID1 + '"]';
             const expectedSalePrice = testData.getPricesByProductId(productMasterID1, locale).sale;
+            const product1Selector = '.product-tile[data-itemid="' + productMasterID1 + '"] .product-compare input';
+            const product2Selector = '.product-tile[data-itemid="' + productMasterID3 + '"] .product-compare input';
 
-            return browser.click('.product-tile[data-itemid="' + productMasterID1 + '"] .product-compare input')
-                .then(() => browser.click('.product-tile[data-itemid="' + productMasterID3 + '"] .product-compare input'))
-                .then(() => browser.isVisible('.compare-items'))
+            return common.clickCheckbox(product1Selector)
+                .then(() => common.clickCheckbox(product2Selector))
                 .then(() => browser.waitForVisible('#compare-items-button'))
-                .then(() => browser.click('#compare-items-button'))
-                .then(() => browser.waitForVisible('#compare-table'))
-                .then(() => browser.getText(productTile + ' ' + searchResultsPage.PRICE_SALE))
+                .click('#compare-items-button')
+                .waitForVisible('#compare-table')
+                .getText(productTile + ' ' + searchResultsPage.PRICE_SALE)
                 .then(displayedSalePrice => {
                     assert.equal(pricingHelpers.getCurrencyValue(displayedSalePrice, locale), pricingHelpers.getPercentageDiscountedPrice(expectedSalePrice, locale, promotionInfo.discountAmount).toFixed(2))
                 })
@@ -212,7 +215,7 @@ describe('Promotions - PromotionTest_WithoutQualifying product tile pricing', ()
                 })
         });
 
-        it('Should display promotional messaging for the qualifiying product tile.', () => {
+        it('Should display promotional messaging for the qualifying Striped Silk Tie on comparePage.', () => {
             const productTile = 'div[data-itemid="' + productMasterID1 + '"]';
 
             return browser.getText(productTile + ' ' + '.promotional-message')
