@@ -141,3 +141,8 @@ SiteGenesis also comes with inline code documentation (JSDoc), tutorials and a l
 ```
 
 The equivalent task for grunt, `grunt doc`, is also available.
+
+### SiteGenesis configuration requirements
+Notes :
+1. This tests assumes the Site Preferences->Enable Storefront URLs is enabled
+2. For some promotion and coupon tests to work, remember to use the latest SG Demo data for your site(s).

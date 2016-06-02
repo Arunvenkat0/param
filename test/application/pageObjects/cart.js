@@ -32,6 +32,10 @@ export const STORE_LIST_CONTAINER = '.store-list-container';
 export const ZIP_CODE_POP_UP = '#preferred-store-panel';
 export const FRM_QUANTITY_ERROR = '#dwfrm_cart_shipments_i0_items_i0_quantity-error';
 export const PRODUCT_SLOT = '.product-slot';
+export const LAST_VISITED_ITEMS = '.last-visited .search-result-items .grid-tile';
+export const LAST_VISITED_ITEM_NAMES = `${LAST_VISITED_ITEMS} .product-name`;
+export const LAST_VISITED_ITEM_PRICES = `${LAST_VISITED_ITEMS} .product-sales-price`;
+export const LAST_VISITED_ITEM_IMAGES = `${LAST_VISITED_ITEMS} .product-image .thumb-link [src]`;
 
 const basePath = '/cart';
 
