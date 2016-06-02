@@ -4,11 +4,8 @@ import {assert} from 'chai';
 import {config} from '../webdriver/wdio.conf';
 import * as giftRegistryPage from '../pageObjects/giftRegistry';
 import * as testData from '../pageObjects/testData/main';
-import * as loginForm from '../pageObjects/helpers/forms/login';
-import * as navHeader from '../pageObjects/navHeader';
 import * as customers from '../pageObjects/testData/customers';
 import * as Resource from '../../mocks/dw/web/Resource';
-import * as addressPage from '../pageObjects/addressBook';
 
 let locale = config.locale;
 
@@ -27,16 +24,6 @@ describe('Gift Registry Navigation', () => {
     let editedGiftRegistryTitle = {
         'x_default': 'LLAMA PALOOZA WORLD TOUR - 2/22/22',
         'en_GB': 'LLAMA PALOOZA WORLD TOUR - 22/02/2022'
-    };
-
-
-    let giftRegistryTitle = {
-        'x_default': 'WEDDING OF THE CENTURY - 3/28/08',
-        'en_GB': 'WEDDING OF THE CENTURY - 28/03/2008',
-        'fr-FR': 'mariage du siècle - 3/28/08',
-        'it-IT': 'matrimonio del secolo - 3/28/08',
-        'ja-JP': '世紀の結婚式 -2008年3月28日',
-        'zh-CN': '世纪婚礼 - 2008年3月28号'
     };
 
     before(() => testData.load()
@@ -147,35 +134,12 @@ describe('Gift Registry Navigation', () => {
                 editedAfterEventFormShippingData2.states_state = 'NH';
             }
         })
-        .then(() => giftRegistryPage.navigateTo())
-        .then(() => loginForm.loginAsDefaultCustomer(locale))
-        .then(() => browser.waitForVisible(giftRegistryPage.BTN_CREATE_REGISTRY))
-        .then(() => giftRegistryPage.emptyAllGiftRegistries())
-        .then(() => browser.click(giftRegistryPage.BTN_CREATE_REGISTRY))
-        .then(() => browser.waitForVisible(giftRegistryPage.FORM_REGISTRY))
+        .then(() => giftRegistryPage.createGiftRegistry(locale, eventFormData, eventFormShippingData))
     );
 
-    after(() =>
-        addressPage.navigateTo()
-            .then(() =>  addressPage.removeAddresses())
-            .then(() => navHeader.logout())
-    );
-
-    it('should create a new gift registry', () =>
-        giftRegistryPage.fillOutEventForm(eventFormData)
-            .then(() => browser.click(giftRegistryPage.BTN_EVENT_SET_PARTICIPANTS))
-            .then(() => browser.waitForVisible(giftRegistryPage.USE_PRE_EVENT))
-            .then(() => giftRegistryPage.fillOutEventShippingForm(eventFormShippingData))
-            .then(() => browser.waitForValue('[name*=addressBeforeEvent_phone]'))
-            .then(() => browser.click(giftRegistryPage.USE_PRE_EVENT))
-            .then(() => browser.waitForVisible(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE))
-            .then(() => browser.click(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE))
-            .then(() => browser.waitForVisible(giftRegistryPage.BTN_EVENT_CONFIRM))
-            .then(() => browser.click(giftRegistryPage.BTN_EVENT_CONFIRM))
-            .then(() => browser.waitForVisible(giftRegistryPage.REGISTRY_HEADING))
-            .then(() => browser.getText(giftRegistryPage.REGISTRY_HEADING))
-            .then(eventTitle => assert.equal(eventTitle, giftRegistryTitle[locale]))
-    );
+    after(() => {
+        return giftRegistryPage.giftRegistryCleanUp()
+    });
 
     it('Should go to the event info page in gift registry', () =>
         browser.click(giftRegistryPage.BTN_NAV_EVENT)
@@ -399,19 +363,9 @@ describe('Gift Registry Navigation', () => {
         );
     }
 
-
     it('Should go to the purchases page in gift registry', () =>
         browser.click(giftRegistryPage.BTN_NAV_PURCHASES)
             .then(() => browser.getText(giftRegistryPage.REGISTRY_NO_PURCHASES_MSG))
             .then(text => assert.equal(text, purchasesNoProductsFound))
     );
-
-
-    it('should delete all the gift registry events', () => {
-        return giftRegistryPage.navigateTo()
-            .then(() => browser.waitForVisible(giftRegistryPage.BTN_CREATE_REGISTRY))
-            .then(() => giftRegistryPage.emptyAllGiftRegistries())
-            .then(() => browser.isExisting(giftRegistryPage.LINK_REMOVE))
-            .then(doesExist => assert.isFalse(doesExist));
-    });
 });

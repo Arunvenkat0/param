@@ -4,12 +4,9 @@ import {assert} from 'chai';
 import {config} from '../webdriver/wdio.conf';
 import * as giftRegistryPage from '../pageObjects/giftRegistry';
 import * as testData from '../pageObjects/testData/main';
-import * as loginForm from '../pageObjects/helpers/forms/login';
-import * as navHeader from '../pageObjects/navHeader';
 import * as customers from '../pageObjects/testData/customers';
 import * as productDetailPage from '../pageObjects/productDetail';
 import * as common from '../pageObjects/helpers/common';
-
 import * as productQuickViewPage from '../pageObjects/productQuickView';
 
 let locale = config.locale;
@@ -77,33 +74,12 @@ describe('Edit details of item in gift registry', () => {
                 eventFormShippingData.states_state = address.stateCode;
             }
         })
-        .then(() => giftRegistryPage.navigateTo())
-        .then(() => loginForm.loginAsDefaultCustomer(locale))
-        .then(() => browser.waitForVisible(giftRegistryPage.BTN_CREATE_REGISTRY))
-        .then(() => giftRegistryPage.emptyAllGiftRegistries())
-        .then(() => browser.click(giftRegistryPage.BTN_CREATE_REGISTRY))
-        .then(() => browser.waitForVisible(giftRegistryPage.FORM_REGISTRY))
+        .then(() => giftRegistryPage.createGiftRegistry(locale, eventFormData, eventFormShippingData))
     );
 
-    after(() =>
-        navHeader.logout()
-    );
-
-    it('should create a new gift registry', () =>
-        giftRegistryPage.fillOutEventForm(eventFormData)
-            .then(() => browser.click(giftRegistryPage.BTN_EVENT_SET_PARTICIPANTS))
-            .then(() => browser.waitForVisible(giftRegistryPage.USE_PRE_EVENT))
-            .then(() => giftRegistryPage.fillOutEventShippingForm(eventFormShippingData))
-            .then(() => browser.waitForValue('[name*=addressBeforeEvent_phone]'))
-            .then(() => browser.click(giftRegistryPage.USE_PRE_EVENT))
-            .then(() => browser.waitForVisible(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE))
-            .then(() => browser.click(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE))
-            .then(() => browser.waitForVisible(giftRegistryPage.BTN_EVENT_CONFIRM))
-            .then(() => browser.click(giftRegistryPage.BTN_EVENT_CONFIRM))
-            .then(() => browser.waitForVisible(giftRegistryPage.REGISTRY_HEADING))
-            .then(() => browser.getText(giftRegistryPage.REGISTRY_HEADING))
-            .then(eventTitle => assert.equal(eventTitle, giftRegistryTitle[locale]))
-    );
+    after(() => {
+        return giftRegistryPage.giftRegistryCleanUp()
+    });
 
     it('should add a product to the gift registry', () =>
         browser.url(productResourcePath)
@@ -174,12 +150,4 @@ describe('Edit details of item in gift registry', () => {
             //.then(() => browser.getValue(giftRegistryPage.DESIRED_QUANTITY))
             //.then(quantity => assert.equal(quantity, updatedProductAttributes.quantity))
     );
-
-    it('should delete all the gift registry events', () => {
-        return giftRegistryPage.navigateTo()
-            .then(() => browser.waitForVisible(giftRegistryPage.BTN_CREATE_REGISTRY))
-            .then(() => giftRegistryPage.emptyAllGiftRegistries())
-            .then(() => browser.isExisting(giftRegistryPage.LINK_REMOVE))
-            .then(doesExist => assert.isFalse(doesExist));
-    });
 });
