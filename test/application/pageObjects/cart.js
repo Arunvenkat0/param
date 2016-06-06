@@ -36,6 +36,8 @@ export const LAST_VISITED_ITEMS = '.last-visited .search-result-items .grid-tile
 export const LAST_VISITED_ITEM_NAMES = `${LAST_VISITED_ITEMS} .product-name`;
 export const LAST_VISITED_ITEM_PRICES = `${LAST_VISITED_ITEMS} .product-sales-price`;
 export const LAST_VISITED_ITEM_IMAGES = `${LAST_VISITED_ITEMS} .product-image .thumb-link [src]`;
+export const AVAILABILITY_MESSAGE_1 ='.item-quantity-details .is-in-stock'
+export const AVAILABILITY_MESSAGE_2 ='.item-delivery-options .is-in-stock'
 
 const basePath = '/cart';
 

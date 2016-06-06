@@ -16,7 +16,6 @@
 		<iselse/>
 			<isset name="product" value="${lineItem.product}" scope="page" />
 			<isset name="quantity" value="${pdict.Basket.getAllProductQuantities().get(lineItem.product).value}" scope="page" />
-			<isinclude template="checkout/cart/cartavailability" />
 		</isif>
 	</isif>
 </div>
