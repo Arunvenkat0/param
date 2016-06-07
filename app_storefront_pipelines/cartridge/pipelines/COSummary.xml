@@ -283,8 +283,13 @@
           <transition target-connector="in"/>
           <segment>
             <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition/>
+            <node>
               <call-node start-name-ref="Account-CreateAccount"/>
-              <node-display x="0" y="2"/>
+              <node-display x="0" y="1"/>
               <branch basename="b2" source-connector="error">
                 <transition target-connector="in2" target-path="../+1">
                   <transition-display>
