@@ -51,6 +51,13 @@ export function clickAddToCartButton() {
         .then(() => browser.waitForVisible(MINI_CART));
 }
 
+export function clickAddToWishListButton() {
+    return browser.waitForVisible('.loader-bg', 500, true)
+        .waitForEnabled(BTN_ADD_TO_WISHLIST)
+        .click(BTN_ADD_TO_WISHLIST)
+        .then(() => browser.waitForVisible('table.item-list'));
+}
+
 /**
  * Retrieves the img src values of the thumbnail images
  *
