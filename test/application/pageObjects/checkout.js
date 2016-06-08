@@ -40,6 +40,7 @@ export const SELECT_ADDRESS = '[name*="singleshipping_addressList"]';
 export const SELECT_CREDITCARD = '[name*=creditCardList]';
 export const USE_AS_BILLING_ADDR = '[name*="shippingAddress_useAsBillingAddress"]';
 export const CHECK_BOX_SAVE_THIS_CARD = '#dwfrm_billing_paymentMethods_creditCard_saveCard';
+export const SHIPPEDADDRESS = '.order-shipments .address div:nth-child(2)';
 
 const basePath = '/checkout';
 

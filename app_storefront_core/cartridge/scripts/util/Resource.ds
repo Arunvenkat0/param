@@ -41,6 +41,7 @@ ResourceHelper.getResources = function(pageContext) {
         // Checkout
         SHIP_QualifiesFor                 : Resource.msg('shipment.qualifiesfor', 'checkout', null),
         CC_LOAD_ERROR                     : Resource.msg('billing.creditcardloaderror', 'checkout', null),
+        COULD_NOT_SAVE_ADDRESS            : Resource.msg('multishippingaddresses.couldnotsaveaddress', 'checkout', null),
 
         // Registry resources
         REG_ADDR_ERROR                    : Resource.msg('global.couldntloadaddress', 'locale', null),

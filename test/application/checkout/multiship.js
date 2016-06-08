@@ -10,7 +10,7 @@ import {config} from '../webdriver/wdio.conf';
 import * as customers from '../pageObjects/testData/customers';
 import * as checkoutPage from '../pageObjects/checkout';
 
-describe('Multi Shipping', () => {
+describe('Multi Shipping - Registered User', () => {
     let login = 'testuser1@demandware.com';
     let billingFormData = {};
     let locale = config.locale;

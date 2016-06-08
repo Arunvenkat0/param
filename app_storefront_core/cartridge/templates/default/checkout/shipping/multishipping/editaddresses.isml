@@ -17,6 +17,8 @@
 		class="required-indicator">&#8226; <em>${Resource.msg('global.requiredfield','locale',null)}</em></span>
 </h1>
 
+<h3 class="error" id="multiaddresserror"/>
+
 <form method="post" action="${URLUtils.httpsContinue()}" id="edit-address-form" class="form-horizontal address" name="${pdict.CurrentForms.multishipping.editAddress.htmlName}">
 	<fieldset>
 		<isif condition="${pdict.Status != null && pdict.Status.isError()}">
