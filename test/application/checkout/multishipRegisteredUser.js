@@ -23,6 +23,8 @@ describe('Multi Shipping - Registered User - check out with New Addresses', () =
     let login = 'testuser1@demandware.com';
     let locale = config.locale;
     const thankYouMessage = 'Thank you for your order.';
+    const homeAddress = '(Home) 104 Presidential Way, Woburn, MA, 01801';
+    const workAddress = '(Work) 91 Middlesex Tpke, Burlington, MA, 01803';
     let shipmentText1 = Resource.msgf('multishippingshipments.shipment','checkout', null, 1);
     let shipmentText2 = Resource.msgf('multishippingshipments.shipment','checkout', null, 2);
     let shipmentText3 = Resource.msgf('multishippingshipments.shipment','checkout', null, 3);
@@ -153,8 +155,8 @@ describe('Multi Shipping - Registered User - check out with New Addresses', () =
     );
 
     it('should select an existing address from user profile', () =>
-        browser.selectByIndex(multiShipPage.SELECT_ADDRESS_LIST_3, 1)
-            .then(() => browser.selectByIndex(multiShipPage.SELECT_ADDRESS_LIST_4, 2))
+        browser.selectByVisibleText(multiShipPage.SELECT_ADDRESS_LIST_3, homeAddress)
+            .then(() => browser.selectByVisibleText(multiShipPage.SELECT_ADDRESS_LIST_4, workAddress))
 
     );
 
