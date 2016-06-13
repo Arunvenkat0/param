@@ -3,6 +3,6 @@
     <name>SiteGenesis</name>
     <currency>USD</currency>
     <taxation>net</taxation>
-    <custom-cartridges>sitegenesis_storefront_pipelines:sitegenesis_storefront_core</custom-cartridges>
+    <custom-cartridges>sitegenesis_storefront_controllers:sitegenesis_storefront_core</custom-cartridges>
 </site>
 
