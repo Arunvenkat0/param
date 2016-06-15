@@ -7,6 +7,7 @@ As a registered user, check out with multishipping
 - with edit address after add
 - with edit existing address
 - toggle shipping methods
+- should save the newly added address in user profile
  */
 import {assert} from 'chai';
 import * as multiShipPage from '../pageObjects/multiship';
@@ -124,7 +125,11 @@ describe('Multi Shipping - Registered User - check out with New Addresses', () =
         .then(() => multiShipPage.navigateTo())
     );
 
-    after(() => navHeader.logout());
+    after(() => addressPage.removeAddresses()
+        .then(() => browser.getText(addressPage.TITLE_ADDRESS_SELECTOR))
+        .then(titlesLeft => assert.deepEqual(titlesLeft.sort(), ['Home', 'Work']))
+        .then(() => navHeader.logout())
+    )
 
     it('should display multi shipping page after clicking on multi shipping button', () =>
         browser.waitForVisible(multiShipPage.BTN_CHECKOUT_MULTI_SHIP)
@@ -133,6 +138,7 @@ describe('Multi Shipping - Registered User - check out with New Addresses', () =
             .then(exists => assert.equal(exists, true))
     );
 
+    // TODO: will add assert after RAP-4954 is fixed
     it('should be able to add two new addresses for the first two items in Cart', () =>
         browser.click(multiShipPage.SPAN_EDIT_ADDRESS1)
             .then(() => browser.waitForVisible(multiShipPage.UI_DIALOG_FORM))
@@ -142,6 +148,7 @@ describe('Multi Shipping - Registered User - check out with New Addresses', () =
             .then(() => browser.click(multiShipPage.SPAN_EDIT_ADDRESS2))
             .then(() => browser.waitForVisible(multiShipPage.UI_DIALOG_FORM))
             .then(() => multiShipPage.fillAddressDialog(address2))
+            .then(() => multiShipPage.checkAddToAddressBook())
             .then(() => browser.click(multiShipPage.BTN_SAVE_POPUP))
             .then(() => browser.waitForVisible(multiShipPage.UI_DIALOG_FORM, 500, true))
     );
@@ -209,6 +216,7 @@ describe('Multi Shipping - Registered User - check out with New Addresses', () =
             .then(() => browser.isEnabled(multiShipPage.BTN_CHECKOUT_CONTINUE))
             .then(enabled => assert.isTrue(enabled))
     );
+
     it('should place order successfully and confirm shipment with four different addresses', () =>
         browser.click(multiShipPage.BTN_CHECKOUT_CONTINUE)
             .then(() => browser.waitForVisible(multiShipPage.CHECKOUT_STEP_FOUR))
@@ -225,5 +233,10 @@ describe('Multi Shipping - Registered User - check out with New Addresses', () =
             })
     );
 
+    it('should find the new address saved in user profile', () =>
+        addressPage.navigateTo()
+            .then(() => addressPage.getAddressTitles())
+            .then(addresses => (assert.isTrue(addresses.indexOf('Hong Kong') > -1)))
+    )
 })
 

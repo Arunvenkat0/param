@@ -3,6 +3,7 @@
 import * as testData from './testData/main';
 import * as productDetailPage from './productDetail';
 import * as formHelpers from '../pageObjects/helpers/forms/common';
+import * as common from './helpers/common';
 
 export const BTN_CHECKOUT_CONTINUE = 'button[name*=save]';
 export const BTN_CHECKOUT_MULTI_SHIP = '.shiptomultiplebutton';
@@ -37,6 +38,7 @@ export const BTN_GUEST_CHECKOUT2 = '"]';
 export const SPAN_EDIT_ADDRESS1 = '.item-list tr:nth-of-type(1) .shippingaddress .edit-address span';
 export const SPAN_EDIT_ADDRESS2 = '.item-list tr:nth-of-type(2) .shippingaddress .edit-address span';
 export const SPAN_EDIT_ADDRESS4 = '.item-list tr:nth-of-type(4) .shippingaddress .edit-address span';
+export const BTN_ADDTOADDRESSBOOK ='[name*=addToAddressBook]';
 
 const basePath = '/checkout';
 
@@ -44,6 +46,10 @@ testData.load();
 
 export function navigateTo () {
     return browser.url(basePath);
+}
+
+export function checkAddToAddressBook () {
+    return common.clickCheckbox(BTN_ADDTOADDRESSBOOK);
 }
 
 export function addProductVariationMasterToCart (num1, num2, num3) {
