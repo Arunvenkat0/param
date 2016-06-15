@@ -139,7 +139,10 @@ function initPaymentEvents() {
     $('.add-card').on('click', function (e) {
         e.preventDefault();
         dialog.open({
-            url: $(e.target).attr('href')
+            url: $(e.target).attr('href'),
+            options: {
+                open: initializePaymentForm
+            }
         });
     });
 
@@ -207,6 +210,15 @@ function initLoginPage() {
             }
         });
     });
+}
+
+
+function initializePaymentForm() {
+    $('#CreditCardForm').on('click', '.cancel-button', function (e) {
+        e.preventDefault();
+        dialog.close();
+    });
+
 }
 /**
  * @private
