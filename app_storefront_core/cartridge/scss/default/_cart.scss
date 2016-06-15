@@ -7,7 +7,11 @@
 	}
 	td {
 		box-sizing: border-box;
+		display: block;
 		padding: 5px;
+		@media screen and (min-width: 768px) {
+			display: table-cell;
+		}
 	}
 	.cart-row {
 		display: flex;
