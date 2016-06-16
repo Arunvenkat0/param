@@ -35,8 +35,10 @@ export function fillOutCreditCardForm (creditCardData) {
 }
 
 export function deleteAllCreditCards () {
+    let numOfCCToRemove = 0;
     return browser.elements(BTN_DELETE_CREDIT_CARD)
         .then(removeLinks => {
+            numOfCCToRemove = removeLinks.value.length;
             return removeLinks.value.reduce(removeCreditCard => {
                 return removeCreditCard.then(() => browser.click(BTN_DELETE_CREDIT_CARD)
                     .then(() => browser.waitUntil(() =>
@@ -47,6 +49,11 @@ export function deleteAllCreditCards () {
                             )
                     ))
                     .then(() => browser.alertAccept())
+                    .waitUntil(() => {
+                        return browser.elements(BTN_DELETE_CREDIT_CARD)
+                            .then(rows => rows.value.length === numOfCCToRemove -1);
+                    })
+                    .then(() => numOfCCToRemove -= 1)
                 );
             }, Promise.resolve());
         });
