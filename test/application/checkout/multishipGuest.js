@@ -92,6 +92,18 @@ describe('Multi Shipping - Guest User', () => {
             .then(exists => assert.equal(exists, true))
     );
 
+    it('should be able to cancel the Add New Address Form', () =>
+        browser.click(multiShipPage.SPAN_EDIT_ADDRESS1)
+            .then(() => browser.waitForVisible(multiShipPage.UI_DIALOG_FORM))
+            .then(() => browser.click(multiShipPage.BTN_CANCEL_ADD_ADDRESS))
+            .then(() => browser.waitForVisible(multiShipPage.UI_DIALOG_FORM, 500, true))
+            .isVisible(multiShipPage.UI_DIALOG_FORM)
+            .then(visible => assert.isFalse(visible))
+            .then(() => browser.waitForVisible(multiShipPage.SPAN_EDIT_ADDRESS1))
+            .isVisible(multiShipPage.SPAN_EDIT_ADDRESS1)
+            .then(visible => assert.isTrue(visible))
+    )
+
     it('should display pop up for entering an address after clicking on the first "add/edit address" span.', () =>
         browser.click(multiShipPage.SPAN_EDIT_ADDRESS1)
             .then(() => browser.waitForVisible(multiShipPage.UI_DIALOG_FORM))
