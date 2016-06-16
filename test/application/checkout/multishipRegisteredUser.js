@@ -153,7 +153,7 @@ describe('Multi Shipping - Registered User - check out with New Addresses', () =
             .then(() => browser.waitForVisible(multiShipPage.UI_DIALOG_FORM, 500, true))
     );
 
-    it('should be able to cancel the "Edit existing Address Form', () =>
+    it('should be able to cancel the Edit existing Address Form', () =>
         browser.click(multiShipPage.SPAN_EDIT_ADDRESS1)
             .then(() => browser.waitForVisible(multiShipPage.UI_DIALOG_FORM))
             .then(() => browser.click(multiShipPage.BTN_CANCEL_ADD_ADDRESS))
