@@ -42,10 +42,24 @@ describe('Payment Settings', () => {
             .then(visible => assert.isTrue(visible))
     );
 
-    it('should fill out form to add an Amex Card', () => {
+    it('should click the cancel button and close the form', () =>
+        browser.click(paymentSettingsPage.BTN_CANCEL)
+            .then(() => browser.waitForVisible(paymentSettingsPage.FORM_CREDIT_CARD, 500, true))
+            .isVisible(paymentSettingsPage.FORM_CREDIT_CARD)
+            .then(visible => assert.isFalse(visible))
+            .then(() => browser.waitForVisible(paymentSettingsPage.LINK_ADD_CREDIT_CARD))
+            .then(() => browser.isVisible(paymentSettingsPage.LINK_ADD_CREDIT_CARD))
+            .then(visible => assert.isTrue(visible))
+    );
+
+    it('should bring up the new credit card and fill out form to add an Amex Card', () => {
         let expiration = testData.creditCard1.yearIndex;
         let deleteCard = Resource.msg('account.paymentinstrumentlist.deletecard', 'account', null);
-        return paymentSettingsPage.fillOutCreditCardForm(amexCardData)
+        return browser.click(paymentSettingsPage.LINK_ADD_CREDIT_CARD)
+            .then(() => browser.waitForVisible(paymentSettingsPage.FORM_CREDIT_CARD))
+            .then(() => browser.isVisible(paymentSettingsPage.FORM_CREDIT_CARD))
+            .then(visible => assert.isTrue(visible))
+            .then(() => paymentSettingsPage.fillOutCreditCardForm(amexCardData))
             .then(() => browser.click(paymentSettingsPage.BTN_CREATE_CARD))
             .then(() => browser.waitForVisible(paymentSettingsPage.AMEX_CREDIT_CARD))
             .then(() => browser.getText(paymentSettingsPage.AMEX_CREDIT_CARD))

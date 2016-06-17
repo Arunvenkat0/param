@@ -5,6 +5,7 @@ import * as formHelpers from './helpers/forms/common';
 
 export const AMEX_CREDIT_CARD = '[class*=Amex]';
 export const BTN_DELETE_AMEX_CARD = '.Amex .delete';
+export const BTN_CANCEL = '.cancel-button';
 export const BTN_CREATE_CARD = '#applyBtn';
 export const BTN_DELETE_CREDIT_CARD = '[class*=delete]';
 export const CREDIT_CARD_SELECTOR = '.payment-list li:nth-of-type(1)';
