@@ -8,6 +8,7 @@ import * as productDetailPage from '../pageObjects/productDetail';
 import * as productQuickViewPage from '../pageObjects/productQuickView';
 import * as testData from '../pageObjects/testData/main';
 import * as products from '../pageObjects/testData/products';
+import * as Resource from '../../mocks/dw/web/Resource';
 
 describe('Cart - Simple', () => {
     let locale = config.locale;
@@ -91,6 +92,15 @@ describe('Cart - Simple', () => {
             .getItemList()
             .then(rows => assert.equal(1, rows.value.length))
     );
+
+    it('should not show availability in two places', () => { 
+        let availabilityMessage = Resource.msg('global.instock','locale',null);
+        return browser.waitForVisible(cartPage.AVAILABILITY_MESSAGE_1)
+            .then(() => browser.getText(cartPage.AVAILABILITY_MESSAGE_1))
+            .then(value => assert.equal(value,availabilityMessage))
+            .then(() => browser.isExisting(cartPage.AVAILABILITY_MESSAGE_2))
+            .then(doesExist => assert.isFalse(doesExist))
+    });
 
     it('should display the correct name', () =>
         cartPage
