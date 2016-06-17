@@ -2,7 +2,7 @@
 
 exports.config = {
     user: 'dw-sitegenesis',
-    key: '3fbb01da-379b-4738-8421-5efa0cc51c9f',
+    key: process.env.SAUCELABS_KEY,
     host: 'ondemand.saucelabs.com',
     port: '80',
     framework: 'mocha',
