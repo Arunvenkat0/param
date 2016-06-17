@@ -39,6 +39,7 @@ export const SPAN_EDIT_ADDRESS1 = '.item-list tr:nth-of-type(1) .shippingaddress
 export const SPAN_EDIT_ADDRESS2 = '.item-list tr:nth-of-type(2) .shippingaddress .edit-address span';
 export const SPAN_EDIT_ADDRESS4 = '.item-list tr:nth-of-type(4) .shippingaddress .edit-address span';
 export const BTN_ADDTOADDRESSBOOK ='[name*=addToAddressBook]';
+export const BTN_CANCEL_ADD_ADDRESS = 'button[name*=cancel]';
 
 const basePath = '/checkout';
 
