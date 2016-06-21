@@ -18,8 +18,8 @@ importPackage( dw.order );
 importPackage( dw.web );
 importPackage( dw.customer );
 
-var accountUtils = require ('app_storefront_core/cartridge/scripts/account/Utils');
-var checkoutUtils = require('app_storefront_core/cartridge/scripts/checkout/Utils');
+importScript("account/Utils.js");//var accountUtils = require ('app_storefront_core/cartridge/scripts/account/Utils');
+importScript("checkout/Utils.ds");//var checkoutUtils = require('app_storefront_core/cartridge/scripts/checkout/Utils');
 
 function execute( args : PipelineDictionary ) : Number {
 
@@ -47,7 +47,7 @@ function execute( args : PipelineDictionary ) : Number {
 	if (addToCustomerAddressBook != null && addToCustomerAddressBook == true){
 		if (referenceAddress == null){
 			// Add address to address book
-			var id : String = accountUtils.determineUniqueAddressID(formAddress.city, customerAddressBook);
+			var id : String = determineUniqueAddressID(formAddress.city, customerAddressBook);
 			customerAddress = customerAddressBook.createAddress(id);
 			formAddress.ID = id;
 			formAddress.referenceAddressUUID = customerAddress.getUUID();
@@ -59,7 +59,7 @@ function execute( args : PipelineDictionary ) : Number {
 		}
 
 		if (customerAddress != null){
-			var helperAddress : Object = new checkoutUtils.ShippingAddress();
+			var helperAddress : Object = new ShippingAddress();
 			helperAddress.copyFrom(formAddress);
 			helperAddress.copyTo(customerAddress);
 		}
@@ -68,11 +68,11 @@ function execute( args : PipelineDictionary ) : Number {
 	// Handle session address book update process
 	if (referenceAddress == null){
 		// Add Address
-		sessionAddressBook = checkoutUtils.addAddressToJSON(sessionAddressBook, formAddress);
+		sessionAddressBook = addAddressToJSON(sessionAddressBook, formAddress);
 	} else {
 		// Update Address
 		formAddress.UUID = referenceAddress.UUID;
-		sessionAddressBook = checkoutUtils.updateAddressInJSON(sessionAddressBook, formAddress);
+		sessionAddressBook = updateAddressInJSON(sessionAddressBook, formAddress);
 	}
 
 	basket.custom.sessionAddressBook = sessionAddressBook;
