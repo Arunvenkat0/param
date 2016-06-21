@@ -22,24 +22,22 @@ var guard = require('~/cartridge/scripts/guard');
  */
 function show() {
 
-    var Product = app.getModel('Product');
-    var product = Product.get(params.pid.stringValue);
-    product = getSelectedProduct(product);
+    const Product = app.getModel('Product');
+    let product = Product.get(params.pid.stringValue);
+    const currentVariationModel = product.updateVariationSelection(params);
+    product = product.isVariationGroup() ? product : getSelectedProduct(product);
 
     if (product.isVisible()) {
         require('~/cartridge/scripts/meta').update(product);
-
-        var productView = app.getView('Product', {
+        app.getView('Product', {
             product: product,
             DefaultVariant: product.getVariationModel().getDefaultVariant(),
             CurrentOptionModel: product.updateOptionSelection(params),
-            CurrentVariationModel: product.updateVariationSelection(params)
-        });
-
-        productView.render(product.getTemplate() || 'product/product');
+            CurrentVariationModel: currentVariationModel
+        }).render(product.getTemplate() || 'product/product');
     } else {
         // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
-        // remote includes which the WA won't resolve.
+        // remote includes which the Web Adapter won't resolve.
         response.setStatus(410);
         app.getView().render('error/notfound');
     }
@@ -55,19 +53,16 @@ function show() {
  */
 function detail() {
 
-    var Product = app.getModel('Product');
-    var product = Product.get(params.pid.stringValue);
+    const Product = app.getModel('Product');
+    const product = Product.get(params.pid.stringValue);
 
     if (product.isVisible()) {
-        var currentVariationModel = product.updateVariationSelection(params);
-        var productView = app.getView('Product', {
+        app.getView('Product', {
             product: product,
             DefaultVariant: product.getVariationModel().getDefaultVariant(),
             CurrentOptionModel: product.updateOptionSelection(params),
-            CurrentVariationModel: currentVariationModel
-        });
-
-        productView.render(product.getTemplate() || 'product/productdetail');
+            CurrentVariationModel: product.updateVariationSelection(params)
+        }).render(product.getTemplate() || 'product/productdetail');
     } else {
         // @FIXME Correct would be to set a 404 status code but that breaks the page as it utilizes
         // remote includes which the WA won't resolve
@@ -203,21 +198,20 @@ function productNavigation() {
  */
 function variation() {
 
-    var currentVariationModel;
-    var Product = app.getModel('Product');
-    var product = Product.get(params.pid.stringValue);
-    var resetAttributes = false;
+    const Product = app.getModel('Product');
+    const resetAttributes = false;
+    let product = Product.get(params.pid.stringValue);
 
-    product = getSelectedProduct(product);
-    currentVariationModel = product.updateVariationSelection(params);
+    let currentVariationModel = product.updateVariationSelection(params);
+    product = product.isVariationGroup() ? product : getSelectedProduct(product);
 
     if (product.isVisible()) {
         if (params.source.stringValue === 'bonus') {
-            var Cart = app.getModel('Cart');
-            var bonusDiscountLineItems = Cart.get().getBonusDiscountLineItems();
-            var bonusDiscountLineItem = null;
+            const Cart = app.getModel('Cart');
+            const bonusDiscountLineItems = Cart.get().getBonusDiscountLineItems();
+            let bonusDiscountLineItem = null;
 
-            for (var i = 0; i < bonusDiscountLineItems.length; i++) {
+            for (let i = 0; i < bonusDiscountLineItems.length; i++) {
                 if (bonusDiscountLineItems[i].UUID === params.bonusDiscountLineItemUUID.stringValue) {
                     bonusDiscountLineItem = bonusDiscountLineItems[i];
                     break;
@@ -366,16 +360,11 @@ function getSetItem() {
  * @returns {dw.catalog.Product} - Either input product or selected product variant if all attributes selected
  */
 function getSelectedProduct (product) {
-    var Product = app.getModel('Product');
-
-    if (product.isVariationGroup()) {
-        product = new Product(product.getMasterProduct());
-    }
-
-    var currentVariationModel = product.updateVariationSelection(params);
+    const currentVariationModel = product.updateVariationSelection(params);
+    let selectedVariant;
 
     if (currentVariationModel) {
-        var selectedVariant = currentVariationModel.getSelectedVariant();
+        selectedVariant = currentVariationModel.getSelectedVariant();
         if (selectedVariant) {
             product = app.getModel('Product').get(selectedVariant);
         }

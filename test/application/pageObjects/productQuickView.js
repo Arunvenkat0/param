@@ -31,7 +31,8 @@ export function getSizeTextByIdx(sizeIndex) {
 
 export function selectAttributesByVariant (variant) {
     return common.addProductVariationToBasket(variant, common.BTN_ADD_TO_CART)
-    .then(() => browser.waitForVisible(CONTAINER, 5000, true));
+        .then(() => browser.waitForVisible('.mini-cart-content', 5000, true))
+        .then(() => browser.waitForVisible(CONTAINER, 5000, true));
 }
 
 export function deselectAllAttributes() {
@@ -41,7 +42,7 @@ export function deselectAllAttributes() {
                 return deselect.then(() => {
                     return browser.element('.swatches .selected')
                         .click()
-                        .waitForVisible('.loader-bg', 500, true);
+                        .waitForVisible('.loader-bg', 5000, true);
                 });
             }, Promise.resolve());
         });
