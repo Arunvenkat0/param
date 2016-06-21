@@ -4,12 +4,14 @@
  * Requirement : Home and Work addresses for the test user should be available before test starts
  */
 import {assert} from 'chai';
+import {config} from '../webdriver/wdio.conf';
 import * as addressPage from '../pageObjects/addressBook';
-import * as testData from '../pageObjects/testData/main';
+import * as customers from '../pageObjects/testData/customers';
+import * as keyboard from '../pageObjects/helpers/keyboard';
 import * as loginForm from '../pageObjects/helpers/forms/login';
 import * as navHeader from '../pageObjects/navHeader';
-import {config} from '../webdriver/wdio.conf';
-import * as customers from '../pageObjects/testData/customers';
+import * as Resource from '../../mocks/dw/web/Resource';
+import * as testData from '../pageObjects/testData/main';
 
 
 describe('Address', () => {
@@ -132,4 +134,40 @@ describe('Address', () => {
             .then(titlesLeft => assert.deepEqual(titlesLeft.sort(), ['Home', 'Work']))
     );
 
+    describe('Form Validation', () => {
+        const longString = 'abcdefghijklmnopqrstuvwxyz';
+        const addressIdMaxLength = 20;
+        const expectedAddressIdValue = longString.substring(0, addressIdMaxLength);
+        const cityMinLength = 2;
+
+        before(() => {
+            return addressPage.navigateTo()
+                .then(() => browser.click(addressPage.LINK_CREATE_ADDRESS))
+                .waitForVisible('.ui-dialog');
+        });
+
+        it('should notify a user when a required field is not filled in', () =>
+            browser.click(addressPage.INPUT_ADDRESSID)
+                .keys(keyboard.TAB)
+                .isVisible(addressPage.ERROR_ADDRESSID)
+                .then(visible => assert.isTrue(visible))
+                .then(() => browser.getText(addressPage.ERROR_ADDRESSID))
+                .then(error => assert.equal(error, Resource.msg('validate.required', 'forms', null)))
+        );
+
+        it('should notify a user when a field\'s minimum character length is not reached or surpassed', () =>
+            browser.setValue(addressPage.INPUT_CITY, 'a')
+                .keys(keyboard.TAB)
+                .isVisible(addressPage.ERROR_CITY)
+                .then(visible => assert.isTrue(visible))
+                .then(() => browser.getText(addressPage.ERROR_CITY))
+                .then(error => assert.equal(error, Resource.msgf('validate.minlength', 'forms', null, cityMinLength)))
+        );
+
+        it('should prevent the addition of characters beyond the maxlength value', () =>
+            browser.setValue(addressPage.INPUT_ADDRESSID, longString)
+                .getValue(addressPage.INPUT_ADDRESSID)
+                .then(addressIdValue => assert.equal(addressIdValue, expectedAddressIdValue))
+        );
+    });
 });
