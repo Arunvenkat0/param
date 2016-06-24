@@ -85,9 +85,6 @@ var FormModel = AbstractModel.extend(
          * @returns {module:models/FormModel~FormModel} Returns the updated form.
          */
         copyFrom: function (updateObject, clear) {
-
-            clear = (typeof clear !== 'undefined') ? clear : false;
-
             if (clear) {
                 this.object.clear();
             }
@@ -196,7 +193,7 @@ var FormModel = AbstractModel.extend(
 FormModel.get = function (formReference) {
     var formInstance = null;
     if (typeof formReference === 'string') {
-        formInstance = require('~/cartridge/scripts/object').resolve(session.forms,formReference);
+        formInstance = require('~/cartridge/scripts/object').resolve(session.forms, formReference);
     } else if (typeof formReference === 'object') {
         formInstance = formReference;
     }
