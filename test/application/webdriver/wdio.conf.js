@@ -7,8 +7,9 @@ var _ = require('lodash');
 
 var opts = _.assign({}, getConfig({
     client: 'chrome',
-    url: 'https://staging-sitegenesis-dw.demandware.net/s/SiteGenesis',
+    url: 'https://staging-stage03-dw.demandware.net/s/SiteGenesis',
     suite: '*',
+    coverage : 'smoke',
     reporter: 'spec',
     timeout: 60000,
     locale: 'x_default'
@@ -52,5 +53,6 @@ exports.config = _.assign({
     reporterOptions: {
         outputDir: 'test/reports'
     },
-    locale: opts.locale
+    locale: opts.locale,
+    coverage: opts.coverage
 }, sauce);
