@@ -95,13 +95,18 @@ describe('Cart - Simple', () => {
             .then(rows => assert.equal(1, rows.value.length))
     );
 
-    it('should not show availability in two places', () => { 
+    //identified this is a regression test, will skip during smoke suite run
+    it('should not show availability in two places', () => {
+        if (config.coverage === 'smoke') {
+            return;
+        }
         let availabilityMessage = Resource.msg('global.instock','locale',null);
         return browser.waitForVisible(cartPage.AVAILABILITY_MESSAGE_1)
             .then(() => browser.getText(cartPage.AVAILABILITY_MESSAGE_1))
             .then(value => assert.equal(value,availabilityMessage))
             .then(() => browser.isExisting(cartPage.AVAILABILITY_MESSAGE_2))
             .then(doesExist => assert.isFalse(doesExist))
+
     });
 
     it('should display the correct name', () =>

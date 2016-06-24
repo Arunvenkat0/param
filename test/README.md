@@ -146,10 +146,12 @@ Before running a test, please reset the data by following these steps:
 The following options are supported on the command line:
 
 - `reporter`: (default: `spec`) see [all available options](http://mochajs.org/#reporters).
-- `timeout`: (default: `10000`)
+- `timeout`: (default: `60000`)
 - `suite`: (default: `all`)
-- `client`: (default: `phantomjs`) browser environment to run UI tests in
-- `url`: URL of storefront site to run UI tests against
+- `client`: (default: `chrome`) browser environment to run UI tests in
+- `url`: (default: 'https://staging-stage03-dw.demandware.net/s/SiteGenesis')
+- 'locale': (default:'x_default')
+- 'coverage': (default:'smoke')
 
 ### Test user accounts
 
