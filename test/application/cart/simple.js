@@ -95,9 +95,8 @@ describe('Cart - Simple', () => {
             .then(rows => assert.equal(1, rows.value.length))
     );
 
-    //identified this is a regression test, will skip during smoke suite run
     it('should not show availability in two places', () => {
-        if (config.coverage === 'smoke') {
+        if (config.coverage !== 'regression') {
             return;
         }
         let availabilityMessage = Resource.msg('global.instock','locale',null);
