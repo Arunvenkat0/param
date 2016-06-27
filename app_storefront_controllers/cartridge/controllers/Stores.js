@@ -32,7 +32,7 @@ function find() {
     var pageMeta = require('~/cartridge/scripts/meta');
     pageMeta.update(storeLocatorAsset);
 
-    app.getView('StoreLocator', {'isSearched': isSearched}).render('storelocator/storelocator');
+    app.getView('StoreLocator', {isSearched: isSearched}).render('storelocator/storelocator');
 }
 
 /**
