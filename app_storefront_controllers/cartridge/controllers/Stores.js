@@ -96,7 +96,7 @@ function findStores() {
         app.getView('StoreLocator', searchResult)
             .render('storelocator/storelocatorresults');
     } else {
-        app.getView('StoreLocator', {'isSearched': isSearched})
+        app.getView('StoreLocator', {isSearched: isSearched})
             .render('storelocator/storelocator');
     }
 
