@@ -5,7 +5,7 @@
 		<field formid="lastname" label="profile.lastname" type="string" mandatory="true" binding="lastName" max-length="50"/>
 		<field formid="email" label="profile.email" type="string" mandatory="true" regexp="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$" parse-error="validate.email" binding="email" max-length="50" value-error="profile.usernametaken"/>
 		<field formid="emailconfirm" label="profile.confirmemail" type="string" mandatory="true" regexp="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$" parse-error="validate.email" max-length="50" value-error="validate.equalTo"/>
-
+		<field formid="orderNo" label="" type="string" description="" mandatory="false" binding="orderNo" max-length="50"/>
 		<field formid="birthday" label="profile.dob"  description="profile.dobexample" type="date" mandatory="false" format="MM/dd/yyyy" max="now" binding="birthday" max-length="10"/>
 		<field formid="phone" label="profile.phone" type="string" description="profile.phoneexample" mandatory="false" binding="phoneHome" max-length="50"/>
 		<field formid="addtoemaillist" label="profile.addemailtolist"  type="boolean"/>

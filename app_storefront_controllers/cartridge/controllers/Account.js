@@ -11,10 +11,12 @@
 var Resource = require('dw/web/Resource');
 var URLUtils = require('dw/web/URLUtils');
 var Form = require('~/cartridge/scripts/models/FormModel');
+var OrderMgr = require('dw/order/OrderMgr');
 
 /* Script Modules */
 var app = require('~/cartridge/scripts/app');
 var guard = require('~/cartridge/scripts/guard');
+var Transaction = require('dw/system/Transaction');
 
 /**
  * Gets a ContentModel object that wraps the myaccount-home content asset,
@@ -342,11 +344,12 @@ function startRegister() {
 function registrationForm() {
     app.getForm('profile').handleAction({
         confirm: function () {
-            var email, emailConfirmation, profileValidation, password, passwordConfirmation, existingCustomer, Customer, target;
+            var email, emailConfirmation, orderNo, profileValidation, password, passwordConfirmation, existingCustomer, Customer, target;
 
             Customer = app.getModel('Customer');
             email = app.getForm('profile.customer.email').value();
             emailConfirmation = app.getForm('profile.customer.emailconfirm').value();
+            orderNo =  app.getForm('profile.customer.orderNo').value();
             profileValidation = true;
 
             if (email !== emailConfirmation) {
@@ -371,6 +374,18 @@ function registrationForm() {
 
             if (profileValidation) {
                 profileValidation = Customer.createAccount(email, password, app.getForm('profile'));
+
+                if (orderNo) {
+                    var orders = OrderMgr.searchOrders('orderNo={0} AND status!={1}', 'creationDate desc', orderNo,
+                            dw.order.Order.ORDER_STATUS_REPLACED);
+                    if (orders) {
+                        var foundOrder = orders.next();
+                        Transaction.wrap(function(){
+                            foundOrder.customer = profileValidation;
+                        })
+                        session.custom.TargetLocation = URLUtils.https('Account-Show','Registration','true');
+                    }
+                }
             }
 
             if (!profileValidation) {

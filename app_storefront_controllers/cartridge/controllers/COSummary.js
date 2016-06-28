@@ -86,6 +86,7 @@ function showConfirmation(order) {
         customerForm.setValue('firstname', order.billingAddress.firstName);
         customerForm.setValue('lastname', order.billingAddress.lastName);
         customerForm.setValue('email', order.customerEmail);
+        customerForm.setValue('orderNo', order.orderNo);
     }
 
     app.getForm('profile.login.passwordconfirm').clear();
