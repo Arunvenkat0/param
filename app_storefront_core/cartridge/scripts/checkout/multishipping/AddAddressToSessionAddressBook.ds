@@ -18,8 +18,8 @@ importPackage( dw.order );
 importPackage( dw.web );
 importPackage( dw.customer );
 
-importScript("account/Utils.js");//var accountUtils = require ('app_storefront_core/cartridge/scripts/account/Utils');
-importScript("checkout/Utils.ds");//var checkoutUtils = require('app_storefront_core/cartridge/scripts/checkout/Utils');
+importScript("account/Utils.js");//APP-41988 - var accountUtils = require ('app_storefront_core/cartridge/scripts/account/Utils');
+importScript("checkout/Utils.ds");//APP-41988 - var checkoutUtils = require('app_storefront_core/cartridge/scripts/checkout/Utils');
 
 function execute( args : PipelineDictionary ) : Number {
 
