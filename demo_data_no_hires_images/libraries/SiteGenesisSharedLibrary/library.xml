@@ -7155,31 +7155,31 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;img alt="Free shipping on orders over $150" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;img alt="Free shipping on orders over $150" src="images/homepage/home-promo-free-shipping.png?$staticlink$" /&gt;&#13;
 &lt;div class="home-bottom-center-text"&gt;&#13;
 &lt;h1&gt;Free&lt;/h1&gt;&#13;
 &lt;h2&gt;Ground Shipping&lt;/h2&gt;&#13;
 &lt;h3&gt;on orders of $150 or more&lt;/h3&gt;&#13;
 &lt;/div&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;img alt="Frais de port gratuits pour les commandes de plus de 150 €" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;img alt="Frais de port gratuits pour les commandes de plus de 150 €" src="images/homepage/home-promo-free-shipping.png?$staticlink$" /&gt;&#13;
 &lt;div class="home-bottom-center-text"&gt;&#13;
 &lt;h1&gt;Transport terrestre&lt;/h1&gt;&#13;
 &lt;h2&gt;gratuit&lt;/h2&gt;&#13;
 &lt;h3&gt;pour les commandes de plus de 150 euros&lt;/h3&gt;&#13;
 &lt;/div&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;img alt="Spedizione gratuita su ordini superiori a € 150" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;img alt="Spedizione gratuita su ordini superiori a € 150" src="images/homepage/home-promo-free-shipping.png?$staticlink$" /&gt;&#13;
 &lt;div class="home-bottom-center-text"&gt;&#13;
 &lt;h1&gt;Spedizione gratuita&lt;/h1&gt;&#13;
 &lt;h2&gt;via terra&lt;/h2&gt;&#13;
 &lt;h3&gt;per ordini pari o superiori a € 150&lt;/h3&gt;&#13;
 &lt;/div&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;img alt="$150 を超える注文で送料無料" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;img alt="$150 を超える注文で送料無料" src="images/homepage/home-promo-free-shipping.png?$staticlink$" /&gt;&#13;
 &lt;div class="home-bottom-center-text"&gt;&#13;
 &lt;h1&gt;無料&lt;/h1&gt;&#13;
 &lt;h2&gt;通常配送&lt;/h2&gt;&#13;
 &lt;h3&gt;¥15,000 を超えるご注文&lt;/h3&gt;&#13;
 &lt;/div&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;img alt="订单满 150 美元即享免费送货" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;img alt="订单满 150 美元即享免费送货" src="images/homepage/home-promo-free-shipping.png?$staticlink$" /&gt;&#13;
 &lt;div class="home-bottom-center-text"&gt;&#13;
 &lt;h1&gt;免费&lt;/h1&gt;&#13;
 &lt;h2&gt;陆路送货&lt;/h2&gt;&#13;
@@ -7210,7 +7210,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
         &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Flats&lt;/a&gt;&lt;/li&gt;&#13;
         &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Open Toe&lt;/a&gt;&lt;/li&gt;&#13;
     &lt;/ul&gt;&#13;
-&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Go to category: Women's Shoes"&gt;&lt;img alt="Women's Shoes" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Go to category: Women's Shoes"&gt;&lt;img alt="Women's Shoes" src="images/homepage/womensshoes.png?$staticlink$" /&gt;&lt;/a&gt;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;div id="home-promo-shop-shoes"&gt;&#13;
     &lt;h2&gt;Acheter des chaussures&lt;/h2&gt;&#13;
@@ -7219,7 +7219,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
         &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Ballerines&lt;/a&gt;&lt;/li&gt;&#13;
         &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Sandales&lt;/a&gt;&lt;/li&gt;&#13;
     &lt;/ul&gt;&#13;
-&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Aller à la catégorie : Chaussures Femmes"&gt;&lt;img alt="Chaussures Femmes" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Aller à la catégorie : Chaussures Femmes"&gt;&lt;img alt="Chaussures Femmes" src="images/homepage/womensshoes.png?$staticlink$" /&gt;&lt;/a&gt;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;div id="home-promo-shop-shoes"&gt;&#13;
     &lt;h2&gt;Acquista scarpe&lt;/h2&gt;&#13;
@@ -7228,7 +7228,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
         &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Basse&lt;/a&gt;&lt;/li&gt;&#13;
         &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Spuntate&lt;/a&gt;&lt;/li&gt;&#13;
     &lt;/ul&gt;&#13;
-&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Vai a categoria: Scarpe donna"&gt;&lt;img alt="Scarpe donna" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Vai a categoria: Scarpe donna"&gt;&lt;img alt="Scarpe donna" src="images/homepage/womensshoes.png?$staticlink$" /&gt;&lt;/a&gt;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;div id="home-promo-shop-shoes"&gt;&#13;
     &lt;h2&gt;シューズを購入&lt;/h2&gt;&#13;
@@ -7237,7 +7237,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
         &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;フラット&lt;/a&gt;&lt;/li&gt;&#13;
         &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;オープントゥ&lt;/a&gt;&lt;/li&gt;&#13;
     &lt;/ul&gt;&#13;
-&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="次のカテゴリに移動する: レディースシューズ"&gt;&lt;img alt="レディースシューズ" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="次のカテゴリに移動する: レディースシューズ"&gt;&lt;img alt="レディースシューズ" src="images/homepage/womensshoes.png?$staticlink$" /&gt;&lt;/a&gt;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;div id="home-promo-shop-shoes"&gt;&#13;
     &lt;h2&gt;购买鞋类&lt;/h2&gt;&#13;
@@ -7246,7 +7246,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
         &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;平底&lt;/a&gt;&lt;/li&gt;&#13;
         &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;露趾&lt;/a&gt;&lt;/li&gt;&#13;
     &lt;/ul&gt;&#13;
-&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="前往分类：女士鞋类"&gt;&lt;img alt="女士鞋类" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="前往分类：女士鞋类"&gt;&lt;img alt="女士鞋类" src="images/homepage/womensshoes.png?$staticlink$" /&gt;&lt;/a&gt;
 &lt;/div&gt;</custom-attribute>        </custom-attributes>
     </content>
 
@@ -7283,7 +7283,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
     &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Open Toe&lt;/a&gt;&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
 &#13;
-&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Go to Category: Women's Shoes"&gt;&lt;img alt="Women's Shoes" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Go to Category: Women's Shoes"&gt;&lt;img alt="Women's Shoes" src="images/homepage/womensshoes.png?$staticlink$" /&gt;&lt;/a&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h2&gt;Acheter des chaussures&lt;/h2&gt;&#13;
 &#13;
 &lt;ul&gt;&#13;
@@ -7292,7 +7292,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
     &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Sandales&lt;/a&gt;&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
 &#13;
-&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Aller à la catégorie : Chaussures Femmes"&gt;&lt;img alt="Chaussures Femmes" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Aller à la catégorie : Chaussures Femmes"&gt;&lt;img alt="Chaussures Femmes" src="images/homepage/womensshoes.png?$staticlink$" /&gt;&lt;/a&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;h2&gt;Acquista scarpe&lt;/h2&gt;&#13;
 &#13;
 &lt;ul&gt;&#13;
@@ -7301,7 +7301,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
     &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;Spuntate&lt;/a&gt;&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
 &#13;
-&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Vai a categoria: Scarpe donna"&gt;&lt;img alt="Scarpe donna" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="Vai a categoria: Scarpe donna"&gt;&lt;img alt="Scarpe donna" src="images/homepage/womensshoes.png?$staticlink$" /&gt;&lt;/a&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;h2&gt;シューズを購入&lt;/h2&gt;&#13;
 &#13;
 &lt;ul&gt;&#13;
@@ -7310,7 +7310,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
     &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;オープントゥ&lt;/a&gt;&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
 &#13;
-&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="次のカテゴリに移動する:レディースシューズ"&gt;&lt;img alt="レディースシューズ" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="次のカテゴリに移動する:レディースシューズ"&gt;&lt;img alt="レディースシューズ" src="images/homepage/womensshoes.png?$staticlink$" /&gt;&lt;/a&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;h2&gt;购买鞋类&lt;/h2&gt;&#13;
 &#13;
 &lt;ul&gt;&#13;
@@ -7319,7 +7319,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
     &lt;li&gt;&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$"&gt;露趾&lt;/a&gt;&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
 &#13;
-&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="前往分类：女士鞋类"&gt;&lt;img alt="女士鞋类" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/womensshoes.png" /&gt;&lt;/a&gt;</custom-attribute>
+&lt;a href="$url('Search-Show', 'cgid', 'womens-accessories-shoes')$" title="前往分类：女士鞋类"&gt;&lt;img alt="女士鞋类" src="images/homepage/womensshoes.png?$staticlink$" /&gt;&lt;/a&gt;</custom-attribute>
         </custom-attributes>
     </content>
 
@@ -7346,7 +7346,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text1"&gt;Suits&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;Shop Now&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-suit.jpg" alt="Mens Suits"/&gt;&#13;
+            &lt;img src="images/homepage/car-suit.jpg?$staticlink$" alt="Mens Suits"/&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide2"&gt;&#13;
@@ -7356,7 +7356,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text1"&gt;Perfect Companion&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;Shop Now&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwcfde1e36/homepage/car-accessories.jpg" alt="Perfect Companion"/&gt;&#13;
+            &lt;img src="images/homepage/car-accessories.jpg?$staticlink$" alt="Perfect Companion"/&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide3"&gt;&#13;
@@ -7366,7 +7366,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text1"&gt;Shoes&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;Shop Now&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw3904b03a/homepage/car-shoes.jpg" alt="Women's Shoes"/&gt;&#13;
+            &lt;img src="images/homepage/car-shoes.jpg?$staticlink$" alt="Women's Shoes"/&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide4"&gt;&#13;
@@ -7376,7 +7376,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text1"&gt;Dresses&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;Shop Now&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw0145214e/homepage/car-dresses.jpg" alt="Womens Dresses"/&gt;&#13;
+            &lt;img src="images/homepage/car-dresses.jpg?$staticlink$" alt="Womens Dresses"/&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide5"&gt;&#13;
@@ -7386,7 +7386,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text2"&gt;New Arrivals&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;Shop Now&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw27fbf28e/homepage/car-spring.jpg" alt="Spring Arrivals" /&gt;&#13;
+            &lt;img src="images/homepage/car-spring.jpg?$staticlink$" alt="Spring Arrivals" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
 &lt;/ul&gt;</custom-attribute>
@@ -7398,7 +7398,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text1"&gt;Costumes&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;Acheter maintenant&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-suit.jpg" alt="Costumes Homme" /&gt;&#13;
+            &lt;img src="images/homepage/car-suit.jpg?$staticlink$" alt="Costumes Homme" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide2"&gt;&#13;
@@ -7408,7 +7408,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text1"&gt;Compagnon idéal&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;Acheter maintenant&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwcfde1e36/homepage/car-accessories.jpg" alt="Compagnon idéal" /&gt;&#13;
+            &lt;img src="images/homepage/car-accessories.jpg?$staticlink$" alt="Compagnon idéal" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide3"&gt;&#13;
@@ -7418,7 +7418,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text1"&gt;Chaussures&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;Acheter maintenant&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw3904b03a/homepage/car-shoes.jpg" alt="Chaussures Femmes" /&gt;&#13;
+            &lt;img src="images/homepage/car-shoes.jpg?$staticlink$" alt="Chaussures Femmes" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide4"&gt;&#13;
@@ -7428,7 +7428,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text1"&gt;Robes&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;Acheter maintenant&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw0145214e/homepage/car-dresses.jpg" alt="Robes Femmes" /&gt;&#13;
+            &lt;img src="images/homepage/car-dresses.jpg?$staticlink$" alt="Robes Femmes" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide5"&gt;&#13;
@@ -7438,7 +7438,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text2"&gt;Nouveautés&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;Acheter maintenant&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw27fbf28e/homepage/car-spring.jpg" alt="Arrivages de printemps" /&gt;&#13;
+            &lt;img src="images/homepage/car-spring.jpg?$staticlink$" alt="Arrivages de printemps" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
 &lt;/ul&gt;</custom-attribute>
@@ -7450,7 +7450,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text1"&gt;Completi&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;Acquista ora&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-suit.jpg" alt="Completi uomo" /&gt;&#13;
+            &lt;img src="images/homepage/car-suit.jpg?$staticlink$" alt="Completi uomo" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide2"&gt;&#13;
@@ -7460,7 +7460,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text1"&gt;abbinamento perfetto&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;Acquista ora&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwcfde1e36/homepage/car-accessories.jpg" alt="Abbinamento perfetto" /&gt;&#13;
+            &lt;img src="images/homepage/car-accessories.jpg?$staticlink$" alt="Abbinamento perfetto" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide3"&gt;&#13;
@@ -7470,7 +7470,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text1"&gt;Scarpe&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;Acquista ora&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw3904b03a/homepage/car-shoes.jpg" alt="Scarpe donna" /&gt;&#13;
+            &lt;img src="images/homepage/car-shoes.jpg?$staticlink$" alt="Scarpe donna" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide4"&gt;&#13;
@@ -7480,7 +7480,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text1"&gt;Vestiti&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;Acquista ora&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw0145214e/homepage/car-dresses.jpg" alt="Vestiti donna" /&gt;&#13;
+            &lt;img src="images/homepage/car-dresses.jpg?$staticlink$" alt="Vestiti donna" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide5"&gt;&#13;
@@ -7490,7 +7490,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text2"&gt;Nuovi arrivi&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;Acquista ora&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw27fbf28e/homepage/car-spring.jpg" alt="Collezione primaverile" /&gt;&#13;
+            &lt;img src="images/homepage/car-spring.jpg?$staticlink$" alt="Collezione primaverile" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
 &lt;/ul&gt;</custom-attribute>
@@ -7502,7 +7502,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text1"&gt;スーツ&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;今すぐお買い物をする&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-suit.jpg" alt="メンズスーツ" /&gt;&#13;
+            &lt;img src="images/homepage/car-suit.jpg?$staticlink$" alt="メンズスーツ" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide2"&gt;&#13;
@@ -7512,7 +7512,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text1"&gt;最高の相性&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;今すぐお買い物をする&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwcfde1e36/homepage/car-accessories.jpg" alt="最高の相性" /&gt;&#13;
+            &lt;img src="images/homepage/car-accessories.jpg?$staticlink$" alt="最高の相性" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide3"&gt;&#13;
@@ -7522,7 +7522,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text1"&gt;シューズ&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;今すぐお買い物をする&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw3904b03a/homepage/car-shoes.jpg" alt="レディースシューズ" /&gt;&#13;
+            &lt;img src="images/homepage/car-shoes.jpg?$staticlink$" alt="レディースシューズ" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide4"&gt;&#13;
@@ -7532,7 +7532,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text1"&gt;ドレス&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;今すぐお買い物をする&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw0145214e/homepage/car-dresses.jpg" alt="レディースワンピース" /&gt;&#13;
+            &lt;img src="images/homepage/car-dresses.jpg?$staticlink$" alt="レディースワンピース" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide5"&gt;&#13;
@@ -7542,7 +7542,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text2"&gt;新着アイテム&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;今すぐお買い物をする&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw27fbf28e/homepage/car-spring.jpg" alt="春物入荷" /&gt;&#13;
+            &lt;img src="images/homepage/car-spring.jpg?$staticlink$" alt="春物入荷" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
 &lt;/ul&gt;</custom-attribute>
@@ -7554,7 +7554,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text1"&gt;西装&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;立即购买&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/car-suit.jpg" alt="男士西装" /&gt;&#13;
+            &lt;img src="images/homepage/car-suit.jpg?$staticlink$" alt="男士西装" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide2"&gt;&#13;
@@ -7564,7 +7564,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text1"&gt;完美伴侣&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;立即购买&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwcfde1e36/homepage/car-accessories.jpg" alt="完美伴侣" /&gt;&#13;
+            &lt;img src="images/homepage/car-accessories.jpg?$staticlink$" alt="完美伴侣" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide3"&gt;&#13;
@@ -7574,7 +7574,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text1"&gt;鞋类&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;立即购买&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw3904b03a/homepage/car-shoes.jpg" alt="女士鞋类" /&gt;&#13;
+            &lt;img src="images/homepage/car-shoes.jpg?$staticlink$" alt="女士鞋类" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide4"&gt;&#13;
@@ -7584,7 +7584,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text1"&gt;裙装&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;立即购买&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw0145214e/homepage/car-dresses.jpg" alt="女士连衣裙" /&gt;&#13;
+            &lt;img src="images/homepage/car-dresses.jpg?$staticlink$" alt="女士连衣裙" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
     &lt;li class="slide slide5"&gt;&#13;
@@ -7594,7 +7594,7 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
                 &lt;div class="banner-text2"&gt;新品&lt;/div&gt;&#13;
                 &lt;div class="banner-text3"&gt;立即购买&lt;/div&gt;&#13;
             &lt;/div&gt;&#13;
-            &lt;img src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dw27fbf28e/homepage/car-spring.jpg" alt="春季货品" /&gt;&#13;
+            &lt;img src="images/homepage/car-spring.jpg?$staticlink$" alt="春季货品" /&gt;&#13;
         &lt;/a&gt;&#13;
     &lt;/li&gt;&#13;
 &lt;/ul&gt;</custom-attribute>
@@ -7611,31 +7611,31 @@ Per utilizzare un certificato regalo, specifica il codice di 16 cifre nella pagi
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;img alt="Free Shipping on orders over $150" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;img alt="Free Shipping on orders over $150" src="images/homepage/home-promo-free-shipping.png?$staticlink$" /&gt;&#13;
 &lt;div class="home-bottom-center-text"&gt;&#13;
 &lt;h1&gt;Free&lt;/h1&gt;&#13;
 &lt;h2&gt;Ground Shipping&lt;/h2&gt;&#13;
 &lt;h3&gt;on orders of $150 or more&lt;/h3&gt;&#13;
 &lt;/div&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;img alt="Frais de port gratuits pour les commandes de plus de 150 €" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;img alt="Frais de port gratuits pour les commandes de plus de 150 €" src="images/homepage/home-promo-free-shipping.png?$staticlink$" /&gt;&#13;
 &lt;div class="home-bottom-center-text"&gt;&#13;
 &lt;h1&gt;Transport terrestre&lt;/h1&gt;&#13;
 &lt;h2&gt;gratuit&lt;/h2&gt;&#13;
 &lt;h3&gt;pour les commandes de plus de 150 euros&lt;/h3&gt;&#13;
 &lt;/div&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;img alt="Spedizione gratuita su ordini superiori a € 150" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;img alt="Spedizione gratuita su ordini superiori a € 150" src="images/homepage/home-promo-free-shipping.png?$staticlink$" /&gt;&#13;
 &lt;div class="home-bottom-center-text"&gt;&#13;
 &lt;h1&gt;Spedizione gratuita&lt;/h1&gt;&#13;
 &lt;h2&gt;via terra&lt;/h2&gt;&#13;
 &lt;h3&gt;per ordini pari o superiori a € 150&lt;/h3&gt;&#13;
 &lt;/div&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;img alt="¥15,000 を超える注文で送料無料" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;img alt="¥15,000 を超える注文で送料無料" src="images/homepage/home-promo-free-shipping.png?$staticlink$" /&gt;&#13;
 &lt;div class="home-bottom-center-text"&gt;&#13;
 &lt;h1&gt;無料&lt;/h1&gt;&#13;
 &lt;h2&gt;通常配送&lt;/h2&gt;&#13;
 &lt;h3&gt;¥15,000 を超えるご注文&lt;/h3&gt;&#13;
 &lt;/div&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;img alt="订单满 150 美元即可享免费送货" src="http://production.sitegenesis.dw.demandware.net/on/demandware.static/Sites-Site/Sites-Images-Library/default/dwa1fa5b94/homepage/home-promo-free-shipping.png" /&gt;&#13;
+            <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;img alt="订单满 150 美元即可享免费送货" src="images/homepage/home-promo-free-shipping.png?$staticlink$" /&gt;&#13;
 &lt;div class="home-bottom-center-text"&gt;&#13;
 &lt;h1&gt;免费&lt;/h1&gt;&#13;
 &lt;h2&gt;陆路送货&lt;/h2&gt;&#13;
