@@ -128,8 +128,20 @@
          <searchable-flag>false</searchable-flag>
          <exclusivity>no</exclusivity>
          <name xml:lang="x-default">5 Off Ties Promotion</name>
+         <name xml:lang="fr-FR">5RemiseCravates</name>
+         <name xml:lang="it-IT">Sconto € 5 sulle cravatte</name>
+         <name xml:lang="ja-JP">5OffTies</name>
+         <name xml:lang="zh-CN">优惠 5 美元的领带</name>
          <callout-msg xml:lang="x-default">$5 off Men's Ties</callout-msg>
+         <callout-msg xml:lang="fr-FR">Bénéficiez de 5 euros de remise sur les cravates pour hommes.</callout-msg>
+         <callout-msg xml:lang="it-IT">Sconto di € 5 sulle cravatte da uomo.</callout-msg>
+         <callout-msg xml:lang="ja-JP">メンズネクタイが 500 円引き。</callout-msg>
+         <callout-msg xml:lang="zh-CN">购买优惠 5 美元的男士领带</callout-msg>
          <details xml:lang="x-default">$5 off Men's Ties (with coupon)</details>
+         <details xml:lang="fr-FR">Bénéficiez de 5 euros de remise sur les cravates pour hommes (avec bon de réduction).</details>
+         <details xml:lang="it-IT">Sconto di € 5 sulle cravatte da uomo (con coupon).</details>
+         <details xml:lang="ja-JP">(クーポンのご利用で) メンズネクタイが 500 円引きになります。</details>
+         <details xml:lang="zh-CN">使用优惠券购买优惠 5 美元的男士领带。</details>
          <product-promotion-rule>
              <qualifying-products>
                  <included-products>
@@ -361,8 +373,20 @@
         <searchable-flag>false</searchable-flag>
         <exclusivity>no</exclusivity>
         <name xml:lang="x-default">PromotionTest_WithoutQualifying</name>
+        <name xml:lang="fr-FR">TestPromotionSansCritère</name>
+        <name xml:lang="it-IT">Test promozione senza qualificatore</name>
+        <name xml:lang="ja-JP">PromotionTestWithoutQualifier</name>
+        <name xml:lang="zh-CN">无限定项促销测试</name>
         <callout-msg xml:lang="x-default">Get 20% off of this tie.</callout-msg>
+        <callout-msg xml:lang="fr-FR">Bénéficiez de 20 % de remise sur cette cravate ou ce costume.</callout-msg>
+        <callout-msg xml:lang="it-IT">Sconto del 20% su questa cravatta o questo completo.</callout-msg>
+        <callout-msg xml:lang="ja-JP">このネクタイまたはスーツが 20% 割引。</callout-msg>
+        <callout-msg xml:lang="zh-CN">获得此领带或西装的 8 折优惠。</callout-msg>
         <details xml:lang="x-default">Buy a tie with 20% percent off.</details>
+        <details xml:lang="fr-FR">Achetez une cravate avec 20 % de remise.</details>
+        <details xml:lang="it-IT">Acquista una cravatta con uno sconto del 20%.</details>
+        <details xml:lang="ja-JP">ネクタイを 20% 割引でご購入いただけます。</details>
+        <details xml:lang="zh-CN">以 8 折优惠价购买领带。</details>
         <product-promotion-rule>
             <discounted-products>
                 <included-products>
@@ -1463,8 +1487,20 @@
         <searchable-flag>false</searchable-flag>
         <exclusivity>no</exclusivity>
         <name xml:lang="x-default">20%offOrderAmountOver200</name>
+        <name xml:lang="fr-FR">20%RemiseCommandeSup200</name>
+        <name xml:lang="it-IT">20% di sconto su ordini con importo superiore a € 200</name>
+        <name xml:lang="ja-JP">20%OffOrderAmountOver200</name>
+        <name xml:lang="zh-CN">订单满 200 美元享受 8 折优惠</name>
         <callout-msg xml:lang="x-default">Get 20% off Order Amount Over 200</callout-msg>
+        <callout-msg xml:lang="fr-FR">Bénéficiez de 20 % de remise pour toute commande supérieure à 200 euros.</callout-msg>
+        <callout-msg xml:lang="it-IT">Sconto del 20% su ordini di importo superiore a € 200.</callout-msg>
+        <callout-msg xml:lang="ja-JP">ご注文金額 20,000 円以上で 20% 割引。</callout-msg>
+        <callout-msg xml:lang="zh-CN">订单满 200 美元享受 8 折优惠</callout-msg>
         <details xml:lang="x-default">Get 20% off Order Amount Over 200</details>
+        <details xml:lang="fr-FR">Bénéficiez de 20 % de remise pour toutes les commandes supérieures à 200 euros.</details>
+        <details xml:lang="it-IT">Sconto del 20% su ordini superiori a € 200.</details>
+        <details xml:lang="ja-JP">ご注文金額が 20,000 円を超えると 20% 割引になります。</details>
+        <details xml:lang="zh-CN">订单满 200 美元享受 8 折优惠</details>
         <order-promotion-rule>
             <qualifying-products>
                 <included-products>
