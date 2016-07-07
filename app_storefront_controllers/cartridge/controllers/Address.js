@@ -198,7 +198,7 @@ exports.Add = guard.ensure(['get', 'https', 'loggedIn'], add);
 exports.Edit = guard.ensure(['get', 'https', 'loggedIn'], edit);
 /** The address form handler.
  * @see {@link module:controllers/Address~handleForm} */
-exports.Form = guard.ensure(['post', 'https', 'loggedIn'], handleForm);
+exports.Form = guard.ensure(['post', 'https', 'loggedIn', 'csrf'], handleForm);
 /** Sets the default address for the customer address book.
  * @see {@link module:controllers/Address~setDefault} */
 exports.SetDefault = guard.ensure(['get', 'https', 'loggedIn'], setDefault);

@@ -122,6 +122,23 @@ function wishListForm() {
             }
         },
         search: function () {
+            var CSRFProtection = require('dw/web/CSRFProtection');
+
+            if (!CSRFProtection.validateRequest()) {
+                if (request.httpParameterMap.format.stringValue === 'ajax') {
+                    app.getModel('Customer').logout();
+                    let r = require('~/cartridge/scripts/util/Response');
+                    r.renderJSON({
+                        error: 'CSRF Token Mismatch'
+                    });
+                } else {
+                    app.getModel('Customer').logout();
+                    app.getView().render('csrf/csrffailed');
+                }
+                shouldRedirectToShow = false;
+                return null;
+            }
+
             var ProductList = app.getModel('ProductList');
             var listType = require('dw/customer/ProductList').TYPE_WISH_LIST;
             var searchForm = app.getForm('wishlist.search');
@@ -271,6 +288,6 @@ exports.ShowOther = guard.ensure(['get', 'https'], showOther);
 
 // form handlers
 /** @see module:controllers/Wishlist~LandingForm */
-exports.LandingForm = guard.ensure(['post', 'https'], landingForm);
+exports.LandingForm = guard.ensure(['post', 'https', 'csrf'], landingForm);
 /** @see module:controllers/Wishlist~WishListForm */
 exports.WishListForm = guard.ensure(['post', 'https', 'loggedIn'], wishListForm, {scope: 'wishlist'});

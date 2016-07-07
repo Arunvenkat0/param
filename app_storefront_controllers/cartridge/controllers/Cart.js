@@ -89,6 +89,14 @@ function submitForm() {
     formResult = cartForm.handleAction({
         //Add a coupon if a coupon was entered correctly and is active.
         'addCoupon': function (formgroup) {
+            var CSRFProtection = require('dw/web/CSRFProtection');
+
+            if (!CSRFProtection.validateRequest()) {
+                app.getModel('Customer').logout();
+                app.getView().render('csrf/csrffailed');
+                return null;
+            }
+
             var status;
             var result = {
                 cart: cart,

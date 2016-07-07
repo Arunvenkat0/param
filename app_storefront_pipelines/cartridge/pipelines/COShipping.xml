@@ -151,12 +151,21 @@ This pipeline implements the logic for the default (single) shipping scenario. I
                       </transition>
                       <segment>
                         <node>
-                          <call-node start-name-ref="COShipping-HandleShippingSettings"/>
+                          <call-node start-name-ref="CSRF-Validate"/>
                           <node-display x="2" y="1"/>
+                        </node>
+                        <simple-transition>
+                          <transition-display>
+                            <bend-point relative-to="source" x="0" y="1"/>
+                          </transition-display>
+                        </simple-transition>
+                        <node>
+                          <call-node start-name-ref="COShipping-HandleShippingSettings"/>
+                          <node-display x="0" y="1"/>
                           <branch basename="b2" source-connector="error">
                             <transition target-connector="in1" target-path="../+1">
                               <transition-display>
-                                <bend-point relative-to="source" x="2" y="-2"/>
+                                <bend-point relative-to="source" x="2" y="-1"/>
                                 <bend-point relative-to="target" x="2" y="0"/>
                               </transition-display>
                             </transition>
@@ -226,21 +235,35 @@ This pipeline implements the logic for the default (single) shipping scenario. I
                       </transition>
                       <segment>
                         <node>
-                          <jump-node start-name-ref="COShipping-UpdateAddressDetails"/>
+                          <call-node start-name-ref="CSRF-Validate"/>
                           <node-display x="-2" y="1"/>
+                        </node>
+                        <simple-transition>
+                          <transition-display>
+                            <bend-point relative-to="source" x="0" y="1"/>
+                          </transition-display>
+                        </simple-transition>
+                        <node>
+                          <jump-node start-name-ref="COShipping-UpdateAddressDetails"/>
+                          <node-display x="0" y="1"/>
                         </node>
                       </segment>
                     </branch>
                     <branch basename="b4" source-connector="shipToMultiple">
-                      <transition target-connector="in">
-                        <transition-display>
-                          <bend-point relative-to="target" x="0" y="-1"/>
-                        </transition-display>
-                      </transition>
+                      <transition target-connector="in"/>
                       <segment>
                         <node>
-                          <jump-node start-name-ref="COShippingMultiple-Start"/>
+                          <call-node start-name-ref="CSRF-Validate"/>
                           <node-display x="-1" y="1"/>
+                        </node>
+                        <simple-transition>
+                          <transition-display>
+                            <bend-point relative-to="source" x="0" y="1"/>
+                          </transition-display>
+                        </simple-transition>
+                        <node>
+                          <jump-node start-name-ref="COShippingMultiple-Start"/>
+                          <node-display x="0" y="1"/>
                         </node>
                       </segment>
                     </branch>

@@ -171,28 +171,31 @@
           <transition target-connector="in2" target-path="./+3">
             <transition-display>
               <bend-point relative-to="source" x="-1" y="1"/>
-              <bend-point relative-to="target" x="-1" y="-1"/>
+              <bend-point relative-to="source" x="-2" y="11"/>
+              <bend-point relative-to="target" x="-1" y="-3"/>
             </transition-display>
           </transition>
         </branch>
         <branch basename="b3" source-connector="create">
-          <transition target-connector="in1" target-path="./+1"/>
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="0" y="1"/>
+            </node>
+            <transition target-connector="in1" target-path="../+1"/>
+          </segment>
         </branch>
       </node>
       <simple-transition/>
       <node>
         <decision-node condition-key="!CurrentForms.paymentinstruments.creditcards.valid" condition-operator="expr"/>
-        <node-display x="1" y="1"/>
+        <node-display x="1" y="2"/>
         <branch basename="b4" source-connector="yes">
           <transition target-connector="in1" target-path="./+1/b2.1/b4.2"/>
         </branch>
       </node>
-      <transition target-connector="in1" target-path="./+1">
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-          <bend-point relative-to="target" x="0" y="1"/>
-        </transition-display>
-      </transition>
+      <transition target-connector="in1" target-path="./+1"/>
     </segment>
     <segment>
       <node>
@@ -303,7 +306,8 @@
                   </node>
                   <transition target-connector="in3" target-path="../../-1">
                     <transition-display>
-                      <bend-point relative-to="source" x="1" y="-3"/>
+                      <bend-point relative-to="source" x="2" y="-1"/>
+                      <bend-point relative-to="target" x="3" y="3"/>
                       <bend-point relative-to="target" x="2" y="0"/>
                     </transition-display>
                   </transition>

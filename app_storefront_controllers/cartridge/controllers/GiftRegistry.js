@@ -92,6 +92,23 @@ function submitForm() {
         },
 
         search: function (form, action) {
+            var CSRFProtection = require('dw/web/CSRFProtection');
+
+            if (!CSRFProtection.validateRequest()) {
+                if (request.httpParameterMap.format.stringValue === 'ajax') {
+                    app.getModel('Customer').logout();
+                    let r = require('~/cartridge/scripts/util/Response');
+                    r.renderJSON({
+                        error: 'CSRF Token Mismatch'
+                    });
+                    return null;
+                } else {
+                    app.getModel('Customer').logout();
+                    app.getView().render('csrf/csrffailed');
+                    return null;
+                }
+            }
+
             var productLists = ProductList.search(action.parent.simple, giftRegistryType);
 
             app.getView({ProductLists: productLists}).render('account/giftregistry/giftregistryresults');

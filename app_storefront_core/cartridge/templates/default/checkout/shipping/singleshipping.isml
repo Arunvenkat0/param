@@ -123,7 +123,7 @@
                 </div>
             </isif>
 
-            <input type="hidden" name="${pdict.CurrentForms.singleshipping.secureKeyHtmlName}" value="${pdict.CurrentForms.singleshipping.secureKeyValue}"/>
+			<input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
 
         </fieldset>
 

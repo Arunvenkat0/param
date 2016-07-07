@@ -176,19 +176,33 @@ Input:
         </interaction-continue-node>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="cancel">
-          <transition target-connector="in2" target-path="./+1/b5.1">
-            <transition-display>
-              <bend-point relative-to="target" x="-2" y="0"/>
-            </transition-display>
-          </transition>
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="-1" y="1"/>
+            </node>
+            <transition target-connector="in2" target-path="../+1/b5.1">
+              <transition-display>
+                <bend-point relative-to="target" x="-2" y="0"/>
+              </transition-display>
+            </transition>
+          </segment>
         </branch>
         <branch basename="b3" source-connector="create">
-          <transition target-connector="in1" target-path="./+1"/>
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="0" y="1"/>
+            </node>
+            <transition target-connector="in1" target-path="../+1"/>
+          </segment>
         </branch>
       </node>
       <simple-transition>
         <transition-display>
-          <bend-point relative-to="target" x="-1" y="0"/>
+          <bend-point relative-to="target" x="0" y="-1"/>
         </transition-display>
       </simple-transition>
       <node>
@@ -209,7 +223,11 @@ Input:
         <join-node/>
         <node-display x="-1" y="1"/>
       </node>
-      <simple-transition/>
+      <simple-transition>
+        <transition-display>
+          <bend-point relative-to="source" x="0" y="1"/>
+        </transition-display>
+      </simple-transition>
       <node>
         <pipelet-node pipelet-name="CreateCustomerAddress" pipelet-set-identifier="bc_api">
           <key-binding alias="CurrentForms.profile.address.addressid.value" key="AddressID"/>
@@ -479,11 +497,15 @@ Input:
         </interaction-continue-node>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="cancel">
-          <transition target-connector="in2"/>
+          <transition target-connector="in2">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-2"/>
+            </transition-display>
+          </transition>
           <segment>
             <node>
               <join-node/>
-              <node-display x="1" y="8"/>
+              <node-display x="1" y="9"/>
             </node>
             <simple-transition>
               <transition-display>
@@ -497,20 +519,32 @@ Input:
           </segment>
         </branch>
         <branch basename="b3" source-connector="create">
-          <transition target-connector="in1">
+          <transition target-connector="in">
             <transition-display>
-              <bend-point relative-to="target" x="-1" y="-1"/>
+              <bend-point relative-to="target" x="-1" y="0"/>
             </transition-display>
           </transition>
           <segment>
             <node>
-              <join-node/>
-              <node-display x="1" y="2"/>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display orientation="horizontal" x="1" y="2"/>
             </node>
-            <simple-transition/>
+            <transition target-connector="in1" target-path="./+1"/>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="1" y="0"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="source" x="0" y="1"/>
+                <bend-point relative-to="target" x="0" y="-1"/>
+              </transition-display>
+            </simple-transition>
             <node>
               <decision-node condition-key="Address.ID == CurrentForms.profile.address.addressid.value" condition-operator="expr"/>
-              <node-display x="0" y="1"/>
+              <node-display x="-1" y="1"/>
               <branch basename="b2" source-connector="yes">
                 <transition target-connector="in1" target-path="./b4.1"/>
               </branch>
@@ -648,7 +682,11 @@ Input:
                       </segment>
                     </branch>
                   </node>
-                  <transition target-connector="in1" target-path="../../b2.1"/>
+                  <transition target-connector="in1" target-path="../../b2.1">
+                    <transition-display>
+                      <bend-point relative-to="target" x="-1" y="0"/>
+                    </transition-display>
+                  </transition>
                 </segment>
               </branch>
             </node>
@@ -678,28 +716,25 @@ Input:
           </segment>
         </branch>
         <branch basename="b4" source-connector="edit">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="target" x="-1" y="0"/>
-            </transition-display>
-          </transition>
+          <transition target-connector="in"/>
           <segment>
             <node>
-              <decision-node condition-key="!CurrentForms.profile.address.valid" condition-operator="expr"/>
+              <call-node start-name-ref="CSRF-Validate"/>
               <node-display orientation="horizontal" x="1" y="1"/>
+            </node>
+            <simple-transition/>
+            <node>
+              <decision-node condition-key="!CurrentForms.profile.address.valid" condition-operator="expr"/>
+              <node-display orientation="horizontal" x="1" y="0"/>
               <branch basename="b2" source-connector="yes">
                 <transition target-connector="in1" target-path="../+1"/>
               </branch>
             </node>
-            <transition target-connector="in2" target-path="../b3.1"/>
+            <transition target-connector="in2" target-path="../b3.2"/>
           </segment>
         </branch>
         <branch basename="b5" source-connector="remove">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="target" x="0" y="-1"/>
-            </transition-display>
-          </transition>
+          <transition target-connector="in"/>
           <segment>
             <node>
               <call-node start-name-ref="Address-DeleteAddress"/>
@@ -713,7 +748,7 @@ Input:
                 </transition>
               </branch>
               <branch basename="b3" source-connector="ok">
-                <transition target-connector="in1" target-path="../b3.1/b4.2"/>
+                <transition target-connector="in1" target-path="../b3.2/b4.2"/>
               </branch>
             </node>
           </segment>
@@ -933,11 +968,7 @@ Input:
         <start-node name="Delete" secure="true"/>
         <node-display x="1" y="15"/>
       </node>
-      <simple-transition>
-        <transition-display>
-          <bend-point relative-to="source" x="0" y="1"/>
-        </transition-display>
-      </simple-transition>
+      <simple-transition/>
       <node>
         <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
           <config-property key="Transactional" value="false"/>
@@ -962,7 +993,7 @@ Input:
           <key-binding alias="null" key="From_9"/>
           <key-binding alias="null" key="To_9"/>
         </pipelet-node>
-        <node-display x="0" y="1"/>
+        <node-display x="0" y="2"/>
       </node>
       <simple-transition>
         <transition-display>

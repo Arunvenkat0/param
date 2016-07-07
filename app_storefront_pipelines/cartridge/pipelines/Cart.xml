@@ -252,12 +252,13 @@
         </interaction-continue-node>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="addCoupon">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="target" x="0" y="-2"/>
-            </transition-display>
-          </transition>
+          <transition target-connector="in"/>
           <segment>
+            <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="1" y="6"/>
+            </node>
+            <simple-transition/>
             <node>
               <pipelet-node pipelet-name="Assign" pipelet-set-identifier="bc_api">
                 <config-property key="Transactional" value="false"/>
@@ -282,7 +283,7 @@
                 <key-binding alias="null" key="From_9"/>
                 <key-binding alias="null" key="To_9"/>
               </pipelet-node>
-              <node-display x="1" y="7"/>
+              <node-display x="0" y="1"/>
             </node>
             <simple-transition/>
             <node>

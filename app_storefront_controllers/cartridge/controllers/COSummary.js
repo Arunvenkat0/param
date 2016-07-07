@@ -110,7 +110,7 @@ function showConfirmation(order) {
 /** @see module:controllers/COSummary~Start */
 exports.Start = guard.ensure(['https'], start);
 /** @see module:controllers/COSummary~Submit */
-exports.Submit = guard.ensure(['https', 'post'], submit);
+exports.Submit = guard.ensure(['https', 'post', 'csrf'], submit);
 
 /*
  * Local method

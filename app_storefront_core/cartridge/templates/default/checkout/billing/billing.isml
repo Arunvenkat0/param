@@ -89,9 +89,6 @@
      ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</iscomment>
 
     <fieldset>
-
-        <input type="hidden" name="${pdict.CurrentForms.billing.secureKeyHtmlName}" value="${pdict.CurrentForms.billing.secureKeyValue}"/>
-
         <isset name="gcApplicable" value="${'false'}" scope="page"/>
         <isif condition="${dw.order.PaymentMgr.getPaymentMethod(dw.order.PaymentInstrument.METHOD_GIFT_CERTIFICATE).isActive() }">
             <isset name="gcApplicable" value="${'true'}" scope="page"/>
@@ -196,7 +193,7 @@
             </isif>
 
         </div>
-
+                
     </fieldset>
 
     <iscomment> ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -212,6 +209,7 @@
         <div class="form-row form-row-button">
             <button class="button-fancy-large" type="submit" name="${pdict.CurrentForms.billing.save.htmlName}" value="${Resource.msg('global.continueplaceorder','locale',null)}"><span>${Resource.msg('global.continueplaceorder','locale',null)}</span></button>
         </div>
+        <input type="hidden" name="${dw.web.CSRFProtection.getTokenName()}" value="${dw.web.CSRFProtection.generateToken()}"/>
 
 </form>
 <isscript>

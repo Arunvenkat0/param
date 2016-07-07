@@ -824,7 +824,7 @@ exports.UpdateSummary = guard.ensure(['https', 'get'], updateSummary);
 exports.UpdateAddressDetails = guard.ensure(['https', 'get'], updateAddressDetails);
 /** Renders a form dialog to edit an address.
  * @see module:controllers/COBilling~editAddress */
-exports.EditAddress = guard.ensure(['https', 'get'], editAddress);
+exports.EditAddress = guard.ensure(['https', 'get', 'csrf'], editAddress);
 /** Returns information of a gift certificate including its balance as JSON response.
  * @see module:controllers/COBilling~getGiftCertificateBalance */
 exports.GetGiftCertificateBalance = guard.ensure(['https', 'get'], getGiftCertificateBalance);
@@ -836,7 +836,7 @@ exports.SelectCreditCard = guard.ensure(['https', 'get'], selectCreditCard);
 exports.UpdateCreditCardSelection = guard.ensure(['https', 'get'], updateCreditCardSelection);
 /** Form handler for the billing form.
  * @see module:controllers/COBilling~billing */
-exports.Billing = guard.ensure(['https'], billing);
+exports.Billing = guard.ensure(['https', 'csrf'], billing);
 /** Form handler for the returnToForm form.
  * @see module:controllers/COBilling~editBillingAddress */
 exports.EditBillingAddress = guard.ensure(['https', 'post'], editBillingAddress);

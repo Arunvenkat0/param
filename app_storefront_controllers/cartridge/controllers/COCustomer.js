@@ -96,4 +96,4 @@ function showLoginForm() {
 exports.Start = guard.ensure(['https'], start);
 /** Form handler for the login form.
  * @see module:controllers/COCustomer~showLoginForm */
-exports.LoginForm = guard.ensure(['https', 'post'], showLoginForm);
+exports.LoginForm = guard.ensure(['https', 'post', 'csrf'], showLoginForm);

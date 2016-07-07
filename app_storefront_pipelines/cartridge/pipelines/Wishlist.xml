@@ -158,18 +158,20 @@
         </interaction-continue-node>
         <node-display x="0" y="1"/>
         <branch basename="b2" source-connector="login">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="target" x="0" y="-1"/>
-            </transition-display>
-          </transition>
+          <transition target-connector="in"/>
           <segment>
             <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition/>
+            <node>
               <call-node start-name-ref="Login-Process"/>
-              <node-display x="0" y="2"/>
+              <node-display x="0" y="1"/>
               <branch basename="b2" source-connector="login_failed">
                 <transition target-connector="in1" target-path="..">
                   <transition-display>
+                    <bend-point relative-to="source" x="2" y="0"/>
                     <bend-point relative-to="target" x="4" y="0"/>
                   </transition-display>
                 </transition>
@@ -191,15 +193,16 @@
           </segment>
         </branch>
         <branch basename="b3" source-connector="register">
-          <transition target-connector="in">
-            <transition-display>
-              <bend-point relative-to="target" x="0" y="-1"/>
-            </transition-display>
-          </transition>
+          <transition target-connector="in"/>
           <segment>
             <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="-2" y="1"/>
+            </node>
+            <simple-transition/>
+            <node>
               <call-node start-name-ref="Account-Register"/>
-              <node-display x="-2" y="2"/>
+              <node-display x="0" y="2"/>
             </node>
             <simple-transition>
               <transition-display>
@@ -220,8 +223,17 @@
           </transition>
           <segment>
             <node>
-              <jump-node start-name-ref="Wishlist-Search"/>
+              <call-node start-name-ref="CSRF-Validate"/>
               <node-display x="-1" y="2"/>
+            </node>
+            <simple-transition>
+              <transition-display>
+                <bend-point relative-to="target" x="0" y="-1"/>
+              </transition-display>
+            </simple-transition>
+            <node>
+              <jump-node start-name-ref="Wishlist-Search"/>
+              <node-display x="0" y="2"/>
             </node>
           </segment>
         </branch>
@@ -426,7 +438,33 @@
             <transition target-connector="in1" target-path="../b2.1/b2.1"/>
           </segment>
         </branch>
-        <branch basename="b5" source-connector="selectAddressWishlist">
+        <branch basename="b5" source-connector="search">
+          <transition target-connector="in">
+            <transition-display>
+              <bend-point relative-to="target" x="0" y="-1"/>
+            </transition-display>
+          </transition>
+          <segment>
+            <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="-1" y="0"/>
+            </node>
+            <transition target-connector="in1" target-path="./+1"/>
+          </segment>
+          <segment>
+            <node>
+              <join-node/>
+              <node-display x="-1" y="-1"/>
+            </node>
+            <transition target-connector="in1" target-path="..">
+              <transition-display>
+                <bend-point relative-to="source" x="3" y="0"/>
+                <bend-point relative-to="target" x="-1" y="0"/>
+              </transition-display>
+            </transition>
+          </segment>
+        </branch>
+        <branch basename="b6" source-connector="selectAddressWishlist">
           <transition target-connector="in"/>
           <segment>
             <node>
@@ -435,7 +473,7 @@
             </node>
           </segment>
         </branch>
-        <branch basename="b6" source-connector="setItemPrivate">
+        <branch basename="b7" source-connector="setItemPrivate">
           <transition target-connector="in"/>
           <segment>
             <node>
@@ -488,7 +526,7 @@
             <transition target-connector="in1" target-path="../b4.2"/>
           </segment>
         </branch>
-        <branch basename="b7" source-connector="setItemPublic">
+        <branch basename="b8" source-connector="setItemPublic">
           <transition target-connector="in"/>
           <segment>
             <node>
@@ -524,10 +562,10 @@
               <join-node/>
               <node-display x="0" y="2"/>
             </node>
-            <transition target-connector="in1" target-path="../b6.2"/>
+            <transition target-connector="in1" target-path="../b7.2"/>
           </segment>
         </branch>
-        <branch basename="b8" source-connector="setListPrivate">
+        <branch basename="b9" source-connector="setListPrivate">
           <transition target-connector="in"/>
           <segment>
             <node>
@@ -567,13 +605,13 @@
               </pipelet-node>
               <node-display x="0" y="1"/>
               <branch basename="b2" source-connector="error">
-                <transition target-connector="in1" target-path="../b6.4"/>
+                <transition target-connector="in1" target-path="../b7.4"/>
               </branch>
             </node>
-            <transition target-connector="in2" target-path="../b6.4"/>
+            <transition target-connector="in2" target-path="../b7.4"/>
           </segment>
         </branch>
-        <branch basename="b9" source-connector="setListPublic">
+        <branch basename="b10" source-connector="setListPublic">
           <transition target-connector="in">
             <transition-display>
               <bend-point relative-to="target" x="0" y="-1"/>
@@ -617,13 +655,13 @@
               </pipelet-node>
               <node-display x="0" y="1"/>
               <branch basename="b2" source-connector="error">
-                <transition target-connector="in1" target-path="../b6.3"/>
+                <transition target-connector="in1" target-path="../b7.3"/>
               </branch>
             </node>
-            <transition target-connector="in2" target-path="../b6.3"/>
+            <transition target-connector="in2" target-path="../b7.3"/>
           </segment>
         </branch>
-        <branch basename="b10" source-connector="updateItem">
+        <branch basename="b11" source-connector="updateItem">
           <transition target-connector="in"/>
           <segment>
             <node>
@@ -1090,7 +1128,7 @@
       <simple-transition/>
       <node>
         <decision-node condition-key="CurrentForms.wishlist.search.valid &amp;&amp; (!empty(CurrentForms.wishlist.search.email.value) || (!empty(CurrentForms.wishlist.search.firstname.value) &amp;&amp; !empty(CurrentForms.wishlist.search.lastname.value)) )" condition-operator="expr"/>
-        <node-display x="0" y="1"/>
+        <node-display x="0" y="2"/>
         <branch basename="b2" source-connector="yes">
           <transition target-connector="in"/>
           <segment>
@@ -1166,7 +1204,7 @@
     <segment>
       <node>
         <join-node/>
-        <node-display x="1" y="1"/>
+        <node-display x="1" y="0"/>
       </node>
       <simple-transition/>
       <node>
@@ -1207,15 +1245,34 @@
     <segment>
       <node>
         <join-node/>
-        <node-display x="-1" y="0"/>
+        <node-display x="-1" y="1"/>
       </node>
       <simple-transition/>
       <node>
-        <interaction-node transaction-required="false">
+        <interaction-continue-node secure="false" start-name="SearchWishList" transaction-required="false">
           <template buffered="true" dynamic="false" name="account/wishlist/wishlistresults"/>
-        </interaction-node>
+        </interaction-continue-node>
         <node-display x="0" y="1"/>
+        <branch basename="b2" source-connector="search">
+          <transition target-connector="in"/>
+          <segment>
+            <node>
+              <call-node start-name-ref="CSRF-Validate"/>
+              <node-display x="0" y="1"/>
+            </node>
+            <simple-transition/>
+            <node>
+              <jump-node start-name-ref="Wishlist-Search"/>
+              <node-display x="0" y="1"/>
+            </node>
+          </segment>
+        </branch>
       </node>
+      <transition target-connector="in1" target-path="./-1">
+        <transition-display>
+          <bend-point relative-to="source" x="2" y="1"/>
+        </transition-display>
+      </transition>
     </segment>
   </branch>
   <branch basename="_ANONYMOUS_BRANCH_13">

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<form xmlns="http://www.demandware.com/xml/form/2008-04-19" secure="true">
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19" secure="false">
 
 	<!-- flag indicating whether this checkout step is fulfilled -->
 	<field formid="fulfilled" type="boolean" default-value="false"/>
