@@ -19,7 +19,8 @@ export function login (locale) {
 }
 
 export function logout () {
-    return browser.click(USER_INFO_ICON)
+    return browser.waitForVisible(USER_INFO_ICON)
+        .click(USER_INFO_ICON)
         .waitForVisible(userPanel)
         .click(BTN_LOGOUT)
         .waitForVisible(accountPage.BTN_LOGIN);
