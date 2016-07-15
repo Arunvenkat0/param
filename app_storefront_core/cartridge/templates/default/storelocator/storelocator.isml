@@ -78,7 +78,8 @@
 				
 					<isinputfield formfield="${pdict.CurrentForms.storelocator.country}" type="select" mandatory="false"/>
 					
-					<div class="form-row form-row-button">						<button class="search shadow-darker" type="submit" name="${pdict.CurrentForms.storelocator.findbycountry.htmlName}" value="${Resource.msg('global.search','locale',null)}"><span>${Resource.msg('global.search','locale',null)}</span></button>
+					<div class="form-row form-row-button">
+						<button class="search shadow-darker" type="submit" name="${pdict.CurrentForms.storelocator.findbycountry.htmlName}" value="${Resource.msg('global.search','locale',null)}"><span>${Resource.msg('global.search','locale',null)}</span></button>
 					</div>
 					
 				</fieldset>
