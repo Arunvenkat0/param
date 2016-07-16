@@ -7,6 +7,12 @@ export const BTN_ADD_GIFT_CERT = 'button[name*=wishlist_addGiftCertificate]';
 export const BTN_TOGGLE_PRIVACY = '[name*=wishlist_setList]';
 export const LINK_REMOVE = 'button.delete-item';
 export const WISHLIST_ITEMS = '.item-list tbody tr:not(.headings)';
+export const FRM_WISH_LIST_SEARCH_LAST_NAME = '#dwfrm_wishlist_search_lastname';
+export const FRM_WISH_LIST_SEARCH_FIRST_NAME = '#dwfrm_wishlist_search_firstname';
+export const FRM_WISH_LIST_SEARCH_EMAIL = '#dwfrm_wishlist_search_email';
+export const BTN_MAKE_LIST_PUBLIC = '[name*=wishlist_setListPublic]';
+export const BTN_MAKE_LIST_PRIVATE = '[name*=wishlist_setListPrivate]';
+export const BTN_WISH_LIST_SEARCH = '[name*=dwfrm_wishlist_search_search]';
 
 const basePath = '/wishlist';
 
@@ -57,3 +63,26 @@ export function getItemList () {
         .waitForExist(WISHLIST_ITEMS, 5000)
         .elements(WISHLIST_ITEMS);
 }
+
+export function publishList () {
+    return browser
+        .waitForExist(BTN_TOGGLE_PRIVACY, 5000)
+        .then(() => browser.isExisting(BTN_MAKE_LIST_PUBLIC))
+        .then(doesExist => {
+            if (doesExist) {
+                browser.click(BTN_MAKE_LIST_PUBLIC)
+            }
+        })
+}
+
+export function unPublishList () {
+    return browser
+        .waitForExist(BTN_TOGGLE_PRIVACY, 5000)
+        .then(() => browser.isExisting(BTN_MAKE_LIST_PRIVATE))
+        .then(doesExist => {
+            if (doesExist) {
+                browser.click(BTN_MAKE_LIST_PRIVATE)
+            }
+        })
+}
+
