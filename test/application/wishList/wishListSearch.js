@@ -6,6 +6,7 @@ import * as testData from '../pageObjects/testData/main';
 import * as wishListPage from '../pageObjects/wishList';
 import * as loginForm from '../pageObjects/helpers/forms/login';
 import * as navHeader from '../pageObjects/navHeader';
+import * as Resource from '../../mocks/dw/web/Resource';
 
 /*
 Verify:
@@ -67,8 +68,11 @@ describe('Wish List - Search for wish list as an anonymous user', () => {
                 .then(lastName => assert.equal(customer.lastName, lastName))
                 .then(() => browser.getText(' .item-list .first-name'))
                 .then(firstName => assert.equal(customer.firstName, firstName))
-                .then(() => browser.getAttribute(' .item-list .view > a', 'href'))
-                .then(hrefAttr => assert.isTrue(hrefAttr.contains('showotherwishlist')))
+                .then(() => browser.getText(' .item-list .view > a', 'href > span'))
+                .then(viewStr =>  {
+                    let expectedStr = Resource.msgf('wishlistresult.view', 'account', null);
+                    assert.equal(expectedStr, viewStr);
+                })
         );
 
         it('Should return list on search with email address.', () =>
@@ -83,8 +87,11 @@ describe('Wish List - Search for wish list as an anonymous user', () => {
                 .then(lastName => assert.equal(customer.lastName, lastName))
                 .then(() => browser.getText(' .item-list .first-name'))
                 .then(firstName => assert.equal(customer.firstName, firstName))
-                .then(() => browser.getAttribute(' .item-list .view > a', 'href'))
-                .then(hrefAttr => assert.isTrue(hrefAttr.contains('showotherwishlist')))
+                .then(() => browser.getText(' .item-list .view > a', 'href > span'))
+                .then(viewStr =>  {
+                    let expectedStr = Resource.msgf('wishlistresult.view', 'account', null);
+                    assert.equal(expectedStr, viewStr);
+                })
         );
         
     });
