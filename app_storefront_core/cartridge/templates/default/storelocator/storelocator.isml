@@ -7,7 +7,7 @@
     
     <p>${Resource.msg('storelocator.findstoremessage','storelocator',null)}</p>
 
-	<isif condition="${pdict.Stores != null && empty(pdict.Stores)}">
+	<isif condition="${pdict.Stores != null && empty(pdict.Stores) && pdict.isSearched}">
 		<div class="store-locator-no-results">
 			<p>${Resource.msg('storelocator.noresults','storelocator',null)}</p>
 			<isprint value="${pdict.StoresPagingModel}"/>
