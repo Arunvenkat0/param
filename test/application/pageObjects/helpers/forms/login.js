@@ -13,7 +13,7 @@ export function loginAs (login, password) {
     var _password = password;
     // if no password is provided, use the default one
     if (!_password) {
-	_password = testData.defaultPassword;
+        _password = testData.defaultPassword;
     }
     return browser.waitForVisible(INPUT_EMAIL, 30000)
         .setValue(INPUT_EMAIL, login)
