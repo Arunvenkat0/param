@@ -17,6 +17,6 @@ export function loginAs (login, password) {
     }
     return browser.waitForVisible(INPUT_EMAIL, 30000)
         .setValue(INPUT_EMAIL, login)
-        .setValue(INPUT_PASSWORD, password)
+        .setValue(INPUT_PASSWORD, _password)
         .click(BTN_LOGIN);
 }

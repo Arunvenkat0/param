@@ -55,7 +55,7 @@ exports.config = _.assign({
         outputDir: 'test/reports'
     },
     locale: opts.locale,
-    coverage: opts.coverage
+    coverage: opts.coverage,
     user: opts.user,
     userEmail: opts.userEmail || opts.user + '@demandware.com'
 }, sauce);

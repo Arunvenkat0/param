@@ -101,6 +101,46 @@
             <last-visit-time>2015-05-18T20:49:06.603Z</last-visit-time>
             <preferred-locale>en_US</preferred-locale>
         </profile>
+        <addresses>
+            <address address-id="Home" preferred="true">
+                <salutation/>
+                <title/>
+                <first-name>Test2</first-name>
+                <second-name/>
+                <last-name>User2</last-name>
+                <suffix/>
+                <company-name/>
+                <job-title/>
+                <address1>100 Main St</address1>
+                <address2/>
+                <suite/>
+                <postbox/>
+                <city>Woburn</city>
+                <postal-code>01888</postal-code>
+                <state-code>MA</state-code>
+                <country-code>us</country-code>
+                <phone>781-555-1616</phone>
+            </address>
+            <address address-id="Work" preferred="false">
+                <salutation/>
+                <title/>
+                <first-name>Test2</first-name>
+                <second-name/>
+                <last-name>User2</last-name>
+                <suffix/>
+                <company-name/>
+                <job-title/>
+                <address1>5 Wall St</address1>
+                <address2/>
+                <suite/>
+                <postbox/>
+                <city>Burlington</city>
+                <postal-code>01803</postal-code>
+                <state-code>MA</state-code>
+                <country-code>us</country-code>
+                <phone>781-555-1818</phone>
+            </address>
+        </addresses>
         <note/>
     </customer>
 
@@ -133,7 +173,7 @@
             <preferred-locale>en</preferred-locale>
         </profile>
         <addresses>
-            <address address-id="Mom's" preferred="true">
+            <address address-id="Home" preferred="true">
                 <salutation/>
                 <title/>
                 <first-name>Test3</first-name>
@@ -142,15 +182,34 @@
                 <suffix/>
                 <company-name/>
                 <job-title/>
-                <address1>3486 Mission St</address1>
+                <address1>57th St</address1>
                 <address2/>
                 <suite/>
                 <postbox/>
-                <city>San Francisco</city>
-                <postal-code>94110</postal-code>
-                <state-code>CA</state-code>
+                <city>NYC</city>
+                <postal-code>10036</postal-code>
+                <state-code>NY</state-code>
                 <country-code>us</country-code>
-                <phone>415-555-1212</phone>
+                <phone>800-315-2621</phone>
+            </address>
+            <address address-id="Work" preferred="false">
+                <salutation/>
+                <title/>
+                <first-name>Test3</first-name>
+                <second-name/>
+                <last-name>User3</last-name>
+                <suffix/>
+                <company-name/>
+                <job-title/>
+                <address1>79 West St</address1>
+                <address2/>
+                <suite/>
+                <postbox/>
+                <city>Central Bronx</city>
+                <postal-code>10453</postal-code>
+                <state-code>NY</state-code>
+                <country-code>us</country-code>
+                <phone>800-555-1818</phone>
             </address>
         </addresses>
         <note/>
