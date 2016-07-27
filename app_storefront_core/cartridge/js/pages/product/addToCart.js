@@ -25,9 +25,9 @@ var addItemToCart = function (form) {
     })).then(function (response) {
         // handle error in the response
         if (response.error) {
-            Promise.reject(response.error);
+            throw new Error(response.error);
         } else {
-            Promise.resolve(response);
+            return response;
         }
     });
 };
