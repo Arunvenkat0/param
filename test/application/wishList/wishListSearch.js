@@ -7,6 +7,7 @@ import * as wishListPage from '../pageObjects/wishList';
 import * as loginForm from '../pageObjects/helpers/forms/login';
 import * as navHeader from '../pageObjects/navHeader';
 import * as Resource from '../../mocks/dw/web/Resource';
+import {config} from '../webdriver/wdio.conf';
 
 /*
 Verify:
@@ -20,17 +21,17 @@ describe('Wish List - Search for wish list as an anonymous user', () => {
     let variant;
     let variantId = '701644349929';
     let privacyButton = wishListPage.BTN_TOGGLE_PRIVACY;
-    const loginCustomer = 'testuser1@demandware.com';
+    const login = config.userEmail;
     let customer;
 
     before(() => {
         return testData.load()
             .then(() => {
                 variant = testData.getProductById(variantId);
-                customer = testData.getCustomerByLogin(loginCustomer);
+                customer = testData.getCustomerByLogin(login);
             })
             .then(() => wishListPage.navigateTo())
-            .then(() => loginForm.loginAsDefaultCustomer())
+            .then(() => loginForm.loginAs(login))
             .then(() => browser.url(variant.getUrlResourcePath()))
             .then(() => productDetailPage.clickAddToWishListButton())
             .then(() => browser.waitForVisible(privacyButton))
@@ -39,7 +40,7 @@ describe('Wish List - Search for wish list as an anonymous user', () => {
     });
 
     after(() => wishListPage.navigateTo()
-        .then(() => loginForm.loginAsDefaultCustomer())
+        .then(() => loginForm.loginAs(login))
         .then(() => wishListPage.emptyWishList())
         .then(() => navHeader.logout())
     );
@@ -49,7 +50,7 @@ describe('Wish List - Search for wish list as an anonymous user', () => {
         // Login and make wish list public
         before(() => {
             return wishListPage.navigateTo()
-                .then(() => loginForm.loginAsDefaultCustomer())
+                .then(() => loginForm.loginAs(login))
                 .then(() => browser.waitForVisible(privacyButton))
                 .then(() => wishListPage.publishList())
                 .then(() => navHeader.logout())
@@ -78,7 +79,7 @@ describe('Wish List - Search for wish list as an anonymous user', () => {
         it('Should return list on search with email address.', () =>
             wishListPage.navigateTo()
                 .then(() => browser.waitForVisible(wishListPage.FRM_WISH_LIST_SEARCH_LAST_NAME))
-                .then(() => browser.setValue(wishListPage.FRM_WISH_LIST_SEARCH_EMAIL, loginCustomer))
+                .then(() => browser.setValue(wishListPage.FRM_WISH_LIST_SEARCH_EMAIL, login))
                 .then(() => browser.click(wishListPage.BTN_WISH_LIST_SEARCH))
                 .then(() => browser.waitForVisible(wishListPage.WISHLIST_ITEMS))
                 .then(() => wishListPage.getItemList())
@@ -93,7 +94,7 @@ describe('Wish List - Search for wish list as an anonymous user', () => {
                     assert.equal(expectedStr, viewStr);
                 })
         );
-        
+
     });
 
     describe('Landing page: Search for private wish list as anonymous user.', () => {
@@ -101,7 +102,7 @@ describe('Wish List - Search for wish list as an anonymous user', () => {
         // Login and make wish list private
         before(() => {
             return wishListPage.navigateTo()
-                .then(() => loginForm.loginAsDefaultCustomer())
+                .then(() => loginForm.loginAs(login))
                 .then(() => browser.waitForVisible(privacyButton))
                 .then(() => wishListPage.unPublishList())
                 .then(() => navHeader.logout())

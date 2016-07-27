@@ -95,7 +95,7 @@ describe('Profile', () => {
             let locale = '';
             let bundleName = locale ? `forms_${locale}` : 'forms';
             let expectedError = Resource.msgf('profile.currentpasswordnomatch', bundleName, null, 1);
-            let newEmail = 'testuser1@demandware.com';
+            let newEmail = config.userEmail;
             let invalidPassword = 'invalidPassword';
             let newValues = {};
 

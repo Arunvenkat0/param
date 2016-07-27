@@ -21,7 +21,7 @@ describe('CSRF Protection - Address', () => {
     if (config.coverage !== 'regression') {
         return;
     }
-    let login = 'testuser1@demandware.com';
+    let login = config.userEmail;
     let locale = config.locale;
 
     let addressFormData = {};
@@ -65,7 +65,7 @@ describe('CSRF Protection - Address', () => {
             }
         })
         .then(() => addressPage.navigateTo())
-        .then(() => loginForm.loginAsDefaultCustomer())
+        .then(() => loginForm.loginAs(login))
         .then(() => browser.waitForVisible(addressPage.LINK_CREATE_ADDRESS))
         .then(() => addressPage.removeAddresses())
 

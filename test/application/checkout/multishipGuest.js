@@ -11,7 +11,7 @@ import * as checkoutPage from '../pageObjects/checkout';
 
 describe('Multi Shipping - Guest User', () => {
 
-    const login = 'testuser1@demandware.com';
+    const login = config.userEmail;
     const locale = config.locale;
     const thankYouMessage = 'Thank you for your order.';
     const buttonText = multiShipPage.BTN_GUEST_CHECKOUT1 + Resource.msg('checkoutlogin.checkoutguestbutton', 'checkout', null)
