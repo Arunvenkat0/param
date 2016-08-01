@@ -30,6 +30,7 @@ function setSessionCurrency() {
             Transaction.wrap(function () {
                 var currentCart = Cart.get();
                 if (currentCart) {
+                    currentCart.updateCurrency();
                     currentCart.calculate();
                 }
             });
