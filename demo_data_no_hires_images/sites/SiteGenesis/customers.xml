@@ -47,7 +47,7 @@
                 <city>Woburn</city>
                 <postal-code>01801</postal-code>
                 <state-code>MA</state-code>
-		<country-code>us</country-code>
+                <country-code>us</country-code>
                 <phone>781-555-1212</phone>
             </address>
             <address address-id="Work" preferred="false">
@@ -111,15 +111,15 @@
                 <suffix/>
                 <company-name/>
                 <job-title/>
-                <address1>100 Main St</address1>
+                <address1>104 Presidential Way</address1>
                 <address2/>
                 <suite/>
                 <postbox/>
                 <city>Woburn</city>
-                <postal-code>01888</postal-code>
+                <postal-code>01801</postal-code>
                 <state-code>MA</state-code>
                 <country-code>us</country-code>
-                <phone>781-555-1616</phone>
+                <phone>781-555-1212</phone>
             </address>
             <address address-id="Work" preferred="false">
                 <salutation/>
@@ -130,7 +130,7 @@
                 <suffix/>
                 <company-name/>
                 <job-title/>
-                <address1>5 Wall St</address1>
+                <address1>91 Middlesex Tpke</address1>
                 <address2/>
                 <suite/>
                 <postbox/>
@@ -138,7 +138,7 @@
                 <postal-code>01803</postal-code>
                 <state-code>MA</state-code>
                 <country-code>us</country-code>
-                <phone>781-555-1818</phone>
+                <phone>781-555-1212</phone>
             </address>
         </addresses>
         <note/>
@@ -182,15 +182,15 @@
                 <suffix/>
                 <company-name/>
                 <job-title/>
-                <address1>57th St</address1>
+                <address1>104 Presidential Way</address1>
                 <address2/>
                 <suite/>
                 <postbox/>
-                <city>NYC</city>
-                <postal-code>10036</postal-code>
-                <state-code>NY</state-code>
+                <city>Woburn</city>
+                <postal-code>01801</postal-code>
+                <state-code>MA</state-code>
                 <country-code>us</country-code>
-                <phone>800-315-2621</phone>
+                <phone>781-555-1212</phone>
             </address>
             <address address-id="Work" preferred="false">
                 <salutation/>
@@ -201,15 +201,15 @@
                 <suffix/>
                 <company-name/>
                 <job-title/>
-                <address1>79 West St</address1>
+                <address1>91 Middlesex Tpke</address1>
                 <address2/>
                 <suite/>
                 <postbox/>
-                <city>Central Bronx</city>
-                <postal-code>10453</postal-code>
-                <state-code>NY</state-code>
+                <city>Burlington</city>
+                <postal-code>01803</postal-code>
+                <state-code>MA</state-code>
                 <country-code>us</country-code>
-                <phone>800-555-1818</phone>
+                <phone>781-555-1212</phone>
             </address>
         </addresses>
         <note/>
