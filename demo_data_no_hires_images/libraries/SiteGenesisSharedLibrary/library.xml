@@ -681,23 +681,23 @@ La pagina non è più disponibile: (pagina o file non trovati: errore 404). Prov
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;If you can’t find what you are looking for, why not let our trained staff recommend something?&lt;/p&gt;&#13;
-&lt;p&gt;Our Customer Service representatives are available now to help. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Email us&lt;/a&gt; or call 800-555-XXXX.&lt;/p&gt;&#13;
+&lt;p&gt;Our Customer Service representatives are available now to help. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Email us&lt;/a&gt; or call 800-555-0199.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;Vous ne trouvez pas ce que vous recherchez. Demandez l'aide de notre personnel qualifié.&lt;/p&gt;&#13;
-&lt;p&gt;Les conseillers de notre service client sont à votre disposition pour vous aider. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Envoyez-nous un e-mail ou&lt;/a&gt; ou appelez-nous au 800-555-XXXX.&lt;/p&gt;&#13;
+&lt;p&gt;Les conseillers de notre service client sont à votre disposition pour vous aider. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Envoyez-nous un e-mail ou&lt;/a&gt; ou appelez-nous au 800-555-0199.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;Se non riesci a trovare quello che cerchi, lascia che il nostro personale qualificato ti offra qualche consiglio.&lt;/p&gt;&#13;
-&lt;p&gt;I nostri operatori del servizio clienti sono disponibili immediatamente per aiutarti. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Mandaci un'e-mail&lt;/a&gt; o chiama il numero 800-555-XXXX.&lt;/p&gt;&#13;
+&lt;p&gt;I nostri operatori del servizio clienti sono disponibili immediatamente per aiutarti. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Mandaci un'e-mail&lt;/a&gt; o chiama il numero 800-555-0199.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;お探しの情報が見つからない場合は、弊社の熟練スタッフがお手伝いいたします。&lt;/p&gt;&#13;
-&lt;p&gt;弊社のカスタマーサービスまで、 &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Eメール&lt;/a&gt; またはお電話 (800-555-XXXX) にてご相談ください。&lt;/p&gt;&#13;
+&lt;p&gt;弊社のカスタマーサービスまで、 &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Eメール&lt;/a&gt; またはお電話 (800-555-0199) にてご相談ください。&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;如果您无法找到想要找的内容，何不让我们训练有素的员工给您推荐？&lt;/p&gt;&#13;
-&lt;p&gt;我们的客户服务代表可提供帮助。 &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;给我们发电子邮件&lt;/a&gt; 或致电 800-555-XXXX。&lt;/p&gt;&#13;
+&lt;p&gt;我们的客户服务代表可提供帮助。 &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;给我们发电子邮件&lt;/a&gt; 或致电 800-555-0199。&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
         </custom-attributes>
     </content>
@@ -1307,31 +1307,31 @@ $include(Page-Include, cid, account-nav-service)$</custom-attribute>
 &lt;p&gt;Customer Service&lt;br /&gt;&#13;
 Monday to Friday&lt;br /&gt;&#13;
 8 AM to 8 PM&lt;br /&gt;&#13;
-1 (888) 553 XXXX&lt;/p&gt;</custom-attribute>
+1 (800) 555 0199&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h2&gt;Besoin d'aide ?&lt;/h2&gt;&#13;
 &lt;p&gt;Si vous avez des questions ou besoin d'aide au sujet de votre compte, &lt;a href="$httpsUrl('CustomerService-ContactUs')$"&gt;contactez-nous&lt;/a&gt; et nous nous ferons un plaisir de vous aider.&lt;/p&gt;&#13;
 &lt;p&gt;Service client&lt;br /&gt;&#13;
 Lundi au vendredi&lt;br /&gt;&#13;
 8h à 20h&lt;br /&gt;&#13;
-1 (888) 553 XXXX&lt;/p&gt;</custom-attribute>
+1 (800) 555 0199&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;h2&gt;Serve aiuto?&lt;/h2&gt;&#13;
 &lt;p&gt;In caso di domande o se hai bisogno di aiuto con il tuo account &lt;a href="$httpsUrl('CustomerService-ContactUs')$"&gt;Contattaci&lt;/a&gt; per chiedere assistenza.&lt;/p&gt;&#13;
 &lt;p&gt;Servizio clienti&lt;br /&gt;&#13;
 Lunedì-venerdì&lt;br /&gt;&#13;
 8:00-20:00&lt;br /&gt;&#13;
-1 (888) 553 XXXX&lt;/p&gt;</custom-attribute>
+1 (800) 555 0199&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;h2&gt;サポートをご利用になりますか? &lt;/h2&gt;&#13;
 &lt;p&gt;ご質問がある場合、またはアカウントのサポートが必要な場合は、お気軽に&lt;a href="$httpsUrl('CustomerService-ContactUs')$"&gt;お問い合わせ&lt;/a&gt;ください。&lt;/p&gt;&#13;
 &lt;p&gt;カスタマーサービス&lt;br /&gt;&#13;
 月曜日～金曜日&lt;br /&gt;&#13;
 午前 8 時～午後 8 時&lt;br /&gt;&#13;
-1 (888) 553 XXXX&lt;/p&gt;</custom-attribute>
+1 (800) 555 0199&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;h2&gt;需要帮助？&lt;/h2&gt;&#13;
 &lt;p&gt;如果您有任何问题或需要账户方面的帮助， &lt;a href="$httpsUrl('CustomerService-ContactUs')$"&gt;请联系我们，&lt;/a&gt; 获得帮助。&lt;/p&gt;&#13;
 &lt;p&gt;客户服务&lt;br /&gt;&#13;
 周一到周五&lt;br /&gt;&#13;
 早上 8 时至晚上 8 时&lt;br /&gt;&#13;
-1 (888) 553 XXXX&lt;/p&gt;</custom-attribute>
+1 (800) 555 0199&lt;/p&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="my-account"/>
@@ -5815,11 +5815,11 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">If you have questions about your order, we’re happy to take your call (888-555-XXXX) Monday - Friday, 8AM - 8PM</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="fr-FR">Pour toute question relative à votre commande, contactez-nous (au 888-555-XXXX) du lundi au vendredi, de 8h à 20h.</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="it-IT">In caso di domande relative agli ordini, chiamaci (888-555-XXXX) dal lunedì al venerdì, dalle 8:00 alle 20:00</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="ja-JP">ご注文に関してご質問などがございましたら、月～金の午前 8 時～午後 8 時の間にお電話 (888-555-XXXX) にてご連絡ください。</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="zh-CN">如果您有关于订单方面的问题，请于周一至周五早上 8 时至晚上 8 时随时致电 888-555-XXXX 与我们联系。</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="x-default">If you have questions about your order, we’re happy to take your call (800-555-0199) Monday - Friday, 8AM - 8PM</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="fr-FR">Pour toute question relative à votre commande, contactez-nous (au 800-555-0199) du lundi au vendredi, de 8h à 20h.</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="it-IT">In caso di domande relative agli ordini, chiamaci (800-555-0199) dal lunedì al venerdì, dalle 8:00 alle 20:00</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="ja-JP">ご注文に関してご質問などがございましたら、月～金の午前 8 時～午後 8 時の間にお電話 (800-555-0199) にてご連絡ください。</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="zh-CN">如果您有关于订单方面的问题，请于周一至周五早上 8 时至晚上 8 时随时致电 800-555-0199 与我们联系。</custom-attribute>
         </custom-attributes>
     </content>
 
@@ -6020,11 +6020,11 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <searchable-flag>false</searchable-flag>
         <page-attributes/>
         <custom-attributes>
-            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h3&gt;Help?&amp;nbsp;&lt;span&gt;888-553-XXXX&lt;/span&gt;&lt;/h3&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h3&gt;Besoin d'aide ? &lt;span&gt;888-553-XXXX&lt;/span&gt;&lt;/h3&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;h3&gt;Serve aiuto? &lt;span&gt;888-553-XXXX&lt;/span&gt;&lt;/h3&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;h3&gt;サポートをご利用になりますか?&lt;br&gt;&lt;span&gt;888-553-XXXX&lt;/span&gt;&lt;/h3&gt;</custom-attribute>
-            <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;h3&gt;需要帮助？&lt;span&gt;888-553-XXXX&lt;/span&gt;&lt;/h3&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h3&gt;Help?&amp;nbsp;&lt;span&gt;800-555-0199&lt;/span&gt;&lt;/h3&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h3&gt;Besoin d'aide ? &lt;span&gt;800-555-0199&lt;/span&gt;&lt;/h3&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;h3&gt;Serve aiuto? &lt;span&gt;800-555-0199&lt;/span&gt;&lt;/h3&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;h3&gt;サポートをご利用になりますか?&lt;br&gt;&lt;span&gt;800-555-0199&lt;/span&gt;&lt;/h3&gt;</custom-attribute>
+            <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;h3&gt;需要帮助？&lt;span&gt;800-555-0199&lt;/span&gt;&lt;/h3&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="cart-checkout"/>
@@ -6108,23 +6108,23 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;If you can’t find what you are looking for, why not let our trained staff recommend something?&lt;/p&gt;&#13;
-&lt;p&gt;Our Customer Service Representatives are available now to help. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Email us&lt;/a&gt; or call 800-555-XXXX.&lt;/p&gt;&#13;
+&lt;p&gt;Our Customer Service Representatives are available now to help. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Email us&lt;/a&gt; or call 800-555-0199.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;Vous ne trouvez pas ce que vous recherchez. Demandez l'aide de notre personnel qualifié.&lt;/p&gt;&#13;
-&lt;p&gt;Les conseillers de notre service client sont à votre disposition pour vous aider. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Envoyez-nous un e-mail ou&lt;/a&gt; appelez le 800-555-XXXX.&lt;/p&gt;&#13;
+&lt;p&gt;Les conseillers de notre service client sont à votre disposition pour vous aider. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Envoyez-nous un e-mail ou&lt;/a&gt; appelez le 800-555-0199.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;Se non riesci a trovare quello che cerchi, lascia che il nostro personale qualificato ti offra qualche consiglio.&lt;/p&gt;&#13;
-&lt;p&gt;I nostri operatori del servizio clienti sono disponibili immediatamente per aiutarti. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Mandaci un'e-mail&lt;/a&gt; o chiama al numero 800-555-XXXX.&lt;/p&gt;&#13;
+&lt;p&gt;I nostri operatori del servizio clienti sono disponibili immediatamente per aiutarti. &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Mandaci un'e-mail&lt;/a&gt; o chiama al numero 800-555-0199.&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;お探しの情報が見つからない場合は、弊社の熟練スタッフがお手伝いいたします。&lt;/p&gt;&#13;
-&lt;p&gt;弊社のカスタマーサービスまで、&lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Eメール&lt;/a&gt;またはお電話 (800-555-XXXX) にてご相談ください。&lt;/p&gt;&#13;
+&lt;p&gt;弊社のカスタマーサービスまで、&lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Eメール&lt;/a&gt;またはお電話 (800-555-0199) にてご相談ください。&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;div style="height:110px;"&gt;&#13;
 &lt;p style="font-weight:bold;"&gt;如果您无法找到想要找的内容，何不让我们训练有素的员工给您推荐？&lt;/p&gt;&#13;
-&lt;p&gt;我们的客户服务代表可提供帮助。 &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;给我们发电子邮件&lt;/a&gt; 或致电 800-555-XXXX。&lt;/p&gt;&#13;
+&lt;p&gt;我们的客户服务代表可提供帮助。 &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;给我们发电子邮件&lt;/a&gt; 或致电 800-555-0199。&lt;/p&gt;&#13;
 &lt;/div&gt;</custom-attribute>
         </custom-attributes>
     </content>
@@ -6169,7 +6169,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
 &#13;
 &#13;
 &lt;h3 id="q02"&gt;02. Can I change my order?&lt;/h3&gt;&#13;
-&lt;p&gt;Once the order has been placed, it cannot be changed online. If you want to change your order, please call 1 (800) 555 XXXX, and if it has not yet been processed we will change or re-issue a new amended order.&#13;
+&lt;p&gt;Once the order has been placed, it cannot be changed online. If you want to change your order, please call 1 (800) 555 0199, and if it has not yet been processed we will change or re-issue a new amended order.&#13;
 &lt;br /&gt;&lt;a href="#faq-top"&gt;Back to Top&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
@@ -6209,7 +6209,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
 &#13;
 &#13;
 &lt;h3 id="q10"&gt;10. I have a complaint, who should I speak to?&lt;/h3&gt;&#13;
-&lt;p&gt;If it is about a product you have bought from our stores, please get in touch with the store you purchased from &amp;ndash; the telephone numbers of all our stores can be found on this website. If the complaint is about an online shopping experience please call one of our customer service representatives at 1 (800) 555 1212 or complete the form on the &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Contact Us&lt;/a&gt; page.&#13;
+&lt;p&gt;If it is about a product you have bought from our stores, please get in touch with the store you purchased from &amp;ndash; the telephone numbers of all our stores can be found on this website. If the complaint is about an online shopping experience please call one of our customer service representatives at 1 (800) 555 0199 or complete the form on the &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Contact Us&lt;/a&gt; page.&#13;
 &lt;br /&gt;&lt;a href="#faq-top"&gt;Back to Top&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
@@ -6219,7 +6219,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
 &#13;
 &#13;
 &lt;h3 id="q12"&gt;12. Do you offer discounts on corporate or bulk orders?&lt;/h3&gt;&#13;
-&lt;p&gt;We offer discounts for deliveries to the same address over certain order values. Please call 1(800) 555 XXXX to discuss your requirements&#13;
+&lt;p&gt;We offer discounts for deliveries to the same address over certain order values. Please call 1(800) 555 0199 to discuss your requirements&#13;
 &lt;br /&gt;&lt;a href="#faq-top"&gt;Back to Top&lt;/a&gt;&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h1 class="content-header" id="faq-top"&gt;FAQ&lt;/h1&gt;&#13;
 &#13;
@@ -6246,7 +6246,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
 &#13;
 &#13;
 &lt;h3 id="q02"&gt;02. Puis-je modifier ma commande ?&lt;/h3&gt;&#13;
-&lt;p&gt;Dès lors qu'une commande est passée, elle ne peut plus être modifiée en ligne. Pour modifier votre commande, appelez le 1 (800) 555 XXXX. Si votre commande n'a pas encore été traitée, nous la modifierons et émettrons une nouvelle commande modifiée.&#13;
+&lt;p&gt;Dès lors qu'une commande est passée, elle ne peut plus être modifiée en ligne. Pour modifier votre commande, appelez le 1 (800) 555 0199. Si votre commande n'a pas encore été traitée, nous la modifierons et émettrons une nouvelle commande modifiée.&#13;
 &lt;br /&gt;&lt;a href="#faq-top"&gt;Haut de page&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
@@ -6286,7 +6286,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
 &#13;
 &#13;
 &lt;h3 id="q10"&gt;10. Je souhaite faire une réclamation, à qui dois-je m'adresser ?&lt;/h3&gt;&#13;
-&lt;p&gt;Si votre réclamation concerne un produit que vous avez acheté dans l'un de nos magasins, veuillez prendre contact avec le magasin concerné&amp;ndash; le numéro de téléphone de tous nos magasins figure sur ce site Web. Si votre réclamation concerne un achat effectué en ligne, appelez un de nos conseillers clientèle au 1 (800) 555 XXXX ou remplissez le formulaire disponible sur la page &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Contactez-nous&lt;/a&gt; .&#13;
+&lt;p&gt;Si votre réclamation concerne un produit que vous avez acheté dans l'un de nos magasins, veuillez prendre contact avec le magasin concerné&amp;ndash; le numéro de téléphone de tous nos magasins figure sur ce site Web. Si votre réclamation concerne un achat effectué en ligne, appelez un de nos conseillers clientèle au 1 (800) 555 0199 ou remplissez le formulaire disponible sur la page &lt;a href="$httpsUrl(CustomerService-ContactUs)$"&gt;Contactez-nous&lt;/a&gt; .&#13;
 &lt;br /&gt;&lt;a href="#faq-top"&gt;Haut de page&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
@@ -6296,7 +6296,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
 &#13;
 &#13;
 &lt;h3 id="q12"&gt;12 Proposez-vous des remises pour les commandes destinées aux entreprises ou pour les commandes en gros ?&lt;/h3&gt;&#13;
-&lt;p&gt;Nous proposons des remises pour les livraisons à la même adresse au-delà d'un certain montant de commande. Veuillez nous contacter au 1 (800) 888 555 XXXX pour nous préciser vos besoins.&#13;
+&lt;p&gt;Nous proposons des remises pour les livraisons à la même adresse au-delà d'un certain montant de commande. Veuillez nous contacter au 1 (800) 555 0199 pour nous préciser vos besoins.&#13;
 &lt;br /&gt;&lt;a href="#faq-top"&gt;Haut de page&lt;/a&gt;&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;h1 class="content-header" id="faq-top"&gt;Domande frequenti&lt;/h1&gt;&#13;
 &#13;
@@ -6323,7 +6323,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
 &#13;
 &#13;
 &lt;h3 id="q02"&gt;02. È possibile modificare un ordine?&lt;/h3&gt;&#13;
-&lt;p&gt;Una volta inviato l'ordine, non è più possibile modificarlo. Se desideri modificarlo, chiama il numero 1 (800) 555 XXXX. Se l'ordine non è stato ancora evaso, sarà possibile modificarlo o emettere un nuovo ordine corretto.&#13;
+&lt;p&gt;Una volta inviato l'ordine, non è più possibile modificarlo. Se desideri modificarlo, chiama il numero 1 (800) 555 0199. Se l'ordine non è stato ancora evaso, sarà possibile modificarlo o emettere un nuovo ordine corretto.&#13;
 &lt;br /&gt;&lt;a href="#faq-top"&gt;Torna all'inizio&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
@@ -6373,7 +6373,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
 &#13;
 &#13;
 &lt;h3 id="q12"&gt;12. Offrite sconti per ordini aziendali di grandi volumi?&lt;/h3&gt;&#13;
-&lt;p&gt;Offriamo sconti per consegne presso lo stesso indirizzo o per ordini che superano determinati valori. Chiama il numero 1(800) 555 XXXX per discutere delle tue esigenze.&#13;
+&lt;p&gt;Offriamo sconti per consegne presso lo stesso indirizzo o per ordini che superano determinati valori. Chiama il numero 1(800) 555 0199 per discutere delle tue esigenze.&#13;
 &lt;br /&gt;&lt;a href="#faq-top"&gt;Torna all'inizio&lt;/a&gt;&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;h1 class="content-header" id="faq-top"&gt;よくあるご質問 (FAQ)&lt;/h1&gt;&#13;
 &#13;
@@ -6400,7 +6400,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
 &#13;
 &#13;
 &lt;h3 id="q02"&gt;02. 注文を変更することは可能ですか?&lt;/h3&gt;&#13;
-&lt;p&gt;ご注文確定後は、オンラインでの変更はできません。ご注文を変更したい場合は、(800) 555 XXXX までお電話にてご連絡ください。ご注文がまだ処理されていない場合はこちらで変更するか、または変更した注文を再発行いたします。&#13;
+&lt;p&gt;ご注文確定後は、オンラインでの変更はできません。ご注文を変更したい場合は、(800) 555 0199 までお電話にてご連絡ください。ご注文がまだ処理されていない場合はこちらで変更するか、または変更した注文を再発行いたします。&#13;
 &lt;br /&gt;&lt;a href="#faq-top"&gt;トップに戻る&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
@@ -6450,7 +6450,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
 &#13;
 &#13;
 &lt;h3 id="q12"&gt;12. 企業割引や大量注文割引はありますか?&lt;/h3&gt;&#13;
-&lt;p&gt;同じ住所に配送されるご注文が所定の金額を超えた場合に、割引をご利用いただけます。該当する条件については、お電話 (1(800) 555 XXXX) でお問い合わせください。&#13;
+&lt;p&gt;同じ住所に配送されるご注文が所定の金額を超えた場合に、割引をご利用いただけます。該当する条件については、お電話 (1(800) 555 0199) でお問い合わせください。&#13;
 &lt;br /&gt;&lt;a href="#faq-top"&gt;トップに戻る&lt;/a&gt;&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;h1 class="content-header" id="faq-top"&gt;常见问题&lt;/h1&gt;&#13;
 &#13;
@@ -6477,7 +6477,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
 &#13;
 &#13;
 &lt;h3 id="q02"&gt;02.我是否可以更改订单？&lt;/h3&gt;&#13;
-&lt;p&gt;订单在下达之后无法进行在线更改。如需更改订单，请致电 1 (800) 555 XXXX，如果尚未被处理，我们将更改或重新发布新的修改过的订单。&#13;
+&lt;p&gt;订单在下达之后无法进行在线更改。如需更改订单，请致电 1 (800) 555 0199，如果尚未被处理，我们将更改或重新发布新的修改过的订单。&#13;
 &lt;br /&gt;&lt;a href="#faq-top"&gt;返回页首&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &#13;
@@ -6527,7 +6527,7 @@ Sintonizzatore esterno ATSC DTB-H260F Samsung&lt;/div&gt;&#13;
 &#13;
 &#13;
 &lt;h3 id="q12"&gt;12.你们是否为企业或批量订单提供折扣？&lt;/h3&gt;&#13;
-&lt;p&gt;我们为送往同一地址的超过特定金额的订单提供折扣。请致电 1(800) 555 XXXX 告知您的请求&#13;
+&lt;p&gt;我们为送往同一地址的超过特定金额的订单提供折扣。请致电 1(800) 555 0199 告知您的请求&#13;
 &lt;br /&gt;&lt;a href="#faq-top"&gt;返回页首&lt;/a&gt;&lt;/p&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
@@ -10622,15 +10622,15 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
         <page-attributes/>
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;p&gt;If you cannot find what you are looking for, why not let our trained staff recommend something?&lt;/p&gt;&#13;
-&lt;div&gt;Our Customer Service Representatives are available now to help. &lt;a href="mailto:service@demandware.com"&gt;Email&lt;/a&gt; us or call 800-555-XXXX.&lt;/div&gt;</custom-attribute>
+&lt;div&gt;Our Customer Service Representatives are available now to help. &lt;a href="mailto:service@demandware.com"&gt;Email&lt;/a&gt; us or call 800-555-0199.&lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;p&gt;Vous ne trouvez pas ce que vous recherchez. Demandez l'aide de notre personnel qualifié.&lt;/p&gt;&#13;
-&lt;div&gt;Les conseillers de notre service client sont à votre disposition pour vous aider. &lt;a href="mailto:service@demandware.com"&gt;E-mail&lt;/a&gt; ou appelez-nous au 800-555-XXXX.&lt;/div&gt;</custom-attribute>
+&lt;div&gt;Les conseillers de notre service client sont à votre disposition pour vous aider. &lt;a href="mailto:service@demandware.com"&gt;E-mail&lt;/a&gt; ou appelez-nous au 800-555-0199.&lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;p&gt;Se non riesci a trovare quello che cerchi, lascia che il nostro personale qualificato ti offra qualche consiglio.&lt;/p&gt;&#13;
-&lt;div&gt;I nostri operatori del servizio clienti sono disponibili immediatamente per aiutarti. &lt;a href="mailto:service@demandware.com"&gt;E-mail&lt;/a&gt; o chiama il numero 800-555-XXXX.&lt;/div&gt;</custom-attribute>
+&lt;div&gt;I nostri operatori del servizio clienti sono disponibili immediatamente per aiutarti. &lt;a href="mailto:service@demandware.com"&gt;E-mail&lt;/a&gt; o chiama il numero 800-555-0199.&lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;p&gt;お探しの情報が見つからない場合は、弊社の熟練スタッフがお手伝いいたします。&lt;/p&gt;&#13;
-&lt;div&gt;弊社のカスタマーサービスまで、 &lt;a href="mailto:service@demandware.com"&gt;Eメール&lt;/a&gt; またはお電話 (800-555-XXXX) にてご相談ください。&lt;/div&gt;</custom-attribute>
+&lt;div&gt;弊社のカスタマーサービスまで、 &lt;a href="mailto:service@demandware.com"&gt;Eメール&lt;/a&gt; またはお電話 (800-555-0199) にてご相談ください。&lt;/div&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;p&gt;如果您无法找到想要找的内容，何不让我们训练有素的员工给您推荐？&lt;/p&gt;&#13;
-&lt;div&gt;我们的客户服务代表可提供帮助。 &lt;a href="mailto:service@demandware.com"&gt;给我们发送电子邮件&lt;/a&gt; 致电 800-555-XXXX。&lt;/div&gt;</custom-attribute>
+&lt;div&gt;我们的客户服务代表可提供帮助。 &lt;a href="mailto:service@demandware.com"&gt;给我们发送电子邮件&lt;/a&gt; 致电 800-555-0199。&lt;/div&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="grid-banners"/>
@@ -10898,8 +10898,8 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
     &lt;/li&gt;&#13;
 &lt;/ol&gt;&#13;
 &#13;
-&lt;p&gt;If your order is cancelled by us, you will receive an email which will explain the reason for the cancellation. You will not be billed for any cancelled items. If you are interested in alternative products, please contact our Customer Service Team by email or by calling 1 (800) 555 XXXX&amp;nbsp;for a recommendation. &lt;/p&gt;&#13;
-&lt;p&gt;* Please note that calls to 1 (800) 555 XXXX &amp;nbsp;that are not made from a US landline may be subject to a charge.&lt;/p&gt;</custom-attribute>
+&lt;p&gt;If your order is cancelled by us, you will receive an email which will explain the reason for the cancellation. You will not be billed for any cancelled items. If you are interested in alternative products, please contact our Customer Service Team by email or by calling 1 (800) 555 0199&amp;nbsp;for a recommendation. &lt;/p&gt;&#13;
+&lt;p&gt;* Please note that calls to 1 (800) 555 0199 &amp;nbsp;that are not made from a US landline may be subject to a charge.&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h1 class="content-header"&gt;Modification ou annulation de votre commande&lt;/h1&gt;&#13;
 &#13;
 &lt;p&gt;Pour en savoir plus sur votre droit de retour pendant 28 jours, reportez-vous à la section du site Web consacrée à la politique de retour. Cette section détaille vos droits légaux d'annulation. Veuillez noter que le délai légal est inférieur au délai de 28 jours prévu par notre politique de retour.&lt;/p&gt;&#13;
@@ -11045,8 +11045,8 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
     &lt;/li&gt;&#13;
 &lt;/ol&gt;&#13;
 &#13;
-&lt;p&gt;弊社の方でお客様のご注文をキャンセルした場合は、キャンセルの理由を記載した Eメールをお送りします。キャンセルされた商品について課金されることはありません。代替商品にご興味をおもちの場合は、Eメールにて、またはお電話 (1 (800) 555 XXXX) にて弊社のカスタマーサービスチームまでお問い合わせください。 &lt;/p&gt;&#13;
-&lt;p&gt;* 米国の固定電話以外から 1 (800) 555 XXXX におかけになった場合、料金が発生することがあります。&lt;/p&gt;</custom-attribute>
+&lt;p&gt;弊社の方でお客様のご注文をキャンセルした場合は、キャンセルの理由を記載した Eメールをお送りします。キャンセルされた商品について課金されることはありません。代替商品にご興味をおもちの場合は、Eメールにて、またはお電話 (1 (800) 555 0199) にて弊社のカスタマーサービスチームまでお問い合わせください。 &lt;/p&gt;&#13;
+&lt;p&gt;* 米国の固定電話以外から 1 (800) 555 0199 におかけになった場合、料金が発生することがあります。&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;h1 class="content-header"&gt;更改或取消您的订单&lt;/h1&gt;&#13;
 &#13;
 &lt;p&gt;有关您的 28 天退货权利的详细信息，请参阅本网站的“退货政策”部分。该部分将详细说明您的法定退货权利。请注意，这个期限比“退货政策”中规定的 28 天期限短。&lt;/p&gt;&#13;
@@ -11094,8 +11094,8 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
     &lt;/li&gt;&#13;
 &lt;/ol&gt;&#13;
 &#13;
-&lt;p&gt;如果我们取消了您的订单，您将收到电子邮件说明取消原因。不会向您收取取消项目的费用。如果您对替代产品有兴趣，请通过电子邮件或致电 1 (800) 555 XXXX 联系我们的客户服务团队获取建议。 &lt;/p&gt;&#13;
-&lt;p&gt;*请注意，使用美国座机以外的其它设备拨打 1 (800) 555 XXXX 可能需要付费。&lt;/p&gt;</custom-attribute>
+&lt;p&gt;如果我们取消了您的订单，您将收到电子邮件说明取消原因。不会向您收取取消项目的费用。如果您对替代产品有兴趣，请通过电子邮件或致电 1 (800) 555 0199 联系我们的客户服务团队获取建议。 &lt;/p&gt;&#13;
+&lt;p&gt;*请注意，使用美国座机以外的其它设备拨打 1 (800) 555 0199 可能需要付费。&lt;/p&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="ordering">
@@ -11256,7 +11256,7 @@ Demandware へようこそ。成功は人から始まる、Demandware はそれ�
 ATTN: Privacy&lt;br /&gt;&#13;
 0 Some St&lt;br /&gt;&#13;
 CityName, XX 00000 USA&lt;br /&gt;&#13;
-+1 (800)&amp;nbsp;555 XXX&lt;/p&gt;</custom-attribute>
++1 (800)&amp;nbsp;555 0199&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h1 class="content-header privacy-policy"&gt;Politique de confidentialité&lt;/h1&gt;&#13;
 &lt;p&gt;Préserver la vie privée des clients et des visiteurs du site Web de Demandware est pour nous une priorité. La présente déclaration décrit les pratiques actuelles de notre site (www.demandware.com) en matière de collecte, de partage et de confidentialité des informations.&lt;/p&gt;&#13;
 &#13;
@@ -11310,7 +11310,7 @@ CityName, XX 00000 USA&lt;br /&gt;&#13;
 ATTN: Privacy&lt;br /&gt;&#13;
 5 Wall Street&lt;br /&gt;&#13;
 Burlington, MA 01803 USA&lt;br /&gt;&#13;
-+1 (800) 555 XXXX&lt;/p&gt;</custom-attribute>
++1 (800) 555 0199&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;h1 class="content-header privacy-policy"&gt;Informativa sulla privacy&lt;/h1&gt;&#13;
 &lt;p&gt;In Demandware, rispettiamo la privacy dei nostri clienti e dei visitatori del nostro sito web. In questa dichiarazione vengono descritte la raccolta e la condivisione delle informazioni correnti, oltre alle prassi relative alla privacy per il nostro sito web, www.demandware.com&lt;/p&gt;&#13;
 &#13;
@@ -11364,7 +11364,7 @@ Burlington, MA 01803 USA&lt;br /&gt;&#13;
 ATTN: Privacy&lt;br /&gt;&#13;
 5 Wall Street&lt;br /&gt;&#13;
 Burlington, MA 01803, USA&lt;br /&gt;&#13;
-+1 (800) 555 XXX (principale)&lt;/p&gt;</custom-attribute>
++1 (800) 555 0199 (principale)&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;h1 class="content-header privacy-policy"&gt;プライバシーポリシー&lt;/h1&gt;&#13;
 &lt;p&gt;Demandware では、弊社の顧客および弊社の Web サイトの訪問者のプライバシーを尊重します。本ステートメントは、弊社の Web サイト www.demandware.com における現在の情報の収集、共有、およびプライバシーの取り扱いについて説明しています。&lt;/p&gt;&#13;
 &#13;
@@ -11418,7 +11418,7 @@ Burlington, MA 01803, USA&lt;br /&gt;&#13;
 ATTN: Privacy&lt;br /&gt;&#13;
 5 Wall Street&lt;br /&gt;&#13;
 Burlington, MA 01803, USA&lt;br /&gt;&#13;
-+1 (800) 555 XXX (代表)&lt;/p&gt;</custom-attribute>
++1 (800) 555 0199 (代表)&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;h1 class="content-header privacy-policy"&gt;隐私政策&lt;/h1&gt;&#13;
 &lt;p&gt;在 Demandware，我们尊重客户及网站访客的隐私。本声明介绍了我们的网站 www.demandware.com 现行的信息收集、共享及隐私保护做法。&lt;/p&gt;&#13;
 &#13;
@@ -11472,7 +11472,7 @@ Burlington, MA 01803, USA&lt;br /&gt;&#13;
 ATTN:隐私政策&lt;br /&gt;&#13;
 5 Wall Street&lt;br /&gt;&#13;
 Burlington, MA 01803 USA&lt;br /&gt;&#13;
-+1 (800) 555 XXX（总机）&lt;/p&gt;</custom-attribute>
++1 (800) 555 0199（总机）&lt;/p&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="privacy-security">
@@ -11487,60 +11487,60 @@ Burlington, MA 01803 USA&lt;br /&gt;&#13;
         <display-name xml:lang="it-IT">Informazioni sui resi</display-name>
         <display-name xml:lang="ja-JP">返品についての情報</display-name>
         <display-name xml:lang="zh-CN">关于退货的信息</display-name>
-        <description xml:lang="x-default">We want you to be entirely happy with your purchase from us. If you are unhappy with the goods in any way please contact our Customer Service Team at customerservice@demandware.com or call 1 (800) 555 XXXX as soon as possible. Please note that calls to 1 (800) 555 XXXX that are not made from a US landline may be subject to a charge. If for any reason you are unhappy with your goods, you have the right to return them and receive a full refund.</description>
-        <description xml:lang="fr-FR">Notre objectif est que les articles que vous nous achetez vous donnent entièrement satisfaction. Si vous n'êtes pas satisfait des articles achetés, quelle qu'en soit la raison, contactez notre équipe d'assistance client à l'adresse customerservice@demandware.com ou au 1 (800) 555 XXXX dès que possible. Veuillez noter que les appels au 1 (800) 888 555 XXXX qui ne proviennent pas d'une ligne fixe aux États-Unis peuvent faire l'objet d'une facturation. Si vous n'êtes pas satisfaits de vos articles, quelle qu'en soit la raison, vous disposez d'un droit de retour et de remboursement intégral.</description>
-        <description xml:lang="it-IT">Il nostro obiettivo è che i clienti siano sempre soddisfatti dei loro acquisti. Se i prodotti che hai ricevuto non sono di tuo gradimento, contatta il servizio clienti all'indirizzo customerservice@demandware.com o chiama il numero 1 (800) 555 XXXX quanto prima. Le chiamate al numero 1 (800) 555 XXXX non effettuate da una linea fissa negli Stati Uniti potrebbero essere soggette a costi. Se per qualsiasi motivo i prodotti ricevuti non ti soddisfano, hai il diritto di renderli e di ricevere un rimborso completo.</description>
-        <description xml:lang="ja-JP">お買い上げいただいた商品に完全にご満足いただくことが、弊社の願いです。何らかの理由で商品にご満足いただけない場合は、できるだけ早くカスタマーサービスチームまで Eメール (customerservice@demandware.com) あるいはお電話 (1 (800) 555 XXXX) にてご連絡ください。米国の固定電話以外から 1 (800) 555 XXXX におかけになった場合、料金が発生することがあります。商品にご満足いただけない場合は、その理由にかかわらず、お客様は商品を返品して全額払い戻しを受けることができます。</description>
-        <description xml:lang="zh-CN">我们希望您对从我们这里购物感到愉快。如果您对任何商品感到不满意，请尽快通过 customerservice@demandware.com 或致电 1 (800) 555 XXXX 与我们的客户服务团队联系。请注意，使用美国座机以外的其它设备拨打 1 (800) 555 XXXX 可能需要付费。如果您由于任何原因对商品感到不满意，您有权退回商品并获得全额退款。</description>
+        <description xml:lang="x-default">We want you to be entirely happy with your purchase from us. If you are unhappy with the goods in any way please contact our Customer Service Team at customerservice@demandware.com or call 1 (800) 555 0199 as soon as possible. Please note that calls to 1 (800) 555 0199 that are not made from a US landline may be subject to a charge. If for any reason you are unhappy with your goods, you have the right to return them and receive a full refund.</description>
+        <description xml:lang="fr-FR">Notre objectif est que les articles que vous nous achetez vous donnent entièrement satisfaction. Si vous n'êtes pas satisfait des articles achetés, quelle qu'en soit la raison, contactez notre équipe d'assistance client à l'adresse customerservice@demandware.com ou au 1 (800) 555 0199 dès que possible. Veuillez noter que les appels au 1 (800) 555 0199 qui ne proviennent pas d'une ligne fixe aux États-Unis peuvent faire l'objet d'une facturation. Si vous n'êtes pas satisfaits de vos articles, quelle qu'en soit la raison, vous disposez d'un droit de retour et de remboursement intégral.</description>
+        <description xml:lang="it-IT">Il nostro obiettivo è che i clienti siano sempre soddisfatti dei loro acquisti. Se i prodotti che hai ricevuto non sono di tuo gradimento, contatta il servizio clienti all'indirizzo customerservice@demandware.com o chiama il numero 1 (800) 555 0199 quanto prima. Le chiamate al numero 1 (800) 555 0199 non effettuate da una linea fissa negli Stati Uniti potrebbero essere soggette a costi. Se per qualsiasi motivo i prodotti ricevuti non ti soddisfano, hai il diritto di renderli e di ricevere un rimborso completo.</description>
+        <description xml:lang="ja-JP">お買い上げいただいた商品に完全にご満足いただくことが、弊社の願いです。何らかの理由で商品にご満足いただけない場合は、できるだけ早くカスタマーサービスチームまで Eメール (customerservice@demandware.com) あるいはお電話 (1 (800) 555 0199) にてご連絡ください。米国の固定電話以外から 1 (800) 555 0199 におかけになった場合、料金が発生することがあります。商品にご満足いただけない場合は、その理由にかかわらず、お客様は商品を返品して全額払い戻しを受けることができます。</description>
+        <description xml:lang="zh-CN">我们希望您对从我们这里购物感到愉快。如果您对任何商品感到不满意，请尽快通过 customerservice@demandware.com 或致电 1 (800) 555 0199 与我们的客户服务团队联系。请注意，使用美国座机以外的其它设备拨打 1 (800) 555 0199 可能需要付费。如果您由于任何原因对商品感到不满意，您有权退回商品并获得全额退款。</description>
         <online-flag>true</online-flag>
         <searchable-flag>true</searchable-flag>
         <page-attributes/>
         <custom-attributes>
             <custom-attribute attribute-id="body" xml:lang="x-default">&lt;h1 class="content-header"&gt;Return Policy&lt;/h1&gt;&#13;
 &#13;
-&lt;p&gt;We want you to be entirely happy with your purchase from us. If you are unhappy with the goods in any way please contact our Customer Service Team at customerservice@demandware.com or call 1 (800) 800 555 XXXX as soon as possible. Please note that calls to 1 (800) 888 555 XXXX that are not made from a US landline may be subject to a charge. If for any reason you are unhappy with your goods, you have the right to return them and receive a full refund. This right of return is without prejudice to your statutory right of cancellation, details of which are in the Order Cancellation section of the website. You may return goods and receive a refund provided:&lt;/p&gt;&#13;
+&lt;p&gt;We want you to be entirely happy with your purchase from us. If you are unhappy with the goods in any way please contact our Customer Service Team at customerservice@demandware.com or call 1 (800) 555 0199 as soon as possible. Please note that calls to 1 (800) 555 0199 that are not made from a US landline may be subject to a charge. If for any reason you are unhappy with your goods, you have the right to return them and receive a full refund. This right of return is without prejudice to your statutory right of cancellation, details of which are in the Order Cancellation section of the website. You may return goods and receive a refund provided:&lt;/p&gt;&#13;
 &lt;ul&gt;&#13;
     &lt;li&gt;They are received back at our Returns Department located at XXXXXX normally within 28 days. This 28 day period commences the day after your order has been shipped. Please see Return Instructions for details on the returns process.&lt;/li&gt;&#13;
     &lt;li&gt;They have not been damaged, washed, altered or worn and must include the original packaging, labelling and Returns Form located at the bottom of the Packing List (enclosed with the delivered goods). Please note that we are unable to accept returns for customized products.&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
-&lt;p&gt;We'll do everything we can to take care of your return quickly. It may take up to two billing cycles for the credit to appear on your credit card statement. Returns with complete documentation receive priority. Please note that if the Demandware returns process is not followed, Demandware is not responsible for returns lost in transit to us. All sales involving customized products are final, and may not be returned. Please also note that you do not have a statutory cancellation right for customized products. If you purchased a customized product online and it is damaged during shipping, please contact our Customer Service Team at 1 (800) 555 XXXX within 10 days of receiving your purchase.&lt;/p&gt;&#13;
-&lt;p&gt;If you purchased a customized product at a retail location and receive a damaged or defective item, please contact the specific store where the purchase was made. For a list of US stores, please refer to the Store Locator section of our website or call us at 1 (800) 555 XXXX.  Please note that calls to 1 (800) 555 XXXX that are not made from a US landline may be subject to a charge.&lt;/p&gt;</custom-attribute>
+&lt;p&gt;We'll do everything we can to take care of your return quickly. It may take up to two billing cycles for the credit to appear on your credit card statement. Returns with complete documentation receive priority. Please note that if the Demandware returns process is not followed, Demandware is not responsible for returns lost in transit to us. All sales involving customized products are final, and may not be returned. Please also note that you do not have a statutory cancellation right for customized products. If you purchased a customized product online and it is damaged during shipping, please contact our Customer Service Team at 1 (800) 555 0199 within 10 days of receiving your purchase.&lt;/p&gt;&#13;
+&lt;p&gt;If you purchased a customized product at a retail location and receive a damaged or defective item, please contact the specific store where the purchase was made. For a list of US stores, please refer to the Store Locator section of our website or call us at 1 (800) 555 0199.  Please note that calls to 1 (800) 555 0199 that are not made from a US landline may be subject to a charge.&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="fr-FR">&lt;h1 class="content-header"&gt;Politique de retour&lt;/h1&gt;&#13;
 &#13;
-&lt;p&gt;Notre objectif est que les articles que vous nous achetez vous donnent entièrement satisfaction. Si vous n'êtes pas satisfait des articles achetés, quelle qu'en soit la raison, contactez notre équipe d'assistance client à l'adresse customerservice@demandware.com ou au 1 (800) 555 XXXX dès que possible. Veuillez noter que les appels au 1 (800) 888 555 XXXX qui ne proviennent pas d'une ligne fixe aux États-Unis peuvent faire l'objet d'une facturation. Si vous n'êtes pas satisfaits de vos articles, quelle qu'en soit la raison, vous disposez d'un droit de retour et de remboursement intégral. Le droit de retour est sans préjudice de votre droit légal d'annulation, qui est détaillé dans la section du site Web consacrée à l'annulation d'une commande. Vous pouvez retourner les articles et obtenir leur remboursement à condition :&lt;/p&gt;&#13;
+&lt;p&gt;Notre objectif est que les articles que vous nous achetez vous donnent entièrement satisfaction. Si vous n'êtes pas satisfait des articles achetés, quelle qu'en soit la raison, contactez notre équipe d'assistance client à l'adresse customerservice@demandware.com ou au 1 (800) 555 0199 dès que possible. Veuillez noter que les appels au 1 (800) 555 0199 qui ne proviennent pas d'une ligne fixe aux États-Unis peuvent faire l'objet d'une facturation. Si vous n'êtes pas satisfaits de vos articles, quelle qu'en soit la raison, vous disposez d'un droit de retour et de remboursement intégral. Le droit de retour est sans préjudice de votre droit légal d'annulation, qui est détaillé dans la section du site Web consacrée à l'annulation d'une commande. Vous pouvez retourner les articles et obtenir leur remboursement à condition :&lt;/p&gt;&#13;
 &lt;ul&gt;&#13;
     &lt;li&gt;qu'ils soient reçus par notre service Retour situé à XXXXXX dans un délai normal de 28 jours. Ce délai de 28 jours court à partir du lendemain de l'expédition de votre commande. Veuillez consulter les instructions applicables aux retours pour plus d'informations sur les modalités de retour.&lt;/li&gt;&#13;
     &lt;li&gt;Qu'ils n'aient pas été abîmés, lavés, altérés ou portés et qu'ils soient renvoyés dans leur emballage d'origine, avec leurs étiquettes et le formulaire de retour de la liste de contrôle (accompagnant les articles livrés). Veuillez noter que nous n'acceptons pas les retours de produits personnalisés.&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
-&lt;p&gt;Nous nous efforcerons de traiter rapidement votre retour. Jusqu'à deux cycles de facturation peuvent s'écouler avant que le crédit correspondant au montant des articles retournés n'apparaisse sur votre relevé de carte de crédit. Les retours accompagnés de toutes les pièces requises sont traités en priorité. Veuillez noter que si le processus de retour de Demandware n'est pas respecté, Demandware décline toute responsabilité en cas de perte d'articles qui nous sont retournés. La vente des produits personnalisés est définitive. Ces produits ne sont pas repris. Veuillez noter également que vous ne disposez d'aucun droit d'annulation légal pour les produits personnalisés. Si vous avez acheté un produit personnalisé en ligne et qu'il est abîmé pendant le transport, contactez notre équipe d'assistance client au 1 (800) 555 XXXX dans un délai de 10 jours à compter de la réception de l'article concerné.&lt;/p&gt;&#13;
-&lt;p&gt;Si vous avez acheté un article personnalisé en magasin et qu'il vous est livré abîmé ou défectueux, prenez contact avec le magasin dans lequel l'achat a été effectué. Pour obtenir la liste des magasins aux États-Unis, reportez-vous à la section du site Web consacrée au localisateur de magasins ou appelez-nous au 1 (800) 555 XXXX. Veuillez noter que les appels au 1 (800) 555 XXXX qui ne proviennent pas d'une ligne fixe aux États-Unis peuvent faire l'objet d'une facturation.&lt;/p&gt;</custom-attribute>
+&lt;p&gt;Nous nous efforcerons de traiter rapidement votre retour. Jusqu'à deux cycles de facturation peuvent s'écouler avant que le crédit correspondant au montant des articles retournés n'apparaisse sur votre relevé de carte de crédit. Les retours accompagnés de toutes les pièces requises sont traités en priorité. Veuillez noter que si le processus de retour de Demandware n'est pas respecté, Demandware décline toute responsabilité en cas de perte d'articles qui nous sont retournés. La vente des produits personnalisés est définitive. Ces produits ne sont pas repris. Veuillez noter également que vous ne disposez d'aucun droit d'annulation légal pour les produits personnalisés. Si vous avez acheté un produit personnalisé en ligne et qu'il est abîmé pendant le transport, contactez notre équipe d'assistance client au 1 (800) 555 0199 dans un délai de 10 jours à compter de la réception de l'article concerné.&lt;/p&gt;&#13;
+&lt;p&gt;Si vous avez acheté un article personnalisé en magasin et qu'il vous est livré abîmé ou défectueux, prenez contact avec le magasin dans lequel l'achat a été effectué. Pour obtenir la liste des magasins aux États-Unis, reportez-vous à la section du site Web consacrée au localisateur de magasins ou appelez-nous au 1 (800) 555 0199. Veuillez noter que les appels au 1 (800) 555 0199 qui ne proviennent pas d'une ligne fixe aux États-Unis peuvent faire l'objet d'une facturation.&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="it-IT">&lt;h1 class="content-header"&gt;Politica di gestione dei resi&lt;/h1&gt;&#13;
 &#13;
-&lt;p&gt;Il nostro obiettivo è che i clienti siano sempre soddisfatti dei loro acquisti. Se i prodotti che hai ricevuto non sono di tuo gradimento, contatta il servizio clienti all'indirizzo customerservice@demandware.com o chiama il numero 1 (800) 800 555 XXXX quanto prima. Le chiamate al numero 1 (800) 888 555 XXXX non effettuate da una linea fissa negli Stati Uniti potrebbero essere soggette a costi. Se per qualsiasi motivo i prodotti ricevuti non ti soddisfano, hai il diritto di renderli e di ricevere un rimborso completo. Il diritto di reso non pregiudica il diritto legale di annullamento. Per i dettagli consulta la sezione Annullamento degli ordini del sito Web. È possibile restituire i prodotti e ricevere un rimborso solo se vengono soddisfatte le condizioni seguenti:&lt;/p&gt;&#13;
+&lt;p&gt;Il nostro obiettivo è che i clienti siano sempre soddisfatti dei loro acquisti. Se i prodotti che hai ricevuto non sono di tuo gradimento, contatta il servizio clienti all'indirizzo customerservice@demandware.com o chiama il numero 1 (800) 555 0199 quanto prima. Le chiamate al numero 1 (800) 555 0199 non effettuate da una linea fissa negli Stati Uniti potrebbero essere soggette a costi. Se per qualsiasi motivo i prodotti ricevuti non ti soddisfano, hai il diritto di renderli e di ricevere un rimborso completo. Il diritto di reso non pregiudica il diritto legale di annullamento. Per i dettagli consulta la sezione Annullamento degli ordini del sito Web. È possibile restituire i prodotti e ricevere un rimborso solo se vengono soddisfatte le condizioni seguenti:&lt;/p&gt;&#13;
 &lt;ul&gt;&#13;
     &lt;li&gt;I prodotti vengono restituiti all'Ufficio resi presso XXXXXX di norma entro 28 giorni. I 28 giorni decorrono dal giorno di spedizione dei prodotti ordinati. Consulta le istruzioni sui resi per i dettagli sulla procedura.&lt;/li&gt;&#13;
     &lt;li&gt;I prodotti non sono danneggiati, non sono stati lavati, alterati o indossati e includono l'imballaggio e l'etichetta originali oltre al Modulo di reso che si trova in fondo alla distinta di spedizione (inclusa con i prodotti consegnati). Non siamo in grado di accettare resi di prodotti personalizzati.&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
-&lt;p&gt;Adottiamo tutte le misure necessarie per gestire i resti in modo rapido. L'accredito del rimborso su carta di credito potrebbe richiedere fino a due cicli di fatturazione. I resi accompagnati da documentazione completa vengono considerati in via prioritaria. In caso di mancato adempimento alla procedura di reso di Demandware, la società declina ogni responsabilità in caso di perdite durante il trasporto. Tutte le vendite di prodotti personalizzati sono finali e non sono ammessi resi. Non è previsto alcun diritto legale di annullamento in caso di ordini di prodotti personalizzati. Se hai acquistato un prodotto personalizzato online e questo risulta danneggiato durante la spedizione, contatta il servizio clienti al numero 1 (800) 555 XXXX entro 10 giorni dalla ricezione.&lt;/p&gt;&#13;
-&lt;p&gt;Se hai acquistato un prodotto personalizzato presso un punto vendita al dettaglio e ricevi un articolo danneggiato o difettoso, contatta il negozio in cui hai effettuato l'acquisto. Per l'elenco dei negozi negli Stati Uniti, consulta la sezione Store Locator del nostro sito oppure chiama il numero 1 (800) 555 XXXX. Le chiamate al numero 1 (800) 555 XXXX non effettuate da una linea fissa negli Stati Uniti potrebbero essere soggette a costi.&lt;/p&gt;</custom-attribute>
+&lt;p&gt;Adottiamo tutte le misure necessarie per gestire i resti in modo rapido. L'accredito del rimborso su carta di credito potrebbe richiedere fino a due cicli di fatturazione. I resi accompagnati da documentazione completa vengono considerati in via prioritaria. In caso di mancato adempimento alla procedura di reso di Demandware, la società declina ogni responsabilità in caso di perdite durante il trasporto. Tutte le vendite di prodotti personalizzati sono finali e non sono ammessi resi. Non è previsto alcun diritto legale di annullamento in caso di ordini di prodotti personalizzati. Se hai acquistato un prodotto personalizzato online e questo risulta danneggiato durante la spedizione, contatta il servizio clienti al numero 1 (800) 555 0199 entro 10 giorni dalla ricezione.&lt;/p&gt;&#13;
+&lt;p&gt;Se hai acquistato un prodotto personalizzato presso un punto vendita al dettaglio e ricevi un articolo danneggiato o difettoso, contatta il negozio in cui hai effettuato l'acquisto. Per l'elenco dei negozi negli Stati Uniti, consulta la sezione Store Locator del nostro sito oppure chiama il numero 1 (800) 555 0199. Le chiamate al numero 1 (800) 555 0199 non effettuate da una linea fissa negli Stati Uniti potrebbero essere soggette a costi.&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="ja-JP">&lt;h1 class="content-header"&gt;返品ポリシー&lt;/h1&gt;&#13;
 &#13;
-&lt;p&gt;お買い上げいただいた商品に完全にご満足いただくことが、弊社の願いです。何らかの理由で商品にご満足いただけない場合は、できるだけ早くカスタマーサービスチームまで Eメール (customerservice@demandware.com) あるいはお電話 (1 (800) 800 555 XXXX) にてご連絡ください。米国の固定電話以外から 1 (800) 888 555 XXXX におかけになった場合、料金が発生することがあります。商品にご満足いただけない場合は、その理由にかかわらず、お客様は商品を返品して全額払い戻しを受けることができます。この返品権は制定法上のキャンセル権を損なうものではありません。制定法上のキャンセル権について詳しくは、本ウェブサイトの「注文のキャンセル」セクションに記載されています。お客様は以下の条件を満たしている場合に商品を返品して払い戻しを受けることができます: &lt;/p&gt;&#13;
+&lt;p&gt;お買い上げいただいた商品に完全にご満足いただくことが、弊社の願いです。何らかの理由で商品にご満足いただけない場合は、できるだけ早くカスタマーサービスチームまで Eメール (customerservice@demandware.com) あるいはお電話 (1 (800) 555 0199) にてご連絡ください。米国の固定電話以外から 1 (800) 555 0199 におかけになった場合、料金が発生することがあります。商品にご満足いただけない場合は、その理由にかかわらず、お客様は商品を返品して全額払い戻しを受けることができます。この返品権は制定法上のキャンセル権を損なうものではありません。制定法上のキャンセル権について詳しくは、本ウェブサイトの「注文のキャンセル」セクションに記載されています。お客様は以下の条件を満たしている場合に商品を返品して払い戻しを受けることができます: &lt;/p&gt;&#13;
 &lt;ul&gt;&#13;
     &lt;li&gt;通常 28 日以内に XXXXXX の返品部門に商品が返品されること。この 28 日は、ご注文の発送の翌日から起算します。返品手続きについて詳しくは、「返品手続き」をお読みください。&lt;/li&gt;&#13;
     &lt;li&gt;商品は破損していないこと、また、洗濯、寸法などの直し、着用がされていないこと。また、元のパッケージ、ラベル、パッキングリスト (配達された商品に同梱) 下部の返品フォームを同梱していただく必要があります。カスタム商品の返品には応じかねますのでご了承ください。&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
-&lt;p&gt;弊社では、返品手続きを迅速に行うよう、最大限努力いたしますが、返金金額がお客様のクレジットカード明細に記入されるまでに最高で 2 支払周期かかる場合があります。完全な書類がある返品は優先されます。Demandware の返品手続きに従っていただかなかった場合は、Demandware に到着するまでの間に紛失した商品について Demandware では責任を負いません。すべてのカスタム商品は販売時点で最終となり、カスタム商品は返品できません。カスタム商品については制定法上のキャンセル権も適用されませんので、ご注意ください。カスタム商品をオンラインで購入し、配送中に商品が破損した場合は、ご購入商品の到着から 10 日以内にカスタマーサービスチームまでご連絡ください (1 (800) 555 XXXX)。&lt;/p&gt;&#13;
-&lt;p&gt;カスタム商品を小売店で購入し、破損した、または不具合のある商品を受け取った場合は、その購入店に連絡してください。米国の店舗一覧につきましては、弊社ウェブサイトの「店舗検索」セクションをご覧になるか、または 1 (800) 555 XXXX までお電話にてお問い合わせください。米国の固定電話以外から 1 (800) 555 XXXX におかけになった場合、料金が発生することがあります。&lt;/p&gt;</custom-attribute>
+&lt;p&gt;弊社では、返品手続きを迅速に行うよう、最大限努力いたしますが、返金金額がお客様のクレジットカード明細に記入されるまでに最高で 2 支払周期かかる場合があります。完全な書類がある返品は優先されます。Demandware の返品手続きに従っていただかなかった場合は、Demandware に到着するまでの間に紛失した商品について Demandware では責任を負いません。すべてのカスタム商品は販売時点で最終となり、カスタム商品は返品できません。カスタム商品については制定法上のキャンセル権も適用されませんので、ご注意ください。カスタム商品をオンラインで購入し、配送中に商品が破損した場合は、ご購入商品の到着から 10 日以内にカスタマーサービスチームまでご連絡ください (1 (800) 555 0199)。&lt;/p&gt;&#13;
+&lt;p&gt;カスタム商品を小売店で購入し、破損した、または不具合のある商品を受け取った場合は、その購入店に連絡してください。米国の店舗一覧につきましては、弊社ウェブサイトの「店舗検索」セクションをご覧になるか、または 1 (800) 555 0199 までお電話にてお問い合わせください。米国の固定電話以外から 1 (800) 555 0199 におかけになった場合、料金が発生することがあります。&lt;/p&gt;</custom-attribute>
             <custom-attribute attribute-id="body" xml:lang="zh-CN">&lt;h1 class="content-header"&gt;“退货政策”&lt;/h1&gt;&#13;
 &#13;
-&lt;p&gt;我们希望您对从我们这里购物感到愉快。如果您对任何商品感到不满意，请尽快通过 customerservice@demandware.com 或致电 1 (800) 800 555 XXXX 与我们的客户服务团队联系。请注意，使用美国座机以外的其它设备拨打 1 (800) 888 555 XXXX 可能需要付费。如果您由于任何原因对商品感到不满意，您有权退回商品并获得全额退款。退货权利并不影响您的法定取消权利，详见本站的“取消订单”部分。您退回商品并获得退款的前提是：&lt;/p&gt;&#13;
+&lt;p&gt;我们希望您对从我们这里购物感到愉快。如果您对任何商品感到不满意，请尽快通过 customerservice@demandware.com 或致电 1 (800) 555 0199 与我们的客户服务团队联系。请注意，使用美国座机以外的其它设备拨打 1 (800) 555 0199 可能需要付费。如果您由于任何原因对商品感到不满意，您有权退回商品并获得全额退款。退货权利并不影响您的法定取消权利，详见本站的“取消订单”部分。您退回商品并获得退款的前提是：&lt;/p&gt;&#13;
 &lt;ul&gt;&#13;
     &lt;li&gt;位于 XXXXXX 的退货部门通常在 28 天之内收到退货。这 个28 天周期自您的订单发货之日开始计算。请参阅退货说明以详细了解退货流程。&lt;/li&gt;&#13;
     &lt;li&gt;商品未遭损坏、洗涤、更改或磨损，且必须包含原有包装、标签以及装箱单底部的退货表（附货品一起交付）。请注意，我们无法接受定制产品的退货。&lt;/li&gt;&#13;
 &lt;/ul&gt;&#13;
-&lt;p&gt;我们将竭尽所能迅速处理您的退货要求。信用点数可能需要等待两个结算周期才能出现在您的信用卡账单上。将优先处理具有完整文档的退货请求。请注意，如果未能遵循 Demandware 退货流程，则 Demandware 不为运输途中的退货丢失承担任何责任。所有涉及定制产品的促销均为最终购买，且不可退货。另请注意，您不具有退回定制产品的法定权利。如果您在网上购买的定制产品在送货途中发生损毁，请在收到货物的 10 天之内致电 1 (800) 555 XXXX 联系客户服务团队。&lt;/p&gt;&#13;
-&lt;p&gt;如果您在零售场所购买了定制产品，但收到的是已损坏或有缺陷的产品，请与购买的商店直接联系。如需获取美国商店清单，请参阅本网站的“实体店地址搜索”部分或致电 1 (800) 555 XXXX。请注意，使用美国座机以外的其它设备拨打 1 (800) 555 XXXX 可能需要付费。&lt;/p&gt;</custom-attribute>
+&lt;p&gt;我们将竭尽所能迅速处理您的退货要求。信用点数可能需要等待两个结算周期才能出现在您的信用卡账单上。将优先处理具有完整文档的退货请求。请注意，如果未能遵循 Demandware 退货流程，则 Demandware 不为运输途中的退货丢失承担任何责任。所有涉及定制产品的促销均为最终购买，且不可退货。另请注意，您不具有退回定制产品的法定权利。如果您在网上购买的定制产品在送货途中发生损毁，请在收到货物的 10 天之内致电 1 (800) 555 0199 联系客户服务团队。&lt;/p&gt;&#13;
+&lt;p&gt;如果您在零售场所购买了定制产品，但收到的是已损坏或有缺陷的产品，请与购买的商店直接联系。如需获取美国商店清单，请参阅本网站的“实体店地址搜索”部分或致电 1 (800) 555 0199。请注意，使用美国座机以外的其它设备拨打 1 (800) 555 0199 可能需要付费。&lt;/p&gt;</custom-attribute>
         </custom-attributes>
         <folder-links>
             <classification-link folder-id="returns">
@@ -11818,7 +11818,7 @@ Burlington, MA 01803 USA&lt;br /&gt;&#13;
 &#13;
 &lt;p&gt;&lt;strong&gt;How do we make sure information is secure? &lt;/strong&gt;&lt;br /&gt;&#13;
 We use the latest encryption technology (Secure Sockets Layer, or SSL) to secure your personal information. The information you provide when you place an order is encrypted (or coded) using a secure server for maximum security. This coding makes it extremely difficult for anyone to reach your information as it moves through our ordering system.&lt;/p&gt;&#13;
-&lt;p&gt;Certain browsers will not allow communication through secure servers. If this is the case, you won't be able to place an order online. If you have any problems placing an order online please print your shopping page and place your order by phone at 1 (800) 555 XXXX. Please note that calls to 1 (800) 555 XXXX that are not made from a UK landline may be subject to a charge.&lt;/p&gt;&#13;
+&lt;p&gt;Certain browsers will not allow communication through secure servers. If this is the case, you won't be able to place an order online. If you have any problems placing an order online please print your shopping page and place your order by phone at 1 (800) 555 0199. Please note that calls to 1 (800) 555 0199 that are not made from a UK landline may be subject to a charge.&lt;/p&gt;&#13;
 &lt;p&gt;To check the security of your computer, look at the lower right-hand corner of your browser window if you are using Internet Explorer. If you see an unbroken key or a closed lock, then the encryption technology is active and the server is secure. You can also check by looking at the URL line of your browser; when you access a secure server, the initial characters of the site address will be &amp;quot;https.&amp;quot;&lt;/p&gt;&#13;
 &#13;
 &lt;p&gt;&lt;strong&gt;What if you link to another site? &lt;/strong&gt;&lt;br /&gt;&#13;
