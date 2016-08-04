@@ -75,8 +75,8 @@ describe('Profile', () => {
             let locale = '';
             let bundleName = locale ? `forms_${locale}` : 'forms';
             let expectedError = Resource.msgf('profile.usernametaken', bundleName, null, 1);
-            const emails = ['testuser1@demandware.com', 'testuser2@demandware.com','testuser3@demandware.com'];
-            var result = emails.filter(function(user) {
+            let emails = ['testuser1@demandware.com', 'testuser2@demandware.com','testuser3@demandware.com'];
+            let result = emails.filter(function(user) {
                 return user !== login;
             })
             let newEmail = result[0];

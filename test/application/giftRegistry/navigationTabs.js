@@ -10,8 +10,7 @@ import * as Resource from '../../mocks/dw/web/Resource';
 let locale = config.locale;
 
 describe('Gift Registry Navigation', () => {
-    let userEmail = 'testuser1@demandware.com';
-    let userEmail2 = 'testuser3@demandware.com';
+    let userEmail = config.userEmail;
     let editedEventFormData = {};
     let editedEventFormShippingData = {};
     let editedEventFormShippingData2 = {};
@@ -20,7 +19,11 @@ describe('Gift Registry Navigation', () => {
     let editedAfterEventFormShippingData = {};
     let editedAfterEventFormShippingData2 = {};
     let purchasesNoProductsFound = Resource.msg('registry.noproductsfound', 'account', null);
-
+    let emails = ['testuser1@demandware.com', 'testuser2@demandware.com','testuser3@demandware.com'];
+    let result = emails.filter(function(user) {
+        return user !== userEmail;
+    })
+    let userEmail2 = result[0];
     let editedGiftRegistryTitle = {
         'x_default': 'LLAMA PALOOZA WORLD TOUR - 2/22/22',
         'en_GB': 'LLAMA PALOOZA WORLD TOUR - 22/02/2022'
