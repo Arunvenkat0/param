@@ -95,7 +95,6 @@ export const DESIRED_QUANTITY = 'form-row option-quantity-desired input[name*=qu
 
 const basePath = '/giftregistry';
 const login = config.userEmail;
-const locale = config.locale;
 
 export function navigateTo () {
     return browser.url(basePath);
