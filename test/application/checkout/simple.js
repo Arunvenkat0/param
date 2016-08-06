@@ -19,16 +19,16 @@ import * as customers from '../pageObjects/testData/customers';
 
 
 describe('Checkout', () => {
-    const login = 'testuser1@demandware.com';
     const successfulCheckoutTitle = 'Thank you for your order.';
     const locale = config.locale;
+    const userEmail = config.userEmail;
     let shippingData = {};
     let billingFormData = {};
 
     before(() =>
         testData.load()
             .then(() => {
-                const customer = testData.getCustomerByLogin(login);
+                const customer = testData.getCustomerByLogin(userEmail);
                 customer.addresses[0].postalCode = customers.globalPostalCode[locale];
                 customer.addresses[0].countryCode = customers.globalCountryCode[locale];
                 customer.addresses[0].phone = customers.globalPhone[locale];
@@ -161,7 +161,7 @@ describe('Checkout', () => {
                 delete shippingFormData.addressList;
             })
             .then(() => checkoutPage.navigateTo())
-            .then(() => formLogin.loginAsDefaultCustomer())
+            .then(() => formLogin.loginAs(userEmail))
         );
 
         after(() => navHeader.logout());

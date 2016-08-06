@@ -163,8 +163,10 @@ along with their differences for testing different scenarios:
 |--------------------------|------------|-----------|----------------------|---------------|------------|-------------|--------------|--------------|-----------|-------------------|--------|
 | testuser1@demandware.com | Test1      | User1     | 104 Presidential Way | Woburn        | MA         | 01801       | US           | 781-555-1212 | Home      | ✔                 | F      |
 |                          |            |           | 91 Middlesex Tpke    | Woburn        | MA         | 01801       | US           | 781-555-1212 | Work      |                   |        |
-| testuser2@demandware.com | Test2      | User2     |                      |               |            |             |              |              |           |                   | M      |
-| testuser3@demandware.com | Test3      | User3     | 3486 Mission St      | San Francisco | CA         | 94110       | 415-555-1212 | Mom's        |           | ✔                 | F      |
+| testuser2@demandware.com | Test2      | User2     | 104 Presidential Way | Woburn        | MA         | 01801       | US           | 781-555-1212 | Home      |                   | M      |
+|                          |            |           | 91 Middlesex Tpke    | Woburn        | MA         | 01801       | US           | 781-555-1212 | Work      |                   |        |
+| testuser3@demandware.com | Test3      | User3     | 104 Presidential Way | Woburn        | MA         | 01801       | US           | 781-555-1212 | Home      |                   | F      |
+|                          |            |           | 91 Middlesex Tpke    | Woburn        | MA         | 01801       | US           | 781-555-1212 | Work      |                   |        |
 
 
 ### Test products

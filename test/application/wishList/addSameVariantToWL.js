@@ -6,6 +6,7 @@ import * as testData from '../pageObjects/testData/main';
 import * as wishListPage from '../pageObjects/wishList';
 import * as loginForm from '../pageObjects/helpers/forms/login';
 import * as navHeader from '../pageObjects/navHeader';
+import {config} from '../webdriver/wdio.conf';
 
 /*
 Verify:
@@ -24,6 +25,7 @@ describe('Cart - addSameVariantToWishList', () => {
     let variant;
     let variantId = '701642841241';
     let expectedDesiredQty = 1;
+    const login = config.userEmail;
 
     before(() => {
         return testData.load()
@@ -31,7 +33,7 @@ describe('Cart - addSameVariantToWishList', () => {
                 variant = testData.getProductById(variantId);
             })
             .then(() => wishListPage.navigateTo())
-            .then(() => loginForm.loginAsDefaultCustomer())
+            .then(() => loginForm.loginAs(login))
             .then(() => browser.url(variant.getUrlResourcePath()))
             .then(() => productDetailPage.clickAddToWishListButton())
             .then(() => browser.url(variant.getUrlResourcePath()))

@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Requirement : Home and Work addresses for the test user should be available before test starts
  */
@@ -15,23 +13,23 @@ import * as testData from '../pageObjects/testData/main';
 
 
 describe('Address', () => {
-    let login = 'testuser1@demandware.com';
-    let locale = config.locale;
+    const locale = config.locale;
+    const userEmail = config.userEmail;
 
-    let testAddressEditedTextTitle = 'Test Address Edited';
-    let testAddressTitle = 'ZZZZZ Test Address';
+    const testAddressEditedTextTitle = 'Test Address Edited';
+    const testAddressTitle = 'ZZZZZ Test Address';
 
     let addressFormData = {};
     let editAddressFormData = {};
 
     before(() => testData.load()
         .then(() => {
-            const customer = testData.getCustomerByLogin(login);
+            const customer = testData.getCustomerByLogin(userEmail);
             const address = customer.getPreferredAddress();
 
-            customer.addresses[0].postalCode = customers.globalPostalCode[locale];
-            customer.addresses[0].countryCode = customers.globalCountryCode[locale];
-            customer.addresses[0].phone = customers.globalPhone[locale];
+            address.postalCode = customers.globalPostalCode[locale];
+            address.countryCode = customers.globalCountryCode[locale];
+            address.phone = customers.globalPhone[locale];
 
             addressFormData = {
                 addressid: 'ZZZZZ Test Address',
@@ -43,9 +41,6 @@ describe('Address', () => {
                 country: address.countryCode,
                 phone: address.phone
             };
-            if (locale && locale === 'x_default') {
-                addressFormData.states_state = address.stateCode;
-            }
 
             editAddressFormData = {
                 addressid: 'Test Address Edited',
@@ -57,12 +52,13 @@ describe('Address', () => {
                 country: address.countryCode,
                 phone: address.phone
             };
-            if (locale && locale === 'x_default') {
+            if (locale === 'x_default') {
+                addressFormData.states_state = address.stateCode;
                 editAddressFormData.states_state = address.stateCode;
             }
         })
         .then(() => addressPage.navigateTo())
-        .then(() => loginForm.loginAsDefaultCustomer())
+        .then(() => loginForm.loginAs(userEmail))
         .then(() => browser.waitForVisible(addressPage.LINK_CREATE_ADDRESS))
         .then(() => addressPage.removeAddresses())
 

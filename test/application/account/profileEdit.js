@@ -1,5 +1,3 @@
-'use strict';
-
 import {assert} from 'chai';
 import * as accountPage from '../pageObjects/account';
 import * as testData from '../pageObjects/testData/main';
@@ -7,18 +5,19 @@ import * as accountForm from '../pageObjects/helpers/forms/account';
 import * as loginForm from '../pageObjects/helpers/forms/login';
 import * as navHeader from '../pageObjects/navHeader';
 import * as Resource from '../../mocks/dw/web/Resource';
+import {config} from '../webdriver/wdio.conf';
 
 describe('Profile', () => {
     let customer;
-    let customerEmail = 'testuser1@demandware.com';
+    let login = config.userEmail;
     let newFirstName = 'Diamonique';
     let newLastName = 'Kerfluffle';
 
     before(() => {
         return testData.load()
-            .then(() => customer = testData.getCustomerByLogin(customerEmail))
+            .then(() => customer = testData.getCustomerByLogin(login))
             .then(() => accountPage.navigateTo())
-            .then(() => loginForm.loginAsDefaultCustomer());
+            .then(() => loginForm.loginAs(login));
     });
 
     after(() => navHeader.logout());
@@ -76,8 +75,11 @@ describe('Profile', () => {
             let locale = '';
             let bundleName = locale ? `forms_${locale}` : 'forms';
             let expectedError = Resource.msgf('profile.usernametaken', bundleName, null, 1);
-            let newEmail = 'testuser2@demandware.com';
-
+            let emails = ['testuser1@demandware.com', 'testuser2@demandware.com','testuser3@demandware.com'];
+            let result = emails.filter(function(user) {
+                return user !== login;
+            })
+            let newEmail = result[0];
             let newValues = {};
             newValues[accountForm.FIELD_EMAIL] = newEmail;
             newValues[accountForm.FIELD_EMAIL_CONFIRM] = newEmail;
@@ -96,7 +98,7 @@ describe('Profile', () => {
             let locale = '';
             let bundleName = locale ? `forms_${locale}` : 'forms';
             let expectedError = Resource.msgf('profile.currentpasswordnomatch', bundleName, null, 1);
-            let newEmail = 'testuser1@demandware.com';
+            let newEmail = config.userEmail;
             let invalidPassword = 'invalidPassword';
             let newValues = {};
 

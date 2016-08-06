@@ -21,11 +21,11 @@ import * as navHeader from '../pageObjects/navHeader';
 import * as checkoutPage from '../pageObjects/checkout';
 
 describe('Multi Shipping - Registered User - check out with New Addresses', () => {
-    let login = 'testuser1@demandware.com';
     let locale = config.locale;
     const thankYouMessage = 'Thank you for your order.';
     const homeAddress = '(Home) 104 Presidential Way, Woburn, MA, 01801';
     const workAddress = '(Work) 91 Middlesex Tpke, Burlington, MA, 01803';
+    const login = config.userEmail;
     let shipmentText1 = Resource.msgf('multishippingshipments.shipment','checkout', null, 1);
     let shipmentText2 = Resource.msgf('multishippingshipments.shipment','checkout', null, 2);
     let shipmentText3 = Resource.msgf('multishippingshipments.shipment','checkout', null, 3);
@@ -119,7 +119,7 @@ describe('Multi Shipping - Registered User - check out with New Addresses', () =
         .then(() => multiShipPage.addProductVariationMasterToCart(1, 3, 1))
         .then(() => multiShipPage.addProductVariationMasterToCart(1, 4, 1))
         .then(() => addressPage.navigateTo())
-        .then(() => loginForm.loginAsDefaultCustomer())
+        .then(() => loginForm.loginAs(login))
         .then(() => browser.waitForVisible(addressPage.LINK_CREATE_ADDRESS))
         .then(() => addressPage.removeAddresses())
         .then(() => multiShipPage.navigateTo())

@@ -1,5 +1,3 @@
-'use strict';
-
 import _ from 'lodash';
 import {assert} from 'chai';
 
@@ -12,7 +10,6 @@ import {config} from '../webdriver/wdio.conf';
 let locale = config.locale;
 
 describe('Checkout with Discover Card', () => {
-    let login = 'testuser1@demandware.com';
     let shippingData = {};
     let billingFormData = {};
     let successfulCheckoutTitle = 'Thank you for your order.';
@@ -25,7 +22,7 @@ describe('Checkout with Discover Card', () => {
     before(() =>
         testData.load()
             .then(() => {
-                const customer = testData.getCustomerByLogin(login);
+                const customer = testData.getCustomerByLogin(config.userEmail);
                 const address = customer.getPreferredAddress();
 
                 shippingData = {

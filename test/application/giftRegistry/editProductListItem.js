@@ -9,12 +9,12 @@ import * as productDetailPage from '../pageObjects/productDetail';
 import * as common from '../pageObjects/helpers/common';
 import * as productQuickViewPage from '../pageObjects/productQuickView';
 
-let locale = config.locale;
+const locale = config.locale;
+const userEmail = config.userEmail;
 
 describe('Edit details of item in gift registry', () => {
     let eventFormData = {};
     let eventFormShippingData = {};
-    let login = 'testuser1@demandware.com';
     let product = new Map();
     let productResourcePath;
     let productToAdd;
@@ -39,7 +39,7 @@ describe('Edit details of item in gift registry', () => {
 
             productToAdd = testData.getProductById('701644259273');
             productResourcePath = productToAdd.getUrlResourcePath();
-            const customer = testData.getCustomerByLogin(login);
+            const customer = testData.getCustomerByLogin(userEmail);
             const address = customer.getPreferredAddress();
 
             customer.addresses[0].postalCode = customers.globalPostalCode[locale];

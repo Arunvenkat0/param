@@ -6,6 +6,7 @@ import * as giftRegistryPage from '../pageObjects/giftRegistry';
 import * as loginForm from '../pageObjects/helpers/forms/login';
 import * as addressPage from '../pageObjects/addressBook';
 import * as navHeader from '../pageObjects/navHeader';
+import {config} from '../webdriver/wdio.conf';
 
 export const SHARE_LINK = '.share-link';
 export const USE_PRE_EVENT = '.usepreevent';
@@ -93,6 +94,7 @@ export const QUICK_VIEW_ITEM_QUANTITY = 'input[name=Quantity]';
 export const DESIRED_QUANTITY = 'form-row option-quantity-desired input[name*=quantity]';
 
 const basePath = '/giftregistry';
+const login = config.userEmail;
 
 export function navigateTo () {
     return browser.url(basePath);
@@ -219,14 +221,14 @@ export function getGiftRegistryCount () {
 
 export function createGiftRegistry (locale, eventFormData, eventFormShippingData) {
     return giftRegistryPage.navigateTo()
-        .then(() => loginForm.loginAsDefaultCustomer(locale))
+        .then(() => loginForm.loginAs(login))
         .then(() => browser.waitForVisible(giftRegistryPage.BTN_CREATE_REGISTRY))
         .then(() => browser.click(giftRegistryPage.BTN_CREATE_REGISTRY))
         .then(() => browser.waitForVisible(giftRegistryPage.FORM_REGISTRY))
-        .then(() => giftRegistryPage.fillOutEventForm(eventFormData))
+        .then(() => giftRegistryPage.fillOutEventForm(eventFormData, locale))
         .then(() => browser.click(giftRegistryPage.BTN_EVENT_SET_PARTICIPANTS))
         .then(() => browser.waitForVisible(giftRegistryPage.USE_PRE_EVENT))
-        .then(() => giftRegistryPage.fillOutEventShippingForm(eventFormShippingData))
+        .then(() => giftRegistryPage.fillOutEventShippingForm(eventFormShippingData, locale))
         .then(() => browser.waitForValue('[name*=addressBeforeEvent_phone]'))
         .then(() => browser.click(giftRegistryPage.USE_PRE_EVENT))
         .then(() => browser.waitForVisible(giftRegistryPage.BTN_EVENT_ADDRESS_CONTINUE))

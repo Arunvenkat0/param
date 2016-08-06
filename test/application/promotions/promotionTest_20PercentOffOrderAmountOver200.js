@@ -1,5 +1,3 @@
-'use strict';
-
 //  This test can only be run if the promotion 'PromotionTest_20%offOrderAmountOver200' is enabled.
 //  Also this promotion only gets applied if a user has selected a credit card as a payment method and
 //  the the order total is over '200'.
@@ -19,8 +17,8 @@ import {config} from '../webdriver/wdio.conf';
 
 describe('Promotions - 20% off Order Amount Over 200', () => {
     let billingFormData = {};
-    let locale = config.locale;
-    let login = 'testuser1@demandware.com';
+    const locale = config.locale;
+    const userEmail = config.userEmail;
     let orderAmountTotal;
     let orderDiscount;
     let orderSubtotal;
@@ -34,7 +32,7 @@ describe('Promotions - 20% off Order Amount Over 200', () => {
     before(() => {
         return testData.load()
             .then(() => {
-                const customer = testData.getCustomerByLogin(login);
+                const customer = testData.getCustomerByLogin(userEmail);
                 const address = customer.getPreferredAddress();
                 const productVariation = testData.getProductById('82936941');
                 const variantIds = productVariation.getVariantProductIds();
@@ -96,7 +94,7 @@ describe('Promotions - 20% off Order Amount Over 200', () => {
     it('should go through the checkout process until the Place Order Page', () =>
         productDetailPage.addProductVariationToCart(variantSelection)
             .then(() => checkoutPage.navigateTo())
-            .then(() => formLogin.loginAsDefaultCustomer())
+            .then(() => formLogin.loginAs(userEmail))
             .then(() => browser.waitForVisible(checkoutPage.BREADCRUMB_SHIPPING))
             .then(() => checkoutPage.fillOutShippingForm(shippingFormData, locale))
             .then(() => checkoutPage.checkUseAsBillingAddress())
