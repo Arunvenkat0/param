@@ -233,7 +233,7 @@ function submit() {
         orderPlacementStatus = Order.submit(order.object);
         if (!orderPlacementStatus.error) {
             clearForms();
-            return app.getController('COSummary').ShowConfirmation(order);
+            return app.getController('COSummary').ShowConfirmation(order.object);
         }
     }
     app.getController('COSummary').Start();
