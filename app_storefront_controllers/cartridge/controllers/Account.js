@@ -144,10 +144,7 @@ function editForm() {
             }
         },
         error: function () {
-            app.getView({
-                ErrorCode: 'formnotvalid',
-                ContinueURL: URLUtils.https('Account-EditProfile')
-            }).render('account/user/registration');
+            response.redirect(URLUtils.https('Account-EditProfile', 'invalid', 'true'));
         }
     });
 }
