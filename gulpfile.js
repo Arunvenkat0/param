@@ -33,35 +33,35 @@ var browserify = require('browserify');
 var buffer = require('vinyl-buffer');
 var source = require('vinyl-source-stream');
 var watchify = require('watchify');
-var xtend = require('xtend');
-
+var eventStream = require('event-stream');
 var watching = false;
 gulp.task('enable-watch-mode', function () {watching = true;});
+gulp.task('js', function (done) {
+	function createBundler (path) {
+		var opts = {
+			entries: './' + path.src + 'app.js', // browserify requires relative path
+			debug: gutil.env.sourcemaps
+		};
+		if (watching) {
+			opts = Object.assign(opts, watchify.args);
+		}
+		var bundler = browserify(opts);
+		if (watching) {
+			bundler = watchify(bundler);
+		}
+		// optionally transform
+		// bundler.transform('transformer');
 
-gulp.task('js', function () {
-	var opts = {
-		entries: './' + paths.js.src + 'app.js', // browserify requires relative path
-		debug: gutil.env.sourcemaps
-	};
-	if (watching) {
-		opts = xtend(opts, watchify.args);
+		bundler.on('update', function (ids) {
+			gutil.log('File(s) changed: ' + gutil.colors.cyan(ids));
+			gutil.log('Rebundling...');
+			rebundle(bundler, path);
+		});
+
+		bundler.on('log', gutil.log);
+		return bundler;
 	}
-	var bundler = browserify(opts);
-	if (watching) {
-		bundler = watchify(bundler);
-	}
-	// optionally transform
-	// bundler.transform('transformer');
-
-	bundler.on('update', function (ids) {
-		gutil.log('File(s) changed: ' + gutil.colors.cyan(ids));
-		gutil.log('Rebundling...');
-		rebundle();
-	});
-
-	bundler.on('log', gutil.log);
-
-	function rebundle () {
+	function rebundle (bundler, path) {
 		return bundler.bundle()
 			.on('error', function (e) {
 				gutil.log('Browserify Error', gutil.colors.red(e));
@@ -72,15 +72,18 @@ gulp.task('js', function () {
 				.pipe(sourcemaps.init({loadMaps: true}))
 				.pipe(sourcemaps.write('./'))
 			//
-			.pipe(gulp.dest(paths.js.dest));
+			.pipe(gulp.dest(path.dest));
 	}
-	return rebundle();
+	return eventStream.merge(paths.js.map(function (path) {
+		var b = createBundler(path);
+		return rebundle(b, path);
+	}));
 });
 
 var dwdav = require('dwdav');
 var path = require('path');
 var config = require('@tridnguyen/config');
-function upload(files) {
+function upload (files) {
 	var credentials = config('dw.json', {caller: false});
 	var server = dwdav(credentials);
 	Promise.all(files.map(function (f) {
@@ -146,7 +149,7 @@ gulp.task('js:styleguide', function () {
 		debug: (gutil.env.sourcemaps)
 	};
 	if (styleguideWatching) {
-		opts = xtend(opts, watchify.args);
+		opts = Object.assign(opts, watchify.args);
 	}
 	var bundler = browserify(opts);
 	if (styleguideWatching) {
@@ -204,7 +207,7 @@ gulp.task('styleguide', ['styleguide-watching', 'js:styleguide', 'css:styleguide
 var deploy = require('gulp-gh-pages');
 
 gulp.task('deploy:styleguide', ['js:styleguide', 'css:styleguide'], function () {
-	var options = xtend({cacheDir: 'styleguide/.tmp'}, require('./styleguide/deploy.json').options);
+	var options = Object.assign({cacheDir: 'styleguide/.tmp'}, require('./styleguide/deploy.json').options);
 	return gulp.src(['styleguide/index.html', 'styleguide/dist/**/*', 'styleguide/lib/**/*'], {base: 'styleguide'})
 		.pipe(deploy(options));
 });
