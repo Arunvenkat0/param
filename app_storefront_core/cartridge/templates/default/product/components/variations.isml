@@ -16,8 +16,8 @@
 <isscript>
 	// Get context variables to insert into template placeholders
 	const VariationUtils = require('~/cartridge/scripts/product/VariationUtils.js');
-	const context = VariationUtils.getContext(pdict);
 </isscript>
+<isset name="context" value="${VariationUtils.getContext(pdict)}" scope="page"/>
 
 <isif condition="${context.isValidProductType}">
 	<div class="product-variations" data-attributes="${context.selectedAttrs}">
