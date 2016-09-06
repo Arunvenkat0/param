@@ -15,7 +15,7 @@
 
 <isscript>
 	// Get context variables to insert into template placeholders
-	var VariationUtils = require('~/cartridge/scripts/product/VariationUtils.js');
+    var VariationUtils = require('~/cartridge/scripts/product/VariationUtils.js');
     var context = VariationUtils.getContext(pdict);
 </isscript>
 
