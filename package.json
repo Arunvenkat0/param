@@ -65,6 +65,7 @@
     "load-grunt-tasks": "^3.3.0",
     "merge-stream": "^1.0.0",
     "minimist": "^1.2.0",
+    "mkdirp": "^0.5.1",
     "mocha": "^2.3.3",
     "moment-timezone": "^0.4.1",
     "node-sass": "^3.8.0",
@@ -84,17 +85,17 @@
     "xml2js": "^0.4.15"
   },
   "scripts": {
-    "test:unit": "bin/test.js",
+    "test:unit": "node bin/test.js",
     "test:application": "wdio test/application/webdriver/wdio.conf.js",
-    "test:application:docker": "bin/test-application-docker.sh",
+    "test:application:docker": "sh bin/test-application-docker.sh",
     "lint": "eslint .",
-    "css": "bin/css.js",
-    "js": "bin/js.js",
+    "css": "node bin/css.js",
+    "js": "node bin/js.js",
     "build": "npm run js && npm run css",
     "build:watch": "npm run js -- -w & npm run css -- -w",
     "preversion": "version > old_version",
-    "version": "bin/version.js && rm old_version && git add .",
-    "doc": "bin/doc.sh"
+    "version": "sh bin/version.js && rm old_version && git add .",
+    "doc": "sh bin/doc.sh"
   },
   "repository": {
     "type": "git",
