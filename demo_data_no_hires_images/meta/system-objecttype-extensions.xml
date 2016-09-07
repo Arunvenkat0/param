@@ -333,7 +333,7 @@
         <custom-attribute-definitions>
             <attribute-definition attribute-id="alternativeUrl">
                 <display-name xml:lang="x-default">Alternative URL</display-name>
-                <description xml:lang="x-default">Renders an alternative URL in main navigation. Uses Demandware content url notation. For example: $url('Account-Show')$ or normal URL http://xchange.demandware.com</description>
+                <description xml:lang="x-default">Renders an alternative URL in main navigation. Uses Salesforce Commerce Cloud content url notation. For example: $url('Account-Show')$ or normal URL http://xchange.demandware.com</description>
                 <type>html</type>
                 <localizable-flag>false</localizable-flag>
                 <mandatory-flag>false</mandatory-flag>

@@ -97,7 +97,7 @@ describe('Storelocator', () => {
             browser.click(storeLocatorPage.TBL_RESULTS_DETAILS_LINK)
             .waitForVisible(storeLocatorPage.TBL_RESULTS_DETAILS_MODEL)
             .then(() => storeLocatorPage.getStoreInfo())
-            .then(storeName => assert.equal(storeName, 'Demandware'))
+            .then(storeName => assert.equal(storeName, 'Salesforce Commerce Cloud'))
         );
 
     });

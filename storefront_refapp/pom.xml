@@ -10,7 +10,7 @@
 	<artifactId>sitegen.cartridge</artifactId>
 	<packaging>pom</packaging>
 	<name>SiteGenesis Site Cartridge</name>
-	<description>Demandware SiteGenesis Site Cartridge</description>
+	<description>Salesforce Commerce Cloud SiteGenesis Site Cartridge</description>
 	
     <dependencyManagement>
         <dependencies>

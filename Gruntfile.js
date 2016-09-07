@@ -209,7 +209,7 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerMultiTask('dwDavUpload', 'webDav uploader for Demandware', function () {
+    grunt.registerMultiTask('dwDavUpload', 'webDav uploader for Salesforce Commerce Cloud', function () {
         var done = this.async();
         var options = this.options({authFile: 'dw.json'});
         var authFile = path.resolve(options.authFile);

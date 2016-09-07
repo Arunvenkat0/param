@@ -100,7 +100,7 @@ var FormModel = AbstractModel.extend(
          *
          * @transactional
          * @alias module:models/FormModel~FormModel/copyTo
-         * @param {Object} updateObject - A Demandware system or custom object to update with form data.
+         * @param {Object} updateObject - A Salesforce Commerce Cloud system or custom object to update with form data.
          * @returns {Boolean} true if the passed object is successfully updated using for the
          * passed group properties specified in the form definition bindings. false if an error is thrown
          */

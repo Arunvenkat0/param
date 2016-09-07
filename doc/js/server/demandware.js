@@ -1,6 +1,6 @@
 'use strict';
 /**
- * Demandware plugin to document controller-based Demandware script code.
+ * Salesforce Commerce Cloud plugin to document controller-based Salesforce Commerce Cloud script code.
  */
 
 var helper = require('jsdoc/util/templateHelper');
