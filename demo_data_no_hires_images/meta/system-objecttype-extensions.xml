@@ -4352,7 +4352,7 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
                 <field-length>0</field-length>
-                <default-value>noreply@demandware.com</default-value>
+                <default-value>noreply@salesforce.com</default-value>
             </attribute-definition>
             <attribute-definition attribute-id="disableResponsiveDesign">
                 <display-name xml:lang="x-default">Disable Responsive Design</display-name>

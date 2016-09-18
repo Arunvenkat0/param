@@ -187,7 +187,7 @@ var FormModel = AbstractModel.extend(
  * Gets a new instance for a given form reference or form object.
  *
  * @alias module:models/FormModel~FormModel/get
- * @param formReference {dw.web.FormElement|String} Demandware form id (/forms/$name$.xml) or Demandware form object.
+ * @param formReference {dw.web.FormElement|String} Salesforce form id (/forms/$name$.xml) or Salesforce form object.
  * @returns {module:models/FormModel~FormModel} A new instance of FormModel that wraps the passed form.
  */
 FormModel.get = function (formReference) {
