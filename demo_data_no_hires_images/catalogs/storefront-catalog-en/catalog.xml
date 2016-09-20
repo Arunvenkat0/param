@@ -411,11 +411,11 @@
             <page-title xml:lang="it-IT">Nuovi arrivi donna e uomo in abbigliamento, gioielli, accessori e altro</page-title>
             <page-title xml:lang="ja-JP">衣料、ジュエリー、アクセサリーなどのレディース &amp; メンズ新着</page-title>
             <page-title xml:lang="zh-CN">男士及女士服装、珠宝首饰、配件新品及其他类别新品</page-title>
-            <page-description xml:lang="x-default">Shop all new arrivals including women and mens clothing, jewelry, accessories, suits &amp; more at Demandware</page-description>
-            <page-description xml:lang="fr-FR">Découvrez toutes les nouveautés femme et homme en vêtements, bijoux, accessoires, costumes, et plus encore sur Demandware</page-description>
-            <page-description xml:lang="it-IT">Tutti i nuovi arrivi nei settori abbigliamento, gioielli, accessori, completi e altro uomo e donna disponibili su Demandware</page-description>
-            <page-description xml:lang="ja-JP">レディース &amp; メンズ衣料、ジュエリー、アクセサリー、スーツなどを初めとする Demandware の全新着アイテムのご購入</page-description>
-            <page-description xml:lang="zh-CN">在 Demandware 购物，挑选最新的女士及男士服装、珠宝首饰、配件及其他类别商品</page-description>
+            <page-description xml:lang="x-default">Shop all new arrivals including women and mens clothing, jewelry, accessories, suits &amp; more at Salesforce Commerce Cloud</page-description>
+            <page-description xml:lang="fr-FR">Découvrez toutes les nouveautés femme et homme en vêtements, bijoux, accessoires, costumes, et plus encore sur Salesforce Commerce Cloud</page-description>
+            <page-description xml:lang="it-IT">Tutti i nuovi arrivi nei settori abbigliamento, gioielli, accessori, completi e altro uomo e donna disponibili su Salesforce Commerce Cloud</page-description>
+            <page-description xml:lang="ja-JP">レディース &amp; メンズ衣料、ジュエリー、アクセサリー、スーツなどを初めとする Salesforce Commerce Cloud の全新着アイテムのご購入</page-description>
+            <page-description xml:lang="zh-CN">在 Salesforce Commerce Cloud 购物，挑选最新的女士及男士服装、珠宝首饰、配件及其他类别商品</page-description>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -520,7 +520,7 @@
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Shop New Arrivals in Electronics Including Televisions, Digital Cameras, iPods &amp; More</page-title>
-            <page-description xml:lang="x-default">Shop New Arrivals in Electronics including the latest in televisions, digital cameras, camcorders, mp3, ipod, mobil phones, GPS &amp; gaming at Demandware.</page-description>
+            <page-description xml:lang="x-default">Shop New Arrivals in Electronics including the latest in televisions, digital cameras, camcorders, mp3, ipod, mobil phones, GPS &amp; gaming at Salesforce Commerce Cloud.</page-description>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -585,11 +585,11 @@
             <page-title xml:lang="it-IT">Abbigliamento donna tra cui giacche e cappotti, camicie e camicette, gonne e pantaloni e altro</page-title>
             <page-title xml:lang="ja-JP">アウターウェア、トップス、ボトムスなどを初めとするレディース衣料</page-title>
             <page-title xml:lang="zh-CN">女士服装包括外套、上衣、下装及其他品类</page-title>
-            <page-description xml:lang="x-default">Shop Women's Clothing. Relaxed, timeless classics you can rely on; from denim to corduroys and sweaters to shirts. Huge range of contemporary colours and eco-aware designs: great casualwear at Demandware</page-description>
-            <page-description xml:lang="fr-FR">Découvrez nos vêtements pour femme. Des classiques décontractés et intemporels. Du denim au velours côtelé, des pulls aux chemises. Une gamme complète de couleurs modernes et une mode respectueuse de l'environnement : une belle ligne de vêtements décontractés chez Demandware</page-description>
-            <page-description xml:lang="it-IT">Abbigliamento donna Capi classici senza tempo su cui fare affidamento: dal denim al velluto, dai maglioni alle camicie. Ampia gamma di colori alla moda e design ecologici: il grande abbigliamento casual di Demandware.</page-description>
-            <page-description xml:lang="ja-JP">レディース衣料のご購入リラックス感のあるタイムレスな信頼の定番アイテム。デニムからコーデュロイ、セーターからシャツまで。今風の豊富なカラーバリエーション。エコフレンドリーなデザイン。Demandware のイチオシカジュアルウェアです。</page-description>
-            <page-description xml:lang="zh-CN">选购女装。您可以信赖的舒适而永恒的经典款式，从牛仔裤到条绒裤，从毛衣到衬衫，应有尽有。Demandware 的休闲装样式齐全，配有各种当代色彩，并秉承了环保型设计理念。</page-description>
+            <page-description xml:lang="x-default">Shop Women's Clothing. Relaxed, timeless classics you can rely on; from denim to corduroys and sweaters to shirts. Huge range of contemporary colours and eco-aware designs: great casualwear at Salesforce Commerce Cloud</page-description>
+            <page-description xml:lang="fr-FR">Découvrez nos vêtements pour femme. Des classiques décontractés et intemporels. Du denim au velours côtelé, des pulls aux chemises. Une gamme complète de couleurs modernes et une mode respectueuse de l'environnement : une belle ligne de vêtements décontractés chez Salesforce Commerce Cloud</page-description>
+            <page-description xml:lang="it-IT">Abbigliamento donna Capi classici senza tempo su cui fare affidamento: dal denim al velluto, dai maglioni alle camicie. Ampia gamma di colori alla moda e design ecologici: il grande abbigliamento casual di Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="ja-JP">レディース衣料のご購入リラックス感のあるタイムレスな信頼の定番アイテム。デニムからコーデュロイ、セーターからシャツまで。今風の豊富なカラーバリエーション。エコフレンドリーなデザイン。Salesforce Commerce Cloud のイチオシカジュアルウェアです。</page-description>
+            <page-description xml:lang="zh-CN">选购女装。您可以信赖的舒适而永恒的经典款式，从牛仔裤到条绒裤，从毛衣到衬衫，应有尽有。Salesforce Commerce Cloud 的休闲装样式齐全，配有各种当代色彩，并秉承了环保型设计理念。</page-description>
             <page-keywords xml:lang="x-default">womens outerwear, womens tops, womens bottoms</page-keywords>
             <page-keywords xml:lang="fr-FR">vêtements d'extérieur femme, tops femme, bas femme</page-keywords>
             <page-keywords xml:lang="it-IT">giacche e cappotti donna, camicie e camicette donna, gonne e pantaloni donna</page-keywords>
@@ -1382,11 +1382,11 @@
             <page-title xml:lang="it-IT">Camicie e camicette per donna tra cui manica corta e lunga, casual, classico e altro</page-title>
             <page-title xml:lang="ja-JP">半袖、長袖、カジュアル、定番などを初めとするレディーストップス</page-title>
             <page-title xml:lang="zh-CN">女士上衣包括短袖、长袖上衣及休闲、经典风格上衣等</page-title>
-            <page-description xml:lang="x-default">Shop Women's Shirts. Short and long sleeve, Oxford, smart, casual and classic styles for unbeatable comfort from your desk to the great outdoors at Demandware.</page-description>
-            <page-description xml:lang="fr-FR">Découvrez nos chemises pour femme. Manches courtes et longues, styles Oxford, chic, casual et classique,... Demandware vous garantit un confort inégalable au bureau comme à l'extérieur.</page-description>
-            <page-description xml:lang="it-IT">Camicie donna Manica corta e lunga, stile Oxford, elegante, casual e classico per una praticità senza uguali in ufficio o per una serata speciale, disponibili su Demandware.</page-description>
-            <page-description xml:lang="ja-JP">レディースシャツのご購入Demandware の半袖、長袖、オックスフォードなど、スマートかつカジュアルな定番スタイルは、仕事から素敵なアウトドアの日まで、この上ない着心地です。</page-description>
-            <page-description xml:lang="zh-CN">选购女士衬衫。在 Demandware 选购短袖衬衣、长袖衬衣、牛津衬衣，以及商务、休闲或经典风格衬衣，让您在商务工作中或是户外休闲时，都尽享美观舒适。</page-description>
+            <page-description xml:lang="x-default">Shop Women's Shirts. Short and long sleeve, Oxford, smart, casual and classic styles for unbeatable comfort from your desk to the great outdoors at Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="fr-FR">Découvrez nos chemises pour femme. Manches courtes et longues, styles Oxford, chic, casual et classique,... Salesforce Commerce Cloud vous garantit un confort inégalable au bureau comme à l'extérieur.</page-description>
+            <page-description xml:lang="it-IT">Camicie donna Manica corta e lunga, stile Oxford, elegante, casual e classico per una praticità senza uguali in ufficio o per una serata speciale, disponibili su Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="ja-JP">レディースシャツのご購入Salesforce Commerce Cloud の半袖、長袖、オックスフォードなど、スマートかつカジュアルな定番スタイルは、仕事から素敵なアウトドアの日まで、この上ない着心地です。</page-description>
+            <page-description xml:lang="zh-CN">选购女士衬衫。在 Salesforce Commerce Cloud 选购短袖衬衣、长袖衬衣、牛津衬衣，以及商务、休闲或经典风格衬衣，让您在商务工作中或是户外休闲时，都尽享美观舒适。</page-description>
             <page-keywords xml:lang="x-default">womens shirt, womens dress shirt, womens woven shirt, womens office shirt, womens casual shirt</page-keywords>
             <page-keywords xml:lang="fr-FR">chemise femme, robe-chemise femme, chemise en maille femme, chemise bureau femme, chemise casual femme</page-keywords>
             <page-keywords xml:lang="it-IT">camicia donna, chemisier donna, camicia in tessuto donna, camicia da ufficio donna, camicia casual donna</page-keywords>
@@ -1733,11 +1733,11 @@
             <page-title xml:lang="it-IT">Vestiti da donna per tutte le occasioni</page-title>
             <page-title xml:lang="ja-JP">あらゆる場面で活躍するレディースドレス</page-title>
             <page-title xml:lang="zh-CN">适合各种场合穿着的女士连衣裙</page-title>
-            <page-description xml:lang="x-default">Shop Women's dresses for all occasions including formal, evening and casual in a variety of colors at Demandware</page-description>
-            <page-description xml:lang="fr-FR">Découvrez les robes femme Demandware pour toutes les occasions, (habillées, de soirée et casual) dans une grande variété de coloris</page-description>
-            <page-description xml:lang="it-IT">Vestiti da donna per tutte le occasioni, formali, per la sera e casual, in una vasta gamma di colori disponibili su Demandware</page-description>
-            <page-description xml:lang="ja-JP">フォーマル、イブニング、カジュアルを初め、あらゆる場面で活躍するカラー豊富なレディ－スドレスのご購入は Demandware で。</page-description>
-            <page-description xml:lang="zh-CN">在 Demandware 选购适合各种场合穿着的女士连衣裙，包括正装、晚礼服或休闲裙装，各种颜色花纹，应有尽有。</page-description>
+            <page-description xml:lang="x-default">Shop Women's dresses for all occasions including formal, evening and casual in a variety of colors at Salesforce Commerce Cloud</page-description>
+            <page-description xml:lang="fr-FR">Découvrez les robes femme Salesforce Commerce Cloud pour toutes les occasions, (habillées, de soirée et casual) dans une grande variété de coloris</page-description>
+            <page-description xml:lang="it-IT">Vestiti da donna per tutte le occasioni, formali, per la sera e casual, in una vasta gamma di colori disponibili su Salesforce Commerce Cloud</page-description>
+            <page-description xml:lang="ja-JP">フォーマル、イブニング、カジュアルを初め、あらゆる場面で活躍するカラー豊富なレディ－スドレスのご購入は Salesforce Commerce Cloud で。</page-description>
+            <page-description xml:lang="zh-CN">在 Salesforce Commerce Cloud 选购适合各种场合穿着的女士连衣裙，包括正装、晚礼服或休闲裙装，各种颜色花纹，应有尽有。</page-description>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -1762,11 +1762,11 @@
             <page-title xml:lang="it-IT">Gonne e pantaloni donna tra cui cachi, cargo, pantaloni classici, jeans e altro</page-title>
             <page-title xml:lang="ja-JP">カーキ、カーゴ、パンツ、ジーンズなどのレディースボトムス</page-title>
             <page-title xml:lang="zh-CN">女士下装包括卡其裤、口袋休闲裤、长裤、牛仔裤及其他品类</page-title>
-            <page-description xml:lang="x-default">Shop Women's Trousers. Practical, easy-to-wear styles wherever you're headed. Check out Timberland's famous rugged, long-lasting trousers, jeans, cargo pants and more at Demandware.</page-description>
-            <page-description xml:lang="fr-FR">Découvrez nos pantalons pour femme. Des styles pratiques et faciles à porter peu importe où vous allez. Découvrez les célèbres pantalons, jeans, pantalons cargo etc. ultra-résistants signés Timberland proposés par Demandware.</page-description>
-            <page-description xml:lang="it-IT">Pantaloni donna. Stili pratici e facili da portare in tutte le occasioni. Scopri i famosi pantaloni, jeans e cargo e altro resistenti e duraturi di Timberland, disponibili su Demandware.</page-description>
-            <page-description xml:lang="ja-JP">レディースパンツのご購入どこへ行く場合でも、実用的で着こなしやすいスタイルです。人気の高い丈夫で耐久性に優れた Timberland パンツ、ジーンズ、カーゴパンツを Demandware でお見逃しなく。</page-description>
-            <page-description xml:lang="zh-CN">选购女士裤装。无论您出现在何种场合，均可为您打造实用而舒适的风格。在 Demandware 选购 Timberland 品牌著名的持久耐穿型长裤、牛仔裤、口袋休闲裤和其他品类。</page-description>
+            <page-description xml:lang="x-default">Shop Women's Trousers. Practical, easy-to-wear styles wherever you're headed. Check out Timberland's famous rugged, long-lasting trousers, jeans, cargo pants and more at Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="fr-FR">Découvrez nos pantalons pour femme. Des styles pratiques et faciles à porter peu importe où vous allez. Découvrez les célèbres pantalons, jeans, pantalons cargo etc. ultra-résistants signés Timberland proposés par Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="it-IT">Pantaloni donna. Stili pratici e facili da portare in tutte le occasioni. Scopri i famosi pantaloni, jeans e cargo e altro resistenti e duraturi di Timberland, disponibili su Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="ja-JP">レディースパンツのご購入どこへ行く場合でも、実用的で着こなしやすいスタイルです。人気の高い丈夫で耐久性に優れた Timberland パンツ、ジーンズ、カーゴパンツを Salesforce Commerce Cloud でお見逃しなく。</page-description>
+            <page-description xml:lang="zh-CN">选购女士裤装。无论您出现在何种场合，均可为您打造实用而舒适的风格。在 Salesforce Commerce Cloud 选购 Timberland 品牌著名的持久耐穿型长裤、牛仔裤、口袋休闲裤和其他品类。</page-description>
             <page-keywords xml:lang="x-default">womens pants, womens khaki pants, womens cargo pants, combat trousers, combat pants, combats, womens casual pants, womens jeans, womens denim jeans</page-keywords>
             <page-keywords xml:lang="fr-FR">pantalon femme, pantalon kaki femme, pantalon cargo femme, pantalon treillis, treillis, pantalon casual femme, jean femme, jean denim femme</page-keywords>
             <page-keywords xml:lang="it-IT">pantaloni donna, cachi, donna, cargo donna, pantaloni militari, combat, pantaloni casual donna, jeans donna, jeans denim donna</page-keywords>
@@ -2134,11 +2134,11 @@
             <page-title xml:lang="it-IT">Giacche e cappotti donna tra cui giacche e collezioni</page-title>
             <page-title xml:lang="ja-JP">ジャケットやコレクションを初めとするレディースアウターウェア</page-title>
             <page-title xml:lang="zh-CN">女士外套包括夹克外套及其他类别</page-title>
-            <page-description xml:lang="x-default">Shop Women's Jackets, Coats &amp; Outerwear. Classic outdoor-tested garments with traditional styling details that provide comfort, insulation and ease of movement, whatever the weather at Demandware.</page-description>
-            <page-description xml:lang="fr-FR">Découvrez nos vestes, manteaux et vêtements d'extérieur femme. Testés et approuvés, les vêtements d'extérieurs de Demandware sont fabriqués dans le respect de la tradition avec ces petits détails qui assurent confort, protection et praticité, quelles que soient les conditions climatiques.</page-description>
-            <page-description xml:lang="it-IT">Giacche, cappotti e capispalla donna Le giacche e i cappotti Demandware sono capi classici e comprovati: offrono comfort, tengono caldo e permettono libertà di movimento, in qualsiasi condizione atmosferica.</page-description>
-            <page-description xml:lang="ja-JP">レディースジャケット、コート、アウターウェアのご購入定番のアウトドア向き衣料。スタンダードなスタイルで、着心地良く、断熱性に優れ、動きやすいデザインです。Demandware では、どんなお天気にも対応します。</page-description>
-            <page-description xml:lang="zh-CN">选购女士夹克、大衣及外套。Demandware 的经典户外服装保留了款式传统的装饰，无论任何天气，均可提供舒适、保暖而随意的穿着体验。</page-description>
+            <page-description xml:lang="x-default">Shop Women's Jackets, Coats &amp; Outerwear. Classic outdoor-tested garments with traditional styling details that provide comfort, insulation and ease of movement, whatever the weather at Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="fr-FR">Découvrez nos vestes, manteaux et vêtements d'extérieur femme. Testés et approuvés, les vêtements d'extérieurs de Salesforce Commerce Cloud sont fabriqués dans le respect de la tradition avec ces petits détails qui assurent confort, protection et praticité, quelles que soient les conditions climatiques.</page-description>
+            <page-description xml:lang="it-IT">Giacche, cappotti e capispalla donna Le giacche e i cappotti Salesforce Commerce Cloud sono capi classici e comprovati: offrono comfort, tengono caldo e permettono libertà di movimento, in qualsiasi condizione atmosferica.</page-description>
+            <page-description xml:lang="ja-JP">レディースジャケット、コート、アウターウェアのご購入定番のアウトドア向き衣料。スタンダードなスタイルで、着心地良く、断熱性に優れ、動きやすいデザインです。Salesforce Commerce Cloud では、どんなお天気にも対応します。</page-description>
+            <page-description xml:lang="zh-CN">选购女士夹克、大衣及外套。Salesforce Commerce Cloud 的经典户外服装保留了款式传统的装饰，无论任何天气，均可提供舒适、保暖而随意的穿着体验。</page-description>
             <page-keywords xml:lang="x-default">womens jackets, womens coats, womens leather jackets, womens waterproof jackets, womens insulated jackets, womens vests, womens water resistant jackets</page-keywords>
             <page-keywords xml:lang="fr-FR">vestes femme, manteaux femme, vestes en cuir femme, vestes imperméables femme, vestes isolantes femme, gilets sans manche, vestes coupe-vent</page-keywords>
             <page-keywords xml:lang="it-IT">giacche donna, cappotti donna, giacche in pelle donna, giacche impermeabili donna, giacche isolate donna, giubbotti donna, giacche resistenti all'acqua donna</page-keywords>
@@ -2554,11 +2554,11 @@
             <page-title xml:lang="it-IT">Orecchini da donna a clip, curvi e altro</page-title>
             <page-title xml:lang="ja-JP">ボタン式、クリップ式、イヤーフック式などのレディースイヤリング</page-title>
             <page-title xml:lang="zh-CN">女士耳饰包括按钮夹扣耳钉、波浪耳环等等</page-title>
-            <page-description xml:lang="x-default">Shop Women's earrings in a variety of colors and styles including button, clip on and curved at Demandware.</page-description>
-            <page-description xml:lang="fr-FR">Découvrez la grande variété de coloris et de styles des boucles d'oreilles Demandware (puces, clips, crochets).</page-description>
-            <page-description xml:lang="it-IT">Orecchini da donna in una varietà di colori e stili tra cui a bottone, a clip e curvi disponibili su Demandware.</page-description>
-            <page-description xml:lang="ja-JP">ボタン式、クリップ式、イヤーフック式などのイヤリングのご購入は Demandware で。さまざまな色とサイズを取り揃えています。</page-description>
-            <page-description xml:lang="zh-CN">在 Demandware 选购各种颜色款式的女士耳饰，包括按钮耳钉、夹扣耳钉和波浪耳环等。</page-description>
+            <page-description xml:lang="x-default">Shop Women's earrings in a variety of colors and styles including button, clip on and curved at Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="fr-FR">Découvrez la grande variété de coloris et de styles des boucles d'oreilles Salesforce Commerce Cloud (puces, clips, crochets).</page-description>
+            <page-description xml:lang="it-IT">Orecchini da donna in una varietà di colori e stili tra cui a bottone, a clip e curvi disponibili su Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="ja-JP">ボタン式、クリップ式、イヤーフック式などのイヤリングのご購入は Salesforce Commerce Cloud で。さまざまな色とサイズを取り揃えています。</page-description>
+            <page-description xml:lang="zh-CN">在 Salesforce Commerce Cloud 选购各种颜色款式的女士耳饰，包括按钮耳钉、夹扣耳钉和波浪耳环等。</page-description>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -2583,11 +2583,11 @@
             <page-title xml:lang="it-IT">Braccialetti da donna tra cui elastici, alti, con perle e altro</page-title>
             <page-title xml:lang="ja-JP">ストレッチ、カフ、ビーズなどを初めとするレディースブレスレット</page-title>
             <page-title xml:lang="zh-CN">女士手链包括松紧手链、皮革手链、串珠手链等等</page-title>
-            <page-description xml:lang="x-default">Shop Women's bracelets in a variety of colors and styles including stretched, beaded, cuff &amp; more at Demandware.</page-description>
-            <page-description xml:lang="fr-FR">Découvrez la grande variété de coloris et de styles des bracelets Demandware (élastiques, à perles, manchettes, etc.).</page-description>
-            <page-description xml:lang="it-IT">Braccialetti da donna in una varietà di colori e stili tra cui elastici, con perle, alti e altro disponibili su Demandware.</page-description>
-            <page-description xml:lang="ja-JP">ストレッチ、ビーズ、カフなどを初めとするブレスレットのご購入は Demandware で。さまざまな色とスタイルを取り揃えています。</page-description>
-            <page-description xml:lang="zh-CN">在 Demandware 选购各种颜色款式的女士耳饰，包括按松紧手链、皮革手链、串珠手链等。</page-description>
+            <page-description xml:lang="x-default">Shop Women's bracelets in a variety of colors and styles including stretched, beaded, cuff &amp; more at Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="fr-FR">Découvrez la grande variété de coloris et de styles des bracelets Salesforce Commerce Cloud (élastiques, à perles, manchettes, etc.).</page-description>
+            <page-description xml:lang="it-IT">Braccialetti da donna in una varietà di colori e stili tra cui elastici, con perle, alti e altro disponibili su Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="ja-JP">ストレッチ、ビーズ、カフなどを初めとするブレスレットのご購入は Salesforce Commerce Cloud で。さまざまな色とスタイルを取り揃えています。</page-description>
+            <page-description xml:lang="zh-CN">在 Salesforce Commerce Cloud 选购各种颜色款式的女士耳饰，包括按松紧手链、皮革手链、串珠手链等。</page-description>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -2612,11 +2612,11 @@
             <page-title xml:lang="it-IT">Collane da donna tra cui a goccia, con ciondoli e altro</page-title>
             <page-title xml:lang="ja-JP">ドロップ、ダングルなどを初めとするレディースネックレス</page-title>
             <page-title xml:lang="zh-CN">女士项链包括吊坠项链、锁骨链等等</page-title>
-            <page-description xml:lang="x-default">Shop Women's neclaces in a variety of colors and styles including drop, dangled &amp; more at Demandware.</page-description>
-            <page-description xml:lang="fr-FR">Découvrez la grande variété de coloris et de styles des colliers Demandware (pendentifs, chokers, etc.).</page-description>
-            <page-description xml:lang="it-IT">Collane da donna in una varietà di colori e stili tra cui a goccia, con ciondoli e altro disponibili su Demandware.</page-description>
-            <page-description xml:lang="ja-JP">ドロップ、ダングルなどを初めとするネックレスのご購入は Demandware で。さまざまな色とスタイルを取り揃えています。</page-description>
-            <page-description xml:lang="zh-CN">在 Demandware 选购各种颜色款式的女士项链，包括吊坠项链、锁骨链等等。</page-description>
+            <page-description xml:lang="x-default">Shop Women's neclaces in a variety of colors and styles including drop, dangled &amp; more at Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="fr-FR">Découvrez la grande variété de coloris et de styles des colliers Salesforce Commerce Cloud (pendentifs, chokers, etc.).</page-description>
+            <page-description xml:lang="it-IT">Collane da donna in una varietà di colori e stili tra cui a goccia, con ciondoli e altro disponibili su Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="ja-JP">ドロップ、ダングルなどを初めとするネックレスのご購入は Salesforce Commerce Cloud で。さまざまな色とスタイルを取り揃えています。</page-description>
+            <page-description xml:lang="zh-CN">在 Salesforce Commerce Cloud 选购各种颜色款式的女士项链，包括吊坠项链、锁骨链等等。</page-description>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -2641,11 +2641,11 @@
             <page-title xml:lang="it-IT">Accessori da donna, cinture, portafogli. Guanti, cappelli, orologi, valigeria e altro ancora</page-title>
             <page-title xml:lang="ja-JP">ベルト、財布などのレディースアクセサリー。手袋、帽子、腕時計、鞄など</page-title>
             <page-title xml:lang="zh-CN">女士配件腰带、钱包。手套、帽子、手表、箱包及其他</page-title>
-            <page-description xml:lang="x-default">Shop womens accessories including belts, wallets. gloves, hats, watches, luggage &amp; more at Demandware.</page-description>
-            <page-description xml:lang="fr-FR">Découvrez les accessoires femme Demandware : ceintures, portefeuilles, gants, chapeaux, montres, bagages, et plus encore.</page-description>
-            <page-description xml:lang="it-IT">Accessori donna tra cui cinture, portafogli, guanti, cappelli, orologi, valigeria e altro disponibili su Demandware.</page-description>
-            <page-description xml:lang="ja-JP">ベルト、財布、手袋、帽子、腕時計、かばんを初めとするレディースアクセサリーは Demandware で。</page-description>
-            <page-description xml:lang="zh-CN">在 Demandware 选购各种女士配件，包括腰带、钱包、手套、帽子、手表、行李包等等。</page-description>
+            <page-description xml:lang="x-default">Shop womens accessories including belts, wallets. gloves, hats, watches, luggage &amp; more at Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="fr-FR">Découvrez les accessoires femme Salesforce Commerce Cloud : ceintures, portefeuilles, gants, chapeaux, montres, bagages, et plus encore.</page-description>
+            <page-description xml:lang="it-IT">Accessori donna tra cui cinture, portafogli, guanti, cappelli, orologi, valigeria e altro disponibili su Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="ja-JP">ベルト、財布、手袋、帽子、腕時計、かばんを初めとするレディースアクセサリーは Salesforce Commerce Cloud で。</page-description>
+            <page-description xml:lang="zh-CN">在 Salesforce Commerce Cloud 选购各种女士配件，包括腰带、钱包、手套、帽子、手表、行李包等等。</page-description>
             <page-keywords xml:lang="x-default">womens accessories, womens belts, womens wallets, womens gloves, womens hats, sunglasses, watches, gloves, hats, scarves, luggage, travel bag, backpack, book bag, laptop bag, hiking backpack, womens socks, womansocks</page-keywords>
             <page-keywords xml:lang="fr-FR">accessoires femme, ceintures femme, portefeuilles femme, gants femme, chapeaux femme, lunettes de soleil, gants, chapeaux, écharpes, bagages, sac de voyage, sac à dos, cartable, sac d'ordinateur portable, sac à dos de randonnée, chaussettes femme, chaussettes pour femmes</page-keywords>
             <page-keywords xml:lang="it-IT">accessori donna, cinture donna, portafogli donna, guanti donna, cappelli donna, occhiali da sole, orologi, guanti, cappelli, sciarpe, valigeria, borse da viaggio, zaini, cartelle, borse per portatile, zaino per escursionismo, calze donne</page-keywords>
@@ -2952,11 +2952,11 @@
             <page-title xml:lang="it-IT">Sciarpe da donna</page-title>
             <page-title xml:lang="ja-JP">レディーススカーフ</page-title>
             <page-title xml:lang="zh-CN">女士围巾</page-title>
-            <page-description xml:lang="x-default">Shop Women's Scarves inclduing tweed, pale, basket and spin all at Demandware.</page-description>
-            <page-description xml:lang="fr-FR">Découvrez les écharpes femme Demandware et les différents modèles tweed, maille pastel ou maille fantaisie.</page-description>
-            <page-description xml:lang="it-IT">Sciarpe da donna tra cui sciarpe in tweed, pastello, avvolgenti e in tessuto disponibili su Demandware.</page-description>
-            <page-description xml:lang="ja-JP">ツイード、ペール、バスケット、スピンなどの柄を初めとするレディーススカーフのご購入は Demandwareで。</page-description>
-            <page-description xml:lang="zh-CN">在 Demandware 选购女士围巾，包括粗花呢围巾、经典格纹、织花围巾及丝巾，应有尽有。</page-description>
+            <page-description xml:lang="x-default">Shop Women's Scarves inclduing tweed, pale, basket and spin all at Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="fr-FR">Découvrez les écharpes femme Salesforce Commerce Cloud et les différents modèles tweed, maille pastel ou maille fantaisie.</page-description>
+            <page-description xml:lang="it-IT">Sciarpe da donna tra cui sciarpe in tweed, pastello, avvolgenti e in tessuto disponibili su Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="ja-JP">ツイード、ペール、バスケット、スピンなどの柄を初めとするレディーススカーフのご購入は Salesforce Commerce Cloudで。</page-description>
+            <page-description xml:lang="zh-CN">在 Salesforce Commerce Cloud 选购女士围巾，包括粗花呢围巾、经典格纹、织花围巾及丝巾，应有尽有。</page-description>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -2981,11 +2981,11 @@
             <page-title xml:lang="it-IT">Scarpe da donna tra cui scarpe casual, ballerine, con tacco medio e alto</page-title>
             <page-title xml:lang="ja-JP">カジュアル、フラット、ミドルヒール、ハイヒールを初めとするレディースシューズ</page-title>
             <page-title xml:lang="zh-CN">女士鞋类包括休闲鞋、平底鞋、中跟和高跟鞋</page-title>
-            <page-description xml:lang="x-default">Shop for womens shoes including casual, flat, mid heel and high heels for any occassion at Demandware</page-description>
-            <page-description xml:lang="fr-FR">Découvrez les chaussures femme Demandware pour toutes occasions : casual, plates, talons moyens et talons hauts</page-description>
-            <page-description xml:lang="it-IT">Scarpe da donna comprese scarpe casual, ballerine, con tacco medio e alto per qualsiasi occasione disponibili su Demandware</page-description>
-            <page-description xml:lang="ja-JP">あらゆる場面で活躍するカジュアル、フラット、ミドルヒール、ハイヒールを初めとするレディースシューズのご購入は Demandware で。</page-description>
-            <page-description xml:lang="zh-CN">在 Demandware 选购女士鞋类，包括休闲鞋、平底鞋、中跟和高跟鞋，适合各种场合穿着</page-description>
+            <page-description xml:lang="x-default">Shop for womens shoes including casual, flat, mid heel and high heels for any occassion at Salesforce Commerce Cloud</page-description>
+            <page-description xml:lang="fr-FR">Découvrez les chaussures femme Salesforce Commerce Cloud pour toutes occasions : casual, plates, talons moyens et talons hauts</page-description>
+            <page-description xml:lang="it-IT">Scarpe da donna comprese scarpe casual, ballerine, con tacco medio e alto per qualsiasi occasione disponibili su Salesforce Commerce Cloud</page-description>
+            <page-description xml:lang="ja-JP">あらゆる場面で活躍するカジュアル、フラット、ミドルヒール、ハイヒールを初めとするレディースシューズのご購入は Salesforce Commerce Cloud で。</page-description>
+            <page-description xml:lang="zh-CN">在 Salesforce Commerce Cloud 选购女士鞋类，包括休闲鞋、平底鞋、中跟和高跟鞋，适合各种场合穿着</page-description>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -3050,11 +3050,11 @@
             <page-title xml:lang="it-IT">Abbigliamento da uomo tra cui completi, maglie e camicie, pantaloni e altro</page-title>
             <page-title xml:lang="ja-JP">スーツ、トップス、ボトムスなどを初めとするメンズ衣料</page-title>
             <page-title xml:lang="zh-CN">男士服装包括西套、上衣、下装及其他品类</page-title>
-            <page-description xml:lang="x-default">Shop Men's Clothing. Relaxed, timeless classics you can rely on; from denim to corduroys and sweaters to shirts. Huge range of contemporary colours and eco-aware designs: great casualwear at Demandware.</page-description>
-            <page-description xml:lang="fr-FR">Découvrez nos vêtements pour homme. Des classiques décontractés et intemporels. Du denim au velours côtelé, des pulls aux chemises. Une gamme complète de couleurs modernes et une mode respectueuse de l'environnement : une belle ligne de vêtements décontractés chez Demandware</page-description>
-            <page-description xml:lang="it-IT">Abbigliamento uomo. Capi classici senza tempo su cui fare affidamento: dal denim al velluto, dai maglioni alle camicie. Ampia gamma di colori alla moda e design ecologici: il grande abbigliamento casual di Demandware.</page-description>
-            <page-description xml:lang="ja-JP">メンズ衣料のご購入リラックス感のあるタイムレスな信頼の定番アイテム。デニムからコーデュロイ、セーターからシャツまで。今風の豊富なカラーバリエーション。エコフレンドリーなデザイン。Demandware のイチオシカジュアルウェアです。</page-description>
-            <page-description xml:lang="zh-CN">选购男装。您可以信赖的舒适而永恒的经典款式，从牛仔裤到条绒裤，从毛衣到衬衫，应有尽有。Demandware 的休闲装样式齐全，配有各种当代色彩，并秉承了环保型设计理念。</page-description>
+            <page-description xml:lang="x-default">Shop Men's Clothing. Relaxed, timeless classics you can rely on; from denim to corduroys and sweaters to shirts. Huge range of contemporary colours and eco-aware designs: great casualwear at Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="fr-FR">Découvrez nos vêtements pour homme. Des classiques décontractés et intemporels. Du denim au velours côtelé, des pulls aux chemises. Une gamme complète de couleurs modernes et une mode respectueuse de l'environnement : une belle ligne de vêtements décontractés chez Salesforce Commerce Cloud</page-description>
+            <page-description xml:lang="it-IT">Abbigliamento uomo. Capi classici senza tempo su cui fare affidamento: dal denim al velluto, dai maglioni alle camicie. Ampia gamma di colori alla moda e design ecologici: il grande abbigliamento casual di Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="ja-JP">メンズ衣料のご購入リラックス感のあるタイムレスな信頼の定番アイテム。デニムからコーデュロイ、セーターからシャツまで。今風の豊富なカラーバリエーション。エコフレンドリーなデザイン。Salesforce Commerce Cloud のイチオシカジュアルウェアです。</page-description>
+            <page-description xml:lang="zh-CN">选购男装。您可以信赖的舒适而永恒的经典款式，从牛仔裤到条绒裤，从毛衣到衬衫，应有尽有。Salesforce Commerce Cloud 的休闲装样式齐全，配有各种当代色彩，并秉承了环保型设计理念。</page-description>
             <page-keywords xml:lang="x-default">mens outerwear, mens tops, mens bottoms</page-keywords>
             <page-keywords xml:lang="fr-FR">vêtements d'extérieur homme, tops homme, bas homme</page-keywords>
             <page-keywords xml:lang="it-IT">giacche e cappotti uomo, maglie e camicie uomo, pantaloni uomo</page-keywords>
@@ -3084,11 +3084,11 @@
             <page-title xml:lang="it-IT">Completi professionali e casual per uomo</page-title>
             <page-title xml:lang="ja-JP">ビジネスおよびカジュアル向けメンズスーツ</page-title>
             <page-title xml:lang="zh-CN">商务版及休闲版男士西装</page-title>
-            <page-description xml:lang="x-default">Shop Men's suits for business or pleasure. Enjoy from a variety of different styles and cuts at Demandware.</page-description>
-            <page-description xml:lang="fr-FR">Découvrez nos costumes masculins pour le bureau ou ailleurs. Demandware vous propose un large choix de styles et de coupes.</page-description>
-            <page-description xml:lang="it-IT">Completi professionali e casual per uomo Scopri un'ampia varietà di stili e tagli disponibili su Demandware.</page-description>
-            <page-description xml:lang="ja-JP">ビジネスやレジャー向けメンズスーツのご購入さまざまなスタイルとカットのスーツを Demandware でぜひご覧ください。</page-description>
-            <page-description xml:lang="zh-CN">选购商务版及休闲版男士西装在 Demandware 尽享不同的款式风格及独特剪裁。</page-description>
+            <page-description xml:lang="x-default">Shop Men's suits for business or pleasure. Enjoy from a variety of different styles and cuts at Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="fr-FR">Découvrez nos costumes masculins pour le bureau ou ailleurs. Salesforce Commerce Cloud vous propose un large choix de styles et de coupes.</page-description>
+            <page-description xml:lang="it-IT">Completi professionali e casual per uomo Scopri un'ampia varietà di stili e tagli disponibili su Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="ja-JP">ビジネスやレジャー向けメンズスーツのご購入さまざまなスタイルとカットのスーツを Salesforce Commerce Cloud でぜひご覧ください。</page-description>
+            <page-description xml:lang="zh-CN">选购商务版及休闲版男士西装在 Salesforce Commerce Cloud 尽享不同的款式风格及独特剪裁。</page-description>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -3219,11 +3219,11 @@
             <page-title xml:lang="it-IT">Giacche da uomo tra cui giacche e blazer</page-title>
             <page-title xml:lang="ja-JP">ジャケットやブレザーを初めとするメンズジャケット</page-title>
             <page-title xml:lang="zh-CN">男士夹克包括夹克及运动上衣</page-title>
-            <page-description xml:lang="x-default">Shop Men's Jackets, Coats &amp; Outerwear. Classic outdoor-tested garments with traditional styling details that provide comfort, insulation and ease of movement, whatever the weather at Demandware.</page-description>
-            <page-description xml:lang="fr-FR">Découvrez nos vestes, manteaux et vêtements d'extérieur homme. Testés et approuvés, les vêtements d'extérieurs de Demandware sont fabriqués dans le respect de la tradition avec ces petits détails qui assurent confort, protection et praticité, quelles que soient les conditions climatiques.</page-description>
-            <page-description xml:lang="it-IT">Giacche, cappotti e capispalla uomo Le giacche e i cappotti Demandware sono capi classici e comprovati: offrono comfort, tengono caldo e permettono libertà di movimento, in qualsiasi condizione atmosferica.</page-description>
-            <page-description xml:lang="ja-JP">メンズジャケット、コート、アウターウェアのご購入定番のアウトドア向き衣料。スタンダードなスタイルで、着心地良く、断熱性に優れ、動きやすいデザインです。Demandware では、どんなお天気にも対応します。</page-description>
-            <page-description xml:lang="zh-CN">选购男士夹克、大衣及外套。Demandware 的经典户外服装保留了款式传统的装饰，无论任何天气，均可提供舒适、保暖而随意的穿着体验。</page-description>
+            <page-description xml:lang="x-default">Shop Men's Jackets, Coats &amp; Outerwear. Classic outdoor-tested garments with traditional styling details that provide comfort, insulation and ease of movement, whatever the weather at Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="fr-FR">Découvrez nos vestes, manteaux et vêtements d'extérieur homme. Testés et approuvés, les vêtements d'extérieurs de Salesforce Commerce Cloud sont fabriqués dans le respect de la tradition avec ces petits détails qui assurent confort, protection et praticité, quelles que soient les conditions climatiques.</page-description>
+            <page-description xml:lang="it-IT">Giacche, cappotti e capispalla uomo Le giacche e i cappotti Salesforce Commerce Cloud sono capi classici e comprovati: offrono comfort, tengono caldo e permettono libertà di movimento, in qualsiasi condizione atmosferica.</page-description>
+            <page-description xml:lang="ja-JP">メンズジャケット、コート、アウターウェアのご購入定番のアウトドア向き衣料。スタンダードなスタイルで、着心地良く、断熱性に優れ、動きやすいデザインです。Salesforce Commerce Cloud では、どんなお天気にも対応します。</page-description>
+            <page-description xml:lang="zh-CN">选购男士夹克、大衣及外套。Salesforce Commerce Cloud 的经典户外服装保留了款式传统的装饰，无论任何天气，均可提供舒适、保暖而随意的穿着体验。</page-description>
             <page-keywords xml:lang="x-default">mens jackets, mens coats, mens leather jackets, mens waterproof jackets, mens insulated jackets, mens vests, mens water resistant jackets</page-keywords>
             <page-keywords xml:lang="fr-FR">vestes homme, manteaux homme, vestes en cuir homme, vestes imperméables homme, vestes isolantes homme, gilets sans manche homme, vestes coupe-vent</page-keywords>
             <page-keywords xml:lang="it-IT">giacche uomo, cappotti uomo, giacche in pelle uomo, giacche impermeabili uomo, giacche isolate uomo, giubbotti uomo, giacche resistenti all'acqua uomo</page-keywords>
@@ -3422,11 +3422,11 @@
             <page-title xml:lang="it-IT">Camicie da uomo tra cui camicie a righe, button-down, no stiro e altro</page-title>
             <page-title xml:lang="ja-JP">ストライプ、ボタンダウン、ノーアイロンを初めとするメンズドレスシャツ</page-title>
             <page-title xml:lang="zh-CN">男士礼服衬衫包括条纹、系扣上衣及免熨烫衬衣等等</page-title>
-            <page-description xml:lang="x-default">Shop Men's dress shirts in a variety of colors and styles including striped, button down, non-iron &amp; more at Demandware</page-description>
-            <page-description xml:lang="fr-FR">Découvrez la grande variété de coloris et de styles des chemises habillées Demandware (à rayures, boutonnées, sans repassage, etc.)</page-description>
-            <page-description xml:lang="it-IT">Camicie eleganti da uomo in una varietà di colori e stili tra cui a righine, button-down, no stiro e altro, disponibili su Demandware.</page-description>
-            <page-description xml:lang="ja-JP">ストライプ、ボタンダウン、ノーアイロンなどを初めとするドレスシャツのご購入は Demandware で。さまざまな色とスタイルを取り揃えています。</page-description>
-            <page-description xml:lang="zh-CN">在 Demandware 选购各种颜色款式的男士礼服衬衣，包括条纹、系扣上衣及免熨烫衬衣等</page-description>
+            <page-description xml:lang="x-default">Shop Men's dress shirts in a variety of colors and styles including striped, button down, non-iron &amp; more at Salesforce Commerce Cloud</page-description>
+            <page-description xml:lang="fr-FR">Découvrez la grande variété de coloris et de styles des chemises habillées Salesforce Commerce Cloud (à rayures, boutonnées, sans repassage, etc.)</page-description>
+            <page-description xml:lang="it-IT">Camicie eleganti da uomo in una varietà di colori e stili tra cui a righine, button-down, no stiro e altro, disponibili su Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="ja-JP">ストライプ、ボタンダウン、ノーアイロンなどを初めとするドレスシャツのご購入は Salesforce Commerce Cloud で。さまざまな色とスタイルを取り揃えています。</page-description>
+            <page-description xml:lang="zh-CN">在 Salesforce Commerce Cloud 选购各种颜色款式的男士礼服衬衣，包括条纹、系扣上衣及免熨烫衬衣等</page-description>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">true</custom-attribute>
@@ -3465,11 +3465,11 @@
             <page-title xml:lang="it-IT">Pantaloncini primaverili da uomo</page-title>
             <page-title xml:lang="ja-JP">メンズスプリングショートパンツ</page-title>
             <page-title xml:lang="zh-CN">男士春季短裤</page-title>
-            <page-description xml:lang="x-default">Shop Men's spring shorts in cotton. Variety of different fits at Demandware</page-description>
-            <page-description xml:lang="fr-FR">Découvrez les shorts homme en coton pour le printemps. Demandware propose une variété de coupes.</page-description>
-            <page-description xml:lang="it-IT">Pantaloncini primaverili in cotone uomo. Un'ampia varietà di modelli disponibili su Demandware</page-description>
-            <page-description xml:lang="ja-JP">メンズスプリング綿ショートパンツのご購入さまざまなオフフィットを Demandware で。</page-description>
-            <page-description xml:lang="zh-CN">选购男士春季棉质短裤。Demandware 为您提供不同款式版型</page-description>
+            <page-description xml:lang="x-default">Shop Men's spring shorts in cotton. Variety of different fits at Salesforce Commerce Cloud</page-description>
+            <page-description xml:lang="fr-FR">Découvrez les shorts homme en coton pour le printemps. Salesforce Commerce Cloud propose une variété de coupes.</page-description>
+            <page-description xml:lang="it-IT">Pantaloncini primaverili in cotone uomo. Un'ampia varietà di modelli disponibili su Salesforce Commerce Cloud</page-description>
+            <page-description xml:lang="ja-JP">メンズスプリング綿ショートパンツのご購入さまざまなオフフィットを Salesforce Commerce Cloud で。</page-description>
+            <page-description xml:lang="zh-CN">选购男士春季棉质短裤。Salesforce Commerce Cloud 为您提供不同款式版型</page-description>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -3584,11 +3584,11 @@
             <page-title xml:lang="it-IT">Pantaloni da uomo tra cui cachi, cargo, pantaloni classici, jeans e altro</page-title>
             <page-title xml:lang="ja-JP">カーキ、カーゴ、パンツ、ジーンズなどを初めとするメンズパンツ</page-title>
             <page-title xml:lang="zh-CN">男士下装包括卡其裤、口袋休闲裤、长裤、牛仔裤及其他品类</page-title>
-            <page-description xml:lang="x-default">Shop Men's Trousers. Practical, easy-to-wear styles wherever you're headed. Check out Demandware's famous rugged, long-lasting trousers, jeans, cargo pants and more at Demandware.</page-description>
-            <page-description xml:lang="fr-FR">Découvrez nos pantalons pour homme. Des styles pratiques et faciles à porter peu importe où vous allez. Découvrez les formidables pantalons, jeans, pantalons cargo etc. ultra-résistants signés Demandware.</page-description>
-            <page-description xml:lang="it-IT">Pantaloni uomo. Stili pratici e facili da portare in tutte le occasioni. Scopri i famosi pantaloni, jeans e cargo e altro resistenti e duraturi di Demandware, disponibili su Demandware.</page-description>
-            <page-description xml:lang="ja-JP">メンズパンツのご購入どこへ行く場合でも、実用的で着こなしやすいスタイルです。人気の高い丈夫で耐久性に優れた Demandware のパンツ、ジーンズ、カーゴパンツなどをお見逃しなく。</page-description>
-            <page-description xml:lang="zh-CN">选购男士裤装。无论您出现在何种场合，均可为您打造实用而舒适的风格。在 Demandware 选购 Demandware 著名的持久耐穿型长裤、牛仔裤、口袋休闲裤和其他品类。</page-description>
+            <page-description xml:lang="x-default">Shop Men's Trousers. Practical, easy-to-wear styles wherever you're headed. Check out Salesforce Commerce Cloud's famous rugged, long-lasting trousers, jeans, cargo pants and more at Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="fr-FR">Découvrez nos pantalons pour homme. Des styles pratiques et faciles à porter peu importe où vous allez. Découvrez les formidables pantalons, jeans, pantalons cargo etc. ultra-résistants signés Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="it-IT">Pantaloni uomo. Stili pratici e facili da portare in tutte le occasioni. Scopri i famosi pantaloni, jeans e cargo e altro resistenti e duraturi di Salesforce Commerce Cloud, disponibili su Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="ja-JP">メンズパンツのご購入どこへ行く場合でも、実用的で着こなしやすいスタイルです。人気の高い丈夫で耐久性に優れた Salesforce Commerce Cloud のパンツ、ジーンズ、カーゴパンツなどをお見逃しなく。</page-description>
+            <page-description xml:lang="zh-CN">选购男士裤装。无论您出现在何种场合，均可为您打造实用而舒适的风格。在 Salesforce Commerce Cloud 选购 Salesforce Commerce Cloud 著名的持久耐穿型长裤、牛仔裤、口袋休闲裤和其他品类。</page-description>
             <page-keywords xml:lang="x-default">mens pants, mens khaki pants, mens cargo pants, combat trousers, combat pants, combats, mens casual pants, mens jeans, mens denim jeans</page-keywords>
             <page-keywords xml:lang="fr-FR">pantalon homme, pantalon kaki homme, pantalon cargo homme, pantalon treillis, treillis, pantalon casual homme, jean homme, jean denim homme</page-keywords>
             <page-keywords xml:lang="it-IT">pantaloni uomo, cachi uomo, cargo uomo, pantaloni militari, combat, pantaloni casual uomo, jeans uomo, jeans denim uomo</page-keywords>
@@ -3758,11 +3758,11 @@
             <page-title xml:lang="it-IT">Accessori uomo cinture, portafogli. Guanti, cappelli, orologi, valigeria e altro ancora</page-title>
             <page-title xml:lang="ja-JP">ベルト、財布などのメンズアクセサリー手袋、帽子、腕時計、鞄など</page-title>
             <page-title xml:lang="zh-CN">男士配件腰带、钱包。手套、帽子、手表、箱包及其他</page-title>
-            <page-description xml:lang="x-default">Shop mens accessories including belts, wallets. gloves, hats, watches, luggage &amp; more at Demandware.</page-description>
-            <page-description xml:lang="fr-FR">Découvrez les accessoires homme Demandware : ceintures, portefeuilles, gants, chapeaux, montres, bagages, et plus encore.</page-description>
-            <page-description xml:lang="it-IT">Accessori uomo tra cui cinture, portafogli, guanti, cappelli, orologi, valigeria e altro, disponibili su Demandware.</page-description>
-            <page-description xml:lang="ja-JP">ベルト、財布、手袋、帽子、腕時計、かばんなどを初めとするメンズアクセサリーは Demandware で。</page-description>
-            <page-description xml:lang="zh-CN">在 Demandware 选购各种男士配件，包括腰带、钱包、手套、帽子、手表、行李包等等。</page-description>
+            <page-description xml:lang="x-default">Shop mens accessories including belts, wallets. gloves, hats, watches, luggage &amp; more at Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="fr-FR">Découvrez les accessoires homme Salesforce Commerce Cloud : ceintures, portefeuilles, gants, chapeaux, montres, bagages, et plus encore.</page-description>
+            <page-description xml:lang="it-IT">Accessori uomo tra cui cinture, portafogli, guanti, cappelli, orologi, valigeria e altro, disponibili su Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="ja-JP">ベルト、財布、手袋、帽子、腕時計、かばんなどを初めとするメンズアクセサリーは Salesforce Commerce Cloud で。</page-description>
+            <page-description xml:lang="zh-CN">在 Salesforce Commerce Cloud 选购各种男士配件，包括腰带、钱包、手套、帽子、手表、行李包等等。</page-description>
             <page-keywords xml:lang="x-default">mens accessories, mens belts, mens wallets, mens gloves, mens hats, sunglasses, watches, gloves, hats, scarves, luggage, travel bag, backpack, book bag, laptop bag, hiking backpack, mens socks, man socks</page-keywords>
             <page-keywords xml:lang="fr-FR">accessoires homme, ceintures homme, portefeuilles homme, gants homme, chapeaux homme, lunettes de soleil, gants, chapeaux, écharpes, bagages, sac de voyage, sac à dos, cartable, sac d'ordinateur portable, sac à dos de randonnée, chaussettes homme, chaussettes pour hommes</page-keywords>
             <page-keywords xml:lang="it-IT">accessori uomo, cinture uomo, portafogli uomo, guanti uomo, cappelli uomo, occhiali da sole, orologi, guanti, cappelli, sciarpe, valigeria, borse da viaggio, zaini, cartelle, borse per portatile, zaino per escursionismo, calze uomo</page-keywords>
@@ -3793,11 +3793,11 @@
             <page-title xml:lang="it-IT">Cravatte casual e professionali da uomo</page-title>
             <page-title xml:lang="ja-JP">メンズカジュアル、ビジネスネクタイ</page-title>
             <page-title xml:lang="zh-CN">男士休闲及商务领带</page-title>
-            <page-description xml:lang="x-default">Shop Mens's Ties for all occasions including business or casual at Demandware</page-description>
-            <page-description xml:lang="fr-FR">Découvrez les cravates Demandware pour toutes les occasions, au bureau ou ailleurs</page-description>
-            <page-description xml:lang="it-IT">Cravatte da uomo per tutte le occasioni, professionali e casual, disponibili su Demandware.</page-description>
-            <page-description xml:lang="ja-JP">ビジネスやカジュアルのあらゆる場面で活躍するメンズネクタイは Demandware で。</page-description>
-            <page-description xml:lang="zh-CN">在 Demandware 选购男士休闲及商务领带，适合所有场合穿戴</page-description>
+            <page-description xml:lang="x-default">Shop Mens's Ties for all occasions including business or casual at Salesforce Commerce Cloud</page-description>
+            <page-description xml:lang="fr-FR">Découvrez les cravates Salesforce Commerce Cloud pour toutes les occasions, au bureau ou ailleurs</page-description>
+            <page-description xml:lang="it-IT">Cravatte da uomo per tutte le occasioni, professionali e casual, disponibili su Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="ja-JP">ビジネスやカジュアルのあらゆる場面で活躍するメンズネクタイは Salesforce Commerce Cloud で。</page-description>
+            <page-description xml:lang="zh-CN">在 Salesforce Commerce Cloud 选购男士休闲及商务领带，适合所有场合穿戴</page-description>
         </page-attributes>
         <custom-attributes>
             <custom-attribute attribute-id="enableCompare">false</custom-attribute>
@@ -3822,11 +3822,11 @@
             <page-title xml:lang="it-IT">Guanti da uomo</page-title>
             <page-title xml:lang="ja-JP">メンズ手袋</page-title>
             <page-title xml:lang="zh-CN">男士手套</page-title>
-            <page-description xml:lang="x-default">Shop Men'sGloves . Versatile, commuter, boot, oxford, deer and resolve gloves. All with famous long-lasting quality at Demandware.</page-description>
-            <page-description xml:lang="fr-FR">Découvrez les gants pour hommes. Gants polyvalents, imperméables, Oxford, en daim et doublés, et mitaines. Avec la qualité incomparable de Demandware</page-description>
-            <page-description xml:lang="it-IT">Guanti uomo. Guanti versatili, sportivi, boot, oxford, in pelle di daino ed eleganti. Tutto garantito dalla qualità di lunga durata Demandware.</page-description>
-            <page-description xml:lang="ja-JP">メンズ手袋のご購入多目的、コミューター、ブーツ、オックスフォード、鹿革、リゾルブの各手袋Demandware のアイテムはすべて高品質で長持ちすることで有名です。</page-description>
-            <page-description xml:lang="zh-CN">选购男士手套。多功能、通勤、靴子、牛津、鹿皮、工作手套Demandware 的所有商品均以恒久的品质而著称。</page-description>
+            <page-description xml:lang="x-default">Shop Men'sGloves . Versatile, commuter, boot, oxford, deer and resolve gloves. All with famous long-lasting quality at Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="fr-FR">Découvrez les gants pour hommes. Gants polyvalents, imperméables, Oxford, en daim et doublés, et mitaines. Avec la qualité incomparable de Salesforce Commerce Cloud</page-description>
+            <page-description xml:lang="it-IT">Guanti uomo. Guanti versatili, sportivi, boot, oxford, in pelle di daino ed eleganti. Tutto garantito dalla qualità di lunga durata Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="ja-JP">メンズ手袋のご購入多目的、コミューター、ブーツ、オックスフォード、鹿革、リゾルブの各手袋Salesforce Commerce Cloud のアイテムはすべて高品質で長持ちすることで有名です。</page-description>
+            <page-description xml:lang="zh-CN">选购男士手套。多功能、通勤、靴子、牛津、鹿皮、工作手套Salesforce Commerce Cloud 的所有商品均以恒久的品质而著称。</page-description>
             <page-keywords xml:lang="x-default">gloves, commuter gloves, boot gloves, oxford gloves, deer gloves, resolve gloves</page-keywords>
             <page-keywords xml:lang="fr-FR">gants, mitaines, gants imperméables, gants Oxford, gants en daim, gants doublés</page-keywords>
             <page-keywords xml:lang="it-IT">guanti, guanti sportivi, guanti boot, guanti oxford, guanti in pelle di daino, guanti eleganti</page-keywords>
@@ -3856,11 +3856,11 @@
             <page-title xml:lang="it-IT">Valigia con rotelle uomo</page-title>
             <page-title xml:lang="ja-JP">メンズキャスター付きかばん</page-title>
             <page-title xml:lang="zh-CN">男士带轮行李箱</page-title>
-            <page-description xml:lang="x-default">Shop Men's Wheeled Luggage. Versatile, rugged suitcases, baggage, holdalls and shoulder bags. All with famous long-lasting quality at Demandware.</page-description>
-            <page-description xml:lang="fr-FR">Découvrez nos bagages à roulettes homme. Valises et bagages polyvalents et résistants, cabas et sacs portés épaule. Avec la qualité incomparable de Demandware</page-description>
-            <page-description xml:lang="it-IT">Valigia con rotelle uomo. Valigie versatili e robuste, bagagli, borsoni da viaggio e borse a tracolla. Tutto garantito dalla qualità di lunga durata Demandware.</page-description>
-            <page-description xml:lang="ja-JP">メンズキャスター付きかばんのご購入多目的に使えて丈夫なスーツケース、バッグ、旅行かばん、ショルダーバッグDemandware のアイテムはすべて高品質で長持ちすることで有名です。</page-description>
-            <page-description xml:lang="zh-CN">选购男士带轮行李箱。坚固耐用的多功能行李箱、手提袋及肩背包。Demandware 的所有商品均以恒久的品质而著称。</page-description>
+            <page-description xml:lang="x-default">Shop Men's Wheeled Luggage. Versatile, rugged suitcases, baggage, holdalls and shoulder bags. All with famous long-lasting quality at Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="fr-FR">Découvrez nos bagages à roulettes homme. Valises et bagages polyvalents et résistants, cabas et sacs portés épaule. Avec la qualité incomparable de Salesforce Commerce Cloud</page-description>
+            <page-description xml:lang="it-IT">Valigia con rotelle uomo. Valigie versatili e robuste, bagagli, borsoni da viaggio e borse a tracolla. Tutto garantito dalla qualità di lunga durata Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="ja-JP">メンズキャスター付きかばんのご購入多目的に使えて丈夫なスーツケース、バッグ、旅行かばん、ショルダーバッグSalesforce Commerce Cloud のアイテムはすべて高品質で長持ちすることで有名です。</page-description>
+            <page-description xml:lang="zh-CN">选购男士带轮行李箱。坚固耐用的多功能行李箱、手提袋及肩背包。Salesforce Commerce Cloud 的所有商品均以恒久的品质而著称。</page-description>
             <page-keywords xml:lang="x-default">suitcase with wheels, wheeled luggage</page-keywords>
             <page-keywords xml:lang="fr-FR">valises à roulettes, bagages à roulettes</page-keywords>
             <page-keywords xml:lang="it-IT">valigie con rotelle, valigeria con rotelle</page-keywords>
@@ -3881,7 +3881,7 @@
         <template>rendering/category/catlanding</template>
         <page-attributes>
             <page-title xml:lang="x-default">Shop Electronics Including Televisions, Digital Cameras, iPods &amp; More</page-title>
-            <page-description xml:lang="x-default">Shop Electronics including the latest in televisions, digital cameras, camcorders, mp3, ipod, mobil phones, GPS &amp; gaming at Demandware</page-description>
+            <page-description xml:lang="x-default">Shop Electronics including the latest in televisions, digital cameras, camcorders, mp3, ipod, mobil phones, GPS &amp; gaming at Salesforce Commerce Cloud</page-description>
             <page-keywords xml:lang="x-default">televisions, digital cameras, camcorders, mp3, ipod, mobil phones, GPS, gaming</page-keywords>
         </page-attributes>
         <custom-attributes>
@@ -3919,7 +3919,7 @@
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Televisions Including LCD, Plasma &amp; More in High Definition</page-title>
-            <page-description xml:lang="x-default">Shop the latest Televisions including LCD, Plasma, Flat Screens, Projection including all the top brands, makes and models at Demandware.</page-description>
+            <page-description xml:lang="x-default">Shop the latest Televisions including LCD, Plasma, Flat Screens, Projection including all the top brands, makes and models at Salesforce Commerce Cloud.</page-description>
             <page-keywords xml:lang="x-default">televisions, tvs, LCD, plasma, flat screen, high definition, HDTV, projection</page-keywords>
         </page-attributes>
         <custom-attributes>
@@ -3954,7 +3954,7 @@
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">LCD &amp; Plasma High Definition Flat Screen Televisions</page-title>
-            <page-description xml:lang="x-default">Shop all Flat Screen Televisions including the latest in LCD and Plasma technology from all the latest brands, makes and models at Demandware.</page-description>
+            <page-description xml:lang="x-default">Shop all Flat Screen Televisions including the latest in LCD and Plasma technology from all the latest brands, makes and models at Salesforce Commerce Cloud.</page-description>
             <page-keywords xml:lang="x-default">flat screen, flat screen television, LCD, plasma, HDTV</page-keywords>
         </page-attributes>
         <custom-attributes>
@@ -3972,7 +3972,7 @@
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Projection High Definition Televisions</page-title>
-            <page-description xml:lang="x-default">Shop all Projection Televisions from all the latest brands, makes and models at Demandware.</page-description>
+            <page-description xml:lang="x-default">Shop all Projection Televisions from all the latest brands, makes and models at Salesforce Commerce Cloud.</page-description>
             <page-keywords xml:lang="x-default">projection, projection televisions, HDTV</page-keywords>
         </page-attributes>
         <custom-attributes>
@@ -3989,7 +3989,7 @@
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">TV &amp; DVD Combo Televisions</page-title>
-            <page-description xml:lang="x-default">Shop all TV and DVD combos from all the latest brands, makes and models at Demandware.</page-description>
+            <page-description xml:lang="x-default">Shop all TV and DVD combos from all the latest brands, makes and models at Salesforce Commerce Cloud.</page-description>
             <page-keywords xml:lang="x-default">tv, dvd, tv dvd combo, HDTV</page-keywords>
         </page-attributes>
         <custom-attributes>
@@ -4007,7 +4007,7 @@
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Digital Cameras</page-title>
-            <page-description xml:lang="x-default">Shop the latest digital cameras from all the top brands, makes and models at Demandware.</page-description>
+            <page-description xml:lang="x-default">Shop the latest digital cameras from all the top brands, makes and models at Salesforce Commerce Cloud.</page-description>
             <page-keywords xml:lang="x-default">cameras, digital camerasm point and shoot, slr</page-keywords>
         </page-attributes>
         <custom-attributes>
@@ -4137,7 +4137,7 @@
         <template/>
         <page-attributes>
             <page-title xml:lang="x-default">Camcorders</page-title>
-            <page-description xml:lang="x-default">Shop the latest digital camcorders from all the top brands, makes and models at Demandware.</page-description>
+            <page-description xml:lang="x-default">Shop the latest digital camcorders from all the top brands, makes and models at Salesforce Commerce Cloud.</page-description>
             <page-keywords xml:lang="x-default">camcorders, high definition camcorders</page-keywords>
         </page-attributes>
         <custom-attributes>
@@ -4155,7 +4155,7 @@
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">iPod &amp; MP3 Digital Media Players</page-title>
-            <page-description xml:lang="x-default">Shop Digital Media Players including iPods, Creative Zen, Sony &amp; the latest from all the top brands, makes and models at Demandware.</page-description>
+            <page-description xml:lang="x-default">Shop Digital Media Players including iPods, Creative Zen, Sony &amp; the latest from all the top brands, makes and models at Salesforce Commerce Cloud.</page-description>
             <page-keywords xml:lang="x-default">mp3, iPods, mp3 players</page-keywords>
         </page-attributes>
         <custom-attributes>
@@ -4233,7 +4233,7 @@
         <template/>
         <page-attributes>
             <page-title xml:lang="x-default">Mobile Phones</page-title>
-            <page-description xml:lang="x-default">Shop the latest mobile phones from all the top brands, makes and models at Demandware.</page-description>
+            <page-description xml:lang="x-default">Shop the latest mobile phones from all the top brands, makes and models at Salesforce Commerce Cloud.</page-description>
             <page-keywords xml:lang="x-default">phones, mobile phones, cell, cell phones</page-keywords>
         </page-attributes>
         <custom-attributes>
@@ -4251,7 +4251,7 @@
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">GPS Units</page-title>
-            <page-description xml:lang="x-default">Shop the latest in GPS units from Garmin and Tom Tom along with other brands, makes and models at Demandware.</page-description>
+            <page-description xml:lang="x-default">Shop the latest in GPS units from Garmin and Tom Tom along with other brands, makes and models at Salesforce Commerce Cloud.</page-description>
             <page-keywords xml:lang="x-default">gps, gps units, garmin, tom tom</page-keywords>
         </page-attributes>
         <custom-attributes>
@@ -4375,7 +4375,7 @@
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Gaming</page-title>
-            <page-description xml:lang="x-default">Shop games and game consoles from Xbox, Xbox360, Playstation 2, Playstation 3, Game Cube, Wii, Playstation Portable and Nintento DS at Demandware.</page-description>
+            <page-description xml:lang="x-default">Shop games and game consoles from Xbox, Xbox360, Playstation 2, Playstation 3, Game Cube, Wii, Playstation Portable and Nintento DS at Salesforce Commerce Cloud.</page-description>
             <page-keywords xml:lang="x-default">gaming, xbox, xbox360, ps3, ps2, playstaion 3, psp, game cube, wii, nintendo, nintendo ds</page-keywords>
         </page-attributes>
         <custom-attributes>
@@ -4394,7 +4394,7 @@
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Video Game Consoles</page-title>
-            <page-description xml:lang="x-default">Shop game consoles from Xbox, Xbox360, Playstation 2, Playstation 3, Game Cube, Wii, Playstation Portable and Nintento DS at Demandware.</page-description>
+            <page-description xml:lang="x-default">Shop game consoles from Xbox, Xbox360, Playstation 2, Playstation 3, Game Cube, Wii, Playstation Portable and Nintento DS at Salesforce Commerce Cloud.</page-description>
             <page-keywords xml:lang="x-default">gaming, xbox, xbox360, ps3, ps2, playstaion 3, psp, game cube, wii, nintendo, nintendo ds</page-keywords>
         </page-attributes>
         <custom-attributes>
@@ -4412,7 +4412,7 @@
         <template>rendering/category/categoryproducthits</template>
         <page-attributes>
             <page-title xml:lang="x-default">Video Games</page-title>
-            <page-description xml:lang="x-default">Shop video games from Xbox, Xbox360, Playstation 2, Playstation 3, Game Cube, Wii, Playstation Portable and Nintento DS at Demandware.</page-description>
+            <page-description xml:lang="x-default">Shop video games from Xbox, Xbox360, Playstation 2, Playstation 3, Game Cube, Wii, Playstation Portable and Nintento DS at Salesforce Commerce Cloud.</page-description>
             <page-keywords xml:lang="x-default">games, xbox, xbox360, ps3, ps2, playstaion 3, psp, game cube, wii, nintendo, nintendo ds</page-keywords>
         </page-attributes>
         <custom-attributes>
@@ -4517,11 +4517,11 @@
             <page-title xml:lang="it-IT">Svendite uomo, donna, bambino ed elettronica</page-title>
             <page-title xml:lang="ja-JP">メンズ、レディース、キッズ、エレクトロニクス製品のセール商品</page-title>
             <page-title xml:lang="zh-CN">男士、女士、儿童及电子产品促销</page-title>
-            <page-description xml:lang="x-default">Shop all of our discounted items in our Men's, Women's, Kid's and Electronics departments at Demandware.</page-description>
-            <page-description xml:lang="fr-FR">Découvrez tous nos articles soldés dans les boutiques homme, femme, enfant et produits électroniques de Demandware.</page-description>
-            <page-description xml:lang="it-IT">Tutti i nostri articoli scontati nei reparti Uomo, Donna, Bambino ed Elettronica di Demandware.</page-description>
-            <page-description xml:lang="ja-JP">Demandware のメンズ、レディース、キッズ、エレクトロニクス製品コーナーは、各種ディスカウントアイテムを取り揃えています。</page-description>
-            <page-description xml:lang="zh-CN">在 Demandware 的男士、女士、儿童及电子产品部，选购所有的折扣商品。</page-description>
+            <page-description xml:lang="x-default">Shop all of our discounted items in our Men's, Women's, Kid's and Electronics departments at Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="fr-FR">Découvrez tous nos articles soldés dans les boutiques homme, femme, enfant et produits électroniques de Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="it-IT">Tutti i nostri articoli scontati nei reparti Uomo, Donna, Bambino ed Elettronica di Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="ja-JP">Salesforce Commerce Cloud のメンズ、レディース、キッズ、エレクトロニクス製品コーナーは、各種ディスカウントアイテムを取り揃えています。</page-description>
+            <page-description xml:lang="zh-CN">在 Salesforce Commerce Cloud 的男士、女士、儿童及电子产品部，选购所有的折扣商品。</page-description>
             <page-keywords xml:lang="x-default">sale, sales. mens, womens, kids, electronics</page-keywords>
             <page-keywords xml:lang="fr-FR">soldes, promotions, homme, femme, enfant, produits électroniques</page-keywords>
             <page-keywords xml:lang="it-IT">svendita, svendite, uomo, donna, bambino</page-keywords>
@@ -4586,11 +4586,11 @@
             <page-title xml:lang="it-IT">Calzature da uomo in svendita tra cui scarpe, stivali, sandali e altro</page-title>
             <page-title xml:lang="ja-JP">シューズ、ブーツ、サンダルなどを初めとするメンズフットウェアのセール</page-title>
             <page-title xml:lang="zh-CN">促销男鞋，包括鞋类、靴子、凉鞋等等</page-title>
-            <page-description xml:lang="x-default">Shop for Sales Men's Footwear, Shoes, Boots, Sandals and more. Long-lasting, rugged styles crafted using premium, full-grain leather and constructed to be sturdy and waterproof here at Demandware.</page-description>
-            <page-description xml:lang="fr-FR">Découvrez les articles soldés dans la boutique homme : chaussures, bottines, sandales, et plus encore. Des produits résistants, waterproof et robustes fabriqués à partir d'un cuir pleine fleur de qualité par Demandware.</page-description>
-            <page-description xml:lang="it-IT">Svendita nei reparti calzature, scarpe, stivali, sandali e altro uomo. Stili intramontabili per la vita all'aria aperta, realizzati da Demandware con pelle pieno fiore di prima qualità per essere resistenti e impermeabili.</page-description>
-            <page-description xml:lang="ja-JP">メンズフットウェア、シューズ、ブーツ、サンダルなどのセール商品ご購入当 Demandware では、長持ち、プレミア価値のあるフルグレイン皮で製作した無骨なスタイル。頑丈で、防水加工を施してあります。</page-description>
-            <page-description xml:lang="zh-CN">选购促销男鞋，包括鞋类、靴子、凉鞋等等。Demandware 采用优质的全粒面皮革精心制作，结实而防水，打造出持久耐用的风格。</page-description>
+            <page-description xml:lang="x-default">Shop for Sales Men's Footwear, Shoes, Boots, Sandals and more. Long-lasting, rugged styles crafted using premium, full-grain leather and constructed to be sturdy and waterproof here at Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="fr-FR">Découvrez les articles soldés dans la boutique homme : chaussures, bottines, sandales, et plus encore. Des produits résistants, waterproof et robustes fabriqués à partir d'un cuir pleine fleur de qualité par Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="it-IT">Svendita nei reparti calzature, scarpe, stivali, sandali e altro uomo. Stili intramontabili per la vita all'aria aperta, realizzati da Salesforce Commerce Cloud con pelle pieno fiore di prima qualità per essere resistenti e impermeabili.</page-description>
+            <page-description xml:lang="ja-JP">メンズフットウェア、シューズ、ブーツ、サンダルなどのセール商品ご購入当 Salesforce Commerce Cloud では、長持ち、プレミア価値のあるフルグレイン皮で製作した無骨なスタイル。頑丈で、防水加工を施してあります。</page-description>
+            <page-description xml:lang="zh-CN">选购促销男鞋，包括鞋类、靴子、凉鞋等等。Salesforce Commerce Cloud 采用优质的全粒面皮革精心制作，结实而防水，打造出持久耐用的风格。</page-description>
             <page-keywords xml:lang="x-default">Mens boots, mens shoes, mens sandals, mens sport shoes, mens dress shoes, mens waterproof boots, mens custom boots</page-keywords>
             <page-keywords xml:lang="fr-FR">Bottines homme, chaussures homme, sandales homme, chaussures de sport homme, chaussures habillées homme, bottines imperméables homme, chaussures sur mesure homme</page-keywords>
             <page-keywords xml:lang="it-IT">Stivali da uomo, scarpe da uomo, sandali da uomo, scarpe sportive da uomo, scarpe eleganti da uomo, stivali impermeabili da uomo, stivali personalizzati da uomo</page-keywords>
@@ -5260,11 +5260,11 @@
             <page-title xml:lang="it-IT">Abbigliamento uomo in svendita tra cui giacche e cappotti, maglie e camicie, pantaloni e altro</page-title>
             <page-title xml:lang="ja-JP">アウターウェア、トップス、ボトムスなどを初めとするメンズ衣料セール</page-title>
             <page-title xml:lang="zh-CN">促销男士服装包括外套、上衣、下装及其他品类</page-title>
-            <page-description xml:lang="x-default">Shop Men's Sales on Clothing. Relaxed, timeless classics you can rely on; from denim to corduroys and sweaters to shirts. Huge range of contemporary colours and eco-aware designs: great casualwear at Demandware.</page-description>
-            <page-description xml:lang="fr-FR">Profitez des soldes sur les vêtements homme. Des classiques décontractés et intemporels. Du denim au velours côtelé, des pulls aux chemises. Une gamme complète de couleurs modernes et une mode respectueuse de l'environnement : une belle ligne de vêtements décontractés chez Demandware</page-description>
-            <page-description xml:lang="it-IT">Svendita abbigliamento uomo. Capi classici senza tempo su cui fare affidamento: dal denim al velluto, dai maglioni alle camicie. Ampia gamma di colori alla moda e design ecologici: il grande abbigliamento casual di Demandware.</page-description>
-            <page-description xml:lang="ja-JP">メンズ衣料のセール商品ご購入リラックス感のあるタイムレスな信頼の定番アイテム。デニムからコーデュロイ、セーターからシャツまで。今風の豊富なカラーバリエーション。エコフレンドリーなデザイン。Demandware のイチオシカジュアルウェアです。</page-description>
-            <page-description xml:lang="zh-CN">选购促销男士服装。您可以信赖的舒适而永恒的经典款式，从牛仔裤到条绒裤，从毛衣到衬衫，应有尽有。Demandware 的休闲装样式齐全，配有各种当代色彩，并秉承了环保型设计理念。</page-description>
+            <page-description xml:lang="x-default">Shop Men's Sales on Clothing. Relaxed, timeless classics you can rely on; from denim to corduroys and sweaters to shirts. Huge range of contemporary colours and eco-aware designs: great casualwear at Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="fr-FR">Profitez des soldes sur les vêtements homme. Des classiques décontractés et intemporels. Du denim au velours côtelé, des pulls aux chemises. Une gamme complète de couleurs modernes et une mode respectueuse de l'environnement : une belle ligne de vêtements décontractés chez Salesforce Commerce Cloud</page-description>
+            <page-description xml:lang="it-IT">Svendita abbigliamento uomo. Capi classici senza tempo su cui fare affidamento: dal denim al velluto, dai maglioni alle camicie. Ampia gamma di colori alla moda e design ecologici: il grande abbigliamento casual di Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="ja-JP">メンズ衣料のセール商品ご購入リラックス感のあるタイムレスな信頼の定番アイテム。デニムからコーデュロイ、セーターからシャツまで。今風の豊富なカラーバリエーション。エコフレンドリーなデザイン。Salesforce Commerce Cloud のイチオシカジュアルウェアです。</page-description>
+            <page-description xml:lang="zh-CN">选购促销男士服装。您可以信赖的舒适而永恒的经典款式，从牛仔裤到条绒裤，从毛衣到衬衫，应有尽有。Salesforce Commerce Cloud 的休闲装样式齐全，配有各种当代色彩，并秉承了环保型设计理念。</page-description>
             <page-keywords xml:lang="x-default">mens outerwear, mens tops, mens bottoms</page-keywords>
             <page-keywords xml:lang="fr-FR">vêtements d'extérieur homme, tops homme, bas homme</page-keywords>
             <page-keywords xml:lang="it-IT">giacche e cappotti uomo, maglie e camicie uomo, pantaloni uomo</page-keywords>
@@ -5359,11 +5359,11 @@
             <page-title xml:lang="it-IT">Accessori uomo in svendita, tra cui cinture e portafogli. Guanti, cappelli, orologi, valigeria e altro ancora</page-title>
             <page-title xml:lang="ja-JP">ベルト、財布などのメンズアクセサーリセール手袋、帽子、腕時計、鞄など</page-title>
             <page-title xml:lang="zh-CN">促销男士配件，包括腰带和钱包。手套、帽子、手表、箱包及其他</page-title>
-            <page-description xml:lang="x-default">Shop mens accessories on sale including belts, wallets. gloves, hats, watches, luggage &amp; more at Demandware.</page-description>
-            <page-description xml:lang="fr-FR">Profitez des soldes sur les accessoires homme Demandware : ceintures, portefeuilles, gants, chapeaux, montres, bagages, et plus encore.</page-description>
-            <page-description xml:lang="it-IT">Svendita accessori uomo tra cui cinture, portafogli, guanti, cappelli, orologi, valigeria e altro, disponibili su Demandware.</page-description>
-            <page-description xml:lang="ja-JP">ベルト、財布、手袋、帽子、腕時計、かばんを初めとするメンズアクセサリーのセール商品ご購入は Demandware で。</page-description>
-            <page-description xml:lang="zh-CN">在 Demandware 选购各种促销男士配件，包括腰带、钱包、手套、帽子、手表、行李包等等。</page-description>
+            <page-description xml:lang="x-default">Shop mens accessories on sale including belts, wallets. gloves, hats, watches, luggage &amp; more at Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="fr-FR">Profitez des soldes sur les accessoires homme Salesforce Commerce Cloud : ceintures, portefeuilles, gants, chapeaux, montres, bagages, et plus encore.</page-description>
+            <page-description xml:lang="it-IT">Svendita accessori uomo tra cui cinture, portafogli, guanti, cappelli, orologi, valigeria e altro, disponibili su Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="ja-JP">ベルト、財布、手袋、帽子、腕時計、かばんを初めとするメンズアクセサリーのセール商品ご購入は Salesforce Commerce Cloud で。</page-description>
+            <page-description xml:lang="zh-CN">在 Salesforce Commerce Cloud 选购各种促销男士配件，包括腰带、钱包、手套、帽子、手表、行李包等等。</page-description>
             <page-keywords xml:lang="x-default">mens accessories, mens belts, mens wallets, mens gloves, mens hats, sunglasses, watches, gloves, hats, scarves, luggage, travel bag, backpack, book bag, laptop bag, hiking backpack, mens socks, man socks</page-keywords>
             <page-keywords xml:lang="fr-FR">accessoires homme, ceintures homme, portefeuilles homme, gants homme, chapeaux homme, lunettes de soleil, gants, chapeaux, écharpes, bagages, sac de voyage, sac à dos, cartable, sac d'ordinateur portable, sac à dos de randonnée, chaussettes homme, chaussettes pour hommes</page-keywords>
             <page-keywords xml:lang="it-IT">accessori uomo, cinture uomo, portafogli uomo, guanti uomo, cappelli uomo, occhiali da sole, orologi, guanti, cappelli, sciarpe, valigeria, borse da viaggio, zaini, cartelle, borse per portatile, zaino per escursionismo, calze uomo</page-keywords>
@@ -5568,11 +5568,11 @@
             <page-title xml:lang="it-IT">Calzature donna in svendita tra cui scarpe, stivali, sandali e altro</page-title>
             <page-title xml:lang="ja-JP">シューズ、ブーツ、サンダルなどを初めとするレディースフットウェアのセール</page-title>
             <page-title xml:lang="zh-CN">促销女鞋，包括鞋类、靴子、凉鞋等等</page-title>
-            <page-description xml:lang="x-default">Shop for Sales Women's Footwear, Shoes, Boots, Sandals and more. Long-lasting, rugged styles crafted using premium, full-grain leather and constructed to be sturdy and waterproof here at Demandware.</page-description>
-            <page-description xml:lang="fr-FR">Découvrez les articles soldés dans la boutique femme : chaussures, boots, sandales, et plus encore. Des produits résistants, waterproof et robustes fabriqués à partir d'un cuir pleine fleur de qualité par Demandware.</page-description>
-            <page-description xml:lang="it-IT">Svendite nei reparti calzature, scarpe, stivali, sandali e altro donna. Stili intramontabili per la vita all'aria aperta, realizzati da Demandware con pelle pieno fiore di prima qualità per essere resistenti e impermeabili.</page-description>
-            <page-description xml:lang="ja-JP">レディースフットウェア、シューズ、ブーツ、サンダルなどのセール商品ご購入当 Demandware では、長持ち、プレミア価値のあるフルグレイン皮で製作した無骨なスタイル。頑丈で、防水加工を施してあります。</page-description>
-            <page-description xml:lang="zh-CN">选购促销女鞋，包括鞋类、靴子、凉鞋等等。Demandware 采用优质的全粒面皮革精心制作，结实而防水，打造出持久耐用的风格。</page-description>
+            <page-description xml:lang="x-default">Shop for Sales Women's Footwear, Shoes, Boots, Sandals and more. Long-lasting, rugged styles crafted using premium, full-grain leather and constructed to be sturdy and waterproof here at Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="fr-FR">Découvrez les articles soldés dans la boutique femme : chaussures, boots, sandales, et plus encore. Des produits résistants, waterproof et robustes fabriqués à partir d'un cuir pleine fleur de qualité par Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="it-IT">Svendite nei reparti calzature, scarpe, stivali, sandali e altro donna. Stili intramontabili per la vita all'aria aperta, realizzati da Salesforce Commerce Cloud con pelle pieno fiore di prima qualità per essere resistenti e impermeabili.</page-description>
+            <page-description xml:lang="ja-JP">レディースフットウェア、シューズ、ブーツ、サンダルなどのセール商品ご購入当 Salesforce Commerce Cloud では、長持ち、プレミア価値のあるフルグレイン皮で製作した無骨なスタイル。頑丈で、防水加工を施してあります。</page-description>
+            <page-description xml:lang="zh-CN">选购促销女鞋，包括鞋类、靴子、凉鞋等等。Salesforce Commerce Cloud 采用优质的全粒面皮革精心制作，结实而防水，打造出持久耐用的风格。</page-description>
             <page-keywords xml:lang="x-default">womens boots, womens shoes, womens sandals, womens sport shoes, womens dress shoes, womens waterproof boots, womens custom boots</page-keywords>
             <page-keywords xml:lang="fr-FR">boots femme, chaussures femme, sandales femme, chaussures de sport femme, chaussures habillées femme, boots imperméables femme, chaussures sur mesure femme</page-keywords>
             <page-keywords xml:lang="it-IT">stivali donna, scarpe donna, sandali donna, scarpe sportive donna, scarpe eleganti donna, stivali impermeabili donna, stivali personalizzati donna</page-keywords>
@@ -5854,11 +5854,11 @@
             <page-title xml:lang="it-IT">Abbigliamento donna in svendita tra cui giacche e cappotti, camicie e camicette, gonne e pantaloni e altro</page-title>
             <page-title xml:lang="ja-JP">アウターウェア、トップス、ボトムスなどを初めとするレディース衣料のセール</page-title>
             <page-title xml:lang="zh-CN">促销女士服装包括外套、上衣、下装及其他品类</page-title>
-            <page-description xml:lang="x-default">Shop Women's Clothing Sales. Relaxed, timeless classics you can rely on; from denim to corduroys and sweaters to shirts. Huge range of contemporary colours and eco-aware designs: great casualwear at Demandware</page-description>
-            <page-description xml:lang="fr-FR">Profitez des soldes sur les vêtements pour femme. Des classiques décontractés et intemporels. Du denim au velours côtelé, des pulls aux chemises. Une gamme complète de couleurs modernes et une mode respectueuse de l'environnement : une belle ligne de vêtements décontractés chez Demandware</page-description>
-            <page-description xml:lang="it-IT">Svendite abbigliamento donna Capi classici senza tempo su cui fare affidamento: dal denim al velluto, dai maglioni alle camicie. Ampia gamma di colori alla moda e design ecologici: il grande abbigliamento casual di Demandware.</page-description>
-            <page-description xml:lang="ja-JP">レディース衣料のセール商品ご購入リラックス感のあるタイムレスな信頼の定番アイテム。デニムからコーデュロイ、セーターからシャツまで。今風の豊富なカラーバリエーション。エコフレンドリーなデザイン。Demandware のイチオシカジュアルウェアです。</page-description>
-            <page-description xml:lang="zh-CN">选购促销女装。您可以信赖的舒适而永恒的经典款式，从牛仔裤到条绒裤，从毛衣到衬衫，应有尽有。Demandware 的休闲装样式齐全，配有各种当代色彩，并秉承了环保型设计理念。</page-description>
+            <page-description xml:lang="x-default">Shop Women's Clothing Sales. Relaxed, timeless classics you can rely on; from denim to corduroys and sweaters to shirts. Huge range of contemporary colours and eco-aware designs: great casualwear at Salesforce Commerce Cloud</page-description>
+            <page-description xml:lang="fr-FR">Profitez des soldes sur les vêtements pour femme. Des classiques décontractés et intemporels. Du denim au velours côtelé, des pulls aux chemises. Une gamme complète de couleurs modernes et une mode respectueuse de l'environnement : une belle ligne de vêtements décontractés chez Salesforce Commerce Cloud</page-description>
+            <page-description xml:lang="it-IT">Svendite abbigliamento donna Capi classici senza tempo su cui fare affidamento: dal denim al velluto, dai maglioni alle camicie. Ampia gamma di colori alla moda e design ecologici: il grande abbigliamento casual di Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="ja-JP">レディース衣料のセール商品ご購入リラックス感のあるタイムレスな信頼の定番アイテム。デニムからコーデュロイ、セーターからシャツまで。今風の豊富なカラーバリエーション。エコフレンドリーなデザイン。Salesforce Commerce Cloud のイチオシカジュアルウェアです。</page-description>
+            <page-description xml:lang="zh-CN">选购促销女装。您可以信赖的舒适而永恒的经典款式，从牛仔裤到条绒裤，从毛衣到衬衫，应有尽有。Salesforce Commerce Cloud 的休闲装样式齐全，配有各种当代色彩，并秉承了环保型设计理念。</page-description>
             <page-keywords xml:lang="x-default">womens outerwear, womens tops, womens bottoms</page-keywords>
             <page-keywords xml:lang="fr-FR">vêtements d'extérieur femme, tops femme, bas femme</page-keywords>
             <page-keywords xml:lang="it-IT">giacche e cappotti donna, camicie e camicette donna, gonne e pantaloni donna</page-keywords>
@@ -6100,11 +6100,11 @@
             <page-title xml:lang="it-IT">Accessori donna in svendita tra cui cinture, portafogli. Guanti, cappelli, orologi, valigeria e altro ancora</page-title>
             <page-title xml:lang="ja-JP">ベルト、財布などのレディースアクセサリーのセール手袋、帽子、腕時計、鞄など</page-title>
             <page-title xml:lang="zh-CN">促销女士配件，包括腰带和钱包。手套、帽子、手表、箱包及其他</page-title>
-            <page-description xml:lang="x-default">Shop womens accessories sales including belts, wallets. gloves, hats, watches, luggage &amp; more at Demandware.</page-description>
-            <page-description xml:lang="fr-FR">Profitez des soldes sur les accessoires femme Demandware : ceintures, portefeuilles, gants, chapeaux, montres, bagages, et plus encore.</page-description>
-            <page-description xml:lang="it-IT">Vendita accessori donna tra cui cinture, portafogli, guanti, cappelli, orologi, valigeria e altro, disponibili su Demandware.</page-description>
-            <page-description xml:lang="ja-JP">ベルト、財布、手袋、帽子、腕時計、かばんを初めとするレディースアクセサリーのセール商品ご購入は Demandware で。</page-description>
-            <page-description xml:lang="zh-CN">在 Demandware 选购各种促销女士配件，包括腰带、钱包、手套、帽子、手表、行李包等等。</page-description>
+            <page-description xml:lang="x-default">Shop womens accessories sales including belts, wallets. gloves, hats, watches, luggage &amp; more at Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="fr-FR">Profitez des soldes sur les accessoires femme Salesforce Commerce Cloud : ceintures, portefeuilles, gants, chapeaux, montres, bagages, et plus encore.</page-description>
+            <page-description xml:lang="it-IT">Vendita accessori donna tra cui cinture, portafogli, guanti, cappelli, orologi, valigeria e altro, disponibili su Salesforce Commerce Cloud.</page-description>
+            <page-description xml:lang="ja-JP">ベルト、財布、手袋、帽子、腕時計、かばんを初めとするレディースアクセサリーのセール商品ご購入は Salesforce Commerce Cloud で。</page-description>
+            <page-description xml:lang="zh-CN">在 Salesforce Commerce Cloud 选购各种促销女士配件，包括腰带、钱包、手套、帽子、手表、行李包等等。</page-description>
             <page-keywords xml:lang="x-default">womens accessories, womens belts, womens wallets, womens gloves, womens hats, sunglasses, watches, gloves, hats, scarves, luggage, travel bag, backpack, book bag, laptop bag, hiking backpack, womens socks, womansocks</page-keywords>
             <page-keywords xml:lang="fr-FR">accessoires femme, ceintures femme, portefeuilles femme, gants femme, chapeaux femme, lunettes de soleil, gants, chapeaux, écharpes, bagages, sac de voyage, sac à dos, cartable, sac d'ordinateur portable, sac à dos de randonnée, chaussettes femme, chaussettes pour femmes</page-keywords>
             <page-keywords xml:lang="it-IT">accessori donna, cinture donna, portafogli donna, guanti donna, cappelli donna, occhiali da sole, orologi, guanti, cappelli, sciarpe, valigeria, borse da viaggio, zaini, cartelle, borse per portatile, zaino per escursionismo, calze donne</page-keywords>
@@ -6204,7 +6204,7 @@
         <template/>
         <page-attributes>
             <page-title xml:lang="x-default">Shop Electronics Sales Including Televisions, Digital Cameras, iPods &amp; More</page-title>
-            <page-description xml:lang="x-default">Shop Electronics sales including the latest in televisions, digital cameras, camcorders, mp3, ipod, mobil phones, GPS &amp; gaming at Demandware</page-description>
+            <page-description xml:lang="x-default">Shop Electronics sales including the latest in televisions, digital cameras, camcorders, mp3, ipod, mobil phones, GPS &amp; gaming at Salesforce Commerce Cloud</page-description>
             <page-keywords xml:lang="x-default">televisions, digital cameras, camcorders, mp3, ipod, mobil phones, GPS, gaming</page-keywords>
         </page-attributes>
         <custom-attributes>
@@ -6230,7 +6230,7 @@
         <template/>
         <page-attributes>
             <page-title xml:lang="x-default">Televisions Sales Including LCD, Plasma &amp; More in High Definition</page-title>
-            <page-description xml:lang="x-default">Shop the latest Televisions sales including LCD, Plasma, Flat Screens, Projection including all the top brands, makes and models at Demandware.</page-description>
+            <page-description xml:lang="x-default">Shop the latest Televisions sales including LCD, Plasma, Flat Screens, Projection including all the top brands, makes and models at Salesforce Commerce Cloud.</page-description>
             <page-keywords xml:lang="x-default">televisions, tvs, LCD, plasma, flat screen, high definition, HDTV, projection</page-keywords>
         </page-attributes>
         <custom-attributes>
@@ -6263,7 +6263,7 @@
         <template/>
         <page-attributes>
             <page-title xml:lang="x-default">Sale on Camcorders</page-title>
-            <page-description xml:lang="x-default">Shop the latest digital camcorders sales from all the top brands, makes and models at Demandware.</page-description>
+            <page-description xml:lang="x-default">Shop the latest digital camcorders sales from all the top brands, makes and models at Salesforce Commerce Cloud.</page-description>
             <page-keywords xml:lang="x-default">camcorders, high definition camcorders</page-keywords>
         </page-attributes>
         <custom-attributes>
@@ -6280,7 +6280,7 @@
         <template/>
         <page-attributes>
             <page-title xml:lang="x-default">Sale on Digital Cameras</page-title>
-            <page-description xml:lang="x-default">Shop the latest digital cameras sales from all the top brands, makes and models at Demandware.</page-description>
+            <page-description xml:lang="x-default">Shop the latest digital cameras sales from all the top brands, makes and models at Salesforce Commerce Cloud.</page-description>
             <page-keywords xml:lang="x-default">cameras, digital camerasm point and shoot, slr</page-keywords>
         </page-attributes>
         <custom-attributes>
@@ -6334,7 +6334,7 @@
         <template/>
         <page-attributes>
             <page-title xml:lang="x-default">Sale on GPS Units</page-title>
-            <page-description xml:lang="x-default">Shop the latest sales on GPS units from Garmin and Tom Tom along with other brands, makes and models at Demandware.</page-description>
+            <page-description xml:lang="x-default">Shop the latest sales on GPS units from Garmin and Tom Tom along with other brands, makes and models at Salesforce Commerce Cloud.</page-description>
             <page-keywords xml:lang="x-default">gps, gps units, garmin, tom tom</page-keywords>
         </page-attributes>
         <custom-attributes>
@@ -6381,7 +6381,7 @@
         <template/>
         <page-attributes>
             <page-title xml:lang="x-default">Sale on Gaming</page-title>
-            <page-description xml:lang="x-default">Shop sales on games and game consoles from Xbox, Xbox360, Playstation 2, Playstation 3, Game Cube, Wii, Playstation Portable and Nintento DS at Demandware.</page-description>
+            <page-description xml:lang="x-default">Shop sales on games and game consoles from Xbox, Xbox360, Playstation 2, Playstation 3, Game Cube, Wii, Playstation Portable and Nintento DS at Salesforce Commerce Cloud.</page-description>
             <page-keywords xml:lang="x-default">gaming, xbox, xbox360, ps3, ps2, playstaion 3, psp, game cube, wii, nintendo, nintendo ds</page-keywords>
         </page-attributes>
         <custom-attributes>
@@ -6398,7 +6398,7 @@
         <template/>
         <page-attributes>
             <page-title xml:lang="x-default">Sale on Mobile Phones</page-title>
-            <page-description xml:lang="x-default">Shop the latest sales on mobile phones from all the top brands, makes and models at Demandware.</page-description>
+            <page-description xml:lang="x-default">Shop the latest sales on mobile phones from all the top brands, makes and models at Salesforce Commerce Cloud.</page-description>
             <page-keywords xml:lang="x-default">phones, mobile phones, cell, cell phones</page-keywords>
         </page-attributes>
         <custom-attributes>
@@ -6415,7 +6415,7 @@
         <template/>
         <page-attributes>
             <page-title xml:lang="x-default">Sale on Digital Portable Audio Players</page-title>
-            <page-description xml:lang="x-default">Shop Digital Media Players sales including iPods, Creative Zen, Sony &amp; the latest from all the top brands, makes and models at Demandware.</page-description>
+            <page-description xml:lang="x-default">Shop Digital Media Players sales including iPods, Creative Zen, Sony &amp; the latest from all the top brands, makes and models at Salesforce Commerce Cloud.</page-description>
             <page-keywords xml:lang="x-default">mp3, iPods, mp3 players</page-keywords>
         </page-attributes>
         <custom-attributes>

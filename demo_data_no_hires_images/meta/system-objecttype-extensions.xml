@@ -333,7 +333,7 @@
         <custom-attribute-definitions>
             <attribute-definition attribute-id="alternativeUrl">
                 <display-name xml:lang="x-default">Alternative URL</display-name>
-                <description xml:lang="x-default">Renders an alternative URL in main navigation. Uses Demandware content url notation. For example: $url('Account-Show')$ or normal URL http://xchange.demandware.com</description>
+                <description xml:lang="x-default">Renders an alternative URL in main navigation. Uses Salesforce Commerce Cloud content url notation. For example: $url('Account-Show')$ or normal URL http://xchange.demandware.com</description>
                 <type>html</type>
                 <localizable-flag>false</localizable-flag>
                 <mandatory-flag>false</mandatory-flag>
@@ -4352,7 +4352,7 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
                 <field-length>0</field-length>
-                <default-value>noreply@demandware.com</default-value>
+                <default-value>noreply@salesforce.com</default-value>
             </attribute-definition>
             <attribute-definition attribute-id="disableResponsiveDesign">
                 <display-name xml:lang="x-default">Disable Responsive Design</display-name>

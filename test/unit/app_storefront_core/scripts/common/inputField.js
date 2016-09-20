@@ -3,7 +3,7 @@
 var assert = require('chai').assert;
 var proxyquire = require('proxyquire').noCallThru();
 
-// Demandware server dependencies
+// Salesforce Commerce Cloud server dependencies
 var ContentMgr = require('../../../../mocks/dw/content/ContentMgr');
 var StringUtils = require('../../../../mocks/dw/util/StringUtils');
 var Resource = require('../../../../mocks/dw/web/Resource');

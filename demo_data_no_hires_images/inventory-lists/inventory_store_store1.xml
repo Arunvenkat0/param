@@ -3,7 +3,7 @@
     <inventory-list>
         <header list-id="inventory_store_store1">
             <default-instock>false</default-instock>
-            <description>Inventory list for store: Demandware</description>
+            <description>Inventory list for store: Salesforce Commerce Cloud</description>
             <use-bundle-inventory-only>false</use-bundle-inventory-only>
             <on-order>false</on-order>
         </header>

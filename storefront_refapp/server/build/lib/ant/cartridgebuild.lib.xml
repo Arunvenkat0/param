@@ -84,7 +84,7 @@
         <jar destfile="${jar.file}" whenmanifestonly="skip">
             <fileset refid="jar.content.files" />
             <manifest>
-                <attribute name="Implementation-Vendor" value="Demandware" />
+                <attribute name="Implementation-Vendor" value="Salesforce Commerce Cloud" />
                 <attribute name="Implementation-Title" value="${jar.title}" />
                 <attribute name="Implementation-Version"
                            value="${cartridge.build.version}" />
