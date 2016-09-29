@@ -86,10 +86,9 @@ module.exports = function (grunt) {
         },
         browserify: {
             dev: {
-                files: [{
-                    src: paths.js.src + 'app.js',
-                    dest: paths.js.dest + 'app.js'
-                }],
+                files: paths.js.map(function (path) {
+                    return {src: path.src + 'app.js', dest: path.dest + 'app.js'}
+                }),
                 options: {
                     browserifyOptions: {
                         debug: (config.sourcemaps)
@@ -97,10 +96,9 @@ module.exports = function (grunt) {
                 }
             },
             watchDev: {
-                files: [{
-                    src: paths.js.src + 'app.js',
-                    dest: paths.js.dest + 'app.js'
-                }],
+                files: paths.js.map(function (path) {
+                    return {src: path.src + 'app.js', dest: path.dest + 'app.js'}
+                }),
                 options: {
                     watch: true
                 }
