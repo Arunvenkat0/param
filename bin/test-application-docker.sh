@@ -8,7 +8,7 @@ if [ $? -eq 1 ]; then
     sleep 2
 fi
 
-if [ "$HUB_RUNNING" == "false" ]; then
+if [ "$HUB_RUNNING" = "false" ]; then
     echo "Selenium Hub is not running. Attempting to start it..."
     docker start selenium-hub
     sleep 2
@@ -22,15 +22,18 @@ if [ $(docker ps -a | grep $CONTAINER_NAME | awk '{print $NF}' | wc -l) -gt 0 ];
 fi
 
 # if a debug flag is passed in, use the debug image and open vnc screen sharing
-if [[ $@ == *"--debug"* ]]; then
-    ip=$(grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}' <<< "$@")
-    docker run -d --link selenium-hub:hub --name $CONTAINER_NAME -p 5900:5900 -v /dev/shm:/dev/shm selenium/node-chrome-debug:2.53.0 1>/dev/null
-    sleep 2 # wait a bit for container to start
-    open vnc://:secret@"$ip":5900
-else
-    docker run -d --link selenium-hub:hub --name $CONTAINER_NAME -v /dev/shm:/dev/shm selenium/node-chrome:2.53.0 1>/dev/null
-    sleep 2
-fi
+case "$*" in
+    *--debug*)
+        ip="`echo "$@" | grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}'`"
+        docker run -d --link selenium-hub:hub --name $CONTAINER_NAME -p 5900:5900 -v /dev/shm:/dev/shm selenium/node-chrome-debug:2.53.0 1>/dev/null
+        sleep 2 # wait a bit for container to start
+        open vnc://:secret@"$ip":5900
+        ;;
+    *)
+        docker run -d --link selenium-hub:hub --name $CONTAINER_NAME -v /dev/shm:/dev/shm selenium/node-chrome:2.53.0 1>/dev/null
+        sleep 2
+        ;;
+esac
 
 # run actual test command in a subshell to be able to rm docker container afterwards
 (

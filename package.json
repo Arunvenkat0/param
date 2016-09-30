@@ -95,7 +95,7 @@
     "build": "npm run js && npm run css",
     "build:watch": "npm run js -- -w & npm run css -- -w",
     "preversion": "version > old_version",
-    "version": "sh bin/version.js && rm old_version && git add .",
+    "version": "node bin/version.js && rm old_version && git add .",
     "doc": "sh bin/doc.sh"
   },
   "repository": {
