@@ -16,19 +16,25 @@ pkg.paths.js.forEach((jsPath) => {
             console.error(err);
             return;
         }
-        bundleJs(jsPath, {
+        var options = {
+            paths: jsPath,
             watching: Boolean(argv.w || argv.watch),
             sourcemaps: Boolean(argv.sourcemaps)
-        });
+        }
+        var b = createBundler(options);
+        if (!b) {
+            return;
+        }
+        rebundle(b, options);
     });
 });
 
-function createBundler (jsPath, options) {
+function createBundler (options) {
     try {
-        var stat = fs.statSync(jsPath.src);
+        var stat = fs.statSync(options.paths.src);
     } catch (err) {
         if (err.code === 'ENOENT') {
-            console.error(jsPath.src + ' is not found.');
+            console.error(options.paths.src + ' is not found.');
             return;
         } else {
             throw err;
@@ -37,19 +43,19 @@ function createBundler (jsPath, options) {
 
     var filename, dirname;
     if (stat.isDirectory()) {
-        dirname = jsPath.src;
+        dirname = options.paths.src;
         // trying to heuristically determine JS file name,
         // in order of index.js, main.js and app.js
         try {
-            fs.statSync(jsPath.src + '/index.js');
+            fs.statSync(options.paths.src + '/index.js');
             filename = 'index.js';
         } catch (e) {
             try {
-                fs.statSync(jsPath.src + '/main.js');
+                fs.statSync(options.paths.src + '/main.js');
                 filename = 'main.js';
             } catch (e) {
                 try {
-                    fs.statSync(jsPath.src + '/app.js');
+                    fs.statSync(options.paths.src + '/app.js');
                     filename = 'app.js';
                 } catch (e) {
                     console.error('Unable to find a JS file to bundle.');
@@ -58,8 +64,8 @@ function createBundler (jsPath, options) {
             }
         }
     } else if (stat.isFile()) {
-        dirname = path.dirname(jsPath.src);
-        filename = path.basename(jsPath.src);
+        dirname = path.dirname(options.paths.src);
+        filename = path.basename(options.paths.src);
     }
 
     var opts = {
@@ -82,7 +88,7 @@ function createBundler (jsPath, options) {
     bundler.on('update', function (ids) {
         console.log('File(s) changed: ' + chalk.cyan(ids));
         console.log('Rebundling...');
-        rebundle(bundler, jsPath);
+        rebundle(bundler, options);
     });
 
     bundler.on('log', console.log.bind(console));
@@ -90,26 +96,20 @@ function createBundler (jsPath, options) {
     return bundler;
 }
 
-function rebundle (b, jsPath) {
+function rebundle (b, options) {
     var filename = path.basename(b._options.entries);
-    return b.bundle()
+    var bundle = b.bundle()
         .on('error', function (e) {
             console.log(chalk.red('Browserify Error: ', e));
         })
         .on('end', function () {
             console.log(chalk.green(b._options.entries
-                + ' -> ' + path.resolve(jsPath.dest, filename)
+                + ' -> ' + path.resolve(options.paths.dest, filename)
             ));
-        })
-        // sourcemaps
-        .pipe(exorcist(path.resolve(jsPath.dest, filename + '.map')))
-        .pipe(fs.createWriteStream(path.resolve(jsPath.dest, filename)));
-}
-
-function bundleJs (jsPath, options) {
-    var b = createBundler(jsPath, options);
-    if (!b) {
-        return;
+        });
+    // sourcemaps
+    if (options.sourcemaps) {
+        bundle = bundle.pipe(exorcist(path.resolve(options.paths.dest, filename + '.map')))
     }
-    return rebundle(b, jsPath);
+    bundle.pipe(fs.createWriteStream(path.resolve(options.paths.dest, filename)));
 }
