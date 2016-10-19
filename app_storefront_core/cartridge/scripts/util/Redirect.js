@@ -3,7 +3,7 @@
 var URLUtils = require('dw/web/URLUtils');
 
 /**
- * @input CurrentHttpParamMap : dw.web.HttpParameterMap
+ * @input CurrentHttpParameterMap : dw.web.HttpParameterMap
  * @input CurrentRequest : dw.system.Request
  * @output Location : String
  */
