@@ -4756,12 +4756,6 @@
             </attribute-definition>
         </custom-attribute-definitions>
         <group-definitions>
-            <attribute-group group-id="Basic">
-                <display-name xml:lang="x-default">Basic Attributes</display-name>
-                <attribute attribute-id="ID" system="true"/>
-                <attribute attribute-id="name" system="true"/>
-                <attribute system="true" attribute-id="inventoryListID"/>
-            </attribute-group>
             <attribute-group group-id="Address">
                 <display-name xml:lang="x-default">Address</display-name>
                 <attribute attribute-id="address1" system="true"/>
@@ -4773,20 +4767,6 @@
                 <attribute attribute-id="longitude" system="true"/>
                 <attribute attribute-id="latitude" system="true"/>
                 <attribute attribute-id="countryCodeValue"/>
-            </attribute-group>
-            <attribute-group group-id="Contact">
-                <display-name xml:lang="x-default">Contact Details</display-name>
-                <attribute attribute-id="phone" system="true"/>
-                <attribute attribute-id="fax" system="true"/>
-                <attribute attribute-id="email" system="true"/>
-            </attribute-group>
-            <attribute-group group-id="Details">
-                <display-name xml:lang="x-default">Store Details</display-name>
-                <attribute attribute-id="storeHours" system="true"/>
-                <attribute attribute-id="storeEvents" system="true"/>
-                <attribute attribute-id="image" system="true"/>
-                <attribute attribute-id="longitude" system="true"/>
-                <attribute attribute-id="latitude" system="true"/>
             </attribute-group>
             <attribute-group group-id="Inventory">
                 <display-name xml:lang="x-default">Inventory</display-name>
