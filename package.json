@@ -1,6 +1,6 @@
 {
   "name": "sitegenesis",
-  "version": "103.1.5",
+  "version": "103.1.6",
   "description": "SiteGenesis",
   "main": "app_storefront_core/cartridge/js/app.js",
   "dependencies": {
