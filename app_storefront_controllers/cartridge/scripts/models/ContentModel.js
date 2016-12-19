@@ -110,8 +110,8 @@ ContentModel.get = function (parameter) {
     var obj = null;
     if (typeof parameter === 'string') {
         obj = dw.content.ContentMgr.getContent(parameter);
-        if(!obj.online){
-        	obj = null;
+        if (!obj.online){
+            obj = null;
         }
     } else if (typeof parameter === 'object') {
         obj = parameter;
