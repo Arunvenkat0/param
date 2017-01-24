@@ -31,6 +31,7 @@ function start() {
         location = redirect ? redirect.getLocation() : null;
 
     if (!location) {
+        response.setStatus(410);
         app.getView().render('util/redirecterrorutil/redirecterror');
     } else {
         app.getView({
