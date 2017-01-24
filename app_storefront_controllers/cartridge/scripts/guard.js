@@ -19,7 +19,6 @@ var CSRFProtection = require('dw/web/CSRFProtection');
 
 var app = require('~/cartridge/scripts/app');
 var browsing = require('~/cartridge/scripts/util/Browsing');
-var LOGGER   = dw.system.Logger.getLogger('guard');
 
 /**
  * This method contains the login to handle a not logged in customer
@@ -122,7 +121,6 @@ function ensure (filters, action, params) {
         params = require('~/cartridge/scripts/object').extend(params,args);
 
         for (var i = 0; i < filters.length; i++) {
-            LOGGER.debug('Ensuring guard "{0}"...',filters[i]);
 
             filtersPassed = Filters[filters[i]].apply(Filters);
             if (!filtersPassed) {
@@ -145,10 +143,8 @@ function ensure (filters, action, params) {
         }
 
         if (filtersPassed) {
-            LOGGER.debug('...passed.');
             return action(params);
         } else {
-            LOGGER.debug('...failed. {0}',error.name);
             return error(params);
         }
     });
