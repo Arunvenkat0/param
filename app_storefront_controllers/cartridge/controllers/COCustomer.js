@@ -70,7 +70,7 @@ function start() {
  */
 function showLoginForm() {
     var loginForm = app.getForm('login');
-    session.custom.TargetLocation = URLUtils.https('COShipping-Start');
+    session.custom.TargetLocation = URLUtils.https('COShipping-Start').toString();
 
     loginForm.handleAction({
         login: function () {

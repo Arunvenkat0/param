@@ -386,7 +386,7 @@ function registrationForm() {
                         Transaction.wrap(function(){
                             foundOrder.customer = profileValidation;
                         })
-                        session.custom.TargetLocation = URLUtils.https('Account-Show','Registration','true');
+                        session.custom.TargetLocation = URLUtils.https('Account-Show','Registration','true').toString();
                     }
                 }
             }
