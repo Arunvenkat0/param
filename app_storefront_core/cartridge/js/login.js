@@ -54,7 +54,7 @@ var login = {
                                 success: function (response) {
                                     if (typeof response === 'object' &&
                                             !response.success &&
-                                            response.error === 'CSRF Token Mismatch') {
+                                            response.error === Resources.CSRF_TOKEN_MISMATCH) {
                                         page.redirect(Urls.csrffailed);
                                     } else if (typeof response === 'string') {
                                         dialog.$container.html(response);

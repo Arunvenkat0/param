@@ -104,6 +104,7 @@ ResourceHelper.getResources = function(pageContext) {
         QUICK_VIEW                        : Resource.msg('product.quickview', 'product', null),
         QUICK_VIEW_POPUP                  : Resource.msg('product.quickview.popup', 'product', null),
         TLS_WARNING                       : Resource.msg('global.browsertoolscheck.tls', 'locale', null),
+        CSRF_TOKEN_MISMATCH               : Resource.msg('global.csrf.failed.error', 'locale', null),
 
         // Validation messages
         VALIDATE_REQUIRED                 : Resource.msg('validate.required', 'forms', null),

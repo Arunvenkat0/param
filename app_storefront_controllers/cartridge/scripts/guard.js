@@ -16,6 +16,7 @@
  * exports.Show = require('~/guard').ensure(['get','https','loggedIn'],show);
  */
 var CSRFProtection = require('dw/web/CSRFProtection');
+var Resource = require('dw/web/Resource');
 
 var app = require('~/cartridge/scripts/app');
 var browsing = require('~/cartridge/scripts/util/Browsing');
@@ -68,7 +69,7 @@ function csrfValidationFailed() {
         app.getModel('Customer').logout();
         let r = require('~/cartridge/scripts/util/Response');
         r.renderJSON({
-            error: 'CSRF Token Mismatch'
+            error: Resource.msg('global.csrf.failed.error', 'locale', null)
         });
     } else {
         app.getModel('Customer').logout();
