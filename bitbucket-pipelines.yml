@@ -1,0 +1,19 @@
+image: selenium/standalone-chrome:3.1.0
+
+pipelines:
+  default:
+    - step:
+        script:
+          # install curl and git
+          - sudo apt-get update
+          - sudo apt-get install -y curl git
+          # install node and npm
+          - curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+          - sudo apt-get install -y nodejs
+          - sudo npm install -g npm@latest
+          # install app dependency
+          - npm install
+          # run selenium in the background
+          - /opt/bin/entry_point.sh &
+          # run test
+          - npm run test:application -- --url $BASE_URL
