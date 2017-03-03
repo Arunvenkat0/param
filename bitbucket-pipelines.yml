@@ -1,0 +1,47 @@
+image: selenium/standalone-chrome:3.1.0
+
+pipelines:
+  default:
+    - step:
+        script:
+          # run selenium in the background
+          - /opt/bin/entry_point.sh > /dev/null &
+          # install curl and git
+          - sudo apt-get update
+          - sudo apt-get install -y curl git
+          # install node and npm
+          - curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+          - sudo apt-get install -y nodejs
+          - sudo npm install -g npm@latest
+          # install app dependency
+          - npm install
+          - npm run lint
+          - npm run build
+          - npm run test:unit
+          # upload code to sandbox
+          - ./node_modules/.bin/dwupload -H $SANDBOX_HOSTNAME -u $SANDBOX_USERNAME -p "$SANDBOX_PASSWORD" --cartridge app_storefront_controllers,app_storefront_core,app_storefront_pipelines --code-version $SANDBOX_CODE_VERSION
+          # run test
+          - npm run test:application -- --url $SITE_URL
+
+  branches:
+    master:
+      - step:
+          script:
+            # run selenium in the background
+            - /opt/bin/entry_point.sh > /dev/null &
+            # install curl and git
+            - sudo apt-get update
+            - sudo apt-get install -y curl git
+            # install node and npm
+            - curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+            - sudo apt-get install -y nodejs
+            - sudo npm install -g npm@latest
+            # install app dependency
+            - npm install
+            - npm run lint
+            - npm run build
+            - npm run test:unit
+            # upload code to sandbox
+            - ./node_modules/.bin/dwupload -H $MASTER_SANDBOX_HOSTNAME -u $MASTER_SANDBOX_USERNAME -p "$MASTER_SANDBOX_PASSWORD" --cartridge app_storefront_controllers,app_storefront_core,app_storefront_pipelines --code-version $MASTER_SANDBOX_CODE_VERSION
+            # run test
+            - npm run test:application -- --url $MASTER_SITE_URL
