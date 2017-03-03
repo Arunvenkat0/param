@@ -23,7 +23,7 @@
     "chai": "^3.4.0",
     "chalk": "^1.1.3",
     "cldr-data": "^28.0.3",
-    "dwdav": "^2.2.0",
+    "dwupload": "^3.8.0",
     "eslint": "^1.10.3",
     "event-stream": "^3.3.4",
     "exorcist": "^0.4.0",
@@ -96,7 +96,8 @@
     "build:watch": "npm run js -- -w & npm run css -- -w",
     "preversion": "version > old_version",
     "version": "node bin/version.js && rm old_version && git add .",
-    "doc": "sh bin/doc.sh"
+    "doc": "sh bin/doc.sh",
+    "upload": "dwupload"
   },
   "repository": {
     "type": "git",
