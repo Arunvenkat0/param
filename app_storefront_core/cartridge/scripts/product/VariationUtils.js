@@ -186,7 +186,7 @@ function _getSizeChart (params) {
         }
 
         while (category && !processedAttr.sizeChart) {
-            const sizeChartId = category.custom.sizeChartID;
+            let sizeChartId = category.custom.sizeChartID;
 
             if (sizeChartId) {
                 return {
