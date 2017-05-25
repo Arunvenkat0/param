@@ -155,7 +155,7 @@ function handleLoginForm () {
 
             var foundOrder = orders.next();
 
-            if (foundOrder.billingAddress.postalCode.toUpperCase() !== orderPostalCode.toUpperCase() || foundOrder.customerEmail !== orderFormEmail) {
+            if (foundOrder.billingAddress.postalCode.toUpperCase() !== orderPostalCode.toUpperCase() || foundOrder.customerEmail.toUpperCase()) !== orderFormEmail.toUpperCase()) {
                 app.getView('Login', {
                     OrderNotFound: true
                 }).render();
