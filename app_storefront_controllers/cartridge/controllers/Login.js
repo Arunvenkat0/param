@@ -154,7 +154,7 @@ function handleLoginForm () {
             }
 
             var foundOrder = orders.next();
-            //Add this comment to trigger a build
+
             if (foundOrder.billingAddress.postalCode.toUpperCase() !== orderPostalCode.toUpperCase() || foundOrder.customerEmail.toUpperCase() !== orderFormEmail.toUpperCase()) {
                 app.getView('Login', {
                     OrderNotFound: true
