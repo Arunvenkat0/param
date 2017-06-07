@@ -9,6 +9,7 @@
 /* API Includes */
 var GiftCertProductListItem = require('dw/customer/ProductListItem').TYPE_GIFT_CERTIFICATE;
 var Transaction = require('dw/system/Transaction');
+var Resource = require('dw/web/Resource');
 var URLUtils = require('dw/web/URLUtils');
 
 /* Script Modules */
@@ -129,7 +130,7 @@ function wishListForm() {
                     app.getModel('Customer').logout();
                     let r = require('~/cartridge/scripts/util/Response');
                     r.renderJSON({
-                        error: 'CSRF Token Mismatch'
+                        error: Resource.msg('global.csrf.failed.error', 'locale', null)
                     });
                 } else {
                     app.getModel('Customer').logout();
