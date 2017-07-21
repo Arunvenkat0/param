@@ -2,8 +2,8 @@
   "repository": [
     {
       "url": "https://bitbucket.org/demandware/sitegenesis",
-      "username": "arun.venkat@aspiresys.com",
-      "password": "Arun8600"
+      "username": "althaf.ali@aspiresys.com",
+      "password": "Mar85782al1$"
     }
   ],
   "demandware": [
@@ -16,8 +16,7 @@
   "project": [
     {
       "name":    "sample-project-1",
-      "version": "aspirepoc-1",
-      "build":   "0_0_1-2"
+      "version": "Jenkins_server"
     }
   ]
 }
