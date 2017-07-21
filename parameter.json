@@ -1,0 +1,23 @@
+{
+  "repository": [
+    {
+      "url": "https://bitbucket.org/demandware/sitegenesis",
+      "username": "arun.venkat@aspiresys.com",
+      "password": "Arun8600"
+    }
+  ],
+  "demandware": [
+    {
+      "server": "aspire01-tech-prtnr-na07-dw.demandware.net",
+      "username": "althaf.ali",
+      "password": "Aspire@1234"
+    }
+  ],
+  "project": [
+    {
+      "name":    "sample-project-1",
+      "version": "aspirepoc-1",
+      "build":   "0_0_1-2"
+    }
+  ]
+}
